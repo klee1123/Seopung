@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	안녕안녕 
-	하이하이
+안녕하세요 저는 안리아입니다 안녕~
+
 </body>
 </html>
