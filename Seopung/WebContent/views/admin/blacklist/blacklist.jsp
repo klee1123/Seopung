@@ -111,7 +111,7 @@
 						<td width=""><span>총 회원수 &nbsp;&nbsp;&nbsp;<b
 								style="color: red">5</b> 명
 						</span></td>
-						<td width="720px;">
+						<td width="750px;">
 							<div align="center">
 								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
 								<button class="btn btn-secondary btn-sm">&lt;</button>
@@ -127,7 +127,7 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">목록에서 제거</button>
+							<button class="btn btn-primary btn-sm">목록에서 제거</button>
 						</td>
 					</tr>
 				</table>
