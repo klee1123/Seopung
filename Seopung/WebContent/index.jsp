@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	안녕안녕 
-	하이하이
-	방가방가
+	코딩싹쓰리
 </body>
 </html>
