@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	안녕안녕 
-	하이하이
-
-	ksy
-
-	방가방가
-
+	마지막?
 </body>
 </html>
