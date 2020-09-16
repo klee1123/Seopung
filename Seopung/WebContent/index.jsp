@@ -7,15 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-안녕하세요 저는 안리아입니다 안녕~
-	안녕하세요!
 
-	안녕안녕 
-	하이하이
-
-	ksy
-
-	방가방가
+	코딩싹쓰리
 
 </body>
 </html>
