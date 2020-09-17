@@ -6,13 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-        #select{padding: 5px;margin-left: 40px;}
+        #selectOption{padding: 5px;margin-left: 40px;}
         #plan > button {width: 50px;}
         .myplan{
             /* border: 1px solid black; */
             width: 1000px;
             height: 800px;
-            margin:auto;
         }
         .MyplanArea{ width:1000px;margin-left:40px;}
         .MakeMap {
@@ -36,13 +35,13 @@
 <body>
 	<%@ include file="../../common/menubar.jsp" %>
 	<%@ include file="../common/myPageSidebar.jsp" %>
-	
+	<div class="myContent">
 	 <div class="myplan" >
             <h1>&nbsp;&nbsp;&nbsp;나의 일정</h1>
             <hr>
         <br>
         <div id="selectButton" > <br>
-            <select name="select" id="select">
+            <select name="select" id="selectOption">
                 <option value="select">모든일정</option>
                 <option value="select">일정(공개)</option>
                 <option value="select">비공개(비공개)</option>
@@ -82,7 +81,7 @@
                     </p>
             </div>
         </div>
-
+	</div>
     </div>
     </div>
 </body>

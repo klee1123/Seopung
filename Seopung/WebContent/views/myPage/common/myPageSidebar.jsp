@@ -6,15 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-        .outer{
+        .myOuter{
             width:1400px;
             height:800px;
             margin: auto;
+            margin-top: 30px;
         }
-        .outer div{
+        .myOuter div{
             box-sizing: border-box;
         }
-        .outer>div{height:100%}
+        .myOuter>div{height:100%}
         .menubar{
             width:20%;
             float:left;
@@ -26,11 +27,11 @@
             height:90%;
         }
 
-        .content{ width:80%; float:left}
+        .myContent{ width:80%; float:left}
         #sidenavi{
             list-style-type:none;
-            font-size: 18px;
-            
+            font-size: 20px;
+            margin-left:30px;
         }
         
         #sidenavi>li>a{
@@ -41,6 +42,7 @@
             list-style-type:none;
             font-size:16px;
             padding: 2px;
+            margin-left:40px;
         }
         #sidenavi>li>ul a{
             text-decoration:none;
@@ -52,18 +54,18 @@
 </style>
 </head>
 <body>
-	<div class="outer">
+	<div class="myOuter">
         
         <div class="menubar">
             <div class="color">
             <ul id="sidenavi">
-                <br><br><br><br>
-                <li><a href="">개인정보 조회 및 변경</a></li> <br>
-                <li><a href="">일정관리</a></li><br>
+                <br><br>
+                <li ><a href="">개인정보 조회 및 변경</a></li> <br>
+                <li ><a href="">일정관리</a></li><br>
     
                 <li>동행인관리
                     <ul>
-                        <li><a href="">신청 온 동행인</a></li>
+                        <li><a href="" >신청 온 동행인</a></li>
                         <li><a href="">신청 한 동행인</a></li>
                         <li><a href="">동행목록</a></li>
                     </ul>
