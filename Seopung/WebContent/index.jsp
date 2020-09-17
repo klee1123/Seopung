@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
+  
 	 <!-- 메뉴바 영역 -->
 	<%@include file="views/common/menubar.jsp" %>
     <!-- banner 영역 -->
@@ -160,5 +161,6 @@
         </div>
         <img src="resources/images/overlay_1.png" alt="#" class="blog_img">
     </section>
+
 </body>
 </html>
