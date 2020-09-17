@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -109,7 +109,7 @@
                         <div class="option">
                             <div>
                                 <form onsubmit="searchPlaces(); return false;">
-                                    <input type="text" value="추가할 일정지 검색" id="keyword"> 
+                                    <input type="text" value="" id="keyword" placeholder="추가할 일정지 검색"> 
                                     <button type="submit">검색</button> 
                                 </form>
                             </div>
