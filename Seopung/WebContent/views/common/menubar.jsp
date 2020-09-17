@@ -61,10 +61,10 @@
                                     <a class="nav-link" href="contact.html" style="font-weight:bold; font-size:18px;">고객센터</a>
                                 </li>
                                 <li class="nav-item">
-                                    <form action="" id="searchForm"></form>
+                                    <div id="searchForm">
                                         <input type="search" name="search" id="search">
                                         <a href="#" class="genric-btn primary" >검색</a>
-                                    </form>
+                                    </div>
                                     
                                 </li>
                             </ul>
