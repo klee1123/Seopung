@@ -7,7 +7,7 @@
 <title>Insert title here</title>
  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-  
+  	<link rel="stylesheet" href="resouces/css/all.css">
     <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
