@@ -97,6 +97,14 @@
           </div>
         </div>
       </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      <!-- 1:1문의 -->
+      <li class="nav-item">
+        <a class="nav-link" href="">
+          <span>1:1문의</span></a>
+      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
