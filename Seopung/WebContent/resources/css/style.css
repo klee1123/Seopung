@@ -2455,7 +2455,7 @@ ul {
 /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_banner.scss */
 .banner_part {
   position: relative;
-  background-image: url(../images/banner_bg.png);
+  background-image: url(../img/banner_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -2478,7 +2478,7 @@ ul {
   bottom: -132px;
   width: 100%;
   height: 100%;
-  background-image: url(../images/banner_overlay.svg);
+  background-image: url(../img/banner_overlay.svg);
   background-position: top;
   background-repeat: no-repeat;
   z-index: -1;
@@ -2527,7 +2527,7 @@ ul {
   bottom: -86px;
   width: 50%;
   height: 100%;
-  background-image: url(../images/heading_bg.png);
+  background-image: url(../img/heading_bg.png);
   background-position: top;
   background-repeat: no-repeat;
   background-size: contain;
