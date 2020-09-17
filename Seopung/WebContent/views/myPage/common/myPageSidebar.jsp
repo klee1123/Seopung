@@ -25,6 +25,7 @@
             background:#fec104;
             width:90%;
             height:90%;
+            border-radius: 30px;
         }
 
         .myContent{ width:80%; float:left}
@@ -57,7 +58,7 @@
 	<div class="myOuter">
         
         <div class="menubar">
-            <div class="color">
+            <div>
             <ul id="sidenavi">
                 <br><br>
                 <li ><a href="">개인정보 조회 및 변경</a></li> <br>
