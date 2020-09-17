@@ -8,8 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
- <link rel="stylesheet" href="../../resources/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=contextPath%>/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=contextPath%>/resources/css/all.css">
+ <link rel="stylesheet" href="<%=contextPath%>/resources/css/style.css">
  <style>
         
        #logo{
@@ -44,7 +46,11 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="index.html" id="logo"> 서풍 </a>
-                        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
 
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
@@ -75,5 +81,7 @@
             </div>
         </div>
     </header>
+    
+    <script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
