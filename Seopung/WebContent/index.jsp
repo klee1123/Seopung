@@ -22,7 +22,8 @@
                     <div class="banner_text">
                         <div class="banner_text_iner">
                             <h5>Best way to tour</h5>
-                            <h1>Lorem ipsum dolor amet consec</h1>
+                            <h1>Lorem ipsum dolor amet consec</h1><br><br>
+                            <a href="#" class="genric-btn primary e-large">일정 만들기</a>
                         </div>
                     </div>
                 </div>

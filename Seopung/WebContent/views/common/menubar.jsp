@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +37,7 @@
 </head>
 <body>
 <!--메뉴바-->
+    <img src="<%=contextPath %>/resources/images/menu_bg.png" width="1920px;" height="105px;">
     <header class="main_menu home_menu">
         <div class="container">
             <div class="row align-items-center" style="background:#00c0ff;">
