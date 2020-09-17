@@ -162,5 +162,12 @@
         <img src="resources/images/overlay_1.png" alt="#" class="blog_img">
     </section>
 
+	<footer>
+	<%@include file="views/common/footer.jsp" %>
+	
+	</footer>
+
+
+
 </body>
 </html>
