@@ -2455,7 +2455,7 @@ ul {
 /* line 2, /Applications/MAMP/htdocs/palash/cl/july 2019/189 travel/189 travel html/sass/_banner.scss */
 .banner_part {
   position: relative;
-  background-image: url(../img/banner_bg.png);
+  background-image: url(../images/banner_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
