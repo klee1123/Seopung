@@ -22,6 +22,7 @@
 	      #navbarSupportedContent a{font-size: 18px;}
 	        .main_menu{background:#00c0ff;}
 	     .collapse+a{color:white; font-weight:bold;}
+	     .collapse+a:hover{color:lightgrey}
 	        
        }
     </style>
