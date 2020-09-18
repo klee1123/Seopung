@@ -12,40 +12,28 @@
 <link rel="stylesheet" href="<%=contextPath%>/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=contextPath%>/resources/css/all.css">
  <link rel="stylesheet" href="<%=contextPath%>/resources/css/style.css">
+ <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
  <style>
-        
-       #logo{
-           font-weight:bold;
-           font-size:50px;
-           color:white;
-
-       } 
-
-       #searchForm{
-           margin-left:40px;
-           margin-top:20px;
-       }
-
-       #search{
-           height:40px;
-           border:3px solid #ffdf5d;
-           
-       }
-       .genric-btn{
+        .genric-btn{
            font-weight:bold;
            font-size:18px;
+	       }
+	      #navbarSupportedContent a{font-size: 18px;}
+	        .main_menu{background:#00c0ff;}
+	     .collapse+a{color:white; font-weight:bold;}
+	        
        }
     </style>
 </head>
 <body>
 <!--메뉴바-->
-    <img src="<%=contextPath %>/resources/images/menu_bg.png" width="1920px;" height="105px;">
     <header class="main_menu home_menu">
         <div class="container">
-            <div class="row align-items-center" style="background:#00c0ff;">
+            <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.html" id="logo"> 서풍 </a>
+                        <a class="navbar-brand" href="index.html" style="font-family: 'Do Hyeon', sans-serif; font-size: 50px; color:white">서풍</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -54,28 +42,42 @@
 
                         <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.html" style="font-weight:bold; font-size:18px;">일정서비스</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="about.html"style="font-weight:bold; font-size:18px;">커뮤니티</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="packages.html" style="font-weight:bold; font-size:18px;">추천코스</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html" style="font-weight:bold; font-size:18px;">고객센터</a>
-                                </li>
-                                <li class="nav-item">
-                                    <div id="searchForm">
-                                        <input type="search" name="search" id="search">
-                                        <a href="#" class="genric-btn primary" >검색</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        일정서비스
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="">일정만들기</a>
+                                        <a class="dropdown-item" href="">일정검색</a>
                                     </div>
-                                    
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">커뮤니티</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="packages.html">추천코스</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        고객센터
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                        <a class="dropdown-item" href="">고객센터</a>
+                                        <a class="dropdown-item" href="">FAQ</a>
+                                        <a class="dropdown-item" href="">1:1문의</a>
+                                    </div>
                                 </li>
                             </ul>
+                            <form>
+                                <input type="text" style="border: 3px solid#fec104; height: 35px; margin-left:20px;margin-bottom:20px;margin-top:20px;">
+                                <button class="btn btn-warning">검색</button>
+                            </form>
+                            
                         </div>
-                        <a class="btn_1 d-none d-lg-block" href="http://www.naver.com" style="color:white;">로그인/회원가입</a>
+                        
+                        <a class="btn btn-warning" href="#">로그인/회원가입</a>
                     </nav>
                 </div>
             </div>
