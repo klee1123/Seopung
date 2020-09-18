@@ -8,26 +8,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="<%=contextPath%>/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=contextPath%>/resources/css/all.css">
-<link rel="stylesheet" href="<%=contextPath%>/resources/css/style.css">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
-<style>
-#navbarSupportedContent a {
-	font-size: 18px;
-	font-weight: bold;
-}
-.main_menu {
-	background: #00c0ff;
-}
-</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="<%=contextPath%>/resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=contextPath%>/resources/css/all.css">
+ <link rel="stylesheet" href="<%=contextPath%>/resources/css/style.css">
+ <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+ <style>
+        .genric-btn{
+           font-weight:bold;
+           font-size:18px;
+	       }
+	      #navbarSupportedContent a{font-size: 18px; font-weight: bold;}
+	        .main_menu{background:#00c0ff;}
+	     .collapse+a{color:white; font-weight:bold;}
+	     .collapse+a:hover{color:lightgrey}
+	        
+       }
+    </style>
+
 </head>
 <body>
 	<!--메뉴바-->
