@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1:1문의</title>
 <style>
        
        .inquirePage{
@@ -52,49 +52,49 @@
 	                </thead>
 	                <tbody>
 	                    <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">1.</td>
+	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료 </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk2">2.</td>
+	                        <td><input type="checkbox" id="chk" name="chk2">&nbsp;&nbsp;2.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk3">3.</td>
+	                        <td><input type="checkbox" id="chk" name="chk3">&nbsp;&nbsp;3.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk4">4.</td>
+	                        <td><input type="checkbox" id="chk" name="chk4">&nbsp;&nbsp;4.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk5">5.</td>
+	                        <td><input type="checkbox" id="chk" name="chk5">&nbsp;&nbsp;5.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk6">6.</td>
+	                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;6.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
-	                        <td>20-08-15</td>
+	                        <td>20.08.15</td>
 	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
-	                        <td><input type="checkbox" id="chk" name="chk6">7.</td>
+	                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;7.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>

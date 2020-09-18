@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 일정</title>
 <style>
         #selectOption{padding: 5px;margin-left: 40px;}
         #plan > button {width: 50px;}
