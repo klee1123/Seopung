@@ -19,7 +19,7 @@
            font-weight:bold;
            font-size:18px;
 	       }
-	      #navbarSupportedContent a{font-size: 18px;}
+	      #navbarSupportedContent a{font-size: 18px; font-weight: bold;}
 	        .main_menu{background:#00c0ff;}
 	     .collapse+a{color:white; font-weight:bold;}
 	        
@@ -71,13 +71,13 @@
                                 </li>
                             </ul>
                             <form>
-                                <input type="text" style="border: 3px solid#fec104; height: 35px; margin-left:20px;margin-bottom:20px;margin-top:20px;">
-                                <button class="btn btn-warning">검색</button>
+                                <input type="text" style="border: 3px solid#fec104; width:140px; height: 38px; margin-left:20px;margin-bottom:20px;margin-top:20px;">
+                                <button class="btn btn-warning" style="font-weight: bold; color:rgb(75, 75, 75);">검색</button>
                             </form>
                             
                         </div>
                         
-                        <a class="btn btn-warning" href="#">로그인/회원가입</a>
+                        <a class="btn btn-light" href="#" style="font-weight: bold; color:rgb(75, 75, 75);">로그인/회원가입</a>
                     </nav>
                 </div>
             </div>
