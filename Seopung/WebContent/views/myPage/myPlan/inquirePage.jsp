@@ -43,7 +43,7 @@
 	            <table id="inquireTable">
 	                <thead>
 	                    <tr align="center">
-	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">번호</th>
+	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
 	                        <th width="400">제목</th>
 	                        <th width="100">작성자</th>
 	                        <th width="150">작성일</th>

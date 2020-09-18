@@ -17,6 +17,7 @@
             background: lightblue;
         }
         #scrapCmTable tr{height:30px;}
+        .scrapCm{margin:40px;}
 </style>
 </head>
 <body>
@@ -30,7 +31,7 @@
             <h1>&nbsp;&nbsp;&nbsp;커뮤니티</h1>
             <hr>
         
-        <div class="scrapCm"> <br>
+        <div class="scrapCm">
             <form action="" method="POST">
             <button>삭제</button>
             <br><br>
@@ -39,7 +40,7 @@
                     <tr align="center">
                         <th><input type="checkbox" class="chk" id="chk_all" name="chkAll"> 번호</th>
                         <th width="250">제목</th>
-                        <th width="400">내용</th>
+                        <th width="350">내용</th>
                         <th width="100">작성자</th>
                         <th width="150">스크랩날짜</th>
                     </tr>

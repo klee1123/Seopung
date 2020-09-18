@@ -10,7 +10,6 @@
         .scrapPlanAll{
             width: 1000px;
             height: 800px;
-            margin:auto;
         }
         .scrapPlanArea{
             width:1000px;
