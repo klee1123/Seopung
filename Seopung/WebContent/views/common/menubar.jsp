@@ -21,6 +21,10 @@
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
 	rel="stylesheet">
 <style>
+.genric-btn {
+	font-weight: bold;
+	font-size: 18px;
+}
 
 #navbarSupportedContent a {
 	font-size: 18px;
@@ -29,6 +33,11 @@
 
 .main_menu {
 	background: #00c0ff;
+}
+
+.collapse+a {
+	color: white;
+	font-weight: bold;
 }
 
 .collapse+a:hover {
