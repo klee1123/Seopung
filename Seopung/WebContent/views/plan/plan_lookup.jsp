@@ -10,6 +10,7 @@
             
             }
 
+
             .custom_select_wrap{
                 width: 1000px;
              
@@ -22,10 +23,7 @@
             #search_text{width:75%}
             #search_btn{width:25%}
             
-            td{
-                align-content: center;
-            }
-
+            
             ul {
                     list-style-type: none;
                 }

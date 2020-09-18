@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
-<!doctype html>
 <html lang="zxx">
 
 <head>
@@ -31,7 +30,7 @@
 </head>
 
 <body>
-    <div class="wrap">
+    <div  class="wrap">
         <div class="contents_01" id="">
             <form id="plan_page_01" action="" method="">
                 <table id="" width="700px">
@@ -268,7 +267,7 @@
                     <tr>
                         <td>
                             <div>
-                                <table width=700px>
+                                <table  width=700px>
                                     <tr>
                                         <td>
                                             <table>

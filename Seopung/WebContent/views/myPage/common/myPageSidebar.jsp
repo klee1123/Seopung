@@ -10,11 +10,9 @@
             width:1400px;
             height:800px;
             margin: auto;
-            margin-top: 30px;
+            margin-top: 110px;
         }
-        .myOuter div{
-            box-sizing: border-box;
-        }
+        .myOuter div{box-sizing: border-box;}
         .myOuter>div{height:100%}
         .menubar{
             width:20%;
@@ -25,7 +23,7 @@
             background:#fec104;
             width:90%;
             height:90%;
-            border-radius: 30px;
+            border-radius: 20px;
         }
 
         .myContent{ width:80%; float:left}
