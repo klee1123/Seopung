@@ -7,30 +7,24 @@
         <style>
             div{
             box-sizing:border-box;
-            }
-
-            .wrap{
-                width:1200px;
-                margin:auto;
+            
             }
 
             .custom_select_wrap{
                 width: 1000px;
-                background-color:gainsboro
+             
             }
 
-            #search_form{
-            width:px;
-            height:25px;
-                
-            }
             #search_form>div{
                 height:100%;
                 float:left;
             }
             #search_text{width:75%}
             #search_btn{width:25%}
-
+            
+            td{
+                align-content: center;
+            }
 
             ul {
                     list-style-type: none;
@@ -45,9 +39,6 @@
                 max-width: 250px;
             }
             
-            td{
-                border: solid;
-            }
             /*드롭다운버튼 스타일*/
             .dropdown-content {
                 display: none;
@@ -58,6 +49,8 @@
             }
             .show {display:block;}
             
+            .blog_text {margin: 10px;}
+
             </style>
             
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css"/>  
@@ -65,16 +58,19 @@
             <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
     </head>
     <body>
-        <div class="wrap">
+        <div class="wrap" >
          
         <!----------------------------------------------- 상세 검색 div start----------------------------------------------------------->  
 
             <div class="contents_01"><!--상세검색-->
-                <div><!--일정 서비스(일정 카운트 db연동)-->
-                    <p>일정 서비스 (207)</p>
-                </div>
-
-                <table class="custom_select_wrap">
+                <table class="custom_select_wrap" style="width: 1100px;" align="center">
+                    <tr>
+                        <th bgcolor="white" colspan="5" style="margin: 0px;">
+                            <div>
+                                <p>일정 서비스 (207)</p> <!--일정 서비스(일정 카운트 db연동)-->
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                         <td>
                             <!--지역 버튼 내용-->
@@ -479,39 +475,32 @@
 
 
             <!----------------------------------------------- 등록된 일정 목록 div start----------------------------------------------------------->
-            <div class="contents_02"><!--등록된 일정들 조회-->
+            <div class="contents_02" align="center" style="margin-top: 20px;"><!--등록된 일정들 조회-->
                 <table class="the_plan"> <!--2행 4열 테이블 안에 등록된 일정 번호를 참고하여 표시-->
                     <tr>
                         <td>
                             
-                            <div class="blog_text">
-                                <img src="img/blog/blog_1.png">
+                            <div class="blog_text" >
+                                <a href="http://naver.com"><img src="img/blog/blog_1.png"></a><!-- 이미지에 링크 연결-->
                                 <h2>1박2일 서울일정</h2>
-                                고길동 <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
                                 <ul>
-                                    <li>
-                                        <p>예상비용 : 40만원</p><!--일정번호 참조하여 예상비용 표시-->
-                                    </li>
-                                    <li>
-                                        <p>20.08.29 ~ 20.08.30</p> <!--일정번호 참조하여 일정기간 표시-->
-                                    </li>
+                                    <li><p>고길동</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 40만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
                                 </ul>
+                          
                             </div>
 
                         </td>
                         <td>
                         
                             <div class="blog_text">
-                                <img src="img/blog/blog_1.png">
-                                <h2>1박2일 서울일정</h2>
-                                고길동
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>역사탐방</h2>
                                 <ul>
-                                    <li>
-                                        <p>예상비용 : 40만원</p>
-                                    </li>
-                                    <li>
-                                        <p>20.08.29 ~ 20.08.30</p>
-                                    </li>
+                                    <li><p>현빈</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 8만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
                                 </ul>
                             </div>
                             
@@ -519,16 +508,12 @@
                         <td>
                         
                             <div class="blog_text">
-                                <img src="img/blog/blog_1.png">
-                                <h2>1박2일 서울일정</h2>
-                                고길동
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>유적지 탐사</h2>
                                 <ul>
-                                    <li>
-                                        <p>예상비용 : 40만원</p>
-                                    </li>
-                                    <li>
-                                        <p>20.08.29 ~ 20.08.30</p>
-                                    </li>
+                                    <li><p>아이유</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 7만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
                                 </ul>
                             </div>
                             
@@ -536,16 +521,12 @@
                         <td>
                         
                             <div class="blog_text">
-                                <img src="img/blog/blog_1.png">
-                                <h2>1박2일 서울일정</h2>
-                                고길동
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>남산타워</h2>
                                 <ul>
-                                    <li>
-                                        <p>예상비용 : 40만원</p>
-                                    </li>
-                                    <li>
-                                        <p>20.08.29 ~ 20.08.30</p>
-                                    </li>
+                                    <li><p>정유미</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 5만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
                                 </ul>
                             </div>
                             
@@ -553,17 +534,83 @@
 
                     </tr>
                    
+                    <tr>
+                        <td>
+                            
+                            <div class="blog_text">
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>가로수길</h2>
+                                <ul>
+                                    <li><p>남희석</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 10만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
+                                </ul>
+                            </div>
+
+                        </td>
+                        <td>
+                        
+                            <div class="blog_text">
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>서울숲</h2>
+                                <ul>
+                                    <li><p>안영미</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 2만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
+                                </ul>
+                            </div>
+                            
+                        </td>
+                        <td>
+                        
+                            <div class="blog_text">
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>뚝섬유원지</h2>
+                                <ul>
+                                    <li><p>이수영</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 5만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
+                                </ul>
+                            </div>
+                            
+                        </td>
+                        <td>
+                        
+                            <div class="blog_text">
+                                <a href=""><img src="img/blog/blog_1.png"></a>
+                                <h2>이태원</h2>
+                                <ul>
+                                    <li><p>유재석</p></li>  <!--일정번호 작성자의 회원번호를 참조하여 닉네임 표시-->
+                                    <li><p>예상비용 : 15만원</p></li>   <!--일정번호 참조하여 예상비용 표시-->
+                                    <li><p>20.08.29 ~ 20.08.30</p></li> <!--일정번호 참조하여 일정기간 표시-->
+                                </ul>
+                            </div>
+                            
+                        </td>
+                    </tr>
                 </table>
             </div>
             <!-----------------------------------------------등록된 일정 목록 div end----------------------------------------------------------->
 
             <!----------------------------------------------- 페이지 수 div start----------------------------------------------------------->
             <div><!--페이지 표시-->
+                <br><br><br>
+                <div class ="page_number" align="center">
+                    <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                    <button class="btn btn-secondary btn-sm">&lt;</button>
 
+                    <button class="btn btn-outline-secondary btn-sm">1</button>
+                    <button class="btn btn-outline-secondary btn-sm">2</button>
+                    <button class="btn btn-outline-secondary btn-sm">3</button>
+                    <button class="btn btn-outline-secondary btn-sm">4</button>
+                    <button class="btn btn-outline-secondary btn-sm">5</button>
+
+                    <button class="btn btn-secondary btn-sm">&gt;</button>
+                    <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                </div>
             </div>
              <!----------------------------------------------- 페이지 수 div end----------------------------------------------------------->
         </div>
-
 
     </body>
 
