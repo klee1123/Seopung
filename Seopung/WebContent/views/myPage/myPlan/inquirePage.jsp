@@ -47,7 +47,7 @@
 	                        <th width="400">제목</th>
 	                        <th width="100">작성자</th>
 	                        <th width="150">작성일</th>
-	                        <th width="100">처리상태</th>
+	                        <th width="100">답변여부</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
@@ -56,49 +56,49 @@
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료 </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk2">2.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk3">3.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk4">4.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk5">5.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk6">6.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                    <tr align="center">
 	                        <td><input type="checkbox" id="chk" name="chk6">7.</td>
 	                        <td>제목 넣을 칸</td>
 	                        <td>이름</td>
 	                        <td>20-08-15</td>
-	                        <td>처리상태 </td>
+	                        <td>답변완료  </td>
 	                    </tr>
 	                </tbody>
 	            </table>
