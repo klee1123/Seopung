@@ -51,7 +51,7 @@
 
             <div class="MakeMap" align="center" >
                 
-                <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
+                <img src="../../../resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
                 <p>여행 만들러 가기</p>
             </div>
            

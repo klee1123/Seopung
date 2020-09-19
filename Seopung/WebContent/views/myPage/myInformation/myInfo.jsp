@@ -49,7 +49,7 @@
             <button type="reset">취소</button> <br><br>
         
             <div class="infoPoto">
-                <img src="resources/images/회원.jpg" alt="">
+                <img src="../../../resources/images/회원.jpg" alt="">
                 <br><br>
                 <p style="font-size: 12px;">1MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
