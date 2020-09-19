@@ -48,9 +48,9 @@
 	
 
     
-		<class class="myContent">
+		<class class="accomList">
 	
-		<div class="accompany">
+		<div class="accomTitle">
 	        
 	            <h1>&nbsp;&nbsp;&nbsp;동행목록</h1>
 	            <hr>

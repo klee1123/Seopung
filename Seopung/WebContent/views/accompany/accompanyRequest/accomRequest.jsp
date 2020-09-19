@@ -17,14 +17,14 @@
 	<%@ include file="../../myPage/common/myPageSidebar.jsp" %>
 	
 	
-		<div class="myContent">
+		<div class="accomRequest">
 	
-		<div class="inquirePage">
+		<div class="accomTitle">
 	        
 	            <h1>&nbsp;&nbsp;&nbsp;신청 온 동행인</h1>
 	            <hr>
 	        
-			<div class="accopany"> <br>
+			<div class="request"> <br>
 				
 						
 	            <form action="" method="POST">
