@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.outer {
+	margin: auto;
+	width: 1000px;
+}
+</style>
 </head>
 <body>
 
