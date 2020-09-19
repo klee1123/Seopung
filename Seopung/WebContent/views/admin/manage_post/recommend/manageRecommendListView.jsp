@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp"%>
+	<%@ include file="../../common/header.jsp"%>
 
 
 	<!-- Begin Page Content -->
@@ -176,7 +176,7 @@
 	<!-- /.container-fluid -->
 	
 	
-	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="../../common/footer.jsp"%>
 	
 </body>
 </html>

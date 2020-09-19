@@ -43,21 +43,21 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="../adminResources/vendor/jquery/jquery.min.js"></script>
-  <script src="../adminResources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/vendor/jquery/jquery.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="../adminResources/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="../adminResources/js/sb-admin-2.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="../adminResources/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../adminResources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="../adminResources/js/demo/datatables-demo.js"></script>
+  <script src="<%= request.getContextPath() %>/views/admin/adminResources/js/demo/datatables-demo.js"></script>
 
 
 </body>

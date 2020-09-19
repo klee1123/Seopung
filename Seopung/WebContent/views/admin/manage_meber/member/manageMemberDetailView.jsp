@@ -36,7 +36,7 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
+	<%@ include file="../../common/header.jsp"%>
 
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
@@ -138,7 +138,7 @@
 	</div>
 	<!-- /.container-fluid -->
 	
-	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="../../common/footer.jsp"%>
 
 </body>
 </html>
