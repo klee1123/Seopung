@@ -120,17 +120,14 @@
 								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
 							</div>
 						</td>
-						<td width="">
-							<button class="btn btn-primary">삭제</button>
-							<button class="btn btn-primary">블랙리스트 등록</button>
-							
-						</td>
-					</tr>
+						
+						<div align="right">
+							<button type="button" class="btn btn-secondary">삭제</button>
+							<button type="submit" class="btn btn-primary">블랙리스트 등록</button>
+						</div>	
+					
 				</table>
 			</div>
-			
-			<br><br>
-
 		</div>
 
 
