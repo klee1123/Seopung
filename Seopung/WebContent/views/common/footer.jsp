@@ -90,7 +90,6 @@
                
             </div>
         </div>
-        <img src="../../resources/images/overlay_2.png" alt="#" class="footer_overlay">
     </footer>
 
 
