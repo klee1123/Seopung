@@ -59,8 +59,8 @@
             <div>
             <ul id="sidenavi">
                 <br><br>
-                <li ><a href="">개인정보 조회 및 변경</a></li> <br>
-                <li ><a href="">일정관리</a></li><br>
+                <li ><a href="../myInformation/myInfo.jsp">개인정보 조회 및 변경</a></li> <br>
+                <li ><a href="../myPlan/myPlanList.jsp">일정관리</a></li><br>
     
                 <li>동행인관리
                     <ul>
@@ -72,8 +72,8 @@
                 
                 <li>스크랩
                     <ul>
-                        <li><a href="">일정</a></li>
-                        <li><a href="">커뮤니티</a></li>
+                        <li><a href="../scrap/scrapPlan.jsp">일정</a></li>
+                        <li><a href="../scrap/scrapCommunity.jsp">커뮤니티</a></li>
                     </ul>
                 </li> <br>
     
@@ -84,8 +84,8 @@
                         <li><a href="">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
-                <li><a href="">1:1 문의</a></li> <br>
-                <li><a href="">회원탈퇴</a></li> <br>
+                <li><a href="../myPlan/inquirePage.jsp">1:1 문의</a></li> <br>
+                <li><a href="../myPlan/deleteMemberPage.jsp">회원탈퇴</a></li> <br>
     
             </ul>
             </div>
