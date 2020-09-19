@@ -5,6 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+    .accomRequest{
+        width: 1000px;
+        height: 800px;
+        margin-left: 20px;
+    }
+
+
+</style>
+
+
 </head>
 
 
@@ -17,7 +29,7 @@
 	<%@ include file="../../myPage/common/myPageSidebar.jsp" %>
 	
 	
-		<div class="accomRequest">
+	<class class="accomRequest">
 	
 		<div class="accomTitle">
 	        
@@ -192,7 +204,7 @@
 	        </div>
 	    
 	    </div>   
-	
+	</class>
 
 
     <!-- jquery plugins here-->
