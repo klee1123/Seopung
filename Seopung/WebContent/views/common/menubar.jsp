@@ -104,6 +104,54 @@
 		</div>
 	</header>
 
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      	  일정서비스
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="">일정만들기</a>
+                                        <a class="dropdown-item" href="">일정검색</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="about.html">커뮤니티</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="packages.html">추천코스</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                       	 고객센터
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                        <a class="dropdown-item" href="">고객센터</a>
+                                        <a class="dropdown-item" href="">FAQ</a>
+                                        <a class="dropdown-item" href="">1:1문의</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <form>
+                                <input type="text" style="border: 3px solid#fec104; width:140px; height: 38px; margin-left:20px;margin-bottom:20px;margin-top:20px;">
+                                <button class="btn btn-warning" style="font-weight: bold; color:rgb(75, 75, 75);">검색</button>
+                            </form>
+                            
+                        </div>
+                        
+                        <a class="btn btn-light" href="#" style="font-weight: bold; color:rgb(75, 75, 75);">로그인/회원가입</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
+
 	<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
+
 </body>
 </html>

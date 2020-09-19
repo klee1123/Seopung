@@ -160,7 +160,6 @@
                 </div>
             </div>
         </div>
-        <img src="resources/images/overlay_1.png" alt="#" class="blog_img">
     </section>
 
 	<footer>
