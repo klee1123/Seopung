@@ -41,7 +41,7 @@
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">추천코스 글 등록</h1>
+		<h1 class="h3 mb-4 text-gray-800">추천코스 글 수정</h1>
 
 		<br>
 
