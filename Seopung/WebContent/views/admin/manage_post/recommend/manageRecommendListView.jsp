@@ -161,7 +161,7 @@
 						</td>
 						<td width="">
 							<button class="btn btn-primary">등록</button>
-							<button class="btn btn-primary">삭제</button>
+							<button class="btn btn-danger">삭제</button>
 						</td>
 					</tr>
 				</table>

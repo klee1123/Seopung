@@ -49,7 +49,7 @@
 			<form action="enroll.bo" method="post">
 
 				<input type="text" name="title" style="width: 100%;"
-					placeholder="제목입력" class="form-control form-control" required>
+					placeholder="사용자가입력한제목입니다." class="form-control form-control" required>
 				<br>
 				<textarea id="summernote" name="content" required></textarea>
 
@@ -64,12 +64,12 @@
 
 				<div align="center">
 					<button type="button" class="btn btn-secondary">취소</button>
-					<button type="submit" class="btn btn-primary">등록</button>
+					<button type="submit" class="btn btn-primary">저장</button>
 				</div>
 			</form>
 			<script>
 				$('#summernote').summernote({
-					placeholder : '내용입력',
+					placeholder : '사용자가 작성한 내용입니다',
 					tabsize : 2,
 					height : 400
 				});
