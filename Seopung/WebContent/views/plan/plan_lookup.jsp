@@ -9,7 +9,8 @@
                 width: 1200px;
                 border:solid;
                 padding: 50px;
-                }            
+                margin:auto;
+            }            
 
             div{
                 box-sizing:border-box;
@@ -25,15 +26,18 @@
             }
 
             .contents_top_main{
-                height: 60px;
+                height: 110px;
+                padding: 10px;
             }
             .contents_top_main_01{
-                width: 220px;
+                width: 210px;
                 float: left;
+                margin: 2px;
+                text-align: center;
             }
 
             .row{
-               width: 275px; 
+                width: 275px; 
                 float: left;
                 padding: 10px;
             }
@@ -58,11 +62,78 @@
             }
             .show {display:block;}
             
+            .dropbtn{
+                width: 100px;
+                
+            }
+
+            .contents_top_title{
+                 font-size: 26px;
+                 margin-bottom: 5px;
+            }
+            
+            .contents_top_main{
+                border: 1px solid #00c0ff;
+            }
+
+            .contents_top_main_00{
+                font-size: 20px;
+            }   
+
+            .dropbtn {
+                width:200px;
+
+                background-color: #00c0ff;
+
+                border: none;
+
+                color:#fff;
+
+                padding: 5px;
+
+                text-align: center;
+
+                text-decoration: none;
+
+                display: inline-block;
+
+                font-size: 15px;
+
+                margin: 4px;
+
+                cursor: pointer;
+
+            }
+
+
+            .pn_btn{
+                width: 40px;
+                height: 40px;
+                border: none;
+            }
+
+            .pn_btn:hover{
+                cursor: pointer;
+                background-color: #00c0ff;
+                border: none;
+                cursor: pointer;
+
+
+            }
+
+
+
+
+
+
+
             </style>
             
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css"/>  
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
             <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+
+            
     </head>
     <body>
         <div class="wrap">
@@ -70,11 +141,14 @@
         <!----------------------------------------------- 상세 검색 div start-----------------------------------------------------------> 
             <div class="contents_top"><!--상세검색-->
                 <div class="contents_top_title">
-                    <div class="" >
-                        <p>일정 서비스 (207)</p> <!--일정 서비스(일정 카운트 db연동)-->
-                    </div>
+                    <b>일정 서비스 (207)</b><!--일정 서비스(일정 카운트 db연동)-->
                 </div>
                 <div class="contents_top_main">
+                   
+                    <div class="contents_top_main_00">
+                        <b>상세검색</b>
+                    </div>
+                    
                     <div class="contents_top_main_01" >
                         <!--지역 버튼 내용-->
                         <button class="dropbtn" type="button" onclick="myFunction()">지역</button>
@@ -248,17 +322,20 @@
                                 $("#plan_date").datepicker({
                                     onSelect:function(dateText, inst) {
                                         console.log(dateText);
+                                        
                                     }
                                 });
                             });
                             </script>
-
                             <input type="text" name="date" id="plan_date" size="12">
 
                             <input type="button" value="일정기간" onclick="$('#plan_date').datepicker('show');" />
+                            
                         </div>
                     </div>
+
                     
+
                     <div class="contents_top_main_01">
                         <!--연령 버튼 내용-->
                         <button class="dropbtn" type="button" onclick="myFunction1()">연령</button>
@@ -458,9 +535,9 @@
                         
                     <div class="contents_top_main_01">
                             <div id="search_text" style="float:left">
-                                <input type="search" name="search" placeholder="검색어 입력">
+                                <input type="search" name="search" placeholder="검색어 입력" style="width: 120px;">
                             </div>
-                            <div id="search_btn">
+                            <div id="search_btn"style="float:left">
                                 <input type="submit" value="검색">
                             </div>
                     </div>
@@ -587,18 +664,18 @@
 
             <!----------------------------------------------- 페이지 수 div start----------------------------------------------------------->
             <div class="contents_footer"><!--페이지 표시-->
-                <div class ="page_number" align="center" style="margin-top: 20px; margin-bottom: 20px;">
-                    <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-                    <button class="btn btn-secondary btn-sm">&lt;</button>
+                <div class ="page_number" align="center" style="margin-top: 20px; margin-bottom: 20px; ">
+                    <button class="pn_btn">&lt;&lt;</button>
+                    <button class="pn_btn">&lt;</button>
 
-                    <button class="btn btn-outline-secondary btn-sm">1</button>
-                    <button class="btn btn-outline-secondary btn-sm">2</button>
-                    <button class="btn btn-outline-secondary btn-sm">3</button>
-                    <button class="btn btn-outline-secondary btn-sm">4</button>
-                    <button class="btn btn-outline-secondary btn-sm">5</button>
+                    <button class="pn_btn">1</button>
+                    <button class="pn_btn">2</button>
+                    <button class="pn_btn">3</button>
+                    <button class="pn_btn">4</button>
+                    <button class="pn_btn">5</button>
 
-                    <button class="btn btn-secondary btn-sm">&gt;</button>
-                    <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                    <button class="pn_btn">&gt;</button>
+                    <button class="pn_btn">&gt;&gt;</button>
                 </div>
             </div>
              <!----------------------------------------------- 페이지 수 div end----------------------------------------------------------->
