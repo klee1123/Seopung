@@ -85,10 +85,10 @@
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;" data-toggle="modal" data-target="#profile">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
 	                    </tr>
                        
@@ -191,7 +191,80 @@
                 </form>
 
                 <!-- 프로필 modal -->
+                <div class="modal" id="profile">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">프로필</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
 
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                            
+                                <div class="profile">
+                                    <form action="" method="POST">
+                                        
+                                         <br><br>
+                                    
+                                        <div class="profilePhoto">
+                                            <img src="../../../resources/images/회원.jpg" alt="">
+                                            <br><br>
+                                           
+                                        </div>
+                                        <div class="profileJoin">
+                                            
+                                        <table id="join">
+                                            <tr>
+                                                <th align="left" width="100px">아이디</th>
+                                                <td><span>USERID01 </span></td>
+                                            </tr>
+                                            <tr>
+                                                <th align="left" width="100px">이름</th>
+                                                <td><span>홍길동 </span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th align="left">닉네임</th>
+                                                <td><span>홍길홍길</span></td>
+                                            
+                                            </tr>
+                                            <tr>
+                                               
+                                                </tr>
+                                            </tr>
+                                            <tr>
+                                                <th align="left">이메일</th>
+                                                <td><span>hong@gmail.com <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#emailCh"> 수정</button></span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th align="left">생년월일</th>
+                                                <td><span>2020년 07월 01일</span></td>
+                                            </tr>
+                                            
+                                        </table>
+                                        <br><br>
+                                        </div>
+                                        
+                                        <textarea name="introduction" cols="80" rows="8"style="resize: none;">자기소개 : </textarea>
+                                     
+                                    </form>
+                                    </div>
+
+
+                            </div>
+                            
+
+
+                        </div>
+                        
+                    </div>
+
+
+
+                </div>
                 
                 <!-- 신고하기 modal -->
 
