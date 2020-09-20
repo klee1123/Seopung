@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +45,6 @@
         #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
         div{
-            border:1px solid;
             box-sizing:border-box;
         }
 
@@ -53,6 +53,7 @@
             width:1200px;
             height:500px;
             margin:auto;
+            border: 1px solid;
         }
 
         /* #header, #content, #footer{ */
@@ -76,6 +77,20 @@
         #make_h{height: 10%}
         #make_m{height: 80%}  
         #make_f{height: 10%}  
+
+        .bbtn{
+                display:inline-block;
+                border:1px solid #dfdfdf;   
+                background:#00c0ff; 
+                color:#fff;
+                padding:0px 8px;
+                text-align:center;
+                width: 100px;
+                height:42px;
+                line-height:42px;
+                font-weight:999;
+                cursor:pointer;
+            }
         
 
 </style>
@@ -96,8 +111,8 @@
                     </select>
                 </div>
                 <div id="make_f">
-                     <button type="button">임시 저장</button>
-                    <button type="button">다음 페이지</button>
+                    <button class="bbtn" type="button">임시 저장</button>
+                    <button class="bbtn" type="button">다음 페이지</button>
                 </div>
                
             </div>
