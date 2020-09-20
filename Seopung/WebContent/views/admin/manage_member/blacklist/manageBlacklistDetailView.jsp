@@ -5,134 +5,103 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+</head>
 <style>
 .outer {
 	margin: auto;
 	width: 1000px;
 }
 </style>
-</head>
 <body>
 
 	<%@ include file="../../common/header.jsp"%>
-
 
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">추천코스 관리</h1>
+		<h1 class="h3 mb-4 text-gray-800">블랙리스트 신고내역조회</h1>
 
 		<br>
 
 		<div class="outer">
 
-			<table align="center">
-				<tr>
-					<td width="1000">
-						<form action="" method="GET">
-							<label for="">제목</label> <input type="text" placeholder="제목 입력">
-							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
-						</form>
-					</td>
-				</tr>
-			</table>
+			<h5>
+				<b>userId1</b> 님에 대한 신고내역
+			</h5>
 
 			<br>
 
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align: center;">
 					<tr>
-						<th width="20px"><input type="checkbox"></th>
-						<th width="50px">번호</th>
-						<th width="355px">제목</th>
-						<th width="125px">관리자아이디</th>
-						<th width="125px">작성일</th>
-						<th width="75px">조회수</th>
+						<th width="75px">번호</th>
+						<th width="300px">신고글 제목</th>
+						<th width="150px">신고사유</th>
+						<th width="150px">신고접수일</th>
 					</tr>
 				</thead>
 				<tbody style="text-align: center;">
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>10</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>9</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>8</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>7</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>6</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>5</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>4</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>3</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>2</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
 						<td>1</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
+						<td>부적절한 단어 사용 신고합니다.</td>
+						<td>비매너</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
-
 				</tbody>
 			</table>
 
@@ -141,10 +110,10 @@
 			<div align="center">
 				<table>
 					<tr>
-						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b> 개
+						<td width=""><span>총 신고수 &nbsp;&nbsp;&nbsp;<b
+								style="color: red">10</b> 개
 						</span></td>
-						<td width="700px;">
+						<td width="720px;">
 							<div align="center">
 								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
 								<button class="btn btn-secondary btn-sm">&lt;</button>
@@ -160,23 +129,25 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">등록</button>
-							<button class="btn btn-danger">삭제</button>
+							<button class="btn btn-primary">목록에서 제거</button>
 						</td>
 					</tr>
 				</table>
+
+				<br>
 			</div>
 
-			<br><br>
+			<br>
 
 		</div>
 
 
 	</div>
 	<!-- /.container-fluid -->
-	
-	
+
+
 	<%@ include file="../../common/footer.jsp"%>
-	
+
+
 </body>
 </html>

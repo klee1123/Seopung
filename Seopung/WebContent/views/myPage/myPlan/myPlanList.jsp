@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>나의 일정</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
-        #selectOption{padding: 5px;margin-left: 40px;}
-        #plan > button {width: 50px;}
+        #select{padding: 5px;margin-left: 20px;}
+        /*#plan > button {width: 50px;}*/
         .myplan{
             /* border: 1px solid black; */
             width: 1000px;
@@ -37,21 +38,21 @@
 	<%@ include file="../common/myPageSidebar.jsp" %>
 	<div class="myContent">
 	 <div class="myplan" >
-            <h1>&nbsp;&nbsp;&nbsp;나의 일정</h1>
-            <hr>
+            <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;나의 일정</h1>
+            <hr style="color: black;">
         <div id="selectButton" >
-            <select name="select" id="selectOption">
+            <select name="select" id="select">
                 <option value="select">모든일정</option>
                 <option value="select">일정(공개)</option>
                 <option value="select">비공개(비공개)</option>
             </select>
-            <button>삭제</button>
+            <button class="btn btn-secondary btn-sm">삭제</button>
         </div>
         <div class="MyplanArea" >
 
             <div class="MakeMap" align="center" >
                 
-                <img src="../../../resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
+                <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
                 <p>여행 만들러 가기</p>
             </div>
            
@@ -68,7 +69,7 @@
             <div class="MyplanMap">
                 <input type="checkbox">
                     <img src="river2.PNG" width="250" height="200"> <br>
-                    <p align="center">
+                    <p align="center" s>
                         제목 <br>
                         여행기간
                     </p>
@@ -82,6 +83,8 @@
                     </p>
             </div>
         </div>
+
+    </div>
 
     </div>
     </div>

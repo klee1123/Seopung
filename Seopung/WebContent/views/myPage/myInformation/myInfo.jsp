@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>개인정보조회 및 수정</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 <style>
         
         .myInfo{
@@ -15,7 +21,6 @@
         .infoPoto{
             width: 30%;
             float: left;
-            
         }
         .changeInfo{
             float: left;
@@ -27,10 +32,10 @@
             padding: 10px;
             margin-left:20px;
         }
-       
-        #phone{
-            width:50px;
-        }
+        
+        #infoTable tr{
+           height:50px;
+       }
 </style>
 </head>
 <body>
@@ -39,60 +44,82 @@
 	
 	<div class="myContent">
 	
-		<div class="personal_Info" >
+		<div class="personal_Info">
         
-            <h1>&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
+            <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
         <form action="" method="POST">
-            <button type="submit">수정하기</button>
-            <button type="reset">취소</button> <br><br>
+            <button type="submit" class="btn btn-secondary btn-sm"> 수정</button>
+             <br><br>
         
             <div class="infoPoto">
                 <img src="../../../resources/images/회원.jpg" alt="">
                 <br><br>
                 <p style="font-size: 12px;">1MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
-                    <button type="submit">파일등록</button>
-                    <button type="submit" >삭제</button>
+                    <button type="submit" class="btn btn-secondary btn-sm">파일등록</button>
+                    <button type="submit" class="btn btn-secondary btn-sm">삭제</button>
                 </div>
             </div>
             <div class="changeInfo">
-                <p>USERID01</p><br>
-                <label for="">닉네임</label>
-                <input type="text" placeholder="닉네임을 입력하세요"> <br><br>
-
-                <label for="">* 비밀번호</label>
-                <input type="password" placeholder="비밀번호를 입력하세요"> <br><br>
-
-                <label for="">* 비밀번호 확인</label>
-                <input type="password" placeholder="다시입력해주세요"> <br><br>
-
-                <label for="">* 이름</label>
-                <input type="text" placeholder="이름을 입력하세요"> <br><br>
-
-                <label for="">* 전화번호</label>
-                <input type="text" list="phone" name="phone" style="width: 50px;">
-                <datalist id="phone">
-                    <option value="010">010</option>
-                    <option value="011">011</option>
-                    <option value="019">019</option>
-                    <option value="016">016</option>
-                    <option value="070">070</option>
-                </datalist> -
-                <input type="text" id="phone"> - <input type="text" id="phone"> <br><br>
-
-                <label for="">* 이메일</label>
-                <input type="email" placeholder="@포함해서 적어주세요">                
                 
-                <button>인증하기</button> <br><br>
-
-                <label>* 이메일 인증</label>
-                <input type="text">
-                <button>확인</button>
-                <div><br></div>
+            <table id="infoTable">
+                <tr>
+                    <th align="left" width="200px">아이디</th>
+                    <td><span>USERID01 </span></td>
+                </tr>
+                <tr>
+                    <th align="left" width="200px">이름</th>
+                    <td><span>홍길동 </span></td>
+                    
+                </tr>
+                <tr>
+                    <th align="left">닉네임</th>
+                    <td><span>홍길홍길 <button type="button" data-toggle="collapse" data-target="#nickCh" class="btn btn-secondary btn-sm"> 수정</button></span></td>
+                
+                    <tr id="nickCh" class="collapse" >
+                        <th>변경할 닉네임</th>
+                        <td><input type="text"><button type="button" id="nickChSuccess"  class="btn btn-secondary btn-sm">중복확인</button></td>
+                    </tr>
+                </tr>
+                <tr>
+                    <th align="left">비밀번호</th>
+                    <td><button  type="button" class="btn btn-secondary btn-sm"  data-toggle="collapse" data-target="#pwdCh">변경</button></td>
+                    <tr id="pwdCh" class="collapse" >
+                        <th>현재 비밀번호</th>
+                        <td><input type="text"></td>
+                    </tr><tr id="pwdCh" class="collapse" >
+                        <th>변경할 비밀번호</th>
+                        <td><input type="text"></td>
+                    </tr><tr id="pwdCh" class="collapse" >
+                        <th>비밀번호 확인</th>
+                        <td><input type="text"><button type="button" class="btn btn-secondary btn-sm">확인</button></td>
+                    </tr>
+                </tr>
+                <tr>
+                    <th align="left">이메일</th>
+                    <td><span>hong@gmail.com <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#emailCh"> 수정</button></span></td>
+                    <tr id="emailCh" class="collapse" >
+                        <th>변경할 이메일</th>
+                        <td><input type="email"><button type="button" class="btn btn-secondary btn-sm">인증</button></td>
+                    </tr>
+                    <tr id="emailCh" class="collapse" >
+                        <th>인증확인</th>
+                        <td><input type="text"><button type="button" class="btn btn-secondary btn-sm">확인</button></td>
+                    </tr>
+                </tr>
+                <tr>
+                    <th align="left">생년월일</th>
+                    <td><span>2020년 07월 01일</span></td>
+                </tr>
+                
+            </table>
+            <br><br>
             </div>
-            <textarea name="introduction" id="introduction" cols="100" rows="8" placeholder="자기소개 칸 입니다." style="resize: none;"></textarea>
+            
+            <textarea name="introduction" cols="80" rows="8"style="resize: none;">자기소개 : </textarea>
+         
         </form>
         </div>
             
