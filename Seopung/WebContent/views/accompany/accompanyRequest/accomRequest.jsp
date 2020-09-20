@@ -5,6 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="../../../resources/css/bootstrap.min.css">
+  <!-- animate CSS -->
+  <link rel="stylesheet" href="../../../resources/css/animate.css">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="../../../resources/css/owl.carousel.min.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="../../../resources/css/all.css">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" href="../../../resources/css/flaticon.css">
+  <link rel="stylesheet" href="../../../resources/css/themify-icons.css">
+  <link rel="stylesheet" href="../../../resources/css/nice-select.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="../../../resources/css/magnific-popup.css">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="../../../resources/css/slick.css">
+  <!-- style CSS -->
+  <link rel="stylesheet" href="../../../resources/css/style.css">
+
 <style>
 
     .accomRequest{

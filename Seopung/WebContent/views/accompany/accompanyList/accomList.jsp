@@ -81,103 +81,105 @@
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; ">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 8px;">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 8px;">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 8px;">신고</a></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
 	                    </tr>
+                       
                         <tr align="center">
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk2">&nbsp;&nbsp;2.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk3">&nbsp;&nbsp;3.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk4">&nbsp;&nbsp;4.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk5">&nbsp;&nbsp;5.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk6">&nbsp;&nbsp;6.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk7">&nbsp;&nbsp;7.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk8">&nbsp;&nbsp;8.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk9">&nbsp;&nbsp;9.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
                         </tr>
                         
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk10">&nbsp;&nbsp;10.</td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk3">&nbsp;&nbsp;3.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
-	                        <td><button>프로필보기</button></td>
-                            <td><button>메세지보내기</button></td>
-                            <td><button>동행삭제</button></td>
-                            <td><button>신고</button></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk4">&nbsp;&nbsp;4.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk5">&nbsp;&nbsp;5.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk6">&nbsp;&nbsp;6.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk7">&nbsp;&nbsp;7.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk8">&nbsp;&nbsp;8.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk9">&nbsp;&nbsp;9.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        <tr align="center">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk10">&nbsp;&nbsp;10.</td>
+	                        <td>아이디 넣을칸</td>
+	                        <td>이름</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+
+                        </tr>
+                        
 	                </tbody>
 				</table>
 				
