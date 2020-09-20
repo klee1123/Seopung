@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>스크랩일정</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
 <style>
         
         .scrapPlanAll{
@@ -17,7 +19,7 @@
         }
         #scrapPlan > button {
             width: 50px;
-            margin-left: 40px;
+            margin-left: 20px;
         }
         .scrapPlanMap{
             width:250px;
@@ -36,13 +38,12 @@
 	
 	<div class="myContent">
 		<div class="scrapPlanAll">
-        
-            <h1>&nbsp;&nbsp;&nbsp;일정</h1>
+        <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;스크랩 일정</h1>
             <hr>
         
         <!-- 삭제버튼 묶어준 div -->
-        <div id="scrapPlan"> <br>
-            <button>삭제</button>
+        <div id="scrapPlan">
+            <button class="btn btn-secondary btn-sm">삭제</button>
         </div>
         
             <!-- 게시판 모두 묶어준 div-->
