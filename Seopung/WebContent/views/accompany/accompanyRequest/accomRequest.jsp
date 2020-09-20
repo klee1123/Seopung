@@ -32,6 +32,17 @@
         margin-left: 20px;
     }
 
+    .head{
+        background-color: #00c0ff; 
+        color: white;
+
+    }
+
+    .modal{
+        position: absolute;
+        
+    }
+
 
 </style>
 
@@ -64,7 +75,7 @@
 				
 	            <table id="accomList" align="center">
 	                <thead>
-	                    <tr align="center">
+	                    <tr align="center" class="head">
 	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
 	                        <th width="150">아이디</th>
 	                        <th width="100">이름</th>
@@ -81,126 +92,248 @@
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;" data-toggle="modal" data-target="#accept">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px" data-toggle="modal" data-target="#refusal">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;2.</td>
+	                        <td><input type="checkbox"id="chk" name="chk2">&nbsp;&nbsp;2.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;3.</td>
+	                        <td><input type="checkbox"id="chk" name="chk3">&nbsp;&nbsp;3.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;4.</td>
+	                        <td><input type="checkbox"id="chk" name="chk4">&nbsp;&nbsp;4.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;5.</td>
+	                        <td><input type="checkbox"id="chk" name="chk5">&nbsp;&nbsp;5.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;6.</td>
+	                        <td><input type="checkbox"id="chk" name="chk6">&nbsp;&nbsp;6.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;7.</td>
+	                        <td><input type="checkbox"id="chk" name="chk7">&nbsp;&nbsp;7.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;8.</td>
+	                        <td><input type="checkbox"id="chk" name="chk8">&nbsp;&nbsp;8.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;9.</td>
+	                        <td><input type="checkbox"id="chk" name="chk9">&nbsp;&nbsp;9.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
+                        </tr>
                         <tr align="center">
 	                        <td><input type="checkbox"id="chk" name="chk10">&nbsp;&nbsp;10.</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
+                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
 	                    </tr>
+                       
 	                </tbody>
 				</table>
 				
 			
 				</form>
-		
+                <!-- 수락 modal -->
+                <div class="modal" id="accept">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">수락여부</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body" align="center">
+                
+                                <h4><b>
+                                    동행을 수락하시겠습니까 ? <br>   
+                                </b>
+                                </h4>
+                                <br>
+            
+                                <form action="" method="post">
+                        
+                                    <button type="submit" class="genric-btn info-border radius">확인</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                </form>
+            
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 거절 모달 -->
+
+                <div class="modal" id="refusal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">수락여부</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body" align="center">
+                
+                                <h4><b>
+                                    동행을 거절하시겠습니까 ? <br>   
+                                </b>
+                                </h4>
+                                <br>
+            
+                                <form action="" method="post">
+                        
+                                    <button type="submit" class="genric-btn info-border radius">확인</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                </form>
+            
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 신고하기 modal -->
+
+                <div class="modal" id="report">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">신고 작성</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                        
+                                <form action="" method="post">
+            
+                                    <table>
+                                        <tr>
+                                            <th>신고 사유</th>
+                                                
+                                            <td>
+                                                <div class="default-select" id="default-select_2">
+                                                    <select>
+                                                        <option value="1">영리목적, 홍보성</option>
+                                                        <option value="1">불법성</option>
+                                                        <option value="1">욕설,인신공격</option>
+                                                        <option value="1">도배 및 광고</option>
+                                                        <option value="1">개인정보 노출</option>
+                                                        <option value="1">음란성, 선정성</option>
+                                                        <option value="1">모방 또는 명의 도용</option>
+                                                        <option value="1">기타</option>
+                                                    </select>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 제목 &nbsp;</th>
+                                            <td><input type="text" name="reportTitle" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 내용</th>
+                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <button type="submit" class="genric-btn info-border radius">작성</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                    
+                                </form>
+            
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
 	            <br><br>
 	            <div class="pagingArea" align="center">
 	

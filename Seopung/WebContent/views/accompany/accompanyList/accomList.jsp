@@ -31,7 +31,11 @@
                 height: 800px;
                 margin-left: 20px;
             }
+            .head{
+                background-color: #00c0ff; 
+                color: white;
 
+            }
             
 
 
@@ -66,7 +70,7 @@
 				
 	            <table id="accomList" align="center" >
 	                <thead>
-	                    <tr align="center" style="background-color: #00c0ff; color: white;">
+	                    <tr align="center" class="head">
 	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
 	                        <th width="150">아이디</th>
 	                        <th width="100">이름</th>
@@ -185,7 +189,76 @@
 				
 			
                 </form>
+
+                <!-- 프로필 modal -->
+
                 
+                <!-- 신고하기 modal -->
+
+                <div class="modal" id="report">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">신고 작성</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                        
+                                <form action="" method="post">
+            
+                                    <table>
+                                        <tr>
+                                            <th>신고 사유</th>
+                                                
+                                            <td>
+                                                <div class="default-select" id="default-select_2">
+                                                    <select>
+                                                        <option value="1">영리목적, 홍보성</option>
+                                                        <option value="1">불법성</option>
+                                                        <option value="1">욕설,인신공격</option>
+                                                        <option value="1">도배 및 광고</option>
+                                                        <option value="1">개인정보 노출</option>
+                                                        <option value="1">음란성, 선정성</option>
+                                                        <option value="1">모방 또는 명의 도용</option>
+                                                        <option value="1">기타</option>
+                                                    </select>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 제목 &nbsp;</th>
+                                            <td><input type="text" name="reportTitle" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 내용</th>
+                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <button type="submit" class="genric-btn info-border radius">작성</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                    
+                                </form>
+            
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
             
 	            <br><br>
 	            <div class="pagingArea" align="center">
