@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>스크랩커뮤니티</title>
+<script src="../../../resources/js/jquery-3.5.1.min.js"></script>
 <style>
        .scrapCommunity{
             width: 1000px;
@@ -105,11 +106,11 @@
                 <!-- 이전 페이지로 (<) -->
                 <button class="btn btn-secondary btn-sm"> &lt; </button>
     
-                <button class="btn btn-secondary btn-sm">1</button>
-                <button class="btn btn-secondary btn-sm">2</button>
-                <button class="btn btn-secondary btn-sm">3</button>
-                <button class="btn btn-secondary btn-sm">4</button>
-                <button class="btn btn-secondary btn-sm">5</button>
+                <button class="btn btn-outline-secondary btn-sm">1</button>
+                <button class="btn btn-outline-secondary btn-sm">2</button>
+                <button class="btn btn-outline-secondary btn-sm">3</button>
+                <button class="btn btn-outline-secondary btn-sm">4</button>
+                <button class="btn btn-outline-secondary btn-sm">5</button>
                 
                 <!-- 다음 페이지로 (>) -->
                 <button class="btn btn-secondary btn-sm"> &gt; </button>

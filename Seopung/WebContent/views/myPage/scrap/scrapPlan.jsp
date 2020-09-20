@@ -8,7 +8,6 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
 <style>
-        
         .scrapPlanAll{
             width: 1000px;
             height: 800px;
@@ -52,52 +51,100 @@
                 <!-- 각각 게시판 div -->
                 <div class="scrapPlanMap">
                     <input type="checkbox">
-                        <img src="river2.PNG" width="250" height="200"> <br>
+                        <div id="staticMap" style="width:250px;height:200px;"></div>
+
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
+					<script>
+					var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
+					    staticMapOption = { 
+					        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+					        level: 3 // 이미지 지도의 확대 레벨
+					    };
+					
+					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+					</script> <br>
                     <p  align="center">
-                        제목 <br>
-                        사람이름 <br>
-                        예상비용 <br>
-                        날짜
+			                        제목 <br>
+			                        사람이름 <br>
+			                        예상비용 <br>
+			                        날짜
+                    </p>
+                </div>
+                <div class="scrapPlanMap">
+                    <input type="checkbox">
+                        <div id="staticMap2" style="width:250px;height:200px;"></div>
+
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
+					<script>
+					var staticMapContainer  = document.getElementById('staticMap2'), // 이미지 지도를 표시할 div  
+					    staticMapOption = { 
+					        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+					        level: 3 // 이미지 지도의 확대 레벨
+					    };
+					
+					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+					</script> <br>
+                    <p align="center">
+			                        제목 <br>
+			                        사람이름 <br>
+			                        예상비용 <br>
+			                        날짜
+                    </p>
+                </div>
+                <div class="scrapPlanMap">
+                    <input type="checkbox">
+                        <div id="staticMap3" style="width:250px;height:200px;"></div>
+
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
+					<script>
+					var staticMapContainer  = document.getElementById('staticMap3'), // 이미지 지도를 표시할 div  
+					    staticMapOption = { 
+					        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+					        level: 3 // 이미지 지도의 확대 레벨
+					    };
+					
+					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+					</script> <br>
+                    <p align="center">
+			                        제목 <br>
+			                        사람이름 <br>
+			                        예상비용 <br>
+			                        날짜
+                    </p>
+                </div>
+                <div class="scrapPlanMap">
+                    <input type="checkbox">
+                        <div id="staticMap4" style="width:250px;height:200px;"></div>
+
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
+					<script>
+					var staticMapContainer  = document.getElementById('staticMap4'), // 이미지 지도를 표시할 div  
+					    staticMapOption = { 
+					        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+					        level: 3 // 이미지 지도의 확대 레벨
+					    };
+					
+					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
+					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+					</script> <br>
+                    <p align="center">
+			                        제목 <br>
+			                        사람이름 <br>
+			                        예상비용 <br>
+			                        날짜
                     </p>
                 </div>
                 <div class="scrapPlanMap">
                     <input type="checkbox">
                         <img src="river2.PNG" width="250" height="200"> <br>
                     <p align="center">
-                        제목 <br>
-                        사람이름 <br>
-                        예상비용 <br>
-                        날짜
-                    </p>
-                </div>
-                <div class="scrapPlanMap">
-                    <input type="checkbox">
-                        <img src="river2.PNG" width="250" height="200"> <br>
-                    <p align="center">
-                        제목 <br>
-                        사람이름 <br>
-                        예상비용 <br>
-                        날짜
-                    </p>
-                </div>
-                <div class="scrapPlanMap">
-                    <input type="checkbox">
-                        <img src="river2.PNG" width="250" height="200"> <br>
-                    <p align="center">
-                        제목 <br>
-                        사람이름 <br>
-                        예상비용 <br>
-                        날짜
-                    </p>
-                </div>
-                <div class="scrapPlanMap">
-                    <input type="checkbox">
-                        <img src="river2.PNG" width="250" height="200"> <br>
-                    <p align="center">
-                        제목 <br>
-                        사람이름 <br>
-                        예상비용 <br>
-                        날짜
+			                        제목 <br>
+			                        사람이름 <br>
+			                        예상비용 <br>
+			                        날짜
                     </p>
                 </div>
             </div>
