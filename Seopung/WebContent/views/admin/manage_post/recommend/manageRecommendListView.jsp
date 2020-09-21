@@ -32,7 +32,7 @@
 					<td width="1000">
 						<form action="" method="GET">
 							<label for="">제목</label> <input type="text" placeholder="제목 입력">
-							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
+							<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='';">조회</button>
 						</form>
 					</td>
 				</tr>
@@ -43,7 +43,7 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align: center;">
 					<tr>
-						<th width="20px"><input type="checkbox"></th>
+						<th width="20px"><input type="checkbox" id="chk_all" name="rno"></th>
 						<th width="50px">번호</th>
 						<th width="355px">제목</th>
 						<th width="125px">관리자아이디</th>
@@ -53,7 +53,7 @@
 				</thead>
 				<tbody style="text-align: center;">
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>10</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -61,7 +61,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>9</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -69,7 +69,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>8</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -77,7 +77,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>7</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -85,7 +85,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>6</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -93,7 +93,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>5</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -101,7 +101,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>4</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -109,7 +109,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>3</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -117,7 +117,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>2</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -125,7 +125,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"></td>
+						<td><input type="checkbox" id="chk" name="rno"></td>
 						<td>1</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -161,7 +161,7 @@
 						</td>
 						<td width="">
 							<button class="btn btn-primary">등록</button>
-							<button class="btn btn-danger">삭제</button>
+							<button class="btn btn-danger" onclick="deleteRe();">삭제</button>
 						</td>
 					</tr>
 				</table>
@@ -170,6 +170,38 @@
 			<br><br>
 
 		</div>
+		<script>
+			// 제목 선택시 상세조회 페이지로 이동
+            $(function(){
+            	$("#listArea>tbody>tr").each(function(){
+                    $(this).find("td:eq(2)").css("cursor","pointer");
+                  
+                    $(this).find("td:eq(2)").click(function(){
+                      location.href = "<%= contextPath %>/detail.re?rno=" + $(this).prev().text();
+                    });
+                  });
+			});
+			
+         	// 체크박스 전체선택 및 해제
+            $(function(){
+                $("#chk_all").click(function(){
+                    if($("#chk_all").prop("checked")){
+                        $("input[id=chk]").prop("checked",true);
+
+                    }else {
+                        $("input[id=chk]").prop("checked",false);
+                    }
+                });
+            });
+         	
+         	// 삭제시
+         	function deleteRe(){
+         		//var list = document.getElementById("#chk").val();
+         		
+         		location.href="<%=contextPath%>/delete.re?rno=";
+         	}
+         	
+		</script>
 
 
 	</div>
