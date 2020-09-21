@@ -9,6 +9,26 @@
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   	<link rel="stylesheet" href="resouces/css/all.css">
     <link rel="stylesheet" href="resources/css/style.css">
+    <style>
+    	#mainRecommendTable{
+            width:300px;
+        }
+        #mainRecommendTable a{
+            text-decoration: none;
+            color:black;
+        }
+        #mainRecommendTable tr{
+            height:40px;
+        }
+        .blog_text img{
+            width: 100%;
+            height: 100%;
+        }
+        .single_donation_item{
+        
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
   
@@ -21,9 +41,9 @@
                 <div class="col-lg-7">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h5>Best way to tour</h5>
-                            <h1>Lorem ipsum dolor amet consec</h1><br><br>
-                            <a href="#" class="genric-btn primary e-large">일정 만들기</a>
+                            <h5 style="font-family: 'Do Hyeon', sans-serif;">나만의 여행 플래너 서풍</h5>
+                            <h1 style="font-family: 'Do Hyeon', sans-serif; font-size: 35px;">쉽고 빠르게 여행을 기록하세요</h1><br><br>
+                            <a href="#" class="genric-btn primary e-large" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px;">일정 만들기</a>
                         </div>
                     </div>
                 </div>
@@ -37,29 +57,35 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
-                        <h4>donation</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing 
-                        elit sed do eiusmod tempor incididunt ut labore et 
-                        dolore magna </p>
-                        <a href="#" class="read_btn">read more</a>
+                        <div id="calendarApi"> 
+                            <iframe src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FSeoul&amp;src=a28uc291dGhfa29yZWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%230B8043&amp;showNav=1&amp;showPrint=0&amp;showTitle=0&amp;showTz=0&amp;showCalendars=0&amp;showTabs=0" style="border-width:0" width="280" height="320" frameborder="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single_donation_item" style="margin-left: 40px;">
+                        <h4>공지사항</h4><br>
+                        <p><table id="mainRecommendTable" >
+                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                        </table></p><br>
+                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
-                        <h4>donation</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing 
-                        elit sed do eiusmod tempor incididunt ut labore et 
-                        dolore magna </p>
-                        <a href="#" class="read_btn">read more</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item">
-                        <h4>donation</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing 
-                        elit sed do eiusmod tempor incididunt ut labore et 
-                        dolore magna </p>
-                        <a href="#" class="read_btn">read more</a>
+                        <h4>인기글</h4><br>
+                        <p><table id="mainRecommendTable" >
+                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
+                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
+                        </table></p><br> 
+                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
                 </div>
             </div>
@@ -75,86 +101,39 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section_tittle">
-                        
                         <h2>추천 코스</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit 
-                        sed  do eiusmod tempor incididunt ut</p>
+                        <p>내가 계획한 일정과 서울 주요 관광지 정보를 빠르고 쉽게 찾을 수 있습니다. 서풍에서 제공하는 추천코스를 활용해보세요!</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_blog_part">
-                        <img src="resources/images/blog_1.png" alt="">
                         <div class="blog_text">
-                            <h2>Luxerious Car Rental</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna 
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                            <ul>
-                                <li>
-                                    <i class="ti-calendar"></i>
-                                    <p>13th Dec</p>
-                                </li>
-                                <li>
-                                    <i class="ti-heart"></i>
-                                    <p>15</p>
-                                </li>
-                                <li>
-                                    <i class="far fa-comment-dots"></i>
-                                    <p>10</p>
-                                </li>
-                            </ul>
+                            <h2>제목</h2>
+                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
+                            <a href=""><img src="resources/달.jpg" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_blog_part">
-                        <img src="resources/images/blog_2.png" alt="">
                         <div class="blog_text">
-                            <h2>Luxerious Car Rental</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna 
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                            <ul>
-                                <li>
-                                    <i class="ti-calendar"></i>
-                                    <p>13th Dec</p>
-                                </li>
-                                <li>
-                                    <i class="ti-heart"></i>
-                                    <p>15</p>
-                                </li>
-                                <li>
-                                    <i class="far fa-comment-dots"></i>
-                                    <p>10</p>
-                                </li>
-                            </ul>
+                            <h2>제목</h2>
+                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
+                                <a href=""><img src="resources/달.jpg" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_blog_part">
-                        <img src="resources/images/blog_3.png" alt="">
                         <div class="blog_text">
-                            <h2>Luxerious Car Rental</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                            sed do eiusmod tempor incididunt ut labore et dolore magna 
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                            <ul>
-                                <li>
-                                    <i class="ti-calendar"></i>
-                                    <p>13th Dec</p>
-                                </li>
-                                <li>
-                                    <i class="ti-heart"></i>
-                                    <p>15</p>
-                                </li>
-                                <li>
-                                    <i class="far fa-comment-dots"></i>
-                                    <p>10</p>
-                                </li>
-                            </ul>
+                            <h2>제목</h2>
+                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
+                                <a href=""><img src="resources/달.jpg" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
