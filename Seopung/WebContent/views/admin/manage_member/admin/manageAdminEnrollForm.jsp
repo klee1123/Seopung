@@ -27,13 +27,12 @@
 </style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
-
+	<%@ include file="../../common/header.jsp"%>
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">관리자 상세조회</h1>
+		<h1 class="h3 mb-4 text-gray-800">관리자 등록</h1>
 
 		<div class="outer" align="center">
 			<form action="" method="post" id="adminListForm">
@@ -43,8 +42,8 @@
 						<tr>
 							<th width="15px">*</th>
 							<td width="120px">아이디</td>
-							<td width="300px"><input type="text" name="adminId"
-								value="adminId"></td>
+							<td width="300px"><input type="text" name="adminId">
+							</td>
 						</tr>
 						<tr>
 							<th>*</th>
@@ -59,49 +58,26 @@
 						<tr>
 							<th>*</th>
 							<td>성명</td>
-							<td><input type="text" name="adminName" value="관리자"></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>가입일</td>
-							<td><input type="text" value="2020.09.09" disabled></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>탈퇴일</td>
-							<td><input type="text" value="-" disabled></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>최종수정일</td>
-							<td><input type="text" value="2020.09.09" disabled></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td>상태</td>
-							<td><input type="text" value="회원" disabled></td>
+							<td><input type="text" name="adminName"></td>
 						</tr>
 					</table>
 				</div>
 
-				<br><br><br><br>
+				<br><br><br>
 
 				<div align="center">
 					<button type="button" class="btn btn-secondary">취소</button>
-					<button type="submit" class="btn btn-primary">수정</button>
-					<button type="button" class="btn btn-danger">탈퇴</button>
+					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</form>
-
-			<br>
+			
 		</div>
 
 
 	</div>
 	<!-- /.container-fluid -->
 
-
-	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="../../common/footer.jsp"%>
 
 </body>
 </html>

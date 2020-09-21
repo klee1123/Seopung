@@ -6,32 +6,34 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.outer {
-	margin: auto;
-	width: 1000px;
-}
+    .outer{
+        margin:auto;
+        width:1000px;
+    }
+
 </style>
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp"%>
+
+	<%@ include file="../../common/header.jsp"%>
 
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">일정관리</h1>
+		<h1 class="h3 mb-4 text-gray-800">블랙리스트 목록</h1>
 
 		<br>
-
+		
 		<div class="outer">
 
 			<table align="center">
 				<tr>
 					<td width="1000">
 						<form action="" method="GET">
-							<label for="">검색</label> <input type="text"
-								placeholder="아이디/제목 입력">
+							<label for="">회원ID</label> <input type="text"
+								placeholder="아이디 입력">
 							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
 						</form>
 					</td>
@@ -41,98 +43,63 @@
 			<br>
 
 			<table align="center" id="listArea" class="table table-hover">
-				<thead style="text-align: center;">
+				<thead style="text-align:center;">
 					<tr>
-						<th width="20px"><input type="checkbox"></th>
-						<th width="50px">번호</th>
-						<th width="355px">제목</th>
-						<th width="125px">작성자아이디</th>
-						<th width="125px">작성일</th>
-						<th width="75px">조회수</th>
+						<th width="50px"><input type="checkbox"></th>
+						<th width="75px">번호</th>
+						<th width="120px">아이디</th>
+						<th width="120px">이름</th>
+						<th width="250px">제제 사유</th>
+						<th width="100px">상태</th>
+						<th width="150px">제제 날짜</th>
 					</tr>
 				</thead>
-				<tbody style="text-align: center;">
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>10</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>9</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>8</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>7</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>6</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
+				<tbody style="text-align:center;">
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>5</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
+						<td>userId5</td>
+						<td>홍길동</td>
+						<td>비매너</td>
+						<td>회원</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>4</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
+						<td>userId5</td>
+						<td>홍길동</td>
+						<td>비매너</td>
+						<td>회원</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>3</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
+						<td>userId5</td>
+						<td>홍길동</td>
+						<td>비매너</td>
+						<td>회원</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>2</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
+						<td>userId5</td>
+						<td>홍길동</td>
+						<td>비매너</td>
+						<td>회원</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>1</td>
-						<td>제목입니다</td>
-						<td>userId1</td>
+						<td>userId5</td>
+						<td>홍길동</td>
+						<td>비매너</td>
+						<td>회원</td>
 						<td>2020.09.09</td>
-						<td>10</td>
 					</tr>
-
 				</tbody>
 			</table>
 
@@ -141,10 +108,10 @@
 			<div align="center">
 				<table>
 					<tr>
-						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b> 개
+						<td width=""><span>총 회원수 &nbsp;&nbsp;&nbsp;<b
+								style="color: red">5</b> 명
 						</span></td>
-						<td width="750px;">
+						<td width="720px;">
 							<div align="center">
 								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
 								<button class="btn btn-secondary btn-sm">&lt;</button>
@@ -160,13 +127,13 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">삭제</button>
+							<button class="btn btn-primary">목록에서 제거</button>
 						</td>
 					</tr>
 				</table>
 			</div>
-
-			<br>
+			
+			<br><br>
 
 		</div>
 
@@ -174,8 +141,6 @@
 	</div>
 	<!-- /.container-fluid -->
 
-
-	<%@ include file="../common/footer.jsp"%>
-
+	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

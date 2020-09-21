@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+
 <style>
+		
         .myOuter{
             width:1400px;
             height:800px;
@@ -20,35 +23,39 @@
             
         }
         .menubar>div{
-            background:#fec104;
             width:90%;
-            height:90%;
-            border-radius: 20px;
+            height:80%;
+            border:1px solid gray;
+            
         }
 
         .myContent{ width:80%; float:left}
         #sidenavi{
             list-style-type:none;
-            font-size: 20px;
+            font-size: 17px;
             margin-left:30px;
         }
         
-        #sidenavi>li>a{
+        #sidenavi>li a{
             color: black;
             text-decoration: none;
+            font-size: 18px;
+            font-family: 'Nanum Gothic', sans-serif;
         }
         #sidenavi>li>ul li{
             list-style-type:none;
-            font-size:16px;
+            font-size:14px;
             padding: 2px;
-            margin-left:40px;
+            margin-left:15px;
         }
         #sidenavi>li>ul a{
             text-decoration:none;
             color:black;
+            font-size: 16px;
+            font-family: 'Nanum Gothic', sans-serif;
         }
         #sidenavi a:hover{
-            color:white;
+            color:lightgray;
         }
 </style>
 </head>
