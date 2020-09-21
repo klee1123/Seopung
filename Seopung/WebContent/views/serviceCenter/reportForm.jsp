@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <!DOCTYPE html>
+<html lang="UTF-8">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +20,6 @@
 </style>
 </head>
 <body>
-    <!-- 메뉴바 추가되야됨 -->
 
     <div class="outer">
         <br>
@@ -58,13 +59,14 @@
                 </tr>
 
                 <tr>
-                    <th>약관 동의</th>
-                    <td><input type='checkbox' name='gender' value='female'></td>
+                    <td>약관 동의</td>
+                    <td><input type='checkbox' name='check' value=''></td>
                 </tr>
 
             </table>
 
             <br>
+            
             <div align="center">
                 <button type="submit">제출하기</button>
             </div>
