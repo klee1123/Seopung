@@ -62,8 +62,8 @@
 	padding: 10px;
 }
 
-#content_6 tr {
-	height: 70px;
+#content_6 table {
+	margin-bottom: 20px;
 }
 </style>
 </head>
@@ -124,120 +124,103 @@
 			<div id="content_6" align="center">
 				<table>
 					<tr>
-						<td width="60px"><img width="45px" class="rounded-circle"
+						<td width="60"><img width="45px" class="rounded-circle"
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
-						<td width="700px" style="padding: 10px;">닉네임1 - 2020.09.09
-							22:05<br>닉네임1의 댓글내용
+						<td>닉네임 <br> 2020.09.09 22:05
 						</td>
-						<td>
-							<button style="border: none; background: none">삭제</button>
-						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
 							<button style="border: none; background: none">삭제</button>
 						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
 							<button style="border: none; background: none">삭제</button>
 						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
 							<button style="border: none; background: none">삭제</button>
 						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
 							<button style="border: none; background: none">삭제</button>
 						</td>
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
 					</tr>
 					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
 							<button style="border: none; background: none">삭제</button>
 						</td>
 					</tr>
-					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
-							<button style="border: none; background: none">삭제</button>
-						</td>
-					</tr>
-					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
-							<button style="border: none; background: none">삭제</button>
-						</td>
-					</tr>
-					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
-							<button style="border: none; background: none">삭제</button>
-						</td>
-					</tr>
-					<tr>
-						<td><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td style="padding: 10px;">닉네임2 - 2020.09.09 22:10<br>닉네임2의
-							댓글내용
-						</td>
-						<td>
-							<button style="border: none; background: none">삭제</button>
-						</td>
-					</tr>
-
 				</table>
 			</div>
 
-
+			
+			
 			<div align="center">
 
 				<button class="btn btn-outline-secondary btn-sm">&lt;</button>
