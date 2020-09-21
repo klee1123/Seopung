@@ -5,43 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="../../../resources/css/bootstrap.min.css">
-  <!-- animate CSS -->
-  <link rel="stylesheet" href="../../../resources/css/animate.css">
-  <!-- owl carousel CSS -->
-  <link rel="stylesheet" href="../../../resources/css/owl.carousel.min.css">
-  <!-- font awesome CSS -->
-  <link rel="stylesheet" href="../../../resources/css/all.css">
-  <!-- flaticon CSS -->
-  <link rel="stylesheet" href="../../../resources/css/flaticon.css">
-  <link rel="stylesheet" href="../../../resources/css/themify-icons.css">
-  <link rel="stylesheet" href="../../../resources/css/nice-select.css">
-  <!-- font awesome CSS -->
-  <link rel="stylesheet" href="../../../resources/css/magnific-popup.css">
-  <!-- swiper CSS -->
-  <link rel="stylesheet" href="../../../resources/css/slick.css">
-  <!-- style CSS -->
-  <link rel="stylesheet" href="../../../resources/css/style.css">
 
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../resources/css/bootstrap.min.css">
+
+        
 <style>
 
+
     .accomRequest{
-        width: 1000px;
+      
+        margin-left: 40px;
+        float: left;
+
+
         height: 800px;
-        margin-left: 20px;
     }
-
-    .head{
-        background-color: #00c0ff; 
-        color: white;
-
-    }
+  
+    tbody>tr:hover{
+            cursor:pointer;
+            opacity:0.7;
+        }
 
     .modal{
         position: absolute;
-        
+
     }
+
+    a{
+        font-size: 10px;
+
+    }
+
+
 
 
 </style>
@@ -63,7 +59,7 @@
 	
 		<div class="accomTitle">
 	        
-	            <h1>&nbsp;&nbsp;&nbsp;신청 온 동행인</h1>
+	            <h1>&nbsp;&nbsp;&nbsp;<b style="color:black;">신청 온 동행인</b></h1>
 	            <hr>
 	        
 			<div class="request"> <br>
@@ -71,9 +67,9 @@
 						
 	            <form action="" method="POST">
 	            
-				<br><br>
+				<br>
 				
-	            <table id="accomList" align="center">
+	            <table id="accomList"  align="center" class ="table table-hover">
 	                <thead>
 	                    <tr align="center" class="head">
 	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
@@ -82,130 +78,80 @@
 	                        <th width="100">신청날짜</th>
                             <th width="150">동행내용</th>
                             <th width="200">수락여부</th>
-                            <th width="50">신고</th>
+                            <th width="70">신고</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1.</td>
+	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;" data-toggle="modal" data-target="#accept">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px" data-toggle="modal" data-target="#refusal">거절</a>
+                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
+                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
                             </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
+                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
 
                         </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk2">&nbsp;&nbsp;2.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk3">&nbsp;&nbsp;3.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                        <tbody>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk4">&nbsp;&nbsp;4.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk5">&nbsp;&nbsp;5.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk6">&nbsp;&nbsp;6.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk7">&nbsp;&nbsp;7.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk8">&nbsp;&nbsp;8.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk9">&nbsp;&nbsp;9.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk10">&nbsp;&nbsp;10.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">수락</a> /
-                                <a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">거절</a>
-                            </td>
-                            <td><a href="#" class="genric-btn danger-border radius" style=" height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
 
-	                    </tr>
                        
 	                </tbody>
 				</table>
@@ -337,21 +283,20 @@
 	            <br><br>
 	            <div class="pagingArea" align="center">
 	
-	                <!-- 맨 처음으로 (<<) -->
-	                <button> &lt;&lt; </button>
-	                <!-- 이전 페이지로 (<) -->
-	                <button> &lt; </button>
-	    
-	                <button>1</button>
-	                <button>2</button>
-	                <button>3</button>
-	                <button>4</button>
-	                <button>5</button>
-	                
-	                <!-- 다음 페이지로 (>) -->
-	                <button> &gt; </button>
-	                <!-- 맨 끝으로 (>>) -->
-	                <button> &gt;&gt; </button>
+                    <div align="center">
+                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm">&lt;</button>
+
+                        <button class="btn btn-outline-secondary btn-sm">1</button>
+                        <button class="btn btn-outline-secondary btn-sm">2</button>
+                        <button class="btn btn-outline-secondary btn-sm">3</button>
+                        <button class="btn btn-outline-secondary btn-sm">4</button>
+                        <button class="btn btn-outline-secondary btn-sm">5</button>
+
+                        <button class="btn btn-secondary btn-sm">&gt;</button>
+                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                    
+                    </div>
 	            </div>
 	        </div>
 	    
