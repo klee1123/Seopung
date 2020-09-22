@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"  %>
+
+<%@page import="com.kh.Member.model.vo.Member" %>
 <%
 	String contextPath = request.getContextPath();
+	Member loginUser = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -117,9 +120,22 @@
                             </div>
 
 						</div>
-
+						<%if(loginUser == null){ %>
 						<a class="btn btn-light" href="#" data-toggle="modal" data-target="#loginForm"
 							style="font-weight: bold; color: rgb(75, 75, 75);">로그인/회원가입</a>
+						<%}else{ %>
+							 <ul>
+                                <li>
+                                <span style="white-space:nowrap; margin-left:px;"><span style="font-weight:bold;">&nbsp;&nbsp;&nbsp;<%=loginUser.getUserName() %></span> 어서오세요.</span><br>  
+                                    <span  >
+                                        <button style="border:none; border-radius:5px; color:white;background:#fec104;">마이페이지</button> 
+                                        <button style="border:none; border-radius:5px; color:white;background:#fec104;">로그아웃</button> 
+                                    </span>
+                                        
+                                </li> 
+                            </ul>
+						
+						<%} %>
 					</nav>
 				</div>
 			</div>
@@ -141,22 +157,23 @@
             
             <!-- Modal body -->
             <div class="modal-body" align="center">
-              <form action="">
+              <form action="<%=contextPath%>/login.me" method="post">
               <input type="text" name="userId" style="width:250px; height:35px; " placeholder="ID" required>
               <input type="password" name="userPwd" style="width:250px; height:35px; " placeholder="PASSWORD" required>
+              <!-- <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:310px; margin-right:15px;">Login</button>-->
+              <button type="submit">로그인</button>
+          	</form>   
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-              <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:300px; margin-right:15px;">Login</button>
               <table  style="margin-right:20px;">
                   <tr>
-                      <td><a href="" >회원가입</a>|</td>
+                      <td><a href="<%=contextPath %>/enrollForm.me" >회원가입</a>|</td>
                       <td><a href="" >아이디찾기</a>|</td>
-                      <td><a href="" ">비밀번호찾기</a></td>
+                      <td><a href="" >비밀번호찾기</a></td>
                   </tr>
               </table>
             </div>
-          </form>   
           </div>
         </div>
       </div>
