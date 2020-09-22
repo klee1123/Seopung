@@ -37,6 +37,7 @@
         input[type=text], input[type=password], input[type=email]{
             width:250px;
             height:25px;
+            font-size:12px;
         }
        
         table+button[type=submit], table+button+[type=button]{
@@ -76,48 +77,46 @@
 	<%@include file = "../common/menubar.jsp" %>
 	<div class="outer"></div>
 
-        <form align="center" action="" id="join">
+        <form align="center" action="<%=contextPath %>/insert.me" id="join" method="post">
             <span>Seopung</span>
             <fieldset >
                 <div class="head">서풍 회원가입 정보를 입력해주세요.</div><br><br>
                 <div class="head2">
                     <p>*는 필수 입력사항입니다.</p>
                 </div>
-                <br>
-                <form action="">
-                    
+                <br>                          
                     <table id="join2">
                         <tr>
                             <th>&nbsp;&nbsp;*아이디</th>
-                            <td><input type="text" name="userId" required placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
+                            <td><input type="text" name="userId" required maxlength="12" placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
                             <td><button>중복체크</button></td>
                         </tr>
                         <tr>
                             <th>&nbsp;&nbsp;*비밀번호</th>
-                            <td><input type="password" name="userPwd" required placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
+                            <td><input type="password" name="userPwd" required maxlength="15" placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <th>&nbsp;&nbsp;*비밀번호 확인</th>
-                            <td><input type="password" name="checkPwd" required  placeholder="&nbsp;&nbsp; 비밀번호 확인"></td>
+                            <td><input type="password" required maxlength="15"  placeholder="&nbsp; 비밀번호 확인"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <th style="width:109px;" align="left">&nbsp;&nbsp;*성명</th>
-                            <td><input type="text" name="userName" required  placeholder="&nbsp이름"></td>
+                            <td><input type="text" name="userName" required maxlength="5"  placeholder="&nbsp이름"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <th style="width:109px;" align="left">&nbsp;&nbsp;*닉네임</th>
-                            <td><input type="text" name="userNick" required  placeholder="&nbsp 영문, 숫자, 한글 포함 10자"></td>
+                            <td><input type="text" name="nickName" required  placeholder="&nbsp 영문, 숫자, 한글 포함 10자"></td>
                             <td></td>
                         </tr>
                         <tr>
                             <th style="width:109px;" align="left">&nbsp;&nbsp;*생년월일</th>
-                            <td><input type="text" name="userBirth" required  placeholder="&nbsp생년월일8자리(ex19940322)"></td>
+                            <td><input type="text" name="birth" required  placeholder="&nbsp생년월일8자리(ex19940322)"></td>
                             <td>
-                                <input type="radio" name="gender" id=g1> <label for="g1">남자</label>
-                                <input type="radio" name="gender" id=g2> <label for="g2">여자</label>
+                                <input type="radio" name="gender" value="M" id=g1 required> <label for="g1">남자</label>
+                                <input type="radio" name="gender" value="F" id=g2> <label for="g2">여자</label>
                             </td>
                         </tr>
                       
@@ -133,7 +132,7 @@
                         </tr>
                     </table>
                     
-                    <button type="submit">회원기입 완료</button>
+                    <button type="submit">회원가입 완료</button>
                     <button type="button">취소</button>
                 </fieldset>
             </form>
