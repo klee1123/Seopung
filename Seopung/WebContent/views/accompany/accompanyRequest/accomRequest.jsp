@@ -5,13 +5,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../../../resources/css/bootstrap.min.css">
+
+        
 <style>
 
+
     .accomRequest{
-        width: 1000px;
+      
+        margin-left: 40px;
+        float: left;
+
+
         height: 800px;
-        margin-left: 20px;
     }
+  
+    tbody>tr:hover{
+            cursor:pointer;
+            opacity:0.7;
+        }
+
+    .modal{
+        position: absolute;
+
+    }
+
+    a{
+        font-size: 10px;
+
+    }
+
+
 
 
 </style>
@@ -33,7 +59,7 @@
 	
 		<div class="accomTitle">
 	        
-	            <h1>&nbsp;&nbsp;&nbsp;신청 온 동행인</h1>
+	            <h1>&nbsp;&nbsp;&nbsp;<b style="color:black;">신청 온 동행인</b></h1>
 	            <hr>
 	        
 			<div class="request"> <br>
@@ -41,165 +67,236 @@
 						
 	            <form action="" method="POST">
 	            
-				<br><br>
+				<br>
 				
-	            <table id="accomList" align="center">
+	            <table id="accomList"  align="center" class ="table table-hover">
 	                <thead>
-	                    <tr align="center">
+	                    <tr align="center" class="head">
 	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
 	                        <th width="150">아이디</th>
 	                        <th width="100">이름</th>
 	                        <th width="100">신청날짜</th>
                             <th width="150">동행내용</th>
                             <th width="200">수락여부</th>
-                            <th width="50">신고</th>
+                            <th width="70">신고</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1.</td>
+	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
 	                        <td>아이디 넣을칸</td>
 	                        <td>이름</td>
 	                        <td>2020.09.19</td>
                             <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
+                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
+                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
                             </td>
-                            <td><button>신고</button></td>
+                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;2.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
+                        </tr>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;3.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
+                        <tbody>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;4.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;5.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;6.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
+                            <tr align="center">
+                                <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
+                                <td>아이디 넣을칸</td>
+                                <td>이름</td>
+                                <td>2020.09.19</td>
+                                <td>asdasdasdasd</td>
+                                <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept">수락</a> /
+                                    <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal">거절</a>
+                                </td>
+                                <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report">신고</a></td>
+    
+                            </tr>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;7.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;8.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;9.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
 
-	                    </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox"id="chk" name="chk10">&nbsp;&nbsp;10.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td>2020.09.19</td>
-                            <td>asdasdasdasd</td>
-                            <td><button>수락</button> /
-                                <button>거절</button>
-                            </td>
-                            <td><button>신고</button></td>
 
-	                    </tr>
+                       
 	                </tbody>
 				</table>
 				
 			
 				</form>
-		
+                <!-- 수락 modal -->
+                <div class="modal" id="accept">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">수락여부</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body" align="center">
+                
+                                <h4><b>
+                                    동행을 수락하시겠습니까 ? <br>   
+                                </b>
+                                </h4>
+                                <br>
+            
+                                <form action="" method="post">
+                        
+                                    <button type="submit" class="genric-btn info-border radius">확인</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                </form>
+            
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 거절 모달 -->
+
+                <div class="modal" id="refusal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">수락여부</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body" align="center">
+                
+                                <h4><b>
+                                    동행을 거절하시겠습니까 ? <br>   
+                                </b>
+                                </h4>
+                                <br>
+            
+                                <form action="" method="post">
+                        
+                                    <button type="submit" class="genric-btn info-border radius">확인</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                </form>
+            
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 신고하기 modal -->
+
+                <div class="modal" id="report">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">신고 작성</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                        
+                                <form action="" method="post">
+            
+                                    <table>
+                                        <tr>
+                                            <th>신고 사유</th>
+                                                
+                                            <td>
+                                                <div class="default-select" id="default-select_2">
+                                                    <select>
+                                                        <option value="1">영리목적, 홍보성</option>
+                                                        <option value="1">불법성</option>
+                                                        <option value="1">욕설,인신공격</option>
+                                                        <option value="1">도배 및 광고</option>
+                                                        <option value="1">개인정보 노출</option>
+                                                        <option value="1">음란성, 선정성</option>
+                                                        <option value="1">모방 또는 명의 도용</option>
+                                                        <option value="1">기타</option>
+                                                    </select>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 제목 &nbsp;</th>
+                                            <td><input type="text" name="reportTitle" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>신고 내용</th>
+                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <button type="submit" class="genric-btn info-border radius">작성</button>
+                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
+                                    
+                                </form>
+            
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
 	            <br><br>
 	            <div class="pagingArea" align="center">
 	
-	                <!-- 맨 처음으로 (<<) -->
-	                <button> &lt;&lt; </button>
-	                <!-- 이전 페이지로 (<) -->
-	                <button> &lt; </button>
-	    
-	                <button>1</button>
-	                <button>2</button>
-	                <button>3</button>
-	                <button>4</button>
-	                <button>5</button>
-	                
-	                <!-- 다음 페이지로 (>) -->
-	                <button> &gt; </button>
-	                <!-- 맨 끝으로 (>>) -->
-	                <button> &gt;&gt; </button>
+                    <div align="center">
+                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm">&lt;</button>
+
+                        <button class="btn btn-outline-secondary btn-sm">1</button>
+                        <button class="btn btn-outline-secondary btn-sm">2</button>
+                        <button class="btn btn-outline-secondary btn-sm">3</button>
+                        <button class="btn btn-outline-secondary btn-sm">4</button>
+                        <button class="btn btn-outline-secondary btn-sm">5</button>
+
+                        <button class="btn btn-secondary btn-sm">&gt;</button>
+                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                    
+                    </div>
 	            </div>
 	        </div>
 	    

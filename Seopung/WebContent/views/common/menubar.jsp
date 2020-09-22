@@ -82,7 +82,7 @@
 
 						<div class="collapse navbar-collapse main-menu-item"
 							id="navbarSupportedContent">
-							<ul class="navbar-nav">
+							<ul class="navbar-nav" style="margin-right:30px;">
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="blog.html"
 									id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -105,12 +105,16 @@
 											class="dropdown-item" href="">1:1문의</a>
 									</div></li>
 							</ul>
-							<form>
-								<input type="text"
-									style="border: 3px solid #fec104; width: 140px; height: 38px; margin-left: 20px; margin-bottom: 20px; margin-top: 20px;">
-								<button class="btn btn-warning" 
-									style="font-weight: bold; color: rgb(75, 75, 75);">검색</button>
-							</form>
+							<div style="width:210px;">
+                                <form action="search.do" method="get">
+                                    <div class="input-group mb-3" style="margin-left:25px;margin-top: 15px;margin-bottom: 15px;">
+                                        <input type="text" class="form-control" name="keyword" placeholder="검색">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-warning" type="submit"><img src="<%= contextPath %>/resources/images/icon_magnifier.png" width="15px;"></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 
 						</div>
 

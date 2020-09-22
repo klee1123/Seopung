@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +24,8 @@
 
 <!-- Custom styles for this page -->
 <link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body id="page-top">

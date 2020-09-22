@@ -71,9 +71,9 @@
     
                 <li>동행인관리
                     <ul>
-                        <li><a href="" >신청 온 동행인</a></li>
+                        <li><a href="../../accompany/accompanyRequest/accomRequest.jsp" >신청 온 동행인</a></li>
                         <li><a href="">신청 한 동행인</a></li>
-                        <li><a href="">동행목록</a></li>
+                        <li><a href="../../accompany/accompanyList/accomList.jsp">동행목록</a></li>
                     </ul>
                 </li> <br>
                 
