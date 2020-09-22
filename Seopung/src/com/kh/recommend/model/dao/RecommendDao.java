@@ -2,6 +2,7 @@ package com.kh.recommend.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Properties;
 
 public class RecommendDao {
@@ -19,6 +20,8 @@ public class RecommendDao {
 		}
 	}
 	
-	
+	public int selectListCount(Connection conn) {
+		
+	}
 
 }

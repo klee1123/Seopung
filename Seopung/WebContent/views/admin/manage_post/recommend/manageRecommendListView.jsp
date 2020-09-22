@@ -31,7 +31,7 @@
 				<tr>
 					<td width="1000">
 						<form action="" method="GET">
-							<label for="">제목</label> <input type="text" placeholder="제목 입력">
+							<label for="">제목</label> <input type="text" name="searchTitle" placeholder="제목 입력">
 							<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='';">조회</button>
 						</form>
 					</td>
@@ -53,7 +53,7 @@
 				</thead>
 				<tbody style="text-align: center;">
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="10"></td>
 						<td>10</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -61,7 +61,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="9"></td>
 						<td>9</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -69,7 +69,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="8"></td>
 						<td>8</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -77,7 +77,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="7"></td>
 						<td>7</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -85,7 +85,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="6"></td>
 						<td>6</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -93,7 +93,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="5"></td>
 						<td>5</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -101,7 +101,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="4"></td>
 						<td>4</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -109,7 +109,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="3"></td>
 						<td>3</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -117,7 +117,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="2"></td>
 						<td>2</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -125,7 +125,7 @@
 						<td>10</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno"></td>
+						<td><input type="checkbox" id="chk" name="rno" value="1"></td>
 						<td>1</td>
 						<td>제목입니다</td>
 						<td>admin1</td>
@@ -161,7 +161,7 @@
 						</td>
 						<td width="">
 							<button class="btn btn-primary">등록</button>
-							<button class="btn btn-danger" onclick="deleteRe();">삭제</button>
+							<button class="btn btn-danger" id="btnDelete">삭제</button>
 						</td>
 					</tr>
 				</table>
@@ -195,12 +195,28 @@
             });
          	
          	// 삭제시
-         	function deleteRe(){
-         		//var list = document.getElementById("#chk").val();
-         		
-         		location.href="<%=contextPath%>/delete.re?rno=";
-         	}
-         	
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "rno=" + selected[i];
+	                	}else{
+	                  		str += "rno=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="delete.re?" + str;
+	              	} 
+	            });
+            });
 		</script>
 
 

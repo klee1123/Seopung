@@ -75,7 +75,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">일정관리</a>
             <a class="collapse-item" href="">커뮤니티관리</a>
-            <a class="collapse-item" href="">추천코스관리</a>
+            <a class="collapse-item" href="<%= contextPath %>/list.re">추천코스관리</a>
           </div>
         </div>
       </li>
