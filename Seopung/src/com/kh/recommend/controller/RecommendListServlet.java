@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.recommend.model.service.RecommendService;
+import com.kh.recommend.model.vo.PageInfo;
+import com.kh.recommend.model.vo.Recommend;
 
 /**
  * Servlet implementation class RecommendListServlet
@@ -50,7 +52,7 @@ public class RecommendListServlet extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대 갯수 (페이지 목록들 몇개 단위)
-		pageLimit = 10;
+		pageLimit = 5;
 		
 		// * boardLimit : 한 페이지내에 보여질 게시글 최대 갯수
 		boardLimit = 10;
@@ -117,14 +119,12 @@ public class RecommendListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		// 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-		ArrayList<Board> list = new BoardService().selectList(pi);
+		ArrayList<Recommend> list = new RecommendService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/board/boardListView.jsp");
-		view.forward(request, response);
-		
+		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendListView.jsp").forward(request, response);
 		
 	}
 

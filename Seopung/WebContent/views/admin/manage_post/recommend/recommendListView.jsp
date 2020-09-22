@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.*"%>
+<%
+
+	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");;
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,87 +64,22 @@
 					</tr>
 				</thead>
 				<tbody style="text-align: center;">
+					<% if(list.isEmpty()){ %>
 					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="10"></td>
-						<td>10</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
+						<td colspan="6">조회된 리스트가 없습니다.</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="9"></td>
-						<td>9</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="8"></td>
-						<td>8</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="7"></td>
-						<td>7</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="6"></td>
-						<td>6</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="5"></td>
-						<td>5</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="4"></td>
-						<td>4</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="3"></td>
-						<td>3</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="2"></td>
-						<td>2</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="chk" name="rno" value="1"></td>
-						<td>1</td>
-						<td>제목입니다</td>
-						<td>admin1</td>
-						<td>2020.09.09</td>
-						<td>10</td>
-					</tr>
-
+					<% }else{ %>
+						<% for(Recommend r : list){ %>
+						<tr>
+							<td><input type="checkbox" id="chk" name="rno" value="<%= r.getRecommendNo() %>"></td>
+							<td><%= r.getRecommendNo() %></td>
+							<td><%= r.getRecommendTitle() %></td>
+							<td><%= r.getRecommendWriter() %></td>
+							<td><%= r.getEnrollDate() %></td>
+							<td><%= r.getCount() %></td>
+						</tr>
+						<% } %>
+					<% } %>
 				</tbody>
 			</table>
 
@@ -142,21 +89,27 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b> 개
+								style="color: red"><%= listCount %></b> 개
 						</span></td>
 						<td width="700px;">
 							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
+								<% if(currentPage != 1){ %>
+								<button onclick="location.href='<%= contextPath %>/list.re?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.re?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<% } %>
+	
+								<% for(int p=startPage; p<=endPage; p++){ %>
+									<% if(p != currentPage){ %>
+									<button onclick="location.href='<%= contextPath %>/list.re?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% }else{ %>	
+									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% } %>
+								<% } %>
 
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
+								<% if(currentPage != maxPage){ %>
 								<button class="btn btn-secondary btn-sm">&gt;</button>
 								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% } %>
 							</div>
 						</td>
 						<td width="">

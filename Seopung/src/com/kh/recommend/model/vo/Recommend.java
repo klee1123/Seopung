@@ -31,6 +31,19 @@ public class Recommend {
 		this.status = status;
 		this.thumbnailPath = thumbnailPath;
 	}
+	
+	
+
+	public Recommend(int recommendNo, String recommendTitle, String recommendWriter, Date enrollDate, int count,
+			int like) {
+		super();
+		this.recommendNo = recommendNo;
+		this.recommendTitle = recommendTitle;
+		this.recommendWriter = recommendWriter;
+		this.enrollDate = enrollDate;
+		this.count = count;
+		this.like = like;
+	}
 
 	public int getRecommendNo() {
 		return recommendNo;
