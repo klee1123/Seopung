@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.recommend.model.dao.RecommendDao;
-import com.kh.recommend.model.vo.PageInfo;
+import com.kh.common.PageInfo;
 import com.kh.recommend.model.vo.Recommend;
 
 public class RecommendService {
