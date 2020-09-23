@@ -22,7 +22,7 @@ INSERT
        , ?
        , ?
       );
-      
+--1_2. loginMember(로그인 요청시 실행해야될 sql문)      
 SELECT 
        USER_NO
      , USER_ID
