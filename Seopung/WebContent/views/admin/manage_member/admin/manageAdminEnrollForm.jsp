@@ -77,10 +77,12 @@
 				<br>
 
 				<div align="center">
-					<button type="button" class="btn btn-secondary">취소</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back();">취소</button>
 					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</form>
+			
+			<br><br><br>
 
 		</div>
 
