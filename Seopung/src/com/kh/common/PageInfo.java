@@ -1,4 +1,4 @@
-package com.kh.recommend.model.vo;
+package com.kh.common;
 
 public class PageInfo {
 	

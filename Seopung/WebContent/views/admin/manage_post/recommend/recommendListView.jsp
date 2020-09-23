@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.*"%>
+<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.Recommend, com.kh.common.PageInfo"%>
 <%
 
 	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
@@ -155,6 +155,11 @@
               		$("input[id=chk]:checked").each(function(){
                 		selected.push(this.value);
               		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
 
 	              	var str = "";
 	              	for(var i=0;i<selected.length; i++){

@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.recommend.model.vo.PageInfo;
+import com.kh.common.PageInfo;
 import com.kh.recommend.model.vo.Recommend;
 
 public class RecommendDao {
