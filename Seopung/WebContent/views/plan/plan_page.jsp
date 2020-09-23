@@ -1,396 +1,403 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="zxx">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%String contextPath = request.getContextPath();%>
+<!DOCTYPE html>
 
-   <head>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+.outer {
+	width: 1000px;
+   border: solid;
+	margin: auto;
+}
+
+.top>div
+{
+   height:100%;
+   float:left;
+}
+
+#top_01{width:50%}
+#top_02{
+   width:50%; 
+   text-align:right;
+}
+
+#map {   /* 지도영역 id*/
+	border: 1px solid lightgrey;
+	float: left;
+	margin-right: 20px;
+}
+
+#content_2_2 { /*유형영역*/
+	background-color: lightgrey;
+	padding: 20px;
+	box-sizing: border-box;
+	margin-top: 10px;
+	float: left;
+}
+
+#content_2_3 {    /*리스트*/
+	width: 420px;
+	height: 155px;
+	border: 1px solid lightgrey;
+	margin-top: 10px;
+	padding: 20px;
+	float: left;
+}
+
+#content_3 table { /*작성자 프로필*/
+	width: 340px;
+	background: white;
+	box-shadow: 5px 5px 10px -4px gray; float : left; margin-right : 20px;
+	box-shadow : 5px 5px 10px -4px gray; float : left; margin-right : 20px;
+	margin-top: 15px;
+	float: left;
+	margin-right: 20px;
+	box-shadow: 5px 5px 10px -4px gray;
+	float: left;
+	margin-right: 20px;
+}
+
+#content_3_2 { /*일정 작성자가 텍스트상자에 작성한 내용*/ 
+	width: 420px;
+	height: 100px;
+	margin-top: 15px;
+	padding: 10px;
+	color: grey;
+	border: 1px solid lightgrey;
+	background: white;
+	float: left;
+}
+
+#content_5 table {
+	margin-bottom: 20px;
+}
+
+
+         
+</style>
+
+<!-- Custom fonts for this template-->
+<link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="<%= request.getContextPath() %>/views/admin/adminResources/css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- Custom styles for this page -->
+<link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+	<!-- Begin Page Content -->
+	<div class="container-fluid" >
      
-      <style>
-        
-         div{
-            box-sizing:border-box;
-         }
+		<div class="outer" >
 
-         .wrap{
-               width:1200px;
-               height:800px;
-               margin:auto;
-         }
-         .wrap>div{
-               width:100%;
-         }
-         .top{height:50px}
-         .main_contents{height:480px}
-         .footer{height:140px}
-         .ffooter{height: 140px;}
-
-
-         .top>div{
-            height:100%;
-            float:left;
-         }
-         .top_01{width:50%}
-         .top_02{width:50%}
-
-
-
-         .main_contents>div{
-            height:100%;
-            float:left;
-         }
-         .main_contents_01{width:550px}
-         .main_contents_02{width:646px; padding:10px}
-         
-         .main_contents_01>div{
-            width: 100%;
-            float:top;
-         }
-         .mc01_01{height: 75%}
-         .mc01_02{height: 20%; padding:10px}
-
-         .mc01_02>div{
-            height:100%;
-            float:left;
-         }
-         #plan_profile{width:70%}
-         #plan_profile_btn{width:30%}
-
-
-
-         .main_contents_02>div{
-            width: 100%;
-            float:top;
-            margin-bottom: 10px;
-         }
-         .mc01_01{height: 75%}
-         .mc01_02{height: 20%; padding:10px}
-
-
-         #plan_comment>div{
-            width:100%;
-            float:left;
-         }
-         #plan_comment_title{ height: 50%;}
-         #plan_comment_content{ height: 50%;}
-
-
-
-
-
-         #mc02_01>div{
-            height: 100%;
-            float:left;
-         }
-         #plan_info_01{ width: 50%;}
-         #plan_info_02{ width: 50%;}
-
-
-         
-         #plan_info_01>div{
-            width: 100%;
-            float:left;
-         }
-         #plan_title{ height:50%;}
-         #plan_date{ height: 50%;}
-
-
-      
-
-
-
-
-
-
-
-
-         button{
-            display:inline-block;
-                border:1px solid #dfdfdf;   
-                background:#00c0ff; 
-                color:#fff;
-                padding:0px 8px;
-                text-align:center;
-                width: 100px;
-                height:42px;
-                line-height:42px;
-                font-weight:999;
-                cursor:pointer;
-         }   
-
-      </style>
-   </head>
-   <body>
-      <div class="wrap">
-
-         <div class="top">
-            <div class="top_01">
-               <div class="ptb_writer"> <!--아이디 넘버 체크시 작성자와 일치하면 해당 div 활성화-->
+         <div class="top" style="height: 40px; border: solid;">
+            <div id="top_01"> <!--아이디 넘버 체크시 작성자와 일치하면 해당 div 활성화-->
                   <button>수정</button>
                   <button>삭제</button>
-               </div>
             </div>
-            <div class="top_02">
-               <div id="ptb_reader" style="text-align: right;"> <!--아이디 넘버 체크시 작성자와 일치하지 않으면 해당 div 활성화-->
+            <div id="top_02">  <!--아이디 넘버 체크시 작성자와 일치하지 않으면 해당 div 활성화-->
                   <button>추천</button>
                   <button>스크랩</button>
                   <button>신고하기</button>
-               </div>
             </div>
          </div>
 
-         <div class="main_contents">
+		 <!-- 지도 API 시작-->
+		 <div id="map" style="width: 440px; height: 380px;"></div>
+		 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
 
-            <div class="main_contents_01">
-               <div class="mc01_01">
-                  <div class="plan_mid_map" >
-                     <div id="map" style="width:550px; height:360px"></div>
-                     
-                     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
-                     <script>
-                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-                        mapOption = { 
-                           center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                           level: 3 // 지도의 확대 레벨
-                        };
-                     
-                     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-                     
-                     // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
-                     var positions = [
-                        {
-                           content: '<div>카카오</div>', 
-                           latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-                        },
-                        {
-                           content: '<div>생태연못</div>', 
-                           latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-                        },
-                        {
-                           content: '<div>텃밭</div>', 
-                           latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-                        },
-                        {
-                           content: '<div>근린공원</div>',
-                           latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-                        }
-                     ];
-                     
-                     for (var i = 0; i < positions.length; i ++) {
-                        // 마커를 생성합니다
-                        var marker = new kakao.maps.Marker({
-                           map: map, // 마커를 표시할 지도
-                           position: positions[i].latlng // 마커의 위치
-                        });
-                     
-                        // 마커에 표시할 인포윈도우를 생성합니다 
-                        var infowindow = new kakao.maps.InfoWindow({
-                           content: positions[i].content // 인포윈도우에 표시할 내용
-                        });
-                     
-                        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-                        // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-                        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-                        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-                        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-                     }
-                     
-                     // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-                     function makeOverListener(map, marker, infowindow) {
-                        return function() {
-                           infowindow.open(map, marker);
-                        };
-                     }
-                     
-                     // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-                     function makeOutListener(infowindow) {
-                        return function() {
-                           infowindow.close();
-                        };
-                     }
-                     
-                     /* 아래와 같이도 할 수 있습니다 */
-                     /*
-                     for (var i = 0; i < positions.length; i ++) {
-                        // 마커를 생성합니다
-                        var marker = new kakao.maps.Marker({
-                           map: map, // 마커를 표시할 지도
-                           position: positions[i].latlng // 마커의 위치
-                        });
-                     
-                        // 마커에 표시할 인포윈도우를 생성합니다 
-                        var infowindow = new kakao.maps.InfoWindow({
-                           content: positions[i].content // 인포윈도우에 표시할 내용
-                        });
-                     
-                        // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-                        // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-                        (function(marker, infowindow) {
-                           // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-                           kakao.maps.event.addListener(marker, 'mouseover', function() {
-                                 infowindow.open(map, marker);
-                           });
-                     
-                           // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-                           kakao.maps.event.addListener(marker, 'mouseout', function() {
-                                 infowindow.close();
-                           });
-                        })(marker, infowindow);
-                     }
-                     */
-                     </script>
-                  </div>
-               </div>
+			<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+				mapOption = {
+					center : new kakao.maps.LatLng(33.450936, 126.569477), // 지도의 중심좌표
+					level : 3
+				// 지도의 확대 레벨
+				};
 
-               <div class="mc01_02">
-                  <div id="plan_profile" style="box-shadow: 5px 5px 10px -2px gray;"><!--일정 작성자 프로필 정보 div start-->
-                     <div id="">
-                        <img src="img/blog/blog_1.png" style="width: 96px; float:left; margin-right: 10px;">
-                     </div>
-                     <div id="">
-                        <p>작성자 아이디</p>
-                        <p>작성자가 작성한 한줄 소개</p>
-                     </div>
-                  </div><!--일정 작성자 프로필 정보 div end-->
+				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-                  <div id="plan_profile_btn" style="text-align: center; padding: 10px;" > <!-- 동행 신청 버튼 -->
-                     <button type="" class="genric-btn success large" style="width:100px; height: 50px;">동행신청</button>
-                  </div>
-               </div>
+				// 마커를 표시할 위치와 title 객체 배열입니다 
+				var positions = [ {
+					title : '카카오',
+					latlng : new kakao.maps.LatLng(33.450705, 126.570677)
+				}, {
+					title : '생태연못',
+					latlng : new kakao.maps.LatLng(33.450936, 126.569477)
+				}, {
+					title : '텃밭',
+					latlng : new kakao.maps.LatLng(33.450879, 126.569940)
+				}, {
+					title : '근린공원',
+					latlng : new kakao.maps.LatLng(33.451393, 126.570738)
+				} ];
 
-            </div>
+				// 마커 이미지의 이미지 주소입니다
+				var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+				for (var i = 0; i < positions.length; i++) {
+
+					// 마커 이미지의 이미지 크기 입니다
+					var imageSize = new kakao.maps.Size(24, 35);
+
+					// 마커 이미지를 생성합니다    
+					var markerImage = new kakao.maps.MarkerImage(imageSrc,
+							imageSize);
+
+					// 마커를 생성합니다
+					var marker = new kakao.maps.Marker({
+						map : map, // 마커를 표시할 지도
+						position : positions[i].latlng, // 마커를 표시할 위치
+						title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						image : markerImage
+					// 마커 이미지 
+					});
+				}
+				
+				// 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+				var linePath = [
+					new kakao.maps.LatLng(33.450936, 126.569477),
+					new kakao.maps.LatLng(33.450879, 126.569940),
+					new kakao.maps.LatLng(33.450705, 126.570677),
+					new kakao.maps.LatLng(33.451393, 126.570738)
+				];
+
+				// 지도에 표시할 선을 생성합니다
+				var polyline = new kakao.maps.Polyline({
+					path: linePath, // 선을 구성하는 좌표배열 입니다
+					strokeWeight: 5, // 선의 두께 입니다
+					strokeColor: '#FFAE00', // 선의 색깔입니다
+					strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle: 'solid' // 선의 스타일입니다
+				});
+
+				// 지도에 선을 표시합니다 
+				polyline.setMap(map);  
+			</script>
+		<!-- 지도 API 끝 -->
+
+			<div id="content_1">
+
+			</div>
 
 
-
-
-
-
-
-
-
-
-            <div class="main_contents_02" style="border: solid;">
-               
-               <div id="mc02_01">
-                  <div id="plan_info_01">
-                     <div id="plan_title" style="font-size: 22px;">
-                        <b>일정제목</b>
-                     </div>
-                     <div id="plan_date" style="font-size: 18px;">
-                        <b>20.08.30 - 20.08.31</b>
-                     </div>
-                  </div>
-                 
-                  <div id="plan_info_02">
-                        <li> 추천 : 5 </li>
-                        <li> 스크랩 : 25 </li>
-                        <li> 일정 예산 금액 : 50,000 원 </li>
-                  </div>
-
-               </div>
-               <div id="mc02_02">
-                  <table style="width:590px; height: 100px; text-align: center;">
+            <div id="content_2" >
+               <div id="content_2_1" style="border: solid;">
+                  <table>
                      <tr>
-                        <td><button>10대</button></td>
-                        <td><button>남자끼리</button></td>
-                        <td><button>도보</button></td>
-                        <td><button>동행</button></td>
-                        <td><button>택시</button></td>
-                     </tr>
-                     <tr>
-                        <td><button>전동킥보드</button></td>
-                        <td><button>자전거</button></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td width="300px" style="font-size: 15px;"><b
+                           style="font-size: 20px;">일정제목</b> <br> 20.09.09 - 20.09.12
+                        </td>
+                        <td>추천 : 10 <br> 스크랩 : 5 <br> 예산금액 : 100,000 원
+                        </td>
                      </tr>
                   </table>
-                 
                </div>
-
-               <div id="mc02_03">
-                  <div class="" style="text-align: center;">
-                     <select name="">
-                        <option value="" selected>일정일을 선택하세요</option>
-                        <option value="">Day 1</option>
-                        <option value="">Day 2</option>
-                     </select>
-                  </div>
-                  <div>
-                     <ul>
-                        <li>kh 국밥</li> <!--저장된 위치 지점 연동-->
-                        <li>kh 카페</li>
-                        <li>kh 기념품점</li>
-                     </ul>
-                  </div>
+               
+               <div id="content_2_2" style="border: solid;">
+                  <table>
+                     <tr>
+                        <td><button disabled class="btn btn-secondary">10대</button></td>
+                        <td><button disabled class="btn btn-secondary">남자끼리</button></td>
+                        <td><button disabled class="btn btn-secondary">도보</button></td>
+                        <td><button disabled class="btn btn-secondary">동행</button></td>
+                        <td><button disabled class="btn btn-secondary">전동킥보드</button></td>
+                     </tr>
+                     <tr>
+                        <td><button disabled class="btn btn-secondary">자전거</button></td>
+                     </tr>
+                  </table>
+                  
                </div>
+               <div id="content_2_3">
+                  <select name="" id="">
+                     <option value="">day1</option>
+                     <option value="">day2</option>
+                     <option value="">day3</option>
+                     <option value="">day4</option>
+                  </select> <br> <br>
 
-               <div id="mc02_04">
-                  <div class="" style="height: 80px; margin-top: 20px; border-style:groove">
-                     일정 작성자가 텍스트상자에 작성한 내용
-                  </div>
+                  <ol>
+                     <li>서울역</li>
+                     <li>경복궁</li>
+                     <li>창덕궁</li>
+                  </ol>
                </div>
-
-            </div>
-         </div>
-
-
-
-
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         <div class="footer">
-
-            <div id="plan_comment_write">
-               <hr style="margin-bottom: 20px; border: 1px solid;">
-               <div id="thumb" style="height: 100px; width: 100px; float:left; padding: 10px;">
-                  <img src="img/comment/comment_1.png" alt="" > <!--회원의 등록된 프로필 사진 기능구현-->
-               </div> 
-               <div id="" style="width: 800px; height: 100px; float:left;">
-                  <textarea class="" name="comment" id="comment" style="width: 800px; height: 100px;" placeholder="내용을 입력해주세요" ></textarea>
-               </div>
-               <div id="" style="height: 100px;">
-                  <button type="submit" class="genric-btn success large">등록</button>
-               </div>
+               
             </div>
 
-         </div>
+            <br clear="all">
 
-         <div class="ffooter">
-            <div id="plan_comment_list">
-               <hr style="margin-top: 10px; margin-bottom: 20px; border: 1px solid;">
-               <div id="thumb" style="height: 100px; width: 100px; float:left; padding: 10px;">
-                  <img src="img/comment/comment_1.png" alt="" > <!--회원의 등록된 프로필 사진 기능구현-->
-               </div> 
-   
-               <div id="plan_comment">
-                  <div id="plan_comment_title" style="float:left;">
-                     유저1 - 2020.08.30 12:20 신고
-                  </div>
-                  <div id="plan_comment_content" style="float: left;">
-                     유저1의 댓글내용
+            <div id="content_3" style="height: 200px; border: solid;">
+               <div id="content_3_1" >
+                  <table >
+                     <tr style="height: 100px;">
+                        <td width="100" align="center"><img width="60"
+                           src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+                           alt=""></td>
+                        <td><b>작성자 아이디</b> <br> 자기소개</td>
+                     </tr>
+                  </table>
+                  <div
+                     style="line-height: 100px; float: left; margin-right: 20px; margin-top: 10px;">
+                     <button style="height: 60px;"
+                        class="btn btn-primary btn-sm">동행신청</button>
                   </div>
                </div>
+               <div id="content_3_2">일정 작성자가 텍스트상자에 작성한 내용</div>
             </div>
-         </div>
-        
 
-      </div>
-   </body>
+
+			
+			<br clear="all">
+
+			<hr>
+
+			<div id="content_4" align="center">
+				<form action="" method="post">
+					<table>
+						<tr>
+                     <input type="hidden" name="userNo" value="123">
+                     
+							<td width="70px"><img width="55px" class="rounded-circle"
+								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+                        alt="">
+                     </td>
+                        
+							<td width="800px;"><textarea name="comment" style="resize: none; width: 800px;"></textarea>
+                     </td>
+
+							<td width="100px" style="text-align: center;">
+								<button type="submit" class="btn btn-secondary">등록</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			<hr>
+
+			<div id="content_5" align="center">
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="1000">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+					
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="1000">것이 이상이 쓸한 밥을 어디 뿐이들은 피가 우리 것이다.
+							곳이 너의 새가 불러 보이는 약동하다. 보이는 약동하다.</td>
+						
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="1000">것이 이상이 찾아다녀도, 얼음 주음 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+					
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="1000">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+					
+					</tr>
+				</table>
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="1000">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+					
+					</tr>
+				</table>
+			</div>
+
+			<div align="center">
+
+				<button class="btn btn-outline-secondary btn-sm">&lt;</button>
+
+				<button style="border: none; background: none">1</button>
+				<button style="border: none; background: none">2</button>
+				<button style="border: none; background: none">3</button>
+				<button style="border: none; background: none">4</button>
+				<button style="border: none; background: none">5</button>
+
+				<button class="btn btn-outline-secondary btn-sm">&gt;</button>
+
+			</div>
+
+			<br> <br> <br>
+
+
+		</div>
+
+
+	</div>
+	<!-- /.container-fluid -->
+
+</body>
 </html>
