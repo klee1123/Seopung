@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.model.vo.Admin" %>
 <%
 	String contextPath = request.getContextPath();
+
+	Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
+	// > 로그인 전 : null
+	// > 로그인 후 : 로그인성공한 관리자정보들이 담겨있는 객체
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +35,19 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+	$(function(){
+
+		var msg = "<%= alertMsg %>";
+		
+		if(msg != "null"){ // 메서지가 담겨있을 경우
+			alert(msg);
+			// 알람창 띄워준 후에 session에 담긴 메세지 지워야됨
+			// 안그러면 menubar.jsp가 포함되어있는 페이지 열때마다 alert 계속 뜰거임
+			<% session.removeAttribute("alertMsg"); %>
+		}	
+	});
+</script>
 </head>
 <body id="page-top">
 
@@ -56,7 +77,7 @@
         <div id="collapseUtiliti" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">회원목록</a>
-            <a class="collapse-item" href="">관리자목록</a>
+            <a class="collapse-item" href="<%=contextPath%>/list.ad?currentPage=1">관리자목록</a>
             <a class="collapse-item" href="">블랙리스트</a>
           </div>
         </div>

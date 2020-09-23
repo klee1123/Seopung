@@ -107,8 +107,8 @@
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>

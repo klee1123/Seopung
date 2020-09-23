@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_ADMIN
+	</entry>
+
+	<entry key="selectList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM
+		             , A.*
+		           FROM (
+                         SELECT 
+                                ADMIN_NO
+                              , ADMIN_NAME
+                              , ADMIN_ID
+                              , ENROLL_DATE
+                              , MODIFY_DATE
+                              , STATUS
+                           FROM TB_ADMIN
+                          ORDER
+                             BY ADMIN_NO DESC
+                        ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="insertAdmin">
+		INSERT 
+		  INTO TB_ADMIN
+		  (
+		     ADMIN_NO
+		   , ADMIN_NAME
+		   , ADMIN_ID
+		   , ADMIN_PWD  
+		  )
+		  VALUES
+		  (
+		     SEQ_ADMINNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		  )
+	</entry>
+	
+	<entry key="idCheck">
+		SELECT COUNT(*)
+		  FROM TB_ADMIN
+		 WHERE ADMIN_ID = ?
+	</entry>
+
+</properties>

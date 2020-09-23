@@ -2,7 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectListCount">
-		SELECT COUNT(*) LISTCOUNT
+		SELECT 
+		       COUNT(*) LISTCOUNT
 		  FROM TB_RECOMMEND
 		 WHERE RECOMMEND_STATUS = 'Y'
 	</entry>
