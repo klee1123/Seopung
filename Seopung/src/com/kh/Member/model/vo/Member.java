@@ -224,6 +224,5 @@ public class Member {
 				+ email + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", userIntro=" + userIntro
 				+ ", profile=" + profile + ", status=" + status + "]";
 	}
-	
-	
+
 }
