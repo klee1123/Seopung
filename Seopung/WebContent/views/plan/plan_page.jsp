@@ -8,10 +8,14 @@
 <title>Insert title here</title>
 <style>
 
+.container-fluid{
+margin-top: 100px;
+}
 .outer {
 	width: 1000px;
    border: solid;
 	margin: auto;
+	
 }
 
 .top>div
@@ -96,7 +100,7 @@
 
 </head>
 <body>
-
+	 <%@include file="../common/menubar.jsp"%>
 	<!-- Begin Page Content -->
 	<div class="container-fluid" >
      
@@ -387,12 +391,9 @@
 
 			</div>
 
-			<br> <br> <br>
-
-
 		</div>
 
-
+ 	<%@include file="../common/footer.jsp"%>
 	</div>
 
 </body>
