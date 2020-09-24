@@ -197,10 +197,10 @@ $(function(){
 						
 						<form action="<%=contextPath%>/login.me" method="post" onsubmit="return false;">
 							<input type="text" name="userId" id="userId"
-								style="width: 250px; height: 35px;" placeholder="ID" required>
+								style="width: 250px; height: 35px;" placeholder="ID" >
 							<input type="password" name="userPwd" id="userPwd"
 								style="width: 250px; height: 35px;" placeholder="PASSWORD"
-								required>
+								>
 							<div style="color:red; font-weight:bold; margin-top:5px; margin-bottom:5px; margin-right:28px;  font-size:8px;" id="errorMsg"></div>				
 							<!-- <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:310px; margin-right:15px;">Login</button>-->
 							<button onclick="login();" type="submit" class="btn btn-secondary"  style="width:310px; margin-right:15px;" >로그인</button>
@@ -210,7 +210,8 @@ $(function(){
 						<script>
 							
 							function login(){
-								
+								var id = $("#userId").val();
+								var pwd = $("#userPwd").val();
 								$.ajax({
 									url:"<%=contextPath%>/login.me",
 									data:{userId:$("#userId").val(),
@@ -219,16 +220,25 @@ $(function(){
 									type:"post",
 									success:function(member){
 										console.log(member);
-										if(member == "null"){
+										console.log(id)
+										
+										
+										  if(member == "null"){
 										$("#errorMsg").html("가입하지 않은 아이디거나, 잘못된 비밀번호입니다.");
 										$("#userId").val("");
 										$("#userPwd").val("");
+										if(id == ""){
+											$("#errorMsg").html("아이디를 입력해주세요.");
+										}else if(pwd == ""){
+											$("#errorMsg").html("비밀번호를 입력해주세요.");
+										}
+											
 										}else{
 											$("#loginForm").modal("hide");
 											location.reload(true);
-										}
+										}  
 										
-										
+										  
 										},
 									error:function(){
 										console.log("ajax 통신 실패");
@@ -236,6 +246,7 @@ $(function(){
 									
 								});
 							}
+							
 						</script>
 					</div>
 					<!-- Modal footer -->

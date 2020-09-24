@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		String userPwd = request.getParameter("userPwd");
 
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
-
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("loginUser", loginUser);
 		response.setCharacterEncoding("utf-8");
