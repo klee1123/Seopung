@@ -51,5 +51,28 @@
 		  FROM TB_ADMIN
 		 WHERE ADMIN_ID = ?
 	</entry>
+	
+	<entry key="selectAdmin">
+		SELECT 
+		       ADMIN_NO
+		     , ADMIN_NAME
+		     , ADMIN_ID
+		     , ADMIN_PWD
+		     , ENROLL_DATE
+		     , MODIFY_DATE
+		     , STATUS
+		  FROM TB_ADMIN
+		 WHERE ADMIN_NO = ?
+	</entry>
+	
+	<entry key="updateAdmin">
+		UPDATE 
+		       TB_ADMIN
+		   SET ADMIN_ID = ?
+		     , ADMIN_PWD = ?
+		     , ADMIN_NAME = ?
+		     , MODIFY_DATE = SYSDATE
+		 WHERE ADMIN_NO = ?
+	</entry>
 
 </properties>

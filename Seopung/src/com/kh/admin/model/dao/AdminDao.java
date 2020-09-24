@@ -152,6 +152,71 @@ public class AdminDao {
 		
 		return count;
 	}
+	
+	
+	public Admin selectAdmin(Connection conn, int adminNo) {
+		// select 문 => 한 행 조회
+		Admin ad = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, adminNo);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				ad = new Admin(rset.getInt("admin_no"),
+								rset.getString("admin_name"),
+								rset.getString("admin_id"),
+								rset.getString("admin_pwd"),
+								rset.getDate("enroll_date"),
+								rset.getDate("modify_date"),
+								rset.getString("status"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return ad;
+	}
+	
+	public int updateAdmin(Connection conn, Admin ad) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ad.getAdminId());
+			pstmt.setString(2, ad.getAdminPwd());
+			pstmt.setString(3, ad.getAdminName());
+			pstmt.setInt(4, ad.getAdminNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
 
 

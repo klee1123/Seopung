@@ -76,6 +76,42 @@ public class AdminService {
 		
 		return count;
 	}
+	
+	
+	/**
+	 * 특정 회원번호의 회원 정보 조회용
+	 * @param adminNo
+	 * @return
+	 */
+	public Admin selectAdmin(int adminNo) {
+		Connection conn = getConnection();
+		
+		Admin ad = new AdminDao().selectAdmin(conn, adminNo);
+		
+		close(conn);
+		
+		return ad;
+	}
+	
+	/**
+	 * 관리자 정보 수정용
+	 * @param ad
+	 * @return
+	 */
+	public int updateAdmin(Admin ad) {
+		Connection conn = getConnection();
+		
+		int result = new AdminDao().updateAdmin(conn, ad);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 }
 
 
