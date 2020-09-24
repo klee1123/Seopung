@@ -98,7 +98,7 @@ $(function(){
 			<div class="row align-items-center">
 				<div class="col-lg-12">
 					<nav class="navbar navbar-expand-lg navbar-light">
-						<a class="navbar-brand" href="index.html"
+						<a class="navbar-brand" href="<%=contextPath%>"
 							style="font-family: 'Do Hyeon', sans-serif; font-size: 50px; color: white">서풍</a>
 						<button class="navbar-toggler" type="button"
 							data-toggle="collapse" data-target="#navbarSupportedContent"

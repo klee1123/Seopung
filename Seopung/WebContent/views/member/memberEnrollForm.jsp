@@ -106,13 +106,13 @@ input:placeholder {
 				
 				<tr>
 					<th>&nbsp;&nbsp;*비밀번호</th>
-					<td><input type="password" name="userPwd" required
+					<td><input type="password" name="userPwd" required id="pwd"
 						maxlength="15" placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>&nbsp;&nbsp;*비밀번호 확인</th>
-					<td><input type="password" required maxlength="15"
+					<td><input type="password" required maxlength="15" id="checkPwd"
 						placeholder="&nbsp; 비밀번호 확인"></td>
 					<td></td>
 				</tr>
@@ -130,7 +130,7 @@ input:placeholder {
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*생년월일</th>
-					<td><input type="text" name="birth" required
+					<td><input type="text" name="birth" required maxlength="8"
 						placeholder="&nbsp생년월일8자리(ex19940322)"></td>
 					<td><input type="radio" name="gender" value="M" id=g1 required>
 						<label for="g1">남자</label> <input type="radio" name="gender"
@@ -180,6 +180,18 @@ input:placeholder {
 				error:function(){
 					console.log("통신실패");
 				}
+			});
+			
+			$(function(){
+				var pwd = $("#pwd");
+				var checkPwd= $("#checkPwd");
+				$("#joinBtn").click(function(){
+					if(pwd.val() != checkPwd.val()){
+						alert("비밀번호가 일치하지 않습니다.");
+						checkPwd.val("");
+						checkPwd.focus();
+					}
+				});
 			});
 		}	
 	
