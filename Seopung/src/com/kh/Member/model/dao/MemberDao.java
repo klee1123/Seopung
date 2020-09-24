@@ -35,7 +35,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertMember");
-		System.out.println(m.getGender());
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getUserId());
@@ -60,8 +60,7 @@ public class MemberDao {
 	
 	public Member loginMember(Connection conn, String userId, String userPwd) {
 		
-		System.out.println(userId);
-		System.out.println(userPwd);
+		
 		Member m = null;
 		
 		PreparedStatement pstmt = null;

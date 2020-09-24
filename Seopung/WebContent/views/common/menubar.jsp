@@ -194,17 +194,49 @@ $(function(){
 
 					<!-- Modal body -->
 					<div class="modal-body" align="center">
-						<form action="<%=contextPath%>/login.me" method="post">
-							<input type="text" name="userId"
+						
+						<form action="<%=contextPath%>/login.me" method="post" onsubmit="return false;">
+							<input type="text" name="userId" id="userId"
 								style="width: 250px; height: 35px;" placeholder="ID" required>
-							<input type="password" name="userPwd"
+							<input type="password" name="userPwd" id="userPwd"
 								style="width: 250px; height: 35px;" placeholder="PASSWORD"
 								required>
-								<br><br>
+							<div style="color:red; font-weight:bold; margin-top:5px; margin-bottom:5px; margin-right:28px;  font-size:8px;" id="errorMsg"></div>				
 							<!-- <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:310px; margin-right:15px;">Login</button>-->
-							<button type="submit" class="btn btn-secondary"  style="width:310px; margin-right:15px;" >로그인</button>
+							<button onclick="login();" type="submit" class="btn btn-secondary"  style="width:310px; margin-right:15px;" >로그인</button>
 						</form>
-						<div id="errorMsg"></div>
+					
+						
+						<script>
+							
+							function login(){
+								
+								$.ajax({
+									url:"login.me",
+									data:{userId:$("#userId").val(),
+										 userPwd:$("#userPwd").val()
+										},
+									type:"post",
+									success:function(member){
+										console.log(member);
+										if(member == "null"){
+										$("#errorMsg").html("가입하지 않은 아이디거나, 잘못된 비밀번호입니다.");
+										$("#userId").val("");
+										$("#userPwd").val("");
+										}else{
+											$("#loginForm").modal("hide");
+											location.reload(true);
+										}
+										
+										
+										},
+									error:function(){
+										console.log("ajax 통신 실패");
+									}
+									
+								});
+							}
+						</script>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
