@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <style>
 .outer {
-	margin-top: 200px;
+	width:1000px;
+	margin:auto;
+	mar
 }
 
 #content {
@@ -69,7 +71,7 @@ table {
 	<div class="outer">
 		<!-- 말머리, 정렬 -->
 		<div id="head"
-			style="margin-left: 340px; margin-top: 50px; margin-bottom: 10px; width: 200px;">
+			style=" margin-top: 150px; margin-bottom: 10px; width: 200px;">
 			<select name="" id="head" style=>
 				<option value="all">전체</option>
 				<option value="restaurant">맛집</option>
@@ -82,7 +84,7 @@ table {
 			</select>
 
 		</div>
-		<table id="notice" style="margin-left: 340px;">
+		<table id="notice">
 			<!-- 공지 -->
 			<tbody>
 				<tr>
@@ -102,8 +104,7 @@ table {
 				</tr>
 				<tr>
 					<th>&nbsp;&nbsp;공지</th>
-					<td>글제목에 지역명을
-						포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
+					<td>글제목에 지역명을 포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
 					<td>관리자&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
@@ -111,8 +112,7 @@ table {
 				</tr>
 				<tr>
 					<th>&nbsp;&nbsp;공지</th>
-					<td>글제목에 지역명을
-						포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
+					<td>글제목에 지역명을 포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
 					<td>관리자&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 				<tr>
@@ -127,11 +127,11 @@ table {
 		<div id="board">
 			<ul>
 
-				<hr style="width: 1000px; margin-left: 500px;">
+				<hr style="width: 1000px;">
 				<br>
 
 				<li
-					style="padding-left: 350px; position: relative; list-style-type: none; height: 100px;">
+					style=" position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수 <a
 						href=""> <img style="position: absolute; margin-left: 30px;"
 							src="forest1.png" width="100px;" height="100%;" alt="">
@@ -141,8 +141,7 @@ table {
 							id="title" name="title">여기 짱 맛있음&nbsp;[4]</span>
 					</a>
 
-				</span> <br>
-				<span
+				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
 						<div style="width: 50px;">2020.08.30</div>
 						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
@@ -153,7 +152,7 @@ table {
 				</li>
 				<br>
 				<li
-					style="padding-left: 350px; position: relative; list-style-type: none; height: 100px;">
+					style=" position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수 <a
 						href=""> <img style="position: absolute; margin-left: 30px;"
 							src="forest1.png" width="100px;" height="100%;" alt="">
@@ -164,8 +163,7 @@ table {
 
 					</a>
 
-				</span> <br>
-				<span
+				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
 						<div style="width: 50px;">2020.08.30</div>
 						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
@@ -176,10 +174,10 @@ table {
 				</li>
 				<br>
 
-				<hr style="width: 1000px; margin-left: 300px;">
+				<hr style="width: 1000px;">
 			</ul>
 			<div id="footer">
-				<div style="width: 200x; margin-left: 350px;">
+				<div style="width: 200x; ">
 					<form action="">
 						<select name="" id=""
 							style="width: 66px; height: 24px; font-size: 15px;">
@@ -189,14 +187,12 @@ table {
 							width="20px;" height="16px;"></label>
 						<button type="submit" id="search" style="display: none;">검색</button>
 						<button
-							style="margin-left: 650px; width: 80px; height: 30px; border: none;">글작성</button>
+							style=" width: 80px; height: 30px; border: none;">글작성</button>
 					</form>
 
-					<br>
-					<br>
-					<br>
+					<br> <br> <br>
 				</div>
-				<div style="width: 500px; margin-left: 650px; white-space: nowrap;">
+				<div style="width: 1000px;  white-space: nowrap; " align="center">
 					<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
 					<button class="btn btn-secondary btn-sm">&lt;</button>
 
