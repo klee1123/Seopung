@@ -72,7 +72,7 @@
                 <li>동행인관리
                     <ul>
                         <li><a href="../../accompany/accompanyRequest/accomRequest.jsp" >신청 온 동행인</a></li>
-                        <li><a href="">신청 한 동행인</a></li>
+                        <li><a href="../../accompany/accompanyResponse/accomResponse.jsp">신청 한 동행인</a></li>
                         <li><a href="../../accompany/accompanyList/accomList.jsp">동행목록</a></li>
                     </ul>
                 </li> <br>
@@ -86,9 +86,9 @@
     
                 <li>메시지함
                     <ul>
-                        <li><a href="">메세지보내기</a></li>
-                        <li><a href="">받은 메세지함</a></li>
-                        <li><a href="">보낸 메세지함</a></li>
+                       
+                        <li><a href="../../message/receive/receiveMessage.jsp">받은 메세지함</a></li>
+                        <li><a href="../../message/send/sendMessage.jsp">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
                 <li><a href="../myPlan/inquirePage.jsp">1:1 문의</a></li> <br>

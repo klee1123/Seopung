@@ -29,13 +29,10 @@
             .accomList{
                 width: 1000px;
                 height: 800px;
-                margin-left: 20px;
+                margin-top: 30px;
+                float: left;
             }
-            .head{
-                background-color: #00c0ff; 
-                color: white;
-
-            }
+     
 
             .profilePhoto{
                 padding-left: 20px;
@@ -63,8 +60,8 @@
 	
 		<div class="accomTitle">
 	        
-	            <h1>&nbsp;&nbsp;&nbsp;동행목록</h1>
-	            <hr>
+            <h1>&nbsp;&nbsp;&nbsp;<b style="color:black;">동행목록</b></h1>
+            <hr>
 	        
 			<div class="accompanyList"> <br>
 				
@@ -75,12 +72,12 @@
                     
 				<br><br>
 				
-	            <table id="accomList" align="center" >
+	            <table id="accomList" align="center" class ="table table-hover" >
 	                <thead>
 	                    <tr align="center" class="head">
-	                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
+	                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
 	                        <th width="150">아이디</th>
-	                        <th width="100">이름</th>
+	                        <th width="100">닉네임</th>
 	                        <th width="120"></th>
                             <th width="150"></th>
                             <th width="120"></th>
@@ -88,108 +85,63 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                    <tr align="center">
+	                    <tr align="center" style="line-height: 2;">
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; line-height: 30px;" data-toggle="modal" data-target="#profile">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
+	                        <td>닉네임</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
 	                    </tr>
-                       
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk2">&nbsp;&nbsp;2.</td>
+                        
+                        <tr align="center" style="line-height: 2;">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+	                        <td>닉네임</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
                         </tr>
                         
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk3">&nbsp;&nbsp;3.</td>
+                        <tr align="center" style="line-height: 2;">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+	                        <td>닉네임</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
                         </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk4">&nbsp;&nbsp;4.</td>
+                        
+                        <tr align="center" style="line-height: 2;">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+	                        <td>닉네임</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
                         </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk5">&nbsp;&nbsp;5.</td>
+                        
+                        <tr align="center" style="line-height: 2;">
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
 	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+	                        <td>닉네임</td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk6">&nbsp;&nbsp;6.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+	                    </tr>
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk7">&nbsp;&nbsp;7.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
+                        
 
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk8">&nbsp;&nbsp;8.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk9">&nbsp;&nbsp;9.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
-
-                        </tr>
-                        <tr align="center">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk10">&nbsp;&nbsp;10.</td>
-	                        <td>아이디 넣을칸</td>
-	                        <td>이름</td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 30px; font-size: 10px; padding: 0 10px;">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 30px; font-size: 10px; padding: 0 15px">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 10px">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 30px; font-size: 10px; padding: 0 5px">신고</a></td>
-
-                        </tr>
                         
 	                </tbody>
 				</table>
@@ -309,6 +261,64 @@
 
 
                 </div>
+
+                <!-- 메세지 modal -->
+
+                <div class="modal" id="message">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">메세지 보내기</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                            
+                                <div class="message">
+                                    <form action="" method="POST">
+                                        
+                                        
+                                    
+                                        <div class="profilePhoto" style="float: ">
+                                            <img src="../../../resources/images/회원.jpg" alt="" width="20" height="20" style="margin-left: 30px;">  닉네임
+                                            <br>
+                                           
+                                        </div>
+                                        <div class="profileJoin">
+                                            
+
+                                        <br><br>
+                                        </div>
+                                        
+                                        <textarea name="introduction" cols="50" rows="15"style="resize: none;" placeholder="내용을 입력해주세요" style="float: left;"></textarea>
+                                        
+                                        <br><br>
+
+                                        <button class="genric-btn info-border radius">보내기</button>
+                                        <button class="genric-btn danger-border radius">취소</button>
+
+
+                                    </form>
+                                    </div>
+
+
+                            </div>
+                            
+
+
+                        </div>
+                        
+                    </div>
+
+
+
+                </div>
+
+
+
+
                 
                 <!-- 신고하기 modal -->
 
@@ -369,32 +379,24 @@
                 </div>
 
 
-
-
-
-
-
-
-
             
 	            <br><br>
-	            <div class="pagingArea" align="center">
+                <div class="pagingArea" align="center">
 	
-	                <!-- 맨 처음으로 (<<) -->
-	                <button> &lt;&lt; </button>
-	                <!-- 이전 페이지로 (<) -->
-	                <button> &lt; </button>
-	    
-	                <button>1</button>
-	                <button>2</button>
-	                <button>3</button>
-	                <button>4</button>
-	                <button>5</button>
-	                
-	                <!-- 다음 페이지로 (>) -->
-	                <button> &gt; </button>
-	                <!-- 맨 끝으로 (>>) -->
-	                <button> &gt;&gt; </button>
+                    <div align="center">
+                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm">&lt;</button>
+
+                        <button class="btn btn-outline-secondary btn-sm">1</button>
+                        <button class="btn btn-outline-secondary btn-sm">2</button>
+                        <button class="btn btn-outline-secondary btn-sm">3</button>
+                        <button class="btn btn-outline-secondary btn-sm">4</button>
+                        <button class="btn btn-outline-secondary btn-sm">5</button>
+
+                        <button class="btn btn-secondary btn-sm">&gt;</button>
+                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                    
+                    </div>
 	            </div>
 	        </div>
         </div>
