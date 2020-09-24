@@ -81,8 +81,8 @@
 
 			<div align="center">
 				<button class="btn btn-secondary" onclick="history.back();">취소</button>
-				<button class="btn btn-primary">수정</button>
-				<button class="btn btn-danger">삭제</button>
+				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/updateForm.re?rno=<%=r.getRecommendNo()%>';">수정</button>
+				<button class="btn btn-danger" onclick="location.href='<%=contextPath%>/delete.re?rno=<%=r.getRecommendNo()%>';">삭제</button>
 			</div>
 
 			<br>

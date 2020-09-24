@@ -145,6 +145,7 @@ public class RecommendDao {
 			
 			if(rset.next()) {
 				r = new Recommend();
+				r.setRecommendNo(rno);
 				r.setRecommendTitle(rset.getString("recommend_title"));
 				r.setRecommendContent(rset.getString("recommend_content"));
 				r.setRecommendWriter(rset.getString("admin_id"));
