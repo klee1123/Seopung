@@ -54,6 +54,7 @@
             height:500px;
             margin:auto;
             border: 1px solid;
+            margin-top: 150px;
         }
 
         /* #header, #content, #footer{ */
@@ -108,6 +109,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+ <%@include file="../common/menubar.jsp"%>
     <div class="wrap">
         <div id="header"></div>
         <div id="content">
@@ -371,7 +373,7 @@
                 
             </div>
         </div>
-        <div id="footer"></div>
+        <%@include file="../common/footer.jsp"%>
     </div>
 
     

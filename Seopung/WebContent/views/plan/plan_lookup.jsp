@@ -9,6 +9,7 @@
                 width: 1200px;
                 padding: 50px;
                 margin:auto;
+                margin-top: 100px;
             }            
 
             div{
@@ -139,6 +140,7 @@
             
     </head>
     <body>
+    <%@include file="../common/menubar.jsp"%>
         <div class="wrap">
          
         <!----------------------------------------------- 상세 검색 div start-----------------------------------------------------------> 
@@ -900,6 +902,7 @@
 
 
         </div> <!--wrap end-->
+		<%@include file="../common/footer.jsp"%>
 
     </body>
 

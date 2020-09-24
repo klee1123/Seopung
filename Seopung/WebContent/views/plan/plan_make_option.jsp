@@ -12,6 +12,7 @@
                     width:1200px;
                     height: 1000px;
                     margin:auto;
+                    margin-top: 150px;
     
                 }
     
@@ -104,8 +105,8 @@
             <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
     
     
-        </head>
-    
+    </head>
+    	 <%@include file="../common/menubar.jsp"%>
         <body>
             <div class="wrap">
     
@@ -332,6 +333,7 @@
                     </div>
                 </form>
             </div>
+             <%@include file="../common/footer.jsp"%>
         </body>
     
     </html>
