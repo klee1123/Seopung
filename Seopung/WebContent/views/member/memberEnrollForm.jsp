@@ -150,7 +150,7 @@ input:placeholder {
 				</tr>
 			</table>
 
-			<button type="submit" disabled id="joinBtn">회원가입</button>
+			<button type="submit" disabled id="joinBtn" onclick="joinBtn();")>회원가입</button>
 			<button type="reset">취소</button>
 		</fieldset>
 	</form>
@@ -181,7 +181,7 @@ input:placeholder {
 					console.log("통신실패");
 				}
 			});
-			
+		}
 			$(function(){
 				var pwd = $("#pwd");
 				var checkPwd= $("#checkPwd");
@@ -193,7 +193,7 @@ input:placeholder {
 					}
 				});
 			});
-		}	
+			
 	
 	</script>
 </body>
