@@ -46,7 +46,7 @@ input[type=text], input[type=password], input[type=email] {
 	font-size: 12px;
 }
 
-table+button[type=submit], table+button+[type=button] {
+table+button[type=submit], table+button+[type=reset] {
 	margin-top: 40px;
 	width: 200px;
 	height: 40px;
@@ -99,8 +99,11 @@ input:placeholder {
 					<th>&nbsp;&nbsp;*아이디</th>
 					<td><input type="text" name="userId" required maxlength="12"
 						placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
-					<td><button>중복체크</button></td>
+					<td>
+						<button type="button" onclick="idCheck();" >중복체크</button>
+					</td>
 				</tr>
+				
 				<tr>
 					<th>&nbsp;&nbsp;*비밀번호</th>
 					<td><input type="password" name="userPwd" required
@@ -147,10 +150,39 @@ input:placeholder {
 				</tr>
 			</table>
 
-			<button type="submit">회원가입 완료</button>
-			<button type="button">취소</button>
+			<button type="submit" disabled id="joinBtn">회원가입</button>
+			<button type="reset">취소</button>
 		</fieldset>
 	</form>
 	</div>
+	<script>
+		function idCheck(){
+			var $userId = $("#join2 input[name=userId]");
+			$.ajax({
+				url:"<%=contextPath%>/idCheck.me",
+				data:{checkId:$userId.val()},
+				type:"get",
+				success:function(result){
+					if(result == "fail"){
+						alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+						$userId.val("");
+						$userId.focus();
+					}else{
+						if(confirm("사용가능한 아이디입니다. 사용하시겠습니까?")){
+							$userId.attr("readonly", true);
+							$("#joinBtn").removeAttr("disabled");
+						}else{
+							$userId.focus();
+						}
+					}
+					
+				},
+				error:function(){
+					console.log("통신실패");
+				}
+			});
+		}	
+	
+	</script>
 </body>
 </html>

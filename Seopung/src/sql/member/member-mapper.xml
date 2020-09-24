@@ -48,4 +48,10 @@
 		   AND USER_ID=?
 		   AND USER_PWD=?
 	</entry>
+	<entry key="idCheck">
+		SELECT
+		       COUNT(*)
+		  FROM TB_MEMBER
+		 WHERE USER_ID = ?    
+	</entry>
 </properties>
