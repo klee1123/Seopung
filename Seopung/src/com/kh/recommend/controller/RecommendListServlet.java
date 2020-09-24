@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.recommend.model.service.RecommendService;
-import com.kh.recommend.model.vo.PageInfo;
+import com.kh.common.PageInfo;
 import com.kh.recommend.model.vo.Recommend;
 
 /**
@@ -123,6 +123,7 @@ public class RecommendListServlet extends HttpServlet {
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("pageTitle", "추천코스 목록");
 		
 		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendListView.jsp").forward(request, response);
 		

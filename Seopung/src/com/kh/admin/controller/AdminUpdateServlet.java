@@ -1,4 +1,4 @@
-package com.kh.Member.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
 
@@ -7,22 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.Member.model.service.MemberService;
-import com.kh.Member.model.vo.Member;
+import com.kh.admin.model.service.AdminService;
+import com.kh.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class MemberInsertServlet
+ * Servlet implementation class AdminUpdateServlet
  */
-@WebServlet("/insert.me")
-public class MemberInsertServlet extends HttpServlet {
+@WebServlet("/update.ad")
+public class AdminUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInsertServlet() {
+    public AdminUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +30,27 @@ public class MemberInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
 		
+		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
+		String adminId = request.getParameter("adminId");
+		String adminPwd = request.getParameter("adminPwd");
+		String adminName = request.getParameter("adminName");
 		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		String userName = request.getParameter("userName");
-		String nickName = request.getParameter("nickName");
-		String birth = request.getParameter("birth");
-		String gender = request.getParameter("gender");
-		String email = request.getParameter("email");
+		Admin ad = new Admin(adminNo, adminName, adminId, adminPwd);
 		
-		Member m = new Member(userId, userPwd, userName, nickName, birth, gender, email);
+		//System.out.println(ad);
 		
-		int result = new MemberService().insertMember(m);
-		
-		request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
+		int result = new AdminService().updateAdmin(ad);
 		
 		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "관리자 수정 성공");
+			response.sendRedirect(request.getContextPath() + "/detail.ad?adminNo=" + adminNo);
 			
-			response.sendRedirect(request.getContextPath());
 		}else {
-			
+			request.setAttribute("errorMsg", "관리자 수정 실패");
+			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

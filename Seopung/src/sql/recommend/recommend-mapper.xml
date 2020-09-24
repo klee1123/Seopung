@@ -2,7 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectListCount">
-		SELECT COUNT(*) LISTCOUNT
+		SELECT 
+		       COUNT(*) LISTCOUNT
 		  FROM TB_RECOMMEND
 		 WHERE RECOMMEND_STATUS = 'Y'
 	</entry>
@@ -28,6 +29,26 @@
 		               ) A
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="insertRecommend">
+		INSERT
+		  INTO TB_RECOMMEND
+		  (
+		     RECOMMEND_NO
+		   , RECOMMEND_TITLE
+		   , RECOMMEND_CONTENT
+		   , RECOMMEND_THUMB
+		   , ADMIN_NO
+		  )
+		  VALUES 
+		  (
+		     SEQ_RECOMMENDNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		  )
 	</entry>
 
 

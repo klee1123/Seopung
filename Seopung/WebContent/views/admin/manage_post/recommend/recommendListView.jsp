@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.*"%>
+<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.Recommend, com.kh.common.PageInfo"%>
 <%
 
 	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .outer {
 	margin: auto;
@@ -32,9 +33,9 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">추천코스 관리</h1>
-
+		-->
 		<br>
 
 		<div class="outer">
@@ -107,13 +108,13 @@
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">등록</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/enrollForm.re';">등록</button>
 							<button class="btn btn-danger" id="btnDelete">삭제</button>
 						</td>
 					</tr>
@@ -155,6 +156,11 @@
               		$("input[id=chk]:checked").each(function(){
                 		selected.push(this.value);
               		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
 
 	              	var str = "";
 	              	for(var i=0;i<selected.length; i++){

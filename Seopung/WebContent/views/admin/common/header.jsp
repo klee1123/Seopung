@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.admin.model.vo.Admin" %>
 <%
 	String contextPath = request.getContextPath();
+
+	Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
+	// > 로그인 전 : null
+	// > 로그인 후 : 로그인성공한 관리자정보들이 담겨있는 객체
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	
+	String pageTitle = (String)request.getAttribute("pageTitle");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -25,8 +35,21 @@
 <!-- Custom styles for this page -->
 <link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+
+<script>
+	$(function(){
+
+		var msg = "<%= alertMsg %>";
+		
+		if(msg != "null"){ // 메서지가 담겨있을 경우
+			alert(msg);
+			// 알람창 띄워준 후에 session에 담긴 메세지 지워야됨
+			// 안그러면 menubar.jsp가 포함되어있는 페이지 열때마다 alert 계속 뜰거임
+			<% session.removeAttribute("alertMsg"); %>
+		}	
+	});
+</script>
 </head>
 <body id="page-top">
 
@@ -56,7 +79,7 @@
         <div id="collapseUtiliti" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">회원목록</a>
-            <a class="collapse-item" href="">관리자목록</a>
+            <a class="collapse-item" href="<%=contextPath%>/list.ad?currentPage=1">관리자목록</a>
             <a class="collapse-item" href="">블랙리스트</a>
           </div>
         </div>
@@ -140,6 +163,7 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+          <h3 class="text-gray-800">&nbsp;<%= pageTitle %></h3>
           
           <!-- Topbar Navbar -->
 
@@ -150,22 +174,22 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-700">admin1</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-700">admin01</span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<%=contextPath%>/detail.ad?adminNo=1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  프로필
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<%=contextPath%>">
                   <i class="fas fa-laugh fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	홈페이지로
+                  	홈페이지
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  로그아웃
                 </a>
               </div>
             </li>

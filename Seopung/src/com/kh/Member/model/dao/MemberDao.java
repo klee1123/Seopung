@@ -35,7 +35,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = prop.getProperty("insertMember");
-		System.out.println(m.getGender());
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, m.getUserId());
@@ -60,8 +60,7 @@ public class MemberDao {
 	
 	public Member loginMember(Connection conn, String userId, String userPwd) {
 		
-		System.out.println(userId);
-		System.out.println(userPwd);
+		
 		Member m = null;
 		
 		PreparedStatement pstmt = null;
@@ -103,6 +102,35 @@ public class MemberDao {
 		}
 		
 		return m;
+	}
+	
+	public int idCheck(Connection conn, String checkId) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+		
 	}
 	
 	
