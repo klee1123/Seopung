@@ -201,7 +201,7 @@ $(function(){
 							<input type="password" name="userPwd" id="userPwd"
 								style="width: 250px; height: 35px;" placeholder="PASSWORD"
 								>
-							<div style="color:red; font-weight:bold; margin-top:5px; margin-bottom:5px; margin-right:28px;  font-size:8px;" id="errorMsg"></div>				
+							<div style="color:red; font-weight:bold; margin:5px; font-size:8px;" id="errorMsg"></div>				
 							<!-- <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:310px; margin-right:15px;">Login</button>-->
 							<button onclick="login();" type="submit" class="btn btn-secondary"  style="width:310px; margin-right:15px;" >로그인</button>
 						</form>
@@ -219,10 +219,7 @@ $(function(){
 										},
 									type:"post",
 									success:function(member){
-										console.log(member);
-										console.log(id)
-										
-										
+							
 										  if(member == "null"){
 										$("#errorMsg").html("가입하지 않은 아이디거나, 잘못된 비밀번호입니다.");
 										$("#userId").val("");
