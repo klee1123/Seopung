@@ -44,9 +44,10 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">추천코스 상세조회</h1>
-
+		-->
+		
 		<br>
 
 		<div class="outer">
@@ -65,6 +66,12 @@
 			<hr>
 
 			<div id="content_3">내용입니다.</div>
+			
+            <hr>
+
+			<div style="padding-left: 10px;">
+              <p>썸네일 사진</p><img src="" width="200px;" height="150px;"> 
+            </div>
 
 			<hr>
 			<br>

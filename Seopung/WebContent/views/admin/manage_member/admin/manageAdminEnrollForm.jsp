@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 	.outer {
 		width: 500px;
@@ -31,9 +32,12 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">관리자 등록</h1>
-
+		-->
+		
+		<br>
+		
 		<div class="outer" align="center">
 			<form action="<%= contextPath %>/insert.ad" method="post" id="adminListForm"
 				onsubmit="return validateForm()">

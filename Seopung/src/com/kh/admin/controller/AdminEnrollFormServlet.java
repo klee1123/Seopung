@@ -27,8 +27,8 @@ public class AdminEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setAttribute("pageTitle", "관리자 등록");
 		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
-		
 	}
 
 	/**

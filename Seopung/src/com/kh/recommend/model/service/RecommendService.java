@@ -41,6 +41,21 @@ public class RecommendService {
 		
 		return list;
 	}
+	
+	/**
+	 * 2. 추천코스 새 글 등록용 서비스
+	 * @param r		추천코스 정보를 담고 있는 Recommend 객체
+	 * @return		처리된 행 수
+	 */
+	public int insertRecommend(Recommend r) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().insertRecommend(conn, r);
+		
+		close(conn);
+		
+		return result;
+	}
 
 }
 

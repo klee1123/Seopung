@@ -62,6 +62,7 @@ public class AdminListServlet extends HttpServlet {
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("pageTitle", "관리자 목록");
 		
 		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
 		

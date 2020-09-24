@@ -123,6 +123,7 @@ public class RecommendListServlet extends HttpServlet {
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("pageTitle", "추천코스 목록");
 		
 		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendListView.jsp").forward(request, response);
 		

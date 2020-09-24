@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class AdminInsertServlet
+ * Servlet implementation class AdminDeleteServlet
  */
-@WebServlet("/insert.ad")
-public class AdminInsertServlet extends HttpServlet {
+@WebServlet("/delete.ad")
+public class AdminDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInsertServlet() {
+    public AdminDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +31,21 @@ public class AdminInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String adminId = request.getParameter("adminId");
-		String adminPwd = request.getParameter("adminPwd");
-		String adminName = request.getParameter("adminName");
+		int delAdminNo = Integer.parseInt(request.getParameter("deleteAdminNo"));
 		
-		Admin ad = new Admin();
-		ad.setAdminId(adminId);
-		ad.setAdminPwd(adminPwd);
-		ad.setAdminName(adminName);
+		//System.out.println(delAdminNo);
 		
-		int result = new AdminService().insertAdmin(ad);
+		int result = new AdminService().deleteAdmin(delAdminNo);
 		
 		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "관리자 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/list.ad?currentPage=1");
+			request.getSession().setAttribute("alertMsg", "탈퇴 처리 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/detail.ad?adminNo=" + delAdminNo);
+			
 		}else {
-			request.setAttribute("errorMsg", "관리자 등록 실패");
-			request.getRequestDispatcher("views/admin/common/errorPage.jsp");
+			request.setAttribute("errorMsg", "탈퇴 실패");
+			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
 		}
-	
+		
 	}
 
 	/**

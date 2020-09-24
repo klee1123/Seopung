@@ -74,5 +74,12 @@
 		     , MODIFY_DATE = SYSDATE
 		 WHERE ADMIN_NO = ?
 	</entry>
+	
+	<entry key="deleteAdmin">
+		UPDATE
+		       TB_ADMIN
+		   SET STATUS = 'N'
+		 WHERE ADMIN_NO = ?
+	</entry>
 
 </properties>

@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .outer {
 	margin: auto;
@@ -32,9 +33,9 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">추천코스 관리</h1>
-
+		-->
 		<br>
 
 		<div class="outer">
@@ -113,7 +114,7 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">등록</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/enrollForm.re';">등록</button>
 							<button class="btn btn-danger" id="btnDelete">삭제</button>
 						</td>
 					</tr>

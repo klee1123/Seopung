@@ -217,6 +217,31 @@ public class AdminDao {
 		
 		return result;
 	}
+	
+	public int deleteAdmin(Connection conn, int delAdminNo) {
+		// update문 => 처리된 행 수 
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, delAdminNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
 
 

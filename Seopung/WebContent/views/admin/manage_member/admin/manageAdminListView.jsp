@@ -18,6 +18,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 	.outer {
 		margin: auto;
@@ -31,24 +32,27 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">관리자 목록</h1>
+		-->
 
 		<br>
-
 		<div class="outer">
 
 			<table align="center" width="1000">
 				<tr>
 					<td width="830">
-						<form action="" method="GET">
-							<label for="">관리자ID</label> <input type="text"
-								placeholder="아이디 입력" name="adminId">
-							<button type="submit" onclick="location.href='<%=contextPath %>/search.ad';" class="btn btn-secondary btn-sm">조회</button>
+						<form action="<%=contextPath %>/list.ad" method="get">
+							<select name="keyField">
+								<option value="id">아이디</option>
+								<option value="name">이름</option>
+							</select>
+							<input type="text" name="keyword">
+							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
 						</form>
 					</td>
 					<td>
-						<button onclick="selectNonMem();" class="btn btn-secondary btn-sm">탈퇴한 관리자만 조회</button>
+						<button onclick="location.href='<%=contextPath %>/selectNo';" class="btn btn-secondary btn-sm">탈퇴한 관리자만 조회</button>
 					</td>
 				</tr>
 			</table>
@@ -129,17 +133,9 @@
 			<br>
 			<br>
 			<br>
-
+			
+			
 		</div>
-		<script>
-		 function selectNonMem(){
-			 
-			 
-		 }
-		
-		
-		</script>
-
 
 	</div>
 	<!-- /.container-fluid -->

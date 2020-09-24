@@ -1,4 +1,4 @@
-package com.kh.admin.controller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.recommend.model.service.RecommendService;
+import com.kh.recommend.model.vo.Recommend;
 
 /**
- * Servlet implementation class AdminDetailServlet
+ * Servlet implementation class RecommendDetailServlet
  */
-@WebServlet("/detail.ad")
-public class AdminDetailServlet extends HttpServlet {
+@WebServlet("/detail.re")
+public class RecommendDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDetailServlet() {
+    public RecommendDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,11 @@ public class AdminDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int rno = Integer.parseInt(request.getParameter("rno"));
 		
-		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
-		
-		Admin ad = new AdminService().selectAdmin(adminNo);
-		
-		request.setAttribute("ad", ad);
-		request.setAttribute("pageTitle", "관리자 상세조회");
-		
-		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
-		
+		//Recommend r = new RecommendService().selectRecommend(rno);
+	
+	
 	}
 
 	/**

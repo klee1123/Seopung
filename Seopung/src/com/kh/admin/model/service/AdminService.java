@@ -112,6 +112,28 @@ public class AdminService {
 		
 		return result;
 	}
+	
+	
+	/**
+	 * 관리자 탈퇴용 서비스
+	 * @param delAdminNo	탈퇴한 관리자번호
+	 * @return				처리된 행 수 
+	 */
+	public int deleteAdmin(int delAdminNo) {
+		Connection conn = getConnection();
+		
+		int result = new AdminDao().deleteAdmin(conn, delAdminNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
 }
 
 

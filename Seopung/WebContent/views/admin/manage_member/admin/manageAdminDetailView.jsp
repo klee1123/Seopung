@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 	.outer {
 		width: 500px;
@@ -35,9 +36,12 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">관리자 상세조회</h1>
-
+		-->
+		
+		<br>
+		
 		<div class="outer" align="center">
 			<% if(ad.getStatus().equals("Y")){ %>
 			<form action="<%= contextPath %>/update.ad" method="post" id="adminListForm" onsubmit="return validateForm()">
@@ -162,26 +166,27 @@
 
 		<!-- The Modal -->
 		<div class="modal" id="myModal">
-			<div class="modal-dialog modal-sm">
+			<div class="modal-dialog">
 				<div class="modal-content">
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">비밀번호 입력</h4>
+						<h4 class="modal-title">관리자 탈퇴</h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
 					<!-- Modal body -->
-					<form action="delete.ad" method="post">
+					<form action="<%=contextPath%>/delete.ad" method="post">
 						<div class="modal-body">
-							<input type="password" name="deletePwd" class="form-control">
+							<input type="hidden" name="deleteAdminNo" value="<%=ad.getAdminNo()%>">
+							탈퇴를 원하시면 아래 [탈퇴] 버튼을 선택하여 주십시오.
 						</div>
 
 						<!-- Modal footer -->
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-dismiss="modal">취소</button>
-							<button class="btn btn-danger">탈퇴</button>
+							<button type="submit" class="btn btn-danger">탈퇴</button>
 						</div>
 					</form>
 				</div>

@@ -10,6 +10,8 @@
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
+	String pageTitle = (String)request.getAttribute("pageTitle");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +35,7 @@
 <!-- Custom styles for this page -->
 <link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 <script>
 	$(function(){
@@ -161,6 +163,7 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
+          <h3 class="text-gray-800">&nbsp;<%= pageTitle %></h3>
           
           <!-- Topbar Navbar -->
 
@@ -171,22 +174,22 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-700">admin1</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-700">admin01</span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<%=contextPath%>/detail.ad?adminNo=1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  프로필
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="<%=contextPath%>">
                   <i class="fas fa-laugh fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	홈페이지로
+                  	홈페이지
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  로그아웃
                 </a>
               </div>
             </li>
