@@ -36,7 +36,7 @@ public class AdminDetailServlet extends HttpServlet {
 		Admin ad = new AdminService().selectAdmin(adminNo);
 		
 		request.setAttribute("ad", ad);
-		request.setAttribute("pageTitle", "관리자 상세조회");
+		request.setAttribute("pageTitle", "관리자 상세정보");
 		
 		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
 		

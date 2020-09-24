@@ -178,7 +178,7 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<%=contextPath%>/detail.ad?adminNo=1">
+                <a class="dropdown-item" href="<%=contextPath%>/myPage.ad?adminNo=1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   프로필
                 </a>

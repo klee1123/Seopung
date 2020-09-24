@@ -57,6 +57,21 @@ public class RecommendService {
 		return result;
 	}
 
+	
+	/**
+	 * 3. 추천코스 상세정보 조회용 서비스
+	 * @param rno		상세조회요청한 게시글 번호
+	 * @return			행당 게시글 정보가 담겨있는 Recommend객체
+	 */
+	public Recommend selectRecommend(int rno) {
+		Connection conn = getConnection();
+		
+		Recommend r = new RecommendDao().selectRecommend(conn, rno);
+		
+		close(conn);
+		
+		return r;
+	}
 }
 
 

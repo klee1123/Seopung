@@ -125,6 +125,44 @@ public class RecommendDao {
 		
 		return result;
 	}
+	
+	
+	public Recommend selectRecommend(Connection conn, int rno) {
+		// select문 => 한 행 조회
+		Recommend r = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new Recommend();
+				r.setRecommendTitle(rset.getString("recommend_title"));
+				r.setRecommendContent(rset.getString("recommend_content"));
+				r.setRecommendWriter(rset.getString("admin_id"));
+				r.setEnrollDate(rset.getDate("recommend_enroll"));
+				r.setCount(rset.getInt("recommend_count"));
+				r.setLike(rset.getInt("recommend_like"));
+				r.setThumbnailPath(rset.getString("RECOMMEND_THUMB"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
+	}
 }
 
 
