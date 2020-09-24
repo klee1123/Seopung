@@ -86,6 +86,7 @@
 
 		</div>
 
+
 		<script>
 			var idcheck = 0;	
 		
@@ -95,24 +96,25 @@
 				
 				$.ajax({
 					url:"<%=contextPath%>/idCheck.ad",
-					data:{checkId:$adminId.val()},
-					type:"get",
-					success:function(result){
+					data : {checkId : $adminId.val()},
+					type : "get",
+					success : function(result) {
 						console.log(result);
-						
-						if(result=="fail"){
+
+						if (result == "fail") {
 							idcheck = 0;
 							$("#validateIdArea").html("<td></td><td></td><td style='font-size:12px; color:red;'>이미 존재하거나 탈퇴한 회원의 아이디입니다.</td>");
-						}else{
+						} else {
 							idcheck = 1;
 							$("#validateIdArea").html("");
 						}
-					},error:function(){
+					},
+					error : function() {
 						consoel.log("Ajax 통신 실패");
 					}
 				});
 			}
-		
+
 			// 등록버튼 클릭시 전체 유효성 검사
 			function validateForm() {
 
@@ -126,7 +128,8 @@
 				var regExp3 = /^[가-힣]{2,}$/;
 
 				if (regExp1.test(adminId) && regExp2.test(adminPwd)
-						&& (adminPwd == checkPwd) && regExp3.test(adminName) && idcheck==1) {
+						&& (adminPwd == checkPwd) && regExp3.test(adminName)
+						&& idcheck == 1) {
 					return true;
 				} else {
 					alert("유효한 값을 입력해주세요.");
@@ -144,16 +147,13 @@
 
 				var regExp = /^[a-z][a-z\d]{4,11}$/;
 
-				
 				if (regExp.test(input.value)) {
-					
+
 					idCheck();
 					//document.getElementById("validateIdArea").innerHTML = "";
 				} else {
 					document.getElementById("validateIdArea").innerHTML = "<td></td><td></td><td style='font-size:12px; color:red;'>유효한 값을 입력해주세요.</td>";
 				}
-				
-				
 			}
 
 			// 비밀번호 유효성 검사

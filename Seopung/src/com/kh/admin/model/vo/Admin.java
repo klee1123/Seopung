@@ -37,6 +37,14 @@ public class Admin {
 		this.modifyDate = modifyDate;
 		this.status = status;
 	}
+	
+	public Admin(int adminNo, String adminName, String adminId, String adminPwd) {
+		super();
+		this.adminNo = adminNo;
+		this.adminName = adminName;
+		this.adminId = adminId;
+		this.adminPwd = adminPwd;
+	}
 
 	public int getAdminNo() {
 		return adminNo;
