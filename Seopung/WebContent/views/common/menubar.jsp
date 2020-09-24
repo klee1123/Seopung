@@ -5,6 +5,7 @@
 <%
 	String contextPath = request.getContextPath();
 	Member loginUser = (Member) session.getAttribute("loginUser");
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +77,20 @@
 	color: lightgrey;
 }
 </style>
-</head>
+<script>
+$(function(){
+	var msg = "<%=alertMsg%>";
+	
+	if(msg!= "null"){
+		alert(msg);
+		<% session.removeAttribute("alertMsg");%>
+	}
+	
+});
+
+
+</script>
+
 <body>
 	<!--메뉴바-->
 	<header class="main_menu home_menu">
@@ -190,6 +204,7 @@
 							<!-- <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="width:310px; margin-right:15px;">Login</button>-->
 							<button type="submit" class="btn btn-secondary"  style="width:310px; margin-right:15px;" >로그인</button>
 						</form>
+						<div id="errorMsg"></div>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
