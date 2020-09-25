@@ -4,11 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   	<link rel="stylesheet" href="resouces/css/all.css">
     <link rel="stylesheet" href="resources/css/style.css">
+    <!-- 달력 -->
+    <script src="resources/js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+   	<script>
+   	  $( function() {
+        $( "#calendar" ).datepicker({
+          firstDay: 1
+        });
+      });
+  	</script>
     <style>
     	#mainRecommendTable{
             width:300px;
@@ -28,6 +42,8 @@
         
             font-size: 18px;
         }
+        
+        .ui-datepicker{ font-size: 20px; width:280px; height: 300px; }
     </style>
 </head>
 <body>
@@ -57,9 +73,7 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
-                        <div id="calendarApi"> 
-                            <iframe src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FSeoul&amp;src=a28uc291dGhfa29yZWEjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%230B8043&amp;showNav=1&amp;showPrint=0&amp;showTitle=0&amp;showTz=0&amp;showCalendars=0&amp;showTabs=0" style="border-width:0" width="280" height="320" frameborder="0" scrolling="no"></iframe>
-                        </div>
+                       	<div id="calendar"></div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
