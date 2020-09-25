@@ -15,10 +15,10 @@ public class AdminService {
 	 * 관리자 수 조회용 서비스
 	 * @return		총 관리자 수
 	 */
-	public int selectListCount() {
+	public int selectListCount(int keyfield, String keyword, String status) {
 		Connection conn = getConnection();
 		
-		int listCount = new AdminDao().selectListCount(conn);
+		int listCount = new AdminDao().selectListCount(conn, keyfield, keyword, status);
 		
 		close(conn);
 		
@@ -31,10 +31,10 @@ public class AdminService {
 	 * @param pi
 	 * @return
 	 */
-	public ArrayList<Admin> selectList(PageInfo pi){
+	public ArrayList<Admin> selectList(PageInfo pi, int keyfield, String keyword, String status){
 		Connection conn = getConnection();
 		
-		ArrayList<Admin> list = new AdminDao().selectList(conn, pi);
+		ArrayList<Admin> list = new AdminDao().selectList(conn, pi, keyfield, keyword, status);
 		
 		close(conn);
 		

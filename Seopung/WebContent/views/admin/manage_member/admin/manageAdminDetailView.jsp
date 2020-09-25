@@ -85,7 +85,7 @@
 							<th></th>
 							<td>상태</td>
 							<% if(ad.getStatus().equals("Y")){%>
-							<td><input type="text" value="회원" disabled
+							<td><input type="text" value="관리자" disabled
 								class="form-control"></td>
 							<%}else{ %>
 							<td><input type="text" value="탈퇴" disabled

@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectListCount">
+	<entry key="selectListCount1">
 		SELECT 
 		       COUNT(*)
 		  FROM TB_ADMIN
+		 WHERE ADMIN_NAME LIKE '%' || ? || '%'
+		   AND STATUS LIKE '%' || ? ||'%'
+	</entry>
+	
+	<entry key="selectListCount2">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_ADMIN
+		 WHERE ADMIN_ID LIKE '%' || ? || '%'
+		   AND STATUS LIKE '%' || ? ||'%'
 	</entry>
 
-	<entry key="selectList">
+	<entry key="selectList1">
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNUM
@@ -21,6 +31,31 @@
                               , MODIFY_DATE
                               , STATUS
                            FROM TB_ADMIN
+                          WHERE ADMIN_NAME LIKE '%' || ? || '%'
+                            AND STATUS LIKE '%' || ? ||'%'
+                          ORDER
+                             BY ADMIN_NO DESC
+                        ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectList2">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM
+		             , A.*
+		           FROM (
+                         SELECT 
+                                ADMIN_NO
+                              , ADMIN_NAME
+                              , ADMIN_ID
+                              , ENROLL_DATE
+                              , MODIFY_DATE
+                              , STATUS
+                           FROM TB_ADMIN
+                          WHERE ADMIN_ID LIKE '%' || ? || '%'
+                            AND STATUS LIKE '%' || ? ||'%'
                           ORDER
                              BY ADMIN_NO DESC
                         ) A

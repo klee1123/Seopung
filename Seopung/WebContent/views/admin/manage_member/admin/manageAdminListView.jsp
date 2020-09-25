@@ -10,6 +10,10 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	int keyfield = (int)request.getAttribute("keyfield");
+	String keyword = (String)request.getAttribute("keyword");
+	String status = (String)request.getAttribute("status");
 
 %>
 <!DOCTYPE html>
@@ -39,20 +43,35 @@
 		<br>
 		<div class="outer">
 
-			<table align="center" width="1000">
+			<table align="center" width="950">
 				<tr>
-					<td width="830">
+					<td width="890">
 						<form action="<%=contextPath %>/list.ad" method="get">
-							<select name="keyField">
-								<option value="id">아이디</option>
-								<option value="name">이름</option>
+							<input type="hidden" name="currentPage" value="1">
+							<input type="hidden" name="status" value="<%=status%>">
+							<select name="keyfield">
+								<%if(keyfield==2){%>
+								<option value="1">이름</option>
+								<option value="2" selected>아이디</option>
+								<%}else{%>
+								<option value="1">이름</option>
+								<option value="2">아이디</option>
+								<%}%>
 							</select>
-							<input type="text" name="keyword">
+							<input type="text" name="keyword" value="<%=keyword%>">
 							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
 						</form>
 					</td>
 					<td>
-						<button onclick="location.href='<%=contextPath %>/selectNo';" class="btn btn-secondary btn-sm">탈퇴한 관리자만 조회</button>
+						<button class="btn btn-outline-primary btn-sm dropdown-toggle"
+							type="button" id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">분류</button>
+						<div class="dropdown-menu animated--fade-in"
+							aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="<%=contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=">전체</a> 
+							<a class="dropdown-item" href="<%=contextPath%>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">회원</a> 
+							<a class="dropdown-item" href="<%=contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=N">탈퇴</a>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -105,21 +124,21 @@
 						<td width="720px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
