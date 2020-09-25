@@ -14,7 +14,7 @@ import com.kh.admin.model.vo.Admin;
 /**
  * Servlet implementation class AdminInsertServlet
  */
-@WebServlet("/insert.ad")
+@WebServlet("/adminPage/insert.ad")
 public class AdminInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,10 +45,10 @@ public class AdminInsertServlet extends HttpServlet {
 		
 		if(result>0) {
 			request.getSession().setAttribute("alertMsg", "관리자 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/list.ad?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.ad?currentPage=1");
 		}else {
 			request.setAttribute("errorMsg", "관리자 등록 실패");
-			request.getRequestDispatcher("views/admin/common/errorPage.jsp");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);;
 		}
 	
 	}

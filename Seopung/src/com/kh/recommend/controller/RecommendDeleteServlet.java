@@ -13,7 +13,7 @@ import com.kh.recommend.model.service.RecommendService;
 /**
  * Servlet implementation class RecommendDeleteServlet
  */
-@WebServlet("/delete.re")
+@WebServlet("/adminPage/delete.re")
 public class RecommendDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,17 +30,17 @@ public class RecommendDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int rno = Integer.parseInt(request.getParameter("rno"));
+		String[] rno = request.getParameterValues("rno");
 		
 		int result = new RecommendService().deleteRecommend(rno);
 		
 		if(result>0) {
 			request.getSession().setAttribute("alertMsg", "추천코스 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.re?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.re?currentPage=1");
 			
 		}else {
 			request.setAttribute("errorMsg", "추천코스 삭제 실패");
-			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

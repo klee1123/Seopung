@@ -13,7 +13,7 @@ import com.kh.admin.model.service.AdminService;
 /**
  * Servlet implementation class AdminDeleteServlet
  */
-@WebServlet("/delete.ad")
+@WebServlet("/adminPage/delete.ad")
 public class AdminDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,12 +38,13 @@ public class AdminDeleteServlet extends HttpServlet {
 		int result = new AdminService().deleteAdmin(delAdminNo);
 		
 		if(result>0) {
+			// 탈퇴 페이지 만들면 좋을듯!! 로그아웃 되고, 홈페이지로 이동하는 링크 있는
 			request.getSession().setAttribute("alertMsg", "탈퇴 처리 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/detail.ad?adminNo=" + delAdminNo);
+			response.sendRedirect(request.getContextPath() + "/adminPage/detail.ad?adminNo=" + delAdminNo);
 			
 		}else {
 			request.setAttribute("errorMsg", "탈퇴 실패");
-			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

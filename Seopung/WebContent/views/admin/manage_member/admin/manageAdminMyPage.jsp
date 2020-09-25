@@ -44,7 +44,7 @@
 		
 		<div class="outer" align="center">
 			
-			<form action="<%= contextPath %>/update.ad" method="post" id="adminListForm" onsubmit="return validateForm()">
+			<form action="<%= contextPath %>/adminPage/update.ad" method="post" id="adminListForm" onsubmit="return validateForm()">
 				<input type="hidden" name="adminNo" value="<%=ad.getAdminNo()%>">
 				<table align="center">
 					<tr>
@@ -120,7 +120,7 @@
 					</div>
 
 					<!-- Modal body -->
-					<form action="<%=contextPath%>/delete.ad" method="post">
+					<form action="<%=contextPath%>/adminPage/delete.ad" method="post">
 						<div class="modal-body">
 							<input type="hidden" name="deleteAdminNo" value="<%=ad.getAdminNo()%>">
 							탈퇴를 원하시면 아래 [탈퇴] 버튼을 선택하여 주십시오.

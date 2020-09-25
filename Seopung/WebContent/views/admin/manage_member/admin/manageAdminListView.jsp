@@ -46,7 +46,7 @@
 			<table align="center" width="950">
 				<tr>
 					<td width="890">
-						<form action="<%=contextPath %>/list.ad" method="get">
+						<form action="<%=contextPath %>/adminPage/list.ad" method="get">
 							<input type="hidden" name="currentPage" value="1">
 							<input type="hidden" name="status" value="<%=status%>">
 							<select name="keyfield">
@@ -68,9 +68,9 @@
 							aria-haspopup="true" aria-expanded="false">분류</button>
 						<div class="dropdown-menu animated--fade-in"
 							aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="<%=contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=">전체</a> 
-							<a class="dropdown-item" href="<%=contextPath%>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">회원</a> 
-							<a class="dropdown-item" href="<%=contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=N">탈퇴</a>
+							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=">전체</a> 
+							<a class="dropdown-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">회원</a> 
+							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=N">탈퇴</a>
 						</div>
 					</td>
 				</tr>
@@ -106,7 +106,7 @@
 							<% }else{ %>
 							<td></td>
 							<% } %>
-							<td><button class="btn btn-outline-dark btn-sm" onclick="location.href='<%=contextPath%>/detail.ad?adminNo=<%=a.getAdminNo()%>';">보기</button></td>
+							<td><button class="btn btn-outline-dark btn-sm" onclick="location.href='<%=contextPath%>/adminPage/detail.ad?adminNo=<%=a.getAdminNo()%>';">보기</button></td>
 						</tr>
 						<% } %>
 					<% } %>
@@ -124,26 +124,26 @@
 						<td width="720px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/enrollForm.ad'">등록</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.ad'">등록</button>
 						</td>
 					</tr>
 				</table>

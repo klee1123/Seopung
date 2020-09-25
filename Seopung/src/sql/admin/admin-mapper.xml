@@ -114,6 +114,7 @@
 		UPDATE
 		       TB_ADMIN
 		   SET STATUS = 'N'
+		     , MODIFY_DATE = SYSDATE
 		 WHERE ADMIN_NO = ?
 	</entry>
 

@@ -14,7 +14,7 @@ import com.kh.recommend.model.vo.Recommend;
 /**
  * Servlet implementation class RecommendDetailServlet
  */
-@WebServlet("/detail.re")
+@WebServlet("/adminPage/detail.re")
 public class RecommendDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,13 +33,22 @@ public class RecommendDetailServlet extends HttpServlet {
 		int rno = Integer.parseInt(request.getParameter("rno"));
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		Recommend r = new RecommendService().selectRecommend(rno);
+		int result = new RecommendService().increaseCount(rno);
 		
-		request.setAttribute("r", r);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("pageTitle", "추천코스 상세조회");
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendDetailView.jsp").forward(request, response);
-	
+		if(result>0) {
+			
+			Recommend r = new RecommendService().selectRecommend(rno);
+			
+			request.setAttribute("r", r);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("pageTitle", "추천코스 상세조회");
+			request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendDetailView.jsp").forward(request, response);
+			
+		}else {
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

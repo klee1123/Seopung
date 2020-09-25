@@ -39,7 +39,7 @@
 		<br>
 		
 		<div class="outer" align="center">
-			<form action="<%= contextPath %>/insert.ad" method="post" id="adminListForm"
+			<form action="<%= contextPath %>/adminPage/insert.ad" method="post" id="adminListForm"
 				onsubmit="return validateForm()">
 
 				<table align="center">

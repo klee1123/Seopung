@@ -16,7 +16,7 @@ import com.kh.common.PageInfo;
 /**
  * Servlet implementation class AdminListServlet
  */
-@WebServlet("/list.ad")
+@WebServlet("/adminPage/list.ad")
 public class AdminListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -74,13 +74,20 @@ public class AdminListServlet extends HttpServlet {
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
 		listCount = new AdminService().selectListCount(keyfield, keyword, status);
-		//System.out.println(listCount); // 확인용
 		
 		pageLimit = 5;
+		
 		boardLimit = 10;
 		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
+		if(listCount != 0) {
+			maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		}else {
+			maxPage=1;
+		}
+		
 		startPage = (currentPage-1)/pageLimit * pageLimit + 1;
+		
 		endPage = startPage + pageLimit - 1;
 		
 		if(maxPage<endPage) {
@@ -98,7 +105,7 @@ public class AdminListServlet extends HttpServlet {
 		request.setAttribute("status", status);
 		request.setAttribute("pageTitle", "관리자 목록");
 		
-		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
 		
 	}
 

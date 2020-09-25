@@ -14,7 +14,7 @@ import com.kh.recommend.model.vo.Recommend;
 /**
  * Servlet implementation class RecommendUpdateFormServlet
  */
-@WebServlet("/updateForm.re")
+@WebServlet("/adminPage/updateForm.re")
 public class RecommendUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,7 +40,7 @@ public class RecommendUpdateFormServlet extends HttpServlet {
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageTitle", "추천코스 글 수정");
 		
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendUpdateForm.jsp").forward(request, response);;
+		request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendUpdateForm.jsp").forward(request, response);;
 	}
 
 	/**

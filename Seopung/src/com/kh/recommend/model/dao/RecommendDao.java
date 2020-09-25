@@ -30,19 +30,21 @@ public class RecommendDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, String keyword) {
 		// select문 => 총 게시글 수(int)
 		int listCount = 0;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
 			
-			rset = stmt.executeQuery(sql);
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -52,14 +54,14 @@ public class RecommendDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return listCount;
 	}
 	
 
-	public ArrayList<Recommend> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Recommend> selectList(Connection conn, PageInfo pi, String keyword){
 		// select문 => 여러 행 조회
 		ArrayList<Recommend> list = new ArrayList<>();
 		
@@ -74,8 +76,9 @@ public class RecommendDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 
 			rset = pstmt.executeQuery();
 			
@@ -114,6 +117,31 @@ public class RecommendDao {
 			pstmt.setString(2, r.getRecommendContent());
 			pstmt.setString(3, r.getThumbnailPath());
 			pstmt.setInt(4, Integer.parseInt(r.getRecommendWriter()));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int increaseCount(Connection conn, int rno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rno);
 			
 			result = pstmt.executeUpdate();
 			
@@ -193,7 +221,7 @@ public class RecommendDao {
 		return result;
 	}
 	
-	public int deleteRecommend(Connection conn, int rno) {
+	public int deleteRecommend(Connection conn, String[] rno) {
 		// update문 => 처리된 행 수
 		int result = 0;
 		
@@ -201,10 +229,17 @@ public class RecommendDao {
 		
 		String sql = prop.getProperty("deleteRecommend");
 		
+		// 삭제할 추천코스 갯수가 복수일 경우
+		if(rno.length > 1) {
+			for(int i=1; i<rno.length; i++) {
+				sql += " OR RECOMMEND_NO =" + rno[i];
+			}
+		}
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, rno);
+			pstmt.setInt(1, Integer.parseInt(rno[0]));
 			
 			result = pstmt.executeUpdate();
 			

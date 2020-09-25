@@ -15,11 +15,11 @@ public class RecommendService {
 	 * 1_1. 추천코스 게시글 수 조회용 서비스
 	 * @return	총 게시글 수
 	 */
-	public int selectListCount() {
+	public int selectListCount(String keyword) {
 		
 		Connection conn = getConnection();
 		
-		int listCount = new RecommendDao().selectListCount(conn);
+		int listCount = new RecommendDao().selectListCount(conn, keyword);
 		
 		close(conn);
 		
@@ -31,10 +31,10 @@ public class RecommendService {
 	 * @param pi		현재 요청한 페이지, 게시글최대갯수가 담겨있는 PageInfo객체 
 	 * @return			조회된 결과가 담겨있는 list
 	 */
-	public ArrayList<Recommend> selectList(PageInfo pi){
+	public ArrayList<Recommend> selectList(PageInfo pi, String keyword){
 		Connection conn = getConnection();
 		
-		ArrayList<Recommend> list = new RecommendDao().selectList(conn, pi);
+		ArrayList<Recommend> list = new RecommendDao().selectList(conn, pi, keyword);
 		
 		close(conn);
 		
@@ -62,6 +62,27 @@ public class RecommendService {
 		return result;
 	}
 
+	
+	/**
+	 * 3_1. 상세조회시 조회수 증가용 서비스
+	 * @param rno		조회수 증가시킬 게시글 번호
+	 * @return			처리된 행 수
+	 */
+	public int increaseCount(int rno) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().increaseCount(conn, rno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	/**
 	 * 3. 추천코스 상세정보 조회용 서비스
@@ -104,7 +125,7 @@ public class RecommendService {
 	 * @param rno		삭제할 글 번호
 	 * @return			처리된 행 수
 	 */
-	public int deleteRecommend(int rno) {
+	public int deleteRecommend(String[] rno) {
 		Connection conn = getConnection();
 		
 		int result = new RecommendDao().deleteRecommend(conn, rno);

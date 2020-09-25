@@ -9,8 +9,11 @@
 	// > 로그인 후 : 로그인성공한 관리자정보들이 담겨있는 객체
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
-	
-	String pageTitle = (String)request.getAttribute("pageTitle");
+
+	String pageTitle = "";
+	if(request.getAttribute("pageTitle")!=null){		
+		pageTitle = (String)request.getAttribute("pageTitle");
+	}
 	
 %>
 <!DOCTYPE html>
@@ -78,7 +81,7 @@
         <div id="collapseUtiliti" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">회원목록</a>
-            <a class="collapse-item" href="<%=contextPath%>/list.ad?currentPage=1">관리자목록</a>
+            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1">관리자목록</a>
             <a class="collapse-item" href="">블랙리스트</a>
           </div>
         </div>
@@ -97,7 +100,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">일정관리</a>
             <a class="collapse-item" href="">커뮤니티관리</a>
-            <a class="collapse-item" href="<%= contextPath %>/list.re?currentPage=1">추천코스관리</a>
+            <a class="collapse-item" href="<%= contextPath %>/adminPage/list.re?currentPage=1">추천코스관리</a>
           </div>
         </div>
       </li>
@@ -177,7 +180,7 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<%=contextPath%>/myPage.ad?adminNo=1">
+                <a class="dropdown-item" href="<%=contextPath%>/adminPage/myPage.ad?adminNo=1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   프로필
                 </a>
