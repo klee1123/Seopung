@@ -64,6 +64,23 @@
 		  JOIN TB_ADMIN USING(ADMIN_NO)
 		 WHERE RECOMMEND_NO = ?
 	</entry>
+	
+	<entry key="updateRecommend">
+		UPDATE 
+		       TB_RECOMMEND
+		   SET RECOMMEND_TITLE = ?
+		     , RECOMMEND_CONTENT = ?
+		     , RECOMMEND_THUMB = ?
+		     , RECOMMEND_MODIFY = SYSDATE
+		 WHERE RECOMMEND_NO = ?
+	</entry>
+	
+	<entry key="deleteRecommend">
+		UPDATE 
+		       TB_RECOMMEND
+		   SET RECOMMEND_STATUS = 'N'
+		 WHERE RECOMMEND_NO = ?
+	</entry>
 
 
 </properties>
