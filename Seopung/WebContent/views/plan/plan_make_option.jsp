@@ -12,7 +12,6 @@
                     width:1200px;
                     height: 1000px;
                     margin:auto;
-                    margin-top: 150px;
     
                 }
     
@@ -105,8 +104,8 @@
             <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
     
     
-    </head>
-    	 <%@include file="../common/menubar.jsp"%>
+        </head>
+    
         <body>
             <div class="wrap">
     
@@ -114,24 +113,24 @@
                 
     
     
-                <form id="plan_page_01" action="" method="">
+                <form id="plan_page_01" action="/test1.do" method="GET">
                     <div class="plan_sec">
                         <div class="so_title">
                             일정만들기 < 1 / 2 >
                         </div>
                         <div class="so_title">
-                            <input type="text" style="width:700px" placeholder="일정 제목">
+                            <input type="text" style="width:700px" name="plan_title" id="" placeholder="일정 제목">
                         </div>
                     </div>
                     <div class="plan_sec" style="margin-top: 0px;">
-                        <div class="so_title">
+                        <div class="">
                             일정 날짜
                         </div>
                         <div class=""> <!--일정 기간 버튼 내용-->
                             <table>
                                 <tr>
                                     <td style="width: 350px;">
-                                        <div class="" id="">
+                                        <div class="">
                                             <script type="text/javascript">
                     
                                             $(function(){
@@ -143,13 +142,13 @@
                                             });
                                             </script>
                     
-                                            <input type="text" name="date" id="plan_sdate" size="12">
+                                            <input type="text" name="plan_sdate" id="plan_sdate" size="12">
                     
                                             <input type="button" value="시작일" onclick="$('#plan_sdate').datepicker('show');" />
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="" id="">
+                                        <div class="">
                                             <script type="text/javascript">
                     
                                             $(function(){
@@ -161,7 +160,7 @@
                                             });
                                             </script>
                     
-                                            <input type="text" name="date" id="plan_edate" size="12">
+                                            <input type="text" name="plan_edate" id="plan_edate" size="12">
                     
                                             <input type="button" value="종료일" onclick="$('#plan_edate').datepicker('show');" />
                                         </div>
@@ -179,22 +178,22 @@
                         </div>
                         <div class="plan_type" >
                             <div class="" >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션1" checked="checked"><span>남자끼리</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="MM" checked="checked"><span>남자끼리</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>여자끼리</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="FF"><span>여자끼리</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>가족</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="family"><span>가족</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>커플/신혼</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="couple"><span>커플/신혼</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>남자혼자</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="MO"><span>남자혼자</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>여자혼자</span></label>
+                                <label class="box-radio-input"><input type="radio" name="cp_item" value="FO"><span>여자혼자</span></label>
                             </div>
                         </div>
                     </div>
@@ -329,11 +328,11 @@
                     
                         <div style="text-align: right;">
                             <button class="bbtn" type="button">다음 페이지</button>
+                            <input type="submit" value="확인">
                         </div>
                     </div>
                 </form>
             </div>
-             <%@include file="../common/footer.jsp"%>
         </body>
     
     </html>
