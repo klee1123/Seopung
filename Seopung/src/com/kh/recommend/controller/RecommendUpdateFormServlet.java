@@ -12,16 +12,16 @@ import com.kh.recommend.model.service.RecommendService;
 import com.kh.recommend.model.vo.Recommend;
 
 /**
- * Servlet implementation class RecommendDetailServlet
+ * Servlet implementation class RecommendUpdateFormServlet
  */
-@WebServlet("/detail.re")
-public class RecommendDetailServlet extends HttpServlet {
+@WebServlet("/updateForm.re")
+public class RecommendUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendDetailServlet() {
+    public RecommendUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,6 +30,7 @@ public class RecommendDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int rno = Integer.parseInt(request.getParameter("rno"));
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
@@ -37,9 +38,9 @@ public class RecommendDetailServlet extends HttpServlet {
 		
 		request.setAttribute("r", r);
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("pageTitle", "추천코스 상세조회");
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendDetailView.jsp").forward(request, response);
-	
+		request.setAttribute("pageTitle", "추천코스 글 수정");
+		
+		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendUpdateForm.jsp").forward(request, response);;
 	}
 
 	/**

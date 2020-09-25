@@ -1,27 +1,26 @@
-package com.kh.recommend.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recommend.model.service.RecommendService;
-import com.kh.recommend.model.vo.Recommend;
+import com.kh.admin.model.service.AdminService;
+import com.kh.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class RecommendDetailServlet
+ * Servlet implementation class AdminMyPageServlet
  */
-@WebServlet("/detail.re")
-public class RecommendDetailServlet extends HttpServlet {
+@WebServlet("/myPage.ad")
+public class AdminMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendDetailServlet() {
+    public AdminMyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +29,16 @@ public class RecommendDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rno = Integer.parseInt(request.getParameter("rno"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
 		
-		Recommend r = new RecommendService().selectRecommend(rno);
+		Admin ad = new AdminService().selectAdmin(adminNo);
 		
-		request.setAttribute("r", r);
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("pageTitle", "추천코스 상세조회");
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendDetailView.jsp").forward(request, response);
-	
+		request.setAttribute("ad", ad);
+		request.setAttribute("pageTitle", "개인정보");
+		
+		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminMyPage.jsp").forward(request, response);
+		
 	}
 
 	/**

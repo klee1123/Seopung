@@ -54,4 +54,10 @@
 		  FROM TB_MEMBER
 		 WHERE USER_ID = ?    
 	</entry>
+	<entry key="nickCheck">
+		SELECT
+		       COUNT(*)
+		  FROM TB_MEMBER
+		 WHERE USER_NICK = ?    
+	</entry>
 </properties>

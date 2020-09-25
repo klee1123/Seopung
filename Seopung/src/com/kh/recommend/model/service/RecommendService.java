@@ -1,7 +1,6 @@
 package com.kh.recommend.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -52,11 +51,72 @@ public class RecommendService {
 		
 		int result = new RecommendDao().insertRecommend(conn, r);
 		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
 		close(conn);
 		
 		return result;
 	}
 
+	
+	/**
+	 * 3. 추천코스 상세정보 조회용 서비스
+	 * @param rno		상세조회요청한 게시글 번호
+	 * @return			행당 게시글 정보가 담겨있는 Recommend객체
+	 */
+	public Recommend selectRecommend(int rno) {
+		Connection conn = getConnection();
+		
+		Recommend r = new RecommendDao().selectRecommend(conn, rno);
+		
+		close(conn);
+		
+		return r;
+	}
+	
+	
+	/**
+	 * 4. 추천코스 게시글 수정용 서비스
+	 * @param r		수정된 내용이 담긴 Recommend 객체
+	 * @return		처리된 행 수
+	 */
+	public int updateRecommend(Recommend r) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().updateRecommend(conn, r);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 * 5. 추천코스 게시글 삭제용 서비스
+	 * @param rno		삭제할 글 번호
+	 * @return			처리된 행 수
+	 */
+	public int deleteRecommend(int rno) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().deleteRecommend(conn, rno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 }
 
 

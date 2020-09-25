@@ -46,7 +46,7 @@ public class AdminUpdateServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "관리자 수정 성공");
-			response.sendRedirect(request.getContextPath() + "/detail.ad?adminNo=" + adminNo);
+			response.sendRedirect(request.getContextPath() + "/myPage.ad?adminNo=" + adminNo);
 			
 		}else {
 			request.setAttribute("errorMsg", "관리자 수정 실패");

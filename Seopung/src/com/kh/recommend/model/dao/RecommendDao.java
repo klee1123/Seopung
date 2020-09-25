@@ -125,6 +125,97 @@ public class RecommendDao {
 		
 		return result;
 	}
+	
+	
+	public Recommend selectRecommend(Connection conn, int rno) {
+		// select문 => 한 행 조회
+		Recommend r = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new Recommend();
+				r.setRecommendNo(rno);
+				r.setRecommendTitle(rset.getString("recommend_title"));
+				r.setRecommendContent(rset.getString("recommend_content"));
+				r.setRecommendWriter(rset.getString("admin_id"));
+				r.setEnrollDate(rset.getDate("recommend_enroll"));
+				r.setCount(rset.getInt("recommend_count"));
+				r.setLike(rset.getInt("recommend_like"));
+				r.setThumbnailPath(rset.getString("RECOMMEND_THUMB"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
+	}
+	
+	
+	public int updateRecommend(Connection conn, Recommend r) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, r.getRecommendTitle());
+			pstmt.setString(2, r.getRecommendContent());
+			pstmt.setString(3, r.getThumbnailPath());
+			pstmt.setInt(4, r.getRecommendNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteRecommend(Connection conn, int rno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
 
 

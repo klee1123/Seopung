@@ -46,4 +46,12 @@ public class MemberService {
 		
 		return count;
 	}
+	
+	public int nickCheck(String checkNick) {
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().nickCheck(conn, checkNick);
+		close(conn);
+		return count;
+	}
 }

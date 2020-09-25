@@ -1,34 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.recommend.model.vo.Recommend"%>
+<%
+	Recommend r = (Recommend)request.getAttribute("r");
+	int currentPage = (int)request.getAttribute("currentPage");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-	crossorigin="anonymous"></script>
-
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-	crossorigin="anonymous"></script>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <style>
 .outer {
-	width: 800px;
+	width: 900px;
 	margin: auto;
 }
 </style>
@@ -40,38 +27,37 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">추천코스 글 수정</h1>
-
+		-->
 		<br>
 
 		<div class="outer">
-			<form action="enroll.bo" method="post">
-
+			<form action="<%=contextPath %>/update.re?currentPage=<%=currentPage%>" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="rno" value="<%= r.getRecommendNo()%>">
 				<input type="text" name="title" style="width: 100%;"
-					placeholder="사용자가입력한제목입니다." class="form-control form-control" required>
+					value="<%= r.getRecommendTitle() %>" class="form-control form-control" required>
 				<br>
-				<textarea id="summernote" name="content" required></textarea>
+				<textarea id="summernote" name="content" required><%=r.getRecommendContent()%></textarea>
 
 				<br>
 				<button type="button" id="thumbBtn"
 					class="btn btn-outline-secondary btn-sm">썸네일 사진첨부</button>
-				<img width="140" height="140" id="thumbPreview"> <input
-					type="file" id="thumbnail" name="thumbnail"
-					onchange="loadImage(this)" required> <br>
+				<img width="140" height="140" id="thumbPreview" src="<%=contextPath %>/<%=r.getThumbnailPath() %>"> 
+				<input type="file" id="thumbnail" name="thumbnail"
+					onchange="loadImage(this)"> <br>
 				<br>
 				<br>
 
 				<div align="center">
-					<button type="button" class="btn btn-secondary">취소</button>
-					<button type="submit" class="btn btn-primary">저장</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back();">취소</button>
+					<button type="submit" class="btn btn-primary">수정</button>
 				</div>
 			</form>
 			<script>
 				$('#summernote').summernote({
-					placeholder : '사용자가 작성한 내용입니다',
 					tabsize : 2,
-					height : 400
+					height : 450
 				});
 
 				$(function() {
@@ -93,7 +79,7 @@
 							$("#thumbPreview").attr("src", e.target.result);
 						};
 					} else {
-						$("#thumbPreview").attr("src", null);
+						$("#thumbPreview").attr("src", "<%=contextPath %>/<%=r.getThumbnailPath() %>");
 					}
 				};
 			</script>
