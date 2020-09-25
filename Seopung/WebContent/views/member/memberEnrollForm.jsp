@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%! public int getRandom(){
+	int random = 0;
+	random = (int)Math.floor((Math.random()*(99999-10000 +1))) +10000;
+	return random;
+	}
+	%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,7 +150,8 @@ input:placeholder {
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일</th>
 					<td><input type="email" name="email" required
 						placeholder="&nbsp이메일"></td>
-					<td><button type="button">인증번호 발송</button></td>
+					<td><button type="button" onclick="send();">인증번호 발송</button></td>
+						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom() %>">					
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일 인증</th>
@@ -156,7 +165,25 @@ input:placeholder {
 		</fieldset>
 	</form>
 	</div>
+	
+	<form action="<%=contextPath %>/send" method="post" id="form1">
+	<table>
+		<tr>
+			<td>
+				<input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요.">
+			</td>
+			<td>
+				<input id="submit" type="submit" value="인증번호발송">
+			</td>
+			<td>
+				<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
+			</td>
+		</tr>
+	</table>
+		
+	</form>
 	<script>
+		
 		var regI =/^[a-z0-9]{4,12}$/i;
 		function idCheck(){
 			var $userId = $("#join2 input[name=userId]");
