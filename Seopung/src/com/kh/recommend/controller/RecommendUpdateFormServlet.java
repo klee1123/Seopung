@@ -32,10 +32,12 @@ public class RecommendUpdateFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int rno = Integer.parseInt(request.getParameter("rno"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		Recommend r = new RecommendService().selectRecommend(rno);
 		
 		request.setAttribute("r", r);
+		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageTitle", "추천코스 글 수정");
 		
 		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendUpdateForm.jsp").forward(request, response);;

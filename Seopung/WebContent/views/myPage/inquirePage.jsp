@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>1:1문의</title>
-<link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-<script src="../../../resources/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="../.resources/css/bootstrap.min.css">
+<script src="../../resources/js/jquery-3.5.1.min.js"></script>
 <style>
        
        .inquirePage{
@@ -27,8 +28,8 @@
     </style>
 </head>
 <body>
-	<%@ include file="../../common/menubar.jsp" %>
-	<%@ include file="../common/myPageSidebar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="common/myPageSidebar.jsp" %>
 	
 	<div class="myContent">
 	
@@ -37,86 +38,76 @@
             <hr>
         
         <div class="inquire">
-            <button class="btn btn-secondary btn-sm">삭제</button>
+            <button type="button" id="deleteIq" class="btn btn-secondary">삭제</button>
             <br><br>
             <table id="inquireTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
                         <th width="70"><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
                         <th width="400">제목</th>
-                        <th width="100">작성자</th>
-                        <th width="150">작성일</th>
+                        <th width="100">내용</th>
                         <th width="100">처리상태</th>
                     </tr>
                 </thead>
                 <tbody>
+                	
                     <tr align="center">
-                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                        <td>제목 넣을 칸</td>
-                        <td>이름</td>
-                        <td>20.08.15</td>
-                        <td>처리상태 </td>
+                        <td><input type="checkbox" id="chk" name="chk" value="1">&nbsp;&nbsp; 1</td>
+                        <td id="iqTitle">제목</td>
+                        <td>20-08-15</td>
+                        <td>처리상태</td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk2">&nbsp;&nbsp;2</td>
-                        <td>제목 넣을 칸</td>
-                        <td>이름</td>
+                        <td><input type="checkbox" id="chk" name="chk" value="2">&nbsp;&nbsp;2</td>
+                        <td id="iqTitle">제목 넣을 칸</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk3">&nbsp;&nbsp;3</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;3</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk4">&nbsp;&nbsp;4</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;4</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk5">&nbsp;&nbsp;5</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;5</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;6</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;6</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;7</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;7</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;8</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;8</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;9</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;9</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
                     <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6">&nbsp;&nbsp;10</td>
+                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;10</td>
                         <td>제목 넣을 칸</td>
-                        <td>이름</td>
                         <td>20-08-15</td>
                         <td>처리상태 </td>
                     </tr>
@@ -148,15 +139,35 @@
         // 체크박스 전체선택 및 해제
         $(function(){
             $("#chk_all").click(function(){
+            	// chk_all 클릭되었으면
                 if($("#chk_all").prop("checked")){
+                	// input태크의 아이디가 chk인 것을 찾아서 checked옵션을 true로
                     $("input[id=chk]").prop("checked",true);
-
+					//클릭이 안되어있다면
                 }else {
+                	// input태그의 아이디가 chk인 것을 찾아서 checked옵션을 false로 정의
                     $("input[id=chk]").prop("checked",false);
                 }
             });
         });
         
+		$(function(){
+			$("#deleteIq").click(function(){
+				location.href = "<%=contextPath%>/deleteIq.mp?bno=" 
+			});
+		});
+		$(function(){
+	   		$("#iqTitle").click(function(){
+	   			//console.log("클릭됨");
+	   			var nno = $(this).children().eq(0).text();
+	   			
+	   			//console.log(nno);
+	   			// 쿼리스트링
+	   			location.href = "<%=contextPath%>/inquireDetail.mp?bno=" + bno;
+	   			
+	   		});
+	   	});
+	</script>
     </script>
 	<!-- myContent -->
     </div>

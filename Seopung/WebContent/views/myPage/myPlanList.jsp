@@ -31,11 +31,15 @@
             cursor:pointer;
             opacity:0.7;
         }
+        .myContent>a{
+        	text-decoration: none;
+        	color:black;
+        }
     </style>
 </head>
 <body>
-	<%@ include file="../../common/menubar.jsp" %>
-	<%@ include file="../common/myPageSidebar.jsp" %>
+	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="common/myPageSidebar.jsp" %>
 	<div class="myContent">
 	 <div class="myplan" >
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;나의 일정</h1>
@@ -52,8 +56,8 @@
 
             <div class="MakeMap" align="center" >
                 
-                <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
-                <p>여행 만들러 가기</p>
+                <img src="../../resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
+                <p><a href="">여행 만들러 가기</a></p>
             </div>
            
             <!-- 각각 게시판 div -->

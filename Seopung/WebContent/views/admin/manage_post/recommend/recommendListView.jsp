@@ -131,7 +131,7 @@
                     $(this).find("td:eq(2)").css("cursor","pointer");
                   
                     $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/detail.re?rno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/detail.re?currentPage=" + <%=currentPage%> + "&rno=" + $(this).prev().text();
                     });
                   });
 			});
