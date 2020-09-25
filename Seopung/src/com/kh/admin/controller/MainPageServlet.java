@@ -27,6 +27,7 @@ public class MainPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setAttribute("pageTitle", "관리자 페이지");
 		request.getRequestDispatcher("views/admin/common/main.jsp").forward(request, response);
 	
 	}
