@@ -81,15 +81,14 @@ input:placeholder {
 </head>
 <body>
 	<%@include file="../common/menubar.jsp"%>
- <div class="outer"></div>
+	<div class="outer"></div>
 
 	<form align="center" action="<%=contextPath %>/insert.me" id="join"
 		method="post">
 		<span>Seopung</span>
 		<fieldset>
 			<div class="head">서풍 회원가입 정보를 입력해주세요.</div>
-			<br>
-			<br>
+			<br> <br>
 			<div class="head2">
 				<p>*는 필수 입력사항입니다.</p>
 			</div>
@@ -97,23 +96,25 @@ input:placeholder {
 			<table id="join2">
 				<tr>
 					<th>&nbsp;&nbsp;*아이디</th>
-					<td><input type="text" name="userId" required maxlength="12"
+					<td><input type="text" name="userId" id="Id" required maxlength="12" 
 						placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
 					<td>
-						<button type="button" onclick="idCheck();" >중복체크</button>
+						<button type="button" onclick="idCheck();">중복체크</button>
 					</td>
 				</tr>
 				
 				<tr>
+					
 					<th>&nbsp;&nbsp;*비밀번호</th>
-					<td><input type="password" name="userPwd" required id="pwd"
+					<td><input type="password" name="userPwd" required id="pwd" 
 						maxlength="15" placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 					<td></td>
 				</tr>
+				<div id="validPwdArea" style="position:absolute; margin-top:95px; margin-left:120px; color:red;"></div>
 				<tr>
 					<th>&nbsp;&nbsp;*비밀번호 확인</th>
-					<td><input type="password" required maxlength="15" id="checkPwd"
-						placeholder="&nbsp; 비밀번호 확인"></td>
+					<td><input type="password" required maxlength="15"
+						id="checkPwd" placeholder="&nbsp; 비밀번호 확인"></td>
 					<td></td>
 				</tr>
 				<tr>
@@ -126,7 +127,7 @@ input:placeholder {
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*닉네임</th>
 					<td><input type="text" name="nickName" required
 						placeholder="&nbsp 영문, 숫자, 한글 포함 10자"></td>
-					<td></td>
+					<td><button type="button" onclick="nickCheck();">중복체크</button></td>
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*생년월일</th>
@@ -141,7 +142,7 @@ input:placeholder {
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일</th>
 					<td><input type="email" name="email" required
 						placeholder="&nbsp이메일"></td>
-					<td><button>인증번호 발송</button></td>
+					<td><button type="button">인증번호 발송</button></td>
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일 인증</th>
@@ -150,12 +151,13 @@ input:placeholder {
 				</tr>
 			</table>
 
-			<button type="submit" disabled id="joinBtn" onclick="joinBtn();")>회원가입</button>
+			<button type="submit" disabled id="joinBtn" onclick="joinBtn();">회원가입</button>
 			<button type="reset">취소</button>
 		</fieldset>
 	</form>
 	</div>
 	<script>
+		var regI =/^[a-z0-9]{4,12}$/i;
 		function idCheck(){
 			var $userId = $("#join2 input[name=userId]");
 			$.ajax({
@@ -163,6 +165,8 @@ input:placeholder {
 				data:{checkId:$userId.val()},
 				type:"get",
 				success:function(result){
+					if(regI.test($userId.val())){
+						
 					if(result == "fail"){
 						alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
 						$userId.val("");
@@ -176,12 +180,48 @@ input:placeholder {
 						}
 					}
 					
+					}else{
+						alert("유효한 아이디가 아닙니다.");
+					}
 				},
 				error:function(){
 					console.log("통신실패");
 				}
 			});
 		}
+		var regN = /^[a-z0-9가-힣]{1,10}$/i;
+		function nickCheck(){
+			var $nickName = $("#join2 input[name=nickName]");
+			$.ajax({
+				url:"<%=contextPath%>/nickCheck.me",
+				data:{checkNick:$nickName.val()},
+				type:"get",
+				success:function(result){
+					
+					if(regN.test($nickName.val())){
+						if(result == "fail"){
+							alert("이미 존재하는 닉네임입니다.");
+							$nickName.val("");
+							$nickName.focus();
+						}else{
+							if(confirm("사용가능한 닉네임입니다. 사용하시겠습니까?")){
+								$nickName.attr("readonly", true);
+							}else{
+								$nickName.focus
+							}
+						}
+					}else{
+						alert("유효한 닉네임이아닙니다.")
+					}
+				},
+				error:function(){
+					
+				}
+			})
+		}
+		
+		
+		
 			$(function(){
 				var pwd = $("#pwd");
 				var checkPwd= $("#checkPwd");
@@ -193,8 +233,21 @@ input:placeholder {
 					}
 				});
 			});
+		
+			var regP = /^[a-z0-9!@#$%^&*]{8,15}$/i;
+		$(function(){
+			$("#pwd").blur(function(){
+				console.log($("#pwd").val());
+				if(regP.test($("#pwd").val())){
+					$("#validPwdArea").html("");
+				}else{
+					$("#validPwdArea").html("유효한 비밀번호가 아닙니다");
+				}
+				
+			});
 			
-	
+		});
 	</script>
+
 </body>
 </html>
