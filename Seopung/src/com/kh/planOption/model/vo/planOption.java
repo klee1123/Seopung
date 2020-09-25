@@ -20,12 +20,38 @@ public class planOption {
 	private String status;				// 이동수단
 	private int planRecommend;			// 추천수
 	private int planScrapCount;			// 스크랩수
-	private int userNo;					// 회원번호
 	
 	
-	
+	public planOption() {
+		
+	}
 
-	public planOption() {}
+	
+	public planOption(int planNo, String planTitle, Date planSdate, Date planEdate, String planAge, String planAcc,
+			String gender, String phone, String email, Date enrollDate, Date modifyDate, String userIntro,
+			String profile, String status, int planRecommend, int planScrapCount) {
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+		this.planAge = planAge;
+		this.planAcc = planAcc;
+		this.gender = gender;
+		this.phone = phone;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.userIntro = userIntro;
+		this.profile = profile;
+		this.status = status;
+		this.planRecommend = planRecommend;
+		this.planScrapCount = planScrapCount;
+	}
+
+
+
+
 
 
 	public int getPlanNo() {
@@ -188,15 +214,6 @@ public class planOption {
 	}
 
 
-	public int getUserNo() {
-		return userNo;
-	}
-
-
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
-	}
-
 	
 	@Override
 	public String toString() {
@@ -204,7 +221,7 @@ public class planOption {
 				+ planEdate + ", planAge=" + planAge + ", planAcc=" + planAcc + ", gender=" + gender + ", phone="
 				+ phone + ", email=" + email + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate
 				+ ", userIntro=" + userIntro + ", profile=" + profile + ", status=" + status + ", planRecommend="
-				+ planRecommend + ", planScrapCount=" + planScrapCount + ", userNo=" + userNo + "]";
+				+ planRecommend + ", planScrapCount=" + planScrapCount + "]";
 	}
 
 	
