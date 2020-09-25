@@ -12,7 +12,6 @@
                     width:1200px;
                     height: 1000px;
                     margin:auto;
-                    margin-top: 150px;
     
                 }
     
@@ -105,8 +104,8 @@
             <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
     
     
-    </head>
-    	 <%@include file="../common/menubar.jsp"%>
+        </head>
+    
         <body>
             <div class="wrap">
     
@@ -114,24 +113,24 @@
                 
     
     
-                <form id="plan_page_01" action="" method="">
+                <form id="plan_page_01" action="/test1.do" method="GET">
                     <div class="plan_sec">
                         <div class="so_title">
                             일정만들기 < 1 / 2 >
                         </div>
                         <div class="so_title">
-                            <input type="text" style="width:700px" placeholder="일정 제목">
+                            <input type="text" style="width:700px" name="plan_title" id="" placeholder="일정 제목">
                         </div>
                     </div>
                     <div class="plan_sec" style="margin-top: 0px;">
-                        <div class="so_title">
+                        <div class="">
                             일정 날짜
                         </div>
                         <div class=""> <!--일정 기간 버튼 내용-->
                             <table>
                                 <tr>
                                     <td style="width: 350px;">
-                                        <div class="" id="">
+                                        <div class="">
                                             <script type="text/javascript">
                     
                                             $(function(){
@@ -143,13 +142,13 @@
                                             });
                                             </script>
                     
-                                            <input type="text" name="date" id="plan_sdate" size="12">
+                                            <input type="text" name="plan_sdate" id="plan_sdate" size="12">
                     
                                             <input type="button" value="시작일" onclick="$('#plan_sdate').datepicker('show');" />
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="" id="">
+                                        <div class="">
                                             <script type="text/javascript">
                     
                                             $(function(){
@@ -161,7 +160,7 @@
                                             });
                                             </script>
                     
-                                            <input type="text" name="date" id="plan_edate" size="12">
+                                            <input type="text" name="plan_edate" id="plan_edate" size="12">
                     
                                             <input type="button" value="종료일" onclick="$('#plan_edate').datepicker('show');" />
                                         </div>
@@ -179,22 +178,22 @@
                         </div>
                         <div class="plan_type" >
                             <div class="" >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션1" checked="checked"><span>남자끼리</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="남자끼리" checked="checked"><span>남자끼리</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>여자끼리</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="여자끼리"><span>여자끼리</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>가족</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="가족"><span>가족</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>커플/신혼</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="커플"><span>커플/신혼</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>남자혼자</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="남자혼자"><span>남자혼자</span></label>
                             </div>
                             <div >
-                                <label class="box-radio-input"><input type="radio" name="cp_item" value="옵션2"><span>여자혼자</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_type" value="여자혼자"><span>여자혼자</span></label>
                             </div>
                         </div>
                     </div>
@@ -205,22 +204,22 @@
                         </div>
                         <div class="plan_type">
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1" checked="checked"><span>10대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="10" checked="checked"><span>10대</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>20대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="20"><span>20대</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>30대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="30"><span>30대</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>40대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="40"><span>40대</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>50대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="50"><span>50대</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>60대</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_age" value="60"><span>60대</span></label>
                             </div>
                         </div>
                     </div>
@@ -230,22 +229,22 @@
                         </div>
                         <div class="plan_type">
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1" checked="checked"><span>도보</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="도보" checked="checked"><span>도보</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>택시</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="택시"><span>택시</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>대중교통</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="대중교통"><span>대중교통</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>전동킥보드</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="전동킥보드"><span>전동킥보드</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>자가용</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="자가용"><span>자가용</span></label>
                             </div>
                             <div class="">
-                                <label class="box-check-input"><input type="checkbox" name="cp_item" value="옵션1"><span>자전거</span></label>
+                                <label class="box-check-input"><input type="checkbox" name="plan_trans" value="자전거"><span>자전거</span></label>
                             </div>
                         </div>
                     </div>
@@ -256,10 +255,10 @@
                         </div>
                         <div class="plan_type">
                             <div class="">
-                                <label class="box-radio-input"><input type="radio" name="cp_item1" value="옵션2" checked="checked"><span>동행</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_acc" value="y" checked="checked"><span>동행</span></label>
                             </div>
                             <div class="">
-                                <label class="box-radio-input"><input type="radio" name="cp_item1" value="옵션2"><span>비동행</span></label>
+                                <label class="box-radio-input"><input type="radio" name="plan_acc" value="n"><span>비동행</span></label>
                             </div>
                         </div>
     
@@ -271,7 +270,7 @@
                         </div>
                         <div class="plan_type">
                             <div class="">
-                                <input type="text" style="width:220px; height: 30px;" placeholder="예산금액">
+                                <input type="text" style="width:220px; height: 30px;" name="plan_budget" placeholder="예산금액">
                             </div>
                         </div>
                     </div>
@@ -286,10 +285,10 @@
                                         </div>
                                         <div class="plan_type">
                                             <div class="">
-                                                <label class="box-radio-input"><input type="radio" name="cp_item2" value="옵션2" checked="checked"><span>허용</span></label>
+                                                <label class="box-radio-input"><input type="radio" name="plan_scrap_yn" value="y" checked="checked"><span>허용</span></label>
                                             </div>
                                             <div class="">
-                                                <label class="box-radio-input"><input type="radio" name="cp_item2" value="옵션2"><span>비허용</span></label>
+                                                <label class="box-radio-input"><input type="radio" name="plan_scrap_yn" value="n"><span>비허용</span></label>
                                             </div>
                                         </div>
                                     </div>
@@ -301,10 +300,10 @@
                                         </div>
                                         <div class="plan_type">
                                             <div class="">
-                                                <label class="box-radio-input"><input type="radio" name="cp_item3" value="옵션2" checked="checked"><span>공개</span></label>
+                                                <label class="box-radio-input"><input type="radio" name="plan_private" value="y" checked="checked"><span>공개</span></label>
                                             </div>
                                             <div class="">
-                                                <label class="box-radio-input"><input type="radio" name="cp_item3" value="옵션2"><span>비공개</span></label>
+                                                <label class="box-radio-input"><input type="radio" name="plan_private" value="n"><span>비공개</span></label>
                                             </div>
                                         </div>
                                     </div>
@@ -315,7 +314,7 @@
                       
                     <div class="plan_sec">
                         <div>
-                            <textarea name="" id="" style="margin-top: 10px; resize: none; width: 720px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
+                            <textarea name="plan_memo" style="margin-top: 10px; resize: none; width: 720px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
                         </div>
                         <div style="margin-top: 10px;">
                             <input type="text" style="width:720px" placeholder="해시태그">
@@ -324,16 +323,16 @@
     
                     <div class="plan_sec" style="margin-top: 370px;">
                         <div style="float: left;">
-                            <button class="bbtn" type="button">임시 저장</button>
+                            <button class="bbtn" type="submit" name="plan_temp" value="y">임시 저장</button>
                         </div>
                     
                         <div style="text-align: right;">
-                            <button class="bbtn" type="button">다음 페이지</button>
+                            <button class="bbtn" type="submit" name="plan_temp" value="n">다음 페이지</button>
+                          
                         </div>
                     </div>
                 </form>
             </div>
-             <%@include file="../common/footer.jsp"%>
         </body>
     
     </html>

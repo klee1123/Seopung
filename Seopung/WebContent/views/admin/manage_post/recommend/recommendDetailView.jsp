@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.recommend.model.vo.Recommend"%>
+<%
+	Recommend r = (Recommend)request.getAttribute("r");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,33 +56,33 @@
 		<div class="outer">
 
 			<div id="content_1">
-				<div style="width: 740px; font-size: 18px;">제목입니다</div>
-				<div style="text-align: right;">2020.09.09 20:00</div>
+				<div style="width: 740px; font-size: 18px;"><%= r.getRecommendTitle() %></div>
+				<div style="text-align: right;"><%=r.getEnrollDate() %></div>
 			</div>
 
 			<div id="content_2">
-				<div style="width: 725px;">관리자</div>
-				<div>조회수 5</div>
-				<div>추천수 3</div>
+				<div style="width: 725px;"><%= r.getRecommendWriter() %></div>
+				<div>조회수 <%=r.getCount() %></div>
+				<div>추천수 <%=r.getLike() %></div>
 			</div>
 
 			<hr>
 
-			<div id="content_3">내용입니다.</div>
+			<div id="content_3"><%= r.getRecommendContent() %></div>
 			
             <hr>
 
 			<div style="padding-left: 10px;">
-              <p>썸네일 사진</p><img src="" width="200px;" height="150px;"> 
+              <p>썸네일 사진</p><img src="<%=contextPath %>/<%=r.getThumbnailPath() %>" width="200px;" height="150px;"> 
             </div>
 
 			<hr>
 			<br>
 
 			<div align="center">
-				<button class="btn btn-secondary">취소</button>
-				<button class="btn btn-primary">수정</button>
-				<button class="btn btn-danger">삭제</button>
+				<button class="btn btn-secondary" onclick="history.back();">취소</button>
+				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/updateForm.re?rno=<%=r.getRecommendNo()%>';">수정</button>
+				<button class="btn btn-danger" onclick="location.href='<%=contextPath%>/delete.re?rno=<%=r.getRecommendNo()%>';">삭제</button>
 			</div>
 
 			<br>

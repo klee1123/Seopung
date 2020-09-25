@@ -36,7 +36,6 @@
 <link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
-
 <script>
 	$(function(){
 
@@ -60,7 +59,7 @@
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - 로고 -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<%=contextPath%>/adminPage">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-fw fa-cog"></i>
         </div>
@@ -178,7 +177,7 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<%=contextPath%>/detail.ad?adminNo=1">
+                <a class="dropdown-item" href="<%=contextPath%>/myPage.ad?adminNo=1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   프로필
                 </a>
