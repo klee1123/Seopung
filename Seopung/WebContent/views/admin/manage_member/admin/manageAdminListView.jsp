@@ -121,7 +121,7 @@
 						<td width=""><span>총 관리자 수 &nbsp;&nbsp;&nbsp;<b
 								style="color: red"><%= listCount %></b> 명
 						</span></td>
-						<td width="720px;">
+						<td width="750px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
 								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
@@ -143,7 +143,7 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.ad'">등록</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.ad';">등록</button>
 						</td>
 					</tr>
 				</table>

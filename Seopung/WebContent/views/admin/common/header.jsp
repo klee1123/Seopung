@@ -80,7 +80,7 @@
         </a>
         <div id="collapseUtiliti" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="">회원목록</a>
+            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.me?currentPage=1">회원목록</a>
             <a class="collapse-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1">관리자목록</a>
             <a class="collapse-item" href="">블랙리스트</a>
           </div>

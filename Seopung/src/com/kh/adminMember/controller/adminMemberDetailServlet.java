@@ -1,26 +1,27 @@
-package com.kh.admin.controller;
+package com.kh.adminMember.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.adminMember.model.service.MemberService;
+import com.kh.adminMember.model.vo.Member;
 
 /**
- * Servlet implementation class AdminMyPageServlet
+ * Servlet implementation class adminMemberDetailServlet
  */
-@WebServlet("/adminPage/myPage.ad")
-public class AdminMyPageServlet extends HttpServlet {
+@WebServlet("/adminPage/detail.me")
+public class adminMemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMyPageServlet() {
+    public adminMemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,19 @@ public class AdminMyPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		Admin ad = new AdminService().selectAdmin(adminNo);
+		Member m = new MemberService().selectMember(userNo);
 		
-		if(ad!=null) {
-			request.setAttribute("ad", ad);
-			request.setAttribute("pageTitle", "개인정보");
+		if(m!=null) {
+			request.setAttribute("m", m);
+			request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberDetailView.jsp").forward(request, response);
 			
-			request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminMyPage.jsp").forward(request, response);
 		}else {
-			request.setAttribute("errorMsg", "프로필 조회 실패");
+			request.setAttribute("errorMsg", "회원 상세조회 실패");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-		
+	
 	}
 
 	/**
