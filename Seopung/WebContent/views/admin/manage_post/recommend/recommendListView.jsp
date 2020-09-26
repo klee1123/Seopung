@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.Recommend, com.kh.common.PageInfo"%>
+<%@ page import="java.util.ArrayList, com.kh.adminRecommend.model.vo.Recommend, com.kh.common.PageInfo"%>
 <%
 
 	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");

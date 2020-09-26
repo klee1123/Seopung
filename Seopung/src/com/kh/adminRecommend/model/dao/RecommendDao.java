@@ -1,4 +1,4 @@
-package com.kh.recommend.model.dao;
+package com.kh.adminRecommend.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
 
@@ -8,12 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.PageInfo;
-import com.kh.recommend.model.vo.Recommend;
 
 public class RecommendDao {
 	

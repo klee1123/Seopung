@@ -1,4 +1,4 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recommend.model.service.RecommendService;
-import com.kh.recommend.model.vo.Recommend;
+import com.kh.adminRecommend.model.service.RecommendService;
 
 /**
- * Servlet implementation class RecommendDetailServlet
+ * Servlet implementation class RecommendDeleteServlet
  */
-@WebServlet("/adminPage/detail.re")
-public class RecommendDetailServlet extends HttpServlet {
+@WebServlet("/adminPage/delete.re")
+public class RecommendDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendDetailServlet() {
+    public RecommendDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,25 +29,19 @@ public class RecommendDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rno = Integer.parseInt(request.getParameter("rno"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		int result = new RecommendService().increaseCount(rno);
+		String[] rno = request.getParameterValues("rno");
+		
+		int result = new RecommendService().deleteRecommend(rno);
 		
 		if(result>0) {
-			
-			Recommend r = new RecommendService().selectRecommend(rno);
-			
-			request.setAttribute("r", r);
-			request.setAttribute("currentPage", currentPage);
-			request.setAttribute("pageTitle", "추천코스 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendDetailView.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsg", "추천코스 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.re?currentPage=1");
 			
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.setAttribute("errorMsg", "추천코스 삭제 실패");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-		
 	}
 
 	/**

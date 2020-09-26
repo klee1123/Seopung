@@ -1,23 +1,27 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.adminRecommend.model.service.RecommendService;
+import com.kh.adminRecommend.model.vo.Recommend;
+
 /**
- * Servlet implementation class RecommendEnrollFormServlet
+ * Servlet implementation class RecommendUpdateFormServlet
  */
-@WebServlet("/adminPage/enrollForm.re")
-public class RecommendEnrollFormServlet extends HttpServlet {
+@WebServlet("/adminPage/updateForm.re")
+public class RecommendUpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollFormServlet() {
+    public RecommendUpdateFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +31,16 @@ public class RecommendEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("pageTitle", "추천코스 글 등록");
-		request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendEnrollForm.jsp").forward(request, response);
-	
+		int rno = Integer.parseInt(request.getParameter("rno"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		Recommend r = new RecommendService().selectRecommend(rno);
+		
+		request.setAttribute("r", r);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("pageTitle", "추천코스 글 수정");
+		
+		request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendUpdateForm.jsp").forward(request, response);;
 	}
 
 	/**

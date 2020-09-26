@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.recommend.model.vo.Recommend"%>
+	pageEncoding="UTF-8" import="com.kh.adminRecommend.model.vo.Recommend"%>
 <%
 	Recommend r = (Recommend)request.getAttribute("r");
 	int currentPage = (int)request.getAttribute("currentPage");

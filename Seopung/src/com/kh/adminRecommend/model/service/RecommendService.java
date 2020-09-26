@@ -1,13 +1,16 @@
-package com.kh.recommend.model.service;
+package com.kh.adminRecommend.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.recommend.model.dao.RecommendDao;
+import com.kh.adminRecommend.model.dao.RecommendDao;
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.PageInfo;
-import com.kh.recommend.model.vo.Recommend;
 
 public class RecommendService {
 	

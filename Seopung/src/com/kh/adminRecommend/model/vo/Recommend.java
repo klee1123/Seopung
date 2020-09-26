@@ -1,4 +1,4 @@
-package com.kh.recommend.model.vo;
+package com.kh.adminRecommend.model.vo;
 
 import java.sql.Date;
 
