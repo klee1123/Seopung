@@ -8,7 +8,7 @@ public class PlanOption {
 	private String planTitle;			// 일정제목
 	private String planSdate;			// 시작일 
 	private String planEdate;			// 종료일
-	private String[] planAge;			// 연령대
+	private String planAge;				// 연령대
 	private String planAcc;				// 동행유무
 	private String planBudget;			// 예산금액
 	private String planScrapYn;			// 스크랩허용
@@ -17,35 +17,13 @@ public class PlanOption {
 	private String planHashtag;			// 해시태그
 	private String planTemp;			// 임시저장
 	private String planType;			// 여행유형
-	private String[] planTrans;			// 이동수단
+	private String planTrans;			// 이동수단
 	private int planRecommend;			// 추천수
 	private int planScrapCount;			// 스크랩수
 	
 	
 	public PlanOption() {
 		
-	}
-
-	public PlanOption(int planNo, String planTitle, String planSdate, String planEdate, String[] planAge, String planAcc,
-			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
-			String planTemp, String planType, String[] planTrans, int planRecommend, int planScrapCount) {
-		super();
-		this.planNo = planNo;
-		this.planTitle = planTitle;
-		this.planSdate = planSdate;
-		this.planEdate = planEdate;
-		this.planAge = planAge;
-		this.planAcc = planAcc;
-		this.planBudget = planBudget;
-		this.planScrapYn = planScrapYn;
-		this.planPrivate = planPrivate;
-		this.planMemo = planMemo;
-		this.planHashtag = planHashtag;
-		this.planTemp = planTemp;
-		this.planType = planType;
-		this.planTrans = planTrans;
-		this.planRecommend = planRecommend;
-		this.planScrapCount = planScrapCount;
 	}
 
 
@@ -89,13 +67,13 @@ public class PlanOption {
 	}
 
 
-	public String[] getPlanAge() {
+	public String getPlanAge() {
 		return planAge;
 	}
 
 
-	public void setPlanAge(String[] plan_age) {
-		this.planAge = plan_age;
+	public void setPlanAge(String planAge) {
+		this.planAge = planAge;
 	}
 
 
@@ -179,13 +157,13 @@ public class PlanOption {
 	}
 
 
-	public String[] getPlanTrans() {
+	public String getPlanTrans() {
 		return planTrans;
 	}
 
 
-	public void setPlanTrans(String[] plan_trans) {
-		this.planTrans = plan_trans;
+	public void setPlanTrans(String planTrans) {
+		this.planTrans = planTrans;
 	}
 
 
@@ -208,9 +186,6 @@ public class PlanOption {
 		this.planScrapCount = planScrapCount;
 	}
 
-
-	
-	
 
 
 }

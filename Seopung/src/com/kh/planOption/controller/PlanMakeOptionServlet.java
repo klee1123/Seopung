@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.planOption.model.service.PlanOptionService;
 import com.kh.planOption.model.vo.PlanOption;
@@ -39,8 +41,20 @@ public class PlanMakeOptionServlet extends HttpServlet {
 		String plan_edate = request.getParameter("plan_edate");
 		String plan_type = request.getParameter("plan_type");
 		
-		String[] plan_age = request.getParameterValues("plan_age");
-		String[] plan_trans = request.getParameterValues("plan_trans");
+		String[] plan_ages = request.getParameterValues("plan_age");
+		String plan_age = "";
+		if(plan_age != null) {
+			plan_age = String.join(",", plan_age);
+		}
+		
+		
+		
+		String[] plan_transs = request.getParameterValues("plan_trans");
+		String plan_trans = "";
+		if(plan_trans != null) {
+			plan_trans = String.join(",", plan_trans);
+		}
+		
 		
 		String plan_acc = request.getParameter("plan_acc");
 		String plan_budget = request.getParameter("plan_budget");
@@ -61,6 +75,34 @@ public class PlanMakeOptionServlet extends HttpServlet {
 		po.setPlanPrivate(plan_private);
 		po.setPlanMemo(plan_memo);
 		po.setPlanTemp(plan_temp);
+		
+		
+		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
+		int result = new PlanOptionService().insertPlanOption(po);
+		
+		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
+		if(result > 0) { // 회원가입 성공  => 인덱스페이지
+			
+			// session영역에 alert 띄워줄 메세지담기
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 저장 됐습니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/views/plan/plan_make_map.jsp");
+			
+		}else { // 회원가입 실패
+			
+			request.setAttribute("errorMsg", "실패");
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/plan/plan_make_map.jsp");
+			view.forward(request,response);
+			
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 	}
