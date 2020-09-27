@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.recommend.model.vo.Recommend"%>
+	pageEncoding="UTF-8" import="com.kh.adminRecommend.model.vo.Recommend"%>
 <%
 	Recommend r = (Recommend)request.getAttribute("r");
 	int currentPage = (int)request.getAttribute("currentPage");
@@ -33,7 +33,7 @@
 		<br>
 
 		<div class="outer">
-			<form action="<%=contextPath %>/update.re?currentPage=<%=currentPage%>" method="post" enctype="multipart/form-data">
+			<form action="<%=contextPath %>/adminPage/update.re?currentPage=<%=currentPage%>" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="rno" value="<%= r.getRecommendNo()%>">
 				<input type="text" name="title" style="width: 100%;"
 					value="<%= r.getRecommendTitle() %>" class="form-control form-control" required>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.recommend.model.vo.Recommend"%>
+	pageEncoding="UTF-8" import="com.kh.adminRecommend.model.vo.Recommend"%>
 <%
 	Recommend r = (Recommend)request.getAttribute("r");
 	int currentPage = (int)request.getAttribute("currentPage");
@@ -81,14 +81,22 @@
 			<br>
 
 			<div align="center">
-				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/list.re?currentPage=<%=currentPage%>';">목록</button>
-				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/updateForm.re?currentPage=<%=currentPage%>&rno=<%=r.getRecommendNo()%>';">수정</button>
-				<button class="btn btn-danger" onclick="location.href='<%=contextPath%>/delete.re?rno=<%=r.getRecommendNo()%>';">삭제</button>
+				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/adminPage/list.re?currentPage=<%=currentPage%>';">목록</button>
+				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/updateForm.re?currentPage=<%=currentPage%>&rno=<%=r.getRecommendNo()%>';">수정</button>
+				<button class="btn btn-danger" onclick="deleteRecommend();">삭제</button>
 			</div>
 
 			<br>
 			<br>
 		</div>
+		
+		<script>
+			function deleteRecommend(){
+				if(confirm("정말 삭제하시겠습니까?")) {
+                	location.href= "<%=contextPath%>/adminPage/delete.re?rno=<%=r.getRecommendNo()%>";
+              	} 
+			}
+		</script>
 
 
 

@@ -13,7 +13,7 @@ import com.kh.admin.model.vo.Admin;
 /**
  * Servlet implementation class AdminMyPageServlet
  */
-@WebServlet("/myPage.ad")
+@WebServlet("/adminPage/myPage.ad")
 public class AdminMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,10 +34,15 @@ public class AdminMyPageServlet extends HttpServlet {
 		
 		Admin ad = new AdminService().selectAdmin(adminNo);
 		
-		request.setAttribute("ad", ad);
-		request.setAttribute("pageTitle", "개인정보");
-		
-		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminMyPage.jsp").forward(request, response);
+		if(ad!=null) {
+			request.setAttribute("ad", ad);
+			request.setAttribute("pageTitle", "개인정보");
+			
+			request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminMyPage.jsp").forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "프로필 조회 실패");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
 		
 	}
 

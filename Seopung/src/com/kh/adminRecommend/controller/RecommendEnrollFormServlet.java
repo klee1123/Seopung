@@ -1,6 +1,7 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class RecommendEnrollFormServlet
  */
-@WebServlet("/enrollForm.re")
+@WebServlet("/adminPage/enrollForm.re")
 public class RecommendEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,7 +29,7 @@ public class RecommendEnrollFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setAttribute("pageTitle", "추천코스 글 등록");
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendEnrollForm.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendEnrollForm.jsp").forward(request, response);
 	
 	}
 

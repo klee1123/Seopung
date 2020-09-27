@@ -1,4 +1,4 @@
-package com.kh.admin.controller;
+package com.kh.adminMember.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.adminMember.model.service.MemberService;
+import com.kh.adminMember.model.vo.Member;
 import com.kh.common.PageInfo;
 
 /**
- * Servlet implementation class AdminListServlet
+ * Servlet implementation class adminMemberListServlet
  */
-@WebServlet("/adminPage/list.ad")
-public class AdminListServlet extends HttpServlet {
+@WebServlet("/adminPage/list.me")
+public class adminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminListServlet() {
+    public adminMemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -73,7 +73,7 @@ public class AdminListServlet extends HttpServlet {
 		}
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
-		listCount = new AdminService().selectListCount(keyfield, keyword, status);
+		listCount = new MemberService().selectListCount(keyfield, keyword, status);
 		
 		pageLimit = 5;
 		
@@ -96,17 +96,17 @@ public class AdminListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Admin> list = new AdminService().selectList(pi, keyfield, keyword, status);
+		ArrayList<Member> list = new MemberService().selectList(pi, keyfield, keyword, status);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("status", status);
-		request.setAttribute("pageTitle", "관리자 목록");
+		request.setAttribute("pageTitle", "회원 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberListView.jsp").forward(request, response);
+	
 	}
 
 	/**

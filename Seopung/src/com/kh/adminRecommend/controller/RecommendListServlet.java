@@ -1,23 +1,22 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.recommend.model.service.RecommendService;
+import com.kh.adminRecommend.model.service.RecommendService;
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.PageInfo;
-import com.kh.recommend.model.vo.Recommend;
 
 /**
  * Servlet implementation class RecommendListServlet
  */
-@WebServlet("/list.re")
+@WebServlet("/adminPage/list.re")
 public class RecommendListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,6 +33,8 @@ public class RecommendListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		
 		// ------------------ 페이징 처리 ------------------------
 		int listCount;		// 현재 총 게시글 갯수
 		int currentPage;	// 현재 페이지 (즉, 요청한 페이지)
@@ -44,9 +45,16 @@ public class RecommendListServlet extends HttpServlet {
 		int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작수
 		int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수
 		
+		// 넘어온 키워드 값 뽑기
+		String keyword;
+		if(request.getParameter("keyword")!=null) {
+			keyword = request.getParameter("keyword");
+		}else {
+			keyword = "";
+		}
+		
 		// * listCount : 총 게시글 갯수
-		listCount = new RecommendService().selectListCount();
-		//System.out.println(listCount); -- 프린트문은 서버에 부담이 되어 버벅이는 현상 생길 수 있음.
+		listCount = new RecommendService().selectListCount(keyword);
 		
 		//  * currentPage : 현재 페이지(요청한 페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -58,55 +66,17 @@ public class RecommendListServlet extends HttpServlet {
 		boardLimit = 10;
 		
 		// * maxPage : 총 페이지 수 (마지막 페이지)
-		/*
-		 *  listCount, boardLimit에 영향을 받음
-		 *  
-		 *   ex) boardLimit : 10이라는 가정 하에
-		 *   
-		 *   총 갯수		boardLimit				maxPage
-		 *    100.0		/		10		=> 10.0			10
-		 *    101.0		/		10		=> 10.1			11
-		 *    105.0		/		10		=> 10.5			11
-		 *    109.0		/		10		=> 10.9			11
-		 *    
-		 *  총게시글갯수(실수) / boardLimit => 올림처리 => maxPage
-		 */
-		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-		
+		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
+		if(listCount != 0) {
+			maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		}else {
+			maxPage=1;
+		}
+
 		// * startPage : 현재 페이지에 보여질 페이징 바의 시작수
-		/*
-		 *  pageLimit, currentPage에 영향을 받음
-		 *  
-		 * ex) pageLimit : 10이라는 가정하에
-		 *     startPage : 1, 11, 21, 31, ..... 	=> n * 10 + 1
-		 *  
-		 *     currentPage = 1		=>	1			=> 0 * 10 + 1	=>	n=0
-		 *     currentPage = 5		=>	1			=> 0 * 10 + 1	=>	n=0
-		 *     currentPage = 10		=>	1			=> 0 * 10 + 1	=> 	n=0
-		 *     
-		 *     currentPage = 11		=>	11			=> 1 * 10 + 1	=>	n=1
-		 *     currentPage = 15		=> 	11			=> 1 * 10 + 1	=>	n=1
-		 *     currentPage = 20		=>	11			=> 1 * 10 + 1	=> 	n=1
-		 *     
-		 *     currentPage = 1~10	=> 	n=0
-		 *     currentPage = 11~20	=>	n=1
-		 *     currentPage = 21~20	=>	n=2
-		 *     										  0 ~ 9	  /		10			=> 0
-		 *     										10 ~ 19   /		10			=> 1
-		 *     						=>	n = (currentPage - 1) / pageLimit
-		 *     		startPage => n * 10 + 1	 ==	 (currentPage - 1) / pageLimit * 10 + 1
-		 *  
-		 */
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
 		// * endPage : 현재 페이지에 보여지는 페이징 바의 끝 수
-		/*
-		 * ex) pageLimit이 10이라는 가정하에
-		 * 
-		 * startPage : 1	=>	endPage : 10
-		 * startPage : 11	=>	endPage : 20
-		 * startPage : 21	=>	endPage : 30
-		 */
 		endPage = startPage + pageLimit - 1;
 		
 		// 만약 maxPage가 고작 13까지 밖에 안된다면? endPage를 다시 13으로 해줘야됨!!
@@ -119,13 +89,14 @@ public class RecommendListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		// 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-		ArrayList<Recommend> list = new RecommendService().selectList(pi);
+		ArrayList<Recommend> list = new RecommendService().selectList(pi, keyword);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("pageTitle", "추천코스 목록");
 		
-		request.getRequestDispatcher("views/admin/manage_post/recommend/recommendListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendListView.jsp").forward(request, response);
 		
 	}
 

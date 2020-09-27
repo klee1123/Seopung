@@ -1,4 +1,4 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.kh.adminRecommend.model.service.RecommendService;
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.MyFileRenamePolicy;
-import com.kh.recommend.model.service.RecommendService;
-import com.kh.recommend.model.vo.Recommend;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class RecommendUpdateServlet
  */
-@WebServlet("/update.re")
+@WebServlet("/adminPage/update.re")
 public class RecommendUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -69,7 +69,7 @@ public class RecommendUpdateServlet extends HttpServlet {
 			
 			if(result>0) {
 				request.getSession().setAttribute("alertMsg", "추천코스 수정 성공");
-				response.sendRedirect(request.getContextPath() + "/detail.re?currentPage=" + currentPage + "&rno=" + rno);
+				response.sendRedirect(request.getContextPath() + "/adminPage/detail.re?currentPage=" + currentPage + "&rno=" + rno);
 				
 			}else {
 				// 실패한 파일있을 경우 삭제
@@ -80,7 +80,7 @@ public class RecommendUpdateServlet extends HttpServlet {
 				}
 				
 				request.setAttribute("errorMsg", "추천코스 수정 실패");
-				request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 			}
 			
 		}

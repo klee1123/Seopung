@@ -1,4 +1,4 @@
-package com.kh.recommend.controller;
+package com.kh.adminRecommend.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.kh.adminRecommend.model.service.RecommendService;
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.MyFileRenamePolicy;
-import com.kh.recommend.model.service.RecommendService;
-import com.kh.recommend.model.vo.Recommend;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class RecommendInsertServlet
  */
-@WebServlet("/insert.re")
+@WebServlet("/adminPage/insert.re")
 public class RecommendInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,7 +61,7 @@ public class RecommendInsertServlet extends HttpServlet {
 			
 			if(result>0) {
 				request.getSession().setAttribute("alertMsg", "추천코스 등록 성공");
-				response.sendRedirect(request.getContextPath() + "/list.re?currentPage=1");
+				response.sendRedirect(request.getContextPath() + "/adminPage/list.re?currentPage=1");
 				
 			}else {
 				// 실패한 파일 삭제
@@ -69,7 +69,7 @@ public class RecommendInsertServlet extends HttpServlet {
 				failedFile.delete();
 				
 				request.setAttribute("errorMsg", "추천코스 등록 실패");
-				request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 			}
 		}
 	}

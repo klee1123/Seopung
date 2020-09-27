@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.recommend.model.vo.Recommend, com.kh.common.PageInfo"%>
+<%@ page import="java.util.ArrayList, com.kh.adminRecommend.model.vo.Recommend, com.kh.common.PageInfo"%>
 <%
 
 	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
@@ -11,6 +11,8 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	String keyword = (String)request.getAttribute("keyword");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,8 +45,9 @@
 			<table align="center">
 				<tr>
 					<td width="1000">
-						<form action="" method="GET">
-							<label for="">제목</label> <input type="text" name="searchTitle" placeholder="제목 입력">
+						<form action="<%=contextPath%>/adminPage/list.re" method="GET">
+							<input type="hidden" name="currentPage" value="<%=currentPage%>">
+							<label for="">제목</label> <input type="text" name="keyword" placeholder="제목 입력" value="<%=keyword%>">
 							<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='';">조회</button>
 						</form>
 					</td>
@@ -95,26 +98,26 @@
 						<td width="700px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/list.re?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.re?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.re?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.re?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/list.re?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.re?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/list.ad?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.ad?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/enrollForm.re';">등록</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.re';">등록</button>
 							<button class="btn btn-danger" id="btnDelete">삭제</button>
 						</td>
 					</tr>
@@ -131,7 +134,7 @@
                     $(this).find("td:eq(2)").css("cursor","pointer");
                   
                     $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/detail.re?currentPage=" + <%=currentPage%> + "&rno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/adminPage/detail.re?currentPage=" + <%=currentPage%> + "&rno=" + $(this).prev().text();
                     });
                   });
 			});
@@ -172,7 +175,7 @@
 	              	}
 	              
 	              	if(confirm("정말 삭제하시겠습니까?")) {
-	                	location.href="delete.re?" + str;
+	                	location.href="<%=contextPath%>/adminPage/delete.re?" + str;
 	              	} 
 	            });
             });

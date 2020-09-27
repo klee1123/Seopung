@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.adminMember.model.vo.Member" %>
+<%
+	Member m = (Member)request.getAttribute("m");
+
+	String year = m.getBirth().substring(0, 4);
+	String month = m.getBirth().substring(4, 6);
+	String day = m.getBirth().substring(6);
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,11 +50,13 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">회원상세조회</h1>
-
+		-->
+		
+		<br>
 		<div class="outer" align="center">
-			<form action="" method="post" id="memberListForm">
+			<form action="<%= contextPath %>/adminPage/update.me" method="post" id="memberListForm" onsubmit="return validateForm()">
 				<div>
 					<table>
 						<tr>
@@ -58,15 +69,15 @@
 							<td width="300px">닉네임</td>
 						</tr>
 						<tr>
-							<td colspan="2"><input type="text" name="userNickname"
-								value="nickname"></td>
+							<td colspan="2"><input type="text" name="userNickname"  class="form-control"
+								value="<%= m.getNickName() %>" required></td>
 						</tr>
 						<tr>
 							<td colspan="2">자기소개</td>
 						</tr>
 						<tr>
-							<td colspan="2"><textarea name="userSelfIntro" rows="5"
-									style="resize: none;">안녕하세요</textarea></td>
+							<td colspan="2"><textarea name="userSelfIntro" rows="5"  class="form-control"
+									style="resize: none;"><%=m.getUserIntro() %></textarea></td>
 						</tr>
 					</table>
 
@@ -78,48 +89,58 @@
 						<tr>
 							<th width="15px">*</th>
 							<td width="90px">아이디</td>
-							<td width="300px"><input type="text" name="userId"
-								value="userId"></td>
+							<td width="300px"><input type="text" value="<%=m.getUserId() %>"  class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th>*</th>
 							<td>성명</td>
-							<td><input type="text" name="userName" value="아무개"></td>
+							<td><input type="text" name="userName" id="userName" value="<%=m.getUserName() %>"  class="form-control" onfocusin="validateNamein(this);"
+							onfocusout="validateNameout(this);" required></td>
 						</tr>
+						<tr id="validateNameArea"></tr>
 						<tr>
 							<th>*</th>
 							<td>생년월일</td>
-							<td><input type="date" name="birthday" value="1999.09.09"></td>
-						</tr>
-						<tr>
-							<th>*</th>
-							<td>전화번호</td>
-							<td><input type="text" name="phone" value="010-1111-2222"></td>
+							<td class="form-row" style="padding-top:6px;padding-left:6px;">
+					           <input type="number" value="<%=year%>" name="year" class="form-control mr-sm-2" min="1920" max="2020" style="width:110px;height:36px;" required>
+					           <input type="number" value="<%=month%>" name="month" class="form-control mr-sm-2" min="1" max="12" style="width:85px;height:36px;" required>
+					           <input type="number" value="<%=day%>" name="day" class="form-control mr-sm-2" min="1" max="31" style="width:85px;height:36px;" required>					           
+							</td>
 						</tr>
 						<tr>
 							<th>*</th>
 							<td>이메일</td>
-							<td><input type="text" name="email" value="amugae@gmail.com"></td>
+							<td><input type="text" name="email" value="<%=m.getEmail() %>"  class="form-control" required></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>가입일</td>
-							<td><input type="text" value="2020.09.09" disabled></td>
+							<td><input type="text" value="<%=m.getEnrollDate() %>"  class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>탈퇴일</td>
-							<td><input type="text" value="-" disabled></td>
+							<%if(m.getStatus().equals("Y")){ %>
+							<td><input type="text" value="-" class="form-control" readonly></td>
+							<%}else{ %>
+							<td><input type="text" value="<%=m.getModifyDate() %>" class="form-control" readonly></td>
+							<%} %>
 						</tr>
 						<tr>
 							<th></th>
 							<td>최종수정일</td>
-							<td><input type="text" value="2020.09.09" disabled></td>
+							<td><input type="text" value="<%=m.getModifyDate() %>" class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>상태</td>
-							<td><input type="text" value="회원" disabled></td>
+							<%if(m.getStatus().equals("Y")){  %>
+							<td><input type="text" value="회원" class="form-control" readonly></td>
+							<%}else if(m.getStatus().equals("N")){ %>
+							<td><input type="text" value="탈퇴" class="form-control" readonly></td>
+							<%}else{ %>
+							<td><input type="text" value="블랙리스트" class="form-control" readonly></td>
+							<%} %>
 						</tr>
 					</table>
 				</div>
@@ -127,12 +148,75 @@
 				<br>
 
 				<div align="center">
-					<button type="button" class="btn btn-secondary">취소</button>
-					<button type="submit" class="btn btn-secondary">수정</button>
-					<button type="button" class="btn btn-secondary">탈퇴</button>
+					<button type="button" onclick="history.back();" class="btn btn-secondary">취소</button>
+					<button type="submit" class="btn btn-primary">수정</button>
+					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">탈퇴</button>
 				</div>
 			</form>
 		</div>
+		
+		<!-- The Modal -->
+		<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">회원 탈퇴</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+
+					<!-- Modal body -->
+					<form action="<%=contextPath%>/adminPage/delete.me" method="post">
+						<div class="modal-body">
+							<input type="hidden" name="deleteAdminNo" value="">
+							탈퇴를 원하시면 아래 [탈퇴] 버튼을 선택하여 주십시오.
+						</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">취소</button>
+							<button type="submit" class="btn btn-danger">탈퇴</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- Modal end -->
+		
+		<script>
+		
+			// 수정버튼 클릭시 전체 유효성 검사
+			function validateForm() {
+	            
+				var userName = document.getElementById("userName").value;
+
+                var regExp1 = /^[가-힣]{2,}$/;
+
+                if (regExp1.test(userName)) {
+					return true;
+				} else {
+					alert("유효한 값을 입력해주세요.");
+					return false;
+				}
+			}
+			
+			// 이름 유효성 검사
+			function validateNamein(input) {
+				document.getElementById("validateNameArea").innerHTML = "";
+			}
+
+			function validateNameout(input) {
+				regExp = /^[가-힣]{2,}$/;
+
+				if (regExp.test(input.value)) {
+					document.getElementById("validateNameArea").innerHTML = "";
+				} else {
+					document.getElementById("validateNameArea").innerHTML = "<td></td><td></td><td style='font-size:12px; color:red;'>유효한 값을 입력해주세요.</td>";
+				}
+			}
+		</script>
 
 
 	</div>

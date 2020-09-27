@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AdminEnrollFormServlet
  */
-@WebServlet("/enrollForm.ad")
+@WebServlet("/adminPage/enrollForm.ad")
 public class AdminEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,7 +28,7 @@ public class AdminEnrollFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setAttribute("pageTitle", "관리자 등록");
-		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

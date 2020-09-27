@@ -6,6 +6,7 @@
 		       COUNT(*) LISTCOUNT
 		  FROM TB_RECOMMEND
 		 WHERE RECOMMEND_STATUS = 'Y'
+		   AND RECOMMEND_TITLE LIKE '%' || ? || '%'
 	</entry>
 
 	<entry key="selectList">
@@ -24,6 +25,7 @@
 		                  FROM TB_RECOMMEND
 		                  JOIN TB_ADMIN USING(ADMIN_NO)
 		                 WHERE RECOMMEND_STATUS = 'Y'
+		                   AND RECOMMEND_TITLE LIKE '%' || ? || '%'
 		                 ORDER 
 		                    BY RECOMMEND_NO DESC
 		               ) A
@@ -49,6 +51,14 @@
 		   , ?
 		   , ?
 		  )
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+		       TB_RECOMMEND
+		   SET RECOMMEND_COUNT = RECOMMEND_COUNT + 1
+		 WHERE RECOMMEND_NO = ?
+		   AND RECOMMEND_STATUS = 'Y'
 	</entry>
 	
 	<entry key="selectRecommend">
@@ -79,6 +89,7 @@
 		UPDATE 
 		       TB_RECOMMEND
 		   SET RECOMMEND_STATUS = 'N'
+		     , RECOMMEND_MODIFY = SYSDATE
 		 WHERE RECOMMEND_NO = ?
 	</entry>
 

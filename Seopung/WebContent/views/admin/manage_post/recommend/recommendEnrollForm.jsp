@@ -30,7 +30,7 @@
 		<br>
 
 		<div class="outer">
-			<form action="<%=contextPath%>/insert.re" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+			<form action="<%=contextPath%>/adminPage/insert.re" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 				
 				<!-- 수정 필요! 임시 -->
 				<input type="hidden" name="adminNo" value="1">

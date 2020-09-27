@@ -5,17 +5,11 @@
 
 <head>
 <style>
-
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
-.notosanskr * { font-family: 'Noto Sans KR', sans-serif; }
-
-
 .wrap {
 	width: 1200px;
 	padding: 50px;
 	margin: auto;
 	margin-top: 100px;
-	font-family: 'Noto Sans KR', sans-serif; 
 }
 
 div {

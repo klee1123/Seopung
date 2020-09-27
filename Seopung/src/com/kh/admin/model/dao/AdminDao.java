@@ -30,18 +30,28 @@ public class AdminDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int keyfield, String keyword, String status) {
 		int listCount = 0;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectListCount");
+		
+		String sql = "";
+		// 키워드 검색 조건 설정
+		if(keyfield == 1) {
+			sql = prop.getProperty("selectListCount1");		// 이름검색	
+		}else {
+			sql = prop.getProperty("selectListCount2");		// 아이디검색
+		}
 		
 		try {
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
 			
-			rset = stmt.executeQuery(sql);
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, status);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -51,20 +61,26 @@ public class AdminDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return listCount;
 	}
 
-	public ArrayList<Admin> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Admin> selectList(Connection conn, PageInfo pi, int keyfield, String keyword, String status){
 		// select문 => 여러행조회
 		ArrayList<Admin> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectList");
+		String sql = "";
+		// 키워드 검색 조건 설정
+		if(keyfield == 1) {
+			sql = prop.getProperty("selectList1");		// 이름검색	
+		}else {
+			sql = prop.getProperty("selectList2");		// 아이디검색
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -72,8 +88,10 @@ public class AdminDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, status);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rset = pstmt.executeQuery();
 			

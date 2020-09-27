@@ -14,7 +14,7 @@ import com.kh.admin.model.vo.Admin;
 /**
  * Servlet implementation class AdminDetailServlet
  */
-@WebServlet("/detail.ad")
+@WebServlet("/adminPage/detail.ad")
 public class AdminDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +38,7 @@ public class AdminDetailServlet extends HttpServlet {
 		request.setAttribute("ad", ad);
 		request.setAttribute("pageTitle", "관리자 상세정보");
 		
-		request.getRequestDispatcher("views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
 		
 	}
 
