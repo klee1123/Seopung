@@ -64,11 +64,11 @@
 		   AND USER_PWD=?
 	</entry>
 		
-	<entry key="checkNick">
+	<entry key="nickChk">
 		SELECT
 		       COUNT(*)
 		  FROM TB_MEMBER
-		 WHERE USER_ID = ?
+		 WHERE USER_NICK = ?
 	</entry>
 
 </properties>

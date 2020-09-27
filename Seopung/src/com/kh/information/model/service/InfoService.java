@@ -95,10 +95,10 @@ public class InfoService {
 		return result;
 	}
 	
-	public int nickCheck(String checkNick) {
+	public int nickCheck(String nickChk) {
 		Connection conn = getConnection();
 		
-		int count = new InfoDao().nickCheck(conn, checkNick);
+		int count = new InfoDao().nickCheck(conn, nickChk);
 		
 		close(conn);
 		
