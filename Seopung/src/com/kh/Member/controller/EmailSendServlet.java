@@ -40,7 +40,7 @@ public class EmailSendServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Properties props = System.getProperties();
-			props.put("mail.smtp.user", "didaos1231");
+			props.put("mail.smtp.user", "semiproject.KH");
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.port", "465");
 			props.put("mail.smtp.starttls.enable", "true");
@@ -57,7 +57,7 @@ public class EmailSendServlet extends HttpServlet {
 			try {
 				msg.setSentDate(new Date());
 				
-				InternetAddress from = new InternetAddress("didaos1231@gmail.com");
+				InternetAddress from = new InternetAddress("semiproject.KH@gmail.com");
 				
 				
 				msg.setFrom(from);
@@ -95,8 +95,8 @@ public class EmailSendServlet extends HttpServlet {
 			PasswordAuthentication pa;
 			
 			public MyAuthentication() {
-				String id = "didaos1231";
-				String pw = "vkfdhdl462!";
+				String id = "semiproject.KH";
+				String pw = "semiprojectkh";
 				
 				pa = new PasswordAuthentication(id, pw);
 			}
