@@ -207,6 +207,7 @@ div {
 	border: 1px solid;
 	margin-top: 150px;
 	font-family: 'Noto Sans KR', sans-serif;
+	
 }
 
 /* #header, #content, #footer{ */
@@ -238,7 +239,9 @@ div {
 }
 
 #make_h {
-	height: 10%
+	height: 10%;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 #make_m {
@@ -246,7 +249,8 @@ div {
 }
 
 #make_f {
-	height: 10%
+	height: 10%;
+	float: left;
 }
 
 .bbtn {
@@ -273,15 +277,24 @@ div {
 			<div id="content_1">
 				<div id="make_h">일정 만들기 < 2 / 2 ></div>
 				<div id="make_m">
-					<select name="">
-						<option value="" selected>일정일을 선택하세요</option>
-						<option value="">Day 1</option>
-						<option value="">Day 2</option>
+					<select name="" style="width: 300px;">
+						<option value="null" selected>일정일을 선택하세요</option>
+						<option value="day1">Day 1</option>
+						<option value="day2">Day 2</option>
 					</select>
 				</div>
 				<div id="make_f">
-					<button class="bbtn" type="button">임시 저장</button>
-					<button class="bbtn" type="button">다음 페이지</button>
+					<table style="width: 300px;">
+						<tr>
+							<td>
+								<button class="bbtn" type="submit" name="plan_temp" value="n">임시 저장</button>
+							</td>
+							<td style="text-align: right;">
+								<button class="bbtn" type="submit" name="plan_temp" value="n">작성 완료</button>
+							</td>
+						</tr>
+					</table>
+					
 				</div>
 
 			</div>

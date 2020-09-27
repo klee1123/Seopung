@@ -14,6 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 	.outer {
 		width: 900px;
@@ -57,12 +58,25 @@
 		<br>
 		<div class="outer" align="center">
 			<form action="<%= contextPath %>/adminPage/update.me" method="post" id="memberListForm" onsubmit="return validateForm()">
+				<input type="hidden" name="userNo" value="<%= m.getUserNo()%>">
+				<input type="hidden" name="profilePath" value="<%=m.getProfile() %>" id="profilePath">
 				<div>
 					<table>
 						<tr>
-							<td colspan="2" align="center"><img
-								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-								alt="프로필사진" height="150px;"></td>
+							<td colspan="2" align="center">
+								<%if(m.getProfile()==null || m.getProfile().equals("null")){ %>
+								<img src="https://ucanr.edu/sb3/display_2018/images/default-user.png" 
+								alt="프로필사진" height="180px;" width="180px;"  class="rounded-circle">
+								<%}else{ %>
+								<img src="<%=contextPath %>/<%=m.getProfile() %>" id="propicPreview"
+								alt="프로필사진" height="180px;" width="180px;"  class="rounded-circle">
+								<br>
+								<div align="right">
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="deletePropic();">삭제</button>
+									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="cancelDelete();">취소</button>
+								</div>
+								<%} %>
+							</td>
 						</tr>
 						<tr>
 							<th width="15px">*</th>
@@ -148,9 +162,11 @@
 				<br>
 
 				<div align="center">
-					<button type="button" onclick="history.back();" class="btn btn-secondary">취소</button>
+					<button type="button" onclick="location.href='<%=contextPath %>/adminPage/list.me?currentPage=1';" class="btn btn-secondary">취소</button>
+					<%if(m.getStatus().equals("Y")){ %>
 					<button type="submit" class="btn btn-primary">수정</button>
 					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">탈퇴</button>
+					<%} %>
 				</div>
 			</form>
 		</div>
@@ -169,7 +185,7 @@
 					<!-- Modal body -->
 					<form action="<%=contextPath%>/adminPage/delete.me" method="post">
 						<div class="modal-body">
-							<input type="hidden" name="deleteAdminNo" value="">
+							<input type="hidden" name="deleteUserNo" value="<%=m.getUserNo()%>">
 							탈퇴를 원하시면 아래 [탈퇴] 버튼을 선택하여 주십시오.
 						</div>
 
@@ -216,6 +232,26 @@
 					document.getElementById("validateNameArea").innerHTML = "<td></td><td></td><td style='font-size:12px; color:red;'>유효한 값을 입력해주세요.</td>";
 				}
 			}
+			
+			
+			// 프로필사진
+			function deletePropic() {
+				$("#propicPreview").attr("src", "https://ucanr.edu/sb3/display_2018/images/default-user.png");
+				$("#profilePath").val("null");
+			}
+			
+			function cancelDelete(){
+				$("#propicPreview").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTu51XqkERN4KCU2HF526phPswwmMY9qjexFA&usqp=CAU");
+				$("#profilePath").val("<%=m.getProfile() %>");
+			}
+		
+			// 탈퇴, 블랙리스트 회원 read only로 변경
+			$(function(){
+				if("<%=m.getStatus()%>"!="Y"){
+					$("#memberListForm input").attr('readonly', true);
+					$("textarea[name='userSelfIntro']").attr('readonly', true);
+				}
+			});
 		</script>
 
 

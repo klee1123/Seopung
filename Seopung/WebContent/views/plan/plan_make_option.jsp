@@ -4,6 +4,9 @@
 <html lang="zxx">
 
 <head>
+
+<meta charset="utf-8">
+<title>일정 만들기 - 옵션</title>
 <style>
 
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
@@ -109,7 +112,7 @@ div {
 	<%@include file="../common/menubar.jsp"%>
 	<div class="wrap">
 
-		<form action="<%= contextPath %>/test1.do"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
+		<form action="<%= contextPath %>/planOption.po"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
 			<div class="plan_sec">
 				<div class="so_title">일정만들기 < 1 / 2 ></div>
 				<div class="so_title">
@@ -261,7 +264,7 @@ div {
 
 			<div class="plan_sec" style="width: 720px;">
 				<div class="so_title">동행 유무</div>
-				<div class="plan_acc">
+				<div class="plan_type">
 					<div class="">
 						<label class="box-radio-input"><input type="radio"
 							name="plan_acc" value="y" checked="checked"><span>동행</span></label>

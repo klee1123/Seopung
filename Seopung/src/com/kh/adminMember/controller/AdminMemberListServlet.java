@@ -17,13 +17,13 @@ import com.kh.common.PageInfo;
  * Servlet implementation class adminMemberListServlet
  */
 @WebServlet("/adminPage/list.me")
-public class adminMemberListServlet extends HttpServlet {
+public class AdminMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminMemberListServlet() {
+    public AdminMemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

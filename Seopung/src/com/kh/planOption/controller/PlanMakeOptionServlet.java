@@ -1,6 +1,7 @@
 package com.kh.planOption.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -9,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.model.service.AdminService;
+import com.kh.planOption.model.service.PlanOptionService;
 import com.kh.planOption.model.vo.PlanOption;
 
 /**
  * Servlet implementation class PlanMakeOption
  */
-@WebServlet("/test1.do")
+@WebServlet("/planOption.po")
 public class PlanMakeOptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,8 +38,10 @@ public class PlanMakeOptionServlet extends HttpServlet {
 		String plan_sdate = request.getParameter("plan_sdate");
 		String plan_edate = request.getParameter("plan_edate");
 		String plan_type = request.getParameter("plan_type");
-		String plan_age = request.getParameter("plan_age");
-		String plan_trans = request.getParameter("plan_trans");
+		
+		String[] plan_age = request.getParameterValues("plan_age");
+		String[] plan_trans = request.getParameterValues("plan_trans");
+		
 		String plan_acc = request.getParameter("plan_acc");
 		String plan_budget = request.getParameter("plan_budget");
 		String plan_scrap_yn = request.getParameter("plan_scrap_yn");
@@ -46,31 +49,18 @@ public class PlanMakeOptionServlet extends HttpServlet {
 		String plan_memo = request.getParameter("plan_memo");
 		String plan_temp = request.getParameter("plan_temp");
 		
-		PlanOption ad = new PlanOption();
-		ad.setPlanTitle(plan_title);
-		ad.setPlanSdate(plan_sdate);
-		ad.setPlanEdate(plan_edate);
-		ad.setPlanType(plan_type);
-		ad.setPlanAge(plan_age);
-		ad.setPlanTrans(plan_trans);
-		ad.setPlanAcc(plan_acc);
-		ad.setPlanBudget(plan_budget);
-		ad.setPlanScrapYn(plan_scrap_yn);
-		ad.setPlanPrivate(plan_private);
-		ad.setPlanMemo(plan_memo);
-		ad.setPlanTemp(plan_temp);
-		
-
-		int result = new AdminService().insertAdmin(ad);
-		
-		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "관리자 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/adminPage/list.ad?currentPage=1");
-		}else {
-			request.setAttribute("errorMsg", "관리자 등록 실패");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);;
-		}
-	
+		PlanOption po = new PlanOption();
+		po.setPlanTitle(plan_title);
+		po.setPlanSdate(plan_sdate);
+		po.setPlanEdate(plan_edate);
+		po.setPlanType(plan_type);
+		po.setPlanAge(plan_age);
+		po.setPlanTrans(plan_trans);
+		po.setPlanBudget(plan_budget);
+		po.setPlanScrapYn(plan_scrap_yn);
+		po.setPlanPrivate(plan_private);
+		po.setPlanMemo(plan_memo);
+		po.setPlanTemp(plan_temp);
 		
 		
 	}

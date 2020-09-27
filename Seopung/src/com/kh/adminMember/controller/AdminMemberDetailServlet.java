@@ -1,8 +1,6 @@
 package com.kh.adminMember.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,13 +15,13 @@ import com.kh.adminMember.model.vo.Member;
  * Servlet implementation class adminMemberDetailServlet
  */
 @WebServlet("/adminPage/detail.me")
-public class adminMemberDetailServlet extends HttpServlet {
+public class AdminMemberDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminMemberDetailServlet() {
+    public AdminMemberDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
