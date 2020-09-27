@@ -4,6 +4,10 @@
 <%
 	Member m = (Member)request.getAttribute("m");
 
+	String year = m.getBirth().substring(0, 4);
+	String month = m.getBirth().substring(4, 6);
+	String day = m.getBirth().substring(6);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -66,14 +70,14 @@
 						</tr>
 						<tr>
 							<td colspan="2"><input type="text" name="userNickname"  class="form-control"
-								value="nickname" required></td>
+								value="<%= m.getNickName() %>" required></td>
 						</tr>
 						<tr>
 							<td colspan="2">자기소개</td>
 						</tr>
 						<tr>
 							<td colspan="2"><textarea name="userSelfIntro" rows="5"  class="form-control"
-									style="resize: none;">안녕하세요</textarea></td>
+									style="resize: none;"><%=m.getUserIntro() %></textarea></td>
 						</tr>
 					</table>
 
@@ -85,44 +89,58 @@
 						<tr>
 							<th width="15px">*</th>
 							<td width="90px">아이디</td>
-							<td width="300px"><input type="text" value="userId"  class="form-control" readonly></td>
+							<td width="300px"><input type="text" value="<%=m.getUserId() %>"  class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th>*</th>
 							<td>성명</td>
-							<td><input type="text" name="userName" id="userName" value="아무개"  class="form-control" onfocusin="validateNamein(this);"
+							<td><input type="text" name="userName" id="userName" value="<%=m.getUserName() %>"  class="form-control" onfocusin="validateNamein(this);"
 							onfocusout="validateNameout(this);" required></td>
 						</tr>
 						<tr id="validateNameArea"></tr>
 						<tr>
 							<th>*</th>
 							<td>생년월일</td>
-							<td><input type="date" name="birthday" value="1999.09.09"  class="form-control" required></td>
+							<td class="form-row" style="padding-top:6px;padding-left:6px;">
+					           <input type="number" value="<%=year%>" name="year" class="form-control mr-sm-2" min="1920" max="2020" style="width:110px;height:36px;" required>
+					           <input type="number" value="<%=month%>" name="month" class="form-control mr-sm-2" min="1" max="12" style="width:85px;height:36px;" required>
+					           <input type="number" value="<%=day%>" name="day" class="form-control mr-sm-2" min="1" max="31" style="width:85px;height:36px;" required>					           
+							</td>
 						</tr>
 						<tr>
 							<th>*</th>
 							<td>이메일</td>
-							<td><input type="text" name="email" value="amugae@gmail.com"  class="form-control" required></td>
+							<td><input type="text" name="email" value="<%=m.getEmail() %>"  class="form-control" required></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>가입일</td>
-							<td><input type="text" value="2020.09.09"  class="form-control" readonly></td>
+							<td><input type="text" value="<%=m.getEnrollDate() %>"  class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>탈퇴일</td>
+							<%if(m.getStatus().equals("Y")){ %>
 							<td><input type="text" value="-" class="form-control" readonly></td>
+							<%}else{ %>
+							<td><input type="text" value="<%=m.getModifyDate() %>" class="form-control" readonly></td>
+							<%} %>
 						</tr>
 						<tr>
 							<th></th>
 							<td>최종수정일</td>
-							<td><input type="text" value="2020.09.09" class="form-control" readonly></td>
+							<td><input type="text" value="<%=m.getModifyDate() %>" class="form-control" readonly></td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>상태</td>
+							<%if(m.getStatus().equals("Y")){  %>
 							<td><input type="text" value="회원" class="form-control" readonly></td>
+							<%}else if(m.getStatus().equals("N")){ %>
+							<td><input type="text" value="탈퇴" class="form-control" readonly></td>
+							<%}else{ %>
+							<td><input type="text" value="블랙리스트" class="form-control" readonly></td>
+							<%} %>
 						</tr>
 					</table>
 				</div>
