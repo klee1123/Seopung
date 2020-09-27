@@ -22,7 +22,7 @@ public class PlanOptionDao {
 	
 	public PlanOptionDao() {
 		
-		String fileName = PlanOptionDao.class.getResource("/sql/admin/admin-mapper.xml").getPath();
+		String fileName = PlanOptionDao.class.getResource("").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));

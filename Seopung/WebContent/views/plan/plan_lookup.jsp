@@ -4,12 +4,20 @@
 <html lang="zxx">
 
 <head>
+<meta charset="utf-8">
+<title>일정 서비스</title>
+
 <style>
+
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
+
 .wrap {
 	width: 1200px;
 	padding: 50px;
 	margin: auto;
 	margin-top: 100px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 div {
@@ -119,8 +127,7 @@ td {
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
 
@@ -128,12 +135,14 @@ td {
 
 
 </head>
+
+
 <body>
 	<%@include file="../common/menubar.jsp"%>
 	<div class="wrap">
 
 		<!----------------------------------------------- 상세 검색 div start----------------------------------------------------------->
-		<div class="contents_top" style="z-index: 3000;">
+		<div class="contents_top" style="z-index: 2;">
 			<!--상세검색-->
 			<div class="contents_top_title">
 				<b>일정 서비스 (207)</b>
@@ -517,7 +526,7 @@ td {
 
 
 		<!----------------------------------------------- 등록된 일정 목록 div start----------------------------------------------------------->
-		<div class="contents_main">
+		<div class="contents_main" style="z-index: 1;">
 
 			<div class="col_1">
 				<div class="row_1">
