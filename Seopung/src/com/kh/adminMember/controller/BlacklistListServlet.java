@@ -91,6 +91,12 @@ public class BlacklistListServlet extends HttpServlet {
 		
 		ArrayList<Member> list = new MemberService().selectList(pi, keyfield, keyword, status);
 		
+		String reportType = "";
+		for(int i=0; i<list.size(); i++) {
+			reportType = new MemberService().selectReportType(list.get(i).getUserNo());
+			list.get(i).setReportType(reportType);
+		}
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyfield", keyfield);

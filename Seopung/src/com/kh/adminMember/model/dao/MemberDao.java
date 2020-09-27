@@ -210,4 +210,38 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+	
+	
+	public String selectReportType(Connection conn, int userNo) {
+		// select문 => 여러행 조회
+		String reportType = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReportType");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reportType += rset.getString("report_type") + "/";
+			}
+			
+			reportType = reportType.substring(0, reportType.length() - 1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportType;
+	}
+	
 }

@@ -101,5 +101,11 @@
 		       MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
+	
+	<entry key="selectReportType">
+		SELECT DISTINCT REPORT_TYPE
+		  FROM TB_REPORT
+		 WHERE USER_NO2 = ?
+	</entry>
 
 </properties>

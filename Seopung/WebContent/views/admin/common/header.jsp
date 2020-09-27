@@ -26,7 +26,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>메인</title>
+<title>서풍-관리자페이지</title>
 
 <!-- Custom fonts for this template-->
 <link href="<%= request.getContextPath() %>/views/admin/adminResources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

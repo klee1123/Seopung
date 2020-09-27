@@ -18,6 +18,7 @@ public class Member {
 	private String userIntro;			// 자기소개
 	private String profile;				// 프로필경로
 	private String status;				// 상태 기본 Y, 탈퇴, N, 블랙 B
+	private String reportType;			// 블랙리스트 제제사유
 	
 	public Member() {
 		
@@ -182,6 +183,14 @@ public class Member {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getReportType() {
+		return reportType;
+	}
+
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
 	}
 
 	@Override

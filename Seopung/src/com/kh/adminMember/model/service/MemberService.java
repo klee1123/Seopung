@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.adminMember.model.dao.MemberDao;
 import com.kh.adminMember.model.vo.Member;
+import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
 
 public class MemberService {
@@ -104,5 +105,44 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	
+	/**
+	 * 블랙리스트 회원 제제사유 작성 용 신고분류 조회
+	 * @return
+	 */
+	public String selectReportType(int userNo) {
+		Connection conn = getConnection();
+		
+		String reportType = new MemberDao().selectReportType(conn, userNo);
+		
+		close(conn);
+		
+		return reportType;
+	}
+	
+	
+	public int selectReportCount(int userNo) {
+		Connection conn = getConnection();
+		
+		int listCount = new MemberDao().selectReportCount(conn, userNo);
+		
+		close(conn);
+		
+		return listCount;
+	}
+	
+	
+	public ArrayList<Report> selectReportList(int userNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Report> reportList = new MemberDao().selectReportList(conn, userNo);
+		
+		close(conn);
+		
+		return reportList;
+	}
+	
+		
 
 }

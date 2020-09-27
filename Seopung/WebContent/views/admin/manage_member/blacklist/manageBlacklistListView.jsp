@@ -90,8 +90,8 @@
 							<td><%= m.getUserNo() %></td>
 							<td><%= m.getUserId() %></td>
 							<td><%= m.getUserName() %></td>
-							<td></td>
-							<td></td>
+							<td><%= m.getReportType() %></td>
+							<td><%= m.getModifyDate() %></td>
 						</tr>
 						<% } %>
 					<% } %>
@@ -144,7 +144,7 @@
                     $(this).find("td:eq(4)").css("cursor","pointer");
                   
                     $(this).find("td:eq(4)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.bl?uno=" + $(this).prevAll().eq(2).text();
+                      location.href = "<%= contextPath %>/adminPage/detail.bl?currentPage=1&uno=" + $(this).prevAll().eq(2).text();
                     });
                   });
 			});
@@ -184,8 +184,8 @@
 	                	}
 	              	}
 	              
-	              	if(confirm("정말 삭제하시겠습니까?")) {
-	                	location.href="<%=contextPath%>/adminPage/delete.me?" + str;
+	              	if(confirm("정말 해제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/delete.bl?" + str;
 	              	} 
 	            });
             });
