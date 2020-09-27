@@ -163,7 +163,7 @@ $(function(){
 							<li><span style="white-space: nowrap; margin-left: px;"><span
 									style="font-weight: bold;">&nbsp;&nbsp;&nbsp;<%=loginUser.getUserName()%>님</span>
 									어서오세요.</span><br> <span>
-									<button 
+									<button onclick="location.href='<%=contextPath%>/myPage.me'"
 										style="border: none; border-radius: 5px; color: white; background: #fec104;">마이페이지</button>
 									<button onclick="location.href='<%=contextPath%>/logout.me'"
 										style="border: none; border-radius: 5px; color: white; background: #fec104;">로그아웃</button>

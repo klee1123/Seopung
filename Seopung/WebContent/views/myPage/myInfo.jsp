@@ -5,11 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>개인정보조회 및 수정</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     
+     
+     <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="resources/css/animate.css">
+        <!-- owl carousel CSS -->
+        <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="resources/css/all.css">
+        <!-- flaticon CSS -->
+        <link rel="stylesheet" href="resources/css/flaticon.css">
+        <link rel="stylesheet" href="resources/css/themify-icons.css">
+        <link rel="stylesheet" href="resources/css/nice-select.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="resources/css/magnific-popup.css">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="resources/css/slick.css">
+        <!-- style CSS -->
+        <link rel="stylesheet" href="resources/css/style.css">
     
 <style>
         
@@ -44,6 +65,17 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
+	<%
+		String userId = loginUser.getUserId();
+		String userName = loginUser.getUserName();
+		String nickName = loginUser.getNickName();
+		String email = loginUser.getEmail();
+		String birth = loginUser.getBirth();
+		String year = birth.substring(0, 4);
+		String month = birth.substring(4, 6);
+		String day = birth.substring(6);
+		String intro = (loginUser.getUserIntro().equals("null")) ? "" : loginUser.getUserIntro() ;
+	%>
 	
 	<div class="myContent">
 	
@@ -52,12 +84,12 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="<%= contextPath %>/updateInfo.mp" method="POST" enctype="multipart/form-data">
+        <form action="<%= contextPath %>/updateInfo.in" method="POST" enctype="multipart/form-data">
             <button type="button" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
-                <img src="../../resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+                <img src="resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
                 <br><br>
                 <p style="font-size: 12px;">1MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
@@ -69,70 +101,177 @@
                 
             <table id="infoTable">
                 <tr>
-                    <th align="left" width="200px">아이디</th>
-                    <td><span>USERID01 </span></td>
+                    <th align="left" width="100px">아이디</th>
+                    <td><input type="text" name="userId" required value="<%= userId %>" readonly></td>
+                    
                 </tr>
                 <tr>
-                    <th align="left" width="200px">이름</th>
-                    <td><span>홍길동 </span></td>
+                    <th align="left">이름</th>
+                    <td><input type="text" name="userName" required value="<%= userName %>" readonly></td>
                     
                 </tr>
                 <tr>
                     <th align="left">닉네임</th>
-                    <td><span>홍길홍길 <button type="button" data-toggle="collapse" data-target="#nickCh" class="btn btn-secondary btn-sm"> 수정</button></span></td>
-                
-                    <tr id="nickCh" class="collapse" >
-                        <th>변경할 닉네임</th>
-                        <td><input type="text"><button type="button" id="nickChSuccess"  class="btn btn-secondary btn-sm">중복확인</button></td>
-                    </tr>
+                    <td><span style="width: 100px;"><%= nickName %>&nbsp;&nbsp;&nbsp;</span>     <button type="button" data-toggle="modal" data-target="#updateNickForm" class="btn btn-secondary btn-sm">닉네임변경</button></td>
                 </tr>
                 <tr>
                     <th align="left">비밀번호</th>
-                    <td>
-                    <button  type="button" class="btn btn-secondary btn-sm"  data-toggle="collapse" data-target="#pwdCh">변경</button></td>
-                    <tr id="pwdCh" class="collapse" >
-                        <th>현재 비밀번호</th>
-                        <td><input type="password" id="currentPwd" required></td>
-                    </tr>
-                    <tr id="pwdCh" class="collapse" >
-                        <th>변경할 비밀번호</th>
-                        <td><input type="password" id="changePwd"></td>
-                    </tr>
-                    <tr id="pwdCh" class="collapse" >
-                        <th>비밀번호 확인</th>
-                        <td><input type="password" id="checkPwd"><button type="button" id="btn_changePwd" class="btn btn-secondary btn-sm" onclick="onCheck();">확인</button>
-                            <br><span id="pwdSpan"></span>
-                        </td>
-                    </tr>
+                    <td><button type="button" data-toggle="modal" data-target="#updatePwdForm" class="btn btn-secondary btn-sm">비밀번호변경</button></td>
+                    
                 </tr>
                 <tr>
                     <th align="left">이메일</th>
-                    <td><span>hong@gmail.com <button type="button" class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#emailCh"> 수정</button></span></td>
-                    <tr id="emailCh" class="collapse" >
-                        <th>변경할 이메일</th>
-                        <td><input type="email"><button type="button" class="btn btn-secondary btn-sm">인증</button></td>
-                    </tr>
-                    <tr id="emailCh" class="collapse" >
-                        <th>인증확인</th>
-                        <td><input type="text"><button type="button" class="btn btn-secondary btn-sm">확인</button></td>
-                    </tr>
+                    <td><input type="text" name="email" required value="<%= email %>"></td>
+                    <td><button type="button" data-toggle="modal" data-target="#updateEmailForm" class="btn btn-secondary btn-sm">이메일변경</button></td>
+                    
                 </tr>
                 <tr>
                     <th align="left">생년월일</th>
-                    <td><span>2020년 07월 01일</span></td>
+                    <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
+                     
                 </tr>
                 
             </table>
             <br>
             </div>
             <label><strong>자기소개</strong></label> <br>
-            <textarea name="introduction" cols="80" rows="8"style="resize: none;"></textarea>
+            <textarea name="introduction" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
         </form>
         	<div id="fileArea">
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
             </div>
         </div>
     </div>
+    
+    <!-- 닉네임변경 버튼 클릭시 보여질 Modal-->
+<div class="modal" id="updateNickForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">닉네임 변경</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" align="center">
+            <form action="<%= contextPath %>/updateNick.me" method="POST">
+                <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+                <table>
+                	<tr>
+                		<th>현재닉네임</th>
+                		<td><input type="text" name="userNick" id="userNick" required value="<%= nickName %>"></td>
+                    <tr>
+                        <th>변경할 닉네임</th>
+                        <td><input type="text" name="updateNick" id="updateNick" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn">중복확인</button></td>
+                    </tr>
+                </table>
+                <br>
+               <button type="submit" class="btn btn-secondary">닉네임변경</button>
+           </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    
+    <!-- 비밀번호변경 버튼 클릭시 보여질 Modal -->
+   <div class="modal" id="updatePwdForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">비밀번호변경</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" align="center">
+            <form action="<%= contextPath %>/updatePwd.me" method="POST">
+            <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+                <table>
+                    <tr>
+                        <th>현재 비밀번호 </th>
+                        <td><input type="password" name="userPwd" required></td>
+                    </tr>
+                    <tr>
+                        <th> 변경할 비밀번호 </th>
+                        <td><input type="password" name="updatePwd" id="pwd1" required></td>
+                    </tr>
+                    <tr>
+                        <th>변경할 비밀번호 재입력 </th>
+                        <td><input type="password" name="checkPwd" id="pwd2" required>
+                    	<br><span id="pwdSpan"></span></td>
+                    </tr>
+                </table>
+                <br>
+               <button type="submit" class="btn btn-secondary" >비밀번호변경</button>
+           </form>
+           <script>
+           		$(function(){
+           			$("input").keyUp(function(){
+           				var pwd1= $("#pwd1").val();
+           				var pwd2= $("#pwd2").val();
+           				if(pwd1 != "" || pwd2 != "") {
+           					if(pwd1 == pwd2){
+           						pwdSpan.innerHTML="비밀번호가 일치합니다.";
+           					}else {
+           						pwdSpan.innerHTML = "비밀번호가 일치하지 않습니다";
+           					}
+           				}
+           			});
+           		});	
+           /*
+           		function validatePwd() {
+           			if($("input[name=updatePwd]").val() && $("input[name=checkPwd]").val() != null) {
+	           			if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()) {
+	           			 	pwdSpan.innerHTML = "비밀번호가 일치하지 않습니다";
+	           			 	return false;
+	           			}else {
+	                        pwdSpan.innerHTML = "비밀번호가 일치합니다."
+	                    }
+           			}
+           		}; */
+           </script>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- 이메일변경 버튼 클릭시 보여질 Modal-->
+<div class="modal" id="updateEmailForm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">이메일변경</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" align="center">
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <th>변경할 이메일 </th>
+                        <td><input type="email" name="updateEmail" required><button type="button" class="btn btn-secondary btn-sm">인증</button></td>
+                    </tr>
+                    <tr>
+                        <th> 인증확인</th>
+                        <td><input type="text" name="emailPwd" required></td>
+                    </tr>
+                </table>
+                <br>
+               <button type="submit" class="btn btn-secondary">이메일변경</button>
+           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    
     <script>
         $(function(){
             $("#fileArea").hide();
@@ -159,39 +298,48 @@
                     $("#profileImg").attr("src",e.target.result);
                 };
             }else {
-               $("#profileImg").attr("src", "../../../resources/images/회원.jpg");
+               $("#profileImg").attr("src", "resources/images/회원.jpg");
             }
         }
         $("#deleteProfile").click(function(){
-            $("#profileImg").attr("src", "../../../resources/images/회원.jpg");
+            $("#profileImg").attr("src", "resources/images/회원.jpg");
         });
         
- 		function onCheck() {
-            
-            var currentPwd = document.getElementById("currentPwd").value;
-            var changePwd = document.getElementById("changePwd").value;
-            var checkPwd = document.getElementById("checkPwd").value;
-            var pwdSpan = document.getElementById("pwdSpan");
-            
-            if(currentPwd && changePwd && checkPwd != null) {
-                if(changePwd != checkPwd) {
-                    pwdSpan.innerHTML = "똑같은 비밀번호를 적어주세요";
-                }else {
-                    pwdSpan.innerHTML = "비밀번호가 일치합니다."
-                }
-            }else {
-            	if(currentPwd == null) {
-            		pwdSpan.innerHTML = "현재 비밀번호를 적어주세요";
-            	}else {
-            		pwdSpan.innerHTML = "비밀번호 칸을 채워주세요";
-            	}
-            }
-            
-            
-        }
+ 		
     </script>
 	
 	</div>
 	</div>
+	
+	
+    <!-- jquery plugins here-->
+    <!-- jquery -->
+    <script src="resources/js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="resources/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="resources/js/bootstrap.min.js"></script>
+    <!-- easing js -->
+    <script src="resources/js/jquery.magnific-popup.js"></script>
+    
+    
+    
+    
+    <!-- particles js -->
+    <script src="../../resources/js/owl.carousel.min.js"></script>
+    <script src="../../resources/js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="../../resources/js/slick.min.js"></script>
+    <script src="../../resources/js/jquery.counterup.min.js"></script>
+    <script src="../../resources/js/waypoints.min.js"></script>
+    <script src="../../resources/js/contact.js"></script>
+    <script src="../../resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../../resources/js/jquery.form.js"></script>
+    <script src="../../resources/js/jquery.validate.min.js"></script>
+    <script src="../../resources/js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="../../resources/js/custom.js"></script>
+	
+	
 </body>
 </html>
