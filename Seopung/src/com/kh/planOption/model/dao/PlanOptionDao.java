@@ -12,9 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.admin.model.vo.Admin;
-import com.kh.common.PageInfo;
-import com.kh.member.model.vo.Member;
 import com.kh.planOption.model.vo.PlanOption;
 
 public class PlanOptionDao {
@@ -23,7 +20,7 @@ public class PlanOptionDao {
 	
 	public PlanOptionDao() {
 		
-		String fileName = PlanOptionDao.class.getResource("").getPath();
+		String fileName = PlanOptionDao.class.getResource("/sql/planOption/planOption-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));

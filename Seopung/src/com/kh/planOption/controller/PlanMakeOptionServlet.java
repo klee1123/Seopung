@@ -93,7 +93,7 @@ public class PlanMakeOptionServlet extends HttpServlet {
 			
 			request.setAttribute("errorMsg", "실패");
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/plan/plan_make_map.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("실패!");
 			view.forward(request,response);
 			
 		}
