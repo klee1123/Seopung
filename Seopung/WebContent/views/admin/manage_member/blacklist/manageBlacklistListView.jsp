@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.PageInfo, com.kh.adminMember.model.vo.Member" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	int keyfield = (int)request.getAttribute("keyfield");
+	String keyword = (String)request.getAttribute("keyword");
+	String status = (String)request.getAttribute("status");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,19 +37,29 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">블랙리스트 목록</h1>
-
+		-->
 		<br>
 		
 		<div class="outer">
 
-			<table align="center">
+			<table align="center" width="950">
 				<tr>
-					<td width="1000">
+					<td>
 						<form action="" method="GET">
-							<label for="">회원ID</label> <input type="text"
-								placeholder="아이디 입력">
+							<input type="hidden" name="currentPage" value="1">
+							<input type="hidden" name="status" value="<%=status%>">
+							<select name="keyfield">
+								<%if(keyfield==2){%>
+								<option value="1">이름</option>
+								<option value="2" selected>아이디</option>
+								<%}else{%>
+								<option value="1">이름</option>
+								<option value="2">아이디</option>
+								<%}%>
+							</select>
+							<input type="text" name="keyword" value="<%=keyword%>">
 							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
 						</form>
 					</td>
@@ -45,7 +71,7 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
-						<th width="50px"><input type="checkbox"></th>
+						<th width="20px"><input type="checkbox" id="chk_all" name="uno"></th>
 						<th width="75px">번호</th>
 						<th width="120px">아이디</th>
 						<th width="120px">이름</th>
@@ -55,51 +81,22 @@
 					</tr>
 				</thead>
 				<tbody style="text-align:center;">
+					<% if(list.isEmpty()){ %>
 					<tr>
-						<td><input type="checkbox"></td>
-						<td>5</td>
-						<td>userId5</td>
-						<td>홍길동</td>
-						<td>비매너</td>
-						<td>회원</td>
-						<td>2020.09.09</td>
+						<td colspan="7">조회된 리스트가 없습니다.</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>4</td>
-						<td>userId5</td>
-						<td>홍길동</td>
-						<td>비매너</td>
-						<td>회원</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>3</td>
-						<td>userId5</td>
-						<td>홍길동</td>
-						<td>비매너</td>
-						<td>회원</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>2</td>
-						<td>userId5</td>
-						<td>홍길동</td>
-						<td>비매너</td>
-						<td>회원</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>userId5</td>
-						<td>홍길동</td>
-						<td>비매너</td>
-						<td>회원</td>
-						<td>2020.09.09</td>
-					</tr>
+					<% }else{ %>
+						<% for(Member m : list){ %>
+						<tr>
+							<td><input type="checkbox" id="chk" name="uno" value="<%= r.getRecommendNo() %>"></td>
+							<td><%= r.getRecommendNo() %></td>
+							<td><%= r.getRecommendTitle() %></td>
+							<td><%= r.getRecommendWriter() %></td>
+							<td><%= r.getEnrollDate() %></td>
+							<td><%= r.getCount() %></td>
+						</tr>
+						<% } %>
+					<% } %>
 				</tbody>
 			</table>
 
@@ -109,25 +106,31 @@
 				<table>
 					<tr>
 						<td width=""><span>총 회원수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b> 명
+								style="color: red"><%= listCount %></b> 명
 						</span></td>
 						<td width="720px;">
 							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
+								<% if(currentPage != 1){ %>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<% } %>
+	
+								<% for(int p=startPage; p<=endPage; p++){ %>
+									<% if(p != currentPage){ %>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% }else{ %>	
+									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% } %>
+								<% } %>
 
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% if(currentPage != maxPage){ %>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">목록에서 제거</button>
+							<button class="btn btn-primary" id="btnDelete">목록에서 제거</button>
 						</td>
 					</tr>
 				</table>
@@ -136,6 +139,59 @@
 			<br><br>
 
 		</div>
+		<script>
+			// 제목 선택시 상세조회 페이지로 이동
+            $(function(){
+            	$("#listArea>tbody>tr").each(function(){
+                    $(this).find("td:eq(2)").css("cursor","pointer");
+                  
+                    $(this).find("td:eq(2)").click(function(){
+                      location.href = "<%= contextPath %>/adminPage/detail.bl?uno=" + $(this).prev().text();
+                    });
+                  });
+			});
+			
+         	// 체크박스 전체선택 및 해제
+            $(function(){
+                $("#chk_all").click(function(){
+                    if($("#chk_all").prop("checked")){
+                        $("input[id=chk]").prop("checked",true);
+
+                    }else {
+                        $("input[id=chk]").prop("checked",false);
+                    }
+                });
+            });
+         	
+         	// 삭제시
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "uno=" + selected[i];
+	                	}else{
+	                  		str += "uno=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/delete.me?" + str;
+	              	} 
+	            });
+            });
+		</script>
 
 
 	</div>
