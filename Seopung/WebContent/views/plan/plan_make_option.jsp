@@ -21,11 +21,6 @@ div {
 	font-family: 'Noto Sans KR', sans-serif; 
 }
 
-#plan_page_01 {
-	width: 720px;
-	height: 1000px;
-	margin: auto;
-}
 
 .so_title {
 	font-size: 18px;
@@ -114,11 +109,11 @@ div {
 	<%@include file="../common/menubar.jsp"%>
 	<div class="wrap">
 
-		<form id="plan_page_01" action="/test1.do" method="GET">
+		<form action="<%= contextPath %>/test1.do"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
 			<div class="plan_sec">
 				<div class="so_title">일정만들기 < 1 / 2 ></div>
 				<div class="so_title">
-					<input type="text" style="width: 700px" name="plan_title" id=""
+					<input type="text" style="width: 700px" name="plan_title" id="plan_title"
 						placeholder="일정 제목">
 				</div>
 			</div>
@@ -132,16 +127,13 @@ div {
 								<div class="">
 									<script type="text/javascript">
 										$(function() {
-											$("#plan_sdate")
-													.datepicker(
-															{
-																onSelect : function(
-																		dateText,
-																		inst) {
-																	console
-																			.log(dateText);
-																}
-															});
+										$("#plan_sdate").datepicker(
+											{
+												onSelect : function(dateText,inst) 
+												{
+													console.log(dateText);
+												}
+											});
 										});
 									</script>
 
@@ -155,16 +147,13 @@ div {
 								<div class="">
 									<script type="text/javascript">
 										$(function() {
-											$("#plan_edate")
-													.datepicker(
-															{
-																onSelect : function(
-																		dateText,
-																		inst) {
-																	console
-																			.log(dateText);
-																}
-															});
+										$("#plan_edate").datepicker(
+											{
+												onSelect : function(dateText, inst) 
+												{
+													console.log(dateText);
+												}
+											});
 										});
 									</script>
 
@@ -272,7 +261,7 @@ div {
 
 			<div class="plan_sec" style="width: 720px;">
 				<div class="so_title">동행 유무</div>
-				<div class="plan_type">
+				<div class="plan_acc">
 					<div class="">
 						<label class="box-radio-input"><input type="radio"
 							name="plan_acc" value="y" checked="checked"><span>동행</span></label>
@@ -287,7 +276,7 @@ div {
 
 			<div class="plan_sec" style="width: 720px; float: left;">
 				<div class="so_title">일정 예산금액</div>
-				<div class="plan_type">
+				<div class="plan_budget">
 					<div class="">
 						<input type="text" style="width: 220px; height: 30px;"
 							name="plan_budget" placeholder="예산금액">
@@ -350,12 +339,11 @@ div {
 				</div>
 
 				<div style="text-align: right;">
-					<button class="bbtn" type="submit" name="plan_temp" value="n">다음
-						페이지</button>
-
+					<button class="bbtn" type="submit" name="plan_temp" value="n">다음 페이지</button>
 				</div>
 			</div>
 		</form>
+		<%@include file="../common/footer.jsp"%>
 	</div>
 </body>
 
