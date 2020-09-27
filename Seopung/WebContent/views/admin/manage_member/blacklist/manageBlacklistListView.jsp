@@ -13,7 +13,6 @@
 	
 	int keyfield = (int)request.getAttribute("keyfield");
 	String keyword = (String)request.getAttribute("keyword");
-	String status = (String)request.getAttribute("status");
 
 %>
 <!DOCTYPE html>
@@ -21,6 +20,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
     .outer{
         margin:auto;
@@ -49,7 +49,6 @@
 					<td>
 						<form action="" method="GET">
 							<input type="hidden" name="currentPage" value="1">
-							<input type="hidden" name="status" value="<%=status%>">
 							<select name="keyfield">
 								<%if(keyfield==2){%>
 								<option value="1">이름</option>
@@ -71,29 +70,28 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
-						<th width="20px"><input type="checkbox" id="chk_all" name="uno"></th>
+						<th width="20px"><input type="checkbox" id="chk_all"></th>
 						<th width="75px">번호</th>
 						<th width="120px">아이디</th>
 						<th width="120px">이름</th>
 						<th width="250px">제제 사유</th>
-						<th width="100px">상태</th>
 						<th width="150px">제제 날짜</th>
 					</tr>
 				</thead>
 				<tbody style="text-align:center;">
 					<% if(list.isEmpty()){ %>
 					<tr>
-						<td colspan="7">조회된 리스트가 없습니다.</td>
+						<td colspan="6">조회된 리스트가 없습니다.</td>
 					</tr>
 					<% }else{ %>
 						<% for(Member m : list){ %>
 						<tr>
-							<td><input type="checkbox" id="chk" name="uno" value="<%= r.getRecommendNo() %>"></td>
-							<td><%= r.getRecommendNo() %></td>
-							<td><%= r.getRecommendTitle() %></td>
-							<td><%= r.getRecommendWriter() %></td>
-							<td><%= r.getEnrollDate() %></td>
-							<td><%= r.getCount() %></td>
+							<td><input type="checkbox" id="chk" name="uno" value="<%= m.getUserNo()%>"></td>
+							<td><%= m.getUserNo() %></td>
+							<td><%= m.getUserId() %></td>
+							<td><%= m.getUserName() %></td>
+							<td></td>
+							<td></td>
 						</tr>
 						<% } %>
 					<% } %>
@@ -111,26 +109,26 @@
 						<td width="720px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary" id="btnDelete">목록에서 제거</button>
+							<button class="btn btn-primary" id="btnDelete">블랙리스트 해제</button>
 						</td>
 					</tr>
 				</table>
@@ -143,10 +141,10 @@
 			// 제목 선택시 상세조회 페이지로 이동
             $(function(){
             	$("#listArea>tbody>tr").each(function(){
-                    $(this).find("td:eq(2)").css("cursor","pointer");
+                    $(this).find("td:eq(4)").css("cursor","pointer");
                   
-                    $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.bl?uno=" + $(this).prev().text();
+                    $(this).find("td:eq(4)").click(function(){
+                      location.href = "<%= contextPath %>/adminPage/detail.bl?uno=" + $(this).prevAll().eq(2).text();
                     });
                   });
 			});
