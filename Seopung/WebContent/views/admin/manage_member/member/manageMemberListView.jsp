@@ -21,6 +21,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
   .outer {
     margin: auto;
@@ -142,8 +143,7 @@
 								<% } %>
 							</div>
 						</td>
-						<td width="">
-							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.me';">등록</button>
+						<td width="75">
 						</td>
 					</tr>
 				</table>

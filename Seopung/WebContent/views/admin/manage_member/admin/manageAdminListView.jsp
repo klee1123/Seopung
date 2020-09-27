@@ -142,7 +142,7 @@
 								<% } %>
 							</div>
 						</td>
-						<td width="">
+						<td width="75">
 							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.ad';">등록</button>
 						</td>
 					</tr>

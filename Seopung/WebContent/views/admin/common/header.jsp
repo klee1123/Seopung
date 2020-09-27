@@ -40,8 +40,8 @@
 
 
 <script>
-	$(function(){
 
+	(function () {
 		var msg = "<%= alertMsg %>";
 		
 		if(msg != "null"){ // 메서지가 담겨있을 경우
@@ -50,7 +50,7 @@
 			// 안그러면 menubar.jsp가 포함되어있는 페이지 열때마다 alert 계속 뜰거임
 			<% session.removeAttribute("alertMsg"); %>
 		}	
-	});
+	}());
 </script>
 </head>
 <body id="page-top">
