@@ -70,11 +70,13 @@
 								<%}else{ %>
 								<img src="<%=contextPath %>/<%=m.getProfile() %>" id="propicPreview"
 								alt="프로필사진" height="180px;" width="180px;"  class="rounded-circle">
+								<%if(m.getStatus().equals("Y")){  %>
 								<br>
 								<div align="right">
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="deletePropic();">삭제</button>
 									<button type="button" class="btn btn-outline-secondary btn-sm" onclick="cancelDelete();">취소</button>
 								</div>
+								<%} %>
 								<%} %>
 							</td>
 						</tr>
@@ -169,6 +171,7 @@
 					<%} %>
 				</div>
 			</form>
+			<br>
 		</div>
 		
 		<!-- The Modal -->
@@ -241,7 +244,7 @@
 			}
 			
 			function cancelDelete(){
-				$("#propicPreview").attr("src", "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTu51XqkERN4KCU2HF526phPswwmMY9qjexFA&usqp=CAU");
+				$("#propicPreview").attr("src", "<%=contextPath%>/<%=m.getProfile() %>");
 				$("#profilePath").val("<%=m.getProfile() %>");
 			}
 		
