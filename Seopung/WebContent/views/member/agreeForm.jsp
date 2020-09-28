@@ -65,7 +65,7 @@
 <body>
 	<%@include file = "../common/menubar.jsp" %>
 	 <div class="outer">
-        <form align="center" action="" id="joinCheck">
+        <form align="center" action="<%=contextPath %>/enrollForm.me" id="joinCheck">
             <span>Seopung</span>
             <fieldset id="agreeForm" >
                 <div class="head" style="margin-right:160px;">서풍 회원가입</div>
@@ -81,7 +81,7 @@
                     
                     <div class="foot" align="left" style="margin-left:75px;">
                         <input type="checkbox" id="c1" name="c1" required> 
-                        <label for="c1">만 14세 이상입니다.</label> 
+                        <label for="c1">[필수]만 14세 이상입니다.</label> 
                         <a href="" >></a><br>
                         <input type="checkbox" id="c2" name="c2" required> 
                         <label for="c2">[필수] 서풍계정 약관</label> 
@@ -100,9 +100,35 @@
                         <a href="">></a><br>
                     </div>
                     
-                    <button id="agree" type=submit>동의합니다</button>
+                    <button id="agree" type="submit" >동의합니다</button>
                 </fieldset>
             </form>
     </div>
+    <script>
+    	$(function(){
+    		
+    		if($("input:checkbox[id='allCheck']").click(function(){
+    			$(".foot>input[type='checkbox']").attr("checked", true);
+    			agree_checked();
+    			
+    		}));
+    		
+    		
+    		
+    	});
+    	$(".foot").change(function(){
+    		agree_checked();
+    	});
+    		function agree_checked(){
+    			if($("#c4").prop("checked") && $("#c2").prop("checked") && $("#c1").prop("checked")){
+    				console.log("체크");
+    				$("#agree").removeAttr("disabled");
+    			}else{
+    				console.log("체크안됨");
+    			}
+    		}
+    		
+		   
+    </script>
 </body>
 </html>

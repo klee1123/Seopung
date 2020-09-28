@@ -166,7 +166,7 @@ input:placeholder {
 	</form>
 	</div>
 	
-		
+		<!-- ajax로  -->
 	 <form action="<%=contextPath %>/send" method="post" id="form1">
 	<table>
 		<tr>
@@ -182,7 +182,9 @@ input:placeholder {
 		</tr>
 	</table> 
 	</form>
-	<script>
+	<script>	
+	
+		
 		
 		var regI =/^[a-z0-9]{4,12}$/i;
 		function idCheck(){
