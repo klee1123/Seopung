@@ -11,21 +11,21 @@ public class PlanOptionService {
 	
 public int insertPlanOption(PlanOption p) {
 		
-		Connection conn = /* JDBCTemplate. */getConnection();
+		Connection conn = getConnection();
 		
 		int result = new PlanOptionDao().insertPlanOption(conn, p);
 		
-		// 트랜잭션 처리
+		
 		if(result > 0) {
-			/* JDBCTemplate. */commit(conn);
+			commit(conn);
 		}else {
-			/* JDBCTemplate. */rollback(conn);
+			rollback(conn);
 		}
 		
-		/* JDBCTemplate. */close(conn);
+		close(conn);
 		
 		return result;
-		
+	
 	}
 
 	

@@ -42,8 +42,8 @@ public class PlanOptionDao {
 			pstmt = conn.prepareStatement(sql); // 미완성된sql문 => 완성하고 실행
 			
 			pstmt.setString(1, p.getPlanTitle());
-			pstmt.setString(2, p.getPlanSdate());
-			pstmt.setString(3, p.getPlanEdate());
+			pstmt.setDate(2, p.getPlanSdate());
+			pstmt.setDate(3, p.getPlanEdate());
 			pstmt.setString(4, p.getPlanAge());
 			pstmt.setString(5, p.getPlanAcc());
 			pstmt.setString(6, p.getPlanBudget());
@@ -60,7 +60,7 @@ public class PlanOptionDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			/* JDBCTemplate. */close(pstmt);
+			close(pstmt);
 		}
 		
 		return result;		

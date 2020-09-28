@@ -6,8 +6,8 @@ public class PlanOption {
 
 	private int planNo;					// 일정번호
 	private String planTitle;			// 일정제목
-	private String planSdate;				// 시작일 
-	private String planEdate;				// 종료일
+	private Date planSdate;				// 시작일 
+	private Date planEdate;				// 종료일
 	private String planAge;				// 연령대
 	private String planAcc;				// 동행유무
 	private String planBudget;			// 예산금액
@@ -26,7 +26,7 @@ public class PlanOption {
 		
 	}
 
-	public PlanOption(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+	public PlanOption(int planNo, String planTitle, Date planSdate, Date planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
 			String planTemp, String planType, String planTrans, int planRecommend, int planScrapCount) {
 		super();
@@ -49,7 +49,7 @@ public class PlanOption {
 	}
 	
 	// 일정만들기 옵션
-	public PlanOption(String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+	public PlanOption(String planTitle, Date planSdate, Date planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
 			String planTemp, String planType, String planTrans) {
 		super();
@@ -89,22 +89,22 @@ public class PlanOption {
 	}
 
 
-	public String getPlanSdate() {
+	public Date getPlanSdate() {
 		return planSdate;
 	}
 
 
-	public void setPlanSdate(String planSdate) {
+	public void setPlanSdate(Date planSdate) {
 		this.planSdate = planSdate;
 	}
 
 
-	public String getPlanEdate() {
+	public Date getPlanEdate() {
 		return planEdate;
 	}
 
 
-	public void setPlanEdate(String planEdate) {
+	public void setPlanEdate(Date planEdate) {
 		this.planEdate = planEdate;
 	}
 
