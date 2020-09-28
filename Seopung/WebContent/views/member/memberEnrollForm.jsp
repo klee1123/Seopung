@@ -92,7 +92,7 @@ input:placeholder {
 	<div class="outer"></div>
 
 	<form align="center" action="<%=contextPath %>/insert.me" id="join"
-		method="post">
+		method="post" onsubmit="retrun test();">
 		<span>Seopung</span>
 		<fieldset>
 			<div class="head">서풍 회원가입 정보를 입력해주세요.</div>
@@ -104,21 +104,22 @@ input:placeholder {
 			<table id="join2">
 				<tr>
 					<th>&nbsp;&nbsp;*아이디</th>
-					<td><input type="text" name="userId" id="Id" required maxlength="12" 
-						placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
+					<td><input type="text" name="userId" id="Id" required
+						maxlength="12" placeholder="&nbsp;4 ~ 12자 영문 대ㆍ소문자, 숫자"></td>
 					<td>
 						<button type="button" onclick="idCheck();">중복체크</button>
 					</td>
 				</tr>
-				
+
 				<tr>
-					
+
 					<th>&nbsp;&nbsp;*비밀번호</th>
-					<td><input type="password" name="userPwd" required id="pwd" 
+					<td><input type="password" name="userPwd" required id="pwd"
 						maxlength="15" placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 					<td></td>
 				</tr>
-				<div id="validPwdArea" style="position:absolute; margin-top:95px; margin-left:120px; color:red;"></div>
+				<div id="validPwdArea"
+					style="position: absolute; margin-top: 95px; margin-left: 120px; color: red;"></div>
 				<tr>
 					<th>&nbsp;&nbsp;*비밀번호 확인</th>
 					<td><input type="password" required maxlength="15"
@@ -148,14 +149,17 @@ input:placeholder {
 
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일</th>
-					<td><input type="email" name="email" required
+					<td><input type="email" name="email" id="email" required
 						placeholder="&nbsp이메일"></td>
+					<input type="hidden" readonly="readonly" name="code_check"
+						id="code_check" value="<%=getRandom()%>">
 					<td><button type="button" onclick="send();">인증번호 발송</button></td>
-									
+
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일 인증</th>
-					<td><input type="text" required placeholder="&nbsp인증번호 입력"></td>
+					<td><input type="text" id="checkEmail" required placeholder="&nbsp인증번호 입력"></td>
+					<button onclick="test();")>ㅇㅇㅇ</button>
 					<td></td>
 				</tr>
 			</table>
@@ -165,9 +169,8 @@ input:placeholder {
 		</fieldset>
 	</form>
 	</div>
-	
-		<!-- ajax로  -->
-	 <form action="<%=contextPath %>/send" method="post" id="form1">
+
+	<%-- <form action="<%=contextPath %>/send" method="post" id="form1">
 	<table>
 		<tr>
 			<td>
@@ -181,9 +184,30 @@ input:placeholder {
 			</td>
 		</tr>
 	</table> 
-	</form>
+	</form> --%>
+	<!-- ajax로  -->
 	<script>	
-	
+		function send(){
+			$.ajax({
+				url:"<%=contextPath%>/send",
+				data:{
+					email:$("#email").val(),
+					code_check:$("#code_check").val()
+				},
+				type:"post",
+				success:function(data){
+					console.log("ajax통신 성공");
+					
+				},
+				error:function(){
+					consoel.log("ajax통신 실패");
+				}
+				
+			});
+			
+			
+			
+		}
 		
 		
 		var regI =/^[a-z0-9]{4,12}$/i;
@@ -248,7 +272,9 @@ input:placeholder {
 				}
 			})
 		}
-		
+			
+				
+			
 		
 		
 			$(function(){
@@ -259,7 +285,12 @@ input:placeholder {
 						alert("비밀번호가 일치하지 않습니다.");
 						checkPwd.val("");
 						checkPwd.focus();
-					}
+					}		
+					if($("#code_check").val() != $("#checkEmail").val()){
+						alert("인증번호가 일치하지 않습니다.");
+						$("#checkEmail").val("");
+						$("#checkEmail").focus();
+					}					
 				});
 			});
 		
