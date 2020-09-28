@@ -18,11 +18,11 @@ import com.kh.common.PageInfo;
 
 public class MemberDao {
 	
-private Properties prop = new Properties();
+	private Properties prop = new Properties();
 	
 	public MemberDao() {
 		
-		String fileName = AdminDao.class.getResource("/sql/adminMember/adminMember-mapper.xml").getPath();
+		String fileName = MemberDao.class.getResource("/sql/adminMember/adminMember-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));

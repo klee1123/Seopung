@@ -33,9 +33,9 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">블랙리스트 신고내역조회</h1>
-
+		-->
 		<br>
 
 		<div class="outer">

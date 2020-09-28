@@ -76,12 +76,12 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtiliti" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-folder"></i>
-          <span>회원관리</span>
+          <span>사용자관리</span>
         </a>
         <div id="collapseUtiliti" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.me?currentPage=1">회원목록</a>
-            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1">관리자목록</a>
+            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1">관리자</a>
+            <a class="collapse-item" href="<%=contextPath%>/adminPage/list.me?currentPage=1">회원</a>
             <a class="collapse-item" href="<%=contextPath%>/adminPage/list.bl?currentPage=1">블랙리스트</a>
           </div>
         </div>

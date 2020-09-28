@@ -36,6 +36,7 @@ public class AdminMemberDetailServlet extends HttpServlet {
 		Member m = new MemberService().selectMember(userNo);
 		
 		if(m!=null) {
+			request.setAttribute("pageTitle", "회원 상세정보");
 			request.setAttribute("m", m);
 			request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberDetailView.jsp").forward(request, response);
 			
