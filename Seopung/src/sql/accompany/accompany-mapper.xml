@@ -18,4 +18,12 @@
 		  , ?
 		  );
 	</entry>
+	
+	<entry key="selectListCount">
+		SELECT COUNT(*) LISTCOUNT
+		  FROM TB_ACCOMPANY
+		 WHERE ACCOM_STATUS = 'Y'
+	
+	
+	</entry>
 </properties>
