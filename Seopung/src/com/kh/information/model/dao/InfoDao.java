@@ -174,21 +174,23 @@ public class InfoDao {
 		return result;
 	}
 	
-	public int nickCheck(Connection conn, String checkNick) {
+	public int nickCheck(Connection conn, String nickChk) {
 		// select문 => 오로지 한개의 값(개수)
 		int count = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("checkNick");
+		String sql = prop.getProperty("nickChk");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, checkNick);
+			pstmt.setString(1, nickChk);
 			
 			rset = pstmt.executeQuery();
+			
+			System.out.println(rset);
 			
 			if(rset.next()) {
 				count = rset.getInt(1);

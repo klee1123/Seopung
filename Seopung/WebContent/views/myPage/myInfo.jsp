@@ -112,7 +112,7 @@
                 </tr>
                 <tr>
                     <th align="left">닉네임</th>
-                    <td><span style="width: 100px;"><%= nickName %>&nbsp;&nbsp;&nbsp;</span>     <button type="button" data-toggle="modal" data-target="#updateNickForm" class="btn btn-secondary btn-sm">닉네임변경</button></td>
+                    <td><span style="width: 100px;"><%= nickName %>&nbsp;&nbsp;&nbsp;</span><button type="button" data-toggle="modal" data-target="#updateNickForm" class="btn btn-secondary btn-sm">닉네임변경</button></td>
                 </tr>
                 <tr>
                     <th align="left">비밀번호</th>
@@ -156,7 +156,7 @@
         
         <!-- Modal body -->
         <div class="modal-body" align="center">
-            <form action="<%= contextPath %>/updateNick.me" method="POST">
+            <form action="<%= contextPath %>/updateNick.me" method="POST" id="nickChange">
                 <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
                 <table>
                 	<tr>
@@ -164,17 +164,48 @@
                 		<td><input type="text" name="userNick" id="userNick" required value="<%= nickName %>"></td>
                     <tr>
                         <th>변경할 닉네임</th>
-                        <td><input type="text" name="updateNick" id="updateNick" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn">중복확인</button></td>
+                        <td><input type="text" name="updateNick" id="updateNick" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn" onclick="nickCheck();">중복확인</button></td>
+                    	
                     </tr>
+                    <tr><td colspan="2" align="center"><span id=nickView></span></td></tr>
                 </table>
                 <br>
-               <button type="submit" class="btn btn-secondary">닉네임변경</button>
+               <button type="submit" class="btn btn-secondary" id="nickChkBtn">닉네임변경</button>
            </form>
         </div>
-        
       </div>
     </div>
   </div>
+  
+  <script>
+           var regN = /^[a-z0-9가-힣]{1,10}$/i;
+  	function nickCheck(){
+  		var $userNick = $("#updateNick");
+  		var $nickChkBtn = $("#nickChkBtn");
+  		$.ajax({
+  			url:"<%= contextPath %>/nickChk.me",
+  			data:{nickChk:$userNick.val()},
+  			type:"get",
+  			success:function(result){
+  				
+  				if(regN.test($userNick.val())){
+	  				if(result == "fail"){
+	  					nickView.innerHTML = ("이미 존재하는 닉네임 입니다");
+	  					$userNick.val("");
+	  					$userNick.focus();
+	  				}else {
+	  					nickView.innerHTML = ("사용가능한 닉네임 입니다.");
+	  				}
+  				}else {
+  					alert("유효한 닉네임이 아닙니다.")
+  				}
+  			},error:function(){
+  				console.log("ajax 통신 실패!");
+  			}
+  		})
+  	}
+  </script>
+  
     
     <!-- 비밀번호변경 버튼 클릭시 보여질 Modal -->
    <div class="modal" id="updatePwdForm">
@@ -209,37 +240,12 @@
                 <br>
                <button type="submit" class="btn btn-secondary" >비밀번호변경</button>
            </form>
-           <script>
-           		$(function(){
-           			$("input").keyUp(function(){
-           				var pwd1= $("#pwd1").val();
-           				var pwd2= $("#pwd2").val();
-           				if(pwd1 != "" || pwd2 != "") {
-           					if(pwd1 == pwd2){
-           						pwdSpan.innerHTML="비밀번호가 일치합니다.";
-           					}else {
-           						pwdSpan.innerHTML = "비밀번호가 일치하지 않습니다";
-           					}
-           				}
-           			});
-           		});	
-           /*
-           		function validatePwd() {
-           			if($("input[name=updatePwd]").val() && $("input[name=checkPwd]").val() != null) {
-	           			if($("input[name=updatePwd]").val() != $("input[name=checkPwd]").val()) {
-	           			 	pwdSpan.innerHTML = "비밀번호가 일치하지 않습니다";
-	           			 	return false;
-	           			}else {
-	                        pwdSpan.innerHTML = "비밀번호가 일치합니다."
-	                    }
-           			}
-           		}; */
-           </script>
         </div>
-        
       </div>
     </div>
   </div>
+  
+  
 <!-- 이메일변경 버튼 클릭시 보여질 Modal-->
 <div class="modal" id="updateEmailForm">
     <div class="modal-dialog">

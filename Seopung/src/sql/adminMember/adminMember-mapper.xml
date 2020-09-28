@@ -101,5 +101,47 @@
 		       MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
+	
+	<entry key="selectReportType">
+		SELECT DISTINCT REPORT_TYPE
+		  FROM TB_REPORT
+		 WHERE USER_NO2 = ?
+	</entry>
+	
+	<entry key="selectReportListCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_REPORT
+		 WHERE USER_NO2 = ?
+	</entry>
+	
+	<entry key="selectReportList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       REPORT_NO
+		                     , REPORT_DATE
+		                     , REPORT_TYPE
+		                     , REPORT_CONTENT
+		                     , USER_ID
+		                  FROM TB_REPORT
+		                  JOIN TB_MEMBER M ON(USER_NO2 = M.USER_NO)
+		                 WHERE USER_NO2 = ?
+		                 ORDER
+		                    BY REPORT_NO DESC
+		               ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="removeBlacklist">
+		UPDATE 
+		       TB_MEMBER
+		   SET STATUS = 'Y'
+		 WHERE USER_NO = ?
+	</entry>
 
 </properties>

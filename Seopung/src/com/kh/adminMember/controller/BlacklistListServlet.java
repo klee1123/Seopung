@@ -91,14 +91,19 @@ public class BlacklistListServlet extends HttpServlet {
 		
 		ArrayList<Member> list = new MemberService().selectList(pi, keyfield, keyword, status);
 		
+		String reportType = "";
+		for(int i=0; i<list.size(); i++) {
+			reportType = new MemberService().selectReportType(list.get(i).getUserNo());
+			list.get(i).setReportType(reportType);
+		}
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("status", status);
-		request.setAttribute("pageTitle", "회원 목록");
+		request.setAttribute("pageTitle", "블랙리스트 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_member/blacklist/manageBlacklistListView.jsp").forward(request, response);
 	
 		
 		

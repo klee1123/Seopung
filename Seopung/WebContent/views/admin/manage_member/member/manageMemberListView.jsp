@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>서풍-관리자페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
   .outer {
@@ -72,6 +72,7 @@
 							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=">전체</a> 
 							<a class="dropdown-item" href="<%=contextPath%>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">회원</a> 
 							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=N">탈퇴</a>
+							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=B">블랙리스트</a>
 						</div>
 					</td>
 				</tr>
@@ -104,9 +105,11 @@
 							<td><%= a.getEnrollDate() %></td>
 							<% if(a.getStatus().equals("N")){ %>
 							<td><%= a.getModifyDate() %></td>
-							<% }else{ %>
+							<% }else if(a.getStatus().equals("Y")){ %>
 							<td></td>
-							<% } %>
+							<% }else{ %>
+							<td>블랙리스트</td>
+							<%} %>
 							<td><button class="btn btn-outline-dark btn-sm" onclick="location.href='<%=contextPath%>/adminPage/detail.me?userNo=<%=a.getUserNo()%>';">보기</button></td>
 						</tr>
 						<% } %>

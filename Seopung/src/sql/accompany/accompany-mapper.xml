@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	<entry key="accomInsert">
+		INSERT 
+		  INTO TB_ACCOMPANY
+		  (    ACCOM_NO
+		     , USER_NO
+		     , USER_NO2
+		     , PLAN_NO
+		  )
+		  VALUES
+		  (
+		    SEQ_UNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  );
+	</entry>
+</properties>
