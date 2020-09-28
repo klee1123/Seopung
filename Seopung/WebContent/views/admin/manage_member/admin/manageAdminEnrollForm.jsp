@@ -119,6 +119,8 @@
 				});
 			}
 
+			
+			
 			// 등록버튼 클릭시 전체 유효성 검사
 			function validateForm() {
 
@@ -141,6 +143,8 @@
 				}
 
 			}
+			
+			
 
 			// 아이디 유효성 검사
 			function validateIdin(input) {

@@ -6,8 +6,8 @@ public class PlanOption {
 
 	private int planNo;					// 일정번호
 	private String planTitle;			// 일정제목
-	private String planSdate;			// 시작일 
-	private String planEdate;			// 종료일
+	private String planSdate;				// 시작일 
+	private String planEdate;				// 종료일
 	private String planAge;				// 연령대
 	private String planAcc;				// 동행유무
 	private String planBudget;			// 예산금액
@@ -47,7 +47,27 @@ public class PlanOption {
 		this.planRecommend = planRecommend;
 		this.planScrapCount = planScrapCount;
 	}
-
+	
+	// 일정만들기 옵션
+	public PlanOption(String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
+			String planTemp, String planType, String planTrans) {
+		super();
+		this.planTitle = planTitle;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+		this.planAge = planAge;
+		this.planAcc = planAcc;
+		this.planBudget = planBudget;
+		this.planScrapYn = planScrapYn;
+		this.planPrivate = planPrivate;
+		this.planMemo = planMemo;
+		this.planHashtag = planHashtag;
+		this.planTemp = planTemp;
+		this.planType = planType;
+		this.planTrans = planTrans;
+	}
+	
 
 	public int getPlanNo() {
 		return planNo;
