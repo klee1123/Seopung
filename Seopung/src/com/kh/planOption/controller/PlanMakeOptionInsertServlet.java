@@ -1,7 +1,12 @@
 package com.kh.planOption.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,19 +54,39 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 		String planType = request.getParameter("planType");
 		String planTrans = request.getParameter("planTrans");
 		
-		
 		PlanOption p = new PlanOption();
+		p.setPlanTitle(planTitle);
+		p.setPlanSdate(planSdate);
+		p.setPlanEdate(planEdate);
+		p.setPlanAge(planAge);
+		p.setPlanAcc(planAcc);
+		p.setPlanBudget(planBudget);
+		p.setPlanScrapYn(planScrapYn);
+		p.setPlanPrivate(planPrivate);
+		p.setPlanMemo(planMemo);
+		p.setPlanHashtag(planHashtag);
+		p.setPlanTemp(planTemp);
+		p.setPlanType(planType);
+		p.setPlanTrans(planTrans);
+		
 		
 		int result = new PlanOptionService().insertPlanOption(p);
 		
-		request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
+		//request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
+		
+		request.getRequestDispatcher("views/plan/plan_make_map.jsp").forward(request, response);
+		
 		
 		if(result > 0) {
 			
 			response.sendRedirect(request.getContextPath());
 		}else {
-			
+			System.out.println("실패");
 		}
+		
+		
+		
+		
 	}
 
 	/**

@@ -221,7 +221,7 @@
 					</table>
 				</div>
 
-				<div id="content_2_2" style="width: 530px; height: 110px;">
+				<div id="content_2_2" style="width: 530px; height: 110px; overflow:auto;">
 					<table style="width: 500px; height: 90px; text-align: center;">
 						<tr>
 							<td><button disabled class="btn btn-secondary">10대</button></td>
@@ -236,7 +236,7 @@
 					</table>
 
 				</div>
-				<div id="content_2_3" style="width: 530px; height: 200px">
+				<div id="content_2_3" style="width: 530px; height: 200px; overflow:auto;">
 					<select name="" id="">
 						<option value="">day1</option>
 						<option value="">day2</option>
@@ -248,6 +248,16 @@
 						<li>서울역</li>
 						<li>경복궁</li>
 						<li>창덕궁</li>
+						<li>서울역</li>
+						<li>경복궁</li>
+						<li>창덕궁</li>
+						<li>서울역</li>
+						<li>경복궁</li>
+						<li>창덕궁</li>
+						<li>서울역</li>
+						<li>경복궁</li>
+						<li>창덕궁</li>
+						
 					</ol>
 				</div>
 
@@ -270,7 +280,15 @@
 						<button style="height: 60px;" class="btn btn-primary btn-sm">동행 신청</button>
 					</div>
 				</div>
-				<div id="content_3_2" style="width: 520px;">일정 작성자가 텍스트상자에 작성한 내용</div>
+				<div id="content_3_2" style="width: 520px; overflow:auto;">
+				것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아
+				피가 것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한
+				밥을 어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는
+				약동하다. 보이는 약동하다.것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아
+				피가 것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한
+				밥을 어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는
+				약동하다. 보이는 약동하다.
+				</div>
 			</div>
 
 

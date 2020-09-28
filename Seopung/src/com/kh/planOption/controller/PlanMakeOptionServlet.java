@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class PlanMakeOption
  */
-@WebServlet("/planOptionForm.po")
+@WebServlet("/planOption.pd")
 public class PlanMakeOptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

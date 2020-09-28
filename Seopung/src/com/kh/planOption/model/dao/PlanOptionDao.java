@@ -5,10 +5,13 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -42,8 +45,8 @@ public class PlanOptionDao {
 			pstmt = conn.prepareStatement(sql); // 미완성된sql문 => 완성하고 실행
 			
 			pstmt.setString(1, p.getPlanTitle());
-			pstmt.setDate(2, p.getPlanSdate());
-			pstmt.setDate(3, p.getPlanEdate());
+			pstmt.setString(2, p.getPlanSdate());
+			pstmt.setString(3, p.getPlanEdate());
 			pstmt.setString(4, p.getPlanAge());
 			pstmt.setString(5, p.getPlanAcc());
 			pstmt.setString(6, p.getPlanBudget());
