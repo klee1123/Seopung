@@ -68,7 +68,7 @@
                     
 
                 
-	            <form action="" method="POST">
+	            <form action="<%=contextPath %>/list.ac" method="GET">
                     
 				<br><br>
 				
