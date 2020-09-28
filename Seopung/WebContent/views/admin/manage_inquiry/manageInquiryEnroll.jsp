@@ -19,7 +19,7 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading
+		<!-- Page Heading 
 		<h1 class="h3 mb-4 text-gray-800">FAQ</h1>-->
 
 		<div class="outer" align="left">
@@ -30,14 +30,15 @@
 						<tr>
 							<th width="15px"></th>
 							<td width="120px">제목</td>
-							<td width="1000px"><input type="text" name="title">
+							<td width="1000px"><input type="text" name="title" value="동행 구하기에 대해">
 							</td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>내용</td>
 							<td>
-                        	<textarea name="content" rows="5" cols="80" style="resize:none;"></textarea>
+                            <textarea name="content" rows="5" cols="80" style="resize:none;">동행 구하기를 어떻게 사용하는지 모르겠어요. 알려주실수 있나요?
+                            </textarea>
                     		</td>
 						</tr>
 						<tr>
