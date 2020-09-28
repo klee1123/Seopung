@@ -1,15 +1,19 @@
 package com.kh.accompany.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
-
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
+
+import com.kh.accompany.model.vo.Accompany;
+import com.kh.common.PageInfo;
 
 
 
@@ -57,6 +61,20 @@ private Properties prop = new Properties();
 		}
 		
 		return listCount;
+		
+	}
+	
+	public ArrayList<Accompany> selectList(Connection conn , PageInfo pi){
+		
+		ArrayList<Accompany> list = new ArrayList<Accompany>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty(key)
+		
+		
 		
 	}
 	

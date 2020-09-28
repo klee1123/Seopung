@@ -26,4 +26,28 @@
 	
 	
 	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+		 FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       ACCOM_NO
+		                     , ACCOM_APPLY
+		                     , ACCOM_STATUS
+		                     , ACCOM_COMPLETE
+		                     , USER_NO
+		                     , USER_NO2
+		                     , PLAN_NO
+		                  FROM TB_ACCOMPANY
+		                  WHERE ACCOM_STATUS = 'Y'
+		                 ORDER 
+		                    BY ACCOM_NO DESC
+		               ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.accompany.model.service.AccompanyService;
-import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
 
 /**
@@ -70,9 +69,12 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
+		ArrayList<Accompany> list =  new AccompanyService().selectList(pi);
+		
+		
 
 		
-		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/accompany/accompanyList/accompanyList.jsp").forward(request, response);
 		
 		
 		
