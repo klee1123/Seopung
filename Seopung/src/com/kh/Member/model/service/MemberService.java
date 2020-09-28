@@ -54,4 +54,29 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
+	
+	public String searchId(String name, String email) {
+		Connection conn = getConnection();
+		
+		String id = new MemberDao().searchId(conn, name, email);
+		
+		close(conn);
+		return id;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

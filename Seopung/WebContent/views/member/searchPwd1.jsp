@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 .outer {
-	margin-top: 130px;
+	margin-top: 150px;
 }
 
 #searchPwd1 {

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
 .outer {
-	margin-top: 100px;
+	margin-top: 150px;
 }
 
 #searchId1 {
@@ -55,8 +55,8 @@ table+br+button {
 <body>
 	<%@include file="../common/menubar.jsp"%>
 	<div class="outer" id="searchId">
-		<form action="">
-			<fieldset style="width: 460px; height: 430px;" id="searchId1"
+		<form action="<%=contextPath%>/searchId2.me" method="post">
+			<fieldset style="width: 460px; height: 330px;" id="searchId1"
 				align="center">
 				<p style="font-size: 22px; font-weight: bold; color: dimgray">아이디
 					찾기</p>
@@ -77,11 +77,7 @@ table+br+button {
 						<td><input type="text" name="email" placeholder="이메일"></td>
 						<td></td>
 					</tr>
-					<tr>
-						<th>&nbsp;이메일인증</th>
-						<td><input type="text" name="checkNum" placeholder="인증번호 입력"></td>
-						<td><button>인증번호 발송</button></td>
-					</tr>
+					
 				</table>
 				<br>
 				<button type="submit">다음</button>

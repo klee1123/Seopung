@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	String id = (String)request.getAttribute("id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,27 +53,24 @@
 	color: white;
 }
 
-#userId {
+#userId1 {
 	margin-left: 15px;
 	font-size: 20px;
 	border: 1px solid grey;
 	line-height: 50px
 }
 
-input[type=radio] {
-	width: 15px;
-	height: 15px;
-	border: 1px;
-	font-size: 20px;
-	margin-top: 20px
+#id{
+margin-top:30px;
 }
+
 </style>
 </head>
 <body>
 	<%@include file="../common/menubar.jsp"%>
 	<div class="outer">
 		<form action="">
-			<fieldset id="searchId2" style="width: 460px; height: 420px;"
+			<fieldset id="searchId2" style="width: 460px; height: 370px;"
 				align="center">
 				<br>
 				<p style="font-size: 22px; font-weight: bold; color: dimgray">아이디
@@ -80,17 +81,26 @@ input[type=radio] {
 				<br>
 				<div style="border: 1px solid dimgray;"></div>
 				<br>
-				<fieldset style="width: 430px; height: 120px;" id="userId">
-					<input type="radio" id="userId1" name="id"><label
-						for="userId1">user01</label><br> <input type="radio"
-						id="userId2" name="id"><label for="userId2">user02</label>
+				<%if(id.equals("")){ %>
+						<fieldset style="width: 430px; height: 120px;" id="userId1">
+					<div style="color:red" >일치하는 아이디가 없습니다.</div>
+	
 				</fieldset>
 				<br>
-				<button id=login>로그인</button>
-				<button id="searchPwd">비밀번호 찾기</button>
+				
+				<button type="button" onclick="location.href='<%=contextPath %>/searchId.me'" id="searchPwd">아이디찾기</button>
+				<button type="button" onclick="location.href='<%=contextPath%>'" id="close">메인으로</button>
+				<%}else{ %>
+					<fieldset style="width: 430px; height: 120px;" id="userId1">
+				 	<div id="id"><%=id %></div>
+						
+				</fieldset>
 				<br>
-				<br>
-				<button id="close">닫기</button>
+				
+				<button type="button" onclick="location.href='<%=contextPath%>/searchPwd.me'" id="searchPwd">비밀번호 찾기</button>
+				
+				<button type="button" onclick="location.href='<%=contextPath%>'" id="close">메인으로</button>
+						<%} %>
 		</form>
 	</div>
 </body>

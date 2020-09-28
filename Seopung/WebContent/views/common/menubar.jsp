@@ -251,8 +251,8 @@ $(function(){
 						<table style="margin-right: 20px;">
 							<tr>
 								<td><a href="<%=contextPath%>/agreeform.me">회원가입</a>|</td>
-								<td><a href="">아이디찾기</a>|</td>
-								<td><a href="">비밀번호찾기</a></td>
+								<td><a href="<%=contextPath%>/searchId.me">아이디찾기</a>|</td>
+								<td><a href="<%=contextPath%>/searchPwd.me">비밀번호찾기</a></td>
 							</tr>
 						</table>
 					</div>
