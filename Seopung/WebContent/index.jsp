@@ -59,7 +59,7 @@
                         <div class="banner_text_iner">
                             <h5 style="font-family: 'Do Hyeon', sans-serif;">나만의 여행 플래너 서풍</h5>
                             <h1 style="font-family: 'Do Hyeon', sans-serif; font-size: 35px;">쉽고 빠르게 여행을 기록하세요</h1><br><br>
-                            <a href="#" class="genric-btn primary e-large" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px;">일정 만들기</a>
+                            <a href="views/plan/plan_make_option.jsp" class="genric-btn primary e-large" style="font-family: 'Do Hyeon', sans-serif; font-size: 20px;">일정 만들기</a>
                         </div>
                     </div>
                 </div>
