@@ -111,6 +111,46 @@
 						<td>2020.09.09</td>
 						<td>84</td>
 					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>친구랑 함께 하는 여행이 궁금합니다.</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>84</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>친구랑 함께 하는 여행이 궁금합니다.</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>84</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>친구랑 함께 하는 여행이 궁금합니다.</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>84</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>친구랑 함께 하는 여행이 궁금합니다.</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>84</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>친구랑 함께 하는 여행이 궁금합니다.</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>84</td>
+					</tr>
 				</tbody>
 			</table>
 
@@ -120,7 +160,7 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>개
+								style="color: red"><%=listCount %></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

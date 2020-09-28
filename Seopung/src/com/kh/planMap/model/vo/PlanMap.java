@@ -2,7 +2,7 @@ package com.kh.planMap.model.vo;
 
 import java.sql.Date;
 
-public class planMap {
+public class PlanMap {
 
 	private int planXyNo;		// 좌표번호
 	private Date planDay;		// 일정일
@@ -11,7 +11,7 @@ public class planMap {
 	private String latitude;	// 위도
 	private String longitude;	// 경도
 	
-	public planMap(int planXyNo, Date planDay, int orderNo, String lineMemo, String latitude, String longitude) {
+	public PlanMap(int planXyNo, Date planDay, int orderNo, String lineMemo, String latitude, String longitude) {
 		super();
 		this.planXyNo = planXyNo;
 		this.planDay = planDay;
@@ -69,14 +69,11 @@ public class planMap {
 		this.longitude = longitude;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "planMap [planXyNo=" + planXyNo + ", planDay=" + planDay + ", orderNo=" + orderNo + ", lineMemo="
 				+ lineMemo + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
-	
-	
 	
 	
 	

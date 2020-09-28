@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="insertPlanOption">
-		INSERT /* com.kh.member.model.dao.MemberDao#insertMember() */
+		INSERT
 		  INTO TB_PLAN_OPTION
 		  (
 		     PLAN_NO

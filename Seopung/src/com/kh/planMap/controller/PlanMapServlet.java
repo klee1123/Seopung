@@ -1,23 +1,23 @@
-package com.kh.planOption.controller;
+package com.kh.planMap.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
- * Servlet implementation class PlanMakeOption
+ * Servlet implementation class PlanMapServlet
  */
-@WebServlet("/planOption.pd")
-public class PlanMakeOptionServlet extends HttpServlet {
+@WebServlet("/PlanMapServlet")
+public class PlanMapServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanMakeOptionServlet() {
+    public PlanMapServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +26,10 @@ public class PlanMakeOptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("views/plan/plan_make_map.jsp").forward(request, response);
-	
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
