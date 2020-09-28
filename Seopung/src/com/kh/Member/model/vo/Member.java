@@ -75,6 +75,23 @@ public class Member {
 		this.modifyDate = modifyDate;
 		this.status = status;
 	}
+	
+	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String birth,
+			String email, Date enrollDate, Date modifyDate, String profile, String userIntro, String status) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.email = email;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.profile = profile;
+		this.userIntro = userIntro;
+		this.status = status;
+	}
 
 
 	public int getUserNo() {

@@ -1,16 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.PageInfo, com.kh.admin.model.vo.Admin" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	int keyfield = (int)request.getAttribute("keyfield");
+	String keyword = (String)request.getAttribute("keyword");
+	String status = (String)request.getAttribute("status");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
-    .outer{
-        margin:auto;
-        width:1000px;
-    }
-
+.outer {
+	margin: auto;
+	width: 1000px;
+}
 </style>
 </head>
 <body>
@@ -21,8 +37,9 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
+		<!-- Page Heading
 		<h1 class="h3 mb-4 text-gray-800">FAQ</h1>
+		-->
 
 		<br>
 		
@@ -102,8 +119,8 @@
 			<div align="center">
 				<table>
 					<tr>
-						<td width=""><span>총 회원수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>명
+						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
+								style="color: red">5</b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

@@ -21,8 +21,8 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">신고내역</h1>
+		<!-- Page Heading
+		<h1 class="h3 mb-4 text-gray-800">신고내역</h1>-->
 
 		<br>
 		
@@ -102,8 +102,8 @@
 			<div align="center">
 				<table>
 					<tr>
-						<td width=""><span>총 회원수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>명
+						<td width=""><span>총 신고글 수 &nbsp;&nbsp;&nbsp;<b
+								style="color: red">5</b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

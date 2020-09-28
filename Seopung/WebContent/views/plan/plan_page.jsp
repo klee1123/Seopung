@@ -5,19 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>  일정  </title>
 <style>
 
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
+.notosanskr * { font-family: 'Noto Sans KR', sans-serif; }
+
+	
 .container-fluid {
 	margin-top: 100px;
-	font-family: 'Noto Sans KR', sans-serif; 
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .outer {
 	width: 1000px;
-	border: solid;
 	margin: auto;
 	margin-top: 120px;
 }
@@ -44,7 +46,7 @@
 
 #content_2_2 { /*유형영역*/
 	background-color: lightgrey;
-	padding: 20px;
+	padding: 11px;
 	box-sizing: border-box;
 	margin-top: 10px;
 	float: left;
@@ -60,20 +62,13 @@
 }
 
 #content_3 table { /*작성자 프로필*/
-	width: 340px;
+	width: 350px;
 	background: white;
 	box-shadow: 5px 5px 10px -4px gray;
-	float: left;
-	margin-right: 20px;
-	box-shadow: 5px 5px 10px -4px gray;
-	float: left;
 	margin-right: 20px;
 	margin-top: 15px;
 	float: left;
-	margin-right: 20px;
-	box-shadow: 5px 5px 10px -4px gray;
-	float: left;
-	margin-right: 20px;
+	
 }
 
 #content_3_2 { /*일정 작성자가 텍스트상자에 작성한 내용*/
@@ -122,17 +117,19 @@
 
 		<div class="outer">
 
-			<div class="top" style="height: 40px; border: solid;">
+			<div class="top" style="height: 40px; ">
 				<div id="top_01">
 					<!--아이디 넘버 체크시 작성자와 일치하면 해당 div 활성화-->
-					<button>수정</button>
-					<button>삭제</button>
+					<button style="height: 30px;" class="btn btn-primary btn-sm">수정</button>
+					<button style="height: 30px;" class="btn btn-primary btn-sm">삭제</button>
+
 				</div>
 				<div id="top_02">
 					<!--아이디 넘버 체크시 작성자와 일치하지 않으면 해당 div 활성화-->
-					<button>추천</button>
-					<button>스크랩</button>
-					<button>신고하기</button>
+					<button style="height: 30px;" class="btn btn-primary btn-sm">추천</button>
+					<button style="height: 30px;" class="btn btn-primary btn-sm">스크랩</button>
+					<button style="height: 30px;" class="btn btn-primary btn-sm">신고하기</button>
+
 				</div>
 			</div>
 
@@ -212,8 +209,8 @@
 
 
 			<div id="content_2">
-				<div id="content_2_1" style="border: solid;">
-					<table>
+				<div id="content_2_1">
+					<table >
 						<tr>
 							<td width="300px" style="font-size: 15px;"><b
 								style="font-size: 20px;">일정제목</b> <br> 20.09.09 - 20.09.12
@@ -224,8 +221,8 @@
 					</table>
 				</div>
 
-				<div id="content_2_2" style="border: solid;">
-					<table>
+				<div id="content_2_2" style="width: 530px; height: 110px;">
+					<table style="width: 500px; height: 90px; text-align: center;">
 						<tr>
 							<td><button disabled class="btn btn-secondary">10대</button></td>
 							<td><button disabled class="btn btn-secondary">남자끼리</button></td>
@@ -239,7 +236,7 @@
 					</table>
 
 				</div>
-				<div id="content_2_3">
+				<div id="content_2_3" style="width: 530px; height: 200px">
 					<select name="" id="">
 						<option value="">day1</option>
 						<option value="">day2</option>
@@ -258,22 +255,22 @@
 
 			<br clear="all">
 
-			<div id="content_3" style="height: 200px; border: solid;">
+			<div id="content_3" style="height: 200px;">
 				<div id="content_3_1">
 					<table>
 						<tr style="height: 100px;">
-							<td width="100" align="center"><img width="60"
+							<td width="100px" align="center"><img width="60"
 								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 								alt=""></td>
 							<td><b>작성자 아이디</b> <br> 자기소개</td>
 						</tr>
 					</table>
 					<div
-						style="line-height: 100px; float: left; margin-right: 20px; margin-top: 10px;">
-						<button style="height: 60px;" class="btn btn-primary btn-sm">동행신청</button>
+						style="line-height: 100px; float: left; margin-right: 23px; margin-top: 10px;">
+						<button style="height: 60px;" class="btn btn-primary btn-sm">동행 신청</button>
 					</div>
 				</div>
-				<div id="content_3_2">일정 작성자가 텍스트상자에 작성한 내용</div>
+				<div id="content_3_2" style="width: 520px;">일정 작성자가 텍스트상자에 작성한 내용</div>
 			</div>
 
 

@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.PageInfo, com.kh.adminMember.model.vo.Member" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	int keyfield = (int)request.getAttribute("keyfield");
+	String keyword = (String)request.getAttribute("keyword");
+	String status = (String)request.getAttribute("status");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>서풍-관리자페이지</title>
 </head>
 <style>
 .outer {
@@ -35,8 +51,8 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align: center;">
 					<tr>
-						<th width="75px">번호</th>
-						<th width="300px">신고글 제목</th>
+						<th width="75px">신고번호</th>
+						<th width="300px">신고내용</th>
 						<th width="150px">신고사유</th>
 						<th width="150px">신고접수일</th>
 					</tr>
@@ -48,60 +64,22 @@
 						<td>비매너</td>
 						<td>2020.09.09</td>
 					</tr>
+					<% if(list.isEmpty()){ %>
 					<tr>
-						<td>9</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
+						<td colspan="6">조회된 리스트가 없습니다.</td>
 					</tr>
-					<tr>
-						<td>8</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>비매너</td>
-						<td>2020.09.09</td>
-					</tr>
+					<% }else{ %>
+						<% for(Member m : list){ %>
+						<tr>
+							<td><input type="checkbox" id="chk" name="uno" value="<%= m.getUserNo()%>"></td>
+							<td><%= m.getUserNo() %></td>
+							<td><%= m.getUserId() %></td>
+							<td><%= m.getUserName() %></td>
+							<td><%= m.getReportType() %></td>
+							<td><%= m.getModifyDate() %></td>
+						</tr>
+						<% } %>
+					<% } %>
 				</tbody>
 			</table>
 
@@ -111,25 +89,29 @@
 				<table>
 					<tr>
 						<td width=""><span>총 신고수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">10</b> 개
+								style="color: red"><%=listCount %></b> 개
 						</span></td>
 						<td width="720px;">
-							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
+							<% if(currentPage != 1){ %>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<% } %>
+	
+								<% for(int p=startPage; p<=endPage; p++){ %>
+									<% if(p != currentPage){ %>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% }else{ %>	
+									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<% } %>
+								<% } %>
 
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-							</div>
+								<% if(currentPage != maxPage){ %>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=<%=status%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% } %>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">목록에서 제거</button>
+							<button class="btn btn-primary">블랙리스트 해제</button>
 						</td>
 					</tr>
 				</table>

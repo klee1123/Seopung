@@ -14,16 +14,16 @@ import com.kh.adminMember.model.vo.Member;
 import com.kh.common.PageInfo;
 
 /**
- * Servlet implementation class adminMemberListServlet
+ * Servlet implementation class BlacklistListServlet
  */
-@WebServlet("/adminPage/list.me")
-public class adminMemberListServlet extends HttpServlet {
+@WebServlet("/adminPage/list.bl")
+public class BlacklistListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminMemberListServlet() {
+    public BlacklistListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,6 @@ public class adminMemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		
 		int listCount;		// 현재 총 게시글 갯수
@@ -64,15 +63,9 @@ public class adminMemberListServlet extends HttpServlet {
 			keyword = "";
 		}
 		
-		// 상태분류
-		String status;
-		if(request.getParameter("status")!=null) {
-			status = request.getParameter("status");
-		}else {
-			status = "";
-		}
+		String status = "B";
 		
-		// 상태분류와 키워드에 해당하는 데이터 수 조회
+		// 키워드에 해당하는 데이터 수 조회
 		listCount = new MemberService().selectListCount(keyfield, keyword, status);
 		
 		pageLimit = 5;
@@ -98,15 +91,22 @@ public class adminMemberListServlet extends HttpServlet {
 		
 		ArrayList<Member> list = new MemberService().selectList(pi, keyfield, keyword, status);
 		
+		String reportType = "";
+		for(int i=0; i<list.size(); i++) {
+			reportType = new MemberService().selectReportType(list.get(i).getUserNo());
+			list.get(i).setReportType(reportType);
+		}
+		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("status", status);
-		request.setAttribute("pageTitle", "회원 목록");
+		request.setAttribute("pageTitle", "블랙리스트 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_member/blacklist/manageBlacklistListView.jsp").forward(request, response);
 	
+		
+		
 	}
 
 	/**

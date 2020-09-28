@@ -80,5 +80,32 @@
 		  FROM TB_MEMBER
 		 WHERE USER_NO = ?
 	</entry>
+	
+	<entry key="updateMember">
+		UPDATE 
+		       TB_MEMBER
+		   SET PROFILEPIC_PATH = ?,
+		       USER_NICK = ?,
+		       USER_INTRO = ?,
+		       USER_NAME = ?,
+		       USER_BIRTH = ?,
+		       EMAIL = ?,
+       		   MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE 
+		       TB_MEMBER
+		   SET STATUS = 'N',
+		       MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
+	</entry>
+	
+	<entry key="selectReportType">
+		SELECT DISTINCT REPORT_TYPE
+		  FROM TB_REPORT
+		 WHERE USER_NO2 = ?
+	</entry>
 
 </properties>

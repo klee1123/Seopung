@@ -151,7 +151,7 @@ input:placeholder {
 					<td><input type="email" name="email" required
 						placeholder="&nbsp이메일"></td>
 					<td><button type="button" onclick="send();">인증번호 발송</button></td>
-						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom() %>">					
+									
 				</tr>
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일 인증</th>
@@ -166,7 +166,8 @@ input:placeholder {
 	</form>
 	</div>
 	
-	<form action="<%=contextPath %>/send" method="post" id="form1">
+		
+	 <form action="<%=contextPath %>/send" method="post" id="form1">
 	<table>
 		<tr>
 			<td>
@@ -179,8 +180,7 @@ input:placeholder {
 				<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
 			</td>
 		</tr>
-	</table>
-		
+	</table> 
 	</form>
 	<script>
 		

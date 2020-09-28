@@ -3,35 +3,30 @@ package com.kh.planOption.model.service;
 import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 
-import com.kh.common.PageInfo;
 import com.kh.planOption.model.vo.PlanOption;
 import com.kh.planOption.model.dao.PlanOptionDao;
 
 public class PlanOptionService {
 	
-
-	/**
-	 * 관리자 등록용
-	 * @param ad
-	 * @return
-	 */
-	public int insertPlanOption(PlanOption ad) {
-		Connection conn = getConnection();
-		
-		int result = new PlanOptionDao().insertPlanOption(conn, ad);
-		
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
+	public int insertPlanOption(PlanOption po) {
+			
+			Connection conn = /* JDBCTemplate. */getConnection();
+			
+			int result = new PlanOptionDao().insertPlanOption(conn, po);
+			
+			// 트랜잭션 처리
+			if(result > 0) {
+				/* JDBCTemplate. */commit(conn);
+			}else {
+				/* JDBCTemplate. */rollback(conn);
+			}
+			
+			/* JDBCTemplate. */close(conn);
+			
+			return result;
+			
 		}
-		
-		close(conn);
-		
-		return result;
-	}
 
 	
 	

@@ -158,5 +158,90 @@ private Properties prop = new Properties();
 		return m;
 	}
 	
+	
+	public int updateMember(Connection conn, Member m) {
+		// update => 처리된 행 수 
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getProfile());
+			pstmt.setString(2, m.getNickName());
+			pstmt.setString(3, m.getUserIntro());
+			pstmt.setString(4, m.getUserName());
+			pstmt.setString(5, m.getBirth());
+			pstmt.setString(6, m.getEmail());
+			pstmt.setInt(7, m.getUserNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 
+	public int deleteMember(Connection conn, int delUserNo) {
+		// update문 => 처리된 행 수 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, delUserNo);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public String selectReportType(Connection conn, int userNo) {
+		// select문 => 여러행 조회
+		String reportType = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReportType");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				reportType += rset.getString("report_type") + "/";
+			}
+			
+			reportType = reportType.substring(0, reportType.length() - 1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportType;
+	}
+	
 }
