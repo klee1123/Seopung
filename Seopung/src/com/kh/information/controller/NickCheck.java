@@ -31,7 +31,6 @@ public class NickCheck extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String nickChk = request.getParameter("nickChk");
-		System.out.println(nickChk);
 		
 		int count = new InfoService().nickCheck(nickChk);
 		

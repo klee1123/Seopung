@@ -21,8 +21,8 @@
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 
-		<!-- Page Heading -->
-		<h1 class="h3 mb-4 text-gray-800">1:1문의</h1>
+		<!-- Page Heading
+		<h1 class="h3 mb-4 text-gray-800">1:1문의</h1>-->
 
 		<br>
 		
@@ -94,6 +94,46 @@
 						<td>2020.09.09</td>
 						<td>답변완료</td>
 					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>답변완료</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>답변완료</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>답변완료</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>답변완료</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>1</td>
+						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
+						<td>userId5</td>
+						<td>2020.09.09</td>
+						<td>답변완료</td>
+					</tr>
 				</tbody>
 			</table>
 
@@ -103,7 +143,7 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>개
+								style="color: red"><%=listCount %></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

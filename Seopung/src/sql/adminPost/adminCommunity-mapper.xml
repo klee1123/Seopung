@@ -4,38 +4,71 @@
 	<entry key="selectListCount1">
 		SELECT 
 		       COUNT(*)
-		  FROM TB_MEMBER
-		 WHERE USER_NAME LIKE '%' || ? || '%'
-		   AND STATUS LIKE '%' || ? ||'%'
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		   AND COMMUNITY_HEAD LIKE '%' || ? || '%'
+		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
 	
 	<entry key="selectListCount2">
 		SELECT 
 		       COUNT(*)
-		  FROM TB_MEMBER
+		  FROM TB_COMMUNITY
+		  JOIN TB_ADMIN ON(USER_NO = ADMIN_NO)
+		 WHERE ADMIN_ID LIKE '%' || ? || '%'
+		   AND COMMUNITY_HEAD LIKE '%' || ? || '%'
+		   AND COMMUNITY_STATUS = 'Y'
+		
+		UNION ALL
+		
+		SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY
+		  JOIN TB_MEMBER USING(USER_NO)
 		 WHERE USER_ID LIKE '%' || ? || '%'
-		   AND STATUS LIKE '%' || ? ||'%'
+		   AND (COMMUNITY_HEAD LIKE '%' || ? || '%'
+		    OR COMMUNITY_HEAD LIKE '%' || ? || '%')
+		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
 
 	<entry key="selectList1">
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNUM
-		             , A.*
-		           FROM (
-                         SELECT 
-                                USER_NO
-                              , USER_ID
-                              , USER_NAME
-                              , ENROLL_DATE
-                              , MODIFY_DATE
-                              , STATUS
-                           FROM TB_MEMBER
-                          WHERE USER_NAME LIKE '%' || ? || '%'
-                            AND STATUS LIKE '%' || ? ||'%'
-                          ORDER
-                             BY USER_NO DESC
-                        ) A
+		             , B.*
+		          FROM (
+		                SELECT A.*
+		                          FROM (
+		                                SELECT ADMIN_ID WRITER
+		                                     , COMMUNITY_NO
+		                                     , COMMUNITY_TITLE
+		                                     , COMMUNITY_ENROLL
+		                                     , COMMUNITY_COUNT
+		                                     , COMMUNITY_HEAD
+		                                  FROM TB_COMMUNITY
+		                                  JOIN TB_ADMIN ON(USER_NO = ADMIN_NO)
+		                                 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		                                   AND COMMUNITY_HEAD LIKE '%' || ? || '%'
+		                                   AND COMMUNITY_STATUS = 'Y'
+		                                
+		                                UNION
+		                                
+		                                SELECT USER_ID
+		                                     , COMMUNITY_NO
+		                                     , COMMUNITY_TITLE
+		                                     , COMMUNITY_ENROLL
+		                                     , COMMUNITY_COUNT
+		                                     , COMMUNITY_HEAD
+		                                  FROM TB_COMMUNITY
+		                                  JOIN TB_MEMBER USING(USER_NO)
+		                                 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		                                   AND (COMMUNITY_HEAD LIKE '%' || ? || '%'
+		                                    OR COMMUNITY_HEAD LIKE '%' || ? || '%')
+		                                   AND COMMUNITY_STATUS = 'Y'
+		                               ) A
+		                         ORDER  
+		                            BY COMMUNITY_NO DESC
+		               ) B
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
@@ -44,22 +77,60 @@
 		SELECT *
 		  FROM (
 		        SELECT ROWNUM RNUM
-		             , A.*
-		           FROM (
-                         SELECT 
-                                USER_NO
-                              , USER_ID
-                              , USER_NAME
-                              , ENROLL_DATE
-                              , MODIFY_DATE
-                              , STATUS
-                           FROM TB_MEMBER
-                          WHERE USER_ID LIKE '%' || ? || '%'
-                            AND STATUS LIKE '%' || ? ||'%'
-                          ORDER
-                             BY USER_NO DESC
-                        ) A
+		             , B.*
+		          FROM (
+		                SELECT A.*
+		                          FROM (
+		                                SELECT ADMIN_ID WRITER
+		                                     , COMMUNITY_NO
+		                                     , COMMUNITY_TITLE
+		                                     , COMMUNITY_ENROLL
+		                                     , COMMUNITY_COUNT
+		                                     , COMMUNITY_HEAD
+		                                  FROM TB_COMMUNITY
+		                                  JOIN TB_ADMIN ON(USER_NO = ADMIN_NO)
+		                                 WHERE ADMIN_ID LIKE '%' || ? || '%'
+		                                   AND COMMUNITY_HEAD LIKE '%' || ? || '%'
+		                                   AND COMMUNITY_STATUS = 'Y'
+		                                
+		                                UNION
+		                                
+		                                SELECT USER_ID
+		                                     , COMMUNITY_NO
+		                                     , COMMUNITY_TITLE
+		                                     , COMMUNITY_ENROLL
+		                                     , COMMUNITY_COUNT
+		                                     , COMMUNITY_HEAD
+		                                  FROM TB_COMMUNITY
+		                                  JOIN TB_MEMBER USING(USER_NO)
+		                                 WHERE USER_ID LIKE '%' || ? || '%'
+		                                   AND (COMMUNITY_HEAD LIKE '%' || ? || '%'
+		                                    OR COMMUNITY_HEAD LIKE '%' || ? || '%')
+		                                   AND COMMUNITY_STATUS = 'Y'
+		                               ) A
+		                         ORDER  
+		                            BY COMMUNITY_NO DESC
+		               ) B
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="insertCommunity">
+		INSERT
+		  INTO TB_COMMUNITY
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   , COMMUNITY_TITLE
+		   , COMMUNITY_CONTENT
+		   , COMMUNITY_HEAD
+		  )
+		  VALUES
+		  (
+		     SEQ_COMMUNITYNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , '공지'
+		  )
 	</entry>
 </properties>

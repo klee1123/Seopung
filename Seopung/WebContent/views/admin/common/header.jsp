@@ -99,7 +99,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">일정관리</a>
-            <a class="collapse-item" href="">커뮤니티관리</a>
+            <a class="collapse-item" href="<%= contextPath %>/adminPage/list.co?currentPage=1">커뮤니티관리</a>
             <a class="collapse-item" href="<%= contextPath %>/adminPage/list.re?currentPage=1">추천코스관리</a>
           </div>
         </div>

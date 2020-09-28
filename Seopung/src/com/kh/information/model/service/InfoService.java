@@ -54,6 +54,13 @@ public class InfoService {
 		return updateMem;
 	}
 	
+	/**
+	 * 닉네임 등록 서비스
+	 * @param userId
+	 * @param userNick
+	 * @param updateNick
+	 * @return
+	 */
 	public Member updateNick(String userId, String userNick, String updateNick) {
 			
 		Connection conn = getConnection();
@@ -95,6 +102,11 @@ public class InfoService {
 		return result;
 	}
 	
+	/**
+	 * 닉네임 중복체크 서비스
+	 * @param nickChk
+	 * @return
+	 */
 	public int nickCheck(String nickChk) {
 		Connection conn = getConnection();
 		
@@ -103,6 +115,25 @@ public class InfoService {
 		close(conn);
 		
 		return count;
+	}
+	
+	public Member updateInfo(String userId, String userIntro, String profile) {
+		Connection conn = getConnection();
+		
+		int result = new InfoDao().updateInfo(conn, userId, userIntro, profile);
+		
+		Member updateMem = null;
+		
+		if(result > 0) {
+			commit(conn);
+			updateMem = new InfoDao().selectMember(conn, userId);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return updateMem;
 	}
 }
 

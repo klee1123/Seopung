@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%! public int getRandom(){
+	int random = 0;
+	random = (int)Math.floor((Math.random()*(99999-10000 +1))) +10000;
+	return random;
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +77,7 @@
 		String nickName = loginUser.getNickName();
 		String email = loginUser.getEmail();
 		String birth = loginUser.getBirth();
+		String profile = loginUser.getProfile();
 		String year = birth.substring(0, 4);
 		String month = birth.substring(4, 6);
 		String day = birth.substring(6);
@@ -84,12 +91,13 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="<%= contextPath %>/updateInfo.in" method="POST" enctype="multipart/form-data">
-            <button type="button" class="btn btn-secondary btn-sm">저장</button>
+        <form action="updateInfo.in" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="userId" value="<%=userId%>">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="<%= contextPath %>/updateInfo.in">저장</button>
              <br><br>
         
             <div class="infoPoto">
-                <img src="resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+                <img src="<%=profile%>" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
                 <br><br>
                 <p style="font-size: 12px;">1MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
@@ -122,9 +130,17 @@
                 <tr>
                     <th align="left">이메일</th>
                     <td><input type="text" name="email" required value="<%= email %>"></td>
-                    <td><button type="button" data-toggle="modal" data-target="#updateEmailForm" class="btn btn-secondary btn-sm">이메일변경</button></td>
                     
                 </tr>
+                <tr>
+                	<th align="left">변경할 이메일</th>
+                	<td><input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요."></td>
+                    <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
+                    <td><button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
+                </tr>
+             	<tr>
+             		<th>인증확인</th>
+             	</tr>
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
@@ -240,43 +256,72 @@
                 <br>
                <button type="submit" class="btn btn-secondary" >비밀번호변경</button>
            </form>
+
         </div>
       </div>
     </div>
   </div>
   
-  
-<!-- 이메일변경 버튼 클릭시 보여질 Modal-->
+  <!-- 
+<!-- 이메일인증 버튼 클릭시 보여질 Modal-->
 <div class="modal" id="updateEmailForm">
     <div class="modal-dialog">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">이메일변경</h4>
+            <h4 class="modal-title">이메일인증</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
         <div class="modal-body" align="center">
-            <form action="" method="POST">
-                <table>
-                    <tr>
-                        <th>변경할 이메일 </th>
-                        <td><input type="email" name="updateEmail" required><button type="button" class="btn btn-secondary btn-sm">인증</button></td>
-                    </tr>
-                    <tr>
-                        <th> 인증확인</th>
-                        <td><input type="text" name="emailPwd" required></td>
-                    </tr>
-                </table>
-                <br>
-               <button type="submit" class="btn btn-secondary">이메일변경</button>
-           </form>
+        	<form action="" method="post" id="form1">
+				<table>
+					<tr>
+						<th>변경할 이메일 </th>
+						<td>
+							<input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요.">
+						</td>
+						<td>
+							<input id="button" type="button" value="인증번호발송" class="btn btn-secondary btn-sm" onclick="emailChk();">
+						</td>
+						<td>
+							<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+		<button type="submit" class="btn btn-secondary">이메일확인</button>
         </div>
       </div>
     </div>
   </div>
+  <script>
+  -->         
+  	function emailChk(){
+  		var $receiver = $("#receiver");
+  		$.ajax({
+  			url:"<%= contextPath %>/sendEmail.in",
+  			data:{receiver:$receiver.val(),code_check:$("#code_check").val()},
+  			type:"post",
+  			success:function(result){
+  				
+  				console.log("통신성공");
+	  				if(result == "fail"){
+	  					alert("이메일 전송 실패");
+	  					
+	  				}else {
+	  					alert("이메일 전송 성공");
+	  				}
+  				
+  			},error:function(){
+  				console.log("ajax 통신 실패!");
+  			}
+  		})
+  	}
+  </script>
     
     <script>
         $(function(){

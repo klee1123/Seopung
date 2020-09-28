@@ -71,4 +71,11 @@
 		 WHERE USER_NICK = ?
 	</entry>
 
+	<entry key="updateInfo">
+		UPDATE
+		       TB_MEMBER
+		   SET USER_INTRO = ?
+		     , PROFILEPIC_PATH = ?
+		 WHERE USER_ID = ?
+	</entry>
 </properties>
