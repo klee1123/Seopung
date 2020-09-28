@@ -122,27 +122,57 @@ public class MemberService {
 	}
 	
 	
-	public int selectReportCount(int userNo) {
+	/**
+	 * 선택된 회원의 신고당한 수
+	 * @param userNo	해당 회원 번호
+	 * @return			신고수
+	 */
+	public int selectReportListCount(int userNo) {
 		Connection conn = getConnection();
 		
-		int listCount = new MemberDao().selectReportCount(conn, userNo);
+		int reportListCount = new MemberDao().selectReportCount(conn, userNo);
 		
 		close(conn);
 		
-		return listCount;
+		return reportListCount;
 	}
 	
 	
-	public ArrayList<Report> selectReportList(int userNo) {
+	/**
+	 * 선택된 회원의 신고내역 조회용 서비스
+	 * @param pi			페이징을 위한 정보
+	 * @param userNo		해당회원 번호
+	 * @return				신고내역 정보를 담은 리스트
+	 */
+	public ArrayList<Report> selectReportList(PageInfo pi, int userNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Report> reportList = new MemberDao().selectReportList(conn, userNo);
+		ArrayList<Report> reportList = new MemberDao().selectReportList(conn, pi, userNo);
 		
 		close(conn);
 		
 		return reportList;
 	}
 	
+	/**
+	 * 블랙리스트에서 해제할 서비스
+	 * @param removeList	해제할 회원 리스트
+	 * @return				처리된 행 수
+	 */
+	public int removeBlacklist(String[] removeList) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().removeBlacklist(conn, removeList);
+		
+		if(result>0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 		
 
 }

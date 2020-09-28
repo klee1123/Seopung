@@ -34,6 +34,17 @@ public class Report {
 		this.reportContent = reportContent;
 	}
 
+	
+
+	public Report(int reportNo, Date reportDate, String userNo2, String reportType, String reportContent) {
+		super();
+		this.reportNo = reportNo;
+		this.reportDate = reportDate;
+		this.userNo2 = userNo2;
+		this.reportType = reportType;
+		this.reportContent = reportContent;
+	}
+
 
 	public int getReportNo() {
 		return reportNo;

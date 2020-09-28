@@ -185,7 +185,7 @@
 	              	}
 	              
 	              	if(confirm("정말 해제하시겠습니까?")) {
-	                	location.href="<%=contextPath%>/adminPage/delete.bl?" + str;
+	                	location.href="<%=contextPath%>/adminPage/remove.bl?" + str;
 	              	} 
 	            });
             });

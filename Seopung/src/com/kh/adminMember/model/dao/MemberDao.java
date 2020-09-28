@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.admin.model.dao.AdminDao;
-import com.kh.admin.model.vo.Admin;
 import com.kh.adminMember.model.vo.Member;
+import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
 
 public class MemberDao {
@@ -244,4 +244,128 @@ private Properties prop = new Properties();
 		return reportType;
 	}
 	
+	
+	public int selectReportCount(Connection conn, int userNo) {
+		// select문 => 신고당한 수 한 행 조회
+		int reportListCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReportListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reportListCount = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportListCount;
+	}
+	
+	
+	public ArrayList<Report> selectReportList(Connection conn, PageInfo pi, int userNo){
+		// select문 => 여러행조회
+		ArrayList<Report> reportList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReportList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				reportList.add(new Report(rset.getInt("report_no"),
+											rset.getDate("report_date"),
+											rset.getString("user_id"),
+											rset.getString("report_type"),
+											rset.getString("report_content")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return reportList;
+	}
+	
+	
+	public int removeBlacklist(Connection conn, String[] removeList) {
+		//update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("removeBlacklist");
+		
+		// 해제할 회원수가 복수일 경우
+		if(removeList.length > 1) {
+			for(int i=1; i<removeList.length; i++) {
+				sql += " OR USER_NO =" + removeList[i];
+			}
+		}
+				
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(removeList[0]));
+				
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
