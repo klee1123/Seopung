@@ -20,7 +20,7 @@ public class RecommendDao {
 	
 	public RecommendDao() {
 		
-		String fileName = RecommendDao.class.getResource("/sql/adminRecommend/adminRecommend-mapper.xml").getPath();
+		String fileName = RecommendDao.class.getResource("/sql/adminPost/adminRecommend-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
