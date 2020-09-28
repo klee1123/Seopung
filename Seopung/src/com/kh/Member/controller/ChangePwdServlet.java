@@ -12,16 +12,16 @@ import com.kh.Member.model.service.MemberService;
 import com.kh.Member.model.vo.Member;
 
 /**
- * Servlet implementation class SearchIdServlet2
+ * Servlet implementation class ChangePwdServlet
  */
-@WebServlet("/searchId2.me")
-public class SearchIdServlet2 extends HttpServlet {
+@WebServlet("/changePwd.me")
+public class ChangePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchIdServlet2() {
+    public ChangePwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +32,17 @@ public class SearchIdServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		String userPwd = request.getParameter("userPwd");
+		String userId = request.getParameter("userId");
+		System.out.println(userId);
+		System.out.println(userPwd);
 		
-		String name = request.getParameter("userName");
-		String email = request.getParameter("email");
+		int result = new MemberService().changePwd(userId, userPwd);
 		
-		
-		
-		String id = new MemberService().searchId(name, email);
-		
-		
-		if(!id.equals("")) {
-			request.setAttribute("id", id);
+		if(result > 0) {
 			
-			request.getRequestDispatcher("views/member/searchId2.jsp").forward(request, response);
-		}else {
-			request.setAttribute("errorMsg", "이름과 이메일이 일치하지 않습니다.");
-			
-			request.getRequestDispatcher("views/member/searchError.jsp").forward(request, response);
-			
+			request.getSession().setAttribute("alertMsg", "비밀번호가 변경되었습니다.");
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 

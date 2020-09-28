@@ -159,7 +159,7 @@ input:placeholder {
 				<tr>
 					<th style="width: 109px;" align="left">&nbsp;&nbsp;*이메일 인증</th>
 					<td><input type="text" id="checkEmail" required placeholder="&nbsp인증번호 입력"></td>
-					<button onclick="test();")>ㅇㅇㅇ</button>
+					
 					<td></td>
 				</tr>
 			</table>
@@ -197,10 +197,10 @@ input:placeholder {
 				type:"post",
 				success:function(data){
 					console.log("ajax통신 성공");
-					
+					alert(data);
 				},
 				error:function(){
-					consoel.log("ajax통신 실패");
+					console.log("ajax통신 실패");
 				}
 				
 			});

@@ -64,6 +64,31 @@ public class MemberService {
 		return id;
 	}
 	
+	public String searchId2(String userId, String email) {
+		Connection conn = getConnection();
+		
+		String id = new MemberDao().searchId2(conn, userId, email);
+		
+		close(conn);
+		return id;
+	}
+	
+	public int changePwd(String userId, String userPwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().changePwd(conn, userId, userPwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	

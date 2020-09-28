@@ -67,4 +67,17 @@
 		 WHERE USER_NAME = ?
 		   AND EMAIL = ?
 	</entry>
+	<entry key="searchId2">
+		SELECT 
+		       USER_ID
+		  FROM TB_MEMBER
+		 WHERE USER_ID = ?
+		   AND EMAIL = ?
+	</entry>
+	<entry key="changePwd">
+		UPDATE
+		       TB_MEMBER
+		   SET USER_PWD = ?
+		 WHERE USER_ID = ?
+	</entry>
 </properties>

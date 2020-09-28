@@ -61,7 +61,7 @@ table+br+button {
 				<p style="font-size: 22px; font-weight: bold; color: dimgray">아이디
 					찾기</p>
 				<p style="font-size: 16px; color: grey;">
-					본인확인 이메일 주소와입력한 이메일 주소가<br> 같아야 인증번호를 받을 수 있습니다.
+					본인확인 이메일 주소와입력한 이메일 주소가<br> 같아야 아이디를 찾을 수 있습니다.
 				</p>
 				<br>
 				<div style="border: 1px solid dimgray;"></div>
@@ -69,12 +69,12 @@ table+br+button {
 				<table id="searchForm">
 					<tr>
 						<th>&nbsp;이름</th>
-						<td><input type="text" name="userName" placeholder="이름"></td>
+						<td><input type="text" name="userName" required placeholder="이름"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>&nbsp;이메일</th>
-						<td><input type="text" name="email" placeholder="이메일"></td>
+						<td><input type="text" name="email" required placeholder="이메일"></td>
 						<td></td>
 					</tr>
 					

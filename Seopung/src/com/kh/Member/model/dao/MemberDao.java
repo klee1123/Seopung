@@ -167,7 +167,7 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+		System.out.println(name);
 		String sql = prop.getProperty("searchId");
 		
 		try {
@@ -188,10 +188,62 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
+		System.out.println(id);
 		return id;
 		
 	}
 	
+	public String searchId2(Connection conn, String userId, String email ) {
+		String id = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		System.out.println(userId);
+		System.out.println(email);
+		String sql = prop.getProperty("searchId2");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				id = rset.getString("USER_ID");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return id;
+	}
+	
+	public int changePwd(Connection conn, String userId, String userPwd) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("changePwd");
+			System.out.println(userId);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userPwd);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
