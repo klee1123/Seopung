@@ -39,11 +39,12 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		
 		String planTitle = request.getParameter("planTitle");
 		String planSdate = request.getParameter("planSdate");
 		String planEdate = request.getParameter("planEdate");
+		
 		String planAge = request.getParameter("planAge");
+		
 		String planAcc = request.getParameter("planAcc");
 		String planBudget = request.getParameter("planBudget");
 		String planScrapYn = request.getParameter("planScrapYn");
@@ -51,7 +52,9 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 		String planMemo = request.getParameter("planMemo");
 		String planHashtag = request.getParameter("planHashtag");
 		String planTemp = request.getParameter("planTemp");
+		
 		String planType = request.getParameter("planType");
+		
 		String planTrans = request.getParameter("planTrans");
 		
 		PlanOption p = new PlanOption();
@@ -72,7 +75,7 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 		
 		int result = new PlanOptionService().insertPlanOption(p);
 		
-		//request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
+		//request.getSession().setAttribute();
 		
 		request.getRequestDispatcher("views/plan/plan_make_map.jsp").forward(request, response);
 		
