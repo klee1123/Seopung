@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminMember.model.service.MemberService;
-import com.kh.adminMember.model.vo.Member;
+import com.kh.adminCommunity.model.service.CommunityService;
+import com.kh.adminCommunity.model.vo.Community;
 import com.kh.common.PageInfo;
 
 /**
@@ -64,7 +64,7 @@ public class AdminCommunityListServlet extends HttpServlet {
 			keyword = "";
 		}
 		
-		// 상태분류
+		// 말머리분류
 		String head;
 		if(request.getParameter("head")!=null) {
 			head = request.getParameter("head");
@@ -73,7 +73,7 @@ public class AdminCommunityListServlet extends HttpServlet {
 		}
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
-		listCount = new MemberService().selectListCount(keyfield, keyword, head);
+		listCount = new CommunityService().selectListCount(keyfield, keyword, head);
 		
 		pageLimit = 5;
 		
@@ -96,16 +96,16 @@ public class AdminCommunityListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Member> list = new MemberService().selectList(pi, keyfield, keyword, head);
+		ArrayList<Community> list = new CommunityService().selectList(pi, keyfield, keyword, head);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyfield", keyfield);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("status", head);
-		request.setAttribute("pageTitle", "회원 목록");
+		request.setAttribute("head", head);
+		request.setAttribute("pageTitle", "커뮤니티 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityListView.jsp").forward(request, response);
 	
 	
 	}

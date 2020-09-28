@@ -1,4 +1,4 @@
-package com.kh.information.controller;
+package com.kh.Member.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.information.model.service.InfoService;
+import com.kh.Member.model.service.MemberService;
+import com.kh.Member.model.vo.Member;
 
 /**
- * Servlet implementation class NickCheck
+ * Servlet implementation class ChangePwdServlet
  */
-@WebServlet("/nickChk.me")
-public class NickCheck extends HttpServlet {
+@WebServlet("/changePwd.me")
+public class ChangePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NickCheck() {
+    public ChangePwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,19 +30,20 @@ public class NickCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String nickChk = request.getParameter("nickChk");
 		
-		int count = new InfoService().nickCheck(nickChk);
+		request.setCharacterEncoding("utf-8");
+		String userPwd = request.getParameter("userPwd");
+		String userId = request.getParameter("userId");
+		System.out.println(userId);
+		System.out.println(userPwd);
 		
-		if(count == 1) { // 이미 존재하는 닉네임 => 사용불가
-			// fail
-			response.getWriter().print("fail");
-		}else { 		 // 존재하는 닉네임 없음 => 사용가능
-			// success
-			response.getWriter().print("success");
+		int result = new MemberService().changePwd(userId, userPwd);
+		
+		if(result > 0) {
+			
+			request.getSession().setAttribute("alertMsg", "비밀번호가 변경되었습니다.");
+			response.sendRedirect(request.getContextPath());
 		}
-		
 	}
 
 	/**

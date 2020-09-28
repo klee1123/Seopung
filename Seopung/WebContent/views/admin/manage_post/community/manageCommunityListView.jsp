@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.adminRecommend.model.vo.Recommend, com.kh.common.PageInfo"%>
+<%@ page import="java.util.ArrayList, com.kh.adminCommunity.model.vo.Community, com.kh.common.PageInfo"%>
 <%
 
-	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
+	ArrayList<Community> list = (ArrayList<Community>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");;
 	
 	int listCount = pi.getListCount();
@@ -22,6 +22,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
 .outer {
 	margin: auto;
@@ -47,6 +48,7 @@
 				<tr>
 					<td width="950">
 						<form action="<%=contextPath%>/adminPage/list.co" method="GET">
+							<input type="hidden" name="currentPage" value="<%=currentPage%>">
 							<select name="keyfield">
 								<%if(keyfield==2){%>
 								<option value="1">제목</option>
@@ -56,9 +58,8 @@
 								<option value="2">아이디</option>
 								<%}%>
 							</select>
-							<input type="hidden" name="currentPage" value="<%=currentPage%>">
-							<label for="">제목</label> <input type="text" name="keyword" placeholder="제목 입력" value="<%=keyword%>">
-							<button type="submit" class="btn btn-secondary btn-sm" onclick="location.href='';">조회</button>
+							<input type="text" name="keyword" value="<%=keyword%>">
+							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
 						</form>
 					</td>
 					<td width="">
@@ -95,14 +96,14 @@
 						<td colspan="6">조회된 리스트가 없습니다.</td>
 					</tr>
 					<% }else{ %>
-						<% for(Recommend r : list){ %>
+						<% for(Community c : list){ %>
 						<tr>
-							<td><input type="checkbox" id="chk" name="rno" value="<%= r.getRecommendNo() %>"></td>
-							<td><%= r.getRecommendNo() %></td>
-							<td><%= r.getRecommendTitle() %></td>
-							<td><%= r.getRecommendWriter() %></td>
-							<td><%= r.getEnrollDate() %></td>
-							<td><%= r.getCount() %></td>
+							<td><input type="checkbox" id="chk" name="rno" value="<%= c.getCommunityNo() %>"></td>
+							<td><%= c.getCommunityNo() %></td>
+							<td>[<%= c.getHead() %>] <%= c.getTitle() %></td>
+							<td><%= c.getCommunityWriter() %></td>
+							<td><%= c.getEnrollDate() %></td>
+							<td><%= c.getCount() %></td>
 						</tr>
 						<% } %>
 					<% } %>
@@ -117,29 +118,30 @@
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
 								style="color: red"><%= listCount %></b> 개
 						</span></td>
-						<td width="750px;">
+						<td width="700px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.me?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>&head=<%=head%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-danger">삭제</button>
+							<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/enrollForm.co';">등록</button>
+							<button class="btn btn-danger" id="btnDelete">삭제</button>
 						</td>
 					</tr>
 				</table>
@@ -158,7 +160,7 @@
                     $(this).find("td:eq(2)").css("cursor","pointer");
                   
                     $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.re?currentPage=" + <%=currentPage%> + "&rno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/adminPage/detail.re?currentPage=" + <%=currentPage%> + "&cno=" + $(this).prev().text();
                     });
                   });
 			});
@@ -192,9 +194,9 @@
 	              	var str = "";
 	              	for(var i=0;i<selected.length; i++){
 	                	if(i == selected.length-1){
-	                  		str += "rno=" + selected[i];
+	                  		str += "cno=" + selected[i];
 	                	}else{
-	                  		str += "rno=" + selected[i] + "&";
+	                  		str += "cno=" + selected[i] + "&";
 	                	}
 	              	}
 	              

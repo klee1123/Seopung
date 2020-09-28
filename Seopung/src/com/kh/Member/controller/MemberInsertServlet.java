@@ -47,9 +47,9 @@ public class MemberInsertServlet extends HttpServlet {
 		
 		int result = new MemberService().insertMember(m);
 		
-		request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
 		
 		if(result > 0) {
+			request.getSession().setAttribute("alertMsg","성공적으로 회원가입 되었습니다.");
 			
 			response.sendRedirect(request.getContextPath());
 		}else {

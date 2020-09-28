@@ -139,7 +139,6 @@ public class InfoDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -205,6 +204,31 @@ public class InfoDao {
 		}
 		
 		return count;
+	}
+	
+	public int updateInfo(Connection conn, String userId, String userIntro, String profile) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userIntro);
+			pstmt.setString(2, profile);
+			pstmt.setString(3, userId);
+			
+			result = pstmt.executeUpdate();
+
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

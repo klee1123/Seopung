@@ -62,7 +62,7 @@ public class EmailSendServlet extends HttpServlet {
 				
 				msg.setFrom(from);
 				
-				String email = request.getParameter("receiver");
+				String email = request.getParameter("email");
 				InternetAddress to = new InternetAddress(email);
 				msg.setRecipient(Message.RecipientType.TO, to);
 				
@@ -82,11 +82,12 @@ public class EmailSendServlet extends HttpServlet {
 				
 				
 			}
+//			
+//			RequestDispatcher rd = request.getRequestDispatcher("views/member/memberEnrollForm.jsp");
+//			
+//			rd.forward(request, response);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("views/member/memberEnrollForm.jsp");
-			
-			rd.forward(request, response);
-			response.setContentType("application/json; charset=utf-8");
+			response.setCharacterEncoding("utf-8");
 			response.getWriter().print("인증번호를 발송했습니다");
 	}
 	

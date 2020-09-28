@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String id = (String)request.getAttribute("id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,7 @@
 <title>Insert title here</title>
 <style>
 .outer {
-	margin-top: 120px;
+	margin-top: 150px;
 }
 
 #searchPwd2 {
@@ -23,8 +26,8 @@
 	line-height: 60px;
 }
 
-#searchForm input[type=text] {
-	width: 250px;
+#searchForm input[type=password] {
+	width: 280px;
 	height: 30px;
 }
 
@@ -44,15 +47,17 @@ table+br+button {
 	width: 220px;
 	height: 35px;
 }
+
 </style>
 </head>
 <body>
 	<%@include file="../common/menubar.jsp"%>
-	<div class="outer" id="changePwd">
-		<form action="">
+	<div class="outer" id="Pwd">
+		<form action="<%=contextPath%>/changePwd.me" method="post">
 			<fieldset id="searchPwd2" style="width: 460px; height: 380px;"
 				align="center">
 				<br>
+				<input type="hidden" name="userId" id="userId" value="<%=id%>">
 				<p style="font-size: 22px; font-weight: bold; color: dimgray">비밀번호
 					변경</p>
 				<p style="font-size: 16px; color: grey;">
@@ -64,13 +69,13 @@ table+br+button {
 				<table id="searchForm">
 					<tr>
 						<th>&nbsp;비밀번호</th>
-						<td><input type="text" name="userName"
+						<td><input type="password" name="userPwd" id="userPwd"
 							placeholder="&nbsp;8 ~15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 
 					</tr>
 					<tr>
 						<th>&nbsp;비밀번호 확인</th>
-						<td><input type="text" name="email"
+						<td><input type="password" id="checkPwd" name="checkPwd"
 							placeholder="&nbsp;8 ~15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 
 					</tr>
@@ -78,7 +83,7 @@ table+br+button {
 				</table>
 				<br>
 
-				<button>비밀번호 변경</button>
+				<button type="submit">비밀번호 변경</button>
 			</fieldset>
 
 		</form>

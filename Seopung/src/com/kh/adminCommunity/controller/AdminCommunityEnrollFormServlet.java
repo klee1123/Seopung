@@ -1,26 +1,23 @@
-package com.kh.information.controller;
+package com.kh.adminCommunity.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.information.model.service.InfoService;
-
 /**
- * Servlet implementation class NickCheck
+ * Servlet implementation class AdminCommunityEnrollFormServlet
  */
-@WebServlet("/nickChk.me")
-public class NickCheck extends HttpServlet {
+@WebServlet("/adminPage/enrollForm.co")
+public class AdminCommunityEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NickCheck() {
+    public AdminCommunityEnrollFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,18 +26,9 @@ public class NickCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String nickChk = request.getParameter("nickChk");
 		
-		int count = new InfoService().nickCheck(nickChk);
-		
-		if(count == 1) { // 이미 존재하는 닉네임 => 사용불가
-			// fail
-			response.getWriter().print("fail");
-		}else { 		 // 존재하는 닉네임 없음 => 사용가능
-			// success
-			response.getWriter().print("success");
-		}
+		request.setAttribute("pageTitle", "커뮤니티 공지사항 등록");
+		request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityEnrollForm.jsp").forward(request, response);
 		
 	}
 

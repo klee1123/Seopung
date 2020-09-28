@@ -2,10 +2,14 @@ package com.kh.adminCommunity.model.vo;
 
 import java.sql.Date;
 
+/**
+ * @author kl
+ *
+ */
 public class Community {
 	
 	private int communityNo;				//글번호
-	private String communityWriter;			//회원번호
+	private String communityWriter;			//회원번호,작성자아이디
 	private String title;					//커뮤니티제목
 	private String content;					//커뮤니티내용
 	private Date enrollDate;				//커뮤니티등록일
@@ -36,6 +40,16 @@ public class Community {
 		this.recommendCount = recommendCount;
 		this.status = status;
 		this.thumbnailPath = thumbnailPath;
+		this.head = head;
+	}
+
+	public Community(int communityNo, String communityWriter, String title, Date enrollDate, int count, String head) {
+		super();
+		this.communityNo = communityNo;
+		this.communityWriter = communityWriter;
+		this.title = title;
+		this.enrollDate = enrollDate;
+		this.count = count;
 		this.head = head;
 	}
 

@@ -58,6 +58,7 @@ public class Member {
 	}
 	
 	
+	
 
 
 	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String birth,
