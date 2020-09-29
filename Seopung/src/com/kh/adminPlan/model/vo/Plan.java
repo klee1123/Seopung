@@ -21,7 +21,10 @@ public class Plan {
 	private int recommendCount;
 	private int scrapCount;
 	private String planWriter; // 회원번호 또는 회원아이디 담기
-	
+	private String status;
+	private Date enrollDate;
+	private Date modifyDate;
+	private int count;
 	
 	public Plan() {
 		
@@ -30,7 +33,8 @@ public class Plan {
 
 	public Plan(int planNo, String planTitle, Date startDate, Date endDate, String age, String accompany, String budget,
 			String scrapYN, String privateYN, String memo, String hashtag, String tempYN, String planType,
-			String transrportations, int recommendCount, int scrapCount, String planWriter) {
+			String transrportations, int recommendCount, int scrapCount, String planWriter, String status,
+			Date enrollDate, Date modifyDate, int count) {
 		super();
 		this.planNo = planNo;
 		this.planTitle = planTitle;
@@ -49,6 +53,20 @@ public class Plan {
 		this.recommendCount = recommendCount;
 		this.scrapCount = scrapCount;
 		this.planWriter = planWriter;
+		this.status = status;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.count = count;
+	}
+
+	
+	public Plan(int planNo, String planTitle, String planWriter, Date enrollDate, int count) {
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.planWriter = planWriter;
+		this.enrollDate = enrollDate;
+		this.count = count;
 	}
 
 
@@ -222,13 +240,55 @@ public class Plan {
 	}
 
 
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public Date getEnrollDate() {
+		return enrollDate;
+	}
+
+
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
+	}
+
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Plan [planNo=" + planNo + ", planTitle=" + planTitle + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", age=" + age + ", accompany=" + accompany + ", budget=" + budget + ", scrapYN=" + scrapYN
 				+ ", privateYN=" + privateYN + ", memo=" + memo + ", hashtag=" + hashtag + ", tempYN=" + tempYN
 				+ ", planType=" + planType + ", transrportations=" + transrportations + ", recommendCount="
-				+ recommendCount + ", scrapCount=" + scrapCount + ", planWriter=" + planWriter + "]";
+				+ recommendCount + ", scrapCount=" + scrapCount + ", planWriter=" + planWriter + ", status=" + status
+				+ ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", count=" + count + "]";
 	}
+
 	
 }

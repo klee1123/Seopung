@@ -16,7 +16,7 @@ import com.kh.common.PageInfo;
 /**
  * Servlet implementation class AdminPlanListServlet
  */
-@WebServlet("/adminPage/list.co")
+@WebServlet("/adminPage/list.pl")
 public class AdminPlanListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

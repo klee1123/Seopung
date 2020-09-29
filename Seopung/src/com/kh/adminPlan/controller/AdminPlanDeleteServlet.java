@@ -1,4 +1,4 @@
-package com.kh.adminCommunity.controller;
+package com.kh.adminPlan.controller;
 
 import java.io.IOException;
 
@@ -13,14 +13,14 @@ import com.kh.adminCommunity.model.service.CommunityService;
 /**
  * Servlet implementation class AdminCommunityDeleteServlet
  */
-@WebServlet("/adminPage/delete.co")
-public class AdminCommunityDeleteServlet extends HttpServlet {
+@WebServlet("/adminPage/delete.pl")
+public class AdminPlanDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityDeleteServlet() {
+    public AdminPlanDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

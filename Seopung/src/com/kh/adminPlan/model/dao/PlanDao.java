@@ -84,15 +84,23 @@ public class PlanDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			
-
+			pstmt.setString(1,keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Plan());
+				list.add(new Plan(rset.getInt("plan_no"),
+									rset.getString("plan_title"),
+									rset.getString("user_id"),
+									rset.getDate("enroll_date"),
+									rset.getInt("plan_count")));
 			}
 			
+			while(rset.next()) {
+				list.add(new Plan());
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,7 +108,6 @@ public class PlanDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
 
