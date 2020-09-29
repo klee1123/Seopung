@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +44,6 @@
               * 허위 신고의 경우 신고자가 제재받을 수 있음을 유념해주세요.<br></h6>
   
           <form action="" id="insertForm" method="post">
-              <!-- 카테고리, 제목, 내용, 첨부파일 -->
   
               <table align="center">
                   <tr>

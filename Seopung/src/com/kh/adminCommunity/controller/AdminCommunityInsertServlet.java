@@ -30,6 +30,9 @@ public class AdminCommunityInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		
 		String adminNo = request.getParameter("adminNo");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");

@@ -1,12 +1,17 @@
 package com.kh.adminCommunity.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.adminCommunity.model.dao.CommunityDao;
+import com.kh.adminCommunity.model.vo.ComComment;
 import com.kh.adminCommunity.model.vo.Community;
+import com.kh.adminRecommend.model.dao.RecommendDao;
 import com.kh.common.PageInfo;
 
 public class CommunityService {
@@ -46,6 +51,11 @@ public class CommunityService {
 		return list;
 	}
 	
+	/**
+	 * 커뮤니티 공지글 등록용 서비스
+	 * @param c
+	 * @return
+	 */
 	public int insertCommunity(Community c) {
 		Connection conn = getConnection();
 		
@@ -57,6 +67,85 @@ public class CommunityService {
 			rollback(conn);
 		}
 		close(conn);
+		
+		return result;
+	}
+	
+	
+	public int increaseCount(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().increaseCount(conn, cno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	public Community selectCommunity(int cno) {
+		Connection conn = getConnection();
+		
+		Community c = new CommunityDao().selectCommunity(conn, cno);
+		
+		close(conn);
+		
+		return c;
+	}
+	
+	public int selectCommentCount(int cno) {
+		Connection conn = getConnection();
+		
+		int commentCount = new CommunityDao().selectCommentCount(conn, cno);
+		
+		close(conn);
+		
+		return commentCount;
+	}
+	
+	
+	public ArrayList<ComComment> selectCommentList(PageInfo pi, int cno){
+		Connection conn = getConnection();
+		
+		ArrayList<ComComment> commentList = new CommunityDao().selectCommentList(conn, pi, cno);
+		
+		close(conn);
+		
+		return commentList;
+	}
+	
+	
+	public int deleteCommunity(String[] cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().deleteCommunity(conn, cno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteComment(int commentNo) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().deleteComment(conn, commentNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
 		return result;
 	}

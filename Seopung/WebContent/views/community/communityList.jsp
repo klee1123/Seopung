@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import = "java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo" %>
+<%
+	ArrayList<Community> list = (ArrayList<Community>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,50 +139,32 @@ table {
 
 				<hr style="width: 1000px;">
 				<br>
-
+				<%if(list.isEmpty()){ %>
+				<div style="font-size:20px">조회된 리스트가 없습니다.</div>
+				<%}else{ %>
+				<%for(Community c : list){ %>
 				<li
 					style=" position: relative; list-style-type: none; height: 100px;">
-					<span style="display: inline-block; width: 720px;">추천수 <a
+					<span style="display: inline-block; width: 720px;">추천수<a
 						href=""> <img style="position: absolute; margin-left: 30px;"
-							src="forest1.png" width="100px;" height="100%;" alt="">
+							src="<%=c.getThumb() %>" width="100px;" height="100%;" alt="">
 					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;">[맛집]</span>
+							id="headTitle" style="margin-left: 140px;"><%=c.getHead() %></span>
 					</a> <a href="" style="text-decoration: none; color: black;"> <span
-							id="title" name="title">여기 짱 맛있음&nbsp;[4]</span>
+							id="title" name="title"><%=c.getTitle() %>&nbsp;[4]</span>
 					</a>
 
 				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 50px;">2020.08.30</div>
-						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;">5</span> <br> <span>스크랩</span>
-					<span id="content" style="margin-left: 140px;">내용을여기다
-						넣을거에요내용을여기다 넣을거에요내용을ddddddddddddddddddddddd</span> <br> <span
-					style="margin-left: 15px; color: red;">5</span>
+						<div style="width: 100px;"><%=c.getEnroll() %></div>
+						<div style="width: 140px;">조회수: <%=c.getCount() %> /<%=c.getUserNo() %></div> <!-- <div style="width:50px">양현우</div> -->
+				</span> <span style="margin-left: 15px; color: blue;"><%=c.getRecommend() %></span> <br> <span>스크랩</span>
+					<span id="content" style="margin-left: 140px;"><%=c.getContent() %></span> <br> <span
+					style="margin-left: 15px; color: red;"><%=c.getScrap() %></span>
 				</li>
 				<br>
-				<li
-					style=" position: relative; list-style-type: none; height: 100px;">
-					<span style="display: inline-block; width: 720px;">추천수 <a
-						href=""> <img style="position: absolute; margin-left: 30px;"
-							src="forest1.png" width="100px;" height="100%;" alt="">
-					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;">[맛집]</span>
-					</a> <a href="" style="text-decoration: none; color: black;"> <span
-							id="title">여기 짱 맛있음&nbsp;[4]</span>
-
-					</a>
-
-				</span> <br> <span
-					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 50px;">2020.08.30</div>
-						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;">5</span> <br> <span>스크랩</span>
-					<span id="content" style="margin-left: 140px;">내용을여기다
-						넣을거에요내용을여기다 넣을거에요내용을ddddddddddddddddddddddd</span> <br> <span
-					style="margin-left: 15px; color: red;">5</span>
-				</li>
-				<br>
+					<%} %>
+				<%} %>
 
 				<hr style="width: 1000px;">
 			</ul>
@@ -184,33 +176,32 @@ table {
 							<option value="title">제목</option>
 						</select> <input type="text" style="width: 150px; height: 23px;"> <label
 							for="search" style="cursor: pointer;"><img src="다운로드.png"
-							width="20px;" height="16px;"></label>
+							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
-						<button
-							style=" width: 80px; height: 30px; border: none;">글작성</button>
+						<button onclick="location.href='<%=contextPath%>/enrollForm.co'" type="button"
+							style=" margin-left:640px; width: 80px; height: 30px; border: none;">글작성</button>
 					</form>
 
 					<br> <br> <br>
 				</div>
 				<div style="width: 1000px;  white-space: nowrap; " align="center">
-					<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-					<button class="btn btn-secondary btn-sm">&lt;</button>
-
-					<button class="btn btn-outline-secondary btn-sm">1</button>
-					<button class="btn btn-outline-secondary btn-sm">2</button>
-					<button class="btn btn-outline-secondary btn-sm">3</button>
-					<button class="btn btn-outline-secondary btn-sm">4</button>
-					<button class="btn btn-outline-secondary btn-sm">5</button>
-					<button class="btn btn-outline-secondary btn-sm">1</button>
-					<button class="btn btn-outline-secondary btn-sm">2</button>
-					<button class="btn btn-outline-secondary btn-sm">3</button>
-					<button class="btn btn-outline-secondary btn-sm">4</button>
-					<button class="btn btn-outline-secondary btn-sm">5</button>
-
-					<button class="btn btn-secondary btn-sm">&gt;</button>
-					<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-
+				<%if(currentPage != 1){ %>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=1'" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage-1 %>'" class="btn btn-secondary btn-sm">&lt;</button>
+				<%} %>
+					<%for(int p = startPage; p<=endPage; p++){ %>
+						<%if(p != currentPage){ %>
+						<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p %>'" class="btn btn-outline-secondary btn-sm"><%=p %></button>
+						<%}else{ %>
+						<button disabled><%=p %></button>
+							<%} %>
+						<%} %>
+					<%if(currentPage != maxPage ){ %>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage+1 %>'" class="btn btn-secondary btn-sm">&gt;</button>
+					<button onclick="location.href='<%=contextPath %>/list.co?currentPage=<%=maxPage %>'" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+					<%} %>	
 				</div>
+				<br><br>
 			</div>
 		</div>
 	</div>

@@ -104,10 +104,10 @@ div {
 </head>
 
 <body>
-	<%@include file="../common/menubar.jsp"%>
+	<%@include file="../../common/menubar.jsp"%>
 	<div class="wrap">
 
-        <h2>고객센터</h2>
+        <h2>&nbsp;고객센터</h2><br>
 
         <h3 style="display:inline;">&nbsp;공지사항</h3>
         &emsp;&emsp;&emsp;&emsp;
@@ -123,46 +123,50 @@ div {
                     <br>
 
                     <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                    
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h6>
-                        <h3>
-                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선
-                        </h3>
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;20.09.29</h6>
+                        
+                        <br>
+                        <h6>&emsp;공지사항</h6>
+                        <h4>
+                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
+                        </h4>
+                        <h6>&emsp;20.09.29</h6>
                         
                         </div>
                         <br>
 
                     <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                    
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h6>
-                        <h3>
-                            &emsp;[서풍LIVE] 내 여행 일정 : 동행 분야 신청 안내
-                        </h3>
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;20.09.29</h6>
+                        
+                        <br>
+                        <h6>&emsp;공지사항</h6>
+                        <h4>
+                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
+                        </h4>
+                        <h6>&emsp;20.09.29</h6>
                         
                         </div>
                         <br>
 
                     <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                    
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h6>
-                        <h3>
-                            &emsp;[정책 변경] 커뮤니티 이용 약관 및 기준 신설
-                        </h3>
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;20.09.29</h6>
-                            
+                        
+                        <br>
+                        <h6>&emsp;공지사항</h6>
+                        <h4>
+                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
+                        </h4>
+                        <h6>&emsp;20.09.29</h6>
+                        
                         </div>
                         <br>
 
-                     <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                    
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;공지사항</h6>
-                        <h3>
-                            &emsp;[정책 변경] 커뮤니티 이용 약관 및 기준 신설
-                        </h3>
-                        <h6>&nbsp;&nbsp;&nbsp;&nbsp;20.09.29</h6>
-                                
+                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
+                        
+                        <br>
+                        <h6>&emsp;공지사항</h6>
+                        <h4>
+                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
+                        </h4>
+                        <h6>&emsp;20.09.29</h6>
+                        
                         </div>
                         <br>
 					
@@ -174,7 +178,7 @@ div {
                     <table>
                         <tr>
                             <td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-                                    style="color: red"><%=listCount %></b>개
+                                    style="color: red">5</b>개
                             </span></td>
                             <td width="720px;">
                                 <div align="center">
@@ -204,6 +208,6 @@ div {
         </div>
         <!-- /.container-fluid -->
     
-        <%@ include file="../common/footer.jsp"%>
+        <%@ include file="../../common/footer.jsp"%>
     </body>
     </html>

@@ -17,14 +17,14 @@ import com.kh.inquire.model.vo.Inquire;
 /**
  * Servlet implementation class inquireServlet
  */
-@WebServlet("/inquire.bo")
-public class inquireListServlet extends HttpServlet {
+@WebServlet("/inquire.in")
+public class InquireListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public inquireListServlet() {
+    public InquireListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,30 +49,24 @@ public class inquireListServlet extends HttpServlet {
 		System.out.println(listCount);
 		// * currentPage : 현재 요청한 페이지(요청한페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		
+		System.out.println(currentPage);
 		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대 갯수 (페이지 목록을 몇 개 단위)
 		pageLimit = 5;
 		
-		// * boardLimit : 한 페이지에 보여질 게시글 최대 갯수
 		boardLimit = 10;
-		
-		// * maxPage : 총 페이지 수(마지막 페이지)
 		
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 	
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		// * endPage : 현재 페이지에 보여진 페이징 바의 글 수
-
+		
 		endPage = startPage + pageLimit -1;
-		// 만약 maxPage가 고작 13까지 밖에 안된다면? endPage를 다시 13로 해줘야함
+		
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-		// 페이징 정보들을 하나의 공간에 담아서 보내자
-		// 페이징정보들을 하나의 공간에 담아서 보내자!!
-        // 1. 페이징바 만들 때 필요한 PageInfo 객체
+	
         PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-              
+        System.out.println(pi);
         // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
         ArrayList<Inquire> list = new InquireService().selectList(pi);
         

@@ -49,24 +49,32 @@ public class UpInfoServlet extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			// --> 위의 코드가 실행되는 순간 서버에 파일 업로드 됨
 		
-			String userId = multiRequest.getParameter("userId");
+			String userNo = multiRequest.getParameter("userNo");
 			String userIntro = multiRequest.getParameter("userIntro");
 			String profile = multiRequest.getParameter("profile");
+			String email = multiRequest.getParameter("email");
 			
+			Member m = new Member();
+			m.setUserId(userNo);
+			m.setUserIntro(userIntro);
+			m.setProfile(profile);
+			m.setEmail(email);
 			
-			Member updateMem = new InfoService().updateInfo(userId, userIntro, profile);
-			
-			HttpSession session = request.getSession();
-			
-			if(updateMem != null) { // 비밀번호 변경 성공
+			int result = new InfoService().updateInfo(m);
+			System.out.println(m);
+			// case1:새로운 첨부파일 x		  		=> updateBoard(b, null);				=> Board Update
+			// case2:새로운 첨부파일 o, 기존의 첨부파일o => updateBoard(b, fileNo이 담긴at);		=> Board Update, Attachment Update 
+			// case3:새로운 첨부파일 o, 기존의 첨부파일x => updateBoard(b, refBoardNo이 담긴 at);	=> Board Update, Attachment Insert
+		
+			if(result > 0) { // 성공 => 상세조회 재요청(detail.bo?bno=xx)
 				
-				session.setAttribute("alertMsg", "성공적으로 정보를 변경됐습니다.");
-				session.setAttribute("loginUser", updateMem);
+				request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
 				
-			}else { // 실패
-				session.setAttribute("alertMsg", "정보변경에 실패했습니다");
+			}else { //실패 => 에러페이지
+				
+				request.setAttribute("errorMsg", "게시글 수정 실패");
+				request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
 			}
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}
 	}
 	/**

@@ -2,18 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.PageInfo, com.kh.admin.model.vo.Admin" %>
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");
-	
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-	
-	int keyfield = (int)request.getAttribute("keyfield");
-	String keyword = (String)request.getAttribute("keyword");
-	String status = (String)request.getAttribute("status");
 
 %>
 <!DOCTYPE html>
@@ -160,7 +148,7 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red"><%=listCount %></b>개
+								style="color: red">5</b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

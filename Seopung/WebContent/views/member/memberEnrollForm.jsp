@@ -302,6 +302,7 @@ input:placeholder {
 					$("#validPwdArea").html("");
 				}else{
 					$("#validPwdArea").html("유효한 비밀번호가 아닙니다");
+					$("#pwd").val("");
 				}
 				
 			});

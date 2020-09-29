@@ -1,6 +1,9 @@
 package com.kh.information.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
@@ -117,23 +120,22 @@ public class InfoService {
 		return count;
 	}
 	
-	public Member updateInfo(String userId, String userIntro, String profile) {
+	public int updateInfo(Member m) {
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updateInfo(conn, userId, userIntro, profile);
+		int result = new InfoDao().updateInfo(conn,m);
 		
-		Member updateMem = null;
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new InfoDao().selectMember(conn, userId);
+			
 		}else {
 			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return updateMem;
+		return result;
 	}
 }
 

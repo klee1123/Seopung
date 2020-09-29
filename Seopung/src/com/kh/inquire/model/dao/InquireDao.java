@@ -85,6 +85,7 @@ public class InquireDao {
 									 rset.getString("inquire_content"),
 									 rset.getString("inquire_status")));
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

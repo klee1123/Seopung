@@ -69,24 +69,52 @@ table+br+button {
 				<table id="searchForm">
 					<tr>
 						<th>&nbsp;비밀번호</th>
-						<td><input type="password" name="userPwd" id="userPwd"
+						<td><input type="password" name="pwd" id="pwd" required
 							placeholder="&nbsp;8 ~15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 
 					</tr>
 					<tr>
 						<th>&nbsp;비밀번호 확인</th>
-						<td><input type="password" id="checkPwd" name="checkPwd"
+						<td><input type="password" id="checkPwd" name="checkPwd" required
 							placeholder="&nbsp;8 ~15자 영문 대ㆍ소문자, 숫자, 특수문자"></td>
 
 					</tr>
-
+					<div id="validPwdArea" style=" color:red; margin-top:50px; margin-left:120px; position:absolute;"></div>
 				</table>
 				<br>
 
-				<button type="submit">비밀번호 변경</button>
+				<button id="change" type="submit">비밀번호 변경</button>
 			</fieldset>
 
 		</form>
 	</div>
+	<script>
+	$(function(){
+		var pwd = $("#pwd");
+		var checkPwd= $("#checkPwd");
+		$("#change").click(function(){
+			if(pwd.val() != checkPwd.val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				checkPwd.val("");
+				checkPwd.focus();
+			}						
+		});	
+	});
+	var regP = /^[a-z0-9!@#$%^&*]{8,15}$/i;
+	$(function(){
+		$("#pwd").blur(function(){
+			console.log($("#pwd").val());
+			if(regP.test($("#pwd").val())){
+				$("#validPwdArea").html("");
+			}else{
+				$("#validPwdArea").html("유효한 비밀번호가 아닙니다");
+				$("#pwd").val("");
+			}
+			
+		});
+		
+	});
+		
+	</script>
 </body>
 </html>

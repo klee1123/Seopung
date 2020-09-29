@@ -206,7 +206,7 @@ public class InfoDao {
 		return count;
 	}
 	
-	public int updateInfo(Connection conn, String userId, String userIntro, String profile) {
+	public int updateInfo(Connection conn, Member m) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -216,9 +216,10 @@ public class InfoDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, userIntro);
-			pstmt.setString(2, profile);
-			pstmt.setString(3, userId);
+			pstmt.setString(1, m.getUserIntro());
+			pstmt.setString(2, m.getProfile());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setInt(4, m.getUserNo());
 			
 			result = pstmt.executeUpdate();
 

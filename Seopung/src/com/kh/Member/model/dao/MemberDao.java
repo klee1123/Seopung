@@ -167,7 +167,7 @@ public class MemberDao {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println(name);
+		
 		String sql = prop.getProperty("searchId");
 		
 		try {

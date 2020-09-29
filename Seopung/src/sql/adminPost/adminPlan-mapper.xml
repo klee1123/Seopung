@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount1">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectListCount2">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION P
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE USER_ID LIKE '%' || ? || '%'
+		   AND P.STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectList1">
+		SELECT *
+		  FROM
+		    (
+		    SELECT ROWNUM RNUM
+		         , A.*
+		      FROM
+		        (
+		        SELECT 
+		               PLAN_NO
+		             , PLAN_TITLE
+		             , USER_ID
+		             , P.ENROLL_DATE
+		             , PLAN_COUNT
+		          FROM TB_PLAN_OPTION P
+		          JOIN TB_MEMBER USING(USER_NO)
+		         WHERE P.STATUS = 'Y'
+		           AND PLAN_TITLE LIKE '%' || ? || '%'
+		         ORDER
+		            BY PLAN_NO DESC
+		        ) A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectList2">
+		SELECT *
+		  FROM
+		    (
+		    SELECT ROWNUM RNUM
+		         , A.*
+		      FROM
+		        (
+		        SELECT 
+		               PLAN_NO
+		             , PLAN_TITLE
+		             , USER_ID
+		             , P.ENROLL_DATE
+		             , PLAN_COUNT
+		          FROM TB_PLAN_OPTION P
+		          JOIN TB_MEMBER USING(USER_NO)
+		         WHERE P.STATUS = 'Y'
+		           AND USER_ID LIKE '%' || ? || '%'
+		         ORDER
+		            BY PLAN_NO DESC
+		        ) A
+		    )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+		       TB_PLAN_OPTION
+		   SET PLAN_COUNT = PLAN_COUNT + 1
+		 WHERE PLAN_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectPlan">
+		SELECT 
+		       PLAN_TITLE
+		     , PLAN_SDATE
+		     , PLAN_EDATE
+		     , PLAN_AGE
+		     , PLAN_BUDGET
+		     , PLAN_MEMO
+		     , PLAN_TYPE
+		     , PLAN_TRANS
+		     , PLAN_RECOMMEND
+		     , PLAN_SCRAP_COUNT
+		     , USER_ID
+		  FROM TB_PLAN_OPTION P
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE PLAN_NO = ?
+		   AND P.STATUS = 'Y'
+	</entry>
+	
+	<entry key="deletePlan">
+		UPDATE 
+		       TB_PLAN_OPTION
+		   SET STATUS = 'N'
+		     , MODIFY_DATE = SYSDATE
+		 WHERE PLAN_NO = ?
+	</entry>
+	
+</properties>
