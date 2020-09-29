@@ -1,4 +1,4 @@
-package com.kh.adminCommunity.controller;
+package com.kh.adminPlan.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,25 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.kh.adminCommunity.model.service.CommunityService;
-import com.kh.adminCommunity.model.vo.ComComment;
+import com.kh.adminPlan.model.service.PlanService;
+import com.kh.adminPlan.model.vo.Plan;
 import com.kh.common.PageInfo;
 
 /**
- * Servlet implementation class AdminCommunityCommentListServlet
+ * Servlet implementation class AdminPlanListServlet
  */
-@WebServlet("/adminPage/rlist.co")
-public class AdminCommunityCommentListServlet extends HttpServlet {
+@WebServlet("/adminPage/list.co")
+public class AdminPlanListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityCommentListServlet() {
+    public AdminPlanListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +32,8 @@ public class AdminCommunityCommentListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
+		
+		request.setCharacterEncoding("utf-8");
 		
 		int listCount;		// 현재 총 게시글 갯수
 		int currentPage;	// 현재 페이지 (즉, 요청한 페이지)
@@ -47,13 +44,35 @@ public class AdminCommunityCommentListServlet extends HttpServlet {
 		int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작수
 		int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수
 		
-		listCount = new CommunityService().selectCommentCount(cno);
 		
+		// 넘어온 값 뽑기
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// 키필드(1:제목/2:아이디)
+		int keyfield;
+		if(request.getParameter("keyfield")!=null) {
+			keyfield = Integer.parseInt(request.getParameter("keyfield"));			
+		}else {
+			keyfield = 1;
+		}
+		
+		// 키워드
+		String keyword;
+		if(request.getParameter("keyword")!=null) {
+			keyword = request.getParameter("keyword");
+		}else {
+			keyword = "";
+		}
+		
+		
+		// 상태분류와 키워드에 해당하는 데이터 수 조회
+		listCount = new PlanService().selectListCount(keyfield, keyword);
+		
 		pageLimit = 5;
+		
 		boardLimit = 10;
 		
-		// 조회된 수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
+		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
 			maxPage = (int)Math.ceil((double)listCount/boardLimit);
 		}else {
@@ -70,17 +89,16 @@ public class AdminCommunityCommentListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<ComComment> commentList = new CommunityService().selectCommentList(pi, cno);
+		ArrayList<Plan> list = new PlanService().selectList(pi, keyfield, keyword);
 		
-		// 비동기로 진행
-		response.setContentType("application/json; charset=utf-8");
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		request.setAttribute("keyfield", keyfield);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("pageTitle", "일정 목록");
 		
-		JSONObject jsonUser = new JSONObject();
-		jsonUser.put("pi", pi);
-		jsonUser.put("list", commentList);
-
-		Gson gson = new GsonBuilder().setDateFormat("yy.MM.dd HH:mm").create();
-		gson.toJson(jsonUser, response.getWriter());
+		request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanListView.jsp").forward(request, response);
+	
 	
 	}
 

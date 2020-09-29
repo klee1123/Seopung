@@ -338,6 +338,63 @@ public class CommunityDao {
 		
 		return commentList;
 	}
+	
+	public int deleteCommunity(Connection conn, String[] cno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCommunity");
+		
+		// 삭제할 추천코스 갯수가 복수일 경우
+		if(cno.length > 1) {
+			for(int i=1; i<cno.length; i++) {
+				sql += " OR COMMUNITY_NO =" + cno[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(cno[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteComment(Connection conn, int commentNo) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteComment");
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, commentNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
 
 

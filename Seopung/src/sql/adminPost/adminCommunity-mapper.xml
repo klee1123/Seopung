@@ -193,4 +193,20 @@
 		     )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="deleteCommunity">
+		UPDATE 
+		       TB_COMMUNITY
+		   SET COMMUNITY_STATUS = 'N'
+		     , COMMUNITY_MODIFY = SYSDATE
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	
+	<entry key="deleteComment">
+		UPDATE 
+		       TB_COMMUNITY_COMMENT
+		   SET COMMENT_STATUS = 'N',
+  		       COMMENT_MODIFY = SYSDATE
+		 WHERE COMMENT_NO = ?
+	</entry>
 </properties>

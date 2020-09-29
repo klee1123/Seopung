@@ -142,7 +142,7 @@
 
 			<div align="center">
 				<button class="btn btn-secondary" onclick="history.back();">취소</button>
-				<button class="btn btn-danger">삭제</button>
+				<button class="btn btn-danger" id="deleteBtn">삭제</button>
 			</div>
 
 			<br> <br>
@@ -156,7 +156,13 @@
 	       		
 	       		//setInterval(selectReplyList,1000);
 	       		
-	       	});	       	
+	       		$("#deleteBtn").click(function(){
+	       			location.href="<%=contextPath%>/adminPage/delete.co?cno=<%=c.getCommunityNo()%>";
+	       		});
+	       		
+	       		
+	       	});	 
+	       	
 	       	
 	       	// 해당 게시글에 딸려있는 댓글리스트 조회용 ajax
 	       	function selectReplyList(cPage){
@@ -193,7 +199,7 @@
 					    								result.list[i].content +
 					    							"</td>" +
 					    							"<td align='center'>" +
-					    								"<button style='border: none; background: none' id='deleteBtn'>삭제</button>" +
+					    								"<button style='border: none; background: none' onclick='deleteComment(" + result.list[i].commentNo + ");'>삭제</button>" +
 					    							"</td>" +
 					    						"</tr>" +
 					    					"</table>";
@@ -243,6 +249,26 @@
 		       		}
 		       	});
 			}
+	       	
+	       	// 댓글 삭제용 ajax
+	       	function deleteComment(commentNo){
+	       		
+	       		$.ajax({
+	       			url:"<%=contextPath%>/adminPage/delete.rco",
+	       			type:"post",
+	       			data:{"commentNo":commentNo},
+	       			success:function(result){
+	       				
+	       				if(result>0){
+	       					selectReplyList(1);
+	       					
+	       				}
+	       				
+	       			}, error:function(){
+	       				console.log("ajax 통신 실패");
+	       			}
+	       		});
+	       	}
 	       
        	</script>
 	

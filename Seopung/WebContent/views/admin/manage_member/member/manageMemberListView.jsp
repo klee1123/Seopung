@@ -87,7 +87,7 @@
 						<th width="120px">아이디</th>
 						<th width="120px">이름</th>
 						<th width="150px">가입일</th>
-						<th width="150px">탈퇴일</th>
+						<th width="150px">상태</th>
 						<th width="75px">관리</th>
 					</tr>
 				</thead>
@@ -104,9 +104,9 @@
 							<td><%= a.getUserName() %></td>
 							<td><%= a.getEnrollDate() %></td>
 							<% if(a.getStatus().equals("N")){ %>
-							<td><%= a.getModifyDate() %></td>
+							<td>탈퇴</td>
 							<% }else if(a.getStatus().equals("Y")){ %>
-							<td></td>
+							<td>회원</td>
 							<% }else{ %>
 							<td>블랙리스트</td>
 							<%} %>
