@@ -1,6 +1,7 @@
 package com.kh.community.cotroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.PageInfo;
 import com.kh.community.model.service.CommunityService;
+import com.kh.community.model.vo.Community;
 
 /**
  * Servlet implementation class CommunityListServlet
@@ -40,7 +43,7 @@ public class CommunityListServlet extends HttpServlet {
 		int endPage;
 		
 		listCount = new CommunityService().selectListCount();
-		
+		System.out.println(listCount);
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		pageLimit = 10;
@@ -57,9 +60,14 @@ public class CommunityListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage );
+		
+		ArrayList<Community> list = new CommunityService().selectList(pi);
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
 		
 		
-		request.getRequestDispatcher("views/community/communityList.jsp");
+		request.getRequestDispatcher("views/community/communityList.jsp").forward(request, response);
 	}
 
 	/**

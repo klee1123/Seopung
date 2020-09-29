@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Community {
 
 	private int comNo;
-	private int userNo;
+	private String userNo;
 	private String title;
 	private String content;
 	private Date enroll;
@@ -19,7 +19,7 @@ public class Community {
 	
 	public Community() {}
 
-	public Community(int comNo, int userNo, String title, String content, Date enroll, Date modify, int count,
+	public Community(int comNo, String userNo, String title, String content, Date enroll, Date modify, int count,
 			int scrap, int recommend, String status, String thumb, String head) {
 		super();
 		this.comNo = comNo;
@@ -35,6 +35,27 @@ public class Community {
 		this.thumb = thumb;
 		this.head = head;
 	}
+	
+	
+
+	
+
+	
+
+	public Community(int comNo, String userNo, String title, String content, Date enroll, int count, int scrap,
+			int recommend, String thumb, String head) {
+		super();
+		this.comNo = comNo;
+		this.userNo = userNo;
+		this.title = title;
+		this.content = content;
+		this.enroll = enroll;
+		this.count = count;
+		this.scrap = scrap;
+		this.recommend = recommend;
+		this.thumb = thumb;
+		this.head = head;
+	}
 
 	public int getComNo() {
 		return comNo;
@@ -44,11 +65,11 @@ public class Community {
 		this.comNo = comNo;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 

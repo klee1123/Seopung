@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import = "java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo" %>
+<%
+	ArrayList<Community> list = (ArrayList<Community>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,50 +139,32 @@ table {
 
 				<hr style="width: 1000px;">
 				<br>
-
+				<%if(list.isEmpty()){ %>
+				<div style="font-size:20px">조회된 리스트가 없습니다.</div>
+				<%}else{ %>
+				<%for(Community c : list){ %>
 				<li
 					style=" position: relative; list-style-type: none; height: 100px;">
-					<span style="display: inline-block; width: 720px;">추천수 <a
+					<span style="display: inline-block; width: 720px;">추천수<a
 						href=""> <img style="position: absolute; margin-left: 30px;"
 							src="forest1.png" width="100px;" height="100%;" alt="">
 					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;">[맛집]</span>
+							id="headTitle" style="margin-left: 140px;"><%=c.getHead() %></span>
 					</a> <a href="" style="text-decoration: none; color: black;"> <span
-							id="title" name="title">여기 짱 맛있음&nbsp;[4]</span>
+							id="title" name="title"><%=c.getTitle() %>&nbsp;[4]</span>
 					</a>
 
 				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 50px;">2020.08.30</div>
-						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;">5</span> <br> <span>스크랩</span>
-					<span id="content" style="margin-left: 140px;">내용을여기다
-						넣을거에요내용을여기다 넣을거에요내용을ddddddddddddddddddddddd</span> <br> <span
-					style="margin-left: 15px; color: red;">5</span>
+						<div style="width: 100px;"><%=c.getEnroll() %></div>
+						<div style="width: 140px;">조회수: <%=c.getCount() %> /<%=c.getUserNo() %></div> <!-- <div style="width:50px">양현우</div> -->
+				</span> <span style="margin-left: 15px; color: blue;"><%=c.getRecommend() %></span> <br> <span>스크랩</span>
+					<span id="content" style="margin-left: 140px;"><%=c.getContent() %></span> <br> <span
+					style="margin-left: 15px; color: red;"><%=c.getScrap() %></span>
 				</li>
 				<br>
-				<li
-					style=" position: relative; list-style-type: none; height: 100px;">
-					<span style="display: inline-block; width: 720px;">추천수 <a
-						href=""> <img style="position: absolute; margin-left: 30px;"
-							src="forest1.png" width="100px;" height="100%;" alt="">
-					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;">[맛집]</span>
-					</a> <a href="" style="text-decoration: none; color: black;"> <span
-							id="title">여기 짱 맛있음&nbsp;[4]</span>
-
-					</a>
-
-				</span> <br> <span
-					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 50px;">2020.08.30</div>
-						<div style="width: 140px;">조회수: 40 /양현우</div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;">5</span> <br> <span>스크랩</span>
-					<span id="content" style="margin-left: 140px;">내용을여기다
-						넣을거에요내용을여기다 넣을거에요내용을ddddddddddddddddddddddd</span> <br> <span
-					style="margin-left: 15px; color: red;">5</span>
-				</li>
-				<br>
+					<%} %>
+				<%} %>
 
 				<hr style="width: 1000px;">
 			</ul>

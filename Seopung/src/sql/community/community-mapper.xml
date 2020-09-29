@@ -1,83 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-
-	<entry key="insertMember">
-		INSERT 
-		  INTO TB_MEMBER 
-		  (
-		        USER_NO
-		      , USER_ID
-		      , USER_PWD
-		      , USER_NAME
-		      , USER_NICK
-		      , USER_BIRTH
-		      , GENDER
-		      , EMAIL
-		      ) 
-		      VALUES
-		      ( 
-		        SEQ_UNO.NEXTVAL
-		       , ?
-		       , ?
-		       , ?
-		       , ?
-		       , ?
-		       , ?
-		       , ?
-		      )
-	</entry>
-	<entry key="loginMember">
+	<entry key="selectListCount">
 		SELECT 
-		       USER_NO
-		     , USER_ID
-		     , USER_PWD
-		     , USER_NAME
-		     , USER_NICK
-		     , USER_BIRTH
-		     , GENDER
-		     , PHONE
-		     , EMAIL
-		     , ENROLL_DATE
-		     , MODIFY_DATE
-		     , USER_INTRO
-		     , PROFILEPIC_PATH
-		     , STATUS
-		  FROM TB_MEMBER
-		 WHERE STATUS='Y'
-		   AND USER_ID=?
-		   AND USER_PWD=?
-	</entry>
-	<entry key="idCheck">
-		SELECT
 		       COUNT(*)
-		  FROM TB_MEMBER
-		 WHERE USER_ID = ?    
+		  FROM TB_COMMUNITY C
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_HEAD = '명소'
+	        OR COMMUNITY_HEAD = '맛집'
 	</entry>
-	<entry key="nickCheck">
-		SELECT
-		       COUNT(*)
-		  FROM TB_MEMBER
-		 WHERE USER_NICK = ?    
-	</entry>
-	<entry key="searchId">
-		SELECT 
-		       USER_ID
-		  FROM TB_MEMBER
-		 WHERE USER_NAME = ?
-		   AND EMAIL = ?
-	</entry>
-	<entry key="searchId2">
-		SELECT 
-		       USER_ID
-		  FROM TB_MEMBER
-		 WHERE USER_ID = ?
-		   AND EMAIL = ?
-	</entry>
-	<entry key="changePwd">
-		UPDATE
-		       TB_MEMBER
-		   SET USER_PWD = ?
-		 WHERE USER_ID = ?
+	<entry key="selectList">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_HEAD = '맛집'
+			            OR COMMUNITY_HEAD = '명소'
+			         ORDER 
+			            BY COMMUNITY_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>
