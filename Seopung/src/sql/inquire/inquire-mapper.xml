@@ -5,28 +5,28 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) LISTCOUNT
 	      FROM TB_INQUIRE
-	     WHERE INQUIRE_STATUS = 'Y' 
+	     WHERE STATUS = 'Y' 
 	</entry>
 
 	<entry key="selectList">
-		SELECT *
-		  FROM (
-		        SELECT 
-		               ROWNUM RNUM
-		             , A.*
-		          FROM (
-		                SELECT
-		                       INQUIRE_NO
-		                     , INQUIRE_TITLE
-		                     , INQUIRE_CONTENT
-		                     , INQUIRE_STATUS
-		                     
-		                  FROM TB_INQUIRE
-		                 ORDER
-		                    BY INQUIRE_NO DESC
-		                ) 
-		        )
-		  WHERE RNUM BETWEEN ? AND ?
+		 SELECT *
+   FROM (
+         SELECT 
+                ROWNUM RNUM
+              , A.* 
+           FROM (
+                 SELECT
+                        INQUIRE_NO
+                      , INQUIRE_TITLE
+                      , INQUIRE_CONTENT
+                      , INQUIRE_STATUS
+                   FROM TB_INQUIRE
+                  WHERE STATUS = 'Y'
+                  ORDER
+                     BY INQUIRE_NO DESC
+                ) A
+           )
+  WHERE RNUM BETWEEN ? AND ?;
 	</entry>
 
 </properties>
