@@ -1,4 +1,4 @@
-package com.kh.Member.controller;
+package com.kh.community.cotroller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.service.MemberService;
-import com.kh.Member.model.vo.Member;
+import com.kh.community.model.service.CommunityService;
 
 /**
- * Servlet implementation class SearchIdServlet2
+ * Servlet implementation class CommunityListServlet
  */
-@WebServlet("/searchId2.me")
-public class SearchIdServlet2 extends HttpServlet {
+@WebServlet("/list.co")
+public class CommunityListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchIdServlet2() {
+    public CommunityListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +30,36 @@ public class SearchIdServlet2 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
 		
-		String name = request.getParameter("userName");
-		String email = request.getParameter("email");
+		int maxPage;
+		int startPage;
+		int endPage;
 		
+		listCount = new CommunityService().selectListCount();
 		
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		String id = new MemberService().searchId(name, email);
+		pageLimit = 10;
 		
-		if(!id.equals("")) {
-			request.setAttribute("id", id);
-			
-			request.getRequestDispatcher("views/member/searchId2.jsp").forward(request, response);
-		}else {
-			request.setAttribute("errorMsg", "이름과 이메일이 일치하지 않습니다.");
-			
-			request.getRequestDispatcher("views/member/searchError.jsp").forward(request, response);
-			
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		
+		startPage = (currentPage -1) / pageLimit * pageLimit + 1;
+		
+		endPage = currentPage + pageLimit - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
 		}
+		
+		
+		
+		request.getRequestDispatcher("views/community/communityList.jsp");
 	}
 
 	/**
