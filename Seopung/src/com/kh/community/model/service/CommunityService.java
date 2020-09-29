@@ -1,7 +1,6 @@
 package com.kh.community.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -28,5 +27,22 @@ public class CommunityService {
 		ArrayList<Community> list = new CommunityDao().selectList(conn, pi);
 		close(conn);
 		return list;
+	}
+	
+	public int insertCommunity(Community c) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().insertCommunity(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+			
+		}
+		
+		close(conn);
+		return result;
+		
 	}
 }

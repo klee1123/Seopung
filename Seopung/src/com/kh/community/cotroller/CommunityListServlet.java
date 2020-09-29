@@ -43,7 +43,6 @@ public class CommunityListServlet extends HttpServlet {
 		int endPage;
 		
 		listCount = new CommunityService().selectListCount();
-		System.out.println(listCount);
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		pageLimit = 10;

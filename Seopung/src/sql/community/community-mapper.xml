@@ -37,4 +37,27 @@
 			     )
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="insertCommunity">
+		INSERT
+		  INTO TB_COMMUNITY
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   , COMMUNITY_TITLE
+		   , COMMUNITY_CONTENT
+		   , COMMUNITY_THUMB
+		   , COMMUNITY_HEAD
+		   , COMMUNITY_ENROLL
+		   )
+		   VALUES
+		   (
+		      SEQ_UNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
 </properties>

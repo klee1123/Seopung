@@ -98,6 +98,33 @@ public class CommunityDao {
 		
 	}
 	
+	public int insertCommunity(Connection conn, Community c) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(c.getUserNo()));
+			pstmt.setString(2, c.getTitle());
+			pstmt.setString(3, c.getContent());
+			pstmt.setString(4, c.getThumb());
+			pstmt.setString(5, c.getHead());
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
 	
 	
 	

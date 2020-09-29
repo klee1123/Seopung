@@ -178,30 +178,28 @@ table {
 							for="search" style="cursor: pointer;"><img src="다운로드.png"
 							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
-						<button
+						<button onclick="location.href='<%=contextPath%>/enrollForm.co'" type="button"
 							style=" margin-left:640px; width: 80px; height: 30px; border: none;">글작성</button>
 					</form>
 
 					<br> <br> <br>
 				</div>
 				<div style="width: 1000px;  white-space: nowrap; " align="center">
-					<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-					<button class="btn btn-secondary btn-sm">&lt;</button>
-
-					<button class="btn btn-outline-secondary btn-sm">1</button>
-					<button class="btn btn-outline-secondary btn-sm">2</button>
-					<button class="btn btn-outline-secondary btn-sm">3</button>
-					<button class="btn btn-outline-secondary btn-sm">4</button>
-					<button class="btn btn-outline-secondary btn-sm">5</button>
-					<button class="btn btn-outline-secondary btn-sm">1</button>
-					<button class="btn btn-outline-secondary btn-sm">2</button>
-					<button class="btn btn-outline-secondary btn-sm">3</button>
-					<button class="btn btn-outline-secondary btn-sm">4</button>
-					<button class="btn btn-outline-secondary btn-sm">5</button>
-
-					<button class="btn btn-secondary btn-sm">&gt;</button>
-					<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-
+				<%if(currentPage != 1){ %>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=1'" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage-1 %>'" class="btn btn-secondary btn-sm">&lt;</button>
+				<%} %>
+					<%for(int p = startPage; p<=endPage; p++){ %>
+						<%if(p != currentPage){ %>
+						<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p %>'" class="btn btn-outline-secondary btn-sm"><%=p %></button>
+						<%}else{ %>
+						<button disabled><%=p %></button>
+							<%} %>
+						<%} %>
+					<%if(currentPage != maxPage ){ %>
+					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage+1 %>'" class="btn btn-secondary btn-sm">&gt;</button>
+					<button onclick="location.href='<%=contextPath %>/list.co?currentPage=<%=maxPage %>'" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+					<%} %>	
 				</div>
 				<br><br>
 			</div>
