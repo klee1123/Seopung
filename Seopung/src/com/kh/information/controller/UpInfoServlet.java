@@ -53,20 +53,26 @@ public class UpInfoServlet extends HttpServlet {
 			String userIntro = multiRequest.getParameter("userIntro");
 			String profile = multiRequest.getParameter("profile");
 			
+			Member m = new Member();
+			m.setUserId(userId);
+			m.setUserIntro(userIntro);
+			m.setUserIntro(userIntro);
 			
-			Member updateMem = new InfoService().updateInfo(userId, userIntro, profile);
+			int result = new InfoService().updateInfo(m);
 			
-			HttpSession session = request.getSession();
-			
-			if(updateMem != null) { // 비밀번호 변경 성공
+			// case1:새로운 첨부파일 x		  		=> updateBoard(b, null);				=> Board Update
+			// case2:새로운 첨부파일 o, 기존의 첨부파일o => updateBoard(b, fileNo이 담긴at);		=> Board Update, Attachment Update 
+			// case3:새로운 첨부파일 o, 기존의 첨부파일x => updateBoard(b, refBoardNo이 담긴 at);	=> Board Update, Attachment Insert
+		
+			if(result > 0) { // 성공 => 상세조회 재요청(detail.bo?bno=xx)
 				
-				session.setAttribute("alertMsg", "성공적으로 정보를 변경됐습니다.");
-				session.setAttribute("loginUser", updateMem);
+				request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
 				
-			}else { // 실패
-				session.setAttribute("alertMsg", "정보변경에 실패했습니다");
+			}else { //실패 => 에러페이지
+				
+				request.setAttribute("errorMsg", "게시글 수정 실패");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}
 	}
 	/**

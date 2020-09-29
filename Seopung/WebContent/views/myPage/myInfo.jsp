@@ -81,7 +81,7 @@
 		String year = birth.substring(0, 4);
 		String month = birth.substring(4, 6);
 		String day = birth.substring(6);
-		String intro = (loginUser.getUserIntro().equals("null")) ? "" : loginUser.getUserIntro() ;
+		String intro = loginUser.getUserIntro() == null ? "" : loginUser.getUserIntro() ;
 	%>
 	
 	<div class="myContent">
@@ -140,7 +140,11 @@
                 </tr>
              	<tr>
              		<th>인증확인</th>
+             		<td><input type="text" name="code2" id="code2" onkeyup="checkCode()" placeholder="인증번호를 입력하세요">
+                    <div id="ckeckCode" style="border:1px solid black"></div></td>
+              		<td><input type="hidden" readonly="readonly" name="code_check2" id="code_check2" value="<%=request.getAttribute("code")%>"></td>
              	</tr>
+             	<tr><td><input type="hidden" id="ok" value="인증하기"></td></tr>
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
@@ -158,6 +162,30 @@
             </div>
         </div>
     </div>
+    <script>
+    function checkCode(){
+        var v1 = $("#code_check2").value;
+        var v2 = $("#code2")value;
+        if(v1 != v2) {
+            document.getElementById("checkCode").style.color = "red";
+            document.getElementById("checkCode").innerHTML = "잘못된인증번호입니다"
+            makeNull();
+        }else {
+            document.getElementById("checkCode").style.color = "blue";
+            document.getElementById("checkCode").innerHTML = "인증되었습니다"
+            makeReal();
+        }
+    }
+
+    function makeReal() {
+        var hi = document.getElementById("ok");
+        hi.type="submit";
+    }
+    function makeNull() {
+        var hi = document.getElementById("hi");
+        hi.type="hidden";
+    }
+    </script>
     
     <!-- 닉네임변경 버튼 클릭시 보여질 Modal-->
 <div class="modal" id="updateNickForm">
