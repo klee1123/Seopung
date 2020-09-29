@@ -46,14 +46,12 @@ public class PlanDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			
+			pstmt.setString(1, keyword);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				listCount += rset.getInt(1);
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
