@@ -34,7 +34,7 @@ public class AccompanyService {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Accompany> list = new AccompanyDao().selectListCount(conn, pi);
+		ArrayList<Accompany> list = new AccompanyDao().selectList(conn, pi);
 		
 		close(conn);
 		
