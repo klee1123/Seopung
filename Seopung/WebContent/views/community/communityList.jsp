@@ -147,7 +147,7 @@ table {
 					style=" position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수<a
 						href=""> <img style="position: absolute; margin-left: 30px;"
-							src="forest1.png" width="100px;" height="100%;" alt="">
+							src="<%=c.getThumb() %>" width="100px;" height="100%;" alt="">
 					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
 							id="headTitle" style="margin-left: 140px;"><%=c.getHead() %></span>
 					</a> <a href="" style="text-decoration: none; color: black;"> <span
@@ -203,6 +203,7 @@ table {
 					<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
 
 				</div>
+				<br><br>
 			</div>
 		</div>
 	</div>
