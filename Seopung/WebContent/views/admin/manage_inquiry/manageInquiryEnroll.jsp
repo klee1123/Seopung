@@ -20,7 +20,7 @@
 	<div class="container-fluid">
 
 		<!-- Page Heading 
-		<h1 class="h3 mb-4 text-gray-800">FAQ</h1>-->
+		<h1 class="h3 mb-4 text-gray-800">1:1문의</h1>-->
 
 		<div class="outer" align="left">
 			<form action="" method="post" id="faqPost">
