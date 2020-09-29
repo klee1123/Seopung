@@ -40,7 +40,6 @@ public class SearchIdServlet2 extends HttpServlet {
 		
 		String id = new MemberService().searchId(name, email);
 		
-		
 		if(!id.equals("")) {
 			request.setAttribute("id", id);
 			

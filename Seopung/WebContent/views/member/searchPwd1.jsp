@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%! 
-	public int getRandom(){
-	int random = 0;
-	random = (int)Math.floor((Math.random()*(99999-10000 +1))) +10000;
-	return random;
-	}
-%>
+
+<%!public int getRandom() {
+		int random = 0;
+		random = (int) Math.floor((Math.random() * (99999 - 10000 + 1))) + 10000;
+		return random;
+	}%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,25 +86,29 @@ table+br+button+button {
 				<table id="searchForm">
 					<tr>
 						<th>&nbsp;아이디</th>
-						<td><input type="text" required name="userId" placeholder="아이디"></td>
+						<td><input type="text" required name="userId"
+							placeholder="아이디"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>&nbsp;이메일</th>
-						<td><input type="text" id="email" required name="email" placeholder="이메일"></td>
+						<td><input type="text" id="email" required name="email"
+							placeholder="이메일"></td>
 						<td><button type="button" onclick="send();">인증번호 발송</button></td>
 					</tr>
 					<tr>
 						<th>&nbsp;이메일인증</th>
-						<td><input type="text" id="checkNum" required placeholder="인증번호 입력"></td>
+						<td><input type="text" id="checkNum" required
+							placeholder="인증번호 입력"></td>
 						<input type="hidden" readonly="readonly" name="code_check"
-						id="code_check" value="<%=getRandom()%>">
+							id="code_check" value="<%=getRandom()%>">
 						<td></td>
 					</tr>
 				</table>
 				<br>
 				<button type="submit" id="next">다음</button>
-				<button type="button">아이디 찾기</button>
+				<button onclick="location.href='<%=contextPath%>/searchId.me'"
+					type="button">아이디 찾기</button>
 			</fieldset>
 
 		</form>
@@ -114,31 +116,30 @@ table+br+button+button {
 		function send(){
 			$.ajax({
 				url:"<%=contextPath%>/send",
-				data:{
-					email:$("#email").val(),
-					code_check:$("#code_check").val()
-				},
-				type:"post",
-				success:function(data){
-					console.log("ajax통신 성공");
-					alert(data);
-				},
-				error:function(){
-					console.log("ajax통신 실패");
-				}
-				
+					data : {
+						email : $("#email").val(),
+						code_check : $("#code_check").val()
+					},
+					type : "post",
+					success : function(data) {
+						console.log("ajax통신 성공");
+						alert(data);
+					},
+					error : function() {
+						console.log("ajax통신 실패");
+					}
+
+				});
+			}
+			$(function() {
+				$("#next").click(function() {
+					if ($("#code_check").val() != $("#checkNum").val()) {
+						alert("인증번호가 일치하지 않습니다.");
+						$("#checkNum").val("")
+						$("#checkNum").focus();
+					}
+				})
 			});
-		}
-		$(function(){
-			$("#next").click(function(){
-				if($("#code_check").val() != $("#checkNum").val()){
-					alert("인증번호가 일치하지 않습니다.");
-					$("#checkNum").val("")
-					$("#checkNum").focus();
-				}
-			})
-		});
-		
 		</script>
 	</div>
 </body>

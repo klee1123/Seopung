@@ -72,6 +72,7 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
 	<%
+		int userNo = loginUser.getUserNo();
 		String userId = loginUser.getUserId();
 		String userName = loginUser.getUserName();
 		String nickName = loginUser.getNickName();
@@ -81,7 +82,7 @@
 		String year = birth.substring(0, 4);
 		String month = birth.substring(4, 6);
 		String day = birth.substring(6);
-		String intro = (loginUser.getUserIntro().equals("null")) ? "" : loginUser.getUserIntro() ;
+		String intro = loginUser.getUserIntro() == null ? "" : loginUser.getUserIntro() ;
 	%>
 	
 	<div class="myContent">
@@ -92,8 +93,8 @@
             <hr>
         <div class="myInfo">
         <form action="updateInfo.in" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="userId" value="<%=userId%>">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="<%= contextPath %>/updateInfo.in">저장</button>
+            <input type="hidden" name="userNo" value="<%=userNo%>">
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
@@ -134,13 +135,17 @@
                 </tr>
                 <tr>
                 	<th align="left">변경할 이메일</th>
-                	<td><input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요."></td>
+                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="이메일을 입력하세요."></td>
                     <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
                     <td><button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
                 </tr>
              	<tr>
              		<th>인증확인</th>
+             		<td><input type="text" name="code" id="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요">
+                    <div id="ckeckCode"></div></td>
+              		<!-- <td><input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>"></td> -->
              	</tr>
+             	<tr><td><input type="hidden" id="ok" value="인증하기"></td></tr>
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
@@ -158,6 +163,30 @@
             </div>
         </div>
     </div>
+    <script>
+    function checkCode(){
+        var v1 = $("#code_check").value;
+        var v2 = $("#code")value;
+        if(v1 != v2) {
+            document.getElementById("checkCode").style.color = "red";
+            document.getElementById("checkCode").innerHTML = "잘못된인증번호입니다"
+            makeNull();
+        }else {
+            document.getElementById("checkCode").style.color = "blue";
+            document.getElementById("checkCode").innerHTML = "인증되었습니다"
+            makeReal();
+        }
+    }
+
+    function makeReal() {
+        var hi = document.getElementById("ok");
+        ok.type="submit";
+    }
+    function makeNull() {
+        var hi = document.getElementById("hi");
+        hi.type="hidden";
+    }
+    </script>
     
     <!-- 닉네임변경 버튼 클릭시 보여질 Modal-->
 <div class="modal" id="updateNickForm">
@@ -301,10 +330,10 @@
   <script>
   -->         
   	function emailChk(){
-  		var $receiver = $("#receiver");
+  		var $updateEmail = $("#updateEmail");
   		$.ajax({
   			url:"<%= contextPath %>/sendEmail.in",
-  			data:{receiver:$receiver.val(),code_check:$("#code_check").val()},
+  			data:{updateEmail:$updateEmail.val(),code_check:$("#code_check").val()},
   			type:"post",
   			success:function(result){
   				

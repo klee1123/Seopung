@@ -114,6 +114,7 @@
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
 	<entry key="insertCommunity">
 		INSERT
 		  INTO TB_COMMUNITY
@@ -132,5 +133,80 @@
 		   , ?
 		   , '공지'
 		  )
+	</entry>
+	
+	<entry key="increaseCount">
+		UPDATE
+		       TB_COMMUNITY
+		   SET COMMUNITY_COUNT = COMMUNITY_COUNT + 1
+		 WHERE COMMUNITY_NO = ?
+		   AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectCommunity">
+		SELECT 
+		       USER_ID
+		     , COMMUNITY_TITLE
+		     , COMMUNITY_CONTENT
+		     , COMMUNITY_ENROLL
+		     , COMMUNITY_COUNT
+		     , COMMUNITY_SCRAP
+		     , COMMUNITY_RECOMMEND
+		     , COMMUNITY_THUMB
+		     , COMMUNITY_HEAD
+		  FROM TB_COMMUNITY
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_NO = ?
+	</entry>
+	
+	<entry key="selectCommentCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY_COMMENT
+		 WHERE COMMENT_STATUS = 'Y'
+		   AND COMMUNITY_NO = ?
+	</entry>
+	
+	<entry key="selectCommentList">
+		SELECT *
+		  FROM
+		     (
+		     SELECT ROWNUM RNUM
+		                 , A.*
+		              FROM
+		                 (
+		                  SELECT  
+		                         COMMENT_NO
+		                       , COMMUNITY_NO
+		                       , COMMENT_CONTENT
+		                       , COMMENT_DATE
+		                       , USER_ID
+		                       , PROFILEPIC_PATH
+		                    FROM TB_COMMUNITY_COMMENT 
+		                    JOIN TB_MEMBER USING(USER_NO)
+		                   WHERE COMMENT_STATUS = 'Y'
+                             AND COMMUNITY_NO = ? 
+                           ORDER
+                              BY COMMENT_NO DESC          
+		                 ) A
+		     )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteCommunity">
+		UPDATE 
+		       TB_COMMUNITY
+		   SET COMMUNITY_STATUS = 'N'
+		     , COMMUNITY_MODIFY = SYSDATE
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	
+	<entry key="deleteComment">
+		UPDATE 
+		       TB_COMMUNITY_COMMENT
+		   SET COMMENT_STATUS = 'N',
+  		       COMMENT_MODIFY = SYSDATE
+		 WHERE COMMENT_NO = ?
 	</entry>
 </properties>

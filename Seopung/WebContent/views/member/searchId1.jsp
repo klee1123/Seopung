@@ -69,15 +69,17 @@ table+br+button {
 				<table id="searchForm">
 					<tr>
 						<th>&nbsp;이름</th>
-						<td><input type="text" name="userName" required placeholder="이름"></td>
+						<td><input type="text" name="userName" required
+							placeholder="이름"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>&nbsp;이메일</th>
-						<td><input type="text" name="email" required placeholder="이메일"></td>
+						<td><input type="text" name="email" required
+							placeholder="이메일"></td>
 						<td></td>
 					</tr>
-					
+
 				</table>
 				<br>
 				<button type="submit">다음</button>

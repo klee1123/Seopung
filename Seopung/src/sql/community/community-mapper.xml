@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY C
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_HEAD = '명소'
+	        OR COMMUNITY_HEAD = '맛집'
+	</entry>
+	<entry key="selectList">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_HEAD = '맛집'
+			            OR COMMUNITY_HEAD = '명소'
+			         ORDER 
+			            BY COMMUNITY_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="insertCommunity">
+		INSERT
+		  INTO TB_COMMUNITY
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   , COMMUNITY_TITLE
+		   , COMMUNITY_CONTENT
+		   , COMMUNITY_THUMB
+		   , COMMUNITY_HEAD
+		   , COMMUNITY_ENROLL
+		   )
+		   VALUES
+		   (
+		      SEQ_UNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
+</properties>

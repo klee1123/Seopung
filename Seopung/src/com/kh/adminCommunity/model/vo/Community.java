@@ -53,6 +53,22 @@ public class Community {
 		this.head = head;
 	}
 
+	
+	public Community(int communityNo, String communityWriter, String title, String content, Date enrollDate, int count,
+			int scrapCount, int recommendCount, String thumbnailPath, String head) {
+		super();
+		this.communityNo = communityNo;
+		this.communityWriter = communityWriter;
+		this.title = title;
+		this.content = content;
+		this.enrollDate = enrollDate;
+		this.count = count;
+		this.scrapCount = scrapCount;
+		this.recommendCount = recommendCount;
+		this.thumbnailPath = thumbnailPath;
+		this.head = head;
+	}
+
 	public int getCommunityNo() {
 		return communityNo;
 	}

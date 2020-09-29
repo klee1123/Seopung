@@ -72,8 +72,42 @@ private Properties prop = new Properties();
 		
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty(key)
+		String sql = prop.getProperty("selectList");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Accompany(rset.getInt("ACCOM_NO"),
+						               rset.getDate("ACCOM_APPLY"),
+						               rset.getString("ACCOM_STATUS"),
+						               rset.getDate("ACCOM_COMPLETE"),
+						               rset.getInt("USER_NO"),
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO")));
+				
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 		
 		
 	}
