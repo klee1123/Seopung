@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminPlan.model.service.PlanService;
+import com.kh.adminPlan.model.vo.Plan;
 
 /**
- * Servlet implementation class AdminCommunityDeleteServlet
+ * Servlet implementation class AdminPlanDetailServlet
  */
-@WebServlet("/adminPage/delete.pl")
-public class AdminPlanDeleteServlet extends HttpServlet {
+@WebServlet("/adminPage/detail.pl")
+public class AdminPlanDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPlanDeleteServlet() {
+    public AdminPlanDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +31,23 @@ public class AdminPlanDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] pno = request.getParameterValues("pno");
+		int pno = Integer.parseInt(request.getParameter("pno"));
 		
-		int result = new PlanService().deletePlan(pno);
+		int result = new PlanService().increaseCount(pno);
 		
 		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "일정 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/adminPage/list.pl?currentPage=1");
 			
+			Plan p = new PlanService().selectPlan(pno);
+			
+			request.setAttribute("p", p);
+			request.setAttribute("pageTitle", "일정 상세조회");
+			request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanDetailView.jsp").forward(request, response);
+
 		}else {
-			request.setAttribute("errorMsg", "일정 삭제 실패");
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
+		
 	}
 
 	/**

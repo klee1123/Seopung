@@ -69,5 +69,39 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="increaseCount">
+		UPDATE
+		       TB_PLAN_OPTION
+		   SET PLAN_COUNT = PLAN_COUNT + 1
+		 WHERE PLAN_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectPlan">
+		SELECT 
+		       PLAN_TITLE
+		     , PLAN_SDATE
+		     , PLAN_EDATE
+		     , PLAN_AGE
+		     , PLAN_BUDGET
+		     , PLAN_MEMO
+		     , PLAN_TYPE
+		     , PLAN_TRANS
+		     , PLAN_RECOMMEND
+		     , PLAN_SCRAP_COUNT
+		     , USER_ID
+		  FROM TB_PLAN_OPTION P
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE PLAN_NO = ?
+		   AND P.STATUS = 'Y'
+	</entry>
+	
+	<entry key="deletePlan">
+		UPDATE 
+		       TB_PLAN_OPTION
+		   SET STATUS = 'N'
+		     , MODIFY_DATE = SYSDATE
+		 WHERE PLAN_NO = ?
+	</entry>
 	
 </properties>

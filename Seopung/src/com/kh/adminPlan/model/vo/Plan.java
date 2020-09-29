@@ -60,6 +60,25 @@ public class Plan {
 	}
 
 	
+	public Plan(int planNo, String planTitle, Date startDate, Date endDate, String age, String budget, String memo,
+			String planType, String transrportations, int recommendCount, int scrapCount, String planWriter) 
+	{
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.age = age;
+		this.budget = budget;
+		this.memo = memo;
+		this.planType = planType;
+		this.transrportations = transrportations;
+		this.recommendCount = recommendCount;
+		this.scrapCount = scrapCount;
+		this.planWriter = planWriter;
+	}
+
+
 	public Plan(int planNo, String planTitle, String planWriter, Date enrollDate, int count) {
 		super();
 		this.planNo = planNo;

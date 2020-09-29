@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.adminCommunity.model.vo.Community;
 import com.kh.adminPlan.model.vo.Plan;
+import com.kh.adminRecommend.model.vo.Recommend;
 import com.kh.common.PageInfo;
 
 public class PlanDao {
@@ -109,6 +110,105 @@ public class PlanDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	
+	public int increaseCount(Connection conn, int pno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public Plan selectPlan(Connection conn, int pno) {
+		// select문 => 한 행 조회
+		Plan p = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlan");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				p = new Plan(pno,
+						     rset.getString("plan_title"),
+							 rset.getDate("plan_sdate"),
+							 rset.getDate("plan_edate"),
+							 rset.getString("plan_age"),
+							 rset.getString("plan_budget"),
+							 rset.getString("plan_memo"),
+							 rset.getString("plan_type"),
+							 rset.getString("plan_trans"),
+							 rset.getInt("plan_recommend"),
+							 rset.getInt("plan_scrap_count"),
+							 rset.getString("user_id"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;
+	}
+	
+	public int deletePlan(Connection conn, String[] pno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deletePlan");
+		
+		// 삭제할 추천코스 갯수가 복수일 경우
+		if(pno.length > 1) {
+			for(int i=1; i<pno.length; i++) {
+				sql += " OR PLAN_NO =" + pno[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(pno[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

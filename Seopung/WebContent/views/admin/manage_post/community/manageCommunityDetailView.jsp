@@ -157,7 +157,9 @@
 	       		//setInterval(selectReplyList,1000);
 	       		
 	       		$("#deleteBtn").click(function(){
-	       			location.href="<%=contextPath%>/adminPage/delete.co?cno=<%=c.getCommunityNo()%>";
+	       			if(confirm("정말 삭제하시겠습니까?")) {
+	       				location.href="<%=contextPath%>/adminPage/delete.co?cno=<%=c.getCommunityNo()%>";
+	       			}
 	       		});
 	       		
 	       		
