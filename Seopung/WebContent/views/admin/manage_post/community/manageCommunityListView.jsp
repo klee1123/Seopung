@@ -160,7 +160,7 @@
                     $(this).find("td:eq(2)").css("cursor","pointer");
                   
                     $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.re?currentPage=" + <%=currentPage%> + "&cno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/adminPage/detail.co?cno=" + $(this).prev().text();
                     });
                   });
 			});

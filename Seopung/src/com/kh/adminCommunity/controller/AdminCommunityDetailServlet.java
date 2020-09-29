@@ -12,16 +12,16 @@ import com.kh.adminCommunity.model.service.CommunityService;
 import com.kh.adminCommunity.model.vo.Community;
 
 /**
- * Servlet implementation class AdminCommunityInsertServlet
+ * Servlet implementation class AdminCommunityDetailServlet
  */
-@WebServlet("/adminPage/insert.co")
-public class AdminCommunityInsertServlet extends HttpServlet {
+@WebServlet("/adminPage/detail.co")
+public class AdminCommunityDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityInsertServlet() {
+    public AdminCommunityDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +30,24 @@ public class AdminCommunityInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		request.setCharacterEncoding("utf-8");
-		
-		String adminNo = request.getParameter("adminNo");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		
-		Community c = new Community();
-		c.setCommunityWriter(adminNo);
-		c.setTitle(title);
-		c.setContent(content);
-		
-		int result = new CommunityService().insertCommunity(c);
+		int result = new CommunityService().increaseCount(cno);
 		
 		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "커뮤니티 공지사항 등록 성공");
-			response.sendRedirect(request.getContextPath() + "/adminPage/list.co?currentPage=1");
+			
+			Community c = new CommunityService().selectCommunity(cno);
+			
+			request.setAttribute("c", c);
+			request.setAttribute("pageTitle", "커뮤니티 상세조회");
+			request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityDetailView.jsp").forward(request, response);
 			
 		}else {
-			request.setAttribute("errorMsg", "커뮤니티 공지사항 등록 실패");
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
+		
+	
 	
 	}
 
