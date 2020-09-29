@@ -71,10 +71,10 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		ArrayList<Accompany> list =  new AccompanyService().selectList(pi);
 		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
 		
-
-		
-		request.getRequestDispatcher("../views/accompany/accompanyList/accompanyList.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/accompany/accompanyList/accomList.jsp").forward(request, response);
 		
 		
 		
