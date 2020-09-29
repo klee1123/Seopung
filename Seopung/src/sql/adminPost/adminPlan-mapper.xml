@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount1">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || '' || '%'
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectListCount2">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION P
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE USER_ID LIKE '%' || '' || '%'
+		   AND P.STATUS = 'Y'
+	</entry>
+	
+	
+	
+	
+</properties>

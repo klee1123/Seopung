@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.adminCommunity.model.dao.CommunityDao;
 import com.kh.adminCommunity.model.vo.ComComment;
 import com.kh.adminCommunity.model.vo.Community;
+import com.kh.adminRecommend.model.dao.RecommendDao;
 import com.kh.common.PageInfo;
 
 public class CommunityService {
@@ -117,5 +118,35 @@ public class CommunityService {
 		close(conn);
 		
 		return commentList;
+	}
+	
+	
+	public int deleteCommunity(String[] cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().deleteCommunity(conn, cno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	public int deleteComment(int commentNo) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().deleteComment(conn, commentNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 }

@@ -129,6 +129,17 @@
 							<td><input type="text" name="email" value="<%=m.getEmail() %>"  class="form-control" required></td>
 						</tr>
 						<tr>
+							<th>*</th>
+							<td>성별</td>
+							<td>
+								<%if(m.getGender().equals("M")){ %>
+								<input type="text" value="남자"  class="form-control" readonly>
+								<%}else{ %>
+								<input type="text" value="여자"  class="form-control" readonly>
+								<%} %>
+							</td>
+						</tr>
+						<tr>
 							<th></th>
 							<td>가입일</td>
 							<td><input type="text" value="<%=m.getEnrollDate() %>"  class="form-control" readonly></td>
