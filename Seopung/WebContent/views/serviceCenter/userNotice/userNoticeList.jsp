@@ -104,7 +104,7 @@ div {
 </head>
 
 <body>
-	<%@include file="../common/menubar.jsp"%>
+	<%@include file="../../common/menubar.jsp"%>
 	<div class="wrap">
 
         <h2>고객센터</h2>
@@ -174,7 +174,7 @@ div {
                     <table>
                         <tr>
                             <td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-                                    style="color: red"><%=listCount %></b>개
+                                    style="color: red">5</b>개
                             </span></td>
                             <td width="720px;">
                                 <div align="center">
@@ -204,6 +204,6 @@ div {
         </div>
         <!-- /.container-fluid -->
     
-        <%@ include file="../common/footer.jsp"%>
+        <%@ include file="../../common/footer.jsp"%>
     </body>
     </html>

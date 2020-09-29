@@ -142,18 +142,18 @@ div {
         <h4>서풍에 가입된 이메일 주소</h4>
         <form action="">
             <label for="email"></label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" required>
         </form>
         <br>
 
         <h4>문의내용</h4>
         <form action="">
-            <textarea cols="60" rows="7" style="resize: none;"></textarea>
+            <textarea cols="60" rows="7" style="resize: none;" required></textarea>
         </form>
         <br><br>
 
         <form action="">
-            <input id="privacy" type="checkbox" name="privacy" value="">
+            <input id="privacy" type="checkbox" name="privacy" value="" required>
             <label for="privacy"><h4 style="display:inline;">개인 정보 수집 및  이용에 동의합니다.</h4></label>
         </form>
         <br><br><br><br>

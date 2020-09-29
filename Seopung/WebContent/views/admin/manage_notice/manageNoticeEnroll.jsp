@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<%@ include file="../../common/header.jsp"%>
+	<%@ include file="../common/header.jsp"%>
 
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
@@ -30,7 +30,7 @@
 		<br>
 
 		<div class="outer">
-			<form action="<%=contextPath%>/adminPage/insert.re" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+			<form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 				
 				<!-- 수정 필요! 임시 -->
 				<input type="hidden" name="adminNo" value="1">
@@ -84,9 +84,6 @@
 				
 				function validateForm(){
 					
-					
-					
-					
 				}
 			</script>
 			<br>
@@ -97,6 +94,6 @@
 	<!-- /.container-fluid -->
 	
 	
-	<%@ include file="../../common/footer.jsp"%>
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>
