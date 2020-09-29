@@ -105,9 +105,9 @@
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;1.</td>
-	                        <td><%= a.getAccomNo() %></td>
-	                        <td><%= a.getUserNo2() %></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;<%= a.getAccomNo() %></td>
+	                        <td>id</td>
+	                        <td>nick</td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
@@ -356,20 +356,26 @@
             
 	            <br><br>
                 <div class="pagingArea" align="center">
-	
                     <div align="center">
+					<% if(currentPage != 1){ %>
+	            	<!-- 맨 처음으로 (<<) -->
                         <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                    <!-- 이전페이지로 (<) -->    
                         <button class="btn btn-secondary btn-sm">&lt;</button>
-
-                        <button class="btn btn-outline-secondary btn-sm">1</button>
-                        <button class="btn btn-outline-secondary btn-sm">2</button>
-                        <button class="btn btn-outline-secondary btn-sm">3</button>
-                        <button class="btn btn-outline-secondary btn-sm">4</button>
-                        <button class="btn btn-outline-secondary btn-sm">5</button>
-
-                        <button class="btn btn-secondary btn-sm">&gt;</button>
-                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-                    
+					<% } %>
+					
+				<% for(int p=startPage; p<=endPage; p++){ %>
+					<% if(p != currentPage){ %>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+                	<% } %>        
+                <% } %>
+                
+                <% if(currentPage != maxPage){ %>  
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                <% } %>    
                     </div>
 	            </div>
 	        </div>

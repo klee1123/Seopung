@@ -74,7 +74,7 @@ public class AccompanyListServlet extends HttpServlet {
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
-		request.getRequestDispatcher("../views/accompany/accompanyList/accomList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/accompany/accompanyList/accomList.jsp").forward(request, response);
 		
 		
 		
