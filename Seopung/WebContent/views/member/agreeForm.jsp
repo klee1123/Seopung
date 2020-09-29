@@ -106,9 +106,17 @@
     </div>
     <script>
     	$(function(){
-    		
-    		if($("input:checkbox[id='allCheck']").click(function(){
-    			$(".foot>input[type='checkbox']").attr("checked", true);
+    				
+    			($("input:checkbox[id='allCheck']").click(function(){
+    			if($("input:checkbox[id='allCheck']").prop("checked")){
+    			
+    				$(".foot>input[type='checkbox']").attr("checked", true);
+    			
+    			
+    			}else{
+    				$(".foot>input[type='checkbox']").attr("checked", false);
+
+    			}
     			agree_checked();
     			
     		}));

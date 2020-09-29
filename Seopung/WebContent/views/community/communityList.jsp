@@ -184,10 +184,10 @@ table {
 							<option value="title">제목</option>
 						</select> <input type="text" style="width: 150px; height: 23px;"> <label
 							for="search" style="cursor: pointer;"><img src="다운로드.png"
-							width="20px;" height="16px;"></label>
+							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
 						<button
-							style=" width: 80px; height: 30px; border: none;">글작성</button>
+							style=" margin-left:640px; width: 80px; height: 30px; border: none;">글작성</button>
 					</form>
 
 					<br> <br> <br>

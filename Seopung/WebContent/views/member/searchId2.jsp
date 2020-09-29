@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String id = (String)request.getAttribute("id");
+	String id = (String) request.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,10 +60,9 @@
 	line-height: 50px
 }
 
-#id{
-margin-top:30px;
+#id {
+	margin-top: 30px;
 }
-
 </style>
 </head>
 <body>
@@ -81,26 +80,39 @@ margin-top:30px;
 				<br>
 				<div style="border: 1px solid dimgray;"></div>
 				<br>
-				<%if(id.equals("")){ %>
-						<fieldset style="width: 430px; height: 120px;" id="userId1">
-					<div style="color:red" >일치하는 아이디가 없습니다.</div>
-	
+				<%
+					if (id.equals("")) {
+				%>
+				<fieldset style="width: 430px; height: 120px;" id="userId1">
+					<div style="color: red">일치하는 아이디가 없습니다.</div>
+
 				</fieldset>
 				<br>
-				
-				<button type="button" onclick="location.href='<%=contextPath %>/searchId.me'" id="searchPwd">아이디찾기</button>
-				<button type="button" onclick="location.href='<%=contextPath%>'" id="close">메인으로</button>
-				<%}else{ %>
-					<fieldset style="width: 430px; height: 120px;" id="userId1">
-				 	<div id="id"><%=id %></div>
-						
+
+				<button type="button"
+					onclick="location.href='<%=contextPath%>/searchId.me'"
+					id="searchPwd">아이디찾기</button>
+				<button type="button" onclick="location.href='<%=contextPath%>'"
+					id="close">메인으로</button>
+				<%
+					} else {
+				%>
+				<fieldset style="width: 430px; height: 120px;" id="userId1">
+					<div id="id"><%=id%></div>
+
 				</fieldset>
 				<br>
-				
-				<button type="button" onclick="location.href='<%=contextPath%>/searchPwd.me'" id="searchPwd">비밀번호 찾기</button>
-				
-				<button type="button" onclick="location.href='<%=contextPath%>'" id="close">메인으로</button>
-						<%} %>
+
+				<button type="button"
+					onclick="location.href='<%=contextPath%>/searchPwd.me'"
+					id="searchPwd">비밀번호 찾기</button>
+
+				<button type="button" onclick="location.href='<%=contextPath%>'"
+					id="close">메인으로</button>
+				<%
+					}
+				%>
+			
 		</form>
 	</div>
 </body>

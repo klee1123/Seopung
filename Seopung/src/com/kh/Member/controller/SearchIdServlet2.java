@@ -39,8 +39,8 @@ public class SearchIdServlet2 extends HttpServlet {
 		
 		
 		String id = new MemberService().searchId(name, email);
-		
-		
+		System.out.println(name);
+		System.out.println(email);
 		if(!id.equals("")) {
 			request.setAttribute("id", id);
 			
