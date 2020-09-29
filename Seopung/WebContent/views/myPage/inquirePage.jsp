@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.inquire.model.vo.*"%>
+<%@ page import = "com.kh.common.PageInfo"%>
+<%
+	ArrayList<Inquire> list = (ArrayList<Inquire>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>1:1문의</title>
-<link rel="stylesheet" href="../.resources/css/bootstrap.min.css">
-<script src="../../resources/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+<script src="resources/js/jquery-3.5.1.min.js"></script>
 <style>
        
        .inquirePage{
@@ -50,91 +62,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                	
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk" value="1">&nbsp;&nbsp; 1</td>
-                        <td id="iqTitle">제목</td>
-                        <td>20-08-15</td>
-                        <td>처리상태</td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk" value="2">&nbsp;&nbsp;2</td>
-                        <td id="iqTitle">제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;3</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;4</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;5</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;6</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;7</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;8</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;9</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk">&nbsp;&nbsp;10</td>
-                        <td>제목 넣을 칸</td>
-                        <td>20-08-15</td>
-                        <td>처리상태 </td>
-                    </tr>
+                <% if(list.isEmpty()){ %>
+                	<tr>
+                		<td colspan="6">조회된 리스트가 없습니다</td>
+                	</tr>
+                <% }else { %>
+                		<% for(Inquire i : list) { %>
+		                    <tr align="center">
+		                        <td><input type="checkbox" id="chk" name="chk" value="1">
+		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
+		                        <td><%= i.getInquireTitle() %></td>
+		                        <td><%= i.getInquireContent() %></td>
+		                        <td><%= i.getInquireStatus() %></td>
+		                    </tr>	
+                    	<% } %>
+                    <% } %>
                 </tbody>
             </table>
             <br><br>
             <div class="pagingArea" align="center">
+			<% if(currentPage != 1) { %>
+	            <!-- 맨 처음으로 (<<) -->
+	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1';"> &lt;&lt; </button>
+	            <!-- 이전 페이지로 (<) -->
+	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>';"> &lt; </button>
+			<% } %>
+            <!-- button{$}*10 -->
+            
+			<% for(int p=startPage; p<=endPage; p++){ %>
+               <%if(p != currentPage) {%>
+               <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>';"><%= p %></button>
+               <% }else{ %>
+               <button disabled><%= p %></button>
+               <% } %>
+            <% } %>
+			<% if(currentPage != maxPage) { %>
+	            <!-- 다음 페이지로 (>) -->
+	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage +1 %>';"> &gt; </button>
+	            <!-- 맨 끝으로 (>>) -->
+	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>';"> &gt;&gt; </button>
+			<% } %>
 
-                <!-- 맨 처음으로 (<<) -->
-                <button class="btn btn-secondary btn-sm"> &lt;&lt; </button>
-                <!-- 이전 페이지로 (<) -->
-                <button class="btn btn-secondary btn-sm"> &lt; </button>
-    
-                <button class="btn btn-outline-secondary btn-sm">1</button>
-                <button class="btn btn-outline-secondary btn-sm">2</button>
-                <button class="btn btn-outline-secondary btn-sm">3</button>
-                <button class="btn btn-outline-secondary btn-sm">4</button>
-                <button class="btn btn-outline-secondary btn-sm">5</button>
-                
-                <!-- 다음 페이지로 (>) -->
-                <button class="btn btn-secondary btn-sm"> &gt; </button>
-                <!-- 맨 끝으로 (>>) -->
-                <button class="btn btn-secondary btn-sm"> &gt;&gt; </button>
-            </div>
         </div>
-    
-    </div>   
+
     <script>
         // 체크박스 전체선택 및 해제
         $(function(){

@@ -13,10 +13,11 @@ import com.kh.inquire.model.vo.Inquire;
 public class InquireService {
 	
 	/**
-	 * 1_1. 총 일반게시글 갯수 조회용 서비스
-	 * @return		총 갯수
+	 * 1_1. 총 일반게시글 개수 조회용 서비스
+	 * @return		총 개수
 	 */
 	public int selectListCount() {
+		
 		Connection conn = getConnection();
 		
 		int listCount = new InquireDao().selectListCount(conn);
@@ -31,6 +32,7 @@ public class InquireService {
 	 * @return			조회된 결과가 담겨있는 list
 	 */
 	public ArrayList<Inquire> selectList(PageInfo pi) {
+		
 		Connection conn = getConnection();
 		
 		ArrayList<Inquire> list = new InquireDao().selectList(conn, pi);

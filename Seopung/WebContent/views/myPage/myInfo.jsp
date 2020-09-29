@@ -92,15 +92,16 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="updateInfo.in" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="userNo" value="<%=userNo%>">
-            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
+            <button type="submit" onclick="infoSub();" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
-                <img src="<%=profile%>" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+                <img src="<%= contextPath %>/<%=profile%>"  
+                		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
                 <br><br>
-                <p style="font-size: 12px;">1MB이하의 JPEG파일만 등록가능합니다.</p>
+                <p style="font-size: 12px;">10MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
                     <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile">삭제</button>
@@ -130,7 +131,7 @@
                 </tr>
                 <tr>
                     <th align="left">이메일</th>
-                    <td><input type="text" name="email" required value="<%= email %>"></td>
+                    <td><input type="text" id="email" name="email" required value="<%= email %>"></td>
                     
                 </tr>
                 <tr>
@@ -141,22 +142,20 @@
                 </tr>
              	<tr>
              		<th>인증확인</th>
-             		<td><input type="text" name="code" id="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요">
-                    <div id="ckeckCode"></div></td>
-              		<!-- <td><input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>"></td> -->
+             		<td><input type="text" name="code" id="code" placeholder="인증번호를 입력하세요"><button type="button" id="emBtn">인증확인</button>
+                    <td><span id="cEm"></span></td>
+              		
              	</tr>
-             	<tr><td><input type="hidden" id="ok" value="인증하기"></td></tr>
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
-                     
                 </tr>
                 
             </table>
             <br>
             </div>
             <label><strong>자기소개</strong></label> <br>
-            <textarea name="introduction" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
+            <textarea name="userIntro" id="intro" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
         </form>
         	<div id="fileArea">
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
@@ -164,28 +163,38 @@
         </div>
     </div>
     <script>
-    function checkCode(){
-        var v1 = $("#code_check").value;
-        var v2 = $("#code")value;
-        if(v1 != v2) {
-            document.getElementById("checkCode").style.color = "red";
-            document.getElementById("checkCode").innerHTML = "잘못된인증번호입니다"
-            makeNull();
-        }else {
-            document.getElementById("checkCode").style.color = "blue";
-            document.getElementById("checkCode").innerHTML = "인증되었습니다"
-            makeReal();
-        }
-    }
-
-    function makeReal() {
-        var hi = document.getElementById("ok");
-        ok.type="submit";
-    }
-    function makeNull() {
-        var hi = document.getElementById("hi");
-        hi.type="hidden";
-    }
+    $("#emBtn").click(function(){
+    	var codeChk = $("#code_check");
+    	var code = $("#code");
+    	var updateEmail = $("#updateEmail");
+    	var email = $("#email");
+    	
+    	if(codeChk.val() == code.val()) {
+    		alert("확인");
+    		
+    		$.ajax({
+      			url:"<%= contextPath %>/updateEmail.me",
+      			data:{
+      				updateEmail:$updateEmail.val(),
+      				email:$email.val()},
+      			type:"post",
+      			success:function(result){
+      					alert("성공");
+    	  				updateEmail.innerHTML = (updateEmail.val());
+    	  				
+      			},error:function(){
+      				console.log("ajax 통신 실패!");
+      			}
+      		})
+    		
+    		
+    		$("#email").html($("updateEmail"));
+    	}else {
+    		$("#cEm").innerHTML = "틀려";
+    	}
+    });
+    
+    
     </script>
     
     <!-- 닉네임변경 버튼 클릭시 보여질 Modal-->
@@ -202,7 +211,7 @@
         <!-- Modal body -->
         <div class="modal-body" align="center">
             <form action="<%= contextPath %>/updateNick.me" method="POST" id="nickChange">
-                <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+                <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
                 <table>
                 	<tr>
                 		<th>현재닉네임</th>
@@ -223,7 +232,7 @@
   </div>
   
   <script>
-           var regN = /^[a-z0-9가-힣]{1,10}$/i;
+        var regN = /^[a-z0-9가-힣]{1,10}$/i;
   	function nickCheck(){
   		var $userNick = $("#updateNick");
   		var $nickChkBtn = $("#nickChkBtn");
@@ -250,7 +259,6 @@
   		})
   	}
   </script>
-  
     
     <!-- 비밀번호변경 버튼 클릭시 보여질 Modal -->
    <div class="modal" id="updatePwdForm">
@@ -266,7 +274,7 @@
         <!-- Modal body -->
         <div class="modal-body" align="center">
             <form action="<%= contextPath %>/updatePwd.me" method="POST">
-            <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+            <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
                 <table>
                     <tr>
                         <th>현재 비밀번호 </th>
@@ -290,45 +298,7 @@
       </div>
     </div>
   </div>
-  
-  <!-- 
-<!-- 이메일인증 버튼 클릭시 보여질 Modal-->
-<div class="modal" id="updateEmailForm">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title">이메일인증</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" align="center">
-        	<form action="" method="post" id="form1">
-				<table>
-					<tr>
-						<th>변경할 이메일 </th>
-						<td>
-							<input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요.">
-						</td>
-						<td>
-							<input id="button" type="button" value="인증번호발송" class="btn btn-secondary btn-sm" onclick="emailChk();">
-						</td>
-						<td>
-							<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
-						</td>
-					</tr>
-				</table>
-			</form>
-			
-		<button type="submit" class="btn btn-secondary">이메일확인</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <script>
-  -->         
   	function emailChk(){
   		var $updateEmail = $("#updateEmail");
   		$.ajax({
@@ -350,6 +320,33 @@
   			}
   		})
   	}
+  	
+  	function infoSub(){
+  		var $updateEmail = $("#updateEmail");
+		var $profile = $("#profile");
+		var $intro = $("#intro");
+  		$.ajax({
+  			url:"<%= contextPath %>/updateInfo.in",
+  			data:{updateEmail:$updateEmail.val(),
+			profile :$("#profile").val(),
+			intro:$("#intro").val()},
+  			type:"post",
+  			success:function(result){
+  				
+  				console.log("통신성공");
+	  				if(result == "fail"){
+	  					alert("개인정보 수정 완료");
+	  					
+	  				}else {
+	  					alert("개인정보 수정 실패");
+	  				}
+  				
+  			},error:function(){
+  				console.log("ajax 통신 실패!");
+  			}
+  		})
+  	}
+  	
   </script>
     
     <script>
@@ -406,19 +403,19 @@
     
     
     <!-- particles js -->
-    <script src="../../resources/js/owl.carousel.min.js"></script>
-    <script src="../../resources/js/jquery.nice-select.min.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <script src="resources/js/jquery.nice-select.min.js"></script>
     <!-- slick js -->
-    <script src="../../resources/js/slick.min.js"></script>
-    <script src="../../resources/js/jquery.counterup.min.js"></script>
-    <script src="../../resources/js/waypoints.min.js"></script>
-    <script src="../../resources/js/contact.js"></script>
-    <script src="../../resources/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../../resources/js/jquery.form.js"></script>
-    <script src="../../resources/js/jquery.validate.min.js"></script>
-    <script src="../../resources/js/mail-script.js"></script>
+    <script src="resources/js/slick.min.js"></script>
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/contact.js"></script>
+    <script src="resources/js/jquery.ajaxchimp.min.js"></script>
+    <script src="resources/js/jquery.form.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/mail-script.js"></script>
     <!-- custom js -->
-    <script src="../../resources/js/custom.js"></script>
+    <script src="resources/js/custom.js"></script>
 	
 	
 </body>
