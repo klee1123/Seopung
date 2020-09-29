@@ -104,10 +104,10 @@ div {
 </head>
 
 <body>
-	<%@include file="../common/menubar.jsp"%>
+	<%@include file="../../common/menubar.jsp"%>
 	<div class="wrap">
 
-        <h2>고객센터</h2>
+        <h2>&nbsp;고객센터</h2><br>
 
         <h3 style="display:inline;">&nbsp;공지사항</h3>
         &emsp;&emsp;&emsp;&emsp;
@@ -145,15 +145,6 @@ div {
 
 				<br><br>
 
-				<div align="left">
-                    <table>
-                        <tr>
-                            <td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-                                    style="color: red"><%=listCount %></b>개
-                            </span></td>
-                    </table>
-                </div>
-
                 <div align="center">
 					<button type="submit" class="btn btn-primary">목록으로 돌아가기</button>
 				</div>
@@ -166,6 +157,6 @@ div {
         </div>
         <!-- /.container-fluid -->
     
-        <%@ include file="../common/footer.jsp"%>
+        <%@ include file="../../common/footer.jsp"%>
     </body>
     </html>

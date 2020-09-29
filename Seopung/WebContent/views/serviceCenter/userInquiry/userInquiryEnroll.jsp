@@ -104,10 +104,10 @@ div {
 </head>
 
 <body>
-	<%@include file="../common/menubar.jsp"%>
+	<%@include file="../../common/menubar.jsp"%>
 	<div class="wrap">
 
-        <h2>고객센터</h2>
+        <h2>&nbsp;고객센터</h2><br>
 
         <h3 style="display:inline;">&nbsp;공지사항</h3>
         &emsp;&emsp;&emsp;&emsp;
@@ -165,6 +165,6 @@ div {
     </div>
     <!-- /.container-fluid -->
     
-    <%@ include file="../common/footer.jsp"%>
+    <%@ include file="../../common/footer.jsp"%>
     </body>
     </html>
