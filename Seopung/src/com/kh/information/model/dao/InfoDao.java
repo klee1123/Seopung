@@ -218,7 +218,8 @@ public class InfoDao {
 			
 			pstmt.setString(1, m.getUserIntro());
 			pstmt.setString(2, m.getProfile());
-			pstmt.setString(3, m.getUserId());
+			pstmt.setString(3, m.getEmail());
+			pstmt.setInt(4, m.getUserNo());
 			
 			result = pstmt.executeUpdate();
 

@@ -59,7 +59,8 @@
 	<entry key="deleteMember">
 		UPDATE
 		       TB_MEMBER
-		   SET STATUS='N' 
+		   SET STATUS='N'
+		     , MODIFY_DATE = SYSDATE 
 		 WHERE USER_ID=?
 		   AND USER_PWD=?
 	</entry>
@@ -76,6 +77,7 @@
 		       TB_MEMBER
 		   SET USER_INTRO = ?
 		     , PROFILEPIC_PATH = ?
-		 WHERE USER_ID = ?
+		     , EMAIL = ?
+		 WHERE USER_NO = ?
 	</entry>
 </properties>

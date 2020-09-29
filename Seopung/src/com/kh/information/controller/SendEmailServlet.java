@@ -65,7 +65,7 @@ public class SendEmailServlet extends HttpServlet {
 			
 			msg.setFrom(from);
 			
-			String email = request.getParameter("receiver");
+			String email = request.getParameter("updateEmail");
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);
 			

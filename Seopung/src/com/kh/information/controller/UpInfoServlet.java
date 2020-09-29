@@ -49,17 +49,19 @@ public class UpInfoServlet extends HttpServlet {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			// --> 위의 코드가 실행되는 순간 서버에 파일 업로드 됨
 		
-			String userId = multiRequest.getParameter("userId");
+			String userNo = multiRequest.getParameter("userNo");
 			String userIntro = multiRequest.getParameter("userIntro");
 			String profile = multiRequest.getParameter("profile");
+			String email = multiRequest.getParameter("email");
 			
 			Member m = new Member();
-			m.setUserId(userId);
+			m.setUserId(userNo);
 			m.setUserIntro(userIntro);
-			m.setUserIntro(userIntro);
+			m.setProfile(profile);
+			m.setEmail(email);
 			
 			int result = new InfoService().updateInfo(m);
-			
+			System.out.println(m);
 			// case1:새로운 첨부파일 x		  		=> updateBoard(b, null);				=> Board Update
 			// case2:새로운 첨부파일 o, 기존의 첨부파일o => updateBoard(b, fileNo이 담긴at);		=> Board Update, Attachment Update 
 			// case3:새로운 첨부파일 o, 기존의 첨부파일x => updateBoard(b, refBoardNo이 담긴 at);	=> Board Update, Attachment Insert
@@ -71,7 +73,7 @@ public class UpInfoServlet extends HttpServlet {
 			}else { //실패 => 에러페이지
 				
 				request.setAttribute("errorMsg", "게시글 수정 실패");
-				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
 			}
 		}
 	}

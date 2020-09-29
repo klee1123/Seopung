@@ -72,6 +72,7 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
 	<%
+		int userNo = loginUser.getUserNo();
 		String userId = loginUser.getUserId();
 		String userName = loginUser.getUserName();
 		String nickName = loginUser.getNickName();
@@ -92,8 +93,8 @@
             <hr>
         <div class="myInfo">
         <form action="updateInfo.in" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="userId" value="<%=userId%>">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="<%= contextPath %>/updateInfo.in">저장</button>
+            <input type="hidden" name="userNo" value="<%=userNo%>">
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
@@ -134,15 +135,15 @@
                 </tr>
                 <tr>
                 	<th align="left">변경할 이메일</th>
-                	<td><input type="text" id="receiver" name="receiver" placeholder="이메일을 입력하세요."></td>
+                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="이메일을 입력하세요."></td>
                     <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
                     <td><button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
                 </tr>
              	<tr>
              		<th>인증확인</th>
-             		<td><input type="text" name="code2" id="code2" onkeyup="checkCode()" placeholder="인증번호를 입력하세요">
-                    <div id="ckeckCode" style="border:1px solid black"></div></td>
-              		<td><input type="hidden" readonly="readonly" name="code_check2" id="code_check2" value="<%=request.getAttribute("code")%>"></td>
+             		<td><input type="text" name="code" id="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요">
+                    <div id="ckeckCode"></div></td>
+              		<!-- <td><input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>"></td> -->
              	</tr>
              	<tr><td><input type="hidden" id="ok" value="인증하기"></td></tr>
                 <tr>
@@ -164,8 +165,8 @@
     </div>
     <script>
     function checkCode(){
-        var v1 = $("#code_check2").value;
-        var v2 = $("#code2")value;
+        var v1 = $("#code_check").value;
+        var v2 = $("#code")value;
         if(v1 != v2) {
             document.getElementById("checkCode").style.color = "red";
             document.getElementById("checkCode").innerHTML = "잘못된인증번호입니다"
@@ -179,7 +180,7 @@
 
     function makeReal() {
         var hi = document.getElementById("ok");
-        hi.type="submit";
+        ok.type="submit";
     }
     function makeNull() {
         var hi = document.getElementById("hi");
@@ -329,10 +330,10 @@
   <script>
   -->         
   	function emailChk(){
-  		var $receiver = $("#receiver");
+  		var $updateEmail = $("#updateEmail");
   		$.ajax({
   			url:"<%= contextPath %>/sendEmail.in",
-  			data:{receiver:$receiver.val(),code_check:$("#code_check").val()},
+  			data:{updateEmail:$updateEmail.val(),code_check:$("#code_check").val()},
   			type:"post",
   			success:function(result){
   				
