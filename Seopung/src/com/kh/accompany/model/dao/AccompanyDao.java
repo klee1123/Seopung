@@ -88,13 +88,10 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				
 				list.add(new Accompany(rset.getInt("ACCOM_NO"),
-						               rset.getDate("ACCOM_APPLY"),
-						               rset.getString("ACCOM_STATUS"),
-						               rset.getDate("ACCOM_COMPLETE"),
+									   rset.getString("USER_ID"),
+						               rset.getString("USER_NICK"),
 						               rset.getInt("USER_NO"),
-						               rset.getInt("USER_NO2"),
-						               rset.getInt("PLAN_NO")));
-				
+						               rset.getInt("USER_NO2")));
 				
 			}
 			
@@ -109,6 +106,33 @@ private Properties prop = new Properties();
 		
 		return list;
 		
+		
+	}
+	
+	public int deleteAccom(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteAccom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
 		
 	}
 	

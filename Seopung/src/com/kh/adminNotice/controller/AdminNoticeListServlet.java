@@ -16,7 +16,7 @@ import com.kh.common.PageInfo;
 /**
  * Servlet implementation class AdminListServlet
  */
-@WebServlet("/adminPage/list.ad")
+@WebServlet("/adminPage/notice.ad")
 public class AdminNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -11,8 +11,11 @@ public class Accompany {
 	private int userNo1;				// 신청자
 	private int userNo2;				// 구인자
 	private int planNo;					// 일정 번호(PLAN)
+	private String userId;
+	private String userNick;
 	
 	
+
 	public Accompany() {};
 	
 	public Accompany(int accomNo, Date accomApply, String accomStatus, Date accomComplete, int userNo1, int userNo2,
@@ -25,6 +28,17 @@ public class Accompany {
 		this.userNo1 = userNo1;
 		this.userNo2 = userNo2;
 		this.planNo = planNo;
+	}
+	
+	
+
+	public Accompany(int accomNo,  String userId, String userNick , int userNo1 , int userNo2) {
+		super();
+		this.accomNo = accomNo;
+		this.userId = userId;
+		this.userNick = userNick;
+		this.userNo1 = userNo1;
+		this.userNo2 = userNo2;
 	}
 
 	public int getAccomNo() {
@@ -83,6 +97,22 @@ public class Accompany {
 		this.planNo = planNo;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+	
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	public String getUserNick() {
+		return userNick;
+	}
+	
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+	
 	@Override
 	public String toString() {
 		return "Accompany [accomNo=" + accomNo + ", accomApply=" + accomApply + ", accomStatus=" + accomStatus

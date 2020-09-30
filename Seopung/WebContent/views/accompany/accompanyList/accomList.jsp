@@ -105,9 +105,9 @@
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="chk1">&nbsp;&nbsp;<%= a.getAccomNo() %></td>
-	                        <td>id</td>
-	                        <td>nick</td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="accomNo">&nbsp;&nbsp;<%= a.getAccomNo() %></td>
+	                        <td><input type="hidden" name="accomId" ><%= a.getUserId() %></td>
+	                        <td><input type="hidden" name="accomNick"><%= a.getUserNick() %></td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>

@@ -35,19 +35,28 @@
 		             , A.*
 		          FROM (
 		                SELECT 
-		                       ACCOM_NO
-		                     , ACCOM_APPLY
-		                     , ACCOM_STATUS
-		                     , ACCOM_COMPLETE
-		                     , USER_NO
-		                     , USER_NO2
-		                     , PLAN_NO
-		                  FROM TB_ACCOMPANY
-		                  WHERE ACCOM_STATUS = 'Y'
+		                       C.ACCOM_NO
+		                     , M.USER_ID
+		                     , M.USER_NICK
+		                     , C.USER_NO
+		                     , C.USER_NO2
+		                  FROM TB_ACCOMPANY C
+		                  JOIN TB_MEMBER M ON(C.USER_NO2 = M.USER_NO)
+		                  WHERE C.ACCOM_STATUS = 'Y'
 		                 ORDER 
-		                    BY ACCOM_NO DESC
+		                    BY C.ACCOM_NO DESC
 		               ) A
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteAccom">
+	
+		UPDATE
+               TB_ACCOMPANY
+  	       SET ACCOM_STATUS = 'N'
+         WHERE ACCOM_NO = ?
+	
+	
 	</entry>
 </properties>
