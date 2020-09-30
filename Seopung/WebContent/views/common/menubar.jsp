@@ -154,7 +154,7 @@ $(function(){
 							if (loginUser == null) {
 						%>
 						<a class="btn btn-light" href="#" data-toggle="modal"
-							data-target="#loginForm"
+							data-target="#loginForm" id="start1"
 							style="font-weight: bold; color: rgb(75, 75, 75);">로그인/회원가입</a>
 						<%
 							} else {
@@ -208,7 +208,12 @@ $(function(){
 					
 						
 						<script>
-							
+							$(function(){
+								$(".modal").on("shown.bs.modal",function(){
+									$("#userId").focus();
+									
+								});
+							});
 							function login(){
 								var id = $("#userId").val();
 								var pwd = $("#userPwd").val();
@@ -224,6 +229,7 @@ $(function(){
 										$("#errorMsg").html("가입하지 않은 아이디거나, 잘못된 비밀번호입니다.");
 										$("#userId").val("");
 										$("#userPwd").val("");
+										$("#userId").focus();
 										if(id == ""){
 											$("#errorMsg").html("아이디를 입력해주세요.");
 										}else if(pwd == ""){

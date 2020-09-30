@@ -57,7 +57,46 @@
 		    , ?
 		    , ?
 		    , ?
-		    , SYSDATE
+		    , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MM)
 		    )
 	</entry>
+	<entry key="increaseCount">
+		UPDATE
+		       TB_COMMUNITY
+		   SET COMMUNITY_COUNT = COMMUNITY_COUNT +1
+		   WHERE COMMUNITY_NO = ?
+		     AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	<entry key="selectCommunity">
+		SELECT
+		       COMMUNITY_NO
+		     , COMMUNITY_TITLE
+		     , USER_NICK
+		     , COMMUNITY_CONTENT
+		     , COMMUNITY_COUNT
+		     , COMMUNITY_SCRAP
+		     , COMMUNITY_RECOMMEND
+		     , COMMUNITY_THUMB
+		     , COMMUNITY_ENROLL
+		  FROM TB_COMMUNITY   
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE COMMUNITY_NO = ?
+		   AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	<entry key="deleteCommunity">
+		 UPDATE
+		       TB_COMMUNITY
+		   SET COMMUNITY_STATUS = 'N'
+		   WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="updateCommunity">	 
+		 UPDATE
+		        TB_COMMUNITY
+		    SET COMMUNITY_TITLE = ?
+		      , COMMUNITY_CONTENT = ?
+		      , COMMUNITY_THUMB = ?
+		      , COMMUNITY_HEAD = ?
+		  WHERE COMMUNITY_NO = ?
+	</entry>
+	
 </properties>

@@ -19,11 +19,12 @@
 		   , PLAN_TEMP
 		   , PLAN_TYPE
 		   , PLAN_TRANS
+		   , USER_NO
 		   
 		  ) 
 		  VALUES
 		  (
-		     SEQ_UNO.NEXTVAL
+		     SEQ_PLANNO.NEXTVAL
 		   , ?
 		   , ?
 		   , ?
@@ -37,6 +38,7 @@
 		   , ?
 		   , ?
 		   , ?
+		   , 1
 		  )
 	</entry>
 </properties>

@@ -107,7 +107,7 @@ div {
 	<%@include file="../common/menubar.jsp"%>
 	<div class="wrap">
 
-		<form action="<%= contextPath %>/planOption.po"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
+		<form action="<%= contextPath %>/planOption.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
 			<div class="plan_sec">
 				<div class="so_title">일정만들기 < 1 / 2 ></div>
 				<div class="so_title">

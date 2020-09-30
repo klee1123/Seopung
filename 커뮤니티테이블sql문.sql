@@ -49,4 +49,33 @@ SELECT *
             ) A
     )
     WHERE RNUM BETWEEN 1 AND 10;
+    
+--community insert
+
+INSERT
+  INTO TB_COMMUNITY
+  (
+     COMMUNITY_NO
+   , USER_NO
+   , COMMUNITY_TITLE
+   , COMMUNITY_CONTENT
+   , COMMUNITY_THUMB
+   , COMMUNITY_HEAD
+   , COMMUNITY_ENROLL
+   )
+   VALUES
+   (
+      SEQ_UNO.NEXTVAL
+    , ?
+    , ?
+    , ?
+    , ?
+    , ?
+    , SYSDATE
+    );
+   SELECT SYSDATE FROM dual;
+    
+   DELETE 
+     FROM TB_COMMUNITY 
+    WHERE COMMUNITY_NO = 7;
   

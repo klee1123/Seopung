@@ -58,7 +58,7 @@ public class CommunityInsertServlet extends HttpServlet {
 			c.setUserNo(userNo);
 			c.setHead(head);
 			c.setThumb(thumb);
-			System.out.println(multiRequest.getOriginalFileName("thumbnail"));
+			
 			if(multiRequest.getOriginalFileName("thumbnail") != null) {
 				String originName = multiRequest.getOriginalFileName("thumbnail");
 				String changeName = multiRequest.getFilesystemName("thumbnail");

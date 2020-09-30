@@ -274,7 +274,7 @@ div {
 	<div class="wrap">
 		<div id="header">
 		</div>
-		<form action="<%= contextPath %>/planMap.po" style="width: 1200px; height: 500px" method="get">
+		<form action="<%= contextPath %>/planMap.pl" style="width: 1200px; height: 500px" method="get">
 			<div id="content">
 			
 				<div id="content_1">

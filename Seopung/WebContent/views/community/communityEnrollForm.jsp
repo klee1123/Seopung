@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.community.model.vo.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,7 @@
 				
 				<!-- 수정 필요! 임시 -->
 				<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
-				 <select style="margin-top:100px;" name="head" id="head">
+				 <select style="margin-top:120px;" name="head" id="head">
 			        <option value="맛집">맛집</option>
 			        <option value="명소">명소</option>
 			

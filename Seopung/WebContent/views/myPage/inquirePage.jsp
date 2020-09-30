@@ -54,12 +54,12 @@
             <hr>
         
         <div class="inquire">
-            <button type="button" id="deleteIq" class="btn btn-secondary">삭제</button>
+            <button type="button" id="btn_deleteIq" class="btn btn-secondary" >삭제</button>
             <br><br>
             <table id="inquireTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
+                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;번호</th>
                         <th width="400">제목</th>
                         <th width="100">내용</th>
                         <th width="100">처리상태</th>
@@ -73,7 +73,7 @@
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
 		                    <tr align="center">
-		                        <td><input type="checkbox" id="chk" name="chk" value="1">
+		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
 		                        <td><%= i.getInquireTitle() %></td>
 		                        <td><%= i.getInquireContent() %></td>
@@ -124,12 +124,40 @@
                 }
             });
         });
-        
+     // 삭제시
+        $(function(){
+        	$("#btn_deleteIq").click(function(){
+
+          		var selected = new Array();
+          		$("input[id=chk]:checked").each(function(){
+            		selected.push(this.value);
+          		});
+          		
+          		if(selected.length == 0){
+                	alert("체크된 항목이 없습니다.");
+                    return;
+                }
+
+              	var str = "";
+              	for(var i=0;i<selected.length; i++){
+                	if(i == selected.length-1){
+                  		str += "ino=" + selected[i];
+                	}else{
+                  		str += "ino=" + selected[i] + "&";
+                	}
+              	}
+              
+              	if(confirm("정말 삭제하시겠습니까?")) {
+              		location.href="<%=contextPath%>/deleteInquire.in?" + str;
+              	} 
+            });
+        });
     
     </script>
 	<!-- myContent -->
     </div>
     <!-- myOuter -->
     </div>
+    <%@ include file="../common/footer.jsp"%>
 </body>
 </html>

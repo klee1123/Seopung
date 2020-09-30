@@ -102,6 +102,23 @@ public class InquireDao {
 		return list;
 	}
 	
-	public 
+	public int deleteInquireList(Connection conn, String[] ino) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteInquireList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 }
