@@ -1,4 +1,4 @@
-package com.kh.sidebar.controller;
+package com.kh.inquire.controller;
 
 import java.io.IOException;
 

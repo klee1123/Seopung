@@ -45,7 +45,6 @@
 	
 	<%
 		int userNo = loginUser.getUserNo();
-		
 	%>
 	
 	<div class="myContent">

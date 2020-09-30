@@ -102,5 +102,6 @@ public class InquireDao {
 		return list;
 	}
 	
+	public 
 	
 }
