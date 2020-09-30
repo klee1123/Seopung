@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.Member.model.vo.Member;
 import com.kh.common.MyFileRenamePolicy;
+import com.kh.information.model.dao.InfoDao;
 import com.kh.information.model.service.InfoService;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -54,20 +56,36 @@ public class UpInfoServlet extends HttpServlet {
 			m.setUserIntro(userIntro);
 			m.setEmail(email);
 			
-			String changeName = multiRequest.getFilesystemName("profile");
-			m.setProfile("resources/profilePic_upfiles/" + changeName);
-			
-			int result = new InfoService().updateInfo(m);
-					
-			if(result > 0) { 
+			if(multiRequest.getOriginalFileName("profile") != null) {
+				String changeName = multiRequest.getFilesystemName("profile");
+				m.setProfile("resources/profilePic_upfiles/" + changeName); // 새로운 썸네일 경로 담기
+			}else { // 없을 경우
 				
-				request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
+				Member mem = new InfoService().selectMember(userNo); //기존 게시글 정보를 담는 객체
+				m.setProfile(mem.getProfile()); // 기존 썸네일 경로 담아주기
+			}
+			
+			
+			
+			
+			
+			Member updateMem = new InfoService().updateInfo(m);
+					
+			if(updateMem != null) { // 정보변경 성공 했을 경우 => 마이페이지 보여주기
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("loginUser", updateMem);
+				session.setAttribute("alertMsg", "회원정보 수정 성공");
 				response.sendRedirect(request.getContextPath() + "/myPage.me");
 				
-			}else { 
 				
-				request.setAttribute("errorMsg", "게시글 수정 실패");
-				request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
+			}else {  // 실패
+				
+				request.setAttribute("errorMsg", "회원정보 수정 실패");
+				RequestDispatcher view = request.getRequestDispatcher("../views/common/errorPage.jsp");
+				view.forward(request, response);
+				
 			}
 			
 		}

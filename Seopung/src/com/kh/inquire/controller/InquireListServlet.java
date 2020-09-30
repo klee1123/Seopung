@@ -43,13 +43,14 @@ public class InquireListServlet extends HttpServlet {
 		int maxPage;		// 전체페이지 들 중 가장 마지막 페이지
 		int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작
 		int endPage;		// 현재 페이지 하단에 보여질 페이징 바의 끝
+		int userNo;
 		
-		listCount = new InquireService().selectListCount();
+		userNo = Integer.parseInt(request.getParameter("userNo"));
+		listCount = new InquireService().selectListCount(userNo);
 		
-		System.out.println(listCount);
 		// * currentPage : 현재 요청한 페이지(요청한페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		System.out.println(currentPage);
+		
 		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대 갯수 (페이지 목록을 몇 개 단위)
 		pageLimit = 5;
 		
@@ -64,14 +65,14 @@ public class InquireListServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
-	
         PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-        System.out.println(pi);
+       
         // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-        ArrayList<Inquire> list = new InquireService().selectList(pi);
+        ArrayList<Inquire> list = new InquireService().selectList(pi, userNo);
         
         request.setAttribute("pi", pi);
         request.setAttribute("list", list);
+        request.setAttribute("userNo", userNo);
 	
         RequestDispatcher view = request.getRequestDispatcher("views/myPage/inquirePage.jsp");
         view.forward(request, response);

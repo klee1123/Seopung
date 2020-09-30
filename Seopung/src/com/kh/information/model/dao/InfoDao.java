@@ -32,30 +32,6 @@ public class InfoDao {
 		}
 	}
 	
-	public int updateMember(Connection conn, Member m) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updateMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, m.getUserIntro());
-			pstmt.setInt(2, m.getUserNo());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-	
 	public Member selectMember(Connection conn, int userNo) {
 		
 		Member m = null;
@@ -114,7 +90,6 @@ public class InfoDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -165,7 +140,6 @@ public class InfoDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -189,8 +163,6 @@ public class InfoDao {
 			pstmt.setString(1, nickChk);
 			
 			rset = pstmt.executeQuery();
-			
-			System.out.println(rset);
 			
 			if(rset.next()) {
 				count = rset.getInt(1);
@@ -248,7 +220,6 @@ public class InfoDao {
 			
 			result = pstmt.executeUpdate();
 
-			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
