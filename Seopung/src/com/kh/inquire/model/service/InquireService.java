@@ -41,4 +41,16 @@ public class InquireService {
 		
 		return list;
 	}
+	
+	public int deleteInquireList(String[] ino) {
+		
+		Connection conn = getConnection();
+		
+		int result = new InquireDao().deleteInquireList(conn, ino);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }
