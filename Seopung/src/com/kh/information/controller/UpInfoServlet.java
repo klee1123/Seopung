@@ -43,10 +43,6 @@ public class UpInfoServlet extends HttpServlet {
 			
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/profilePic_upfiles/");
 
-			System.out.println(savePath);
-			System.out.println(savePath);
-		
-			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
@@ -66,12 +62,8 @@ public class UpInfoServlet extends HttpServlet {
 			if(result > 0) { 
 				
 				request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
-				response.sendRedirect(request.getContextPath() + "/views/myPage/myInfo.jsp");
+				response.sendRedirect(request.getContextPath() + "/myPage.me");
 				
-//				request.setAttribute("m", m);
-//				RequestDispatcher view = request.getRequestDispatcher("views/myPage/myInfo.jsp");
-//				view.forward(request, response);
-//				System.out.println(m);
 			}else { 
 				
 				request.setAttribute("errorMsg", "게시글 수정 실패");
