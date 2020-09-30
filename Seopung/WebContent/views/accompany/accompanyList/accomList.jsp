@@ -6,6 +6,7 @@
 	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -105,7 +106,7 @@
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox" name="accomNo">&nbsp;&nbsp;<%= a.getAccomNo() %></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox"><%= a.getAccomNo() %></td>
 	                        <td><input type="hidden" name="accomId" ><%= a.getUserId() %></td>
 	                        <td><input type="hidden" name="accomNick"><%= a.getUserNick() %></td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
@@ -122,6 +123,11 @@
 				
 			
                 </form>
+                
+                <script>
+                
+                
+                </script>
 
                 <!-- 동행 삭제 modal -->
 
@@ -143,8 +149,8 @@
                                                 </h4>
                                                 <br>
                             
-                                                <form action="" method="post">
-                                        
+                                                <form action="<%=contextPath %>/delete.ac" method="GET">
+                                        			<input type="hidden" name="accomNo" value= "<%= %>" >
                                                     <button type="submit" class="genric-btn info-border radius">확인</button>
                                                     <button type="reset" class="genric-btn danger-border radius">취소</button>
                                                 </form>
@@ -173,16 +179,16 @@
                                         
                                          <br><br>
                                     
-                                        <div class="profilePhoto" style="float: left;">
+                                        <div class="profilePhoto"">
                                             <img src="../../../resources/images/회원.jpg" alt="">
                                             <br><br>
                                            
                                         </div>
                                         <div class="profileJoin">
                                             
-                                        <table id="join" style="float: left;">
+                                        <table id="join" align="center" style="float: left;">
                                             <tr>
-                                                <th align="left" width="100px">아이디</th>
+                                                <th align="left" width="100px" ">아이디</th>
                                                 <td><span>USERID01 </span></td>
                                             </tr>
                                             
