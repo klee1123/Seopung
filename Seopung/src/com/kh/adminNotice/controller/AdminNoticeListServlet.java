@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminNotice.model.service.AdminNoticeService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;
 
 /**
  * Servlet implementation class AdminListServlet
  */
-@WebServlet("/adminPage/notice.ad")
+@WebServlet("/adminPage/list.no")
 public class AdminNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -72,7 +72,7 @@ public class AdminNoticeListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Admin> list = new AdminNoticeService().selectList(pi);
+		ArrayList<AdminNotice> list = new AdminNoticeService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);

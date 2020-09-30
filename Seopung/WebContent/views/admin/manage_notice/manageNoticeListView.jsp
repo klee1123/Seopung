@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@page import = "java.util.ArrayList, com.kh.adminNotice.model.vo.AdminNotice, com.kh.common.PageInfo" %>
+<%
+    ArrayList<AdminNotice> list = (ArrayList<AdminNotice>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,20 +39,6 @@
 		
 		<div class="outer">
 
-			<table align="center">
-				<tr>
-					<td width="1000">
-						<form action="" method="GET">
-							<label for=""></label> <input type="text"
-								placeholder="검색어를 입력해주세요.">
-							<button type="submit" class="btn btn-secondary btn-sm">조회</button>
-						</form>
-					</td>
-				</tr>
-			</table>
-
-			<br>
-
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
@@ -53,76 +50,22 @@
 					</tr>
 				</thead>
 				<tbody style="text-align:center;">
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>5</td>
-						<td>내 여행 일정 편의성 개선 안내</td>
-						<td>2020.09.09</td>
-						<td>134</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>4</td>
-						<td>개인정보 처리방침 개정안내</td>
-						<td>2020.09.09</td>
-						<td>233</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>3</td>
-						<td>8월 4주차 개편 사항 안내</td>
-						<td>2020.09.09</td>
-						<td>145</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>2</td>
-						<td>내 일정 SNS 공유하기 이벤트</td>
-						<td>2020.09.09</td>
-						<td>60</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>올 여름 호캉스 즐기기!</td>
-						<td>2020.09.09</td>
-						<td>84</td>
-					</tr>
+					<% if(list.isEmpty()){ %>
+	                    <tr>
+	                        <td colspan="5">조회된 리스트가 없습니다.</td>
+	                    </tr>
+	                    <% }else{ %>
+	                        <% for(AdminNotice n : list){ %>
+	                        <tr>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getNoticeNo()  %>"></td>
+	                            <td><%= n.getNoticeNo() %></td>
+	                            <td><%= n.getNoticeTitle() %></td>
+	                            <td><%= n.getNoticeEnroll() %></td>
+	                            <td><%= n.getNoticeViews() %></td>
+	                        </tr>
+	                        <% } %>
+	                    <% } %>
+					
 				</tbody>
 			</table>
 
@@ -132,21 +75,28 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red"></b>개
+								style="color: red"><%=listCount%></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
-
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% if(currentPage != 1){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+	                                <% } %>
+	
+	                                <% for(int p=startPage; p<=endPage; p++){ %>
+	                                    <% if(p != currentPage){ %>
+	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% }else{ %>
+	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% } %>
+	                                <% } %>
+	
+	                                <% if(currentPage != maxPage){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+	                                <% } %>
+								
 							</div>
 						</td>
 						<td width="">
