@@ -143,7 +143,7 @@
              	<tr>
              		<th>인증확인</th>
              		<td><input type="text" name="code" id="code" placeholder="인증번호를 입력하세요"><button type="button" id="emBtn">인증확인</button>
-                    <td><span id="cEm"></span></td>
+                    
               		
              	</tr>
                 <tr>
@@ -156,10 +156,11 @@
             </div>
             <label><strong>자기소개</strong></label> <br>
             <textarea name="userIntro" id="intro" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
-        </form>
-        	<div id="fileArea">
+       		<div id="fileArea">
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
             </div>
+        </form>
+        	
         </div>
     </div>
     <script>
@@ -183,6 +184,7 @@
     	  				updateEmail.innerHTML = (updateEmail.val());
     	  				
       			},error:function(){
+      				alert("실패");
       				console.log("ajax 통신 실패!");
       			}
       		})
