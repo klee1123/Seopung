@@ -1,19 +1,19 @@
-package com.kh.planMap.model.service;
+package com.kh.planPage.model.service;
 
 import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
-import com.kh.planMap.model.vo.PlanMap;
-import com.kh.planMap.model.dao.PlanMapDao;
+import com.kh.planPage.model.vo.PlanPage;
+import com.kh.planPage.model.dao.PlanPageDao;
 
-public class PlanMapService {
+public class PlanPageService {
 	
-public int insertPlanMap(PlanMap p) {
+public int planPage(PlanPage p) {
 		
 		Connection conn = getConnection();
 		
-		int result = new PlanMapDao().insertPlanMap(conn, p);
+		int result = new PlanPageDao().PlanPage(conn, p);
 		
 		
 		if(result > 0) {
@@ -27,6 +27,9 @@ public int insertPlanMap(PlanMap p) {
 		return result;
 	
 	}
+
+
+
 
 	
 	

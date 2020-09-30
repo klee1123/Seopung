@@ -1,4 +1,4 @@
-package com.kh.planOption.controller;
+package com.kh.planPage.controller;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.planOption.model.service.PlanOptionService;
-import com.kh.planOption.model.vo.PlanOption;
+import com.kh.planPage.model.service.PlanPageService;
+import com.kh.planPage.model.vo.PlanPage;
 
 /**
  * Servlet implementation class MemberInsertServlet
  */
-@WebServlet("/planOption.pl")
-public class PlanMakeOptionInsertServlet extends HttpServlet {
+@WebServlet("/planPage.pl")
+public class PlanMakePageInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanMakeOptionInsertServlet() {
+    public PlanMakePageInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -69,7 +69,7 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 		String planTrans = request.getParameter("planTrans");	
 		
 		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
-		PlanOption p = new PlanOption(planTitle
+		PlanPage p = new PlanPage(planTitle
 									, planSdate
 									, planEdate
 									, planAge
@@ -85,7 +85,7 @@ public class PlanMakeOptionInsertServlet extends HttpServlet {
 				);
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
-		int result = new PlanOptionService().insertPlanOption(p);
+		int result = new PlanPageService().insertPlanPage(p);
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
 		if(result > 0) {	// 회원가입 성공
