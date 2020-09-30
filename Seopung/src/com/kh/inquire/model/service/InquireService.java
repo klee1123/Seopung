@@ -16,11 +16,11 @@ public class InquireService {
 	 * 1_1. 총 일반게시글 개수 조회용 서비스
 	 * @return		총 개수
 	 */
-	public int selectListCount() {
+	public int selectListCount(int userNo) {
 		
 		Connection conn = getConnection();
 		
-		int listCount = new InquireDao().selectListCount(conn);
+		int listCount = new InquireDao().selectListCount(conn, userNo);
 		
 		close(conn);
 		
@@ -31,11 +31,11 @@ public class InquireService {
 	 * @param pi		현재요청페이지, 게시글최대갯수가 담겨있는 PageInfo 객체
 	 * @return			조회된 결과가 담겨있는 list
 	 */
-	public ArrayList<Inquire> selectList(PageInfo pi) {
+	public ArrayList<Inquire> selectList(PageInfo pi, int userNo) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Inquire> list = new InquireDao().selectList(conn, pi);
+		ArrayList<Inquire> list = new InquireDao().selectList(conn, pi, userNo);
 		
 		close(conn);
 		

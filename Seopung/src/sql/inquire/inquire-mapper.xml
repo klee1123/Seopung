@@ -5,7 +5,8 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) LISTCOUNT
 	      FROM TB_INQUIRE
-	     WHERE STATUS = 'Y' 
+	     WHERE STATUS = 'Y'
+	       AND USER_NO = ?
 	</entry>
 
 	<entry key="selectList">
@@ -22,6 +23,7 @@
                       , INQUIRE_STATUS
                    FROM TB_INQUIRE
                   WHERE STATUS = 'Y'
+                    AND USER_NO = ?
                   ORDER
                      BY INQUIRE_NO DESC
                 ) A

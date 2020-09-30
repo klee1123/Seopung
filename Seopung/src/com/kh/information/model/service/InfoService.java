@@ -12,26 +12,6 @@ import com.kh.information.model.dao.InfoDao;
 
 public class InfoService {
 	
-	
-	public Member updateMember(Member m) {
-		Connection conn = getConnection();
-		
-		int result = new InfoDao().updateMember(conn, m);
-		
-		Member updateMem = null;
-		
-		if(result > 0) {
-			commit(conn);
-			
-			updateMem = new InfoDao().selectMember(conn, m.getUserNo());
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return updateMem;
-	}
-	
 	/**
 	 * 비밀번호 변경용 서비스
 	 * @param userId	변경요청한 사용자아이디
@@ -47,8 +27,10 @@ public class InfoService {
 		
 		Member updateMem = null;
 		if(result > 0) {
+			
 			commit(conn);
 			updateMem = new InfoDao().selectMember(conn, userNo);
+			
 		}else {
 			rollback(conn);
 		}
@@ -137,20 +119,37 @@ public class InfoService {
 		return result;
 	}
 	
-	public int updateInfo(Member m) {
+	/**
+	 * 개인정보 업데이트 서비스
+	 * @param m 프로필사진, 자기소개
+	 * @return
+	 */
+	public Member updateInfo(Member m) {
 		Connection conn = getConnection();
 		
 		int result = new InfoDao().updateInfo(conn,m);
-		
+		Member updateMem = null;
 		if(result > 0) {
 			commit(conn);
-			
+			// 갱신된 회원 다시 조회해오기
+			updateMem = new InfoDao().selectMember(conn, m.getUserNo());
+		
 		}else {
 			rollback(conn);
 		}
 		close(conn);
 		
-		return result;
+		return updateMem; // 갱신된 회원객체 / null
+	}
+	
+	public Member selectMember(int userNo) {
+		Connection conn = getConnection();
+		
+		Member m = new InfoDao().selectMember(conn, userNo);
+		
+		close(conn);
+		
+		return m;
 	}
 }
 

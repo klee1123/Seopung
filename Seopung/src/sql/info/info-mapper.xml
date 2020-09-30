@@ -10,14 +10,6 @@
 	
 	</entry>
 	
-	<entry key="updateMember">
-		UPDATE /* com.kh.member.model.dao.MemberDao#updateMember() */
-			   TB_MEMBER
-		   SET USER_INTRO = ?
-		     , MODIFY_DATE=SYSDATE
-		 WHERE USER_NO=?
-	</entry>
-
 	<entry key="selectMember">
 		SELECT 
 		       USER_NO

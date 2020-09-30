@@ -113,12 +113,12 @@
                 <tr>
                     <th align="left" width="100px">아이디</th>
                     <td><input type="text" name="userId" required value="<%= userId %>" readonly></td>
-                    
+                    <td><span name="userId"><%= userId %></span></td>
                 </tr>
                 <tr>
                     <th align="left">이름</th>
                     <td><input type="text" name="userName" required value="<%= userName %>" readonly></td>
-                    
+                    <td><span name="userName"><%= userName %></span></td>
                 </tr>
                 <tr>
                     <th align="left">닉네임</th>
@@ -132,7 +132,7 @@
                 <tr>
                     <th align="left">이메일</th>
                     <td><input type="text" id="email" name="email" required value="<%= email %>"></td>
-                    
+                    <td><span id="email" name="email"><%= email %></span></td>
                 </tr>
                 <tr>
                 	<th align="left">변경할 이메일</th>
@@ -149,6 +149,7 @@
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
+                	<td><span name="birth"><%= year %>년  <%=month %>월  <%=day %>일</span></td>
                 </tr>
                 
             </table>
