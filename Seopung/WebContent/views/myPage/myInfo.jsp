@@ -92,9 +92,9 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="<%=contextPath%>/updateInfo.in" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="userNo" value="<%=userNo%>">
-            <button type="submit" onclick="infoSub();" class="btn btn-secondary btn-sm">저장</button>
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
@@ -321,31 +321,7 @@
   		})
   	}
   	
-  	function infoSub(){
-  		var $updateEmail = $("#updateEmail");
-		var $profile = $("#profile");
-		var $intro = $("#intro");
-  		$.ajax({
-  			url:"<%= contextPath %>/updateInfo.in",
-  			data:{updateEmail:$updateEmail.val(),
-			profile :$("#profile").val(),
-			intro:$("#intro").val()},
-  			type:"post",
-  			success:function(result){
-  				
-  				console.log("통신성공");
-	  				if(result == "fail"){
-	  					alert("개인정보 수정 완료");
-	  					
-	  				}else {
-	  					alert("개인정보 수정 실패");
-	  				}
-  				
-  			},error:function(){
-  				console.log("ajax 통신 실패!");
-  			}
-  		})
-  	}
+  
   	
   </script>
     

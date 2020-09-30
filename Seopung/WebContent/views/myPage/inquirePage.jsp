@@ -64,7 +64,7 @@
                 <tbody>
                 <% if(list.isEmpty()){ %>
                 	<tr>
-                		<td colspan="6">조회된 리스트가 없습니다</td>
+                		<td colspan="4">조회된 리스트가 없습니다</td>
                 	</tr>
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
@@ -121,52 +121,7 @@
             });
         });
         
-     // 삭제시
-        $(function(){
-        	$("#btnDelete").click(function(){
-
-          		var selected = new Array();
-          		$("input[id=chk]:checked").each(function(){
-            		selected.push(this.value);
-          		});
-          		
-          		if(selected.length == 0){
-                	alert("체크된 항목이 없습니다.");
-                    return;
-                }
-
-              	var str = "";
-              	for(var i=0;i<selected.length; i++){
-                	if(i == selected.length-1){
-                  		str += "rno=" + selected[i];
-                	}else{
-                  		str += "rno=" + selected[i] + "&";
-                	}
-              	}
-              
-              	if(confirm("정말 삭제하시겠습니까?")) {
-                	location.href="<%=contextPath%>/adminPage/delete.re?" + str;
-              	} 
-            });
-        });
-        
-		$(function(){
-			$("#deleteIq").click(function(){
-				location.href = "<%=contextPath%>/deleteIq.mp?bno=" 
-			});
-		});
-		$(function(){
-	   		$("#iqTitle").click(function(){
-	   			//console.log("클릭됨");
-	   			var nno = $(this).children().eq(0).text();
-	   			
-	   			//console.log(nno);
-	   			// 쿼리스트링
-	   			location.href = "<%=contextPath%>/inquireDetail.mp?bno=" + bno;
-	   			
-	   		});
-	   	});
-	</script>
+    
     </script>
 	<!-- myContent -->
     </div>

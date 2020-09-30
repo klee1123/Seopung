@@ -23,7 +23,7 @@ public class InfoService {
 		if(result > 0) {
 			commit(conn);
 			
-			updateMem = new InfoDao().selectMember(conn, m.getUserId());
+			updateMem = new InfoDao().selectMember(conn, m.getUserNo());
 		}else {
 			rollback(conn);
 		}
@@ -39,16 +39,16 @@ public class InfoService {
 	 * @param updatePwd 변경된 비밀번호
 	 * @return			갱신된 비밀번호
 	 */
-	public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
+	public Member updatePwdMember(int userNo, String userPwd, String updatePwd) {
 		
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updatePwdMember(conn, userId, userPwd, updatePwd);
+		int result = new InfoDao().updatePwdMember(conn, userNo, userPwd, updatePwd);
 		
 		Member updateMem = null;
 		if(result > 0) {
 			commit(conn);
-			updateMem = new InfoDao().selectMember(conn, userId);
+			updateMem = new InfoDao().selectMember(conn, userNo);
 		}else {
 			rollback(conn);
 		}
@@ -64,17 +64,17 @@ public class InfoService {
 	 * @param updateNick
 	 * @return
 	 */
-	public Member updateNick(String userId, String userNick, String updateNick) {
+	public Member updateNick(int userNo, String userNick, String updateNick) {
 			
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updateNick(conn, userId, userNick, updateNick);
+		int result = new InfoDao().updateNick(conn, userNo, userNick, updateNick);
 		
 		Member updateMem = null;
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new InfoDao().selectMember(conn, userId);
+			updateMem = new InfoDao().selectMember(conn, userNo);
 			
 		}else {
 			rollback(conn);
@@ -90,10 +90,10 @@ public class InfoService {
 	 * @param userPwd	회원비밀번호
 	 * @return
 	 */
-	public int deleteMember(String userId, String userPwd) {
+	public int deleteMember(int userNo, String userPwd) {
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().deleteMember(conn,userId,userPwd);
+		int result = new InfoDao().deleteMember(conn,userNo,userPwd);
 		
 		if(result > 0) {
 			commit(conn);
@@ -120,11 +120,27 @@ public class InfoService {
 		return count;
 	}
 	
+	public int updateEmail(int userNo, String email, String updateEmail) {
+		Connection conn = getConnection();
+		
+		int result = new InfoDao().updateEmail(conn, userNo, email, updateEmail);
+		
+		Member updateMem = null;
+		
+		if(result > 0) {
+			commit(conn);
+			updateMem = new InfoDao().selectMember(conn, userNo);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	public int updateInfo(Member m) {
 		Connection conn = getConnection();
 		
 		int result = new InfoDao().updateInfo(conn,m);
-		
 		
 		if(result > 0) {
 			commit(conn);
@@ -132,7 +148,6 @@ public class InfoService {
 		}else {
 			rollback(conn);
 		}
-		
 		close(conn);
 		
 		return result;
