@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.admin.model.dao.AdminDao;
 import com.kh.adminMember.model.vo.Member;
 import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;

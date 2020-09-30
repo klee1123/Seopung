@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.adminCommunity.model.vo.Community, 
+com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
+<%
+	
+	String keyword = (String)request.getAttribute("keyword");
+
+	int pCount = (int)request.getAttribute("pCount");
+	int cCount = (int)request.getAttribute("cCount");	
+	int rCount = (int)request.getAttribute("rCount");	
+
+	ArrayList<Plan> plist = (ArrayList<Plan>)request.getAttribute("plist");
+	ArrayList<Community> clist = (ArrayList<Community>)request.getAttribute("clist");
+	ArrayList<Recommend> rlist = (ArrayList<Recommend>)request.getAttribute("rlist");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,163 +23,203 @@
 </head>
 <style>
 .outer {
-	width: 1000px;
+	width: 800px;
 	margin: auto;
 }
-
 .searchList {
-	width: 1000px;
-	background: rgb(236, 235, 235);
-	padding: 10px;
+	width: 800px;
+	background: rgb(245, 245, 245);
+	padding: 15px;
 }
-
-.searchList>p {
-	font-size: 12px;
-}
-
 .outer span {
 	color: orangered;
 }
-
-.outer hr {
-	margin-top: 0;
-}
+.outer a{margin:10px;}
+#more1, #more2, #more3 {display: none;}
 </style>
 <body>
 	<%@include file="../common/menubar.jsp" %>
+	
+	<br>
 	
     <div class="outer">
     	
         <br><br><br><br><br>
         <h2 align="center">통합검색결과</h2> <br>
         <img width="18px" src="<%=contextPath %>/resources/images/icon_magnifier2.png" alt="">
-        <b style="font-size: 18px;">&nbsp;"키워드"에 대한 검색 결과 입니다.</b>
+        <b style="font-size: 19px; color:black;">&nbsp;"<%=keyword %>" 에 대한 검색 결과 입니다.</b>
     
         <br><br>
 
-        <b>일정서비스(<span>9</span>건)</b>
+        <b style="font-size: 17px; color:black;">일정서비스 (<span><%=pCount %></span>건)</b>
         <!-- 검색내역 최대 3개? -->
         <div class="searchList">
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p style="margin-bottom: 0;">내용입니다.</p>
-        </div>
-        <!-- 검색내역 3개 초과시 -->
-        <div class="searchList collapse" id="showList1">
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
+        	<%if(pCount > 0){ %>
+	            <%for(int i=0; i<plist.size(); i++){ %>
+	            	<%if(i==0){ %>
+			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			        <%}else if(i==3 && plist.size()==4){ %> 
+			            <hr>
+			            <span id="more1">
+			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <hr>
+			            </span>
+	            	<%}else if(i==3){ %>
+			            <hr>
+		            	<span id="more1">
+			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+		            <%}else if(i>2 && i==plist.size()-1){ %>
+		            	<hr>
+			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <hr>
+			            </span>
+		            <%}else{ %>
+		            	<hr>
+		            	<a href=""><%=plist.get(i).getPlanTitle() %></a>
+		            <%} %>
+	            <%} %>
+	            
+	            <%if(plist.size()>3){ %>
+		        <div align="center">
+		            <button type="button" class="btn btn-outline-dark btn-sm" onclick="myFunction1()" id="myBtn1">더보기</button>
+		        </div>
+		        <%} %>
+            <%}else{ %>
+            <p align="center" style="font-size:15px;">
+                검색 결과가 없습니다. 다른 검색어로 검색해주세요.
+            </p>
+            <%} %>
         </div>
         <br>
-        <div align="center">
-            <button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#showList1">더보기</button>
-        </div>
 
         <br><br>
 
-        <b>커뮤니티(<span>10</span>건)</b>
+        <b style="font-size: 17px; color:black;">커뮤니티 (<span><%=cCount %></span>건)</b>
         <!-- 검색내역 최대 3개? -->
         <div class="searchList">
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p style="margin-bottom: 0;">내용입니다.</p>
-        </div>
-        <!-- 검색내역 3개 초과시 -->
-        <div class="searchList collapse" id="showList2">
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-        </div>
-        <br>
-        <div align="center">
-            <button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#showList2">더보기</button>
-        </div>
-
-        <br><br>
-
-        <b>추천코스(<span>0</span>건)</b>
-        <div class="searchList">
-            <!-- 검색내역 0개 일 때 -->
-            <p align="center">
+            <%if(cCount > 0){ %>
+	            <%for(int i=0; i<clist.size(); i++){ %>
+	            	<%if(i==0){ %>
+			            <a href=""><%=clist.get(i).getTitle() %></a>
+			        <%}else if(i==3 && clist.size()==4){ %> 
+			            <hr>
+			            <span id="more2">
+			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <hr>
+			            </span>
+	            	<%}else if(i==3){ %>
+			            <hr>
+		            	<span id="more2">
+			            <a href=""><%=clist.get(i).getTitle() %></a>
+		            <%}else if(i>2 && i==clist.size()-1){ %>
+		            	<hr>
+			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <hr>
+			            </span>
+		            <%}else{ %>
+		            	<hr>
+		            	<a href=""><%=clist.get(i).getTitle() %></a>
+		            <%} %>
+	            <%} %>
+	            
+	            <%if(clist.size()>3){ %>
+		        <div align="center">
+		            <button type="button" class="btn btn-outline-dark btn-sm" onclick="myFunction2()" id="myBtn2">더보기</button>
+		        </div>
+		        <%} %>
+            <%}else{ %>
+            <p align="center" style="font-size:15px;">
                 검색 결과가 없습니다. 다른 검색어로 검색해주세요.
             </p>
+            <%} %>
         </div>
-        <!-- 검색내역 3개 초과시 -->
-        <!-- <div class="searchList collapse" id="showList3">
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-        </div>
-        <br>
 
-        <div align="center">
-            <button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#showList3">더보기</button>
-        </div> -->
-        
         <br><br>
 
-        고객센터(<span>0</span>건)
+        <b style="font-size: 17px; color:black;">추천코스 (<span><%=rCount %></span>건)</b>
         <div class="searchList">
-            <!-- 검색내역 0개 일 때 -->
-            <p align="center">
+        	<%if(rCount > 0){ %>
+	            <%for(int i=0; i<rlist.size(); i++){ %>
+	            	<%if(i==0){ %>
+			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			        <%}else if(i==3 && rlist.size()==4){ %> 
+			            <hr>
+			            <span id="more3">
+			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <hr>
+			            </span>
+	            	<%}else if(i==3){ %>
+			            <hr>
+		            	<span id="more3">
+			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+		            <%}else if(i>2 && i==rlist.size()-1){ %>
+		            	<hr>
+			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <hr>
+			            </span>
+		            <%}else{ %>
+		            	<hr>
+		            	<a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+		            <%} %>
+	            <%} %>
+	            
+	            <%if(rCount > 3){ %>
+		        <div align="center">
+		            <button type="button" class="btn btn-outline-dark btn-sm" onclick="myFunction3()" id="myBtn3">더보기</button>
+		        </div>
+		        <%} %>
+            <%}else{ %>
+            <p align="center" style="font-size:15px;">
                 검색 결과가 없습니다. 다른 검색어로 검색해주세요.
             </p>
+            <%} %>
         </div>
-        <!-- 검색내역 3개 초과시 -->
-        <!-- <div class="searchList collapse" id="showList3">
-            <hr>
-            <a href="">키워드를 포함한 제목</a><br>
-            <p>내용입니다.</p>
-        </div>
-        <br>
-
-        <div align="center">
-            <button type="button" class="btn btn-primary"  data-toggle="collapse" data-target="#showList3">더보기</button>
-        </div> -->
         
-        <br><br>
+        
+
     
     </div>
+    
+    <script>
+		function myFunction1() {
+		  	var moreText = document.getElementById("more1");
+		  	var btnText = document.getElementById("myBtn1");
+		
+		  	if (moreText.style.display === "inline") {
+		    	btnText.innerHTML = "더보기"; 
+		    	moreText.style.display = "none";
+		  	} else {
+		    	btnText.innerHTML = "닫기"; 
+		    	moreText.style.display = "inline";
+		  	}
+		}
+		
+		function myFunction2() {
+		  	var moreText = document.getElementById("more2");
+		  	var btnText = document.getElementById("myBtn2");
+		
+		  	if (moreText.style.display === "inline") {
+		    	btnText.innerHTML = "더보기"; 
+		    	moreText.style.display = "none";
+		  	} else {
+		    	btnText.innerHTML = "닫기"; 
+		    	moreText.style.display = "inline";
+		  	}
+		}
+		
+		function myFunction3() {
+		  	var moreText = document.getElementById("more3");
+		  	var btnText = document.getElementById("myBtn3");
+		
+		  	if (moreText.style.display === "inline") {
+		    	btnText.innerHTML = "더보기"; 
+		    	moreText.style.display = "none";
+		  	} else {
+		    	btnText.innerHTML = "닫기"; 
+		    	moreText.style.display = "inline";
+		  	}
+		}
+	</script>
 	
 	<%@include file="../common/footer.jsp" %>
 

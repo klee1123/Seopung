@@ -33,7 +33,7 @@
                 <div class="col-sm-6 col-lg-3">
                     <div class="single_footer_part">
                         <h3>서울풍경</h3>
-                        <br><p><b>서울의 풍경을 바라보다, 서풍 <br>
+                        <br><p><b style="color:black;">서울의 풍경을 바라보다, 서풍 <br>
                         주소 : 서울시 강남구 역삼동 xx 빌딩 <br>
                         메일 : seoulLandscape@gmail.com</b>
 

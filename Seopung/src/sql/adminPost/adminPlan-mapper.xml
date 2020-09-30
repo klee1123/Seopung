@@ -144,7 +144,7 @@
 		       TB_PLAN_COMMENT
 		   SET COMMENT_STATUS = 'N',
   		       COMMENT_MODIFY = SYSDATE
-		 WHERE PLAN_NO = ?
+		 WHERE COMMENT_NO = ?
 	</entry>
 	
 </properties>

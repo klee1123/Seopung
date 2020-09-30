@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="searchPlanCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
+		   AND STATUS = 'Y'
+	</entry>
+
+	<entry key="searchCommunityCount">
+		SELECT 
+		       COUNT(*) 
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		   AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchRecommendCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_RECOMMEND
+		 WHERE RECOMMEND_TITLE LIKE '%' || ? || '%'	
+		   AND RECOMMEND_STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchPlan">
+		SELECT 
+		       PLAN_NO
+		     , PLAN_TITLE
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
+		   AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchCommunity">
+		SELECT 
+		       COMMUNITY_NO
+		     , COMMUNITY_TITLE  
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		   AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	
+	<entry key="searchRecommend">
+		SELECT 
+		       RECOMMEND_NO
+		     , RECOMMEND_TITLE
+		  FROM TB_RECOMMEND
+		 WHERE RECOMMEND_TITLE LIKE '%' || ? || '%'	
+		   AND RECOMMEND_STATUS = 'Y'
+	</entry>
+
+</properties>

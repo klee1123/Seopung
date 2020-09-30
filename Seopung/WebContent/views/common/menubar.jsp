@@ -133,11 +133,11 @@ $(function(){
 									</div></li>
 							</ul>
 							<div style="width: 210px;">
-								<form action="search.do" method="get">
+								<form action="<%=contextPath %>/search.do" method="get">
 									<div class="input-group mb-3"
 										style="margin-left: 25px; margin-top: 15px; margin-bottom: 15px;">
 										<input type="text" class="form-control" name="keyword"
-											placeholder="검색">
+											placeholder="검색" required>
 										<div class="input-group-append">
 											<button class="btn btn-warning" type="submit">
 												<img
