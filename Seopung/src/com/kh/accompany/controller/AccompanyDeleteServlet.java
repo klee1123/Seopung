@@ -29,11 +29,12 @@ public class AccompanyDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
+		
 		
 		System.out.println(request.getParameter("accomNo"));
 		
 		int accomNo = Integer.parseInt(request.getParameter("accomNo"));
+		
 		
 		System.out.println(accomNo);
 		
@@ -41,8 +42,8 @@ public class AccompanyDeleteServlet extends HttpServlet {
 		
 		if(result > 0) {	// 삭제 성공일시
 			
-			request.getSession().setAttribute("alertMsg", "탈퇴 처리 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "list.ac?accomNo=" + accomNo);
+			request.getSession().setAttribute("alertMsg", "삭제 처리 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.ac?accomNo=" + accomNo);
 			
 		}else {				// 삭제 실패일시
 			

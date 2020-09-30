@@ -106,12 +106,12 @@
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox"><%= a.getAccomNo() %></td>
-	                        <td><input type="hidden" name="accomId" ><%= a.getUserId() %></td>
-	                        <td><input type="hidden" name="accomNick"><%= a.getUserNick() %></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> <input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>"></td>
+	                        <td><%= a.getUserId() %></td>
+	                        <td><%= a.getUserNick() %></td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="test(<%= a.getAccomNo() %>);" >동행삭제</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
 	                    </tr>
@@ -123,12 +123,23 @@
 				
 			
                 </form>
-                
-                <script>
-                
+				 <script>
+
+                function test(num){
+
+                	
+                	console.log(num);
+                	$("#delete form input[type=hidden]").val(num);
+
+                 
+                }
+                	
+                	
                 
                 </script>
-
+				
+				                
+               
                 <!-- 동행 삭제 modal -->
 
                                 <!-- 거절 모달 -->
@@ -149,10 +160,13 @@
                                                 </h4>
                                                 <br>
                             
+                   
+                                        			
                                                 <form action="<%=contextPath %>/delete.ac" method="GET">
-                                        			<input type="hidden" name="accomNo" value= "<%= %>" >
+                                                    <input type="hidden" id="accomNo2" name="accomNo">
                                                     <button type="submit" class="genric-btn info-border radius">확인</button>
                                                     <button type="reset" class="genric-btn danger-border radius">취소</button>
+							                                                
                                                 </form>
                             
                                             </div>
