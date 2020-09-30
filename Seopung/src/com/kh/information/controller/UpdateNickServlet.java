@@ -33,11 +33,11 @@ public class UpdateNickServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userNick = request.getParameter("userNick");
 		String updateNick = request.getParameter("updateNick");
 		
-		Member updateMem = new InfoService().updateNick(userId, userNick, updateNick);
+		Member updateMem = new InfoService().updateNick(userNo, userNick, updateNick);
 		
 		HttpSession session = request.getSession();
 		

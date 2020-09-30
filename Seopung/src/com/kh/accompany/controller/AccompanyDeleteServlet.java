@@ -13,13 +13,13 @@ import com.kh.accompany.model.service.AccompanyService;
  * Servlet implementation class AccompanyDelete
  */
 @WebServlet("/delete.ac")
-public class AccompanyDelete extends HttpServlet {
+public class AccompanyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyDelete() {
+    public AccompanyDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +31,25 @@ public class AccompanyDelete extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
+		System.out.println(request.getParameter("accomNo"));
+		
 		int accomNo = Integer.parseInt(request.getParameter("accomNo"));
 		
+		System.out.println(accomNo);
+		
 		int result = new AccompanyService().deleteAccom(accomNo);
+		
+		if(result > 0) {	// 삭제 성공일시
+			
+			request.getSession().setAttribute("alertMsg", "탈퇴 처리 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "list.ac?accomNo=" + accomNo);
+			
+		}else {				// 삭제 실패일시
+			
+			request.setAttribute("errorMsg", "삭제 실패");
+			
+			
+		}
 		
 	}
 

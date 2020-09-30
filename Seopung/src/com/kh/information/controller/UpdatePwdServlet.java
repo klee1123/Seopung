@@ -34,11 +34,11 @@ public class UpdatePwdServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userPwd = request.getParameter("userPwd");
 		String updatePwd = request.getParameter("updatePwd");
 		
-		Member updateMem = new InfoService().updatePwdMember(userId, userPwd, updatePwd);
+		Member updateMem = new InfoService().updatePwdMember(userNo, userPwd, updatePwd);
 		
 		HttpSession session = request.getSession();
 		

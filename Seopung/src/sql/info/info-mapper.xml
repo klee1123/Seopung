@@ -6,7 +6,7 @@
 			   TB_MEMBER
 		   SET USER_NICK = ?
 		     , MODIFY_DATE = SYSDATE
-		 WHERE USER_ID = ?;
+		 WHERE USER_NO = ?;
 	
 	</entry>
 	
@@ -15,7 +15,7 @@
 			   TB_MEMBER
 		   SET USER_INTRO = ?
 		     , MODIFY_DATE=SYSDATE
-		 WHERE USER_ID=?
+		 WHERE USER_NO=?
 	</entry>
 
 	<entry key="selectMember">
@@ -34,7 +34,7 @@
 		     , STATUS
 		  FROM TB_MEMBER
 		 WHERE STATUS='Y'
-		   AND USER_ID=?
+		   AND USER_NO=?
 	</entry>
 
 	<entry key="updatePwdMember">
@@ -42,7 +42,7 @@
 		       TB_MEMBER
 		   SET USER_PWD=?
 		     , MODIFY_DATE = SYSDATE
-		 WHERE USER_ID = ?
+		 WHERE USER_NO = ?
 		   AND USER_PWD = ?
 	</entry>
 	
@@ -51,9 +51,16 @@
 		       TB_MEMBER
 		   SET USER_NICK= ?
 		     , MODIFY_DATE = SYSDATE
-		 WHERE USER_ID = ?
+		 WHERE USER_NO = ?
 		   AND USER_NICK = ?
+	</entry>
 	
+	<entry key="updateEmail">
+		UPDATE
+		       TB_MEMBER
+		   SET EMAIL = ?
+		 WHERE USER_NO = ?
+		   AND EMAIL = ?
 	</entry>
 	
 	<entry key="deleteMember">
@@ -61,7 +68,7 @@
 		       TB_MEMBER
 		   SET STATUS='N'
 		     , MODIFY_DATE = SYSDATE 
-		 WHERE USER_ID=?
+		 WHERE USER_NO=?
 		   AND USER_PWD=?
 	</entry>
 		

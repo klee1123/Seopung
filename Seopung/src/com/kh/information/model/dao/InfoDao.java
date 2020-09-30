@@ -43,7 +43,7 @@ public class InfoDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, m.getUserIntro());
-			pstmt.setString(2, m.getUserId());
+			pstmt.setInt(2, m.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -56,7 +56,7 @@ public class InfoDao {
 		return result;
 	}
 	
-	public Member selectMember(Connection conn, String userId) {
+	public Member selectMember(Connection conn, int userNo) {
 		
 		Member m = null;
 		
@@ -69,7 +69,7 @@ public class InfoDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, userId);
+			pstmt.setInt(1, userNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -97,7 +97,7 @@ public class InfoDao {
 		return m;
 	}
 
-	public int updatePwdMember(Connection conn, String userId, String userPwd, String updatePwd) {
+	public int updatePwdMember(Connection conn, int userNo, String userPwd, String updatePwd) {
 		//update문 => 처리된 행 수
 		int result = 0;
 		
@@ -109,7 +109,7 @@ public class InfoDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, updatePwd);
-			pstmt.setString(2, userId);
+			pstmt.setInt(2, userNo);
 			pstmt.setString(3, userPwd);
 			
 			result = pstmt.executeUpdate();
@@ -123,7 +123,7 @@ public class InfoDao {
 		return result;
 	}
 	
-	public int updateNick(Connection conn, String userId, String userNick, String updateNick) {
+	public int updateNick(Connection conn, int userNo, String userNick, String updateNick) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -134,7 +134,7 @@ public class InfoDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, updateNick);
-			pstmt.setString(2, userId);
+			pstmt.setInt(2, userNo);
 			pstmt.setString(3, userNick);
 			
 			result = pstmt.executeUpdate();
@@ -147,7 +147,8 @@ public class InfoDao {
 		return result;
 	}
 	
-	public int deleteMember(Connection conn , String userId, String userPwd) {
+	
+	public int deleteMember(Connection conn , int userNo, String userPwd) {
 		// update문 = > 처리된 행 수
 		int result = 0;
 		
@@ -159,7 +160,7 @@ public class InfoDao {
 		try {
 			pstmt = conn.prepareStatement(sql); // 미완성된 sql
 			
-			pstmt.setString(1, userId);
+			pstmt.setInt(1, userNo);
 			pstmt.setString(2, userPwd);
 			
 			result = pstmt.executeUpdate();
@@ -204,6 +205,30 @@ public class InfoDao {
 		}
 		
 		return count;
+	}
+	
+	public int updateEmail(Connection conn, int userNo, String email, String updateEmail) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updateEmail);
+			pstmt.setInt(2, userNo);
+			pstmt.setString(3, email);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	public int updateInfo(Connection conn, Member m) {
