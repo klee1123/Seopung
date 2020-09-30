@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.adminCommunity.model.vo.Community;
 import com.kh.adminPlan.model.vo.Plan;
-import com.kh.adminRecommend.model.vo.Recommend;
+import com.kh.adminPlan.model.vo.PlanComment;
 import com.kh.common.PageInfo;
 
 public class PlanDao {
@@ -211,4 +210,99 @@ public class PlanDao {
 		return result;
 	}
 
+	
+	public int selectCommentCount(Connection conn, int pno) {
+		// select => 한 행 조회
+		int commentList = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCommentCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				commentList = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return commentList;
+	}
+
+	
+	public ArrayList<PlanComment> selectCommentList(Connection conn, PageInfo pi, int pno){
+		// select문 => 여러행 조회
+		ArrayList<PlanComment> commentList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCommentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, pno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				commentList.add(new PlanComment(rset.getInt("COMMENT_NO"),
+												rset.getString("USER_ID"),
+												rset.getInt("PLAN_NO"),
+												rset.getString("COMMENT_CONTENT"),
+												rset.getDate("COMMENT_DATE"),
+												rset.getString("PROFILEPIC_PATH")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return commentList;
+	}
+	
+	
+	public int deleteComment(Connection conn, int commentNo) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteComment");
+	
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, commentNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }

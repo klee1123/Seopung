@@ -396,14 +396,13 @@
 	       	function deleteComment(commentNo){
 	       		
 	       		$.ajax({
-	       			url:"<%=contextPath%>/adminPage/delete.rco",
+	       			url:"<%=contextPath%>/adminPage/delete.rpl",
 	       			type:"post",
 	       			data:{"commentNo":commentNo},
 	       			success:function(result){
 	       				
 	       				if(result>0){
 	       					selectReplyList(1);
-	       					
 	       				}
 	       				
 	       			}, error:function(){
