@@ -126,6 +126,6 @@
     <!-- custom js -->
     <script src="../../resources/js/custom.js"></script>
 	
-	
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

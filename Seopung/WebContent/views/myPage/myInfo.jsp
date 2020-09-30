@@ -92,9 +92,9 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="<%=contextPath%>/updateInfo.in" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="userNo" value="<%=userNo%>">
-            <button type="submit" onclick="infoSub();" class="btn btn-secondary btn-sm">저장</button>
+            <button type="submit" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
         
             <div class="infoPoto">
@@ -113,12 +113,12 @@
                 <tr>
                     <th align="left" width="100px">아이디</th>
                     <td><input type="text" name="userId" required value="<%= userId %>" readonly></td>
-                    
+                    <td><span name="userId"><%= userId %></span></td>
                 </tr>
                 <tr>
                     <th align="left">이름</th>
                     <td><input type="text" name="userName" required value="<%= userName %>" readonly></td>
-                    
+                    <td><span name="userName"><%= userName %></span></td>
                 </tr>
                 <tr>
                     <th align="left">닉네임</th>
@@ -132,7 +132,7 @@
                 <tr>
                     <th align="left">이메일</th>
                     <td><input type="text" id="email" name="email" required value="<%= email %>"></td>
-                    
+                    <td><span id="email" name="email"><%= email %></span></td>
                 </tr>
                 <tr>
                 	<th align="left">변경할 이메일</th>
@@ -143,12 +143,13 @@
              	<tr>
              		<th>인증확인</th>
              		<td><input type="text" name="code" id="code" placeholder="인증번호를 입력하세요"><button type="button" id="emBtn">인증확인</button>
-                    <td><span id="cEm"></span></td>
+                    
               		
              	</tr>
                 <tr>
                     <th align="left">생년월일</th>
                     <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
+                	<td><span name="birth"><%= year %>년  <%=month %>월  <%=day %>일</span></td>
                 </tr>
                 
             </table>
@@ -156,10 +157,11 @@
             </div>
             <label><strong>자기소개</strong></label> <br>
             <textarea name="userIntro" id="intro" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
-        </form>
-        	<div id="fileArea">
+       		<div id="fileArea">
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
             </div>
+        </form>
+        	
         </div>
     </div>
     <script>
@@ -183,6 +185,7 @@
     	  				updateEmail.innerHTML = (updateEmail.val());
     	  				
       			},error:function(){
+      				alert("실패");
       				console.log("ajax 통신 실패!");
       			}
       		})
@@ -321,35 +324,6 @@
   		})
   	}
   	
-  	function infoSub(){
-  		var $updateEmail = $("#updateEmail");
-		var $profile = $("#profile");
-		var $intro = $("#intro");
-  		$.ajax({
-  			url:"<%= contextPath %>/updateInfo.in",
-  			data:{updateEmail:$updateEmail.val(),
-			profile :$("#profile").val(),
-			intro:$("#intro").val()},
-  			type:"post",
-  			success:function(result){
-  				
-  				console.log("통신성공");
-	  				if(result == "fail"){
-	  					alert("개인정보 수정 완료");
-	  					
-	  				}else {
-	  					alert("개인정보 수정 실패");
-	  				}
-  				
-  			},error:function(){
-  				console.log("ajax 통신 실패!");
-  			}
-  		})
-  	}
-  	
-  </script>
-    
-    <script>
         $(function(){
             $("#fileArea").hide();
 			
@@ -417,6 +391,6 @@
     <!-- custom js -->
     <script src="resources/js/custom.js"></script>
 	
-	
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

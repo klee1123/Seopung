@@ -341,7 +341,7 @@
 					    								result.list[i].content +
 					    							"</td>" +
 					    							"<td align='center'>" +
-					    								"<button style='border: none; background: none' onclick='deleteComment(" + result.list[i].commentNo + ");'>삭제</button>" +
+					    								"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>" +
 					    							"</td>" +
 					    						"</tr>" +
 					    					"</table>";
@@ -392,18 +392,25 @@
 		       	});
 			}
 	       	
+	       	
+	       	// 댓글 삭제 CONFIRM 용
+	       	function confirmDeleteComment(commentNo){
+	       		if(confirm("댓글을 삭제하시겠습니까?")){
+	       			deleteComment(commentNo);
+	       		}
+	       	}
+	       	
 	       	// 댓글 삭제용 ajax
 	       	function deleteComment(commentNo){
 	       		
 	       		$.ajax({
-	       			url:"<%=contextPath%>/adminPage/delete.rco",
+	       			url:"<%=contextPath%>/adminPage/delete.rpl",
 	       			type:"post",
 	       			data:{"commentNo":commentNo},
 	       			success:function(result){
 	       				
 	       				if(result>0){
 	       					selectReplyList(1);
-	       					
 	       				}
 	       				
 	       			}, error:function(){

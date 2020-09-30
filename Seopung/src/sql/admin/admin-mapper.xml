@@ -117,5 +117,50 @@
 		     , MODIFY_DATE = SYSDATE
 		 WHERE ADMIN_NO = ?
 	</entry>
+	
+	<entry key="searchPlanCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="searchCommunityCount">
+		SELECT 
+		       COUNT(*) 
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<etnry key="searchRecommendCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_RECOMMEND
+		 WHERE RECOMMEND_TITLE LIKE '%' || ? || '%'	
+	</etnry>
+	
+	<entry key="searchPlan">
+		SELECT 
+		       PLAN_NO
+		     , PLAN_TTILE
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="searchCommunity">
+		SELECT 
+		       COMMUNITY_NO
+		     , COMMUNITY_TITLE  
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<etnry key="searchRecommend">
+		SELECT 
+		       RECOMMEND_NO
+		     , RECOMMEND_TITLE
+		  FROM TB_RECOMMEND
+		 WHERE RECOMMEND_TITLE LIKE '%' || ? || '%'	
+	</etnry>
 
 </properties>

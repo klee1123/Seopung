@@ -125,6 +125,116 @@ public class CommunityDao {
 		
 	}
 	
+	public int increaseCount(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public Community selectCommunity(Connection conn, int cno) {
+		
+		Community c = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Community(rset.getInt("COMMUNITY_NO"),
+						   rset.getString("USER_NICK"),
+			               rset.getString("COMMUNITY_TITLE"),
+			               rset.getString("COMMUNITY_CONTENT"),
+			               rset.getDate("COMMUNITY_ENROLL"),
+			               rset.getInt("COMMUNITY_COUNT"),
+			               rset.getInt("COMMUNITY_SCRAP"),
+			               rset.getInt("COMMUNITY_RECOMMEND"),
+			               rset.getString("COMMUNITY_THUMB")
+			               );
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return c;
+		
+	}
+	
+	public int deleteCommunity(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public int updateCommunity(Connection conn, Community c) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getTitle());
+			pstmt.setString(2, c.getContent());
+			pstmt.setString(3, c.getThumb());
+			pstmt.setString(4, c.getHead());
+			pstmt.setInt(5, c.getComNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	

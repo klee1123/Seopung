@@ -10,8 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.adminPlan.model.dao.PlanDao;
 import com.kh.adminPlan.model.vo.Plan;
-import com.kh.adminRecommend.model.dao.RecommendDao;
-import com.kh.adminRecommend.model.vo.Recommend;
+import com.kh.adminPlan.model.vo.PlanComment;
 import com.kh.common.PageInfo;
 
 public class PlanService {
@@ -104,4 +103,42 @@ public class PlanService {
 		
 		return result;
 	}
+	
+	
+	public int selectCommentCount(int pno) {
+		Connection conn = getConnection();
+		
+		int commentCount = new PlanDao().selectCommentCount(conn, pno);
+		
+		close(conn);
+		
+		return commentCount;
+	}
+	
+	
+	public ArrayList<PlanComment> selectCommentList(PageInfo pi, int pno){
+		Connection conn = getConnection();
+		
+		ArrayList<PlanComment> commentList = new PlanDao().selectCommentList(conn, pi, pno);
+		
+		close(conn);
+		
+		return commentList;
+	}
+	
+	
+	public int deleteComment(int commentNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().deleteComment(conn, commentNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 }

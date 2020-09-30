@@ -1,7 +1,9 @@
+
 package com.kh.information.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +15,9 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.Member.model.vo.Member;
 import com.kh.common.MyFileRenamePolicy;
+import com.kh.information.model.dao.InfoDao;
 import com.kh.information.model.service.InfoService;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
  * Servlet implementation class test
@@ -37,46 +39,58 @@ public class UpInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 우선 enctype의 multipart/form-data로 잘 전송되었을 때만 전반적인 내용이 수행되게끔
+		
 		if(ServletFileUpload.isMultipartContent(request)) {
-			// 1_1. 전송되는 파일 용량 제한(int maxSize) => 10mbyte
 			int maxSize = 10 * 1024 * 1024;
 			
-			// 1_2. 전달된 파일을 저장시킬 서버의 폴더 물리적인 경로 알아내기 (String savePath)
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/profilePic_upfiles/");
-			
-		
+
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
-			// --> 위의 코드가 실행되는 순간 서버에 파일 업로드 됨
-		
-			String userNo = multiRequest.getParameter("userNo");
+			
+			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
 			String userIntro = multiRequest.getParameter("userIntro");
-			String profile = multiRequest.getParameter("profile");
 			String email = multiRequest.getParameter("email");
 			
 			Member m = new Member();
-			m.setUserId(userNo);
+			m.setUserNo(userNo);
 			m.setUserIntro(userIntro);
-			m.setProfile(profile);
 			m.setEmail(email);
 			
-			int result = new InfoService().updateInfo(m);
-			System.out.println(m);
-			// case1:새로운 첨부파일 x		  		=> updateBoard(b, null);				=> Board Update
-			// case2:새로운 첨부파일 o, 기존의 첨부파일o => updateBoard(b, fileNo이 담긴at);		=> Board Update, Attachment Update 
-			// case3:새로운 첨부파일 o, 기존의 첨부파일x => updateBoard(b, refBoardNo이 담긴 at);	=> Board Update, Attachment Insert
-		
-			if(result > 0) { // 성공 => 상세조회 재요청(detail.bo?bno=xx)
+			if(multiRequest.getOriginalFileName("profile") != null) {
+				String changeName = multiRequest.getFilesystemName("profile");
+				m.setProfile("resources/profilePic_upfiles/" + changeName); // 새로운 썸네일 경로 담기
+			}else { // 없을 경우
 				
-				request.getSession().setAttribute("alertMsg", "게시글 수정 성공했습니다.");
-				
-			}else { //실패 => 에러페이지
-				
-				request.setAttribute("errorMsg", "게시글 수정 실패");
-				request.getRequestDispatcher("../views/common/errorPage.jsp").forward(request, response);
+				Member mem = new InfoService().selectMember(userNo); //기존 게시글 정보를 담는 객체
+				m.setProfile(mem.getProfile()); // 기존 썸네일 경로 담아주기
 			}
+			
+			
+			
+			
+			
+			Member updateMem = new InfoService().updateInfo(m);
+					
+			if(updateMem != null) { // 정보변경 성공 했을 경우 => 마이페이지 보여주기
+				
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("loginUser", updateMem);
+				session.setAttribute("alertMsg", "회원정보 수정 성공");
+				response.sendRedirect(request.getContextPath() + "/myPage.me");
+				
+				
+			}else {  // 실패
+				
+				request.setAttribute("errorMsg", "회원정보 수정 실패");
+				RequestDispatcher view = request.getRequestDispatcher("../views/common/errorPage.jsp");
+				view.forward(request, response);
+				
+			}
+			
 		}
-	}
+		
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -31,12 +31,12 @@ public class DeleteMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		
-		String userId = request.getParameter("userId");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String userPwd = request.getParameter("userPwd");
 		
-		int result = new InfoService().deleteMember(userId,userPwd);
+		int result = new InfoService().deleteMember(userNo,userPwd);
 		
 		if(result > 0) { // 탈퇴 성공 => 세션에 담겨있는 loginUser지워준 후 -> 메인페이지 재요청
 			HttpSession session = request.getSession();

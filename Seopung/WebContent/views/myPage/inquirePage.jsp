@@ -43,6 +43,10 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
 	
+	<%
+		int userNo = loginUser.getUserNo();
+	%>
+	
 	<div class="myContent">
 	
 		<div class="inquirePage">
@@ -50,12 +54,12 @@
             <hr>
         
         <div class="inquire">
-            <button type="button" id="deleteIq" class="btn btn-secondary">삭제</button>
+            <button type="button" id="btn_deleteIq" class="btn btn-secondary" >삭제</button>
             <br><br>
             <table id="inquireTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="chkAll">&nbsp;&nbsp;번호</th>
+                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;번호</th>
                         <th width="400">제목</th>
                         <th width="100">내용</th>
                         <th width="100">처리상태</th>
@@ -64,12 +68,12 @@
                 <tbody>
                 <% if(list.isEmpty()){ %>
                 	<tr>
-                		<td colspan="6">조회된 리스트가 없습니다</td>
+                		<td colspan="4">조회된 리스트가 없습니다</td>
                 	</tr>
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
 		                    <tr align="center">
-		                        <td><input type="checkbox" id="chk" name="chk" value="1">
+		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
 		                        <td><%= i.getInquireTitle() %></td>
 		                        <td><%= i.getInquireContent() %></td>
@@ -83,24 +87,24 @@
             <div class="pagingArea" align="center">
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1';"> &lt;&lt; </button>
+	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
 	            <!-- 이전 페이지로 (<) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>';"> &lt; </button>
+	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
 			<% } %>
             <!-- button{$}*10 -->
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>';"><%= p %></button>
+               <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
                <% }else{ %>
                <button disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage +1 %>';"> &gt; </button>
+	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>';"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>';"> &gt;&gt; </button>
+	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>';"> &gt;&gt; </button>
 			<% } %>
 
         </div>
@@ -120,10 +124,9 @@
                 }
             });
         });
-        
      // 삭제시
         $(function(){
-        	$("#btnDelete").click(function(){
+        	$("#btn_deleteIq").click(function(){
 
           		var selected = new Array();
           		$("input[id=chk]:checked").each(function(){
@@ -138,39 +141,23 @@
               	var str = "";
               	for(var i=0;i<selected.length; i++){
                 	if(i == selected.length-1){
-                  		str += "rno=" + selected[i];
+                  		str += "ino=" + selected[i];
                 	}else{
-                  		str += "rno=" + selected[i] + "&";
+                  		str += "ino=" + selected[i] + "&";
                 	}
               	}
               
               	if(confirm("정말 삭제하시겠습니까?")) {
-                	location.href="<%=contextPath%>/adminPage/delete.re?" + str;
+              		location.href="<%=contextPath%>/deleteInquire.in?" + str;
               	} 
             });
         });
-        
-		$(function(){
-			$("#deleteIq").click(function(){
-				location.href = "<%=contextPath%>/deleteIq.mp?bno=" 
-			});
-		});
-		$(function(){
-	   		$("#iqTitle").click(function(){
-	   			//console.log("클릭됨");
-	   			var nno = $(this).children().eq(0).text();
-	   			
-	   			//console.log(nno);
-	   			// 쿼리스트링
-	   			location.href = "<%=contextPath%>/inquireDetail.mp?bno=" + bno;
-	   			
-	   		});
-	   	});
-	</script>
+    
     </script>
 	<!-- myContent -->
     </div>
     <!-- myOuter -->
     </div>
+    <%@ include file="../common/footer.jsp"%>
 </body>
 </html>

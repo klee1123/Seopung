@@ -1,26 +1,29 @@
-package com.kh.sidebar.controller;
+package com.kh.community.cotroller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.kh.community.model.service.CommunityService;
+import com.kh.community.model.vo.Community;
 
 /**
- * Servlet implementation class InquireServlet
+ * Servlet implementation class CommunityDetailServlet
  */
-@WebServlet("/inquire.me")
-public class InquireServlet extends HttpServlet {
+@WebServlet("/detailList.co")
+public class CommunityDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InquireServlet() {
+    public CommunityDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +32,20 @@ public class InquireServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser") == null) {
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		
+		int result = new CommunityService().increaseCount(cno);
+		
+		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
-			//메인으로 다시 되돌아가기
-			response.sendRedirect(request.getContextPath());
-		}else {
+			Community c = new CommunityService().selectCommunity(cno);
 			
-			RequestDispatcher view = request.getRequestDispatcher("views/myPage/inquirePage.jsp");
-			view.forward(request, response);
+			request.setAttribute("c", c);
+			
+			
+			
+		request.getRequestDispatcher("views/community/communityDetailView.jsp").forward(request, response);
 		}
 	}
 

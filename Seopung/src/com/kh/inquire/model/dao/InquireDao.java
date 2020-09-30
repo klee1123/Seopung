@@ -36,17 +36,21 @@ public class InquireDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int userNo) {
 		int listCount = 0;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
@@ -55,12 +59,12 @@ public class InquireDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		return listCount;
 	}
 	
-	public ArrayList<Inquire> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Inquire> selectList(Connection conn, PageInfo pi, int userNo){
 		//select문 => 여러행 조회
 		ArrayList<Inquire> list = new ArrayList<>();
 		
@@ -72,10 +76,13 @@ public class InquireDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit()+1;
 			int endRow = startRow + pi.getBoardLimit()-1;
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -95,5 +102,23 @@ public class InquireDao {
 		return list;
 	}
 	
+	public int deleteInquireList(Connection conn, String[] ino) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteInquireList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 }

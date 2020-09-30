@@ -12,26 +12,6 @@ import com.kh.information.model.dao.InfoDao;
 
 public class InfoService {
 	
-	
-	public Member updateMember(Member m) {
-		Connection conn = getConnection();
-		
-		int result = new InfoDao().updateMember(conn, m);
-		
-		Member updateMem = null;
-		
-		if(result > 0) {
-			commit(conn);
-			
-			updateMem = new InfoDao().selectMember(conn, m.getUserId());
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		
-		return updateMem;
-	}
-	
 	/**
 	 * 비밀번호 변경용 서비스
 	 * @param userId	변경요청한 사용자아이디
@@ -39,16 +19,18 @@ public class InfoService {
 	 * @param updatePwd 변경된 비밀번호
 	 * @return			갱신된 비밀번호
 	 */
-	public Member updatePwdMember(String userId, String userPwd, String updatePwd) {
+	public Member updatePwdMember(int userNo, String userPwd, String updatePwd) {
 		
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updatePwdMember(conn, userId, userPwd, updatePwd);
+		int result = new InfoDao().updatePwdMember(conn, userNo, userPwd, updatePwd);
 		
 		Member updateMem = null;
 		if(result > 0) {
+			
 			commit(conn);
-			updateMem = new InfoDao().selectMember(conn, userId);
+			updateMem = new InfoDao().selectMember(conn, userNo);
+			
 		}else {
 			rollback(conn);
 		}
@@ -64,17 +46,17 @@ public class InfoService {
 	 * @param updateNick
 	 * @return
 	 */
-	public Member updateNick(String userId, String userNick, String updateNick) {
+	public Member updateNick(int userNo, String userNick, String updateNick) {
 			
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updateNick(conn, userId, userNick, updateNick);
+		int result = new InfoDao().updateNick(conn, userNo, userNick, updateNick);
 		
 		Member updateMem = null;
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new InfoDao().selectMember(conn, userId);
+			updateMem = new InfoDao().selectMember(conn, userNo);
 			
 		}else {
 			rollback(conn);
@@ -90,10 +72,10 @@ public class InfoService {
 	 * @param userPwd	회원비밀번호
 	 * @return
 	 */
-	public int deleteMember(String userId, String userPwd) {
+	public int deleteMember(int userNo, String userPwd) {
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().deleteMember(conn,userId,userPwd);
+		int result = new InfoDao().deleteMember(conn,userNo,userPwd);
 		
 		if(result > 0) {
 			commit(conn);
@@ -120,22 +102,54 @@ public class InfoService {
 		return count;
 	}
 	
-	public int updateInfo(Member m) {
+	public int updateEmail(int userNo, String email, String updateEmail) {
 		Connection conn = getConnection();
 		
-		int result = new InfoDao().updateInfo(conn,m);
+		int result = new InfoDao().updateEmail(conn, userNo, email, updateEmail);
 		
+		Member updateMem = null;
 		
 		if(result > 0) {
 			commit(conn);
-			
+			updateMem = new InfoDao().selectMember(conn, userNo);
 		}else {
 			rollback(conn);
 		}
+		close(conn);
+		return result;
+	}
+	
+	/**
+	 * 개인정보 업데이트 서비스
+	 * @param m 프로필사진, 자기소개
+	 * @return
+	 */
+	public Member updateInfo(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new InfoDao().updateInfo(conn,m);
+		Member updateMem = null;
+		if(result > 0) {
+			commit(conn);
+			// 갱신된 회원 다시 조회해오기
+			updateMem = new InfoDao().selectMember(conn, m.getUserNo());
+		
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return updateMem; // 갱신된 회원객체 / null
+	}
+	
+	public Member selectMember(int userNo) {
+		Connection conn = getConnection();
+		
+		Member m = new InfoDao().selectMember(conn, userNo);
 		
 		close(conn);
 		
-		return result;
+		return m;
 	}
 }
 

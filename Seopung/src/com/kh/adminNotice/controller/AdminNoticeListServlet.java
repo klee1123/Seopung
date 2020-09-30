@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.admin.model.service.AdminService;
-import com.kh.admin.model.vo.Admin;
+import com.kh.adminNotice.model.service.AdminNoticeService;
+import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;
 
 /**
  * Servlet implementation class AdminListServlet
  */
-@WebServlet("/adminPage/notice.ad")
+@WebServlet("/adminPage/list.no")
 public class AdminNoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,32 +48,8 @@ public class AdminNoticeListServlet extends HttpServlet {
 		// 넘어온 값 뽑기
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		// 키필드
-		int keyfield;
-		if(request.getParameter("keyfield")!=null) {
-			keyfield = Integer.parseInt(request.getParameter("keyfield"));			
-		}else {
-			keyfield = 1;
-		}
-		
-		// 키워드
-		String keyword;
-		if(request.getParameter("keyword")!=null) {
-			keyword = request.getParameter("keyword");
-		}else {
-			keyword = "";
-		}
-		
-		// 상태분류
-		String status;
-		if(request.getParameter("status")!=null) {
-			status = request.getParameter("status");
-		}else {
-			status = "";
-		}
-		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
-		listCount = new AdminService().selectListCount(keyfield, keyword, status);
+		listCount = new AdminNoticeService().selectListCount();
 		
 		pageLimit = 5;
 		
@@ -96,16 +72,13 @@ public class AdminNoticeListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Admin> list = new AdminService().selectList(pi, keyfield, keyword, status);
+		ArrayList<AdminNotice> list = new AdminNoticeService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		request.setAttribute("keyfield", keyfield);
-		request.setAttribute("keyword", keyword);
-		request.setAttribute("status", status);
-		request.setAttribute("pageTitle", "관리자 목록");
+		request.setAttribute("pageTitle", "공지사항 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
+		request.getRequestDispatcher("../views/admin/manage_notice/manageNoticeListView.jsp").forward(request, response);
 		
 	}
 

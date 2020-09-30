@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.planOption.model.service.PlanOptionService;
-import com.kh.planOption.model.vo.PlanOption;
+import com.kh.planMap.model.service.PlanMapService;
+import com.kh.planMap.model.vo.PlanMap;
 
 /**
  * Servlet implementation class PlanMapInsertServlet
  */
-@WebServlet("/planMap.po")
+@WebServlet("/planMap.pl")
 public class PlanMapInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,13 +29,20 @@ public class PlanMapInsertServlet extends HttpServlet {
 	
 		request.setCharacterEncoding("utf-8");
 				
-			String planTitle = request.getParameter("planTitle");
+			String planDay = request.getParameter("planDay");
+			int orderNo = request.getParameter("orderNo");
+			String lineMemo = request.getParameter("lineMemo");
+			String latitude = request.getParameter("latitude");
+			String longitude = request.getParameter("longitude");
 			
-			PlanOption p = new PlanOption();
-			p.setPlanTitle(planTitle);
+			PlanMap p = new PlanMap();
+			p.setPlanDay(planDay);
+			p.setOrderNo(orderNo);
+			p.setLineMemo(lineMemo);
+			p.setLatitude(latitude);
+			p.setLongitude(longitude);
 			
-			
-			int result = new PlanOptionService().insertPlanOption(p);
+			int result = new PlanMapService().insertPlanMap(p);
 			
 			//request.getSession().setAttribute();
 			request.getRequestDispatcher("views/plan/plan_page.jsp").forward(request, response);

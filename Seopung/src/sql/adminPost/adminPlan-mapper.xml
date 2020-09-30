@@ -104,4 +104,47 @@
 		 WHERE PLAN_NO = ?
 	</entry>
 	
+	<entry key="selectCommentCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_PLAN_COMMENT
+		 WHERE COMMENT_STATUS = 'Y'
+		   AND PLAN_NO = ?
+	</entry>
+	
+	<entry key="selectCommentList">
+		SELECT *
+		  FROM
+		     (
+		     SELECT ROWNUM RNUM
+		                 , A.*
+		              FROM
+		                 (
+		                  SELECT  
+		                         COMMENT_NO
+		                       , USER_ID
+		                       , PLAN_NO
+		                       , COMMENT_CONTENT
+		                       , COMMENT_DATE
+		                       , PROFILEPIC_PATH
+		                    FROM TB_PLAN_COMMENT 
+		                    JOIN TB_MEMBER USING(USER_NO)
+		                   WHERE COMMENT_STATUS = 'Y'
+                             AND PLAN_NO = ? 
+                           ORDER
+                              BY PLAN_NO DESC          
+		                 ) A
+		     )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="deleteComment">
+		UPDATE 
+		       TB_PLAN_COMMENT
+		   SET COMMENT_STATUS = 'N',
+  		       COMMENT_MODIFY = SYSDATE
+		 WHERE COMMENT_NO = ?
+	</entry>
+	
 </properties>

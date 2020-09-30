@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT COUNT(*) 
+  		  FROM TB_NOTICE 
+ 		 WHERE STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectList">
+		SELECT *
+		  FROM 
+		     (
+		     SELECT ROWNUM RNUM
+		          , A.*
+		       FROM
+		          (
+		             SELECT NOTICE_NO,
+		                    NOTICE_TITLE,
+		                    NOTICE_ENROLL,
+		                    NOTICE_VIEWS
+		               FROM TB_NOTICE
+		              WHERE STATUS = 'Y' 
+		              ORDER
+		                 BY NOTICE_NO DESC
+		          ) A
+		     )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+</properties>

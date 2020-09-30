@@ -45,4 +45,79 @@ public class CommunityService {
 		return result;
 		
 	}
+	
+	public int increaseCount(int cno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().increaseCount(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public Community selectCommunity(int cno) {
+		Connection conn = getConnection();
+		
+		Community c = new CommunityDao().selectCommunity( conn, cno);
+		
+		close(conn);
+		return c;
+	}
+	
+	public int deleteCommunity(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().deleteCommunity(conn, cno);
+		
+		if(result > 0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int updateCommunity(Community c) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().updateCommunity(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
