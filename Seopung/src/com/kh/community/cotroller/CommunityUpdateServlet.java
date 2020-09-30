@@ -1,6 +1,5 @@
 package com.kh.community.cotroller;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,16 +16,16 @@ import com.kh.community.model.vo.Community;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
- * Servlet implementation class CommunityInsertServlet
+ * Servlet implementation class CommunityUpdateServlet
  */
-@WebServlet("/insert.co")
-public class CommunityInsertServlet extends HttpServlet {
+@WebServlet("/update.co")
+public class CommunityUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityInsertServlet() {
+    public CommunityUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,42 +41,42 @@ public class CommunityInsertServlet extends HttpServlet {
 			
 			int maxSize = 10 * 1024 * 1024;
 			
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/com_thumb_upfiles");
+			String savePath = request.getSession().getServletContext().getRealPath("resources/com_thumb_upfiles");
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "utf-8", new MyFileRenamePolicy());
 			
+			int cno = Integer.parseInt(multiRequest.getParameter("cno"));
 			String title = multiRequest.getParameter("title");
 			String content = multiRequest.getParameter("content");
 			String thumb = multiRequest.getParameter("thumbnail");
-			String userNo = multiRequest.getParameter("userNo");
 			String head = multiRequest.getParameter("head");
+			
 			Community c = new Community();
 			
 			c.setTitle(title);
 			c.setContent(content);
-			c.setUserNo(userNo);
+			c.setComNo(cno);
 			c.setHead(head);
 			c.setThumb(thumb);
 			
 			if(multiRequest.getOriginalFileName("thumbnail") != null) {
-				String originName = multiRequest.getOriginalFileName("thumbnail");
+				String originaName = multiRequest.getOriginalFileName("thumbnail");
 				String changeName = multiRequest.getFilesystemName("thumbnail");
 				String filePath = "resources/com_thumb_upfiles/";
 				c.setThumb(filePath + changeName);
-				
 			}
 			
-			int result = new CommunityService().insertCommunity(c);
+			int result = new CommunityService().updateCommunity(c);
 			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", "게시글 등록됐습니다");
-				response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1");
 				
-			}else {
+				request.getSession().setAttribute("alertMsg", "게시물이 수정됐습니다.");
 				
+				response.sendRedirect(request.getContextPath() + "/detailList.co?cno=" + cno);
 			}
+			
+			
 		}
-		
 	}
 
 	/**

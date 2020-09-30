@@ -54,7 +54,7 @@ input[type=text], input[type=password], input[type=email] {
 	font-size: 12px;
 }
 
-table+button[type=submit], table+button+[type=reset] {
+table+button[type=submit], table+button+[type=button] {
 	margin-top: 40px;
 	width: 200px;
 	height: 40px;
@@ -165,7 +165,7 @@ input:placeholder {
 			</table>
 
 			<button type="submit" disabled id="joinBtn" onclick="joinBtn();">회원가입</button>
-			<button type="reset">취소</button>
+			<button type="button" onclick="location.href='<%=contextPath%>'">취소</button>
 		</fieldset>
 	</form>
 	</div>

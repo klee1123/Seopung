@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.kh.community.model.vo.*"%>
-
+<%
+	Community c = (Community)request.getAttribute("c");
+%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,24 +35,25 @@
 		<br>
 
 		<div class="outer">
-			<form action="<%=contextPath%>/insert.co" method="post" enctype="multipart/form-data">
+			<form action="<%=contextPath%>/update.co" method="post" enctype="multipart/form-data">
 				
 				<!-- 수정 필요! 임시 -->
-				<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+				<input type="hidden" name="cno" value="<%=c.getComNo()%>">
 				 <select style="margin-top:120px;" name="head" id="head">
 			        <option value="맛집">맛집</option>
 			        <option value="명소">명소</option>
 			
 			    </select>
 				<input type="text" name="title" style="width: 100%;"
-					placeholder="제목입력" class="form-control" required> <br>
+					placeholder="제목입력" class="form-control" required value="<%=c.getTitle()%>"> <br>
 					
-				<textarea  id="summernote" name="content" required></textarea>
+				<textarea  id="summernote" name="content" required><%=c.getContent() %></textarea>
 
 				<br>
 				<button type="button" id="thumbBtn"
 					class="btn btn-outline-secondary btn-sm">썸네일 사진첨부</button>
-				<img width="140" height="140" id="thumbPreview"> 
+				<img width="140" height="140" id="thumbPreview" src="<%=c.getThumb()%>"> 
+				
 				<input type="file" id="thumbnail" name="thumbnail"
 					onchange="loadImage(this)" required> <br>
 				<br>

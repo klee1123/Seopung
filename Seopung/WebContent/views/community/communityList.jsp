@@ -29,6 +29,11 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	position: absolute;
+	
+}
+
+#content br{
+	display:none;
 }
 
 table {
@@ -69,6 +74,10 @@ table {
 	height: 30px;
 	font-size: 15px;
 }
+p>img{
+	display:none;
+}
+
 
 }
 #footer {
@@ -146,11 +155,11 @@ table {
 				<li
 					style=" position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수<a
-						href=""> <img style="position: absolute; margin-left: 30px;"
+						href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"> <img style="position: absolute; margin-left: 30px;"
 							src="<%=c.getThumb() %>" width="100px;" height="100%;" alt="">
 					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
 							id="headTitle" style="margin-left: 140px;"><%=c.getHead() %></span>
-					</a> <a href="" style="text-decoration: none; color: black;"> <span
+					</a> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>" style="text-decoration: none; color: black;"> <span
 							id="title" name="title"><%=c.getTitle() %>&nbsp;[4]</span>
 					</a>
 
@@ -158,7 +167,8 @@ table {
 					style="position: absolute; display: inline-block; margin-left: 800px;">
 						<div style="width: 100px;"><%=c.getEnroll() %></div>
 						<div style="width: 140px;">조회수: <%=c.getCount() %> /<%=c.getUserNo() %></div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;"><%=c.getRecommend() %></span> <br> <span>스크랩</span>
+				</span> <span style="margin-left: 15px; color: blue;" ><%=c.getRecommend() %></span> <br> <span>스크랩</span>
+					
 					<span id="content" style="margin-left: 140px;"><%=c.getContent() %></span> <br> <span
 					style="margin-left: 15px; color: red;"><%=c.getScrap() %></span>
 				</li>
@@ -178,8 +188,10 @@ table {
 							for="search" style="cursor: pointer;"><img src="다운로드.png"
 							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
+						<%if(loginUser != null){ %>
 						<button onclick="location.href='<%=contextPath%>/enrollForm.co'" type="button"
 							style=" margin-left:640px; width: 80px; height: 30px; border: none;">글작성</button>
+							<%} %>
 					</form>
 
 					<br> <br> <br>
