@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 import com.kh.adminNotice.model.dao.AdminNoticeDao;
 import com.kh.adminNotice.model.vo.AdminNotice;
-import com.kh.adminPlan.model.dao.PlanDao;
-import com.kh.adminPlan.model.vo.PlanComment;
 import com.kh.common.PageInfo;
 
 public class AdminNoticeService {

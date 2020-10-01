@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@page import = "java.util.ArrayList, com.kh.adminReport.model.vo.AdminReport, com.kh.common.PageInfo" %>
+<%
+    ArrayList<AdminReport> list = (ArrayList<AdminReport>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>		
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,86 +65,22 @@
 					</tr>
 				</thead>
 				<tbody style="text-align:center;">
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>5</td>
-						<td>부적절한 단어 사용 신고합니다.</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>영리목적/홍보성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>4</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId2</td>
-						<td>2020.09.09</td>
-						<td>개인정보노출</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>3</td>
-						<td>구체적인 개인정보를 요구해요.</td>
-						<td>userId3</td>
-						<td>2020.09.09</td>
-						<td>불법정보 </td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>2</td>
-						<td>통장 비밀번호를 물어봤어요.</td>
-						<td>userId4</td>
-						<td>2020.09.09</td>
-						<td>개인정보노출</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>비매너 사용자예요.</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>도배성</td>
-					</tr>
+					<% if(list.isEmpty()){ %>
+	                    <tr>
+	                        <td colspan="5">조회된 리스트가 없습니다.</td>
+	                    </tr>
+	                    <% }else{ %>
+	                        <% for(AdminReport n : list){ %>
+	                        <tr>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getNoticeNo()  %>"></td>
+	                            <td><%= n.getReportNo() %></td>
+	                            <td><%= n.getReportTitle() %></td>
+	                            <td><%= n.getReportWriter() %></td>
+	                            <td><%= n.getReportEnroll() %></td>
+	                            <td><%= n.getReportdivision() %></td>
+	                        </tr>
+	                        <% } %>
+	                    <% } %>
 					
 				</tbody>
 			</table>
@@ -144,21 +91,28 @@
 				<table>
 					<tr>
 						<td width=""><span>총 신고글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>개
+								style="color: red"><%=listCount%></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
-
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% if(currentPage != 1){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+	                                <% } %>
+	
+	                                <% for(int p=startPage; p<=endPage; p++){ %>
+	                                    <% if(p != currentPage){ %>
+	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% }else{ %>
+	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% } %>
+	                                <% } %>
+	
+	                                <% if(currentPage != maxPage){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+	                                <% } %>
+								
 							</div>
 						</td>
 						

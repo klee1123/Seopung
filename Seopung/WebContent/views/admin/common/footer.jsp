@@ -36,7 +36,7 @@
         <div class="modal-body">로그아웃을 통해 서비스 종료를 원하시면 아래 [확인] 버튼을 선택하여 주십시오.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-          <a class="btn btn-primary" href="<%=request.getContextPath()%>/logout.ad">확인</a>
+          <a class="btn btn-primary" href="<%=request.getContextPath()%>/logout.me">확인</a>
         </div>
       </div>
     </div>

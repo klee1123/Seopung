@@ -114,7 +114,7 @@
 	                        <td><%= a.getUserNick() %></td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="test(<%= a.getAccomNo() %>);" >동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
 
 	                    </tr>
@@ -129,6 +129,13 @@
 				 
 				 
 				<script>
+				
+				function deleteAccompany(accomNo){
+					
+					if(confirm("동행을 삭제하시겠습니까 ?")){
+						location.href="<%=contextPath%>/delete.ac?accomNo=" + accomNo;
+					}
+				}
 
                 function test(num){
 
@@ -144,11 +151,11 @@
                 </script>
 				
 				                
-               
+              
                 <!-- 동행 삭제 modal -->
 
                                 <!-- 거절 모달 -->
-
+ 								<!-- 
                                 <div class="modal" id="delete">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -180,6 +187,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                 -->
+                                
                 <!-- 프로필 modal -->
                 <div class="modal" id="profile">
                     <div class="modal-dialog" >
