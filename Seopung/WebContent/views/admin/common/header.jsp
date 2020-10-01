@@ -139,10 +139,10 @@
         </a>
         <div id="collapseUtilitie" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <!--<a class="collapse-item" href="">FAQ</a>-->
+            <!--<a class="collapse-item" href="">FAQ</a> /// 주소 겹치지 않게 주의 -->
             <a class="collapse-item" href="<%= contextPath %>/adminPage/list.no?currentPage=1">공지사항</a>
-            <a class="collapse-item" href="">1:1문의</a>
-            <a class="collapse-item" href="">신고내역</a>
+            <a class="collapse-item" href="<%= contextPath %>/adminPage/list.iq?currentPage=1">1:1문의</a>
+            <a class="collapse-item" href="<%= contextPath %>/adminPage/list.rp?currentPage=1">신고내역</a>
           </div>
         </div>
       </li>

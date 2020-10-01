@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@page import = "java.util.ArrayList, com.kh.adminInquiry.model.vo.AdminInquiry, com.kh.common.PageInfo" %>
+<%
+    ArrayList<AdminInquiry> list = (ArrayList<AdminInquiry>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>	
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +26,6 @@
 </style>
 </head>
 <body>
-
 
 	<%@ include file="../common/header.jsp"%>
 
@@ -53,87 +64,25 @@
 						<th width="100px">처리상태</th>
 					</tr>
 				</thead>
+	
 				<tbody style="text-align:center;">
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>5</td>
-						<td>동행 구하기는 어떻게 하나요?</td>
-						<td>userId1</td>
-						<td>2020.09.09</td>
-						<td>미답변</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>4</td>
-						<td>이벤트 문의 드립니다.</td>
-						<td>userId2</td>
-						<td>2020.09.09</td>
-						<td>미답변</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>3</td>
-						<td>내 일정 보기가 안돼요</td>
-						<td>userId3</td>
-						<td>2020.09.09</td>
-						<td>답변 완료 </td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>2</td>
-						<td>문의 드려요~</td>
-						<td>userId4</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>1</td>
-						<td>커뮤니티 서비스는 어디서 이용하나요?</td>
-						<td>userId5</td>
-						<td>2020.09.09</td>
-						<td>답변완료</td>
-					</tr>
+					<% if(list.isEmpty()){ %>
+	                    <tr>
+	                        <td colspan="5">조회된 리스트가 없습니다.</td>
+	                    </tr>
+	                    <% }else{ %>
+	                        <% for(AdminInquiry n : list){ %>
+	                        <tr>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getInquiryNo()  %>"></td>
+	                            <td><%= n.getInquiryNo() %></td>
+	                            <td><%= n.getInquiryTitle() %></td>
+	                            <td><%= n.getInquiryEnroll() %></td>
+	                            <td><%= n.getInquiryWriter() %></td>
+	                            <td><%= n.getInquiryStatus() %></td>
+	                        </tr>
+	                        <% } %>
+	                    <% } %>
+					
 				</tbody>
 			</table>
 
@@ -147,17 +96,23 @@
 						</span></td>
 						<td width="720px;">
 							<div align="center">
-								<button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button class="btn btn-secondary btn-sm">&lt;</button>
-
-								<button class="btn btn-outline-secondary btn-sm">1</button>
-								<button class="btn btn-outline-secondary btn-sm">2</button>
-								<button class="btn btn-outline-secondary btn-sm">3</button>
-								<button class="btn btn-outline-secondary btn-sm">4</button>
-								<button class="btn btn-outline-secondary btn-sm">5</button>
-
-								<button class="btn btn-secondary btn-sm">&gt;</button>
-								<button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<% if(currentPage != 1){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.iq?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.iq?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+	                                <% } %>
+	
+	                                <% for(int p=startPage; p<=endPage; p++){ %>
+	                                    <% if(p != currentPage){ %>
+	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.iq?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% }else{ %>
+	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% } %>
+	                                <% } %>
+	
+	                                <% if(currentPage != maxPage){ %>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.iq?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.iq?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+	                                <% } %>
 							</div>
 						</td>
 						<td width="">
