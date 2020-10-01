@@ -27,8 +27,14 @@ public class AdminEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setAttribute("pageTitle", "관리자 등록");
-		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
+		if(request.getSession().getAttribute("loginUser") != null) {
+			request.setAttribute("pageTitle", "관리자 등록");
+			request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
+		
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

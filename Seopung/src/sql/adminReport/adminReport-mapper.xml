@@ -3,7 +3,7 @@
 <properties>
 	<entry key="selectListCount">
 		SELECT COUNT(*) 
-  		  FROM TB_NOTICE 
+  		  FROM TB_REPORT 
  		 WHERE STATUS = 'Y'
 	</entry>
 	
@@ -15,11 +15,12 @@
 		          , A.*
 		       FROM
 		          (
-		             SELECT NOTICE_NO,
-		                    NOTICE_TITLE,
-		                    NOTICE_ENROLL,
-		                    NOTICE_VIEWS
-		               FROM TB_NOTICE
+		             SELECT REPORT_NO,
+		                    USER_NO,
+		                    USER_NO2,
+		                    REPORT_DATE,
+		                    REPORT_TYPE
+		               FROM TB_REPORT
 		              WHERE STATUS = 'Y' 
 		              ORDER
 		                 BY NOTICE_NO DESC

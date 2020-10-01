@@ -31,14 +31,21 @@ public class AdminDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
+		if(request.getSession().getAttribute("loginUser") != null) {
 		
-		Admin ad = new AdminService().selectAdmin(adminNo);
+			int adminNo = Integer.parseInt(request.getParameter("adminNo"));
+			
+			Admin ad = new AdminService().selectAdmin(adminNo);
+			
+			request.setAttribute("ad", ad);
+			request.setAttribute("pageTitle", "관리자 상세정보");
+			
+			request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
 		
-		request.setAttribute("ad", ad);
-		request.setAttribute("pageTitle", "관리자 상세정보");
-		
-		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminDetailView.jsp").forward(request, response);
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
 		
 	}
 

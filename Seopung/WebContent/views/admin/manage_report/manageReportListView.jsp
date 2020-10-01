@@ -72,7 +72,7 @@
 	                    <% }else{ %>
 	                        <% for(AdminReport n : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getNoticeNo()  %>"></td>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getReportNo()  %>"></td>
 	                            <td><%= n.getReportNo() %></td>
 	                            <td><%= n.getReportTitle() %></td>
 	                            <td><%= n.getReportWriter() %></td>

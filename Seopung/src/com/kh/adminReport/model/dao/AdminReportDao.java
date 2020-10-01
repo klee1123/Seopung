@@ -82,11 +82,11 @@ private Properties prop = new Properties();
 			
 			while(rset.next()) {
 				AdminReport a = new AdminReport();
-				a.setNoticeNo(rset.getInt("notice_no"));
-				a.setNoticeTitle(rset.getString("notice_title"));
-				a.setNoticeEnroll(rset.getDate("notice_enroll"));
-				a.setNoticeViews(rset.getInt("notice_views"));
-
+				a.setReportNo(rset.getInt("report_no"));
+				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정
+				
+				a.setReportDate(rset.getDate("reportDate"));
+				a.setReportType(rset.getString("reportType"));
 				list.add(a);
 			}
 			

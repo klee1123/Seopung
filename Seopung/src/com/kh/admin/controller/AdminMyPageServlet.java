@@ -49,7 +49,7 @@ public class AdminMyPageServlet extends HttpServlet {
 				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 			}
 		}else {
-			request.setAttribute("errorMsg", "로그인 후 이용가능한 서비스 입니다.");
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	}
