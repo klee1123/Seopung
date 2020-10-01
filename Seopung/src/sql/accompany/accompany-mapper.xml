@@ -60,5 +60,19 @@
 	
 	</entry>
 	
+	<entry key="accomProfile">
+			SELECT 
+		           USER_ID
+		         , USER_NAME
+		         , USER_NICK
+		         , EMAIL
+		         , USER_BIRTH
+		         , USER_INTRO
+		 	  FROM TB_MEMBER
+		     WHERE USER_ID = ?
+	
+	
+	</entry>
+	
 	
 </properties>

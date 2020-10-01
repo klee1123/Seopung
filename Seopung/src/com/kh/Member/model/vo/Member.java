@@ -93,6 +93,19 @@ public class Member {
 		this.userIntro = userIntro;
 		this.status = status;
 	}
+	
+	
+
+
+	public Member(String userId, String userName, String nickName, String email,  String birth, String userIntro) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.nickName = nickName;
+		this.email = email;
+		this.birth = birth;
+		this.userIntro = userIntro;
+	}
 
 
 	public int getUserNo() {

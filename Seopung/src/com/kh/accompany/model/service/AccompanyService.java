@@ -1,17 +1,18 @@
 package com.kh.accompany.model.service;
 
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.dao.AccompanyDao;
 import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
-
-import oracle.jdbc.OracleConnection.CommitOption;
 
 public class AccompanyService {
 
@@ -63,6 +64,21 @@ public class AccompanyService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public Member accomProfile(String userId){
+		
+		Connection conn = getConnection();
+		
+		Member profile = new AccompanyDao().accomProfile(conn, userId);
+		
+		close(conn);
+		
+		return profile;
+		
+		
+		
+		
 	}
 	
 	

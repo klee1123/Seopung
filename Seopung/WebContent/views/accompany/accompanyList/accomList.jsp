@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
-<%@ page import="com.kh.accompany.model.vo.*" %>
+<%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
+	Member profile = (Member)request.getAttribute("profile");
+	
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -104,7 +106,7 @@
 	                <tbody>
 	               	<%if(list.isEmpty()){ %>
 	                <tr>
-	                	<td colspan="7">조회된 리스트가 없습니다.</td>
+	                	<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
 	                </tr>
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
@@ -112,7 +114,7 @@
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> <input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>"></td>
 	                        <td><%= a.getUserId() %></td>
 	                        <td><%= a.getUserNick() %></td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile">프로필</a></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile(<%= a.getUserId() %>);">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
@@ -137,57 +139,18 @@
 					}
 				}
 
-                function test(num){
-
+                function accomProfile(userId){
                 	
-                	console.log(num);
-                	$("#delete form input[type=hidden]").val(num);
-
-                 
+                	console.log(userId);
+                	$("#profile form input[type=hidden]").val(userId);
+                	
                 }
-                	
-                	
-                
+				
+				
                 </script>
 				
 				                
               
-                <!-- 동행 삭제 modal -->
-
-                                <!-- 거절 모달 -->
- 								<!-- 
-                                <div class="modal" id="delete">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title">삭제여부</h3>
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                
-                                            <div class="modal-body" align="center">
-                                
-                                                <h4><b>
-                                                    동행을 삭제하시겠습니까 ? <br>   
-                                                </b>
-                                                </h4>
-                                                <br>
-                            
-                   
-                                        			
-                                                <form action="<%=contextPath %>/delete.ac" method="GET">
-                                                    <input type="hidden" id="accomNo2" name="accomNo">
-                                                    <button type="submit" class="genric-btn info-border radius">확인</button>
-                                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
-							                                                
-                                                </form>
-                            
-                                            </div>
-                
-                
-                                        </div>
-                                    </div>
-                                </div>
-                                 -->
                                 
                 <!-- 프로필 modal -->
                 <div class="modal" id="profile">
@@ -203,8 +166,8 @@
                             <div class="modal-body" align="center">
                             
                                 <div class="profile">
-                                    <form action="" method="POST">
-                                        
+                                    <form action="<%= contextPath %>/accomProfile.ac" method="GET">
+                                        <input type="hidden" name="userId" value="">
                                          <br><br>
                                     
                                         <div class="profilePhoto"">
@@ -217,7 +180,7 @@
                                         <table id="join" align="center" style="float: left;">
                                             <tr>
                                                 <th align="left" width="100px" ">아이디</th>
-                                                <td><span>USERID01 </span></td>
+                                                <td><span>id</span></td>
                                             </tr>
                                             
                                             <tr>
