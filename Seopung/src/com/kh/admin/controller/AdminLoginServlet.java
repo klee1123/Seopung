@@ -1,6 +1,7 @@
 package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +14,16 @@ import com.kh.admin.model.service.AdminService;
 import com.kh.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class MainPageServlet
+ * Servlet implementation class AdminLoginServlet
  */
-@WebServlet("/adminPage")
-public class MainPageServlet extends HttpServlet {
+@WebServlet("/adminPage/login.ad")
+public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageServlet() {
+    public AdminLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +32,14 @@ public class MainPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
+		String adminId = request.getParameter("adminId");
+		String adminPwd = request.getParameter("adminPwd");
+		
+		//Admin loginAdmin = new AdminService().loginAdmin(adminId, adminPwd);
 		
 		
-		if(request.getSession().getAttribute("loginUser") != null) {
-		
-			request.setAttribute("pageTitle", "관리자 페이지");
-			
-			request.getRequestDispatcher("views/admin/common/main.jsp").forward(request, response);
-		
-		}else {
-			request.setAttribute("errorMsg", "로그인 후 이용가능한 서비스 입니다.");
-			request.getRequestDispatcher("views/admin/common/errorPage.jsp").forward(request, response);
-		}
-	
 	}
 
 	/**

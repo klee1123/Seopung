@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.admin.model.vo.Admin, com.kh.Member.model.vo.LoginUser" %>
+<%@ page import="com.kh.Member.model.vo.LoginUser, com.kh.admin.model.vo.Admin" %>
 <%
 	String contextPath = request.getContextPath();
 
@@ -174,19 +174,20 @@
           <h3 class="text-gray-800">&nbsp;<%= pageTitle %></h3>
           
           <!-- Topbar Navbar -->
-
+		 <%if(loginUser!=null){ %>
           <ul class="navbar-nav ml-auto">
             
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
+            
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-700">admin01</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-700"><%=loginUser.getUserName()%></span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="<%=contextPath%>/adminPage/myPage.ad?adminNo=1">
+                <a class="dropdown-item" href="<%=contextPath%>/adminPage/myPage.ad?adminNo=<%=loginUser.getUserNo()%>">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   프로필
                 </a>
@@ -202,6 +203,7 @@
               </div>
             </li>
           </ul>
+          <%} %>
         </nav>
         <!-- End of Topbar -->
 

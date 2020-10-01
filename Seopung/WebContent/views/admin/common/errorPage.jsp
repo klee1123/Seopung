@@ -20,7 +20,8 @@
 			<div class="error mx-auto" data-text="ERROR" style="width: 370px;">ERROR</div>
 			<p class="lead text-gray-800 mb-5"><%= errorMsg %></p>
 			<p class="text-gray-500 mb-0">죄송합니다. 요청하신 페이지를 찾을 수 없습니다.</p>
-			<a href="javascript:window.history.back();">&larr; 이전 페이지로</a>
+			<a href="javascript:window.history.back();">&larr; 이전 페이지로</a> <br>
+			<a href="<%=contextPath%>">&larr; 홈페이지로</a> <br>
 		</div>
 
 	</div>
