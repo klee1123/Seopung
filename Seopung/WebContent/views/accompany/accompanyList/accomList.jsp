@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
 <%@ page import="com.kh.accompany.model.vo.*" %>
+
 <%
-	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -13,6 +13,8 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 %>    
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +60,8 @@
            
         </style>
 
-    </head>
+</head>
+	
 <body>
     
     
@@ -123,7 +126,9 @@
 				
 			
                 </form>
-				 <script>
+				 
+				 
+				<script>
 
                 function test(num){
 

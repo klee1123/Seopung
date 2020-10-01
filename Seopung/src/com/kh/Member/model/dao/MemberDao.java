@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.Member.model.vo.Member;
 
 public class MemberDao {
@@ -58,10 +59,9 @@ public class MemberDao {
 		return result;
 	}
 	
-	public Member loginMember(Connection conn, String userId, String userPwd) {
+	public LoginUser loginMember(Connection conn, String userId, String userPwd) {
 		
-		
-		Member m = null;
+		LoginUser loginUser = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -72,25 +72,15 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
+			pstmt.setString(3, userId);
+			pstmt.setString(4, userPwd);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				m = new Member(rset.getInt("USER_NO"),
-							   rset.getString("USER_ID"),
-							   rset.getString("USER_PWD"),
-							   rset.getString("USER_NAME"),
-							   rset.getString("USER_NICK"),
-							   rset.getString("USER_BIRTH"),
-							   rset.getString("GENDER"),
-							   rset.getString("PHONE"),
-							   rset.getString("EMAIL"),
-							   rset.getDate("ENROLL_DATE"),
-							   rset.getDate("MODIFY_DATE"),
-							   rset.getString("USER_INTRO"),
-							   rset.getString("PROFILEPIC_PATH"),
-							   rset.getString("STATUS")
-						       );
+				loginUser = new LoginUser(rset.getInt("USER_NO"),
+							   rset.getString("NAME"),
+							   rset.getInt("category"));
 			}
 			
 		} catch (SQLException e) {
@@ -101,7 +91,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-		return m;
+		return loginUser;
 	}
 	
 	public int idCheck(Connection conn, String checkId) {

@@ -75,7 +75,7 @@
                     <ul>
                         <li><a href="../../accompany/accompanyRequest/accomRequest.jsp" >신청 온 동행인</a></li>
                         <li><a href="../../accompany/accompanyResponse/accomResponse.jsp">신청 한 동행인</a></li>
-                        <li><a href="../../accompany/accompanyList/accomList.jsp">동행목록</a></li>
+                        <li><a href="<%=contextPath %>/list.ac?currentPage=1">동행목록</a></li>
                     </ul>
                 </li> <br>
                 
@@ -93,7 +93,7 @@
                         <li><a href="../../message/send/sendMessage.jsp">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
-                <li><a href="<%= contextPath %>/inquire.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">1:1 문의</a></li> <br>
+                <li><a href="<%= contextPath %>/list.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">1:1 문의</a></li> <br>
                 <li><a href="<%= contextPath %>/deleteMem.me">회원탈퇴</a></li> <br>
     
             </ul>

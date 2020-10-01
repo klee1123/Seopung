@@ -43,7 +43,7 @@ public class AccompanyDeleteServlet extends HttpServlet {
 		if(result > 0) {	// 삭제 성공일시
 			
 			request.getSession().setAttribute("alertMsg", "삭제 처리 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/list.ac?accomNo=" + accomNo);
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1&accomNo=" + accomNo);
 			
 		}else {				// 삭제 실패일시
 			

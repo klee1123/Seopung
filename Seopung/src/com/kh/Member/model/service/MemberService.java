@@ -1,10 +1,14 @@
 package com.kh.Member.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
 import com.kh.Member.model.dao.MemberDao;
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.Member.model.vo.Member;
 
 public class MemberService {
@@ -27,14 +31,14 @@ public class MemberService {
 		return result;
 	}
 	
-	public Member loginMember(String userId, String userPwd) {
+	public LoginUser loginMember(String userId, String userPwd) {
 		Connection conn = getConnection();
 		
-		Member loginMember = new MemberDao().loginMember(conn, userId, userPwd);
+		LoginUser loginUser = new MemberDao().loginMember(conn, userId, userPwd);
 		
 		close(conn);
 		
-		return loginMember;
+		return loginUser;
 	}
 	
 	public int idCheck(String checkId) {

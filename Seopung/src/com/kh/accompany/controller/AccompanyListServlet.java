@@ -21,6 +21,7 @@ public class AccompanyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
+     *
      * @see HttpServlet#HttpServlet()
      */
     public AccompanyListServlet() {
@@ -52,7 +53,7 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		int listCount = new AccompanyService().selectListCount();
 		
-		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
+		// 조회된 동행수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
 			maxPage = (int)Math.ceil((double)listCount/boardLimit);
 		}else {

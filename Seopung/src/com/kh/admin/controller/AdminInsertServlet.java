@@ -48,7 +48,7 @@ public class AdminInsertServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/adminPage/list.ad?currentPage=1");
 		}else {
 			request.setAttribute("errorMsg", "관리자 등록 실패");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);;
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	
 	}

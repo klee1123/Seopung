@@ -36,6 +36,9 @@
         #inquireTable tr{
             height:30px;
         }
+        #inquireTable a{
+        	color:black;
+        }
        
     </style>
 </head>
@@ -68,14 +71,14 @@
                 <tbody>
                 <% if(list.isEmpty()){ %>
                 	<tr>
-                		<td colspan="4">조회된 리스트가 없습니다</td>
+                		<td colspan="4" align="center">조회된 리스트가 없습니다</td>
                 	</tr>
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
 		                    <tr align="center">
 		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
-		                        <td><%= i.getInquireTitle() %></td>
+		                        <td><a href=""><%= i.getInquireTitle() %></a></td>
 		                        <td><%= i.getInquireContent() %></td>
 		                        <td><%= i.getInquireStatus() %></td>
 		                    </tr>	
@@ -148,7 +151,7 @@
               	}
               
               	if(confirm("정말 삭제하시겠습니까?")) {
-              		location.href="<%=contextPath%>/deleteInquire.in?" + str;
+              		location.href="<%=contextPath%>/deleteInquire.in?userNo=<%=userNo%>&" + str;
               	} 
             });
         });
