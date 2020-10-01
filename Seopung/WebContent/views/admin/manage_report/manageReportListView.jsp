@@ -58,8 +58,8 @@
 					<tr>
 						<th width="50px"><input type="checkbox"></th>
 						<th width="75px">번호</th>
-						<th width="200px">제목</th>
-						<th width="100px">신고자</th>
+						<th width="200px">신고된 아이디</th>
+						<th width="100px">신고자 아이디</th>
 						<th width="100px">작성일</th>
 						<th width="100px">구분</th>
 					</tr>
@@ -72,12 +72,12 @@
 	                    <% }else{ %>
 	                        <% for(AdminReport n : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getReportNo()  %>"></td>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getReportNo()%>"></td>
 	                            <td><%= n.getReportNo() %></td>
 	                            <td><%= n.getReportTitle() %></td>
 	                            <td><%= n.getReportWriter() %></td>
-	                            <td><%= n.getReportEnroll() %></td>
-	                            <td><%= n.getReportdivision() %></td>
+	                            <td><%= n.getReportDate() %></td>
+	                            <td><%= n.getReportType() %></td>
 	                        </tr>
 	                        <% } %>
 	                    <% } %>

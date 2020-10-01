@@ -8,8 +8,8 @@ public class AdminReport {
 	private String reportContent;
 	private Date reportDate;
 	private String reportstatus;
-	private int userNo;
-	private int userNo2;
+	private int userNo; // 수정
+	private int userNo2;// 수정
 	private int reportPostno;
 	private String reportType;
 	private int reportPosttype;

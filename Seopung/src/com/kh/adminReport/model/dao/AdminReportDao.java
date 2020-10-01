@@ -84,7 +84,8 @@ private Properties prop = new Properties();
 				AdminReport a = new AdminReport();
 				a.setReportNo(rset.getInt("report_no"));
 				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정
-				
+				a.
+				a.
 				a.setReportDate(rset.getDate("reportDate"));
 				a.setReportType(rset.getString("reportType"));
 				list.add(a);
