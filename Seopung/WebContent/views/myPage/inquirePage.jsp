@@ -90,24 +90,23 @@
             <div class="pagingArea" align="center">
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1';"> &lt;&lt; </button>
 	            <!-- 이전 페이지로 (<) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>';"> &lt; </button>
 			<% } %>
-            <!-- button{$}*10 -->
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
+               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>';"><%= p %></button>
                <% }else{ %>
-               <button disabled><%= p %></button>
+               <button class="btn btn-secondary btn-sm" disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>';"> &gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage+1 %>"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>';"> &gt;&gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>"> &gt;&gt; </button>
 			<% } %>
 
         </div>

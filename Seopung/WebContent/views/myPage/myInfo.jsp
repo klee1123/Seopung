@@ -114,7 +114,6 @@
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
                     <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile">삭제</button>
                 </div>
-                <%System.out.println(profile); %>
             </div>
             <div class="changeInfo">
                 
