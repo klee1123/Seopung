@@ -127,60 +127,30 @@ div {
         <hr>
 
         <div class="outer" align="left">
-			<form action="" method="post" id="faqPost">
-
+				
+				
 				<div>
-
+					
                     <br>
-
-                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                        
-                        <br>
-                        <h6>&emsp;공지사항</h6>
-                        <h4>
-                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
-                        </h4>
-                        <h6>&emsp;20.09.29</h6>
-                        
-                        </div>
-                        <br>
-
-                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                        
-                        <br>
-                        <h6>&emsp;공지사항</h6>
-                        <h4>
-                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
-                        </h4>
-                        <h6>&emsp;20.09.29</h6>
-                        
-                        </div>
-                        <br>
-
-                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                        
-                        <br>
-                        <h6>&emsp;공지사항</h6>
-                        <h4>
-                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
-                        </h4>
-                        <h6>&emsp;20.09.29</h6>
-                        
-                        </div>
-                        <br>
-
-                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
-                        
-                        <br>
-                        <h6>&emsp;공지사항</h6>
-                        <h4>
-                            &emsp;[서비스 개편 안내] 동행 서비스 추가 기능 개선<br>
-                        </h4>
-                        <h6>&emsp;20.09.29</h6>
-                        
-                        </div>
+                    <% if(list.isEmpty()){ %>
+                    	<div>조회된 리스트가 없습니다.</div>
+                    <%} else{%>
+						<% for(AdminNotice n : list){ %>
+	                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
+	                        
+	                        <br>
+	                        <h6>&emsp;공지사항</h6>
+	                        <h4>
+	                            &emsp;<%= n.getNoticeTitle() %><br>
+	                        </h4>
+	                        <h6>&emsp;<%= n.getNoticeEnroll() %></h6>
+	                        
+	                        </div>
+	                    <%} %>
+                    <%} %>
                         <br>
 					
+                    
 					<hr>
 
 				<br><br>
@@ -189,21 +159,27 @@ div {
                     <table>
                         <tr>
                             <td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-                                    style="color: red">5</b>개
+                                    style="color: red"><%= listCount %></b>개
                             </span></td>
                             <td width="720px;">
                                 <div align="center">
-                                    <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-                                    <button class="btn btn-secondary btn-sm">&lt;</button>
-    
-                                    <button class="btn btn-outline-secondary btn-sm">1</button>
-                                    <button class="btn btn-outline-secondary btn-sm">2</button>
-                                    <button class="btn btn-outline-secondary btn-sm">3</button>
-                                    <button class="btn btn-outline-secondary btn-sm">4</button>
-                                    <button class="btn btn-outline-secondary btn-sm">5</button>
-    
-                                    <button class="btn btn-secondary btn-sm">&gt;</button>
-                                    <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
+                                    <% if(currentPage != 1){ %>
+	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button> <!-- &lt; 이거 반대꺾쇠 -->
+	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= currentPage-1 %>';" class="btn btn-secondary btn-sm">&lt;</button>
+	                                <% } %>
+	
+	                                <% for(int p=startPage; p<=endPage; p++){ %>
+	                                    <% if(p != currentPage){ %>
+	                                    <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% }else{ %>
+	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <% } %>
+	                                <% } %>
+	
+	                                <% if(currentPage != maxPage){ %>
+	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+	                                <% } %>
                                 </div>
                             </td>
                         
@@ -214,7 +190,6 @@ div {
                 <br><br>
     
             </div>
-    
     
         </div>
         <!-- /.container-fluid -->
