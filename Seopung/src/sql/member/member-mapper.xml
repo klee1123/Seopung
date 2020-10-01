@@ -30,23 +30,23 @@
 	<entry key="loginMember">
 		SELECT 
 		       USER_NO
-		     , USER_ID
-		     , USER_PWD
-		     , USER_NAME
-		     , USER_NICK
-		     , USER_BIRTH
-		     , GENDER
-		     , PHONE
-		     , EMAIL
-		     , ENROLL_DATE
-		     , MODIFY_DATE
-		     , USER_INTRO
-		     , PROFILEPIC_PATH
-		     , STATUS
+		     , USER_NAME NAME
+		     , 1 AS CATEGORY
 		  FROM TB_MEMBER
 		 WHERE STATUS='Y'
 		   AND USER_ID=?
 		   AND USER_PWD=?
+		   
+		UNION
+		
+		SELECT 
+		       ADMIN_NO
+		     , ADMIN_NAME NAME
+		     , 2 AS CATEGORY
+		  FROM TB_ADMIN
+		 WHERE STATUS = 'Y'
+		   AND ADMIN_ID = ?
+		   AND ADMIN_PWD = ?
 	</entry>
 	<entry key="idCheck">
 		SELECT

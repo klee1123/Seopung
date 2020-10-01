@@ -23,18 +23,19 @@ com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
 </head>
 <style>
 .outer {
-	width: 800px;
+	width: 820px;
 	margin: auto;
+	margin-top:120px;
 }
 .searchList {
-	width: 800px;
+	width: 820px;
 	background: rgb(245, 245, 245);
 	padding: 15px;
 }
 .outer span {
 	color: orangered;
 }
-.outer a{margin:10px;}
+.outer a{margin:10px;font-size:15px;}
 #more1, #more2, #more3 {display: none;}
 </style>
 <body>
@@ -44,10 +45,10 @@ com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
 	
     <div class="outer">
     	
-        <br><br><br><br><br>
-        <h2 align="center">통합검색결과</h2> <br>
-        <img width="18px" src="<%=contextPath %>/resources/images/icon_magnifier2.png" alt="">
-        <b style="font-size: 19px; color:black;">&nbsp;"<%=keyword %>" 에 대한 검색 결과 입니다.</b>
+        
+        <h2 align="center">통합검색결과</h2> <br><br>
+        <img width="20px" src="<%=contextPath %>/resources/images/icon_magnifier2.png" alt="">
+        <b style="font-size: 20px; color:black;">&nbsp;"<%=keyword %>" 에 대한 검색 결과 입니다.</b>
     
         <br><br>
 
