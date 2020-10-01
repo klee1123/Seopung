@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
@@ -37,33 +38,31 @@ public class ScrapCommunityDao {
 	}
 	
 	
-	public int selectListCount(Connection conn, int userNo) {
+	public int selectListCount(Connection conn) {
 		
 		int listCount = 0;
-		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
-			rset = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()) {
-				listCount = rset.getInt(1);
+				listCount = rset.getInt("LISTCOUNT");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 		return listCount;
 	}
 	
-	public ArrayList<ScrapCommunity> selectList(Connection conn, PageInfo pi, int userNo) {
+	public ArrayList<ScrapCommunity> selectList(Connection conn, PageInfo pi) {
 		
 		ArrayList<ScrapCommunity> list = new ArrayList<>();
 		
@@ -77,23 +76,51 @@ public class ScrapCommunityDao {
 			
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit()+1;
 			int endRow = startRow + pi.getBoardLimit()-1;
-			
-			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new ScrapCommunity(rset.getInt("COMMUNITY_NO"),
-											rset.getString("COMMUNITY_TITLE"),
-											rset.getString("USER_NAME"),
+				list.add(new ScrapCommunity(rset.getInt("community_no"),
+											rset.getString("community_title"),
+											rset.getString("user_name"),
 											rset.getDate("scrap_date")));
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
+		return list;
+	}
+	
+	public int deleteScrapCommunityList(Connection conn, String[] scno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteScrapCommunityList");
+		
+		if(scno.length > 1) {
+			for(int i=1; i<scno.length; i++) {
+				sql += "OR COMMUNITY_NO" + scno[i];
+			}
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(scno[0]));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

@@ -44,11 +44,10 @@ public class ScrapCommunityListServlet extends HttpServlet {
 				int maxPage;		// 전체페이지 들 중 가장 마지막 페이지
 				int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작
 				int endPage;		// 현재 페이지 하단에 보여질 페이징 바의 끝
-				int userNo;
 				
-				userNo = Integer.parseInt(request.getParameter("userNo"));
-				listCount = new InquireService().selectListCount(userNo);
 				
+				listCount = new ScrapCommunityService().selectListCount();
+				System.out.println(listCount);
 				// * currentPage : 현재 요청한 페이지(요청한페이지)
 				currentPage = Integer.parseInt(request.getParameter("currentPage"));
 				
@@ -73,11 +72,10 @@ public class ScrapCommunityListServlet extends HttpServlet {
 		        PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		       
 		        // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-		        ArrayList<ScrapCommunity> list = new ScrapCommunityService().selectList(pi, userNo);
+		        ArrayList<ScrapCommunity> list = new ScrapCommunityService().selectList(pi);
 		        
 		        request.setAttribute("pi", pi);
 		        request.setAttribute("list", list);
-		        request.setAttribute("userNo", userNo);
 			
 		        RequestDispatcher view = request.getRequestDispatcher("views/myPage/scrap/scrapCommunity.jsp");
 		        view.forward(request, response);

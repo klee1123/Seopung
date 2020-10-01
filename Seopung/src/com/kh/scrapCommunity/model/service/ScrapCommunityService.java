@@ -12,26 +12,38 @@ import com.kh.scrapCommunity.model.vo.ScrapCommunity;
 
 public class ScrapCommunityService {
 	
-		public int selectListCount(int userNo) {
+		public int selectListCount() {
 		
 			Connection conn = getConnection();
 			
-			int listCount = new ScrapCommunityDao().selectListCount(conn, userNo);
+			int listCount = new ScrapCommunityDao().selectListCount(conn);
 			
 			close(conn);
 			
 			return listCount;
 		}
 		
-		public ArrayList<ScrapCommunity> selectList(PageInfo pi, int userNo) {
+		public ArrayList<ScrapCommunity> selectList(PageInfo pi) {
 			
 			Connection conn = getConnection();
 			
-			ArrayList<ScrapCommunity> list = new ScrapCommunityDao().selectList(conn, pi, userNo);
+			ArrayList<ScrapCommunity> list = new ScrapCommunityDao().selectList(conn, pi);
 			
 			close(conn);
 			
 			return list;
+		}
+		
+		public int deleteScrapCommunityList(String[] scno) {
+			
+			Connection conn = getConnection();
+			
+			int result = new ScrapCommunityDao().deleteScrapCommunityList(conn, scno);
+			
+			close(conn);
+			
+			return result;
+			
 		}
 
 }

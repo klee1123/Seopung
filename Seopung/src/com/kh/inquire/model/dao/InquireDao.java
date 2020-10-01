@@ -115,8 +115,6 @@ public class InquireDao {
 				sql += "OR INQUIRE_NO = " + ino[i];
 			}
 		}
-		System.out.println(ino);
-		System.out.println(sql);
 		try {
 			
 			pstmt = conn.prepareStatement(sql);

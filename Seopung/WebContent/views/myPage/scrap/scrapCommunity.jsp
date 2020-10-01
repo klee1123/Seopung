@@ -47,13 +47,13 @@
         
         <div class="scrapCm">
             
-            <button type="button" class="btn btn-secondary btn-sm" style="margin-left: 20px;">삭제</button>
+            <button type="button" id="btn_scrapSc" class="btn btn-secondary btn-sm" style="margin-left: 20px;">삭제</button>
             <br><br>
             <table id="scrapCmTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll"
-                         style="width: 25px;">번호</th>
+                        <th width="25"><input type="checkbox" class="chk" id="chk_all" name="chkAll"
+                        >&nbsp;&nbsp;번호</th>
                         <th width="250">제목</th>
                         <th width="100">작성자</th>
                         <th width="150">스크랩날짜</th>
@@ -67,7 +67,7 @@
                 	<%}else { %>
                 		<%for(ScrapCommunity cm : list) {%>
 		                   	<tr align="center"> 
-		                        <td><input type="checkbox"id="chk" name="scno"><%=cm.getCommunityNo() %>></td>
+		                        <td><input type="checkbox"id="chk" name="scno">&nbsp;&nbsp;<%=cm.getCommunityNo() %></td>
 		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
 		                        <td><%=cm.getCommunityWriter()%></td>
 		                        <td><%=cm.getScrapDate()%></td>
@@ -79,22 +79,25 @@
         </div>
             <br><br>
             <div class="pagingArea" align="center">
-
-                <!-- 맨 처음으로 (<<) -->
-                <button class="btn btn-secondary btn-sm"> &lt;&lt; </button>
-                <!-- 이전 페이지로 (<) -->
-                <button class="btn btn-secondary btn-sm"> &lt; </button>
-    
-                <button class="btn btn-outline-secondary btn-sm">1</button>
-                <button class="btn btn-outline-secondary btn-sm">2</button>
-                <button class="btn btn-outline-secondary btn-sm">3</button>
-                <button class="btn btn-outline-secondary btn-sm">4</button>
-                <button class="btn btn-outline-secondary btn-sm">5</button>
-                
-                <!-- 다음 페이지로 (>) -->
-                <button class="btn btn-secondary btn-sm"> &gt; </button>
-                <!-- 맨 끝으로 (>>) -->
-                <button class="btn btn-secondary btn-sm"> &gt;&gt; </button>
+				<% if(currentPage != 1) {%>
+	                <!-- 맨 처음으로 (<<) -->
+	                <button  class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.sc?currentPage=1';"> &lt;&lt; </button>
+	                <!-- 이전 페이지로 (<) -->
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage-1%>';"> &lt; </button>
+    			<% } %>
+    			<%for(int p=startPage; p<=endPage; p++) { %>
+	    			<%if(p != currentPage) {%>
+	                <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=p%>';"><%=p%></button>
+	                <%}else {%>
+	                <button class="btn btn-secondary btn-sm" disabled><%=p%></button>
+	                <% } %>
+                <% } %>
+                <% if(currentPage != maxPage) { %>
+	                <!-- 다음 페이지로 (>) -->
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage+1%>';"> &gt; </button>
+	                <!-- 맨 끝으로 (>>) -->
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=maxPage%>';"> &gt;&gt; </button>
+            	<% } %>
             </div>
         </div>
     </div>    
@@ -109,6 +112,34 @@
                 }else {
                     $("input[id=chk]").prop("checked",false);
                 }
+            });
+        });
+     // 삭제시
+        $(function(){
+        	$("#btn_scrapSc").click(function(){
+
+          		var selected = new Array();
+          		$("input[id=chk]:checked").each(function(){
+            		selected.push(this.value);
+          		});
+          		
+          		if(selected.length == 0){
+                	alert("체크된 항목이 없습니다.");
+                    return;
+                }
+
+              	var str = "";
+              	for(var i=0;i<selected.length; i++){
+                	if(i == selected.length-1){
+                  		str += "scno=" + selected[i];
+                	}else{
+                  		str += "scno=" + selected[i] + "&";
+                	}
+              	}
+              
+              	if(confirm("정말 삭제하시겠습니까?")) {
+              		location.href="<%=contextPath%>/DeleteScrapCommunity.sc?" + str;
+              	} 
             });
         });
     </script>

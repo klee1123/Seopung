@@ -1,4 +1,4 @@
-package com.kh.inquire.controller;
+package com.kh.scrapCommunity.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.inquire.model.service.InquireService;
+import com.kh.scrapCommunity.model.service.ScrapCommunityService;
 
 /**
- * Servlet implementation class DeleteInquireListServlet
+ * Servlet implementation class DeleteScrapCommunityListServlet
  */
-@WebServlet("/deleteInquire.in")
-public class DeleteInquireListServlet extends HttpServlet {
+@WebServlet("/DeleteScrapCommunity.sc")
+public class DeleteScrapCommunityListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteInquireListServlet() {
+    public DeleteScrapCommunityListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +30,15 @@ public class DeleteInquireListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] ino = request.getParameterValues("ino");
-		
+		String[] scno = request.getParameterValues("scno");
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int result = new InquireService().deleteInquireList(ino);
+		int result = new ScrapCommunityService().deleteScrapCommunityList(scno);
 		
-		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "문의 내용 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.in?currentPage=1&userNo=" + userNo);
-		}else {
-//			request.setAttribute("errorMsg", "문의 내용 삭제 실패");
-//			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "list.sc?currentPage=1&userNo=" + userNo);
 		}
-		
+	
 	}
 
 	/**
