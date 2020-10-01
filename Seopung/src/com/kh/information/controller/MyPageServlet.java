@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.Member.model.vo.LoginUser;
+import com.kh.Member.model.vo.Member;
+import com.kh.information.model.service.InfoService;
+
 /**
  * Servlet implementation class MyPageServlet
  */
@@ -31,14 +35,18 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
 		
-		if(session.getAttribute("loginUser") == null) {
+		if(session.getAttribute("loginUser") == null && loginUser.getCategory() == 1) {
 			
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
 			//메인으로 다시 되돌아가기
 			response.sendRedirect(request.getContextPath());
 		}else {
 			
+			Member m = new InfoService().selectMember(loginUser.getUserNo());
+			
+			request.setAttribute("m", m);
 			RequestDispatcher view = request.getRequestDispatcher("views/myPage/myInfo.jsp");
 			view.forward(request, response);
 		}

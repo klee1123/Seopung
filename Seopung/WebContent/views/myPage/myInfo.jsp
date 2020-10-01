@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.Member.model.vo.Member"%>
 <%! public int getRandom(){
 	int random = 0;
 	random = (int)Math.floor((Math.random()*(99999-10000 +1))) +10000;
 	return random;
 	}
+%>
+<%
+	
+	Member m = (Member)request.getAttribute("m");
+
+	int userNo = m.getUserNo();
+	String userId = m.getUserId();
+	String userName = m.getUserName();
+	String nickName = m.getNickName();
+	String email = m.getEmail();
+	String birth = m.getBirth();
+	String profile = m.getProfile();
+	String year = birth.substring(0, 4);
+	String month = birth.substring(4, 6);
+	String day = birth.substring(6);
+	String intro = m.getUserIntro().equals("null") ? "" : m.getUserIntro() ;
 %>
 <!DOCTYPE html>
 <html>
@@ -71,19 +87,7 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
-	<%
-		int userNo = loginUser.getUserNo();
-		String userId = loginUser.getUserId();
-		String userName = loginUser.getUserName();
-		String nickName = loginUser.getNickName();
-		String email = loginUser.getEmail();
-		String birth = loginUser.getBirth();
-		String profile = loginUser.getProfile();
-		String year = birth.substring(0, 4);
-		String month = birth.substring(4, 6);
-		String day = birth.substring(6);
-		String intro = loginUser.getUserIntro() == null ? "" : loginUser.getUserIntro() ;
-	%>
+
 	
 	<div class="myContent">
 	

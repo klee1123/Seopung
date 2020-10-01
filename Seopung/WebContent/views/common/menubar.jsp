@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@page import="com.kh.Member.model.vo.Member"%>
+<%@page import="com.kh.Member.model.vo.LoginUser"%>
 <%
 	String contextPath = request.getContextPath();
-	Member loginUser = (Member) session.getAttribute("loginUser");
+	LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
@@ -157,7 +157,7 @@ $(function(){
 							data-target="#loginForm" id="start1"
 							style="font-weight: bold; color: rgb(75, 75, 75);">로그인/회원가입</a>
 						<%
-							} else {
+							} else if(loginUser.getCategory() == 1) {
 						%>
 						<ul>
 							<li><span style="white-space: nowrap; margin-left: px;"><span
@@ -165,6 +165,20 @@ $(function(){
 									어서오세요.</span><br> <span>
 									<button onclick="location.href='<%=contextPath%>/myPage.me'"
 										style="border: none; border-radius: 5px; color: white; background: #fec104;">마이페이지</button>
+									<button onclick="location.href='<%=contextPath%>/logout.me'"
+										style="border: none; border-radius: 5px; color: white; background: #fec104;">로그아웃</button>
+							</span></li>
+						</ul>
+
+						<%
+							} else if(loginUser.getCategory() == 2){
+						%>
+						<ul>
+							<li><span style="white-space: nowrap; margin-left: px;"><span
+									style="font-weight: bold;">&nbsp;&nbsp;&nbsp;<%=loginUser.getUserName()%>님</span>
+									어서오세요.</span><br> <span>
+									<button onclick="location.href='<%=contextPath%>/adminPage'"
+										style="border: none; border-radius: 5px; color: white; background: #fec104;">관리자페이지</button>
 									<button onclick="location.href='<%=contextPath%>/logout.me'"
 										style="border: none; border-radius: 5px; color: white; background: #fec104;">로그아웃</button>
 							</span></li>
