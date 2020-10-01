@@ -23,91 +23,18 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
 .notosanskr * { font-family: 'Noto Sans KR', sans-serif; }
 
-div {
-	box-sizing: border-box;
-}
-
 .wrap {
 	width: 1200px;
-	height: 1000px;
 	margin: auto;
 	margin-top: 120px;
 	font-family: 'Noto Sans KR', sans-serif; 
 }
 
-
-.so_title {
-	font-size: 18px;
-	font-weight: bold;
+.outer {
+	width: 900px;
+	margin: auto;
 }
 
-.plan_type>div {
-	width: 120px;
-	float: left;
-}
-
-.plan_sec {
-	margin-top: 20px;
-	height: 60px;
-}
-
-.bbtn {
-	display: inline-block;
-	border: 1px solid #dfdfdf;
-	background: #00c0ff;
-	color: #fff;
-	padding: 0px 8px;
-	text-align: center;
-	width: 100px;
-	height: 42px;
-	line-height: 42px;
-	font-weight: 999;
-	cursor: pointer;
-}
-
-.box-radio-input input[type="radio"] {
-	display: none;
-}
-
-.box-radio-input input[type="radio"]+span {
-	display: inline-block;
-	background: none;
-	border: 1px solid #dfdfdf;
-	padding: 0px 8px;
-	text-align: center;
-	width: 100px;
-	height: 42px;
-	line-height: 42px;
-	font-weight: 999;
-	cursor: pointer;
-}
-
-.box-radio-input input[type="radio"]:checked+span {
-	background: #00c0ff;
-	color: #fff;
-}
-
-.box-check-input input[type="checkbox"] {
-	display: none;
-}
-
-.box-check-input input[type="checkbox"]+span {
-	display: inline-block;
-	background: none;
-	border: 1px solid #dfdfdf;
-	padding: 0px 8px;
-	text-align: center;
-	width: 100px;
-	height: 42px;
-	line-height: 42px;
-	font-weight: 500;
-	cursor: pointer;
-}
-
-.box-check-input input[type="checkbox"]:checked+span {
-	background: #00c0ff;
-	color: #fff;
-}
 </style>
  <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css"/>  
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -118,6 +45,7 @@ div {
 	<%@include file="../../common/menubar.jsp"%>
 	<div class="wrap">
 
+		<div class="outer">
         <h2>&nbsp;고객센터</h2><br>
 
         <h3 style="display:inline;">&nbsp;공지사항</h3>
@@ -126,29 +54,26 @@ div {
 
         <hr>
 
-        <div class="outer" align="left">
+        <div>
 				
-				
-				<div>
-					
                     <br>
                     <% if(list.isEmpty()){ %>
                     	<div>조회된 리스트가 없습니다.</div>
                     <%} else{%>
 						<% for(AdminNotice n : list){ %>
-	                    <div style="height: auto; width: 90%; border:1px solid rgb(201, 201, 201);">
+	                    <div style="width: 100%; border:1px solid rgb(201, 201, 201); padding: 15px;">
 	                        
 	                        <br>
-	                        <h6>&emsp;공지사항</h6>
+	                        <h6>공지사항</h6>
 	                        <h4>
-	                            &emsp;<%= n.getNoticeTitle() %><br>
+	                            <%= n.getNoticeTitle() %><br>
 	                        </h4>
-	                        <h6>&emsp;<%= n.getNoticeEnroll() %></h6>
+	                        <h6><%= n.getNoticeEnroll() %></h6>
 	                        
 	                        </div>
+	                        <br>
 	                    <%} %>
                     <%} %>
-                        <br>
 					
                     
 					<hr>
@@ -158,10 +83,10 @@ div {
 				<div align="center">
                     <table>
                         <tr>
-                            <td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
+                            <td width="120"><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
                                     style="color: red"><%= listCount %></b>개
                             </span></td>
-                            <td width="720px;">
+                            <td width="650px;">
                                 <div align="center">
                                     <% if(currentPage != 1){ %>
 	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button> <!-- &lt; 이거 반대꺾쇠 -->
@@ -175,20 +100,22 @@ div {
 	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 	                                    <% } %>
 	                                <% } %>
-	
+									
 	                                <% if(currentPage != maxPage){ %>
 	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
 	                                <button onclick="location.href='<%= contextPath %>/list.no?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 	                                <% } %>
                                 </div>
                             </td>
+                           <td width="120px">  	
+                          </td>
                         
                         </tr>
                     </table>
-                </div>
-                
+                	</div>
+             
                 <br><br>
-    
+
             </div>
     
         </div>

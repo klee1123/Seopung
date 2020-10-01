@@ -50,11 +50,10 @@ public class NoticeListServlet extends HttpServlet {
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
 		listCount = new AdminNoticeService().selectListCount();
-		System.out.println(listCount);
 		
 		pageLimit = 5;
 		
-		boardLimit = 10;
+		boardLimit = 5;
 		
 		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
