@@ -82,10 +82,10 @@ private Properties prop = new Properties();
 			
 			while(rset.next()) {
 				AdminReport a = new AdminReport();
-				a.setNoticeNo(rset.getInt("notice_no"));
-				a.setNoticeTitle(rset.getString("notice_title"));
-				a.setNoticeEnroll(rset.getDate("notice_enroll"));
-				a.setNoticeViews(rset.getInt("notice_views"));
+				a.setReportNo(rset.getInt("report_no"));
+				a.setReportTitle(rset.getString("report_title"));
+				a.setReportEnroll(rset.getDate("report_enroll"));
+				a.setReportViews(rset.getInt("report_views"));
 
 				list.add(a);
 			}
