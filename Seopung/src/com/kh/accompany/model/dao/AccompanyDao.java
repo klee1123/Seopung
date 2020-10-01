@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
 
@@ -135,6 +136,53 @@ private Properties prop = new Properties();
 		return result;
 		
 	}
+	
+	public Member accomProfile(Connection conn, String userId){
+		
+		Member profile = new Member();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("accomProfile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				profile = new Member(rset.getString("USER_ID"),
+									 rset.getString("USER_NAME"),
+									 rset.getString("USER_NICK"),
+									 rset.getString("EMAIL"),
+									 rset.getString("USER_BIRTH"),
+									 rset.getString("USER_INTRO"));
+			 	
+			}
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return profile;
+		
+		
+	}
+
 	
 	
 }
