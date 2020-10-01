@@ -75,7 +75,7 @@
                     <ul>
                         <li><a href="../../accompany/accompanyRequest/accomRequest.jsp" >신청 온 동행인</a></li>
                         <li><a href="../../accompany/accompanyResponse/accomResponse.jsp">신청 한 동행인</a></li>
-                        <li><a href="../../accompany/accompanyList/accomList.jsp">동행목록</a></li>
+                        <li><a href="<%=contextPath %>/list.ac?currentPage=1">동행목록</a></li>
                     </ul>
                 </li> <br>
                 
