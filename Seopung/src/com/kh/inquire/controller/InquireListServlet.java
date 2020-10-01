@@ -17,7 +17,7 @@ import com.kh.inquire.model.vo.Inquire;
 /**
  * Servlet implementation class inquireServlet
  */
-@WebServlet("/inquire.in")
+@WebServlet("/list.in")
 public class InquireListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,8 +56,12 @@ public class InquireListServlet extends HttpServlet {
 		
 		boardLimit = 10;
 		
-		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-	
+		if(listCount != 0) {
+            maxPage = (int)Math.ceil((double)listCount/boardLimit);
+        }else {
+            maxPage=1;
+        }
+		
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		
 		endPage = startPage + pageLimit -1;

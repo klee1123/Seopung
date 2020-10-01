@@ -31,11 +31,12 @@
   WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
-	<entry key="deleteIqList">
+	<entry key="deleteInquireList">
 		  UPDATE
 		         TB_INQUIRE
 		     SET STATUS = 'N'
 		   WHERE INQUIRE_NO = ?
+		   
 	</entry>
 
 </properties>

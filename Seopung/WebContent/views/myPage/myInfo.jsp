@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.Member.model.vo.Member"%>
 <%! public int getRandom(){
 	int random = 0;
 	random = (int)Math.floor((Math.random()*(99999-10000 +1))) +10000;
 	return random;
 	}
+%>
+<%
+	
+	Member m = (Member)request.getAttribute("m");
+
+	int userNo = m.getUserNo();
+	String userId = m.getUserId();
+	String userName = m.getUserName();
+	String nickName = m.getNickName();
+	String email = m.getEmail();
+	String birth = m.getBirth();
+	String profile = m.getProfile();
+	String year = birth.substring(0, 4);
+	String month = birth.substring(4, 6);
+	String day = birth.substring(6);
+	String intro = m.getUserIntro().equals("null") ? "" : m.getUserIntro() ;
 %>
 <!DOCTYPE html>
 <html>
@@ -71,19 +87,7 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="common/myPageSidebar.jsp" %>
-	<%
-		int userNo = loginUser.getUserNo();
-		String userId = loginUser.getUserId();
-		String userName = loginUser.getUserName();
-		String nickName = loginUser.getNickName();
-		String email = loginUser.getEmail();
-		String birth = loginUser.getBirth();
-		String profile = loginUser.getProfile();
-		String year = birth.substring(0, 4);
-		String month = birth.substring(4, 6);
-		String day = birth.substring(6);
-		String intro = loginUser.getUserIntro() == null ? "" : loginUser.getUserIntro() ;
-	%>
+
 	
 	<div class="myContent">
 	
@@ -98,14 +102,19 @@
              <br><br>
         
             <div class="infoPoto">
+            	<% if(profile.equals("null")) { %>
+       			<img src="<%= contextPath %>/resources/images/회원.jpg">
+       			<% }else { %>
                 <img src="<%= contextPath %>/<%=profile%>"  
                 		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+                <%} %>
                 <br><br>
                 <p style="font-size: 12px;">10MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
                     <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile">삭제</button>
                 </div>
+                <%System.out.println(profile); %>
             </div>
             <div class="changeInfo">
                 
@@ -158,7 +167,9 @@
             <label><strong>자기소개</strong></label> <br>
             <textarea name="userIntro" id="intro" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
        		<div id="fileArea">
+       			
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
+            	
             </div>
         </form>
         	
@@ -334,7 +345,7 @@
         });
 
         function loadImg(inputFile) {
-           
+        	
         //console.log(inputFile.files.length);
             if(inputFile.files.length == 1){
                 // 파일을 읽어들일 FileReader객체 생성
@@ -344,19 +355,18 @@
                 reader.readAsDataURL(inputFile.files[0]);
                 // 파일 읽기가 다 완료되었을 때 실행할 함수
                 reader.onload = function(e){
-                  // 각 영역에 맞춰서 이미지 미리보기
-                    //console.log(e.target.result);
                     $("#profileImg").attr("src",e.target.result);
                 };
-            }else {
+            }else if (inputFile.files.length == 0) {
+            	
                $("#profileImg").attr("src", "resources/images/회원.jpg");
+              
             }
         }
         $("#deleteProfile").click(function(){
             $("#profileImg").attr("src", "resources/images/회원.jpg");
         });
         
- 		
     </script>
 	
 	</div>
@@ -372,9 +382,6 @@
     <script src="resources/js/bootstrap.min.js"></script>
     <!-- easing js -->
     <script src="resources/js/jquery.magnific-popup.js"></script>
-    
-    
-    
     
     <!-- particles js -->
     <script src="resources/js/owl.carousel.min.js"></script>

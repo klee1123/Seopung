@@ -110,13 +110,25 @@ public class InquireDao {
 		
 		String sql = prop.getProperty("deleteInquireList");
 		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
+		if(ino.length > 1) {
+			for(int i=1; i<ino.length; i++) {
+				sql += "OR INQUIRE_NO = " + ino[i];
+			}
 		}
+		System.out.println(ino);
+		System.out.println(sql);
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(ino[0]));
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 		
 	}
 

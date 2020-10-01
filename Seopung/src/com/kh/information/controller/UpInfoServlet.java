@@ -65,17 +65,12 @@ public class UpInfoServlet extends HttpServlet {
 				m.setProfile(mem.getProfile()); // 기존 썸네일 경로 담아주기
 			}
 			
-			
-			
-			
-			
 			Member updateMem = new InfoService().updateInfo(m);
 					
 			if(updateMem != null) { // 정보변경 성공 했을 경우 => 마이페이지 보여주기
 				
 				HttpSession session = request.getSession();
 				
-				session.setAttribute("loginUser", updateMem);
 				session.setAttribute("alertMsg", "회원정보 수정 성공");
 				response.sendRedirect(request.getContextPath() + "/myPage.me");
 				
