@@ -27,6 +27,7 @@ public class CommunityService {
 		ArrayList<Community> list = new CommunityDao().selectList(conn, pi);
 		close(conn);
 		return list;
+		
 	}
 	
 	public int insertCommunity(Community c) {
