@@ -85,8 +85,11 @@ public class AdminInquiryDao {
 				AdminInquiry a = new AdminInquiry();
 				a.setInquireNo(rset.getInt("inquire_no"));
 				a.setInquireTitle(rset.getString("inquire_title"));
-				a.setUserNo(rset.getInt("user_no"));
+				a.setInquireEnrollDate(rset.getDate("inquire_enroll_date"));
 				a.setInquireStatus(rset.getString("inquire_status"));
+				a.setInquireEmail(rset.getString("inquire_email"));
+				a.setInquireSep(rset.getString("inquire_sep"));
+				a.setInquireWriter(rset.getString("user_id"));
 
 				list.add(a);
 			}

@@ -1,4 +1,4 @@
-package com.kh.adminInquiry.controller;
+package com.kh.Notice.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,25 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminInquiry.controller.AdminInquiryListServlet;
-import com.kh.adminInquiry.model.service.AdminInquiryService;
-import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminNotice.model.service.AdminNoticeService;
 import com.kh.adminNotice.model.vo.AdminNotice;
-import com.kh.admin.model.vo.Admin;
 import com.kh.common.PageInfo;
 
 /**
- * Servlet implementation class AdminListServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/adminPage/list.iq")
-public class AdminInquiryListServlet extends HttpServlet {
+@WebServlet("/list.no")
+public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInquiryListServlet() {
+    public NoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +32,7 @@ public class AdminInquiryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	
 		request.setCharacterEncoding("utf-8");
 		
 		int listCount;		// 현재 총 게시글 갯수
@@ -53,7 +49,7 @@ public class AdminInquiryListServlet extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
-		listCount = new AdminInquiryService().selectListCount();
+		listCount = new AdminNoticeService().selectListCount();
 		
 		pageLimit = 5;
 		
@@ -76,13 +72,14 @@ public class AdminInquiryListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<AdminInquiry> list = new AdminInquiryService().selectList(pi);
+		ArrayList<AdminNotice> list = new AdminNoticeService().selectList(pi); // <> 안의 
 		
-		request.setAttribute("pi", pi);
+		request.setAttribute("pi", pi); // ("택배이름", 내용물)
 		request.setAttribute("list", list);
-		request.setAttribute("pageTitle", "1:1 문의 목록");
 		
-		request.getRequestDispatcher("../views/admin/manage_inquiry/manageInquiryListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/serviceCenter/userNotice/userNoticeList.jsp").forward(request, response);
+		// 주소 지정
+		// admin은 ../ 포함 /// 
 		
 	}
 

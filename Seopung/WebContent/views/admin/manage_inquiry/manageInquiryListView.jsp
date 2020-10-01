@@ -11,6 +11,10 @@
     int endPage = pi.getEndPage();
     int maxPage = pi.getMaxPage();
 %>	
+
+
+<%@page import="com.kh.Member.model.vo.LoginUser"%>
+
 	
 <!DOCTYPE html>
 <html>
@@ -68,18 +72,26 @@
 				<tbody style="text-align:center;">
 					<% if(list.isEmpty()){ %>
 	                    <tr>
-	                        <td colspan="5">조회된 리스트가 없습니다.</td>
+	                        <td colspan="6">조회된 리스트가 없습니다.</td>
 	                    </tr>
 	                    <% }else{ %>
-	                        <% for(AdminInquiry n : list){ %>
+	                        <% for(AdminInquiry iq : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getInquiryNo()  %>"></td>
-	                            <td><%= n.getInquiryNo() %></td>
-	                            <td><%= n.getInquiryTitle() %></td>
-	                            <td><%= n.getInquiryEnroll() %></td>
-	                            <td><%= n.getInquiryWriter() %></td>
-	                            <td><%= n.getInquiryStatus() %></td>
-	                        </tr>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=iq.getInquireNo() %>"></td>
+	                            <td><%= iq.getInquireNo() %></td>
+	                            <td><%= iq.getInquireTitle() %></td>
+	                            <% if(iq.getInquireSep().equals("회원")){ %>
+	                            <td><%= iq.getInquireWriter() %></td> <!-- 작성자 -->
+	                            <%} else {%>
+	                            <td><%= iq.getInquireEmail() %></td>
+	                            <% } %>
+	                            <td><%= iq.getInquireEnrollDate() %></td>
+	                            <% if(iq.getInquireStatus().equals("Y")){ %>
+	                            <td>답변 완료</td>
+	                            <%} else { %>
+	                            <td>미답변</td>
+	                            <% } %>
+	                       	  </tr>
 	                        <% } %>
 	                    <% } %>
 					
@@ -92,7 +104,7 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red">5</b>개
+								style="color: red"><%= listCount %></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">

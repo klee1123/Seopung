@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+
 	<entry key="selectListCount">
 		SELECT COUNT(*) 
   		  FROM TB_INQUIRE
@@ -17,21 +18,16 @@
 		          (
 		             SELECT INQUIRE_NO,
 		                    INQUIRE_TITLE,
-		                    INQUIRE_CONTENT,
 		                    INQUIRE_ENROLL_DATE,
 		                    INQUIRE_STATUS,
 		                    INQUIRE_EMAIL,
-		                    INQUIRE_RESPONSE,
-		                    RESPONSE_DATE,
-		                    STATUS,
-		                    USER_NO,
-		                    ADMIN_NO,
 		                    INQUIRE_SEP,
-		                    INQUIRE_TYPE
-		               FROM TB_INQUIRE
-		              WHERE STATUS = 'Y' 
+		                    USER_ID
+		               FROM TB_INQUIRE IQ
+		               LEFT JOIN TB_MEMBER USING(USER_NO)
+		              WHERE IQ.STATUS = 'Y'
 		              ORDER
-		                 BY NOTICE_NO DESC
+		                 BY INQUIRE_NO DESC
 		          ) A
 		     )
 		 WHERE RNUM BETWEEN ? AND ?	

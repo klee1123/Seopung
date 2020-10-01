@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@page import = "java.util.ArrayList, com.kh.adminNotice.model.vo.AdminNotice, com.kh.common.PageInfo" %>
+<%
+    ArrayList<AdminNotice> list = (ArrayList<AdminNotice>)request.getAttribute("list");
+    PageInfo pi = (PageInfo)request.getAttribute("pi"); // ()괄호안은 데이터타입 변환
+  
+    int listCount = pi.getListCount();
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>	
 <!doctype html>
-<html lang="zxx">
-
+<html>
 <head>
 
 <meta charset="utf-8">
