@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.admin.model.vo.Admin" %>
+<%@ page import="com.kh.admin.model.vo.Admin, com.kh.Member.model.vo.LoginUser" %>
 <%
 	String contextPath = request.getContextPath();
 
-	Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
+	LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
 	// > 로그인 전 : null
 	// > 로그인 후 : 로그인성공한 관리자정보들이 담겨있는 객체
 	

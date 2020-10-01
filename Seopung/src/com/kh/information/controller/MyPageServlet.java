@@ -37,7 +37,7 @@ public class MyPageServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		LoginUser loginUser = (LoginUser)session.getAttribute("loginUser");
 		
-		if(session.getAttribute("loginUser") == null && loginUser.getCategory() == 1) {
+		if(session.getAttribute("loginUser") == null) {
 			
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
 			//메인으로 다시 되돌아가기
