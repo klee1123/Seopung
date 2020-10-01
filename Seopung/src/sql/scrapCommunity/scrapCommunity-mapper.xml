@@ -4,28 +4,36 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) LISTCOUNT
 	      FROM TB_COMMUNITY_SCRAP
+	     WHERE USER_NO = ?
 	</entry>
 	
 	<entry key="selectList">
-		 SELECT *
+		  SELECT *
 		   FROM (
 		         SELECT 
 		                ROWNUM RNUM
 		              , A.* 
 		           FROM (
 		                 SELECT
-		                        COMMUNITY_NO
+		                        CM.COMMUNITY_NO 
 		                      , COMMUNITY_TITLE
-		                      , USER_NAME
 		                      , SCRAP_DATE
 		                   FROM TB_COMMUNITY_SCRAP CS
-		                   JOIN TB_COMMUNITY CM USING (COMMUNITY_NO)
-		                   JOIN TB_MEMBER MEM ON CS.USER_NO = MEM.USER_NO
+		                   JOIN TB_COMMUNITY CM ON (CS.COMMUNITY_NO = CM.COMMUNITY_NO)
 		                  WHERE COMMUNITY_STATUS = 'Y'
+		                    AND CS.USER_NO = ?
 		                  ORDER
 		                     BY SCRAP_DATE DESC
 		                ) A
 		           )
   WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="deleteScrapCommunityList">
+		DELETE
+	           TB_COMMUNITY_SCRAP
+	     WHERE (USER_NO = ?
+	       AND COMMUNITY_NO = ?)
+	        
 	</entry>
 </properties>

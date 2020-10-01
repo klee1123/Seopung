@@ -13,7 +13,7 @@ import com.kh.scrapCommunity.model.service.ScrapCommunityService;
 /**
  * Servlet implementation class DeleteScrapCommunityListServlet
  */
-@WebServlet("/DeleteScrapCommunity.sc")
+@WebServlet("/delete.sc")
 public class DeleteScrapCommunityListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,13 +30,15 @@ public class DeleteScrapCommunityListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] scno = request.getParameterValues("scno");
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int result = new ScrapCommunityService().deleteScrapCommunityList(scno);
 		
+		String[] scno = request.getParameterValues("scno");
+		int result = new ScrapCommunityService().deleteScrapCommunityList(scno, userNo);
+		
+		System.out.println(result);
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "list.sc?currentPage=1&userNo=" + userNo);
+			response.sendRedirect(request.getContextPath() + "/list.sc?currentPage=1");
 		}
 	
 	}

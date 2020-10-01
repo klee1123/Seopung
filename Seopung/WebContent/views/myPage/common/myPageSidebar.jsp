@@ -82,7 +82,7 @@
                 <li>스크랩
                     <ul>
                         <li><a href="<%= contextPath %>/scrapP.me">일정</a></li>
-                        <li><a href="<%= contextPath %>/list.sc?currentPage=1">커뮤니티</a></li>
+                        <li><a href="<%= contextPath %>/list.sc?currentPage=1&userNo=<%=loginUser.getUserNo()%>">커뮤니티</a></li>
                     </ul>
                 </li> <br>
     

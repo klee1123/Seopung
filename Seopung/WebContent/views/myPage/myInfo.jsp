@@ -103,7 +103,7 @@
         
             <div class="infoPoto">
             	<% if(profile.equals("null")) { %>
-       			<img src="<%= contextPath %>/resources/images/회원.jpg">
+       			<img src="<%= contextPath %>/resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
        			<% }else { %>
                 <img src="<%= contextPath %>/<%=profile%>"  
                 		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
