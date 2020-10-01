@@ -102,10 +102,12 @@
              <br><br>
         
             <div class="infoPoto">
-            	
-          
+            	<% if(profile.equals("null")) { %>
+       			<img src="<%= contextPath %>/resources/images/회원.jpg">
+       			<% }else { %>
                 <img src="<%= contextPath %>/<%=profile%>"  
                 		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+                <%} %>
                 <br><br>
                 <p style="font-size: 12px;">10MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
@@ -167,6 +169,7 @@
        		<div id="fileArea">
        			
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
+            	
             </div>
         </form>
         	
@@ -342,6 +345,7 @@
         });
 
         function loadImg(inputFile) {
+        	
         //console.log(inputFile.files.length);
             if(inputFile.files.length == 1){
                 // 파일을 읽어들일 FileReader객체 생성
@@ -353,7 +357,7 @@
                 reader.onload = function(e){
                     $("#profileImg").attr("src",e.target.result);
                 };
-            }else if (inputFile.files.length == null) {
+            }else if (inputFile.files.length == 0) {
             	
                $("#profileImg").attr("src", "resources/images/회원.jpg");
               
@@ -362,8 +366,6 @@
         $("#deleteProfile").click(function(){
             $("#profileImg").attr("src", "resources/images/회원.jpg");
         });
-        
-        
         
     </script>
 	
@@ -380,9 +382,6 @@
     <script src="resources/js/bootstrap.min.js"></script>
     <!-- easing js -->
     <script src="resources/js/jquery.magnific-popup.js"></script>
-    
-    
-    
     
     <!-- particles js -->
     <script src="resources/js/owl.carousel.min.js"></script>
