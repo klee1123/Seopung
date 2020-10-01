@@ -45,7 +45,7 @@ public class UpdatePwdServlet extends HttpServlet {
 		if(updateMem != null) { // 비밀번호 변경 성공
 			
 			session.setAttribute("alertMsg", "성공적으로 비밀번호 변경됐습니다.");
-			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("m", updateMem);
 			
 		}else { // 실패
 			session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다");

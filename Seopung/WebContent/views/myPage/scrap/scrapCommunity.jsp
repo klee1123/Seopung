@@ -55,7 +55,6 @@
                         <th width="25"><input type="checkbox" class="chk" id="chk_all" name="chkAll"
                         >&nbsp;&nbsp;번호</th>
                         <th width="250">제목</th>
-                        <th width="100">작성자</th>
                         <th width="150">스크랩날짜</th>
                     </tr>
                 </thead>
@@ -67,9 +66,8 @@
                 	<%}else { %>
                 		<%for(ScrapCommunity cm : list) {%>
 		                   	<tr align="center"> 
-		                        <td><input type="checkbox"id="chk" name="scno">&nbsp;&nbsp;<%=cm.getCommunityNo() %></td>
+		                        <td><input type="checkbox"id="chk" name="scno" value="<%=cm.getCommunityNo()%>">&nbsp;&nbsp;<%=cm.getCommunityNo() %></td>
 		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
-		                        <td><%=cm.getCommunityWriter()%></td>
 		                        <td><%=cm.getScrapDate()%></td>
 		                    </tr>
 	                    <%} %>
@@ -81,22 +79,22 @@
             <div class="pagingArea" align="center">
 				<% if(currentPage != 1) {%>
 	                <!-- 맨 처음으로 (<<) -->
-	                <button  class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.sc?currentPage=1';"> &lt;&lt; </button>
+	                <button  class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.sc?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
 	                <!-- 이전 페이지로 (<) -->
-	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage-1%>';"> &lt; </button>
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
     			<% } %>
     			<%for(int p=startPage; p<=endPage; p++) { %>
 	    			<%if(p != currentPage) {%>
-	                <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=p%>';"><%=p%></button>
+	                <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=p%>&userNo=<%=userNo%>';"><%=p%></button>
 	                <%}else {%>
 	                <button class="btn btn-secondary btn-sm" disabled><%=p%></button>
 	                <% } %>
                 <% } %>
                 <% if(currentPage != maxPage) { %>
 	                <!-- 다음 페이지로 (>) -->
-	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage+1%>';"> &gt; </button>
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=currentPage+1%>&userNo=<%=userNo%>';"> &gt; </button>
 	                <!-- 맨 끝으로 (>>) -->
-	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=maxPage%>';"> &gt;&gt; </button>
+	                <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=maxPage%>&userNo=<%=userNo%>';"> &gt;&gt; </button>
             	<% } %>
             </div>
         </div>
@@ -138,7 +136,7 @@
               	}
               
               	if(confirm("정말 삭제하시겠습니까?")) {
-              		location.href="<%=contextPath%>/DeleteScrapCommunity.sc?" + str;
+              		location.href="<%=contextPath%>/delete.sc?userNo=<%=userNo%>&" + str;
               	} 
             });
         });

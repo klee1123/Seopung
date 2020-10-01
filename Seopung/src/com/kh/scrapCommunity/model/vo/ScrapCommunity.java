@@ -13,11 +13,10 @@ public class ScrapCommunity {
 	public ScrapCommunity() {}
 
 
-	public ScrapCommunity(int communityNo, String communityTitle, String communityWriter, Date scrapDate) {
+	public ScrapCommunity(int communityNo, String communityTitle, Date scrapDate) {
 		super();
 		this.communityNo = communityNo;
 		this.communityTitle = communityTitle;
-		this.communityWriter = communityWriter;
 		this.scrapDate = scrapDate;
 	}
 
