@@ -98,6 +98,8 @@
              <br><br>
         
             <div class="infoPoto">
+            	
+          
                 <img src="<%= contextPath %>/<%=profile%>"  
                 		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
                 <br><br>
@@ -106,6 +108,7 @@
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
                     <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile">삭제</button>
                 </div>
+                <%System.out.println(profile); %>
             </div>
             <div class="changeInfo">
                 
@@ -158,6 +161,7 @@
             <label><strong>자기소개</strong></label> <br>
             <textarea name="userIntro" id="intro" cols="80" rows="8"style="resize: none;"><%= intro %></textarea>
        		<div id="fileArea">
+       			
                 <input type="file" name="profile" id="profile" onchange="loadImg(this);">
             </div>
         </form>
@@ -334,7 +338,6 @@
         });
 
         function loadImg(inputFile) {
-           
         //console.log(inputFile.files.length);
             if(inputFile.files.length == 1){
                 // 파일을 읽어들일 FileReader객체 생성
@@ -344,19 +347,20 @@
                 reader.readAsDataURL(inputFile.files[0]);
                 // 파일 읽기가 다 완료되었을 때 실행할 함수
                 reader.onload = function(e){
-                  // 각 영역에 맞춰서 이미지 미리보기
-                    //console.log(e.target.result);
                     $("#profileImg").attr("src",e.target.result);
                 };
-            }else {
+            }else if (inputFile.files.length == null) {
+            	
                $("#profileImg").attr("src", "resources/images/회원.jpg");
+              
             }
         }
         $("#deleteProfile").click(function(){
             $("#profileImg").attr("src", "resources/images/회원.jpg");
         });
         
- 		
+        
+        
     </script>
 	
 	</div>
