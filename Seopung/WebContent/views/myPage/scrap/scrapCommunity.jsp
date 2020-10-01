@@ -69,8 +69,8 @@
 		                   	<tr align="center"> 
 		                        <td><input type="checkbox"id="chk" name="scno"><%=cm.getCommunityNo() %>></td>
 		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
-		                        <td><%=cm.getCommunityWriter() %></td>
-		                        <td><%=cm.getScrapDate() %></td>
+		                        <td><%=cm.getCommunityWriter()%></td>
+		                        <td><%=cm.getScrapDate()%></td>
 		                    </tr>
 	                    <%} %>
                    <% } %>

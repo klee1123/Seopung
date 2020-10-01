@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.PageInfo;
 import com.kh.inquire.model.service.InquireService;
-import com.kh.inquire.model.vo.Inquire;
+import com.kh.scrapCommunity.model.service.ScrapCommunityService;
+import com.kh.scrapCommunity.model.vo.ScrapCommunity;
 
 /**
  * Servlet implementation class ScrapCommunityListServlet
@@ -72,7 +73,7 @@ public class ScrapCommunityListServlet extends HttpServlet {
 		        PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		       
 		        // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-		        ArrayList<Inquire> list = new InquireService().selectList(pi, userNo);
+		        ArrayList<ScrapCommunity> list = new ScrapCommunityService().selectList(pi, userNo);
 		        
 		        request.setAttribute("pi", pi);
 		        request.setAttribute("list", list);

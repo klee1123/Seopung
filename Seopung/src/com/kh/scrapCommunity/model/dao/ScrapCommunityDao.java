@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.kh.common.PageInfo;
 import com.kh.inquire.model.dao.InquireDao;
 import com.kh.scrapCommunity.model.vo.ScrapCommunity;
 
@@ -62,7 +63,7 @@ public class ScrapCommunityDao {
 		return listCount;
 	}
 	
-	public ArrayList<ScrapCommunity> selectList(Connection conn, int userNo) {
+	public ArrayList<ScrapCommunity> selectList(Connection conn, PageInfo pi, int userNo) {
 		
 		ArrayList<ScrapCommunity> list = new ArrayList<>();
 		
@@ -71,6 +72,28 @@ public class ScrapCommunityDao {
 		
 		String sql = prop.getProperty("selectList");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit()-1;
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new ScrapCommunity(rset.getInt("COMMUNITY_NO"),
+											rset.getString("COMMUNITY_TITLE"),
+											rset.getString("USER_NAME"),
+											rset.getDate("scrap_date")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminService;
 import com.kh.admin.model.vo.Admin;
+import com.kh.Member.model.vo.LoginUser;;
 
 /**
  * Servlet implementation class AdminUpdateServlet
@@ -40,11 +41,14 @@ public class AdminUpdateServlet extends HttpServlet {
 		
 		Admin ad = new Admin(adminNo, adminName, adminId, adminPwd);
 		
-		//System.out.println(ad);
-		
 		int result = new AdminService().updateAdmin(ad);
 		
 		if(result > 0) {
+			
+			LoginUser loginUser= (LoginUser)request.getSession().getAttribute("loginUser");
+			loginUser.setUserName(adminName);
+
+			request.getSession().setAttribute("loginUser", loginUser);
 			request.getSession().setAttribute("alertMsg", "관리자 수정 성공");
 			response.sendRedirect(request.getContextPath() + "/adminPage/myPage.ad?adminNo=" + adminNo);
 			
