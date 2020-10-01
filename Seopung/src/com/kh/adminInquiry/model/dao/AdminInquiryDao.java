@@ -14,6 +14,8 @@ import java.util.Properties;
 
 import com.kh.adminInquiry.model.dao.AdminInquiryDao;
 import com.kh.adminInquiry.model.vo.AdminInquiry;
+import com.kh.adminNotice.model.dao.AdminNoticeDao;
+import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;
 
 public class AdminInquiryDao {
@@ -31,28 +33,18 @@ public class AdminInquiryDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn, int keyfield, String keyword, String status) {
+	public int selectListCount(Connection conn) {
+		// select => 한 행 조회
 		int listCount = 0;
 		
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rset = null;
 		
-		
-		String sql = "";
-		// 키워드 검색 조건 설정
-		if(keyfield == 1) {
-			sql = prop.getProperty("selectListCount1");		// 이름검색	
-		}else {
-			sql = prop.getProperty("selectListCount2");		// 아이디검색
-		}
+		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, keyword);
-			pstmt.setString(2, status);
-			
-			rset = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
@@ -62,26 +54,20 @@ public class AdminInquiryDao {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
+			close(stmt);
 		}
 		
 		return listCount;
 	}
-
-	public ArrayList<AdminInquiry> selectList(Connection conn, PageInfo pi, int keyfield, String keyword, String status){
-		// select문 => 여러행조회
+	
+	public ArrayList<AdminInquiry> selectList(Connection conn, PageInfo pi){
+		// select문 => 여러행 조회
 		ArrayList<AdminInquiry> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = "";
-		// 키워드 검색 조건 설정
-		if(keyfield == 1) {
-			sql = prop.getProperty("selectList1");		// 이름검색	
-		}else {
-			sql = prop.getProperty("selectList2");		// 아이디검색
-		}
+		String sql = prop.getProperty("selectList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -89,113 +75,34 @@ public class AdminInquiryDao {
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setString(1, keyword);
-			pstmt.setString(2, status);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()){
-				list.add(new AdminInquiry(rset.getInt("inquire_no"),
-										  rset.getString("inquire_title"),
-										  rset.getString("inquire_content"),
-										  rset.getDate("inquire_enroll_date"),
-										  rset.getString("inquire_status"),
-										  rset.getString("inquire_email"),
-										  rset.getString("inquire_response"),
-										  rset.getDate("response_date"),
-										  rset.getString("status"),
-										  rset.getInt("user_no"),
-										  rset.getInt("admin_no"),
-										  rset.getString("inquire_sep"),
-										  rset.getString("inquire_type")));
-			}  
+			// 번호 제목 작성자 처리상태
+			while(rset.next()) {
+				AdminInquiry a = new AdminInquiry();
+				a.setInquireNo(rset.getInt("inquire_no"));
+				a.setInquireTitle(rset.getString("inquire_title"));
+				a.setUserNo(rset.getInt("user_no"));
+				a.setInquireStatus(rset.getString("inquire_status"));
+
+				list.add(a);
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally{
 			close(rset);
 			close(pstmt);
 		}
 		
 		return list;
-	}
-	
-	public int idCheck(Connection conn, String checkId) {
-		// select문 => 한 개의 값 조회
-		int count = 0;
 		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("idCheck");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1,  checkId);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				count = rset.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return count;
 	}
 	
 	
-	public AdminInquiry selectAdmin(Connection conn, int adminNo) {
-		// select 문 => 한 행 조회
-		AdminInquiry ad = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectAdmin");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, adminNo);
-
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
-				ad = new AdminInquiry(rset.getInt("inquire_no"),
-									  rset.getString("inquire_title"),
-									  rset.getString("inquire_content"),
-									  rset.getDate("inquire_enroll_date"),
-									  rset.getString("inquire_status"),
-									  rset.getString("inquire_email"),
-									  rset.getString("inquire_response"),
-									  rset.getDate("response_date"),
-									  rset.getString("status"),
-									  rset.getInt("user_no"),
-									  rset.getInt("admin_no"),
-									  rset.getString("inquire_sep"),
-									  rset.getString("inquire_type"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return ad;
-	}
+	
 
 }
-
-
