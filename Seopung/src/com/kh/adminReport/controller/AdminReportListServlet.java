@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminReport.controller.AdminReportListServlet;
-import com.kh.admin.model.vo.Admin;
-import com.kh.adminNotice.model.service.AdminNoticeService;
-import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.adminReport.model.service.AdminReportService;
+import com.kh.adminReport.model.vo.AdminReport;
 import com.kh.common.PageInfo;
 
 /**
@@ -52,7 +50,7 @@ public class AdminReportListServlet extends HttpServlet {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
-		listCount = new AdminReportListServlet().selectListCount();
+		listCount = new AdminReportService().selectListCount();
 		
 		pageLimit = 5;
 		
@@ -75,7 +73,7 @@ public class AdminReportListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<AdminReportListServlet> list = new AdminReportListServlet().selectList(pi);
+		ArrayList<AdminReport> list = new AdminReportService().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
