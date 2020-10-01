@@ -10,25 +10,25 @@
 	</entry>
 
 	<entry key="selectList">
-		  SELECT *
-		    FROM (
-		         SELECT 
-		                ROWNUM RNUM
-		              , A.* 
-		           FROM (
-		                 SELECT
-		                        COMMUNITY_NO
-		                      , COMMUNITY_TITLE
-		                      , SCRAP_DATE
-		                   FROM TB_COMMUNITY_SCRAP CS
-		                   JOIN TB_COMMUNITY USING(COMMUNITY_NO)
-		                  WHERE COMMUNITY_STATUS = 'Y'
-		                    AND CS.USER_NO = ?
-		                  ORDER
-		                     BY SCRAP_DATE DESC
-		                ) A
-		           )
-		   WHERE RNUM BETWEEN ? AND ?
+		 SELECT *
+   FROM (
+         SELECT 
+                ROWNUM RNUM
+              , A.* 
+           FROM (
+                 SELECT
+                        INQUIRE_NO
+                      , INQUIRE_TITLE
+                      , INQUIRE_CONTENT
+                      , INQUIRE_STATUS
+                   FROM TB_INQUIRE
+                  WHERE STATUS = 'Y'
+                    AND USER_NO = ?
+                  ORDER
+                     BY INQUIRE_NO DESC
+                ) A
+           )
+  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
 	<entry key="deleteInquireList">

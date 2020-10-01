@@ -9,8 +9,8 @@
 	</entry>
 	
 	<entry key="selectList">
-		SELECT *
-		    FROM (
+		 SELECT *
+		   FROM (
 		         SELECT 
 		                ROWNUM RNUM
 		              , A.* 
@@ -18,15 +18,17 @@
 		                 SELECT
 		                        COMMUNITY_NO
 		                      , COMMUNITY_TITLE
+		                      , USER_NAME
 		                      , SCRAP_DATE
 		                   FROM TB_COMMUNITY_SCRAP CS
-		                   JOIN TB_COMMUNITY USING(COMMUNITY_NO)
+		                   JOIN TB_COMMUNITY CM USING (COMMUNITY_NO)
+		                   JOIN TB_MEMBER MEM ON CS.USER_NO = MEM.USER_NO
 		                  WHERE COMMUNITY_STATUS = 'Y'
 		                    AND CS.USER_NO = ?
 		                  ORDER
 		                     BY SCRAP_DATE DESC
 		                ) A
 		           )
-		   WHERE RNUM BETWEEN ? AND ?
+		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>
