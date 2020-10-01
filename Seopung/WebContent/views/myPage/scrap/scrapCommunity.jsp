@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList, com.kh.scrapCommunity.model.vo.*"%>
+<%@ page import = "com.kh.common.PageInfo"%>
+<%
+	ArrayList<ScrapCommunity> list = (ArrayList<ScrapCommunity>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +35,9 @@
 <body>
 	<%@ include file="../../common/menubar.jsp" %>
 	<%@ include file="../common/myPageSidebar.jsp" %>
-
+	<%
+	int userNo = loginUser.getUserNo();
+	%>
 
 	<div class="myContent">
 		<div class="scrapCommunity">
@@ -38,63 +52,28 @@
             <table id="scrapCmTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll" style="width: 25px;">번호</th>
+                        <th><input type="checkbox" class="chk" id="chk_all" name="chkAll"
+                         style="width: 25px;">번호</th>
                         <th width="250">제목</th>
-                        <th width="350">내용</th>
                         <th width="100">작성자</th>
                         <th width="150">스크랩날짜</th>
                     </tr>
                 </thead>
                 <tbody id="cmBody">
-                    <tr align="center">
-                        <td><input type="checkbox"id="chk" name="chk1"> 1.</td>
-                        <td><a></a>제목 넣을 칸</td> 
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>20.09.21</td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk2"> 2.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk3"> 3.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk4"> 4.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk5"> 5.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6"> 6.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
-                    <tr align="center">
-                        <td><input type="checkbox" id="chk" name="chk6"> 7.</td>
-                        <td>제목 넣을 칸</td>
-                        <td>내용</td>
-                        <td>작성자</td>
-                        <td>스크랩 날짜 </td>
-                    </tr>
+                  <%if(list.isEmpty()) { %>
+                  		<tr>
+                  			<td colspan="5" align="center">조회된 스크랩이 없습니다</td>
+                  		</tr>
+                	<%}else { %>
+                		<%for(ScrapCommunity cm : list) {%>
+		                   	<tr align="center"> 
+		                        <td><input type="checkbox"id="chk" name="scno"><%=cm.getCommunityNo() %>></td>
+		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
+		                        <td><%=cm.getCommunityWriter() %></td>
+		                        <td><%=cm.getScrapDate() %></td>
+		                    </tr>
+	                    <%} %>
+                   <% } %>
                 </tbody>
             </table>
         </div>

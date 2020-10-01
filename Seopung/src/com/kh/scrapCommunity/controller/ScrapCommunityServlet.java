@@ -1,4 +1,4 @@
-package com.kh.sidebar.controller;
+package com.kh.scrapCommunity.controller;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ScrapCommunityServlet
  */
-@WebServlet("/scrapC.me")
+@WebServlet("/scrapCommunity.in")
 public class ScrapCommunityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
