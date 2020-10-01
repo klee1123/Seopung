@@ -31,20 +31,27 @@ public class AdminMemberDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		if(request.getSession().getAttribute("loginUser") != null){
 		
-		Member m = new MemberService().selectMember(userNo);
-		
-		if(m!=null) {
-			request.setAttribute("pageTitle", "회원 상세정보");
-			request.setAttribute("m", m);
-			request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberDetailView.jsp").forward(request, response);
+			int userNo = Integer.parseInt(request.getParameter("userNo"));
 			
-		}else {
-			request.setAttribute("errorMsg", "회원 상세조회 실패");
+			Member m = new MemberService().selectMember(userNo);
+			
+			if(m!=null) {
+				request.setAttribute("pageTitle", "회원 상세정보");
+				request.setAttribute("m", m);
+				request.getRequestDispatcher("../views/admin/manage_member/member/manageMemberDetailView.jsp").forward(request, response);
+				
+			}else {
+				request.setAttribute("errorMsg", "회원 상세조회 실패");
+				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			}
+	
+		}else{
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-	
+			
 	}
 
 	/**
