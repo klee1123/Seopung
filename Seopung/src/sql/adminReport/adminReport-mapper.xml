@@ -9,24 +9,25 @@
 	
 	<entry key="selectList">
 		SELECT *
-		  FROM 
-		     (
-		     SELECT ROWNUM RNUM
-		          , A.*
-		       FROM
-		          (
-		             SELECT REPORT_NO,
-		                    USER_NO,
-		                    USER_NO2,
-		                    REPORT_DATE,
-		                    REPORT_TYPE
-		               FROM TB_REPORT
-		              WHERE STATUS = 'Y' 
-		              ORDER
-		                 BY NOTICE_NO DESC
-		          ) A
-		     )
-		 WHERE RNUM BETWEEN ? AND ?
+          FROM 
+             (
+             SELECT ROWNUM RNUM
+                  , A.*
+               FROM
+                  (
+                     SELECT REPORT_NO,
+                            M1.USER_ID AS ID1,
+                            M2.USER_ID AS ID2,
+                            REPORT_DATE,
+                            REPORT_TYPE
+                       FROM TB_REPORT R
+                       JOIN TB_MEMBER M1 ON (R.USER_NO = M1.USER_NO)
+                       JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO) 
+                      ORDER
+                         BY REPORT_NO DESC
+                  ) A
+             )
+         WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
 </properties>

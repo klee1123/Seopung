@@ -70,14 +70,14 @@
 	                        <td colspan="5">조회된 리스트가 없습니다.</td>
 	                    </tr>
 	                    <% }else{ %>
-	                        <% for(AdminReport n : list){ %>
+	                        <% for(AdminReport rp : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getReportNo()%>"></td>
-	                            <td><%= n.getReportNo() %></td>
-	                            <td><%= n.getReportTitle() %></td>
-	                            <td><%= n.getReportWriter() %></td>
-	                            <td><%= n.getReportDate() %></td>
-	                            <td><%= n.getReportType() %></td>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=rp.getReportNo()%>"></td>
+	                            <td><%= rp.getReportNo() %></td>
+	                            <td><%= rp.getUserNo() %></td>
+	                            <td><%= rp.getUserNo2() %></td>
+	                            <td><%= rp.getReportDate() %></td>
+	                            <td><%= rp.getReportType() %></td>
 	                        </tr>
 	                        <% } %>
 	                    <% } %>
