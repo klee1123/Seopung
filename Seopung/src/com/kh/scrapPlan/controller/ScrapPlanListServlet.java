@@ -47,8 +47,7 @@ public class ScrapPlanListServlet extends HttpServlet {
 		int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작
 		int endPage;		// 현재 페이지 하단에 보여질 페이징 바의 끝
 		
-		
-		listCount = new ScrapCommunityService().selectListCount(userNo);
+		listCount = new ScrapPlanService().selectListCount(userNo);
 		
 		// * currentPage : 현재 요청한 페이지(요청한페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -71,6 +70,7 @@ public class ScrapPlanListServlet extends HttpServlet {
 		if(maxPage < endPage) {
 			endPage = maxPage;
 		}
+		
         PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
        
         // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기

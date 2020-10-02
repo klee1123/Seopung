@@ -1,6 +1,6 @@
 package com.kh.scrapPlan.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -33,4 +33,19 @@ public class ScrapPlanService {
 		return list;
 	}
 
+	public int deleteList(String[] spno, int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new ScrapPlanDao().deleteList(conn, spno, userNo);
+	
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 }
