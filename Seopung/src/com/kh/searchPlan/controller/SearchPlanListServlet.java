@@ -15,16 +15,16 @@ import com.kh.searchPlan.model.service.PlanSearchService;
 import com.kh.searchPlan.model.vo.SearchPlan;
 
 /**
- * Servlet implementation class SearchPlanListViewServlet
+ * Servlet implementation class SearchPlanListServlet
  */
 @WebServlet("/list.pl")
-public class SearchPlanListViewServlet extends HttpServlet {
+public class SearchPlanListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPlanListViewServlet() {
+    public SearchPlanListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -83,7 +83,8 @@
 
     .seaechbar {
     overflow: hidden;
-    background-color: #fec004;
+    background-color: white;
+    border:1px solid rgb(218, 218, 218);
     }
     .filterdropdown {
     float: left;
@@ -102,7 +103,7 @@
     }
 
     .seaechbar a:hover, .filterdropdown:hover .dropbtn {
-    background-color:#ffd65b;
+    background-color:rgb(230, 230, 230);
     }
 
     .dropdown-content {
@@ -132,7 +133,7 @@
     }
  
     .listArea{
-         margin-top: 20px;
+         margin-top: 10px;
      }
     .thumbnail{
          width: 227px;
@@ -255,9 +256,9 @@
                     &nbsp;
                 </div>
                 <div style="margin-top:11px;">
-                    <input type="text" style="width:170px;height:30px; border:none" name="keyword">&nbsp;
-                    <button type="submit" class="btn btn-outline-dark btn-sm" style="background:white;">검색</button>
-                    <button type="button" onclick="location.href='<%=contextPath %>/list.pl?currentPage=1';" class="btn btn-outline-dark btn-sm" style="background:white;">초기화</button>                    
+                    <input type="text" style="width:170px;height:30px; border:1px solid rgb(218, 218, 218)" name="keyword">&nbsp;
+                    <button type="submit" class="btn btn-outline-secondary btn-sm" >검색</button>
+                    <button type="button" onclick="location.href='<%=contextPath %>/list.pl?currentPage=1';" class="btn btn-outline-secondary btn-sm">초기화</button>                    
                 </div>
 
             </div>
@@ -272,11 +273,11 @@
             <%}else{ %>
             	<%for(int i=0;i<list.size();i++){ %>
 	            <div class="thumbnail" align="center">
-	                <div id="staticMap<%=i %>" style="width:200px; height:200px; border:1px solid grey"></div>
+	                <div id="staticMap<%=i %>" style="width:200px; height:200px;"></div>
 	                <p>
 	                    <%= list.get(i).getPlanTitle() %> <br>
+	                    <%= list.get(i).getStartDate() %> ~ <%= list.get(i).getEndDate() %><br>
 	                    <%= list.get(i).getPlanWriter() %> <br>
-	                    <%= list.get(i).getStartDate() %> ~ <%= list.get(i).getEndDate() %>
 	                </p>
 	            </div>
 	            <script>
@@ -308,10 +309,10 @@
         <div id="pagingArea" style="margin-top: 50px;" align="center">
 			<table>
 				<tr>
-					<td width="140"><span style="font-size:17px;">총 일정 수 &nbsp;&nbsp;&nbsp;<b
-							style="color: red"><%=listCount %></b> 개
+					<td width="150"><span style="font-size:17px;">총 일정 수 &nbsp;&nbsp;&nbsp;
+					<b style="color:black;"><%=listCount %></b> 개
 					</span></td>
-					<td width="700px;">
+					<td width="680px;">
 						<div align="center">
 							<% if(currentPage != 1){ %>
 							<button onclick="location.href='<%= contextPath %>/list.pl?currentPage=1&sDate=<%=sDate %>&eDate=<%=eDate %><%=age %>&type=<%=type %><%=trans %>&keyword=<%=keyword %>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
@@ -332,7 +333,7 @@
 							<% } %>
 						</div>
 					</td>
-					<td width="140">
+					<td width="150">
 						
 					</td>
 				</tr>
