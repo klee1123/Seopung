@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.kh.adminPlan.model.vo.Plan"%>
+<%
+	Plan p = (Plan)request.getAttribute("p");
+
+	String[] ages = p.getAge().split(",");
+	String[] types = p.getPlanType().split(",");
+	String[] trans = p.getTransrportations().split(",");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +32,12 @@
 #content_2_2 {
 	background-color: lightgrey;
 	width: 420px;
-	height: 130px;
+	height: 80px;
 	padding: 20px;
 	box-sizing: border-box;
 	margin-top: 10px;
 	float: left;
+	overflow:auto;
 }
 
 #content_2_2>button {
@@ -37,10 +46,9 @@
 
 #content_2_3 {
 	width: 420px;
-	height: 155px;
-	border: 1px solid lightgrey;
+	height: 215px;
+	/*border: 1px solid lightgrey;*/
 	margin-top: 10px;
-	padding: 10px;
 	float: left;
 }
 
@@ -67,6 +75,52 @@
 
 #content_5 table {
 	margin-bottom: 20px;
+}
+
+/* Style the tab */
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 20%;
+  height: 100%;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  height:20px;
+  line-height:1px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 12px;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-left: none;
+  height: 100%;
 }
 </style>
 <body>
@@ -153,7 +207,7 @@
 				<table>
 					<tr width="420px;">
 						<td width="210px" style="font-size: 15px;"><b
-							style="font-size: 20px;"><%= p.getPlanTitle() %></b> <br> <%=p.getStartDate() %>
+							style="font-size: 20px; color:rgb(75, 75, 75);"><%= p.getPlanTitle() %></b> <br> <%=p.getStartDate() %>
 							~ <%=p.getEndDate() %></td>
 						<td>추천 : <%=p.getRecommendCount() %> <br> 스크랩 : <%=p.getScrapCount() %>
 							<br> 예산금액 : <%=p.getBudget() %> 원
@@ -161,35 +215,67 @@
 					</tr>
 				</table>
 			</div>
-			<div id="content_2_2" style="overflow: auto;">
+			<div id="content_2_2">
 				<%for(int i=0; i<ages.length; i++){ %>
-				<button disabled class="btn btn-secondary"><%= ages[i] %>대
+				<button disabled class="btn btn-secondary btn-sm"><%= ages[i] %>대
 				</button>
 				<%} %>
 				<%for(int i=0; i<types.length; i++){ %>
-				<button disabled class="btn btn-secondary"><%= types[i] %></button>
+				<button disabled class="btn btn-secondary btn-sm"><%= types[i] %></button>
 				<%} %>
 				<%for(int i=0; i<trans.length; i++){ %>
-				<button disabled class="btn btn-secondary"><%= trans[i] %></button>
+				<button disabled class="btn btn-secondary btn-sm"><%= trans[i] %></button>
 				<%} %>
 			</div>
-			<div id="content_2_3" style="overflow: auto;">
-				<select name="" id="">
-					<option value="">day1</option>
-					<option value="">day2</option>
-					<option value="">day3</option>
-					<option value="">day4</option>
-				</select> <br> <br>
+			<div id="content_2_3">
+				<div class="tab" style="overflow: auto;">
+					<button class="tablinks" onclick="openCity(event, 'London')"
+						id="defaultOpen">day1</button>
+					<button class="tablinks" onclick="openCity(event, 'Paris')">day2</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day3</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day4</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day5</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day6</button>
+					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day7</button>
+				</div>
 
-				<ol>
-					<li>서울역</li>
-					<li>경복궁</li>
-					<li>창덕궁</li>
-				</ol>
+				<div id="London" class="tabcontent">
+					<h3>London</h3>
+					<p>London is the capital city of England.</p>
+				</div>
+
+				<div id="Paris" class="tabcontent">
+					<h3>Paris</h3>
+					<p>Paris is the capital of France.</p>
+				</div>
+
+				<div id="Tokyo" class="tabcontent">
+					<h3>Tokyo</h3>
+					<p>Tokyo is the capital of Japan.</p>
+				</div>
 			</div>
-		</div>
+			<script>
 
-		<br clear="all">
+				function openCity(evt, cityName) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementsByClassName("tabcontent");
+					for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(
+								" active", "");
+					}
+					document.getElementById(cityName).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+
+				// Get the element with id="defaultOpen" and click on it
+				document.getElementById("defaultOpen").click();
+			</script>
+
+			<br clear="all">
 
 		<div id="content_3">
 			<div id="content_3_1">
@@ -198,7 +284,7 @@
 						<td width="100" align="center"><img width="60"
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
-						<td><b style="font-size: 18px;"><%=p.getPlanWriter() %></b> <br>
+						<td><b style="font-size: 18px; color:rgb(75, 75, 75);"><%=p.getPlanWriter() %></b> <br>
 							클릭시 프로필 조회 가능</td>
 					</tr>
 				</table>
@@ -220,7 +306,7 @@
 		<div id="content_4" style="padding-left: 15px;"></div>
 		<hr>
 
-		<!--  
+		
 			<div id="content_4" align="center">
 				<form action="" method="post">
 					<table>
@@ -240,7 +326,7 @@
 			</div>
 
 			<hr>
-			-->
+			
 
 		<div id="content_5" align="center">
 			<!--  

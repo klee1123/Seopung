@@ -273,6 +273,7 @@
             <%}else{ %>
             	<%for(int i=0;i<list.size();i++){ %>
 	            <div class="thumbnail" align="center">
+	            	<input type="hidden" value="<%= list.get(i).getPlanNo() %>">
 	                <div id="staticMap<%=i %>" style="width:200px; height:200px;"></div>
 	                <p>
 	                    <%= list.get(i).getPlanTitle() %> <br>
@@ -339,7 +340,14 @@
 				</tr>
 			</table>
         </div>
-     
+     	<script>
+        	$(function(){
+				$(".thumbnail").click(function(){
+					
+					location.href="<%=contextPath%>/detail.pl?pno=" + $(this).children().eq(0).val();
+				});
+        	});
+        </script>
 
 
 
