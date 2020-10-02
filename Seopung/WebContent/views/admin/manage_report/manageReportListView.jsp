@@ -102,7 +102,7 @@
 	
 	                                <% for(int p=startPage; p<=endPage; p++){ %>
 	                                    <% if(p != currentPage){ %>
-	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 	                                    <% }else{ %>
 	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 	                                    <% } %>
