@@ -15,7 +15,7 @@ public class ScrapCommunityService {
 		
 			Connection conn = getConnection();
 			
-			int listCount = new ScrapCommunityDao().selectListCount(conn);
+			int listCount = new ScrapCommunityDao().selectListCount(conn,userNo);
 			
 			close(conn);
 			

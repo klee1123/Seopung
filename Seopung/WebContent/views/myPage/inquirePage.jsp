@@ -62,10 +62,9 @@
             <table id="inquireTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;번호</th>
-                        <th width="400">제목</th>
-                        <th width="100">내용</th>
-                        <th width="100">처리상태</th>
+                        <th width="100"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;문의번호</th>
+                        <th width="600">제목</th>
+                        <th width="200">처리상태</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,8 +77,7 @@
 		                    <tr align="center">
 		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
-		                        <td><a href=""><%= i.getInquireTitle() %></a></td>
-		                        <td><%= i.getInquireContent() %></td>
+		                        <td><%= i.getInquireTitle() %></td>
 		                        <td><%= i.getInquireStatus() %></td>
 		                    </tr>	
                     	<% } %>
@@ -112,6 +110,11 @@
         </div>
 
     <script>
+	    $(function(){
+			$(".listArea>tbody>tr>td").click(function(){
+				location.href = "<%=contextPath%>/detail.bo?bno=" + $(this).children().eq(2).text();
+			});
+		});
         // 체크박스 전체선택 및 해제
         $(function(){
             $("#chk_all").click(function(){

@@ -53,7 +53,7 @@
                 <thead>
                     <tr align="center">
                         <th width="25"><input type="checkbox" class="chk" id="chk_all" name="chkAll"
-                        >&nbsp;&nbsp;번호</th>
+                        >&nbsp;&nbsp;글번호</th>
                         <th width="250">제목</th>
                         <th width="150">스크랩날짜</th>
                     </tr>

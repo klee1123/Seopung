@@ -1,4 +1,4 @@
-package com.kh.sidebar.controller;
+package com.kh.scrapPlan.controller;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ScarpPlanServlet
  */
-@WebServlet("/scrapP.me")
+@WebServlet("/scrapPlan.sp")
 public class ScarpPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

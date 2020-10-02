@@ -1,4 +1,4 @@
-package com.kh.scrapCommunity.controller;
+package com.kh.scrapPlan.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.common.PageInfo;
-import com.kh.inquire.model.service.InquireService;
 import com.kh.scrapCommunity.model.service.ScrapCommunityService;
-import com.kh.scrapCommunity.model.vo.ScrapCommunity;
+import com.kh.scrapPlan.model.service.ScrapPlanService;
+import com.kh.scrapPlan.model.vo.ScrapPlan;
 
 /**
- * Servlet implementation class ScrapCommunityListServlet
+ * Servlet implementation class ScrapPlanListServlet
  */
-@WebServlet("/list.sc")
-public class ScrapCommunityListServlet extends HttpServlet {
+@WebServlet("/list.sp")
+public class ScrapPlanListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ScrapCommunityListServlet() {
+    public ScrapPlanListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -74,16 +74,15 @@ public class ScrapCommunityListServlet extends HttpServlet {
         PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
        
         // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
-        ArrayList<ScrapCommunity> list = new ScrapCommunityService().selectList(pi,userNo);
+        ArrayList<ScrapPlan> list = new ScrapPlanService().selectList(pi,userNo);
         
         request.setAttribute("pi", pi);
         request.setAttribute("list", list);
         request.setAttribute("userNo",userNo);
 	
-        RequestDispatcher view = request.getRequestDispatcher("views/myPage/scrap/scrapCommunity.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("views/myPage/scrap/scrapPlan.jsp");
         view.forward(request, response);
-		
-		
+
 	}
 
 	/**

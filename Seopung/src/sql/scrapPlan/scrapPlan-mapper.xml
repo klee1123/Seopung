@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT COUNT(*) LISTCOUNT
+	      FROM TB_PLAN_SCRAP
+	     WHERE USER_NO = ?
+	</entry>
+	<entry key="selectList">
+		 SELECT *
+		   FROM (
+		         SELECT 
+		                ROWNUM RNUM
+		              , A.* 
+		           FROM (
+		                 SELECT
+		                        PO.PLAN_NO 
+                              , PO.PLAN_TITLE
+		                      , MEM.USER_NICK
+		                      , PS.PSCRAP_DATE
+		                   FROM TB_PLAN_SCRAP PS
+                           JOIN TB_PLAN_OPTION PO ON (PS.PLAN_NO = PO.PLAN_NO)
+                           JOIN TB_MEMBER MEM ON (MEM.USER_NO = PO.USER_NO)
+		                  WHERE PO.STATUS = 'Y'
+		                    AND PS.USER_NO = ?
+		                  ORDER
+		                     BY PSCRAP_DATE DESC
+		                ) A
+		           )
+  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+</properties>

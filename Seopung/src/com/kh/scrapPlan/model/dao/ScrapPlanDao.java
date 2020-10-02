@@ -1,6 +1,6 @@
-package com.kh.scrapCommunity.model.dao;
+package com.kh.scrapPlan.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,16 +14,16 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.kh.common.PageInfo;
-import com.kh.inquire.model.dao.InquireDao;
-import com.kh.scrapCommunity.model.vo.ScrapCommunity;
+import com.kh.scrapPlan.model.vo.ScrapPlan;
 
-public class ScrapCommunityDao {
-	
+
+public class ScrapPlanDao {
+
 	private Properties prop = new Properties();
 	
-	public ScrapCommunityDao() {
+	public ScrapPlanDao() {
 		
-		String fileName = ScrapCommunityDao.class.getResource("/sql/scrapCommunity/scrapCommunity-mapper.xml").getPath(); 
+		String fileName = ScrapPlanDao.class.getResource("/sql/scrapPlan/scarpPlan-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -34,11 +34,9 @@ public class ScrapCommunityDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	public int selectListCount(Connection conn, int userNo) {
 		
+	}
+	public int selectListCount(Connection conn, int userNo) {
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
@@ -65,20 +63,21 @@ public class ScrapCommunityDao {
 		return listCount;
 	}
 	
-	public ArrayList<ScrapCommunity> selectList(Connection conn, PageInfo pi , int userNo) {
+	public ArrayList<ScrapPlan> selectList(Connection conn, PageInfo pi, int userNo) {
 		
-		ArrayList<ScrapCommunity> list = new ArrayList<>();
+		ArrayList<ScrapPlan> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("selectListCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit()+1;
 			int endRow = startRow + pi.getBoardLimit()-1;
+			
 			pstmt.setInt(1, userNo);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
@@ -86,11 +85,11 @@ public class ScrapCommunityDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new ScrapCommunity(rset.getInt("community_no"),
-											rset.getString("community_title"),
-											rset.getDate("scrap_date")));
+				list.add(new ScrapPlan(rset.getInt("PLAN_NO"),
+									   rset.getString("PLAN_TITLE"),
+									   rset.getString("USER_NICK"),
+									   rset.getDate("pscrap_date")));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -99,32 +98,5 @@ public class ScrapCommunityDao {
 		}
 		return list;
 	}
-	
-	public int deleteScrapCommunityList(Connection conn, String[] scno, int userNo) {
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("deleteScrapCommunityList");
-		
-		if(scno.length > 1) {
-			for(int i=1; i<scno.length; i++) {
-				sql += " OR (USER_NO = " + userNo + " AND COMMUNITY_NO = " + scno[i] + ")";
-			}
-		}
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, Integer.parseInt(scno[0]));
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
+
 }
