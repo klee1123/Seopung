@@ -16,7 +16,7 @@ import com.kh.adminPlan.model.vo.Plan;
 @WebServlet("/detail.pl")
 public class PlanDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,12 +39,11 @@ public class PlanDetailServlet extends HttpServlet {
 			Plan p = new PlanService().selectPlan(pno);
 			
 			request.setAttribute("p", p);
-			request.setAttribute("pageTitle", "일정 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanDetailView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/search/planDetailView.jsp").forward(request, response);
 
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			//request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			//request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	
 	
