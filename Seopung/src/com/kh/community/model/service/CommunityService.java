@@ -100,6 +100,36 @@ public class CommunityService {
 		return result;
 	}
 	
+	public int increaseRe(int cno, int userNo) {
+		Connection conn = getConnection();
+		
+		int result1 = new CommunityDao().increaseRe(conn, cno);
+		int result2 = new CommunityDao().insertRecommend(conn, cno, userNo);
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+	}
+	
+	public int decreaseRe(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().decreaseRe(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	

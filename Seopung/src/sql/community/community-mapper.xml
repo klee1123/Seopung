@@ -99,5 +99,28 @@
 		      , COMMUNITY_HEAD = ?
 		  WHERE COMMUNITY_NO = ?
 	</entry>
+	<entry key="increaseRe">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND + 1
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="insertRecommend">
+		INSERT
+		  INTO TB_COMMUNITY_RECOMMEND
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   )
+		   VALUES
+		   (
+		      ?
+		    , ?
+		    )
+	</entry>
+	<entry key="decreaseRe">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND - 1
+		 WHERE COMMUNITY_NO = ?
+	</entry>
 	
 </properties>

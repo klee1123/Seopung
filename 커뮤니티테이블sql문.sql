@@ -49,7 +49,18 @@ SELECT *
             ) A
     )
     WHERE RNUM BETWEEN 1 AND 10;
-    
+
+INSERT
+  INTO TB_COMMUNITY_RECOMMEND
+  (
+     COMMUNITY_NO
+   , USER_NO
+   )
+   VALUES
+   (
+      ?
+    , ?
+    );
 --community insert
 
 INSERT
@@ -78,4 +89,10 @@ INSERT
    DELETE 
      FROM TB_COMMUNITY 
     WHERE COMMUNITY_NO = 7;
+    
+UPDATE TB_COMMUNITY
+   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND + 1
+ WHERE COMMUNITY_NO = 25;
+ 
+
   
