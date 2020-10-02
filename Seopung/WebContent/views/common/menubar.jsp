@@ -118,7 +118,7 @@ $(function(){
 										<a class="dropdown-item" href="">일정만들기</a> <a
 											class="dropdown-item" href="">일정검색</a>
 									</div></li>
-								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1">커뮤니티</a>
+								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1&head=전체">커뮤니티</a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
 									href="packages.html">추천코스</a></li>

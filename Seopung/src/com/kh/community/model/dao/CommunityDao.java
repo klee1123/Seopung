@@ -29,40 +29,57 @@ public class CommunityDao {
 		}
 	}
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, String keyword, String head) {
 		
 		int listCount = 0;
 		
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectListCount");
-		
-		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
-			
-			if(rset.next()) {
-				listCount = rset.getInt(1);
+			if(head.equals("전체")) {
+				
+			String sql = prop.getProperty("selectListCountAll");
+			try {
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, keyword );
+				
+				rset = stmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(stmt);
-		}
-		return listCount;
+			}else {
+				String sql = prop.getProperty("selectListCount");
+				try {
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, head);
+					stmt.setString(2, keyword);
+					rset = stmt.executeQuery();
+					
+					if(rset.next()) {
+						listCount = rset.getInt(1);
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	
+			return listCount;
+		
 	}
 	
-	public ArrayList<Community> selectList(Connection conn, PageInfo pi){
+	public ArrayList<Community> selectList(Connection conn, PageInfo pi, String keyword, String head){
 		
 		ArrayList<Community> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+		if(head.equals("전체")) {
+		String sql = prop.getProperty("selectListAll");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -70,8 +87,10 @@ public class CommunityDao {
 			int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() -1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
@@ -93,7 +112,42 @@ public class CommunityDao {
 			close(rset);
 			close(pstmt);
 		}
-		
+		}else {
+			String sql = prop.getProperty("selectList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				int startRow = (pi.getCurrentPage() -1 ) * pi.getBoardLimit() + 1;
+				int endRow = startRow + pi.getBoardLimit() -1;
+				
+				pstmt.setString(1, keyword);
+				pstmt.setString(2, head);
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
+				
+				
+				rset = pstmt.executeQuery();
+				while(rset.next()) {
+					list.add(new Community(rset.getInt("COMMUNITY_NO"),
+										   rset.getString("USER_NICK"),
+							               rset.getString("COMMUNITY_TITLE"),
+							               rset.getString("COMMUNITY_CONTENT"),
+							               rset.getDate("COMMUNITY_ENROLL"),
+							               rset.getInt("COMMUNITY_COUNT"),
+							               rset.getInt("COMMUNITY_SCRAP"),
+							               rset.getInt("COMMUNITY_RECOMMEND"),
+							               rset.getString("COMMUNITY_THUMB"),
+							               rset.getString("COMMUNITY_HEAD")));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+		}
 		return list;
 		
 	}
@@ -373,25 +427,45 @@ public class CommunityDao {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
