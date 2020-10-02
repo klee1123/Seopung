@@ -1,6 +1,6 @@
 package com.kh.scrapPlan.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class ScrapPlanDao {
 	
 	public ScrapPlanDao() {
 		
-		String fileName = ScrapPlanDao.class.getResource("/sql/scrapPlan/scarpPlan-mapper.xml").getPath();
+		String fileName = ScrapPlanDao.class.getResource("/sql/scrapPlan/scrapPlan-mapper.xml").getPath(); 
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -34,7 +34,6 @@ public class ScrapPlanDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	public int selectListCount(Connection conn, int userNo) {
 		int listCount = 0;
@@ -70,7 +69,7 @@ public class ScrapPlanDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectListCount");
+		String sql = prop.getProperty("selectList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -85,9 +84,9 @@ public class ScrapPlanDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new ScrapPlan(rset.getInt("PLAN_NO"),
-									   rset.getString("PLAN_TITLE"),
-									   rset.getString("USER_NICK"),
+				list.add(new ScrapPlan(rset.getInt("plan_no"),
+									   rset.getString("plan_title"),
+									   rset.getString("user_nick"),
 									   rset.getDate("pscrap_date")));
 			}
 		} catch (SQLException e) {
@@ -97,6 +96,35 @@ public class ScrapPlanDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public int deleteList(Connection conn, String[] spno, int userNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteList");
+		
+		if(spno.length > 1) {
+			for(int i=1; i<spno.length; i++) {
+				sql += "OR (USER_NO = " + userNo + "AND PLAN_NO = " + spno[i] + ")"; 
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, Integer.parseInt(spno[0]));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

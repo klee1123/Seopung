@@ -43,7 +43,7 @@
 	<div class="myContent">
 		<div class="scrapPlan">
         
-            <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;스크랩 커뮤니티</h1>
+            <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;스크랩 일정</h1>
             <hr>
         
         <div class="scrapCp">
@@ -56,13 +56,14 @@
                         <th width="25"><input type="checkbox" class="chk" id="chk_all" name="chkAll"
                         >&nbsp;&nbsp;글번호</th>
                         <th width="250">제목</th>
-                        <th width="150">스크랩날짜</th>
+                        <th width="100">작성자</th>
+                        <th width="100">스크랩날짜</th>
                     </tr>
                 </thead>
                 <tbody id="cpBody">
                   <%if(list.isEmpty()) { %>
                   		<tr>
-                  			<td colspan="5" align="center">조회된 스크랩이 없습니다</td>
+                  			<td colspan="4" align="center">조회된 스크랩이 없습니다</td>
                   		</tr>
                 	<%}else { %>
                 		<%for(ScrapPlan cp : list) {%>

@@ -55,19 +55,21 @@
                         <th width="25"><input type="checkbox" class="chk" id="chk_all" name="chkAll"
                         >&nbsp;&nbsp;글번호</th>
                         <th width="250">제목</th>
-                        <th width="150">스크랩날짜</th>
+                        <th width="100">작성자</th>
+                        <th width="100">스크랩날짜</th>
                     </tr>
                 </thead>
                 <tbody id="cmBody">
                   <%if(list.isEmpty()) { %>
                   		<tr>
-                  			<td colspan="5" align="center">조회된 스크랩이 없습니다</td>
+                  			<td colspan="4" align="center">조회된 스크랩이 없습니다</td>
                   		</tr>
                 	<%}else { %>
                 		<%for(ScrapCommunity cm : list) {%>
 		                   	<tr align="center"> 
 		                        <td><input type="checkbox"id="chk" name="scno" value="<%=cm.getCommunityNo()%>">&nbsp;&nbsp;<%=cm.getCommunityNo() %></td>
 		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
+		                        <td><%=cm.getCommunityWriter() %></td>
 		                        <td><%=cm.getScrapDate()%></td>
 		                    </tr>
 	                    <%} %>

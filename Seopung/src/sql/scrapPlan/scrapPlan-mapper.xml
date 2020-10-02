@@ -6,6 +6,7 @@
 	      FROM TB_PLAN_SCRAP
 	     WHERE USER_NO = ?
 	</entry>
+	
 	<entry key="selectList">
 		 SELECT *
 		   FROM (
@@ -29,4 +30,12 @@
 		           )
   WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="deleteList">
+		DELETE
+		       TB_PLAN_SCRAP
+		 WHERE (USER_NO = ?
+		   AND PLAN_NO = ?)
+	</entry>
+	
 </properties>
