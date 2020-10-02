@@ -130,6 +130,39 @@ public class CommunityService {
 		return result;
 	}
 	
+	public int increaseScrap(int cno, int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new CommunityDao().increaseScrap(conn, cno);
+		int result2 = new CommunityDao().insertScrap(conn, cno, userNo);
+		
+		if(result1 > 0 && result2 > 0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result1 * result2;
+		
+	}
+	
+	public int decreaseScrap(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().decreaseScrap(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	

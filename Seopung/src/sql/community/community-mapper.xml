@@ -102,6 +102,7 @@
 	<entry key="increaseRe">
 		UPDATE TB_COMMUNITY
 		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND + 1
+		     , COMMUNITY_COUNT = COMMUNITY_COUNT -1
 		 WHERE COMMUNITY_NO = ?
 	</entry>
 	<entry key="insertRecommend">
@@ -120,6 +121,34 @@
 	<entry key="decreaseRe">
 		UPDATE TB_COMMUNITY
 		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND - 1
+		    
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="increaseScrap">
+			UPDATE TB_COMMUNITY
+		   SET COMMUNITY_SCRAP = COMMUNITY_SCRAP + 1
+		     , COMMUNITY_COUNT = COMMUNITY_COUNT -1
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="insertScrap">
+		INSERT
+		  INTO TB_COMMUNITY_SCRAP
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   , SCRAP_DATE
+		   )
+		   VALUES
+		   (
+		      ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
+	<entry key="decreaseScrap">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_SCRAP = COMMUNITY_SCRAP - 1
+		    
 		 WHERE COMMUNITY_NO = ?
 	</entry>
 	

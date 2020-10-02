@@ -90,7 +90,7 @@
           <%if(loginUser != null && loginUser.getUserNo() != c.getUserNo1()){  %>
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/recommend.co?cno=<%=c.getComNo()%>'">추천</button>
-				<button class="btn btn-secondary" onclick="del();">스크랩</button>
+				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">스크랩</button>
 			</div>
         <%} %>
         <div id="content_4">
