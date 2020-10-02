@@ -136,31 +136,32 @@ div {
                 <option value="tendinous">건의</option>
                 <option value="etc">기타문의</option>
                 </select>
-        </form>
         <br>
-
-        <h4>서풍에 가입된 이메일 주소</h4>
-        <form action="">
+		<% if(loginUser == null) {%>
+        
+        <h4>이메일 주소</h4>
+     
             <label for="email"></label>
             <input type="email" id="email" name="email" required>
-        </form>
+        
+        <%} %>
         <br>
-
+		
         <h4>문의내용</h4>
-        <form action="">
+     
             <textarea cols="60" rows="7" style="resize: none;" required></textarea>
-        </form>
+      
         <br><br>
-
-        <form action="">
+        
             <input id="privacy" type="checkbox" name="privacy" value="" required>
             <label for="privacy"><h4 style="display:inline;">개인 정보 수집 및  이용에 동의합니다.</h4></label>
-        </form>
+       
         <br><br><br><br>
 
         <div align="center">
             <button type="submit" class="btn btn-primary">제출하기</button>
         </div>        
+        </form>
 
     </div>
     <!-- /.container-fluid -->
