@@ -1,26 +1,26 @@
-package com.kh.scrapCommunity.controller;
+package com.kh.searchPlan.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.scrapCommunity.model.service.ScrapCommunityService;
+import com.kh.adminPlan.model.service.PlanService;
+import com.kh.adminPlan.model.vo.Plan;
 
 /**
- * Servlet implementation class DeleteScrapCommunityListServlet
+ * Servlet implementation class PlanDetailViewServlet
  */
-@WebServlet("/delete.sc")
-public class DeleteScrapCommunityListServlet extends HttpServlet {
+@WebServlet("/detail.pl")
+public class PlanDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteScrapCommunityListServlet() {
+    public PlanDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,23 @@ public class DeleteScrapCommunityListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int pno = Integer.parseInt(request.getParameter("pno"));
 		
-		String[] scno = request.getParameterValues("scno");
-		int result = new ScrapCommunityService().deleteScrapCommunityList(scno, userNo);
+		int result = new PlanService().increaseCount(pno);
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.sc?currentPage=1&userNo=" + userNo);
+		if(result>0) {
+			
+			Plan p = new PlanService().selectPlan(pno);
+			
+			request.setAttribute("p", p);
+			request.setAttribute("pageTitle", "일정 상세조회");
+			request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanDetailView.jsp").forward(request, response);
+
+		}else {
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
+	
 	
 	}
 

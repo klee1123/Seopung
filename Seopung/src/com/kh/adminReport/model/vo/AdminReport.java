@@ -8,8 +8,8 @@ public class AdminReport {
 	private String reportContent;
 	private Date reportDate;
 	private String reportstatus;
-	private int userNo; // 수정
-	private int userNo2;// 수정
+	private String userNo; // userNo 신고한사람
+	private String userNo2;// userNo2 신고당한사람
 	private int reportPostno;
 	private String reportType;
 	private int reportPosttype;
@@ -18,8 +18,8 @@ public class AdminReport {
 		
 	}
 
-	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, int userNo,
-			int userNo2, int reportPostno, String reportType, int reportPosttype) {
+	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, String userNo,
+			String userNo2, int reportPostno, String reportType, int reportPosttype) {
 		super();
 		this.reportNo = reportNo;
 		this.reportContent = reportContent;
@@ -64,19 +64,19 @@ public class AdminReport {
 		this.reportstatus = reportstatus;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
-	public int getUserNo2() {
+	public String getUserNo2() {
 		return userNo2;
 	}
 
-	public void setUserNo2(int userNo2) {
+	public void setUserNo2(String userNo2) {
 		this.userNo2 = userNo2;
 	}
 
@@ -112,4 +112,5 @@ public class AdminReport {
 	}
 	
 	
+
 }

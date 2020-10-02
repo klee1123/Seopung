@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class userInquiryListServlet
+ * Servlet implementation class UserInquiryEnrollFormServlet
  */
-@WebServlet("/list.us")
-public class userInquiryListServlet extends HttpServlet {
+@WebServlet("/enrollForm.iq") // insert.iq로 값넣을때 지정
+public class UserInquiryEnrollFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public userInquiryListServlet() {
+    public UserInquiryEnrollFormServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class userInquiryListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("views/serviceCenter/userInquiry/userInquiryEnroll.jsp").forward(request, response);
 	}
 
 	/**

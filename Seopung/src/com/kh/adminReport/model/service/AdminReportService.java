@@ -6,8 +6,6 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.adminNotice.model.dao.AdminNoticeDao;
-import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.adminReport.model.dao.AdminReportDao;
 import com.kh.adminReport.model.vo.AdminReport;
 import com.kh.common.PageInfo;
