@@ -38,7 +38,7 @@ public class DeleteScrapCommunityListServlet extends HttpServlet {
 		System.out.println(result);
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.sc?currentPage=1");
+			response.sendRedirect(request.getContextPath() + "/list.sc?currentPage=1&userNo=" + userNo);
 		}
 	
 	}
