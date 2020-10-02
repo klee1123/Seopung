@@ -167,6 +167,7 @@ public class CommunityDao {
 			if(rset.next()) {
 				c = new Community(rset.getInt("COMMUNITY_NO"),
 						   rset.getString("USER_NICK"),
+						   rset.getInt("USER_NO"),
 			               rset.getString("COMMUNITY_TITLE"),
 			               rset.getString("COMMUNITY_CONTENT"),
 			               rset.getDate("COMMUNITY_ENROLL"),

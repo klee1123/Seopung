@@ -2,17 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@page import="com.kh.community.model.vo.*, java.text.SimpleDateFormat" %>
 
-
-
  <%
  	Community c = (Community)request.getAttribute("c");
  %>
  
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +81,7 @@
         <div id="content_3">
             <%=c.getContent() %>
         </div>
-        <%if(loginUser != null && loginUser.getNickName().equals(c.getUserNo())){  %>
+        <%if(loginUser != null && loginUser.getUserNo() == c.getUserNo1()){  %>
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/updateForm.co?cno=<%=c.getComNo()%>'">수정</button>
 				<button class="btn btn-danger" onclick="del();">삭제</button>

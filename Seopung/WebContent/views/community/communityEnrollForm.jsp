@@ -47,16 +47,17 @@
 				<textarea  id="summernote" name="content" required></textarea>
 
 				<br>
+				
 				<button type="button" id="thumbBtn"
 					class="btn btn-outline-secondary btn-sm">썸네일 사진첨부</button>
-				<img width="140" height="140" id="thumbPreview"> 
+				<img width="140" height="140" id="thumbPreview" > 
 				<input type="file" id="thumbnail" name="thumbnail"
 					onchange="loadImage(this)" required> <br>
 				<br>
 				<br>
 
 				<div align="center">
-					<button type="button" class="btn btn-secondary" onclick="history.back();">취소</button>
+					<button type="button" class="btn btn-secondary"  onclick="history.back();">취소</button>
 					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</form>
@@ -65,20 +66,23 @@
 			<br>
 			<br>
 			<script>
-			$()
+		
 				$('#summernote').summernote({
 					tabsize : 2,
 					height : 400
 				});
-
+				
+				
+				
 				$(function() {
 
 					$("#thumbnail").hide();
+					$("#thumbanil").focus();
 
 					$("#thumbBtn").click(function() {
 						$("#thumbnail").click();
 					});
-
+					
 				});
 
 				function loadImage(inputFile) {

@@ -57,7 +57,7 @@
 		    , ?
 		    , ?
 		    , ?
-		    , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MM)
+		    , SYSDATE
 		    )
 	</entry>
 	<entry key="increaseCount">
@@ -72,6 +72,7 @@
 		       COMMUNITY_NO
 		     , COMMUNITY_TITLE
 		     , USER_NICK
+		     , USER_NO
 		     , COMMUNITY_CONTENT
 		     , COMMUNITY_COUNT
 		     , COMMUNITY_SCRAP

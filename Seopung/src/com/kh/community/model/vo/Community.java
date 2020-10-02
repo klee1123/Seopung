@@ -6,6 +6,7 @@ public class Community {
 
 	private int comNo;
 	private String userNo;
+	private int userNo1;
 	private String title;
 	private String content;
 	private Date enroll;
@@ -19,11 +20,12 @@ public class Community {
 	
 	public Community() {}
 
-	public Community(int comNo, String userNo, String title, String content, Date enroll, Date modify, int count,
+	public Community(int comNo, String userNo, int userNo1, String title, String content, Date enroll, Date modify, int count,
 			int scrap, int recommend, String status, String thumb, String head) {
 		super();
 		this.comNo = comNo;
 		this.userNo = userNo;
+		this.userNo1 = userNo1;
 		this.title = title;
 		this.content = content;
 		this.enroll = enroll;
@@ -61,11 +63,12 @@ public class Community {
 
 	
 
-	public Community(int comNo, String userNo, String title, String content, Date enroll, int count, int scrap,
+	public Community(int comNo, String userNo, int userNo1, String title, String content, Date enroll, int count, int scrap,
 			int recommend, String thumb) {
 		super();
 		this.comNo = comNo;
 		this.userNo = userNo;
+		this.userNo1 = userNo1;
 		this.title = title;
 		this.content = content;
 		this.enroll = enroll;
@@ -74,6 +77,7 @@ public class Community {
 		this.recommend = recommend;
 		this.thumb = thumb;
 	}
+	
 
 	public int getComNo() {
 		return comNo;
@@ -89,6 +93,14 @@ public class Community {
 
 	public void setUserNo(String userNo) {
 		this.userNo = userNo;
+	}
+	
+	public int getUserNo1() {
+		return userNo1; 
+	}
+	
+	public void setUserNo1(int userNo1) {
+		this.userNo1 = userNo1;
 	}
 
 	public String getTitle() {
