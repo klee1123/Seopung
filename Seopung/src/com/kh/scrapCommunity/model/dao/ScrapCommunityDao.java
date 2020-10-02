@@ -88,6 +88,7 @@ public class ScrapCommunityDao {
 			while(rset.next()) {
 				list.add(new ScrapCommunity(rset.getInt("community_no"),
 											rset.getString("community_title"),
+											rset.getString("user_nick"),
 											rset.getDate("scrap_date")));
 			}
 			

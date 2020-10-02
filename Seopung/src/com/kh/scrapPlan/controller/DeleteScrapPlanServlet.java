@@ -1,4 +1,4 @@
-package com.kh.scrapCommunity.controller;
+package com.kh.scrapPlan.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.scrapCommunity.model.service.ScrapCommunityService;
+import com.kh.scrapPlan.model.service.ScrapPlanService;
 
 /**
- * Servlet implementation class DeleteScrapCommunityListServlet
+ * Servlet implementation class DeleteScrapPlanServlet
  */
-@WebServlet("/delete.sc")
-public class DeleteScrapCommunityListServlet extends HttpServlet {
+@WebServlet("/delete.sp")
+public class DeleteScrapPlanServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteScrapCommunityListServlet() {
+    public DeleteScrapPlanServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +32,14 @@ public class DeleteScrapCommunityListServlet extends HttpServlet {
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		String[] scno = request.getParameterValues("scno");
-		int result = new ScrapCommunityService().deleteScrapCommunityList(scno, userNo);
+		String[] spno = request.getParameterValues("spno");
+		
+		int result = new ScrapPlanService().deleteList(spno, userNo);
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.sc?currentPage=1&userNo=" + userNo);
+			response.sendRedirect(request.getContextPath() + "/list.sp?currentPage=1&userNo=" + userNo);
 		}
-	
 	}
 
 	/**

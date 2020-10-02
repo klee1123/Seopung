@@ -8,7 +8,7 @@
 	</entry>
 	
 	<entry key="selectList">
-		  SELECT *
+		 SELECT *
 		   FROM (
 		         SELECT 
 		                ROWNUM RNUM
@@ -16,10 +16,12 @@
 		           FROM (
 		                 SELECT
 		                        CM.COMMUNITY_NO 
-		                      , COMMUNITY_TITLE
-		                      , SCRAP_DATE
+		                      , CM.COMMUNITY_TITLE
+                              , MEM.USER_NICK
+		                      , CS.SCRAP_DATE
 		                   FROM TB_COMMUNITY_SCRAP CS
 		                   JOIN TB_COMMUNITY CM ON (CS.COMMUNITY_NO = CM.COMMUNITY_NO)
+                           JOIN TB_MEMBER MEM ON (MEM.USER_NO = CM.USER_NO)
 		                  WHERE COMMUNITY_STATUS = 'Y'
 		                    AND CS.USER_NO = ?
 		                  ORDER
