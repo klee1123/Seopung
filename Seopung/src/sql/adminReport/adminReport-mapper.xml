@@ -4,7 +4,7 @@
 	<entry key="selectListCount">
 		SELECT COUNT(*) 
   		  FROM TB_REPORT 
- 		 WHERE STATUS = 'Y'
+ 		 WHERE REPORT_STATUS = 'Y'
 	</entry>
 	
 	<entry key="selectList">
