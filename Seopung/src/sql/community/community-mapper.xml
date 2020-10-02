@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="selectListCountAll">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY C
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_HEAD IN ('맛집','명소')
+		   AND COMMUNITY_TITLE LIKE '%'||?||'%'
+	</entry>
 	<entry key="selectListCount">
 		SELECT 
 		       COUNT(*)
 		  FROM TB_COMMUNITY C
 		 WHERE COMMUNITY_STATUS = 'Y'
-		   AND COMMUNITY_HEAD = '명소'
-	        OR COMMUNITY_HEAD = '맛집'
+		   AND COMMUNITY_HEAD = ?
+		   AND COMMUNITY_TITLE LIKE '%'||?||'%'
+	</entry>
+	
+	<entry key="selectListAll">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD IN ('맛집', '명소')
+			         ORDER 
+			            BY COMMUNITY_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectList">
 		SELECT *
@@ -29,8 +66,8 @@
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
-			           AND COMMUNITY_HEAD = '맛집'
-			            OR COMMUNITY_HEAD = '명소'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD = ?
 			         ORDER 
 			            BY COMMUNITY_NO DESC
 			            ) A
@@ -151,5 +188,6 @@
 		    
 		 WHERE COMMUNITY_NO = ?
 	</entry>
+	
 	
 </properties>

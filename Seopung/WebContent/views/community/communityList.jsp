@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import = "java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo" %>
+<%@page
+	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"%>
 <%
-	ArrayList<Community> list = (ArrayList<Community>)request.getAttribute("list");
-    PageInfo pi = (PageInfo)request.getAttribute("pi");
-    int listCount = pi.getListCount();
-    int currentPage = pi.getCurrentPage();
-    int startPage = pi.getStartPage();
-    int endPage = pi.getEndPage();
-    int maxPage = pi.getMaxPage();
+	ArrayList<Community> list = (ArrayList<Community>) request.getAttribute("list");
+	String keyword = (String) request.getAttribute("keyword");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	String head = (String) request.getAttribute("head");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,8 +20,8 @@
 <title>Insert title here</title>
 <style>
 .outer {
-	width:1000px;
-	margin:auto;
+	width: 1000px;
+	margin: auto;
 	mar
 }
 
@@ -29,11 +32,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	position: absolute;
-	
 }
 
-#content br{
-	display:none;
+#content br {
+	display: none;
 }
 
 table {
@@ -74,10 +76,10 @@ table {
 	height: 30px;
 	font-size: 15px;
 }
-p>img{
-	display:none;
-}
 
+p>img {
+	display: none;
+}
 
 }
 #footer {
@@ -90,11 +92,11 @@ p>img{
 	<div class="outer">
 		<!-- 말머리, 정렬 -->
 		<div id="head"
-			style=" margin-top: 150px; margin-bottom: 10px; width: 200px;">
-			<select name="" id="head" style=>
-				<option value="all">전체</option>
-				<option value="restaurant">맛집</option>
-				<option value="place">명소</option>
+			style="margin-top: 150px; margin-bottom: 10px; width: 200px;">
+			<select name="head" id="head">
+				<option value="전체">전체</option>
+				<option value="맛집">맛집</option>
+				<option value="명소">명소</option>
 			</select> <select name="" id="array" style=>
 				<option value="new">최신순</option>
 				<option value="recommend">추천순</option>
@@ -148,74 +150,143 @@ p>img{
 
 				<hr style="width: 1000px;">
 				<br>
-				<%if(list.isEmpty()){ %>
-				<div style="font-size:20px">조회된 리스트가 없습니다.</div>
-				<%}else{ %>
-				<%for(Community c : list){ %>
+				<%
+					if (list.isEmpty()) {
+				%>
+				<div style="font-size: 20px">조회된 리스트가 없습니다.</div>
+				<%
+					} else {
+				%>
+				<%
+					for (Community c : list) {
+				%>
 				<li
-					style=" position: relative; list-style-type: none; height: 100px;">
+					style="position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수<a
-						href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"> <img style="position: absolute; margin-left: 30px;"
-							src="<%=c.getThumb() %>" width="100px;" height="100%;" alt="">
+						href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"> <img
+							style="position: absolute; margin-left: 30px;"
+							src="<%=c.getThumb()%>" width="100px;" height="100%;" alt="">
 					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;"><%=c.getHead() %></span>
-					</a> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>" style="text-decoration: none; color: black;"> <span
-							id="title" name="title"><%=c.getTitle() %>&nbsp;[4]</span>
+							id="headTitle" style="margin-left: 140px;"><%=c.getHead()%></span>
+					</a> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"
+						style="text-decoration: none; color: black;"> <span id="title"
+							name="title"><%=c.getTitle()%>&nbsp;[4]</span>
 					</a>
 
 				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 100px;"><%=c.getEnroll() %></div>
-						<div style="width: 140px;">조회수: <%=c.getCount() %> /<%=c.getUserNo() %></div> <!-- <div style="width:50px">양현우</div> -->
-				</span> <span style="margin-left: 15px; color: blue;" ><%=c.getRecommend() %></span> <br> <span>스크랩</span>
-					
-					<span id="content" style="margin-left: 140px;"><%=c.getContent() %></span> <br> <span
-					style="margin-left: 15px; color: red;"><%=c.getScrap() %></span>
+						<div style="width: 100px;"><%=c.getEnroll()%></div>
+						<div style="width: 140px;">
+							조회수:
+							<%=c.getCount()%>
+							/<%=c.getUserNo()%></div> <!-- <div style="width:50px">양현우</div> -->
+				</span> <span style="margin-left: 15px; color: blue;"><%=c.getRecommend()%></span>
+					<br> <span>스크랩</span> <span id="content"
+					style="margin-left: 140px;"><%=c.getContent()%></span> <br> <span
+					style="margin-left: 15px; color: red;"><%=c.getScrap()%></span>
 				</li>
 				<br>
-					<%} %>
-				<%} %>
+				<%
+					}
+				%>
+				<%
+					}
+				%>
 
 				<hr style="width: 1000px;">
 			</ul>
 			<div id="footer">
-				<div style="width: 200x; ">
-					<form action="">
+				<div style="width: 200x;">
+					<form action="<%=contextPath%>/list.co" method="get">
 						<select name="" id=""
 							style="width: 66px; height: 24px; font-size: 15px;">
 							<option value="title">제목</option>
-						</select> <input type="text" style="width: 150px; height: 23px;"> <label
-							for="search" style="cursor: pointer;"><img src="다운로드.png"
+							<input type="hidden" name="currentPage" value="<%=currentPage%>">
+							<input type="hidden" name="head" value="<%=head%>">
+						</select> <input type="text" style="width: 150px; height: 23px;"
+							value="<%=keyword%>" name="keyword"> <label for="search"
+							style="cursor: pointer;"><img src="다운로드.png"
 							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
-						<%if(loginUser != null){ %>
-						<button onclick="location.href='<%=contextPath%>/enrollForm.co'" type="button"
-							style=" margin-left:640px; width: 80px; height: 30px; border: none;">글작성</button>
-							<%} %>
+						<%
+							if (loginUser != null) {
+						%>
+						<button onclick="location.href='<%=contextPath%>/enrollForm.co'"
+							type="button"
+							style="margin-left: 640px; width: 80px; height: 30px; border: none;">글작성</button>
+						<%
+							}
+						%>
 					</form>
 
 					<br> <br> <br>
 				</div>
-				<div style="width: 1000px;  white-space: nowrap; " align="center">
-				<%if(currentPage != 1){ %>
-					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=1'" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage-1 %>'" class="btn btn-secondary btn-sm">&lt;</button>
-				<%} %>
-					<%for(int p = startPage; p<=endPage; p++){ %>
-						<%if(p != currentPage){ %>
-						<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p %>'" class="btn btn-outline-secondary btn-sm"><%=p %></button>
-						<%}else{ %>
-						<button disabled><%=p %></button>
-							<%} %>
-						<%} %>
-					<%if(currentPage != maxPage ){ %>
-					<button onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage+1 %>'" class="btn btn-secondary btn-sm">&gt;</button>
-					<button onclick="location.href='<%=contextPath %>/list.co?currentPage=<%=maxPage %>'" class="btn btn-secondary btn-sm">&gt;&gt;</button>
-					<%} %>	
+
+				<div style="width: 1000px; white-space: nowrap;" align="center">
+					<%
+						if (currentPage != 1) {
+					%>
+					<button
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=1'"
+						class="btn btn-secondary btn-sm">&lt;&lt;</button>
+					<button
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage - 1%>'"
+						class="btn btn-secondary btn-sm">&lt;</button>
+					<%
+						}
+					%>
+					<%
+						for (int p = startPage; p <= endPage; p++) {
+					%>
+					<%
+						if (p != currentPage) {
+					%>
+					<button
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p%>'"
+						class="btn btn-outline-secondary btn-sm"><%=p%></button>
+					<%
+						} else {
+					%>
+					<button disabled><%=p%></button>
+					<%
+						}
+					%>
+					<%
+						}
+					%>
+					<%
+						if (currentPage != maxPage) {
+					%>
+					<button
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage + 1%>'"
+						class="btn btn-secondary btn-sm">&gt;</button>
+					<button
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=maxPage%>'"
+						class="btn btn-secondary btn-sm">&gt;&gt;</button>
+					<%
+						}
+					%>
+
+
 				</div>
-				<br><br>
+				<br>
+				<br>
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		 
+		
+		$("select[name=head]").change(function(){
+		 var value = $("select[name=head]").val()
+	
+		location.href="<%=contextPath%>/list.co?currentPage=<%=currentPage%>&head="+ value;
+
+							});
+			$("#head option[value=<%=head%>]").attr("selected", true);
+		
+	});
+	</script>
 </body>
 </html>

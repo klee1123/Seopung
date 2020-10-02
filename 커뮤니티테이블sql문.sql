@@ -97,5 +97,9 @@ INSERT
     , ?
     );
  
-
+	SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY C
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_HEAD IN ('¸í¼Ò','¸ÀÁý');
   

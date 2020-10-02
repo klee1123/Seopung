@@ -11,20 +11,20 @@ import com.kh.community.model.vo.Community;
 public class CommunityService {
 
 	
-	public int selectListCount() {
+	public int selectListCount(String keyword, String head) {
 		Connection conn = getConnection();
 		
-		int listCount = new CommunityDao().selectListCount(conn);
+		int listCount = new CommunityDao().selectListCount(conn, keyword, head);
 		
 		close(conn);
 		return listCount;
 	}
 	
-	public ArrayList<Community> selectList(PageInfo pi){
+	public ArrayList<Community> selectList(PageInfo pi, String keyword, String head){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Community> list = new CommunityDao().selectList(conn, pi);
+		ArrayList<Community> list = new CommunityDao().selectList(conn, pi, keyword, head);
 		close(conn);
 		return list;
 		
@@ -162,6 +162,8 @@ public class CommunityService {
 		close(conn);
 		return result;
 	}
+	
+
 	
 	
 	
