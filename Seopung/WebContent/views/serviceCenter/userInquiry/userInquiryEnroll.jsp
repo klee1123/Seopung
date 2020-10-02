@@ -124,7 +124,7 @@ div {
         <h4>문의유형</h4>
         <form action="">
             <label for="type""></label>
-            <select name="type" id="type">
+            <select name="type" id="inquiryType">
                 <option value="question">문의 내용을 선택하세요.</option>
                 <option value="service"">서비스이용문의</option>
                 <option value="account">계정문의</option>
@@ -142,7 +142,7 @@ div {
         <h4>이메일 주소</h4>
      
             <label for="email"></label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="userEmail" required>
         
         <%} %>
         <br>
@@ -153,8 +153,8 @@ div {
       
         <br><br>
         
-            <input id="privacy" type="checkbox" name="privacy" value="" required>
-            <label for="privacy"><h4 style="display:inline;">개인 정보 수집 및  이용에 동의합니다.</h4></label>
+            <input id="privacy" type="checkbox" name="userPrivacy" value="" required>
+            <label for="privacy"><h4 style="display:inline;">개인 정보 수집 및 이용에 동의합니다.</h4></label>
        
         <br><br><br><br>
 

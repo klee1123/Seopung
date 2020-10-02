@@ -26,7 +26,21 @@ public class InsertInquiryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		
+		String inquiryType = request.getParameter("inquiryType");
+		String userEmail = request.getParameter("userEmail");
+		String userPrivacy = request.getParameter("userPrivacy");
+		
+		
+		
+		int result = new InquiryService();
+		
+		
+		
+		
+		
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
