@@ -93,7 +93,7 @@
 						<td width=""><span>총 신고글 수 &nbsp;&nbsp;&nbsp;<b
 								style="color: red"><%=listCount%></b>개
 						</span></td>
-						<td width="720px;">
+						<td width="650px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
 	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
@@ -109,23 +109,24 @@
 	                                <% } %>
 	
 	                                <% if(currentPage != maxPage){ %>
-	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
 	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 	                                <% } %>
 								
 							</div>
 						</td>
 						
+						<td>
 						<div align="right">
 							<button type="button" class="btn btn-secondary">삭제</button>
 							<button type="submit" class="btn btn-primary">블랙리스트 등록</button>
 						</div>	
-					
+						</td>
+						
 				</table>
 			</div>
 		</div>
-
-
+		<br><br><br>
 	</div>
 	<!-- /.container-fluid -->
 
