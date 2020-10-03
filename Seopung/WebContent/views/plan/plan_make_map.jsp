@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.planMap.model.vo.PlanMap" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -225,6 +227,7 @@ height : 500px;
   width: 20%;
   height: 400px;
   border: 1px solid #ccc;
+  overflow:auto;
 }
 
 /* Style the buttons inside the tab */
@@ -260,6 +263,7 @@ height : 500px;
   width: 80%;
   border-left: none;
   height: 400px;
+  overflow:auto;
 }
 </style>
 
@@ -273,51 +277,31 @@ height : 500px;
 		
 			<div id="content" style="float:left;">
 				<form action="<%= contextPath %>/planMap.pl"" style="float:left; border: 1px solid #ccc;" method="post">
+					
 					<div id="content_1">
 						<div id="make_h" style="text-align: center; line-height:40px" >일정 만들기 < 2 / 2 ></div>
 						
 						<div id="make_m">
 							<div class="tab">
-							  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="" value="Day1"></input>
-						      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="" value="Day2"></input>
-						      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="" value="Day3"></input>
+						
+							  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day1"></input>
+						      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day2"></input>
+						      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day3"></input>
+						     
 						      
 							</div>
 							
 							<div id="Day1" class="tabcontent">
-						 		<div id="placeName" >장소명 : <input type="text" name="placeName"><input type="button" class="btnAdd" value="Add"><br></div>
-						 		
-						 		
-						 		
-						 		<script>
-						 		 $(document).ready (function () {                
-						             $('.btnAdd').click (function () {                                        
-						                 $('#placeName').append (                        
-						                     '<input type="text" name="placeName"> <input type="button" class="btnRemove" value="Remove"><br>'                    
-						                 ); // end append                            
-						                 $('.btnRemove').on('click', function () { 
-						                     $(this).prev().remove (); // remove the textbox
-						                     $(this).next ().remove (); // remove the <br>
-						                     $(this).remove (); // remove the button
-						                 });
-						             }); // end click                                            
-						         }); // end ready 
-						 		</script>
-						 		
-						 		
-						
-							
+								<div>장소명</div>
+						 		<div id="placeName1" ><input type="text" name="placeName"><input type="button" class="btnAdd1" value="Add"><br></div>
 							</div>
 							
 							<div id="Day2" class="tabcontent">
-							 	<div id="placeName">장소명 : <input type="text" name=""></div>
-							 	<div id="placeName">장소명 : <input type="text" name=""></div>
+							 	<div id="placeName2" ><input type="text" name="placeName"><input type="button" class="btnAdd2" value="Add"><br></div>
 							</div>
 							
 							<div id="Day3" class="tabcontent">
-							  	<div id="placeName">장소명 : <input type="text" name=""></div>
-							  	<div id="placeName">장소명 : <input type="text" name=""></div>
-							  	<div id="placeName">장소명 : <input type="text" name=""></div>
+							  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd" value="Add"><br></div>
 							</div>
 							
 							<script>
@@ -338,6 +322,24 @@ height : 500px;
 							// Get the element with id="defaultOpen" and click on it
 							document.getElementById("defaultOpen").click();
 							</script>
+							
+						 	<script>
+						 		 $(document).ready (function () {                
+						             $('.btnAdd1').click (function () {                                        
+						                 $('#placeName1').append (                        
+						                     '<div><input type="text" name="placeName"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
+						                 ); // end append      
+						                 
+						                 $('.btnRemove1').on('click', function () { 
+						                	 $(this).prev().remove (); // remove the textbox
+						                     $(this).next().remove (); // remove the <div>
+						                     $(this).next().remove (); // ㅇㅇ
+						                     $(this).remove (); // remove the button
+						                 });
+						             }); // end click                                            
+						         }); // end ready 
+						 	</script>
+						
 							
 						</div>
 						

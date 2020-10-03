@@ -23,4 +23,19 @@
 		 
 		  )
 	</entry>
+	<entry key="planMap">
+		SELECT *
+		  FROM TB_PLAN_MAP
+		 WHERE 
+		 PLAN_NO = ?
+	</entry>
+	<entry key="selectPlanDays">
+		SELECT 
+			   PLAN_NO
+			,  PLAN_SDATE
+			,  PLAN_EDATE
+		  FROM TB_PLAN_OPTION
+		 WHERE 
+		 	PLAN_NO = ?
+	</entry>
 </properties>
