@@ -43,7 +43,8 @@ public class CommunityListServlet extends HttpServlet {
 		String head = request.getParameter("head");
 		String array = request.getParameter("array");
 		
-		
+//		int cno = Integer.parseInt(request.getParameter("cCno"));
+//		System.out.println(cno);
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -71,6 +72,9 @@ public class CommunityListServlet extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage );
+		
+//		int count = new CommunityService().countComment(cno);
+//		request.setAttribute("count", count);
 		
 		ArrayList<Community> list = new CommunityService().selectList(pi, keyword, head, array);
 		request.setAttribute("pi", pi);

@@ -1,6 +1,9 @@
 package com.kh.community.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.common.PageInfo;
 import com.kh.community.model.dao.CommunityDao;
 import com.kh.community.model.vo.Community;
+import com.kh.community.model.vo.Reply;
 public class CommunityService {
 
 	
@@ -196,6 +200,40 @@ public class CommunityService {
 		return c;
 	}
 	
+	public int insertReply(Reply r) {
+		Connection conn = getConnection();
+		int result = new CommunityDao().insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public ArrayList<Reply> selectReplyList(int cno){
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new CommunityDao().selectReplyList(conn, cno);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public int countComment(int cno) {
+		Connection conn = getConnection();
+		
+		int count = new CommunityDao().countComment(conn, cno);
+		
+		close(conn);
+		
+		return count;
+	}
 	
 	
 	

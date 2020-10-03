@@ -178,7 +178,6 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-		System.out.println(id);
 		return id;
 		
 	}

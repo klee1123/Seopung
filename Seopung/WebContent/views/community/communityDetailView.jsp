@@ -4,6 +4,7 @@
 
  <%
  	Community c = (Community)request.getAttribute("c");
+ 	
  %>
  
 <!DOCTYPE html>
@@ -101,47 +102,51 @@
         
         <div id="content_5" align="center">
             <table>
+            	<%if(loginUser == null){ %>
+            	<tr>
+                    <td>
+                        <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">
+                    </td>
+                    <td width="700px;">
+                        <textarea name="" id="" cols="90" rows="4" style="resize: none;" readonly>로그인후 이용 가능한 서비스입니다.</textarea>
+                    </td>
+             
+                </tr>
+            	<%}else{ %>
                 <tr>
                     <td>
                         <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">
                     </td>
                     <td width="700px;">
-                        <textarea name="" id="" cols="90" rows="4" style="resize: none;"></textarea>
+                        <textarea name="replyContent" id="replyContent" cols="90" rows="4" style="resize: none;"></textarea>
                     </td>
                     <td>
-                        <button>등록</button>
+                        <button type="button" onclick="addReply();">등록</button>
                     </td>
                 </tr>
+                <%} %>
             </table>
         </div>
 
         <hr>
 
-        <div id="content_6" align="center">
+        <div id="replyArea" align="center">
             
             <table>
-                <tr>
-                    <td>
-                        <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">  
-                    </td>
-                    <td width="700px">
-                        닉네임1 - 2020.09.09 22:05<br>닉네임1의 댓글내용
-                    </td>
-                    <td>
-                        <button style="border:none; background:none">삭제</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">  
-                    </td>
-                    <td>
-                        닉네임2 - 2020.09.09 22:10<br>닉네임2의 댓글내용
-                    </td>
-                    <td>
-                        <button style="border:none; background:none">삭제</button>
-                    </td>
-                </tr>
+    	        <tbody>
+        	       <!--  <tr>
+            	        <td>
+                	        <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">  
+                    	</td>
+                    	<td width="700px">
+                        	닉네임1 - 2020.09.09 22:05<br>닉네임1의 댓글내용
+                    	</td>
+                    	<td>
+                        	<button style="border:none; background:none">삭제</button>
+                    	</td>
+                	</tr> -->
+   	         </tbody>
+   
             </table>            
         </div>
 
@@ -157,6 +162,56 @@
 			}else{
 				
 			}
+		}
+		
+		$(function(){
+			selectReplyList();
+			
+			
+		});
+		// 해당 게시글에 댓글 작성용 ajax
+		function addReply(){
+			$.ajax({
+				url:"<%=contextPath%>/rinsert.co",
+				type:"post",
+				data:{
+					content:$("#replyContent").val(),
+					cno:<%=c.getComNo()%>	
+				},
+				success:function(result){
+					console.log("통신성공");
+					if(result > 0){
+						selectReplyList();
+						$("#replyContent").val("");
+					}
+				},
+				error:function(){
+					console.log("댓글작성용ajax 통신 실패");
+				}
+			});
+		}
+		
+		function selectReplyList(){
+			$.ajax({
+				url:"<%=contextPath%>/rlist.co",
+				type:"get",
+				data:{cno:<%=c.getComNo()%>},
+				success:function(list){
+					var result = "";
+					console.log(list);
+					for(var i in list){
+						result +=  "<tr>" +
+					            	    "<td>" + "<img width='60px' src='" + list[i].profile + "'> </td>" +
+					                	"<td width='700px'>" + list[i].replyWriter + "-" + list[i].createDate +"<br>" +list[i].replyContent +"</td>" +
+					                	"<td><button style='border:none; background:none'>삭제</button></td>" +
+					            	"</tr>";
+					}
+					$("#replyArea tbody").html(result);
+				},
+				error:function(){
+					console.log("댓글 리스트 조회용 ajax통신 실패");
+				}
+			});
 		}
 	</script>
     <br>

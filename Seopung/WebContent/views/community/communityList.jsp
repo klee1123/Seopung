@@ -14,6 +14,8 @@
 	int maxPage = pi.getMaxPage();
 	String head = (String) request.getAttribute("head");
 	String array = (String) request.getAttribute("array");
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -65,7 +67,7 @@ table {
 
 #title {
 	font-size: 15px;
-	font-weight: bold;
+	
 	display: inline-block;
 	width: 300px;
 	white-space: nowrap;
@@ -152,17 +154,19 @@ p>img {
 				<%
 					for (Community c : list) {
 				%>
+						
 				<li
+					
 					style="position: relative; list-style-type: none; height: 100px;">
 					<span style="display: inline-block; width: 720px;">추천수<a
 						href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"> <img
 							style="position: absolute; margin-left: 30px;"
 							src="<%=c.getThumb()%>" width="100px;" height="100%;" alt="">
-					</a> <a href="" style="text-decoration: none; color: #00c0ff"> <span
+					</a> <span  style="text-decoration: none; color: #00c0ff"> <span
 							id="headTitle" style="margin-left: 140px;"><%=c.getHead()%></span>
-					</a> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"
+					</span> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"
 						style="text-decoration: none; color: black;"> <span id="title"
-							name="title"><%=c.getTitle()%>&nbsp;[4]</span>
+							name="title"><%=c.getTitle()%>&nbsp;</span>
 					</a>
 
 				</span> <br> <span
@@ -275,7 +279,7 @@ p>img {
 		 var hed = $("select[name=head]").val()
 		 var arr = $("select[name=array]").val()
 	
-		location.href="<%=contextPath%>/list.co?currentPage=<%=currentPage%>&head="+ hed + "&array=" + arr;
+		location.href="<%=contextPath%>/list.co?currentPage=1&head="+ hed + "&array=" + arr;
 		
 							});
 			$("#head option[value=<%=head%>], #array option[value=<%=array%>").attr("selected", true);
