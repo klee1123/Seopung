@@ -443,6 +443,93 @@ public class CommunityDao {
 		
 	}
 	
+	public int insertNotice(Connection conn, Community c) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(c.getUserNo()));
+			pstmt.setString(2, c.getTitle());
+			pstmt.setString(3, c.getContent());
+			pstmt.setString(4, c.getHead());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Community> selectNoticeList(Connection conn){
+		ArrayList<Community> nList = new ArrayList<>();
+		
+		Statement stmt = null; 
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNoticeList");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			while(rset.next()) {
+				nList.add(new Community(rset.getInt("COMMUNITY_NO"),
+			            rset.getString("ADMIN_ID"),
+		                rset.getString("COMMUNITY_TITLE"),
+		                rset.getString("COMMUNITY_CONTENT"),
+		                rset.getDate("COMMUNITY_ENROLL"),
+		                rset.getInt("COMMUNITY_COUNT"),
+		                rset.getString("COMMUNITY_HEAD")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return nList;
+			
+	}
+	
+	public Community selectNotice(Connection conn, int cno) {
+		Community c = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Community(rset.getInt("COMMUNITY_NO"),
+								  rset.getString("ADMIN_ID"),
+								  rset.getInt("USER_NO"),
+						          rset.getString("COMMUNITY_TITLE"),
+						          rset.getString("COMMUNITY_CONTENT"),
+						          rset.getDate("COMMUNITY_ENROLL"),
+						          rset.getInt("COMMUNITY_COUNT"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+	}
 
 
 

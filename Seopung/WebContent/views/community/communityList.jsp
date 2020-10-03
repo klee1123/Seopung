@@ -4,6 +4,7 @@
 	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"%>
 <%
 	ArrayList<Community> list = (ArrayList<Community>) request.getAttribute("list");
+	ArrayList<Community> nList = (ArrayList<Community>) request.getAttribute("nList");
 	String keyword = (String) request.getAttribute("keyword");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
 	int listCount = pi.getListCount();
@@ -86,6 +87,9 @@ p>img {
 #footer {
 	white-space: nowrap;
 }
+#notic a{
+	color:black;
+}
 </style>
 </head>
 <body>
@@ -113,35 +117,22 @@ p>img {
 					<td colspan="3"><hr style="border: 1px solid white;"></td>
 				</tr>
 				<tr>
-
-					<th style="width: 100px;">&nbsp;&nbsp;공지</th>
+					 
+					<%for(Community nc : nList){ %>
+					<th style="width: 100px;">&nbsp;&nbsp;<%=nc.getHead() %></th>
 					<!-- 관리자가 작성했을시 -->
-					<td style="width: 900px;"><span name="title">글제목에 지역명을
-							포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</span></td>
-					<td>관리자&nbsp;&nbsp;&nbsp;</td>
+					<td style="width: 900px;">
+					 <a style="color:black; font-size:15px; font-weight:bold;" href="<%=contextPath%>/detailNotice.co?cno=<%=nc.getComNo()%>" "name="title1"><%=nc.getTitle() %></a></td>
+					<td><%=nc.getUserNo() %>&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 
 				<tr>
 					<td colspan="3"><hr style="border: 1px solid white;"></td>
 				</tr>
-				<tr>
-					<th>&nbsp;&nbsp;공지</th>
-					<td>글제목에 지역명을 포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
-					<td>관리자&nbsp;&nbsp;&nbsp;</td>
-				</tr>
-				<tr>
-					<td colspan=2><hr style="border: 1px solid white;"></td>
-				</tr>
-				<tr>
-					<th>&nbsp;&nbsp;공지</th>
-					<td>글제목에 지역명을 포함시켜주세요fdsafsdafsadfsadfsadfsafsadfsadfsdafsdaf.</td>
-					<td>관리자&nbsp;&nbsp;&nbsp;</td>
-				</tr>
-				<tr>
-					<td colspan=2><hr style="border: 1px solid white;"></td>
-				</tr>
+				<%} %>
 			</tbody>
 
+					
 		</table>
 
 
