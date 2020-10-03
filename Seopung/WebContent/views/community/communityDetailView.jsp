@@ -81,13 +81,13 @@
         <div id="content_3">
             <%=c.getContent() %>
         </div>
-        <%if(loginUser != null && loginUser.getUserNo() == c.getUserNo1()){  %>
+        <%if(loginUser != null && loginUser.getUserNo() == c.getUserNo1() && loginUser.getCategory() == 1){  %>
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/updateForm.co?cno=<%=c.getComNo()%>'">수정</button>
 				<button class="btn btn-danger" onclick="del();">삭제</button>
 			</div>
         <%} %>
-          <%if(loginUser != null && loginUser.getUserNo() != c.getUserNo1()){  %>
+          <%if(loginUser != null && loginUser.getUserNo() != c.getUserNo1()&& loginUser.getCategory() == 1){  %>
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/recommend.co?cno=<%=c.getComNo()%>'">추천</button>
 				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">스크랩</button>
