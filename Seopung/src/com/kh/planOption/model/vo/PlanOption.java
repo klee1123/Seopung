@@ -1,13 +1,11 @@
 package com.kh.planOption.model.vo;
 
-import java.sql.Date;
-
 public class PlanOption {
 
 	private int planNo;					// 일정번호
 	private String planTitle;			// 일정제목
-	private String planSdate;				// 시작일 
-	private String planEdate;				// 종료일
+	private String planSdate;			// 시작일 
+	private String planEdate;			// 종료일
 	private String planAge;				// 연령대
 	private String planAcc;				// 동행유무
 	private String planBudget;			// 예산금액
@@ -15,46 +13,18 @@ public class PlanOption {
 	private String planPrivate;			// 공개여부
 	private String planMemo;			// 작성자메모
 	private String planHashtag;			// 해시태그
-	private String planTemp;			// 임시저장
 	private String planType;			// 여행유형
 	private String planTrans;			// 이동수단
 	private int planRecommend;			// 추천수
 	private int planScrapCount;			// 스크랩수
-	private int userNo;					// 회원 번호
+	private String userNo;					// 회원 번호
 	
 	public PlanOption() {}
 	
-	
-
-	public PlanOption(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
-			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
-			String planTemp, String planType, String planTrans, int planRecommend, int planScrapCount, int userNo) {
-		super();
-		this.planNo = planNo;
-		this.planTitle = planTitle;
-		this.planSdate = planSdate;
-		this.planEdate = planEdate;
-		this.planAge = planAge;
-		this.planAcc = planAcc;
-		this.planBudget = planBudget;
-		this.planScrapYn = planScrapYn;
-		this.planPrivate = planPrivate;
-		this.planMemo = planMemo;
-		this.planHashtag = planHashtag;
-		this.planTemp = planTemp;
-		this.planType = planType;
-		this.planTrans = planTrans;
-		this.planRecommend = planRecommend;
-		this.planScrapCount = planScrapCount;
-		this.userNo = userNo;
-	}
-
-	
-
-
+	// 일정만들기 - 옵션 
 	public PlanOption(String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
-			String planTemp, String planType, String planTrans) {
+			String planType, String planTrans, String userNo) {
 		super();
 		this.planTitle = planTitle;
 		this.planSdate = planSdate;
@@ -66,11 +36,10 @@ public class PlanOption {
 		this.planPrivate = planPrivate;
 		this.planMemo = planMemo;
 		this.planHashtag = planHashtag;
-		this.planTemp = planTemp;
 		this.planType = planType;
 		this.planTrans = planTrans;
+		this.userNo = userNo;
 	}
-
 
 
 	public int getPlanNo() {
@@ -161,13 +130,6 @@ public class PlanOption {
 		this.planHashtag = planHashtag;
 	}
 
-	public String getPlanTemp() {
-		return planTemp;
-	}
-
-	public void setPlanTemp(String planTemp) {
-		this.planTemp = planTemp;
-	}
 
 	public String getPlanType() {
 		return planType;
@@ -201,11 +163,11 @@ public class PlanOption {
 		this.planScrapCount = planScrapCount;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
@@ -214,7 +176,7 @@ public class PlanOption {
 		return "PlanOption [planNo=" + planNo + ", planTitle=" + planTitle + ", planSdate=" + planSdate + ", planEdate="
 				+ planEdate + ", planAge=" + planAge + ", planAcc=" + planAcc + ", planBudget=" + planBudget
 				+ ", planScrapYn=" + planScrapYn + ", planPrivate=" + planPrivate + ", planMemo=" + planMemo
-				+ ", planHashtag=" + planHashtag + ", planTemp=" + planTemp + ", planType=" + planType + ", planTrans="
+				+ ", planHashtag=" + planHashtag + ", planTemp="  + ", planType=" + planType + ", planTrans="
 				+ planTrans + ", planRecommend=" + planRecommend + ", planScrapCount=" + planScrapCount + ", userNo="
 				+ userNo + "]";
 	}

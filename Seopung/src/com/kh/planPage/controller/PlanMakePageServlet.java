@@ -2,6 +2,7 @@ package com.kh.planPage.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.admin.model.service.AdminService;
+import com.kh.admin.model.vo.Admin;
+import com.kh.common.PageInfo;
 import com.kh.planPage.model.service.PlanPageService;
 import com.kh.planPage.model.vo.PlanPage;
 
@@ -18,13 +22,13 @@ import com.kh.planPage.model.vo.PlanPage;
  * Servlet implementation class MemberInsertServlet
  */
 @WebServlet("/planPage.pl")
-public class PlanMakePageInsertServlet extends HttpServlet {
+public class PlanMakePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanMakePageInsertServlet() {
+    public PlanMakePageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,76 +37,80 @@ public class PlanMakePageInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 1. 전달값 utf-8 인코딩(post)
+
 		request.setCharacterEncoding("utf-8");
 		
-		// 2. 전달값 뽑기서 변수 및 객체에 기록하기
-		String planTitle = request.getParameter("planTitle");	
-		String planSdate = request.getParameter("planSdate");
-		String planEdate = request.getParameter("planEdate");
+		int listCount;		// 현재 총 게시글 갯수
+		int currentPage;	// 현재 페이지 (즉, 요청한 페이지)
+		int pageLimit;		// 한 페이지 하단에 보여질 페이지 최대갯수
+		int boardLimit;		// 한 페이지내에 보여질 게시글 최대갯수
 		
-		String[] planAges = request.getParameterValues("planAge");
-		// String[] --> String
-		// ["운동", "등산" ]  --> "운동,등산"
-		String planAge = "";
-		if(planAges != null) {
-			planAge = String.join(",",  planAges);
+		int maxPage;		// 전체 페이지들 중에서의 가장 마지막 페이지
+		int startPage;		// 현재 페이지에 하단에 보여질 페이징 바의 시작수
+		int endPage;		// 현재 페이지에 하단에 보여질 페이징 바의 끝 수
+		
+		
+		// 넘어온 값 뽑기
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		// 키필드
+		int keyfield;
+		if(request.getParameter("keyfield")!=null) {
+			keyfield = Integer.parseInt(request.getParameter("keyfield"));			
+		}else {
+			keyfield = 1;
 		}
 		
-		String planAcc = request.getParameter("planAcc");
-		String planBudget = request.getParameter("planBudget");
-		String planScrapYn = request.getParameter("planScrapYn");	
-		String planPrivate = request.getParameter("planPrivate");	
-		String planMemo = request.getParameter("planMemo");
-		String planHashtag = request.getParameter("planHashtag");	
-		String planTemp = request.getParameter("planTemp");	
-		
-		String[] planTypes = request.getParameterValues("planType");
-		// String[] --> String
-		// ["운동", "등산" ]  --> "운동,등산"
-		String planType = "";
-		if(planTypes != null) {
-			planType = String.join(",",  planTypes);
+		// 키워드
+		String keyword;
+		if(request.getParameter("keyword")!=null) {
+			keyword = request.getParameter("keyword");
+		}else {
+			keyword = "";
 		}
 		
-		String planTrans = request.getParameter("planTrans");	
-		
-		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
-		PlanPage p = new PlanPage(planTitle
-									, planSdate
-									, planEdate
-									, planAge
-									, planAcc
-									, planBudget
-									, planScrapYn
-									, planPrivate
-									, planMemo
-									, planHashtag
-									, planTemp
-									, planType
-									, planTrans
-				);
-			
-		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
-		int result = new PlanPageService().insertPlanPage(p);
-		
-		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
-		if(result > 0) {	// 회원가입 성공
-			
-			request.getRequestDispatcher("views/plan/plan_make_map.jsp").forward(request, response);
-			
-		} else {	// 회원가입 실패
-			request.setAttribute("errorMsg",  "회원가입에 실패했습니다.");
-		
-			RequestDispatcher view = request.getRequestDispatcher("실패");
-			view.forward(request,response);
-		
+		// 상태분류
+		String status;
+		if(request.getParameter("status")!=null) {
+			status = request.getParameter("status");
+		}else {
+			status = "";
 		}
 		
+		// 상태분류와 키워드에 해당하는 데이터 수 조회
+		listCount = new AdminService().selectListCount(keyfield, keyword, status);
 		
+		pageLimit = 5;
 		
+		boardLimit = 10;
 		
+		// 조회된 관리자수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
+		if(listCount != 0) {
+			maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		}else {
+			maxPage=1;
+		}
+		
+		startPage = (currentPage-1)/pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Admin> list = new AdminService().selectList(pi, keyfield, keyword, status);
+		
+		request.setAttribute("pi", pi);
+		request.setAttribute("list", list);
+		request.setAttribute("keyfield", keyfield);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("status", status);
+		request.setAttribute("pageTitle", "관리자 목록");
+		
+		request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminListView.jsp").forward(request, response);
 		
 	}
 

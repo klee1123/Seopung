@@ -39,10 +39,9 @@ public class PlanMapDao {
 			pstmt = conn.prepareStatement(sql); // 미완성된sql문 => 완성하고 실행
 			
 			pstmt.setString(1, p.getPlanDay());
-			pstmt.setInt(2, p.getOrderNo());
-			pstmt.setString(3, p.getLineMemo());
-			pstmt.setString(4, p.getLatitude());
-			pstmt.setString(5, p.getLongitude());
+			pstmt.setString(2, p.getOrderNo());
+			pstmt.setString(3, p.getPlaceName());
+			pstmt.setString(4, p.getPlanNo());
 		
 			result = pstmt.executeUpdate();
 						
