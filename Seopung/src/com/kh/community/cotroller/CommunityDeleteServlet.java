@@ -1,6 +1,7 @@
 package com.kh.community.cotroller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +38,9 @@ public class CommunityDeleteServlet extends HttpServlet {
 		if(result > 0) {
 			
 			request.getSession().setAttribute("alertMsg", "게시물이 삭제되었습니다");
-			
-			response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1");
+			String all = URLEncoder.encode("전체");
+
+			response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1&head=" + all);
 		}
 	}
 
