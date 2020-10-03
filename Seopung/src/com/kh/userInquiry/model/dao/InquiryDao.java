@@ -34,14 +34,26 @@ import com.kh.userInquiry.model.vo.Inquiry;
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertInquiry");
+		String sql = "";
+		if(iq.getSep().equals("회원")){
+			sql = prop.getProperty("insertInquiryUserNo");
+		}else {
+			sql = prop.getProperty("insertInquiryEmail");
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, iq.getInquiryType());
-			pstmt.setString(2, iq.getUserEmail());
-			pstmt.setString(3, iq.getUserPrivacy());
+			pstmt.setString(1, iq.getTitle());
+			pstmt.setString(2, iq.getInquiryType());
+			pstmt.setString(3, iq.getContent());
+			pstmt.setString(4,  iq.getSep());
+			
+			if(iq.getSep().equals("회원")){				
+				pstmt.setInt(5, iq.getUserNo());
+			}else {
+				pstmt.setString(5, iq.getUserEmail());
+			}
 			
 			result = pstmt.executeUpdate();
 			

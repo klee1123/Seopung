@@ -31,20 +31,38 @@ public class InsertInquiryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		String title = request.getParameter("title");
 		String inquiryType = request.getParameter("inquiryType");
 		String userEmail = request.getParameter("userEmail");
-		String userPrivacy = request.getParameter("userPrivacy");
+		String sep = request.getParameter("sep");
+		String content = request.getParameter("content");
+		
+		int userNo = 0;
+		
+		if(sep.equals("회원")){
+		userNo = Integer.parseInt(request.getParameter("userNo"));
+		}
 		
 		Inquiry iq = new Inquiry();
+		
+		iq.setTitle(title);
 		iq.setInquiryType(inquiryType);
 		iq.setUserEmail(userEmail);
-		iq.setUserPrivacy(userPrivacy);
+		iq.setUserNo(userNo);
+		iq.setSep(sep);
+		iq.setContent(content);
 		
 		int result = new InquiryService().insertInquiry(iq);
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 임시(에러페이지 주소 추가 수정해야함)
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "문의 제출 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/enrollForm.iq");
+		}else {
+			request.setAttribute("errorMsg", "문의 제출 실패하였습니다.");
+			request.getRequestDispatcher("").forward(request, response);
+		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
