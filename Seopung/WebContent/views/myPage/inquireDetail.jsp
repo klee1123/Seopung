@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.ArrayList, com.kh.inquire.model.vo.*"%>
+<%
+	Inquire i = (Inquire)request.getAttribute("i");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -55,17 +58,21 @@
         <div class="inquireEnroll"> <br>
            
             <h4>
-               <span name="iqTitle">제목을 적으세요 </span>
+               <span name="iqTitle"><%= i.getInquireTitle() %> </span>
             </h4>
-            	닉네임 : <span id="nick">닉네임을 적으세요</span> 날짜 : <span id="date">날짜를 넣어주세요</span>
+            	닉네임 : <span id="nick"><%= i.getUserNick() %></span> 날짜 : <span id="date"><%= i.getInquireEnrollDate() %></span>
             <hr style="font-weight: 900; font-size: 30px;">
             <br>
-                <div id="iqcontent">내용을 적으면 됩니다.</div>
+                <div id="iqcontent"><%= i.getInquireContent() %></div>
             <hr style="font-weight: 900; font-size: 30px;">
+            <%if(i.getInquireResponse().equals("NULL")) { %>
+            	<div id="Admin"></div>
+            <% }else { %>
                 <div id="Admin">
-                    	관리자 답변 : 
+                    	관리자 답변 : <%= i.getInquireResponse() %>
                     <span id="iqAdmin"></span> 
                 </div>
+            <% } %>
             <br>
             <div id=enroll align=center>
              <!-- <button class="btn btn-secondary btn-sm">수정</button> -->

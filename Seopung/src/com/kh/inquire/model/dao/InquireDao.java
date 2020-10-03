@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
@@ -128,6 +127,41 @@ public class InquireDao {
 		}
 		return result;
 		
+	}
+	
+	public Inquire selectInquire(Connection conn, int ino) {
+		//select문 => 한 행 조회
+		Inquire i = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectInquire");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ino);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				i = new Inquire(rset.getInt("INQUIRE_NO"),
+								rset.getString("INQUIRE_TITLE"),
+								rset.getString("INQUIRE_CONTENT"),
+								rset.getDate("INQUIRE_ENROLL_DATE"),
+								rset.getString("INQUIRE_RESPONSE"),
+								rset.getDate("RESPONSE_DATE"),
+								rset.getString("USER_NICK"),
+								rset.getString("ADMIN_ID"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return i;
 	}
 
 	

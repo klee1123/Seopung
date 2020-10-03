@@ -77,7 +77,7 @@
 		                    <tr align="center">
 		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
-		                        <td><%= i.getInquireTitle() %></td>
+		                        <td><a href="<%=contextPath %>/detail.in?ino=<%=i.getInquireNo()%>"><%= i.getInquireTitle() %></a></td>
 		                        <td><%= i.getInquireStatus() %></td>
 		                    </tr>	
                     	<% } %>
