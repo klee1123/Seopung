@@ -72,15 +72,23 @@ public class CommunityDao {
 		
 	}
 	
-	public ArrayList<Community> selectList(Connection conn, PageInfo pi, String keyword, String head){
+	public ArrayList<Community> selectList(Connection conn, PageInfo pi, String keyword, String head, String array){
 		
 		ArrayList<Community> list = new ArrayList<>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String sql = "";
 		if(head.equals("전체")) {
-		String sql = prop.getProperty("selectListAll");
-		
+			if(array.equals("최신")) {
+		 sql = prop.getProperty("selectListAll");
+			}else if(array.equals("추천")) {
+				sql = prop.getProperty("selectListAllRe");
+			}else if(array.equals("조회")) {
+				 sql = prop.getProperty("selectListAllCo");
+			}else if(array.equals("스크랩")) {
+				 sql = prop.getProperty("selectListAllSc");
+			}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -113,8 +121,16 @@ public class CommunityDao {
 			close(pstmt);
 		}
 		}else {
-			String sql = prop.getProperty("selectList");
-			
+			if(array.equals("최신")) {
+			 sql = prop.getProperty("selectList");
+			}else if(array.equals("추천")) {
+				 sql = prop.getProperty("selectListRe");
+			}else if(array.equals("조회")) {
+				 sql = prop.getProperty("selectListCo");
+			}else if(array.equals("스크랩")) {
+				 sql = prop.getProperty("selectListSc");
+			}
+				
 			try {
 				pstmt = conn.prepareStatement(sql);
 				

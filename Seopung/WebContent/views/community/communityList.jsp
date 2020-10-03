@@ -12,6 +12,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	String head = (String) request.getAttribute("head");
+	String array = (String) request.getAttribute("array");
 %>
 <!DOCTYPE html>
 <html>
@@ -91,17 +92,17 @@ p>img {
 	<%@include file="../common/menubar.jsp"%>
 	<div class="outer">
 		<!-- 말머리, 정렬 -->
-		<div id="head"
+		<div id=""
 			style="margin-top: 150px; margin-bottom: 10px; width: 200px;">
 			<select name="head" id="head">
 				<option value="전체">전체</option>
 				<option value="맛집">맛집</option>
 				<option value="명소">명소</option>
-			</select> <select name="" id="array" style=>
-				<option value="new">최신순</option>
-				<option value="recommend">추천순</option>
-				<option value="check">조회순</option>
-				<option value="scrap">스크랩순</option>
+			</select> <select name="array" id="array" >
+				<option value="최신">최신순</option>
+				<option value="추천">추천순</option>
+				<option value="조회">조회순</option>
+				<option value="스크랩">스크랩순</option>
 			</select>
 
 		</div>
@@ -203,6 +204,7 @@ p>img {
 							<option value="title">제목</option>
 							<input type="hidden" name="currentPage" value="<%=currentPage%>">
 							<input type="hidden" name="head" value="<%=head%>">
+							<input type='hidden' name="array" value="<%=array%>">
 						</select> <input type="text" style="width: 150px; height: 23px;"
 							value="<%=keyword%>" name="keyword"> <label for="search"
 							style="cursor: pointer;"><img src="다운로드.png"
@@ -227,10 +229,10 @@ p>img {
 						if (currentPage != 1) {
 					%>
 					<button
-						onclick="location.href='<%=contextPath%>/list.co?currentPage=1'"
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=1&head=<%=head %>&array=<%=array %>&keyword=<%=keyword %>'"
 						class="btn btn-secondary btn-sm">&lt;&lt;</button>
 					<button
-						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage - 1%>'"
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage - 1%>&head=<%=head %>&array=<%=array %>&keyword=<%=keyword %>'"
 						class="btn btn-secondary btn-sm">&lt;</button>
 					<%
 						}
@@ -242,7 +244,7 @@ p>img {
 						if (p != currentPage) {
 					%>
 					<button
-						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p%>'"
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=p%>&head=<%=head %>&array=<%=array %>&keyword=<%=keyword %>'"
 						class="btn btn-outline-secondary btn-sm"><%=p%></button>
 					<%
 						} else {
@@ -258,10 +260,10 @@ p>img {
 						if (currentPage != maxPage) {
 					%>
 					<button
-						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage + 1%>'"
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=currentPage + 1%>&head=<%=head %>&array=<%=array %>&keyword=<%=keyword %>'"
 						class="btn btn-secondary btn-sm">&gt;</button>
 					<button
-						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=maxPage%>'"
+						onclick="location.href='<%=contextPath%>/list.co?currentPage=<%=maxPage%>&head=<%=head %>&array=<%=array %>&keyword=<%=keyword %>'"
 						class="btn btn-secondary btn-sm">&gt;&gt;</button>
 					<%
 						}
@@ -278,13 +280,16 @@ p>img {
 	$(function(){
 		 
 		
-		$("select[name=head]").change(function(){
-		 var value = $("select[name=head]").val()
+		 $("select").change(function(){
+		 var hed = $("select[name=head]").val()
+		 var arr = $("select[name=array]").val()
 	
-		location.href="<%=contextPath%>/list.co?currentPage=<%=currentPage%>&head="+ value;
-
+		location.href="<%=contextPath%>/list.co?currentPage=<%=currentPage%>&head="+ hed + "&array=" + arr;
+		
 							});
-			$("#head option[value=<%=head%>]").attr("selected", true);
+			$("#head option[value=<%=head%>], #array option[value=<%=array%>").attr("selected", true);
+		
+			
 		
 	});
 	</script>

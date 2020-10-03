@@ -41,7 +41,7 @@ public class CommunityListServlet extends HttpServlet {
 			keyword = "";
 		}
 		String head = request.getParameter("head");
-		
+		String array = request.getParameter("array");
 		
 		
 		int listCount;
@@ -72,12 +72,12 @@ public class CommunityListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage );
 		
-		ArrayList<Community> list = new CommunityService().selectList(pi, keyword, head);
+		ArrayList<Community> list = new CommunityService().selectList(pi, keyword, head, array);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("head", head);
-		
+		request.setAttribute("array", array);
 		request.getRequestDispatcher("views/community/communityList.jsp").forward(request, response);
 	
 	}

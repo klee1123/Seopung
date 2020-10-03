@@ -20,11 +20,11 @@ public class CommunityService {
 		return listCount;
 	}
 	
-	public ArrayList<Community> selectList(PageInfo pi, String keyword, String head){
+	public ArrayList<Community> selectList(PageInfo pi, String keyword, String head, String array){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Community> list = new CommunityDao().selectList(conn, pi, keyword, head);
+		ArrayList<Community> list = new CommunityDao().selectList(conn, pi, keyword, head, array);
 		close(conn);
 		return list;
 		
