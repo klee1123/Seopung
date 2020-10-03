@@ -410,5 +410,44 @@
 		 WHERE COMMUNITY_NO = ?
 		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
+	<entry key="insertReply">
+		INSERT
+		  INTO TB_COMMUNITY_COMMENT
+		  (
+		     COMMENT_NO
+		   , COMMENT_CONTENT
+		   , COMMUNITY_NO
+		   , USER_NO
+		   , COMMENT_DATE
+		   )
+		   VALUES
+		   (
+		      SEQ_COMMUNITYCOMMENTNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
+	<entry key="selectReplyList">
+		SELECT
+		       COMMENT_NO
+		     , COMMENT_CONTENT
+		     , USER_NAME
+		     , PROFILEPIC_PATH
+		     , COMMENT_DATE
+		  FROM TB_COMMUNITY_COMMENT 
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE COMMUNITY_NO = ?
+		   AND COMMENT_STATUS = 'Y'
+		 ORDER BY COMMENT_NO DESC
+	</entry>
+	<entry key="countComment">
+		SELECT COUNT(*)
+		  FROM TB_COMMUNITY_COMMENT
+		  JOIN TB_COMMUNITY USING(COMMUNITY_NO)
+		 WHERE COMMENT_STATUS = 'Y'
+		   AND COMMUNITY_NO = ?
+	</entry>
 	
 </properties>

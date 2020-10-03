@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.common.PageInfo;
 import com.kh.community.model.vo.Community;
+import com.kh.community.model.vo.Reply;
 
 public class CommunityDao {
 
@@ -531,7 +532,83 @@ public class CommunityDao {
 		return c;
 	}
 
-
+	public int insertReply(Connection conn, Reply r) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, r.getReplyContent());
+			pstmt.setInt(2, r.getRefCommunityNo());
+			pstmt.setInt(3, Integer.parseInt(r.getReplyWriter()));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Reply> selectReplyList(Connection conn, int cno){
+		
+		ArrayList<Reply> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReplyList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Reply(rset.getInt("COMMENT_NO"),
+						           rset.getString("COMMENT_CONTENT"),
+						           rset.getString("USER_NAME"),
+						           rset.getString("PROFILEPIC_PATH"),
+						           rset.getDate("COMMENT_DATE")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public int countComment(Connection conn, int cno) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			rset = pstmt.executeQuery();
+			
+			count = rset.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
 
 
 

@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.adminPlan.model.vo.Plan"%>
+	pageEncoding="UTF-8" import="com.kh.adminPlan.model.vo.Plan, com.kh.Member.model.vo.LoginUser"%>
 <%
 	Plan p = (Plan)request.getAttribute("p");
 
 	String[] ages = p.getAge().split(",");
 	String[] types = p.getPlanType().split(",");
 	String[] trans = p.getTransrportations().split(",");
-
+	
+	int userNo = 0;
+	if(session.getAttribute("loginUser") != null){
+		userNo = ((LoginUser)session.getAttribute("loginUser")).getUserNo();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -15,62 +19,117 @@
 <title>Insert title here</title>
 </head>
 <style>
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 10px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
 .outer {
-	width: 900px;
+	width: 1000px;
 	margin: auto;
 	margin-top: 120px;
 }
 
-#map {
-	width: 440px;
-	height: 380px;
-	border: 1px solid lightgrey;
+#content_1{
+	margin-top:15px;
+	margin-bottom:15px;
+	width:980;
+	align:center;
+	
+}
+#content_1_1{
+	margin-left:10px;
+	float:left;
+	width:400px;
+	height:80px;
+	padding:5px;
+}
+#content_1_2{
+	width: 250px;
 	float: left;
-	margin-right: 20px;
+	margin-left:15px;
+	height:80px;
+}
+#content_1_2 table {
+	background: white;
+	box-shadow: 5px 5px 5px -4px gray;
+	cursor:pointer;
 }
 
-#content_2_2 {
-	background-color: lightgrey;
-	width: 420px;
+#content_1_3 {
+	background-color: #f9f9f9;
+	width: 300px;
 	height: 80px;
 	padding: 20px;
 	box-sizing: border-box;
-	margin-top: 10px;
 	float: left;
 	overflow:auto;
+	margin-left:15px;
 }
 
-#content_2_2>button {
+#content_1_3>button {
 	margin: 3px;
 }
 
-#content_2_3 {
-	width: 420px;
-	height: 215px;
+
+.map_wrap {
+	width: 610px;
+	height: 500px;
 	/*border: 1px solid lightgrey;*/
-	margin-top: 10px;
 	float: left;
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
-#content_3 table {
-	width: 345px;
-	background: white;
-	box-shadow: 5px 5px 10px -4px gray;
-	float: left;
-	margin-right: 20px;
-	margin-top: 15px;
-	float: left;
+#content_2_2{float:left;}
+#content_2_2_1 {
+	width: 350px;
+	height: 340px;
+	/*border: 1px solid lightgrey;*/
 }
 
-#content_3_2 {
-	width: 420px;
-	height: 100px;
+
+#content_2_2_2 {
+	width: 350px;
+	height: 146px;
 	margin-top: 15px;
 	padding: 10px;
 	color: grey;
 	border: 1px solid lightgrey;
 	background: white;
 	float: left;
+	overflow:auto;
 }
 
 #content_5 table {
@@ -81,8 +140,8 @@
 .tab {
   float: left;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 20%;
+  background-color:#f9f9f9;
+  width: 25%;
   height: 100%;
 }
 
@@ -118,7 +177,7 @@
   float: left;
   padding: 12px;
   border: 1px solid #ccc;
-  width: 80%;
+  width: 75%;
   border-left: none;
   height: 100%;
 }
@@ -129,93 +188,36 @@
 
 
 	<div class="outer">
-
-		<div id="map" style="width: 440px; height: 380px;"></div>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0"></script>
-
-		<script>
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-			mapOption = {
-				center : new kakao.maps.LatLng(33.450936, 126.569477), // 지도의 중심좌표
-				level : 3
-			// 지도의 확대 레벨
-			};
-
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-			// 마커를 표시할 위치와 title 객체 배열입니다 
-			var positions = [ {
-				title : '카카오',
-				latlng : new kakao.maps.LatLng(33.450705, 126.570677)
-			}, {
-				title : '생태연못',
-				latlng : new kakao.maps.LatLng(33.450936, 126.569477)
-			}, {
-				title : '텃밭',
-				latlng : new kakao.maps.LatLng(33.450879, 126.569940)
-			}, {
-				title : '근린공원',
-				latlng : new kakao.maps.LatLng(33.451393, 126.570738)
-			} ];
-
-			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
-			for (var i = 0; i < positions.length; i++) {
-
-				// 마커 이미지의 이미지 크기 입니다
-				var imageSize = new kakao.maps.Size(24, 35);
-
-				// 마커 이미지를 생성합니다    
-				var markerImage = new kakao.maps.MarkerImage(imageSrc,
-						imageSize);
-
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					map : map, // 마커를 표시할 지도
-					position : positions[i].latlng, // 마커를 표시할 위치
-					title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					image : markerImage
-				// 마커 이미지 
-				});
-			}
+	
+		<h2>일정 상세조회</h2>
+		<hr>
+		
+		<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
+		<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo()){ %>
+		<div id="buttonArea" style="padding-left:15px;">
 			
-			// 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-			var linePath = [
-			    new kakao.maps.LatLng(33.450936, 126.569477),
-			    new kakao.maps.LatLng(33.450879, 126.569940),
-			    new kakao.maps.LatLng(33.450705, 126.570677),
-			    new kakao.maps.LatLng(33.451393, 126.570738)
-			];
-
-			// 지도에 표시할 선을 생성합니다
-			var polyline = new kakao.maps.Polyline({
-			    path: linePath, // 선을 구성하는 좌표배열 입니다
-			    strokeWeight: 5, // 선의 두께 입니다
-			    strokeColor: '#FFAE00', // 선의 색깔입니다
-			    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-			    strokeStyle: 'solid' // 선의 스타일입니다
-			});
-
-			// 지도에 선을 표시합니다 
-			polyline.setMap(map);  
-		</script>
-
-		<div id="content_2">
-			<div id="content_2_1">
+			<button class="btn btn-primary btn-sm">수정</button>
+			<button class="btn btn-danger btn-sm" onclick="confirmDeletePlan();">삭제</button>
+			
+		</div>
+		<%} %>
+		
+		<div id="content_1">
+		
+			<div id="content_1_1">
 				<table>
-					<tr width="420px;">
-						<td width="210px" style="font-size: 15px;"><b
+					<tr>
+						<td width="250px" style="font-size: 15px;"><b
 							style="font-size: 20px; color:rgb(75, 75, 75);"><%= p.getPlanTitle() %></b> <br> <%=p.getStartDate() %>
 							~ <%=p.getEndDate() %></td>
-						<td>추천 : <%=p.getRecommendCount() %> <br> 스크랩 : <%=p.getScrapCount() %>
+						<td>추천 : <span id="recommendCount"><%=p.getRecommendCount() %></span> <br> 스크랩 : <span id="scrapCount"><%=p.getScrapCount() %></span>
 							<br> 예산금액 : <%=p.getBudget() %> 원
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div id="content_2_2">
+			
+			<div id="content_1_3">
 				<%for(int i=0; i<ages.length; i++){ %>
 				<button disabled class="btn btn-secondary btn-sm"><%= ages[i] %>대
 				</button>
@@ -227,143 +229,285 @@
 				<button disabled class="btn btn-secondary btn-sm"><%= trans[i] %></button>
 				<%} %>
 			</div>
-			<div id="content_2_3">
-				<div class="tab" style="overflow: auto;">
-					<button class="tablinks" onclick="openCity(event, 'London')"
-						id="defaultOpen">day1</button>
-					<button class="tablinks" onclick="openCity(event, 'Paris')">day2</button>
-					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day3</button>
-					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day4</button>
-					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day5</button>
-					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day6</button>
-					<button class="tablinks" onclick="openCity(event, 'Tokyo')">day7</button>
-				</div>
-
-				<div id="London" class="tabcontent">
-					<h3>London</h3>
-					<p>London is the capital city of England.</p>
-				</div>
-
-				<div id="Paris" class="tabcontent">
-					<h3>Paris</h3>
-					<p>Paris is the capital of France.</p>
-				</div>
-
-				<div id="Tokyo" class="tabcontent">
-					<h3>Tokyo</h3>
-					<p>Tokyo is the capital of Japan.</p>
-				</div>
-			</div>
-			<script>
-
-				function openCity(evt, cityName) {
-					var i, tabcontent, tablinks;
-					tabcontent = document.getElementsByClassName("tabcontent");
-					for (i = 0; i < tabcontent.length; i++) {
-						tabcontent[i].style.display = "none";
-					}
-					tablinks = document.getElementsByClassName("tablinks");
-					for (i = 0; i < tablinks.length; i++) {
-						tablinks[i].className = tablinks[i].className.replace(
-								" active", "");
-					}
-					document.getElementById(cityName).style.display = "block";
-					evt.currentTarget.className += " active";
-				}
-
-				// Get the element with id="defaultOpen" and click on it
-				document.getElementById("defaultOpen").click();
-			</script>
-
-			<br clear="all">
-
-		<div id="content_3">
-			<div id="content_3_1">
-				<table>
-					<tr style="height: 100px;">
-						<td width="100" align="center"><img width="60"
+			
+			<div id="content_1_2">
+				<input type="hidden" name="userNo" value="<%=p.getUserNo()%>">
+				<table style="width:250px;">
+					<tr style="height: 75px;">
+						<td width="80" align="center">
+							<%if(p.getProfile().equals("null")){ %>
+							<img width="55" height="55"
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
-						<td><b style="font-size: 18px; color:rgb(75, 75, 75);"><%=p.getPlanWriter() %></b> <br>
+							<%}else{ %>
+							<img width="55" height"55" src="<%=contextPath %>/<%=p.getProfile() %>">
+							<%} %>
+						<td><b style="font-size: 18px; color:rgb(75, 75, 75);"><%=p.getUserNick()%></b> <br>
 							클릭시 프로필 조회 가능</td>
 					</tr>
 				</table>
-				<div
-					style="line-height: 100px; float: left; margin-right: 20px; margin-top: 10px;">
-					<button style="height: 60px;" disabled
-						class="btn btn-primary btn-sm">동행신청</button>
+			</div>
+			<br clear="all">
+			
+		</div> <!-- content_1 end -->
+		
+		
+		<div id="content_2">
+		
+			<div class="map_wrap">
+		
+				<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				
+				<div id="menu_wrap" class="bg_white" style="width:200px;height:115px;">
+			        <div class="option">
+			            <div>
+			                <form onsubmit="searchPlaces(); return false;">
+			                    <input type="text" value="서울" id="keyword" size="17"> 
+			                    <button type="submit" style="border:none; background-color:grey;color:white;">검색</button> 
+			                </form>
+			            </div>
+			        </div>
+			        <hr>
+			        <ul id="placesList"></ul>
+			        <div id="pagination"></div>
+			    </div>
+			</div>
+			
+			<div id="content_2_2">
+				
+				<div id="content_2_2_1">
+					<div class="tab" style="overflow: auto;">
+						<button class="tablinks" onclick="openCity(event, 'London')"
+							id="defaultOpen">day1</button>
+						<button class="tablinks" onclick="openCity(event, 'Paris')">day2</button>
+						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day3</button>
+						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day4</button>
+						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day5</button>
+						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day6</button>
+						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day7</button>
+					</div>
+		
+					<div id="London" class="tabcontent">
+						<h3>Day1</h3>
+						<ol style="padding:0;">
+							<ul>광화문</ul>
+							<ul>경복궁</ul>
+							<ul>창덕궁</ul>
+						</ol>
+					</div>
+		
+					<div id="Paris" class="tabcontent">
+						<h3>Day2</h3>
+						<ol style="padding:0;">
+							<ul>광화문</ul>
+							<ul>경복궁</ul>
+							<ul>창덕궁</ul>
+						</ol>
+					</div>
+		
+					<div id="Tokyo" class="tabcontent">
+						<h3>Day3</h3>
+						<ol style="padding:0;">
+							<ul>광화문</ul>
+							<ul>경복궁</ul>
+							<ul>창덕궁</ul>
+						</ol>
+					</div>
 				</div>
-			</div>
-			<div id="content_3_2" style="overflow: auto;">
-				<%if(p.getMemo()!=null){ %>
-				<%=p.getMemo() %>
-				<%} %>
-			</div>
+				
+				<div id="content_2_2_2">
+					<%if(p.getMemo()!=null){ %>
+					<%=p.getMemo() %>
+					<%} %>
+				</div>
+			
+			</div> <!--  content_2_2 end -->
+			
+			<br clear="all">
+			
+		</div> <!-- content_2 end -->
+		
+		<!-- 일정스크립트 -->
+		<script>
+
+			function openCity(evt, cityName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(
+							" active", "");
+				}
+				document.getElementById(cityName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
+
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+		</script>
+		
+		<br><br>
+		
+		<!-- 각종 버튼들(조건있음) -->
+		<%if(loginUser != null && loginUser.getUserNo() != p.getUserNo() && loginUser.getCategory()==1){ %>
+		<div id="content_3" align="center">
+			<button class="btn btn-outline-warning btn-sm" onclick="likePlan();">추천</button>
+			<%if(p.getScrapYN().equals("Y")){ %>
+			<button class="btn btn-outline-primary btn-sm" onclick="scrapPlan();">스크랩</button>
+			<%}else{ %>
+			<button class="btn btn-outline-primary btn-sm" disabled>스크랩</button>
+			<%} %>
+			<%if(p.getAccompany().equals("Y")){ %>
+			<button class="btn btn-outline-success btn-sm">동행신청</button>
+			<%}else{ %>
+			<button class="btn btn-outline-success btn-sm" disabled>동행신청</button>
+			<%} %>
+			<button class="btn btn-outline-danger btn-sm">신고하기</button>
 		</div>
-
-		<br clear="all"> <br>
-
+		<%}%>
+	
+		<br clear="all">
+	
 		<div id="content_4" style="padding-left: 15px;"></div>
 		<hr>
-
-		
-			<div id="content_4" align="center">
-				<form action="" method="post">
-					<table>
-						<tr>
-							<input type="hidden" name="userNo" value="123">
-							<td width="70px"><img width="55px" class="rounded-circle"
-								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-								alt=""></td>
-							<td width="720px;"><textarea name="comment" cols="85"
-									rows="3" style="resize: none;"></textarea></td>
-							<td>
-								<button type="submit" class="btn btn-secondary">등록</button>
-							</td>
-						</tr>
-					</table>
-				</form>
-			</div>
-
-			<hr>
-			
-
-		<div id="content_5" align="center">
-			<!--  
+	
+		<!-- 댓글 작성창 -->
+		<%if(loginUser!=null && loginUser.getCategory() == 1){ %>
+		<div id="content_4" align="center">
+			<form action="" method="post">
 				<table>
 					<tr>
-						<td width="60"><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td>닉네임 <br> 2020.09.09 22:05
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
-							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
-							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
-							보이는 약동하다.</td>
-						<td align="center">
-							<button style="border: none; background: none">삭제</button>
+						<td width="70px"></td>
+						<td width="800px;"><textarea id="commentContent" name="comment" cols="110"
+								rows="3" maxlength="500" style="resize: none;overflow:auto" required></textarea></td>
+						<td width="100" align="center">
+							<button class="btn btn-secondary" onclick="addComment();">등록</button>
 						</td>
 					</tr>
 				</table>
-				-->
+			</form>
+		</div> <!--  content_4 end -->
+		<hr>
+		<%} %>
+		
+	
+		<!--  댓글 목록 -->
+		<div id="content_5" align="center">
+		
 		</div>
-
+	
+		<!--  댓글 페이징 -->
 		<div align="center" id="paging"></div>
+		
+		
+		<!--  프로필 모달 -->
+		<div class="modal" id="myProfile">
+	        <div class="modal-dialog modal-sm">
+	            <div class="modal-content" align="center">
+	            
+	                <!-- Modal Header -->
+	                <div class="modal-header">
+	                <h5>프로필</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+	                
+	                <!-- Modal body -->
+	                <div class="modal-profile" style="height:370px;">
+					</div>          
+	            </div>
+	        </div>
+	    </div><!-- modal end -->
+		
+	</div> <!-- outer end -->
+	
+	<!-- 프로필 모달 ajax 스크립트 -->
+	<script>
+		var modal = document.getElementById("myProfile");
+	
+		$(function(){
+			$("#content_1_2").click(function(){
+				
+				if(<%=userNo%> != 0){
+					modal.style.display = "block";
+					selectProfile($("#content_1_2").children().eq(0).val());					
+				}else{
+					alert("로그인이 필요한 서비스 입니다.");
+				}
+					
+			});
+			$(".close").click(function() {
+				modal.style.display = "none";
+			});
+			
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		
+		});
+		
+		function selectProfile(userNo){
+       		$.ajax({
+       			url:"<%=contextPath%>/profile.pl",
+       			type:"post",
+       			data:{
+       				"userNo":userNo
+       			},
+       			success:function(profile){
+       				
+       				var content = "<br>";
+       				
+       				if(profile.m.profile != "null"){
+	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+       				}else{
+       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+       				}
+       					
+	                content += "<br><br>" +
+	                    "<table>" +
+	                        "<tr>" +
+	                            "<th  width='80'>닉네임</th>" +
+	                            "<td width='120'>" +
+	                                profile.m.nickName + 
+	                            "</td>" +
+	                        "</tr>" +
+	                        "<tr>" +
+	                            "<th>이메일</th>" +
+	                            "<td>" +
+	                                profile.m.email + 
+	                            "</td>" +
+	                        "</tr>" +
+	                        "<tr>" +
+	                            "<th>생년월일</th>" +
+	                            "<td>" +
+	                                profile.m.birth +
+	                            "</td>" +
+	                        "</tr>" +
+	                    "</table>" +
+	                    "<br>" +
+	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
+	                    
+	                if(profile.m.userIntro != "null"){
+	                	content += profile.m.userIntro + "</textarea>";
+	                }else{
+	                	content +=  "</textarea><br>";
+	                }
+	               
+	                $(".modal-profile").html(content);
 
-		<br> <br> <br>
-
-		<div align="center">
-			<button class="btn btn-secondary" onclick="history.back();">취소</button>
-			<button class="btn btn-danger" id="deleteBtn">삭제</button>
-		</div>
-
-		<br> <br>
-
-	</div>
+       			}, error:function(){
+       				console.log("프로필 조회용 ajax 통신 실패");
+	       		}
+	       	});
+		}
+	</script>
+	
+	
+	<!-- 댓글 관련 ajax 스크립트 -->
 	<script>
 			$(function(){
 				
@@ -403,18 +547,23 @@
      	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
      	       					 }
      	       					 
-     	       					 comment +=         "</td>" +
-					    							"<td>" + result.list[i].commentWriter + "<br>" + result.list[i].enrollDate +
-					    							"</td>" +
-					    							"<td>" +  "</td>" + 
-					    						"</tr>" + 
-					    						"<tr>" + 
-					    							"<td colspan='2' width='800'>" + 
-					    								result.list[i].content +
-					    							"</td>" +
-					    							"<td align='center'>" +
-					    								"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>" +
-					    							"</td>" +
+     	       					 comment += "</td>" +
+			    							"<td>" + result.list[i].userNick + "<br>" + result.list[i].enrollDate +
+			    							"</td>" +
+			    							"<td>" +  "</td>" + 
+			    						"</tr>" + 
+			    						"<tr>" + 
+			    							"<td colspan='2' width='900'>" + 
+			    								result.list[i].content +
+			    							"</td>" +
+			    							"<td align='center'>";
+					    		
+					    		 if(<%=userNo%>!=0 && <%=userNo%> == result.list[i].userNo) {
+					    			 comment += "<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>";
+					    		 }else if(<%=userNo%>!=0){
+					    			 comment += "<button style='border: none; background: none' onclick='reportComment(" + result.list[i].commentNo + ");'>신고</button>";
+					    		 }
+					    		 comment +=	"</td>" +
 					    						"</tr>" +
 					    					"</table>";
      	       				 }
@@ -464,6 +613,29 @@
 		       	});
 			}
 	       	
+	       	// 댓글 작성용 ajax
+	       	function addComment(){
+        		
+        		$.ajax({
+        			url:"<%=contextPath%>/rinsert.pl",
+        			type:"post",
+        			data:{
+        				content:$("#commentContent").val(),
+        				pno:<%=p.getPlanNo()%>
+        			}, success:function(result){
+        				
+        				if(result>0){
+        					selectReplyList(1);
+        					$("#commentContent").val("");
+        				}
+        				
+        			}, error:function(){
+        				console.log("댓글작성용 ajax 통신 실패");
+        			}
+        		});
+        		
+        	}
+	       	
 	       	
 	       	// 댓글 삭제 CONFIRM 용
 	       	function confirmDeleteComment(commentNo){
@@ -491,7 +663,305 @@
 	       		});
 	       	}
 	       
-       	</script>
+	</script>
+	
+	<!-- 삭제, 추천, 스크랩, 동행신청 관련 ajax 스크립트 -->
+	<script>
+		function confirmDeletePlan(){
+			
+			if(confirm("일정을 삭제하시겠습니까?")){
+				location.href="<%=contextPath%>/delete.pl?pno=<%=p.getPlanNo()%>";
+			}
+		}
+	
+		function likePlan(){
+			$.ajax({
+				url:"<%=contextPath%>/like.pl",
+				type:"post",
+				data:{
+					userNo:<%=userNo%>,
+					pNo:<%=p.getPlanNo()%>
+				}, success:function(result1){
+					
+					if(result1>0){
+						alert("추천되었습니다");
+						$("#recommendCount").html(<%=p.getRecommendCount()%> + 1);
+					}else{
+						alert("이미 추천하였습니다.");
+					}
+					
+					
+				}, error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		function scrapPlan(){
+			$.ajax({
+				url:"<%=contextPath%>/scrap.pl",
+				type:"post",
+				data:{
+					"userNo":<%=userNo%>,
+					"pNo":<%=p.getPlanNo()%>
+				}, success:function(result){
+					
+					if(result>0){
+						alert("스크랩 되었습니다");
+						var count = 
+						$("#scrapCount").html(<%=p.getScrapCount()%> + 1);
+					}else{
+						alert("이미 스크랩하였습니다.");
+					}
+					
+				}, error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		function accompanyPlany(){
+			$.ajax({
+				url:"<%=contextPath%>/accom.pl",
+				type:"post",
+				data:{
+					"userNo":<%=userNo%>,
+					"userNo2":<%=p.getUserNo()%>,
+					"pNo":<%=p.getPlanNo()%>
+				}, sucess:function(){
+					
+				}, error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+	
+	</script>
+	
+	
+	<!--  카카오맵 api 스크립트 -->
+	<script type="text/javascript"
+				src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0&libraries=services"></script>
+	<script>
+		// 마커를 담을 배열입니다
+		var markers = [];
+
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+		// 장소 검색 객체를 생성합니다
+		var ps = new kakao.maps.services.Places();  
+
+		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+		// 키워드로 장소를 검색합니다
+		searchPlaces();
+
+		// 키워드 검색을 요청하는 함수입니다
+		function searchPlaces() {
+
+		    var keyword = document.getElementById('keyword').value;
+
+		    if (!keyword.replace(/^\s+|\s+$/g, '')) {
+		        alert('키워드를 입력해주세요!');
+		        return false;
+		    }
+
+		    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+		    ps.keywordSearch( keyword, placesSearchCB); 
+		}
+
+		// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+		function placesSearchCB(data, status, pagination) {
+		    if (status === kakao.maps.services.Status.OK) {
+
+		        // 정상적으로 검색이 완료됐으면
+		        // 검색 목록과 마커를 표출합니다
+		        displayPlaces(data);
+
+		        // 페이지 번호를 표출합니다
+		        displayPagination(pagination);
+
+		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+		        alert('검색 결과가 존재하지 않습니다.');
+		        return;
+
+		    } else if (status === kakao.maps.services.Status.ERROR) {
+
+		        alert('검색 결과 중 오류가 발생했습니다.');
+		        return;
+
+		    }
+		}
+
+		// 검색 결과 목록과 마커를 표출하는 함수입니다
+		function displayPlaces(places) {
+
+		    var listEl = document.getElementById('placesList'), 
+		    menuEl = document.getElementById('menu_wrap'),
+		    fragment = document.createDocumentFragment(), 
+		    bounds = new kakao.maps.LatLngBounds(), 
+		    listStr = '';
+		    
+		    // 검색 결과 목록에 추가된 항목들을 제거합니다
+		    removeAllChildNods(listEl);
+
+		    // 지도에 표시되고 있는 마커를 제거합니다
+		    removeMarker();
+		    
+		    for ( var i=0; i<places.length; i++ ) {
+
+		        // 마커를 생성하고 지도에 표시합니다
+		        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+		            marker = addMarker(placePosition, i), 
+		            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+		        // LatLngBounds 객체에 좌표를 추가합니다
+		        bounds.extend(placePosition);
+
+		        // 마커와 검색결과 항목에 mouseover 했을때
+		        // 해당 장소에 인포윈도우에 장소명을 표시합니다
+		        // mouseout 했을 때는 인포윈도우를 닫습니다
+		        (function(marker, title) {
+		            kakao.maps.event.addListener(marker, 'mouseover', function() {
+		                displayInfowindow(marker, title);
+		            });
+
+		            kakao.maps.event.addListener(marker, 'mouseout', function() {
+		                infowindow.close();
+		            });
+
+		            itemEl.onmouseover =  function () {
+		                displayInfowindow(marker, title);
+		            };
+
+		            itemEl.onmouseout =  function () {
+		                infowindow.close();
+		            };
+		        })(marker, places[i].place_name);
+
+		        fragment.appendChild(itemEl);
+		    }
+
+		    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+		    listEl.appendChild(fragment);
+		    menuEl.scrollTop = 0;
+
+		    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		    map.setBounds(bounds);
+		}
+
+		// 검색결과 항목을 Element로 반환하는 함수입니다
+		function getListItem(index, places) {
+
+		    var el = document.createElement('li'),
+		    itemStr =  (index+1) +
+		                '<div class="info">' +
+		                '   <h5>' + places.place_name + '</h5>';
+
+		    if (places.road_address_name) {
+		        itemStr += '    <span>' + places.road_address_name + '</span>' +
+		                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
+		    } else {
+		        itemStr += '    <span>' +  places.address_name  + '</span>'; 
+		    }
+		                 
+		      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+		                '</div>';           
+
+		    el.innerHTML = itemStr;
+		    el.className = 'item';
+
+		    return el;
+		}
+
+		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+		function addMarker(position, idx, title) {
+		    var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+		        imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+		        imgOptions =  {
+		            spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+		            spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+		            offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+		        },
+		        markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+		            marker = new kakao.maps.Marker({
+		            position: position, // 마커의 위치
+		            image: markerImage 
+		        });
+
+		    marker.setMap(map); // 지도 위에 마커를 표출합니다
+		    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+		    return marker;
+		}
+
+		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+		function removeMarker() {
+		    for ( var i = 0; i < markers.length; i++ ) {
+		        markers[i].setMap(null);
+		    }   
+		    markers = [];
+		}
+
+		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+		function displayPagination(pagination) {
+		    var paginationEl = document.getElementById('pagination'),
+		        fragment = document.createDocumentFragment(),
+		        i; 
+
+		    // 기존에 추가된 페이지번호를 삭제합니다
+		    while (paginationEl.hasChildNodes()) {
+		        paginationEl.removeChild (paginationEl.lastChild);
+		    }
+
+		    for (i=1; i<=pagination.last; i++) {
+		        var el = document.createElement('a');
+		        el.href = "#";
+		        el.innerHTML = i;
+
+		        if (i===pagination.current) {
+		            el.className = 'on';
+		        } else {
+		            el.onclick = (function(i) {
+		                return function() {
+		                    pagination.gotoPage(i);
+		                }
+		            })(i);
+		        }
+
+		        fragment.appendChild(el);
+		    }
+		    paginationEl.appendChild(fragment);
+		}
+
+		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+		// 인포윈도우에 장소명을 표시합니다
+		function displayInfowindow(marker, title) {
+		    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+		    infowindow.setContent(content);
+		    infowindow.open(map, marker);
+		}
+
+		 // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+		function removeAllChildNods(el) {   
+		    while (el.hasChildNodes()) {
+		        el.removeChild (el.lastChild);
+		    }
+		}
+
+		
+	</script>
 
 
 	<%@include file="../common/footer.jsp"%>

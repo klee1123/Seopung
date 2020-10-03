@@ -160,13 +160,18 @@ public class PlanDao {
 							 rset.getDate("plan_sdate"),
 							 rset.getDate("plan_edate"),
 							 rset.getString("plan_age"),
+							 rset.getString("plan_acc"),
 							 rset.getString("plan_budget"),
+							 rset.getString("plan_scrap_yn"),
 							 rset.getString("plan_memo"),
 							 rset.getString("plan_type"),
 							 rset.getString("plan_trans"),
 							 rset.getInt("plan_recommend"),
 							 rset.getInt("plan_scrap_count"),
-							 rset.getString("user_id"));
+							 rset.getString("user_id"),
+							 rset.getString("user_nick"),
+							 rset.getInt("user_no"),
+							 rset.getString("profilepic_path"));
 			}
 			
 		} catch (SQLException e) {
@@ -267,7 +272,9 @@ public class PlanDao {
 												rset.getInt("PLAN_NO"),
 												rset.getString("COMMENT_CONTENT"),
 												rset.getDate("COMMENT_DATE"),
-												rset.getString("PROFILEPIC_PATH")));
+												rset.getString("PROFILEPIC_PATH"),
+												rset.getString("user_nick"),
+												rset.getInt("user_no")));
 			}
 			
 		} catch (SQLException e) {
@@ -299,6 +306,158 @@ public class PlanDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertComment(Connection conn, PlanComment c) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(c.getCommentWriter()));
+			pstmt.setInt(2, c.getPlanNo());
+			pstmt.setString(3, c.getContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int likePlan(Connection conn, int userNo, int pNo) {
+		//insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("likePlan");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int scrapPlan(Connection conn, int userNo, int pNo) {
+		//insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("scrapPlan");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int accomPlan(Connection conn, int userNo, int userNo2, int pNo) {
+		//insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomPlan");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo2);
+			pstmt.setInt(3, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int increasePlanRecommend(Connection conn, int pNo) {
+		//update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increasePlanRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
+	public int increasePlanScrap(Connection conn, int pNo) {
+		//update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increasePlanScrap");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		
