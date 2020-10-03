@@ -107,9 +107,19 @@ div {
 
 <body>
 	<%@include file="../common/menubar.jsp"%>
+	<%
+		String userId = loginUser.getUserId();
+		String userName = loginUser.getUserName();
+		String phone = (loginUser.getPhone() == null) ? "" : loginUser.getPhone();
+		String email = (loginUser.getEmail() == null) ? "" : loginUser.getEmail();
+		String address = (loginUser.getAddress() == null) ? "" : loginUser.getAddress();
+		String interest = (loginUser.getInterest() == null) ? "" : loginUser.getInterest();
+		    // "운동,요리"
+		
+	%>
 	<div class="wrap">
 		
-		<form action="<%= contextPath %>/planOption.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="post">
+		<form action="<%= contextPath %>/planOptionUpdate.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="post">
 			<div>
 			 <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
 			</div>

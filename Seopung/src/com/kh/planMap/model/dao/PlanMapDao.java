@@ -6,10 +6,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.planMap.model.vo.PlanMap;
+import com.kh.planOption.model.vo.PlanOption;
 
 public class PlanMapDao {
 	
@@ -52,6 +54,43 @@ public class PlanMapDao {
 		}
 		return result;		
 	}
+	
+	public PlanOption selectPlanDays(Connection conn, int planNo) {
+		// select 문 => 한 행 조회
+		PlanOption pl = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlanDays");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, planNo);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				pl = new PlanOption( rset.getInt("planNo"),
+								rset.getString("planSdate"),
+								rset.getString("planEdate"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pl;
+	}
+	
+	
+	
+	
 	
 }
 

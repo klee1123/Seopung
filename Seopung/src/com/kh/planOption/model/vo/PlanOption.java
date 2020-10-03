@@ -1,5 +1,7 @@
 package com.kh.planOption.model.vo;
 
+import java.sql.Connection;
+
 public class PlanOption {
 
 	private int planNo;					// 일정번호
@@ -40,7 +42,15 @@ public class PlanOption {
 		this.planTrans = planTrans;
 		this.userNo = userNo;
 	}
-
+	
+	
+	
+	public PlanOption(int planNo, String planSdate, String planEdate) {
+		super();
+		this.planNo = planNo;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+	}
 
 	public int getPlanNo() {
 		return planNo;
@@ -180,6 +190,7 @@ public class PlanOption {
 				+ planTrans + ", planRecommend=" + planRecommend + ", planScrapCount=" + planScrapCount + ", userNo="
 				+ userNo + "]";
 	}
+
 	
 	
 	

@@ -10,6 +10,17 @@ public class PlanMap {
 	
 	public PlanMap() {}
 
+	public PlanMap(String planMapNo, String planDay, String orderNo, String placeName, String planNo) {
+		super();
+		this.planMapNo = planMapNo;
+		this.planDay = planDay;
+		this.orderNo = orderNo;
+		this.placeName = placeName;
+		this.planNo = planNo;
+	}
+
+
+
 	public PlanMap(String planDay, String orderNo, String placeName, String planNo) {
 		super();
 		this.planDay = planDay;
@@ -17,6 +28,7 @@ public class PlanMap {
 		this.placeName = placeName;
 		this.planNo = planNo;
 	}
+
 
 	public String getPlanMapNo() {
 		return planMapNo;
