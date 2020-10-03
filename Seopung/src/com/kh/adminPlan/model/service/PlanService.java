@@ -141,4 +141,97 @@ public class PlanService {
 		return result;
 	}
 	
+	public int insertComment(PlanComment c) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().insertComment(conn, c);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int likePlan(int userNo, int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().likePlan(conn, userNo, pNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int scrapPlan(int userNo, int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().scrapPlan(conn, userNo, pNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int accomPlan(int userNo, int userNo2, int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().accomPlan(conn, userNo, userNo2, pNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int increasePlanRecommend(int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().increasePlanRecommend(conn, pNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int increasePlanScrap(int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().increasePlanScrap(conn, pNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }

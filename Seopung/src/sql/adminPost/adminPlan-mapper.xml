@@ -83,6 +83,8 @@
 		     , PLAN_SDATE
 		     , PLAN_EDATE
 		     , PLAN_AGE
+		     , PLAN_ACC
+		     , PLAN_SCRAP_YN
 		     , PLAN_BUDGET
 		     , PLAN_MEMO
 		     , PLAN_TYPE
@@ -90,8 +92,11 @@
 		     , PLAN_RECOMMEND
 		     , PLAN_SCRAP_COUNT
 		     , USER_ID
+		     , USER_NICK
+		     , P.USER_NO AS USER_NO
+		     , PROFILEPIC_PATH
 		  FROM TB_PLAN_OPTION P
-		  JOIN TB_MEMBER USING(USER_NO)
+		  JOIN TB_MEMBER M ON (P.USER_NO = M.USER_NO)
 		 WHERE PLAN_NO = ?
 		   AND P.STATUS = 'Y'
 	</entry>
@@ -127,6 +132,8 @@
 		                       , COMMENT_CONTENT
 		                       , COMMENT_DATE
 		                       , PROFILEPIC_PATH
+		                       , USER_NICK
+                               , USER_NO
 		                    FROM TB_PLAN_COMMENT 
 		                    JOIN TB_MEMBER USING(USER_NO)
 		                   WHERE COMMENT_STATUS = 'Y'
@@ -145,6 +152,86 @@
 		   SET COMMENT_STATUS = 'N',
   		       COMMENT_MODIFY = SYSDATE
 		 WHERE COMMENT_NO = ?
+	</entry>
+	
+	<entry key="insertComment">
+		INSERT 
+		  INTO TB_PLAN_COMMENT
+		  (
+		     COMMENT_NO
+		   , USER_NO
+		   , PLAN_NO
+		   , COMMENT_CONTENT
+		  )
+		  VALUES
+		  (
+		     SEQ_PLANCOMMENTNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		  )
+	</entry>
+	
+	<entry key="likePlan">
+		INSERT
+		  INTO TB_PLAN_RECOMMEND
+		  (
+		     USER_NO
+		   , PLAN_NO 
+		  )
+		  VALUES
+		  ( 
+		     ?
+		   , ?  
+		  )
+	</entry>
+	
+	<entry key="scrapPlan">
+		INSERT
+		  INTO TB_PLAN_SCRAP
+		  (
+		     USER_NO
+		   , PLAN_NO 
+		   , PSCRAP_DATE
+		  )
+		  VALUES
+		  ( 
+		     ?
+		   , ?
+		   , SYSDATE
+		  )
+	</entry>
+	
+	<entry key="accomPlan">
+		INSERT
+		  INTO TB_ACCOMPANY
+		  (
+		     ACCOM_NO
+		   , USER_NO
+		   , USER_NO2
+		   , PLAN_NO 
+		  )
+		  VALUES
+		  ( 
+		     SEQ_ACCOMNO
+		   , ?
+		   , ?
+		   , ?
+		  )
+	</entry>
+	
+	<entry key="increasePlanRecommend">
+		UPDATE
+		       TB_PLAN_OPTION
+		   SET PLAN_RECOMMEND = PLAN_RECOMMEND + 1
+		 WHERE PLAN_NO = ?
+	</entry>
+	
+	<entry key="increasePlanScrap">
+		UPDATE
+		       TB_PLAN_OPTION
+		   SET PLAN_SCRAP_COUNT = PLAN_SCRAP_COUNT + 1
+		 WHERE PLAN_NO = ?
 	</entry>
 	
 </properties>
