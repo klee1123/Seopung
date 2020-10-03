@@ -2,6 +2,7 @@ package com.kh.community.cotroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,12 +67,14 @@ public class CommunityInsertServlet extends HttpServlet {
 				c.setThumb(filePath + changeName);
 				
 			}
-			
 			int result = new CommunityService().insertCommunity(c);
-			
+			String all = URLEncoder.encode("전체");
 			if(result > 0) {
+				request.setCharacterEncoding("utf-8");
 				request.getSession().setAttribute("alertMsg", "게시글 등록됐습니다");
-				response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1");
+			
+
+				response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1&head=" + all);
 				
 			}else {
 				
