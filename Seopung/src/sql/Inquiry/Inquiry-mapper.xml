@@ -8,11 +8,11 @@
 			(
 				INQUIRE_TYPE
 			  , INQUIRE_EMAIL
-			  , INQUIRE_STATUS
+			  , INQUIRE_CONTENT
 			)
 			VALUES
 			(
-			  , ?
+			  	?
 			  , ?
 			  , ?	
 			)

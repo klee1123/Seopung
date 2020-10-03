@@ -30,7 +30,7 @@ import com.kh.userInquiry.model.vo.Inquiry;
 			}
 	
 	public int insertInquiry(Connection conn, Inquiry iq) {
-		
+		//
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -53,7 +53,6 @@ import com.kh.userInquiry.model.vo.Inquiry;
 		
 		return result;
 	}
-
 		
 }
 	
