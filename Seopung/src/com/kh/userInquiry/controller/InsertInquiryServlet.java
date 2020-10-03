@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.userInquiry.model.service.InquiryService;
+
 /**
  * Servlet implementation class InsertInquiryServlet
  */
@@ -32,16 +34,9 @@ public class InsertInquiryServlet extends HttpServlet {
 		String userEmail = request.getParameter("userEmail");
 		String userPrivacy = request.getParameter("userPrivacy");
 		
+		int result = new InquiryService().insertInquiry(inquiryType, userEmail, userPrivacy);
 		
-		
-		int result = new InquiryService();
-		
-		
-		
-		
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -48,9 +49,9 @@ public class PlanOptionDao {
 			pstmt.setString(8, p.getPlanPrivate());
 			pstmt.setString(9, p.getPlanMemo());
 			pstmt.setString(10, p.getPlanHashtag());
-			pstmt.setString(11, p.getPlanTemp());
-			pstmt.setString(12, p.getPlanType());
-			pstmt.setString(13, p.getPlanTrans());
+			pstmt.setString(11, p.getPlanType());
+			pstmt.setString(12, p.getPlanTrans());
+			pstmt.setString(13, p.getUserNo());
 			
 			result = pstmt.executeUpdate();
 						

@@ -5,12 +5,12 @@
 		INSERT
 		  INTO TB_PLAN_MAP
 		  (
-		     PLAN_XY_NO
+		     PLAN_MAP_NO
 		   , PLAN_DAY
 		   , ORDER_NO
-		   , LINE_MEMO
-		   , LATITUDE
-		   , LONGITUDE
+		   , PLACE_NAME
+		   , PLAN_NO
+		 
 		    
 		  ) 
 		  VALUES
@@ -20,7 +20,7 @@
 		   , ?
 		   , ?
 		   , ?
-		   , ?
+		 
 		  )
 	</entry>
 </properties>
