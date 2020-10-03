@@ -17,27 +17,11 @@ div {
 }
 
 .wrap {
-	width: 1200px;
+	width: 900px;
 	height: 1000px;
 	margin: auto;
 	margin-top: 120px;
 	font-family: 'Noto Sans KR', sans-serif; 
-}
-
-
-.so_title {
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.plan_type>div {
-	width: 120px;
-	float: left;
-}
-
-.plan_sec {
-	margin-top: 20px;
-	height: 60px;
 }
 
 .bbtn {
@@ -120,11 +104,11 @@ div {
 		        이메일 주소와 함께 문의를 남겨주세요. 영업일 기준 2일 내에 답변 드리겠습니다.<br>
 		        특정 사용자의 동행에 관한 질문은 해당 사용자에게 문의하기를 이용해 주세요.<br><br>
 
-        
+        <br>
         <h4>문의유형</h4>
-        <form action="">
+        <form action="" >
             <label for="type""></label>
-            <select name="type" id="inquiryType">
+            <select name="inquiryType" id="inquiryType">
                 <option value="question">문의 내용을 선택하세요.</option>
                 <option value="service"">서비스이용문의</option>
                 <option value="account">계정문의</option>
@@ -136,16 +120,18 @@ div {
                 <option value="tendinous">건의</option>
                 <option value="etc">기타문의</option>
                 </select>
-        <br>
+		<br>
+		<br>
 		<% if(loginUser == null) {%>
         
         <h4>이메일 주소</h4>
      
             <label for="email"></label>
-            <input type="email" id="email" name="userEmail" required>
+            <input type="email" id="userEmail" name="userEmail" required>
         
         <%} %>
-        <br>
+		<br>
+		<br>
 		
         <h4>문의내용</h4>
      
@@ -153,7 +139,7 @@ div {
       
         <br><br>
         
-            <input id="privacy" type="checkbox" name="userPrivacy" value="" required>
+            <input type="checkbox" id="userPrivacy" name="userPrivacy" value="" required>
             <label for="privacy"><h4 style="display:inline;">개인 정보 수집 및 이용에 동의합니다.</h4></label>
        
         <br><br><br><br>

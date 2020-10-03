@@ -8,7 +8,7 @@
 			(
 				INQUIRE_TYPE
 			  , INQUIRE_EMAIL
-			  , INQUIRE_STATUS	<!-- 약관동의 컬럼 부재? -->
+			  , INQUIRE_STATUS
 			)
 			VALUES
 			(
