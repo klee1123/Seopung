@@ -75,7 +75,7 @@
 				<table>
 					<tr>
 						<td width=""><span>총 게시글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red"><%=listCount%></b>개
+								style="color: black"><%=listCount%></b>개
 						</span></td>
 						<td width="720px;">
 							<div align="center">
