@@ -11,11 +11,12 @@ public class InquiryService {
 	/*
 	 * 1:1문의 등록용
 	 */
-	public int insertInquiry() {
+	public int insertInquiry(String inquiryType, String userEmail, 
+							 String userPrivacy) {
 		Connection conn = getConnection();
 		
-		int result = new InquiryDao().insertInquiry(conn, 
-					inquiryType, userEmail, userPrivacy);
+		int result = new InquiryDao().insertInquiry(conn, inquiryType, 
+													userEmail, userPrivacy);
 		
 		if(result>0) {
 			commit(conn);
@@ -29,4 +30,5 @@ public class InquiryService {
 	}
 	
 	
+
 }
