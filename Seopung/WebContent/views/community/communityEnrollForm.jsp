@@ -32,6 +32,7 @@
 		<br>
 
 		<div class="outer">
+				<%if(loginUser.getCategory() == 1){ %>
 			<form action="<%=contextPath%>/insert.co" method="post" enctype="multipart/form-data">
 				
 				<!-- 수정 필요! 임시 -->
@@ -61,6 +62,29 @@
 					<button type="submit" class="btn btn-primary">등록</button>
 				</div>
 			</form>
+			<%}else{ %>
+				<form action="<%=contextPath%>/notice.co" method="post">
+				
+				<!-- 수정 필요! 임시 -->
+				<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+				 <select style="margin-top:120px;" name="head" id="head">
+			        <option value="공지">공지</option>
+			    </select>
+				<input type="text" name="title" style="width: 100%;"
+					placeholder="제목입력" class="form-control" required> <br>
+					
+				<textarea  id="summernote" name="content" required></textarea>
+
+				
+				<br>
+				<br>
+
+				<div align="center">
+					<button type="button" class="btn btn-secondary"  onclick="history.back();">취소</button>
+					<button type="submit" class="btn btn-primary">등록</button>
+				</div>
+			</form>
+			<%} %>
 		</div>
 	</div>
 			<br>

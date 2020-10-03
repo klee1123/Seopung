@@ -43,8 +43,6 @@ public class CommunityDetailServlet extends HttpServlet {
 			
 			request.setAttribute("c", c);
 			
-			
-			
 		request.getRequestDispatcher("views/community/communityDetailView.jsp").forward(request, response);
 		}
 	}
