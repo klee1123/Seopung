@@ -1,7 +1,6 @@
 package com.kh.community.cotroller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,18 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.community.model.service.CommunityService;
+import com.kh.community.model.vo.Community;
 
 /**
- * Servlet implementation class CommunityDeleteServlet
+ * Servlet implementation class CommunityDetailNoticeServlet
  */
-@WebServlet("/delete.co")
-public class CommunityDeleteServlet extends HttpServlet {
+@WebServlet("/detailNotice.co")
+public class CommunityDetailNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityDeleteServlet() {
+    public CommunityDetailNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,15 @@ public class CommunityDeleteServlet extends HttpServlet {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		int result = new CommunityService().deleteCommunity(cno);
+		int result = new CommunityService().increaseCount(cno);
 		
 		if(result > 0) {
-			
-			request.getSession().setAttribute("alertMsg", "게시물이 삭제되었습니다");
-			String all = URLEncoder.encode("전체");
-			String neww = URLEncoder.encode("최신");
+			Community nc = new CommunityService().selectNotice(cno);
+			request.setAttribute("nc", nc);
+			request.getRequestDispatcher("views/community/communityDetailNoticeView.jsp").forward(request, response);
 
-			response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1&head=" + all + "&array=" + neww);
 		}
+		
 	}
 
 	/**

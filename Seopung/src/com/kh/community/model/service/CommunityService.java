@@ -163,7 +163,38 @@ public class CommunityService {
 		return result;
 	}
 	
-
+	public int insertNotice(Community c) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().insertNotice(conn, c);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Community> selectNoticeList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Community> nList = new CommunityDao().selectNoticeList(conn);
+		
+		close(conn);
+		return nList;
+	}
+	
+	public Community selectNotice(int cno) {
+		Connection conn = getConnection();
+	
+		Community c = new CommunityDao().selectNotice(conn, cno);
+		
+		close(conn);
+		return c;
+	}
 	
 	
 	

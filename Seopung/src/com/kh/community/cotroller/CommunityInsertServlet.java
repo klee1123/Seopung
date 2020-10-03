@@ -69,12 +69,13 @@ public class CommunityInsertServlet extends HttpServlet {
 			}
 			int result = new CommunityService().insertCommunity(c);
 			String all = URLEncoder.encode("전체");
+			String neww = URLEncoder.encode("최신");
 			if(result > 0) {
 				request.setCharacterEncoding("utf-8");
 				request.getSession().setAttribute("alertMsg", "게시글 등록됐습니다");
 			
 
-				response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1&head=" + all);
+				response.sendRedirect(request.getContextPath() + "/list.co?currentPage=1&head=" + all + "&array=" + neww);
 				
 			}else {
 				

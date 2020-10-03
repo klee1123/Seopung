@@ -102,4 +102,72 @@ INSERT
 		  FROM TB_COMMUNITY C
 		 WHERE COMMUNITY_STATUS = 'Y'
 		   AND COMMUNITY_HEAD IN ('¸í¼Ò','¸ÀÁý');
-  
+           
+SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||''||'%'			    
+			           AND COMMUNITY_HEAD IN ('¸ÀÁý', '¸í¼Ò')
+			         ORDER 
+			            BY COMMUNITY_COUNT DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN 1 AND 10;
+             
+INSERT 
+  INTO TB_COMMUNITY
+  (  COMMUNITY_NO
+   , ADMIN_ID
+   , COMMUNITY_TITLE
+   , COMMUNITY_CONTENT
+   , COMMUNITY_HEAD
+   , COMMUNITY_ENROLL
+   )
+   VALUES
+   (
+      SEQ_UNO.NEXTVAL
+    , ?
+    , ?
+    , ?
+    , ?
+    , SYSDATE
+   );
+ 
+ 
+ 
+ 
+  SELECT ROWNUM RNUM
+       , A.*
+    FROM(   
+     SELECT
+            COMMUNITY_NO
+          , ADMIN_ID
+          , COMMUNITY_TITLE
+          , COMMUNITY_CONTENT
+          , COMMUNITY_ENROLL
+          , COMMUNITY_COUNT
+          , COMMUNITY_HEAD
+       FROM TB_COMMUNITY
+       JOIN TB_ADMIN ON (USER_NO = ADMIN_NO)
+      WHERE COMMUNITY_STATUS = 'Y'
+        AND COMMUNITY_HEAD = '°øÁö'
+      ORDER
+         BY COMMUNITY_NO DESC
+        ) A
+   

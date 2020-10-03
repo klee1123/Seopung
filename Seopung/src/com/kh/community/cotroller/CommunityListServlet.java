@@ -78,7 +78,12 @@ public class CommunityListServlet extends HttpServlet {
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("head", head);
 		request.setAttribute("array", array);
+		
+		ArrayList<Community> nList = new CommunityService().selectNoticeList();
+		
+		request.setAttribute("nList", nList);
 		request.getRequestDispatcher("views/community/communityList.jsp").forward(request, response);
+		
 	
 	}
 	/**

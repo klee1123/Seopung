@@ -78,6 +78,33 @@ public class Community {
 		this.thumb = thumb;
 	}
 	
+	
+	
+
+	public Community(int comNo, String userNo, String title, String content, Date enroll, int count, String head) {
+		super();
+		this.comNo = comNo;
+		this.userNo = userNo;
+		this.title = title;
+		this.content = content;
+		this.enroll = enroll;
+		this.count = count;
+		this.head = head;
+	}
+	
+
+
+
+	public Community(int comNo, String userNo, int userNo1, String title, String content, Date enroll, int count) {
+		super();
+		this.comNo = comNo;
+		this.userNo = userNo;
+		this.userNo1 = userNo1;
+		this.title = title;
+		this.content = content;
+		this.enroll = enroll;
+		this.count = count;
+	}
 
 	public int getComNo() {
 		return comNo;
