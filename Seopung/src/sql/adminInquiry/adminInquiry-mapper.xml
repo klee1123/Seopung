@@ -32,5 +32,23 @@
 		     )
 		 WHERE RNUM BETWEEN ? AND ?	
 	</entry>
+	
+	<entry key="selectAdminInquiry">
+	SELECT 
+		   IQUIRE_NO
+	     , INQUIRE_TITLE
+	     , INQUIRE_CONTENT
+	     , INQUIRE_ENROLL_DATE
+	     , INQUIRE_RESPONSE
+	     , INQUIRE_TYPE
+	     , INQUIRE_SEP
+	     , INQUIRE_EMAIL
+	     , ADMIN_ID
+	  FROM TB_INQUIRE I
+	  JOIN TB_ADMIN USING(INQUIRE_NO)
+	 WHERE I.STATUS = 'Y'
+	   AND INQUIRE_NO = ?
+	</entry>
+	
 
 </properties>

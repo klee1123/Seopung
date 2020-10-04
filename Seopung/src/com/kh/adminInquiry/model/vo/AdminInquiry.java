@@ -23,6 +23,21 @@ public class AdminInquiry {
 	}
 
 	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
+			String inquireEmail, String inquireResponse, int adminNo, String inquireSep, String inquireType) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireEnrollDate = inquireEnrollDate;
+		this.inquireEmail = inquireEmail;
+		this.inquireResponse = inquireResponse;
+		this.adminNo = adminNo;
+		this.inquireSep = inquireSep;
+		this.inquireType = inquireType;
+	}
+
+
+	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
 			String inquireStatus, String inquireEmail, String inquireResponse, Date responseDate, String status,
 			String inquireWriter, int adminNo, String inquireSep, String inquireType) {
 		super();
@@ -40,7 +55,7 @@ public class AdminInquiry {
 		this.inquireSep = inquireSep;
 		this.inquireType = inquireType;
 	}
-
+	
 	public int getInquireNo() {
 		return inquireNo;
 	}
@@ -144,6 +159,8 @@ public class AdminInquiry {
 	public void setInquireType(String inquireType) {
 		this.inquireType = inquireType;
 	}
+	
+	
 
 	@Override
 	public String toString() {

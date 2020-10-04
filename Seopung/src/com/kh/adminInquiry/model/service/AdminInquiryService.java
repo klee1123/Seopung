@@ -36,5 +36,16 @@ public class AdminInquiryService {
 		return list;
 	}	
 	
+	// 1:1문의글 조회
+	public AdminInquiry selectAdminInquiry(int ino) {
+		Connection conn = getConnection();
+		
+		 AdminInquiry i = new AdminInquiryDao().selectAdminInquiry(conn, ino);
+		
+		close(conn);
+		
+		return i;
+	}
+	
 
 }
