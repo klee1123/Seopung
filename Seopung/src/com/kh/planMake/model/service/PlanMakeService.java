@@ -13,8 +13,8 @@ import com.kh.planMake.model.vo.PlanMake;
 
 public class PlanMakeService {
 	
-public int insertPlanMake(PlanMake p) {
-		
+	public int insertPlanMake(PlanMake p) {
+			
 		Connection conn = getConnection();
 		
 		int result = new PlanMakeDao().insertPlanMake(conn, p);
@@ -32,28 +32,25 @@ public int insertPlanMake(PlanMake p) {
 	
 	}
 
-public int insertPlanPlace(PlanMake pp) {
+	public int insertPlanPlace(PlanMake pp) {
+		
+		Connection conn = getConnection();
+		
+		int result = new PlanMakeDao().insertPlanPlace(conn, pp);
+		
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	
-	Connection conn = getConnection();
-	
-	int result = new PlanMakeDao().insertPlanPlace(conn, pp);
-	
-	
-	if(result > 0) {
-		commit(conn);
-	}else {
-		rollback(conn);
 	}
-	
-	close(conn);
-	
-	return result;
 
-}
-
-
-	
-	
 }
 
 

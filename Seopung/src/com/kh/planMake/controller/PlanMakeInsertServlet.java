@@ -86,14 +86,16 @@ public class PlanMakeInsertServlet extends HttpServlet {
 				p.setUserNo(userNo);
 		
 		PlanMake pp = new PlanMake();
-			p.setPlanDay(planDay);
-			p.setPlanDay(planPlace);
+			pp.setPlanDay(planDay);
+			pp.setPlanPlace(planPlace);
+			
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
 		int result = new PlanMakeService().insertPlanMake(p);
+		int result2 = new PlanMakeService().insertPlanPlace(pp);
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
-		if(result > 0) {	//  저장 성공
+		if((result+result2 )> 1) {	//  저장 성공
 			
 			request.getRequestDispatcher("views/plan/plan_page.jsp").forward(request, response);
 			

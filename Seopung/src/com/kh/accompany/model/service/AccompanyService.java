@@ -16,11 +16,11 @@ import com.kh.common.PageInfo;
 
 public class AccompanyService {
 
-	public int selectListCount() {
+	public int selectListCount(int userNo) {
 		
 		Connection conn = getConnection();
 		
-		int listCount = new AccompanyDao().selectListCount(conn);
+		int listCount = new AccompanyDao().selectListCount(conn, userNo);
 		
 		close(conn);
 		
@@ -33,11 +33,11 @@ public class AccompanyService {
 	}
 	
 	
-	public ArrayList<Accompany> selectList(PageInfo pi){
+	public ArrayList<Accompany> selectList(PageInfo pi, int userNo){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Accompany> list = new AccompanyDao().selectList(conn, pi);
+		ArrayList<Accompany> list = new AccompanyDao().selectList(conn, pi, userNo);
 		
 		close(conn);
 		
@@ -64,6 +64,7 @@ public class AccompanyService {
 		close(conn);
 		
 		return result;
+		
 	}
 	
 	public Member accomProfile(String userId){
@@ -76,6 +77,29 @@ public class AccompanyService {
 		
 		return profile;
 		
+		
+		
+		
+	}
+	
+	public int sendMessage(int senderNo, int receiverNo, String introduction) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().sendMessage(conn, senderNo, receiverNo, introduction);
+		
+		if(result > 0 ) {
+			
+			commit(conn);
+			
+		}else {
+			
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 		
 		
 		

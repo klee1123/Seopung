@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
 <%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
+<%@ page import="com.kh.Member.model.vo.*" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -9,11 +10,16 @@
 	Member profile = (Member)request.getAttribute("profile");
 	
 	
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	String userNick = (String)request.getAttribute("userNick");
+	
+
 %>    
 
 
@@ -114,11 +120,14 @@
 	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> <input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>"></td>
 	                        <td><%= a.getUserId() %></td>
 	                        <td><%= a.getUserNick() %></td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile(<%= a.getUserId() %>);">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message">메세지보내기</a></td>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile('<%= a.getUserId() %>');">프로필</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%= a.getUserNick() %>')">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
-
+							<input type="hidden" name="userId" id="accomProfile" >
+							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
+							<input type="hidden" name="userNo" id="userNo1" value="<%= a.getUserNo1() %>">
+							<input type="hidden" name="userNo2" id="userNo2" value="<%= a.getUserNo2() %>">
 	                    </tr>
 	                    <% } %>
                     <% } %>
@@ -140,9 +149,40 @@
 				}
 
                 function accomProfile(userId){
-                	
+                	<!-- 
+                	$("#accomProfile").val(userId);
+                	console.log($("#accomProfile").val());
+                	-->
                 	console.log(userId);
-                	$("#profile form input[type=hidden]").val(userId);
+                	location.href="<%=contextPath%>/profile.ac?userId=" + userId;
+                	
+                	
+                	
+                }
+                
+                function accomMessage(userNick){
+                	
+                	
+                	$("#myNo").val($("#loginUserNo").val());
+                	
+                	
+                	$("#userNick").val(userNick)
+                	
+                	
+                	var myNo = $("#myNo").val();
+                	var userNo1 = $("#userNo1").val();
+                	var userNo2 = $("#userNo2").val();
+                	
+                	
+                	if(myNo == userNo1){
+                		$("#userNo").val(userNo2);
+                		console.log($("#userNo").val());
+                	}else{
+                		$("#userNo").val(userNo1);
+                		console.log($("#userNo").val());
+                	}
+                	
+                	
                 	
                 }
 				
@@ -151,87 +191,6 @@
 				
 				                
               
-                                
-                <!-- 프로필 modal -->
-                <div class="modal" id="profile">
-                    <div class="modal-dialog" >
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h3 class="modal-title">프로필</h3>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body" align="center">
-                            
-                                <div class="profile">
-                                    <form action="<%= contextPath %>/accomProfile.ac" method="GET">
-                                        <input type="hidden" name="userId" value="">
-                                         <br><br>
-                                    
-                                        <div class="profilePhoto"">
-                                            <img src="../../../resources/images/회원.jpg" alt="">
-                                            <br><br>
-                                           
-                                        </div>
-                                        <div class="profileJoin">
-                                            
-                                        <table id="join" align="center" style="float: left;">
-                                            <tr>
-                                                <th align="left" width="100px" ">아이디</th>
-                                                <td><span>id</span></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <th align="left" width="100px">이름</th>
-                                                <td><span>홍길동 </span></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <th align="left">닉네임</th>
-                                                <td><span>홍길홍길</span></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                               
-                                                </tr>
-                                            </tr>
-                                            <tr>
-                                                <th align="left">이메일</th>
-                                                <td><span>hong@gmail.com </span></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <th align="left">생년월일</th>
-                                                <td><span>2020년 07월 01일</span></td>
-                                            </tr>
-                                            
-                                        </table>
-                                        <br><br>
-                                        </div>
-                                        
-                                        <textarea name="introduction" cols="50" rows="8"style="resize: none;">자기소개 : </textarea>
-                                        
-                                        <br><br>
-
-                                        <button class="genric-btn info-border radius">확인</button>
-
-                                    </form>
-                                    </div>
-
-
-                            </div>
-                            
-
-
-                        </div>
-                        
-                    </div>
-
-
-
-                </div>
 
                 <!-- 메세지 modal -->
 
@@ -248,12 +207,14 @@
                             <div class="modal-body" align="center">
                             
                                 <div class="message">
-                                    <form action="" method="POST">
+                                    <form action="message.ac" method="GET">
                                         
+                                        <input type="hidden" name="senderNo" id="myNo">
+                                        <input type="hidden" name="receiverNo" id="userNo">
                                         
                                     
                                         <div class="profilePhoto" style="float: ">
-                                            <img src="../../../resources/images/회원.jpg" alt="" width="20" height="20" style="margin-left: 30px;">  닉네임
+                                            	닉네임 : <input type="text" id="userNick" readonly>
                                             <br>
                                            
                                         </div>
@@ -287,6 +248,87 @@
 
                 </div>
 
+                                
+                <!-- 프로필 modal -->
+                <div class="modal" id="profile">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">프로필</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                            
+                                <div class="profile">
+                                    <form action="<%= contextPath %>/profile.ac" method="GET">
+                                         <br><br>
+                                        
+                                    
+                                        <div class="profilePhoto"">
+                                            <img src="../../../resources/images/회원.jpg" alt="">
+                                            <br><br>
+                                           
+                                        </div>
+                                        <div class="profileJoin">
+                                            
+                                        <table id="join" align="center" style="float: left;">
+                                            <tr>
+                                                <th align="left" width="100px" ">아이디</th>
+                                                <td><span></span></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <th align="left" width="100px">이름</th>
+                                                <td><span> </span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th align="left">닉네임</th>
+                                                <td><span></span></td>
+                                            
+                                            </tr>
+                                            <tr>
+                                               
+                                                </tr>
+                                            </tr>
+                                            <tr>
+                                                <th align="left">이메일</th>
+                                                <td><span> </span></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <th align="left">생년월일</th>
+                                                <td><span></span></td>
+                                            </tr>
+                                            
+                                        </table>
+                                        <br><br>
+                                        </div>
+                                        
+                                        <textarea name="introduction" cols="50" rows="8"style="resize: none;"></textarea>
+                                        
+                                        <br><br>
+
+                                        <button class="genric-btn info-border radius">확인</button>
+
+                                    </form>
+                                    </div>
+
+
+                            </div>
+                            
+
+
+                        </div>
+                        
+                    </div>
+
+
+
+                </div>
 
 
 
