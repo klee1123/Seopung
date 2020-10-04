@@ -1,4 +1,4 @@
-package com.kh.community.cotroller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CommunitySearchServlet
+ * Servlet implementation class RecommendEnrollFormServlet1
  */
-@WebServlet("/CommunitySearchServlet")
-public class CommunitySearchServlet extends HttpServlet {
+@WebServlet("/enrollForm.re")
+public class RecommendEnrollFormServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunitySearchServlet() {
+    public RecommendEnrollFormServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class CommunitySearchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("views/recommend/recommendEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

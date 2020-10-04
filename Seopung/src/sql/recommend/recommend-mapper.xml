@@ -80,4 +80,25 @@
 			     )
 			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="insertRecommend">
+		INSERT
+		  INTO TB_RECOMMEND
+		  (
+		     RECOMMEND_NO
+		   , ADMIN_NO
+		   , RECOMMEND_TITLE
+		   , RECOMMEND_CONTENT
+		   , RECOMMEND_THUMB
+		   , RECOMMEND_ENROLL
+		   )
+		   VALUES
+		   (
+		      SEQ_RECOMMENDNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
 </properties>

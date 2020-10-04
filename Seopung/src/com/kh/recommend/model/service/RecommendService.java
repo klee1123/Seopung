@@ -1,7 +1,6 @@
 package com.kh.recommend.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -26,5 +25,18 @@ public class RecommendService {
 		ArrayList<Recommend> list = new RecommendDao().selectList(conn, pi, keyword, array);
 		close(conn);
 		return list;
+	}
+	
+	public int insertRecommend(Recommend c) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().insertRecommend(conn, c);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

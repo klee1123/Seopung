@@ -142,7 +142,7 @@ p>img {
 							id="headTitle" style="margin-left: 80px;"></span>
 					</span> <a href="<%=contextPath%>/detailList.re?cno=<%=r.getReNo()%>"
 						style="text-decoration: none; color: black;"> <span id="title"
-							name="title"><%=r.getTitle()%>&nbsp;</span>
+							name="title">&nbsp;&nbsp;<%=r.getTitle()%>&nbsp;</span>
 					</a>
 
 				</span> <br> <span
@@ -153,7 +153,7 @@ p>img {
 							<%=r.getCount()%>
 							/관리자</div> <!-- <div style="width:50px">양현우</div> -->
 				</span> <span style="margin-left: 15px; color: blue;"><%=r.getLike()%></span>
-					<br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span id="content"
+					<br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span id="content"
 					style="margin-left: 140px;"><%=r.getContent()%></span> <br> <span
 					style="margin-left: 15px; color: red;"></span>
 				</li>
@@ -181,9 +181,9 @@ p>img {
 							width="20px;" height="16px;">검색</label>
 						<button type="submit" id="search" style="display: none;">검색</button>
 						<%
-							if (loginUser != null) {
+							if (loginUser != null && loginUser.getCategory() == 2) {
 						%>
-						<button onclick="location.href='<%=contextPath%>/enrollForm.co'"
+						<button onclick="location.href='<%=contextPath%>/enrollForm.re'"
 							type="button"
 							style="margin-left: 640px; width: 80px; height: 30px; border: none;">글작성</button>
 						<%

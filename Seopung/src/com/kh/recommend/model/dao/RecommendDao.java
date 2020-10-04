@@ -98,6 +98,31 @@ public class RecommendDao {
 		return list;
 	}
 	
+	public int insertRecommend(Connection conn, Recommend c) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, c.getUserNo());
+			pstmt.setString(2, c.getTitle());
+			pstmt.setString(3, c.getContent());
+			pstmt.setString(4, c.getThumb());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	
