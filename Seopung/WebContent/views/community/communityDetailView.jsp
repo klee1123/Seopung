@@ -92,12 +92,104 @@
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/recommend.co?cno=<%=c.getComNo()%>'">추천</button>
 				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">스크랩</button>
-				<button class="btn btn-danger" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">신고</button>
+				<button class="btn btn-danger" onclick=" report(<%=c.getComNo()%>,<%=c.getUserNo1()%>, 1)">신고</button>
 			</div>
         <%} %>
         <div id="content_4">
         </div>
-          
+         <!-- 신고폼 모달 -->
+        <div class="modal" id="reportModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4>서풍에 신고하기</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="" method="post" id="reportForm">
+                        	<input type="hidden" name="reportPostNo" id="reportPostNo">
+                        	<input type="hidden" name="reportUserNo2" id="reportUserNo2">
+                        	<input type="hidden" name="reportPostType" id="reportPostType">
+                            <p style="font-size: 13px; padding-left:20px;">
+                                * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
+                                * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
+                                * 허위 신고의 경우 신고자가 제재받을 수 있음을 유념해주세요. <br>
+                            </p>
+                            <br>
+                            <b style="color:black;">신고유형</b>
+                            <select name="reportType" class="form-control" required>
+                            	<option value="" disabled selected hidden>신고 내용을 선택하세요.</option>
+                                <option value="영리목적">영리목적</option>
+                                <option value="불법성">불법성</option>
+                                <option value="욕설">욕설</option>
+                                <option value="도배">도배</option>
+                                <option value="개인정보노출">개인정보노출</option>
+                                <option value="음란성">음란성</option>
+                                <option value="명의도용">명의도용</option>
+                                <option value="기타">기타</option>
+                            </select>
+                            <br>
+                            <b style="color:black;">신고내용</b>
+                            <textarea name="reportContent" id="reportContent" cols="30" rows="6" style="resize: none;overflow:auto;" class="form-control" maxlength="1000" required></textarea>
+                            <br>
+                            <div align="center">
+                                <input type="checkbox" required id="agreeCheck"> <label for="agreeCheck">개인 정보 수집 및 이용에 동의합니다.</label>
+                                <br><br><br>
+                                <button type="submit" class="btn btn-primary">제출</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!--  report modal end -->
+	    
+		
+	
+	
+	<!-- 신고폼 모달 ajax 스크립트 -->
+	<script>
+		var reportModal = document.getElementById("reportModal");
+		
+		$(function(){
+			$(".close").click(function() {
+				reportModal.style.display = "none";
+			});
+		});
+		
+		function report(postNo, userNo2, reportPostType){
+			$("#reportPostNo").val(postNo);
+			$("#reportUserNo2").val(userNo2);
+			$("#reportPostType").val(reportPostType);
+			reportModal.style.display = "block";
+		}
+		
+		$("#reportForm").submit(function(){
+			
+			var form = $(this);
+			
+			$.ajax({
+				type:form.attr('method'),
+				url:"<%=contextPath%>/insert.rp",
+				data:form.serialize(),
+				success:function(result2){
+					
+					if(result2>0){
+						alert("신고되었습니다.");
+						reportModal.style.display = "none";
+					}else{
+						alert("이미 신고하셨습니다.")
+						reportModal.style.display = "none";
+					}
+					
+				}, error:function(){
+					console.log("Ajax 통신 실패");
+				}
+			});
+		})
+			
+	</script> 
 
         <hr>
         
@@ -234,7 +326,7 @@
 			 }
 			 
 			 comment +=         "</td>" +
-							"<td>" + result.list[i].replyWriter +"<button style=' border: none; color:red; background: none;' >신고</button> <br>" + result.list[i].createDate +
+							"<td>" + result.list[i].replyWriter +"<br>" + result.list[i].createDate +
 							"</td>" +
 							"<td>" +  "</td>" + 
 						"</tr>" + 
@@ -250,7 +342,7 @@
 							}else{
 					comment +=			
 						"<td align='center'>"+
-							"<div style='border: none; background: none;' readonly >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</div>" +
+							"<button style='border: none; color:red; background: none;' onclick='report("+result.list[i].replyNo+"," + result.list[i].userNo1+"," + 3+ ");'>신고</button>" +
 						"</td>";
 							}	
 						
@@ -328,6 +420,7 @@
        		});
        	}
 	</script>
+	
 	<%}else{ %>
 	<script>
 		

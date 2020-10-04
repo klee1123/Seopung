@@ -256,7 +256,7 @@
 		   )
 		   VALUES
 		   (
-		      SEQ_UNO.NEXTVAL
+		      SEQ_COMMUNITYNO.NEXTVAL
 		    , ?
 		    , ?
 		    , ?
@@ -368,7 +368,7 @@
 		   )
 		   VALUES
 		   (
-		      SEQ_UNO.NEXTVAL
+		      SEQ_COMMUNITYNO.NEXTVAL
 		    , ?
 		    , ?
 		    , ?
@@ -457,5 +457,6 @@ SELECT *
 		 WHERE COMMENT_STATUS = 'Y'
 		   AND COMMUNITY_NO = ?
 	</entry>
+
 	
 </properties>

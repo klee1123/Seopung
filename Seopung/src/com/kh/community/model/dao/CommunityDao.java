@@ -618,6 +618,8 @@ public class CommunityDao {
 		}
 		return count;
 	}
+	
+	
 
 
 
