@@ -69,7 +69,7 @@
             <ul id="sidenavi">
                 <br><br>
                 <li ><a href="<%= contextPath %>/myPage.me">개인정보 조회 및 변경</a></li> <br>
-                <li ><a href="<%= contextPath %>/myPlanList.me">일정관리</a></li><br>
+                <li ><a href="<%= contextPath %>/list.mp?currentPage=1&userNo=<%=loginUser.getUserNo()%>">일정관리</a></li><br>
     
                 <li>동행인관리
                     <ul>

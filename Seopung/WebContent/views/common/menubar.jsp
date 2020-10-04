@@ -121,7 +121,7 @@ $(function(){
 								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1&head=전체&array=최신">커뮤니티</a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
-									href="packages.html">추천코스</a></li>
+									href="<%=contextPath%>/list.re?currentPage=1&array=최신">추천코스</a></li>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="blog.html"
 									id="navbarDropdown1" role="button" data-toggle="dropdown"

@@ -19,17 +19,19 @@
 <title>스크랩일정</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
  <style>
-       .scrapPlan{
+        .scrapPlan{
             width: 1000px;
             height: 800px;
-       }
-       
-       #cpBody>tr:hover{
+        }
+        #cpBody>tr:hover{
             cursor:pointer;
             opacity:0.7;
         }
         #scrapCpTable tr{height:30px;}
-        
+        #cpBody>tr a{
+	        color:black;
+	        text-decoration:none;
+        }
 </style>
  
 </head>

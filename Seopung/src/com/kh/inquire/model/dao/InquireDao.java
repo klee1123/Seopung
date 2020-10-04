@@ -111,7 +111,7 @@ public class InquireDao {
 		
 		if(ino.length > 1) {
 			for(int i=1; i<ino.length; i++) {
-				sql += "OR INQUIRE_NO = " + ino[i];
+				sql += " OR INQUIRE_NO = " + ino[i];
 			}
 		}
 		try {

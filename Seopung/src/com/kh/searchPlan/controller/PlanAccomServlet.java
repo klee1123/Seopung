@@ -32,15 +32,15 @@ public class PlanAccomServlet extends HttpServlet {
 		int userNo2 = Integer.parseInt(request.getParameter("userNo2"));
 		int pNo = Integer.parseInt(request.getParameter("pNo"));
 		
-		int result = new PlanService().accomPlan(userNo, userNo2, pNo);
-		
+		int result = new PlanService().checkAccom(userNo, userNo2, pNo);
+			
 		if(result>0) {
-			
-			
+			result = 0;
 		}else {
-			
+			result = new PlanService().accomPlan(userNo, userNo2, pNo);
 		}
 	
+		response.getWriter().print(result);
 	}
 
 	/**

@@ -47,8 +47,6 @@ public class AdminCommunityDetailServlet extends HttpServlet {
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 		
-	
-	
 	}
 
 	/**

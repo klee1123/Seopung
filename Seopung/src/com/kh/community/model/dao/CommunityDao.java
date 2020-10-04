@@ -554,7 +554,7 @@ public class CommunityDao {
 		return result;
 	}
 	
-	public ArrayList<Reply> selectReplyList(Connection conn, int cno){
+	public ArrayList<Reply> selectReplyList(Connection conn, int cno, PageInfo pi){
 		
 		ArrayList<Reply> list = new ArrayList<>();
 		
@@ -565,12 +565,19 @@ public class CommunityDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
 			pstmt.setInt(1, cno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				list.add(new Reply(rset.getInt("COMMENT_NO"),
 						           rset.getString("COMMENT_CONTENT"),
-						           rset.getString("USER_NAME"),
+						           rset.getString("USER_NICK"),
+						           rset.getInt("USER_NO"),
 						           rset.getString("PROFILEPIC_PATH"),
 						           rset.getDate("COMMENT_DATE")));
 			}
@@ -611,6 +618,8 @@ public class CommunityDao {
 		}
 		return count;
 	}
+	
+	
 
 
 

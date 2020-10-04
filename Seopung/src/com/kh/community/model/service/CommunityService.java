@@ -215,10 +215,10 @@ public class CommunityService {
 		return result;
 	}
 	
-	public ArrayList<Reply> selectReplyList(int cno){
+	public ArrayList<Reply> selectReplyList(int cno, PageInfo pi){
 		Connection conn = getConnection();
 		
-		ArrayList<Reply> list = new CommunityDao().selectReplyList(conn, cno);
+		ArrayList<Reply> list = new CommunityDao().selectReplyList(conn, cno, pi);
 		
 		close(conn);
 		
@@ -234,6 +234,8 @@ public class CommunityService {
 		
 		return count;
 	}
+	
+	
 	
 	
 	

@@ -256,7 +256,7 @@
 		   )
 		   VALUES
 		   (
-		      SEQ_UNO.NEXTVAL
+		      SEQ_COMMUNITYNO.NEXTVAL
 		    , ?
 		    , ?
 		    , ?
@@ -368,7 +368,7 @@
 		   )
 		   VALUES
 		   (
-		      SEQ_UNO.NEXTVAL
+		      SEQ_COMMUNITYNO.NEXTVAL
 		    , ?
 		    , ?
 		    , ?
@@ -430,10 +430,15 @@
 		    )
 	</entry>
 	<entry key="selectReplyList">
-		SELECT
+SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM
+	         , A.*
+	    FROM (SELECT
 		       COMMENT_NO
 		     , COMMENT_CONTENT
-		     , USER_NAME
+		     , USER_NICK
+		     , USER_NO
 		     , PROFILEPIC_PATH
 		     , COMMENT_DATE
 		  FROM TB_COMMUNITY_COMMENT 
@@ -441,12 +446,17 @@
 		 WHERE COMMUNITY_NO = ?
 		   AND COMMENT_STATUS = 'Y'
 		 ORDER BY COMMENT_NO DESC
+		 ) A
+		   )
+	WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
 	<entry key="countComment">
 		SELECT COUNT(*)
 		  FROM TB_COMMUNITY_COMMENT
 		 WHERE COMMENT_STATUS = 'Y'
 		   AND COMMUNITY_NO = ?
 	</entry>
+
 	
 </properties>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminMember.model.service.MemberService;
 import com.kh.adminMember.model.vo.Member;
 import com.kh.common.PageInfo;
@@ -32,7 +33,7 @@ public class BlacklistListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("loginUser") != null){	
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2){	
 			request.setCharacterEncoding("utf-8");
 			
 			int listCount;		// 현재 총 게시글 갯수

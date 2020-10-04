@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"%>
+	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"
+	import="java.text.SimpleDateFormat, java.util.Date"
+	%>
 <%
+	
 	ArrayList<Community> list = (ArrayList<Community>) request.getAttribute("list");
 	ArrayList<Community> nList = (ArrayList<Community>) request.getAttribute("nList");
 	String keyword = (String) request.getAttribute("keyword");

@@ -42,7 +42,7 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
-						<th width="50px"><input type="checkbox"></th>
+						<th width="50px"><input type="checkbox" id="chk_all" name="nno"></th>
 						<th width="75px">번호</th>
 						<th width="200px">제목</th>
 						<th width="100px">작성일</th>
@@ -57,7 +57,7 @@
 	                    <% }else{ %>
 	                        <% for(AdminNotice n : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getNoticeNo()  %>"></td>
+	                            <td><input type="checkbox" id="chk" name="nno" value="<%=n.getNoticeNo()%>"></td>
 	                            <td><%= n.getNoticeNo() %></td>
 	                            <td><%= n.getNoticeTitle() %></td>
 	                            <td><%= n.getNoticeEnroll() %></td>
@@ -100,7 +100,7 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">등록하기</button>
+							<button class="btn btn-primary" onclick="location.href='<%= contextPath %>/adminPage/enrollForm.no';" >등록하기</button>
 							
 						</td>
 					</tr>
@@ -110,6 +110,61 @@
 			<br><br>
 
 		</div>
+		
+		<script>
+			// 제목 선택시 상세조회 페이지로 이동
+            $(function(){
+            	$("#listArea>tbody>tr").each(function(){
+                    $(this).find("td:eq(2)").css("cursor","pointer");
+                  
+                    $(this).find("td:eq(2)").click(function(){
+                      location.href = "<%= contextPath %>/adminPage/detail.no?nno=" + $(this).prev().text();
+                    });
+                  });
+			});
+			
+         	// 체크박스 전체선택 및 해제
+            $(function(){
+                $("#chk_all").click(function(){
+                    if($("#chk_all").prop("checked")){
+                        $("input[id=chk]").prop("checked",true);
+
+                    }else {
+                        $("input[id=chk]").prop("checked",false);
+                    }
+                });
+            });
+         	
+         	// 삭제시
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "nno=" + selected[i];
+	                	}else{
+	                  		str += "nno=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/delete.no?" + str;
+	              	} 
+	            });
+            });
+		</script>
+
 
 
 	</div>

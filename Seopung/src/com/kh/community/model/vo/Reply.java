@@ -8,6 +8,7 @@ public class Reply {
 	private String replyContent;
 	private int refCommunityNo;
 	private String replyWriter;
+	private int userNo1;
 	private String profile;
 	private Date createDate;
 	private String status;
@@ -48,6 +49,19 @@ public class Reply {
 		this.profile = profile;
 		this.createDate = createDate;
 	}
+	
+
+	
+
+	public Reply(int replyNo, String replyContent, String replyWriter, int userNo1, String profile, Date createDate) {
+		super();
+		this.replyNo = replyNo;
+		this.replyContent = replyContent;
+		this.replyWriter = replyWriter;
+		this.userNo1 = userNo1;
+		this.profile = profile;
+		this.createDate = createDate;
+	}
 
 	public int getReplyNo() {
 		return replyNo;
@@ -79,6 +93,15 @@ public class Reply {
 
 	public void setReplyWriter(String replyWriter) {
 		this.replyWriter = replyWriter;
+	}
+	
+
+	public int getUserNo1() {
+		return userNo1;
+	}
+
+	public void setUserNo1(int userNo1) {
+		this.userNo1 = userNo1;
 	}
 
 	public String getProfile() {
