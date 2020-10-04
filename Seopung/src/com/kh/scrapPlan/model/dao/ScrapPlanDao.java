@@ -126,5 +126,33 @@ public class ScrapPlanDao {
 		}
 		return result;
 	}
+	
+	public int decreasePlanScrapCount(Connection conn, String[] spno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("decreasePlanScrapCount");
+		
+		if(spno.length > 1) {
+			for(int i=1; i<spno.length; i++) {
+				sql += " OR PLAN_NO = " + spno[i]; 
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(spno[0]));
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

@@ -30,6 +30,7 @@ public class DeleteScrapCommunityListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		String[] scno = request.getParameterValues("scno");
