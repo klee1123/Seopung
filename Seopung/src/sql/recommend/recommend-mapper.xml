@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectListCount">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_RECOMMEND 
+		 WHERE RECOMMEND_STATUS = 'Y'
+		   AND RECOMMEND_TITLE LIKE '%'||?||'%'
+	</entry>
+	<entry key="selectList">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               RECOMMEND_NO
+			             , RECOMMEND_TITLE
+			             , RECOMMEND_CONTENT
+			             , ADMIN_NO
+			             , RECOMMEND_COUNT
+			             , RECOMMEND_LIKE
+			             , RECOMMEND_THUMB
+			             , RECOMMEND_ENROLL
+			          FROM TB_RECOMMEND C			     
+			         WHERE RECOMMEND_STATUS = 'Y'
+			           AND RECOMMEND_TITLE LIKE '%'||?||'%'			    
+			         ORDER 
+			            BY RECOMMEND_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+		<entry key="selectListRe">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               RECOMMEND_NO
+			             , RECOMMEND_TITLE
+			             , RECOMMEND_CONTENT
+			             , ADMIN_NO
+			             , RECOMMEND_COUNT
+			             , RECOMMEND_LIKE
+			             , RECOMMEND_THUMB
+			             , RECOMMEND_ENROLL
+			          FROM TB_RECOMMEND C
+			         WHERE RECOMMEND_STATUS = 'Y'
+			           AND RECOMMEND_TITLE LIKE '%'||?||'%'			    
+			         ORDER 
+			            BY RECOMMEND_LIKE DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+		<entry key="selectListCo">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               RECOMMEND_NO
+			             , RECOMMEND_TITLE
+			             , RECOMMEND_CONTENT
+			             , RECOMMEND_ENROLL
+			             , RECOMMEND_COUNT
+			             , RECOMMEND_LIKE
+			             , RECOMMEND_THUMB
+			             , ADMIN_NO
+			          FROM TB_RECOMMEND C
+			         WHERE RECOMMEND_STATUS = 'Y'
+			           AND RECOMMEND_TITLE LIKE '%'||?||'%'			    
+			         ORDER 
+			            BY RECOMMEND_COUNT DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+</properties>
