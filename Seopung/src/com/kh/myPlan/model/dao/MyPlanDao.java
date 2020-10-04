@@ -1,5 +1,4 @@
-package com.kh.inquire.model.dao;
-
+package com.kh.myPlan.model.dao;
 import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
@@ -13,17 +12,17 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import com.kh.adminPlan.model.vo.Plan;
 import com.kh.common.PageInfo;
-import com.kh.inquire.model.vo.Inquire;
 
-public class InquireDao {
-
+public class MyPlanDao {
+	
 	private Properties prop = new Properties();
 	
-	public InquireDao() {
+	public MyPlanDao() {
 		
-		String fileName = InquireDao.class.getResource("/sql/inquire/inquire-mapper.xml").getPath(); 
-		
+		String fileName = MyPlanDao.class.getResource("/sql/myPlan/myPlan-mapper.xml").getPath();
+	
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
 		} catch (InvalidPropertiesFormatException e) {
@@ -36,13 +35,14 @@ public class InquireDao {
 	}
 	
 	public int selectListCount(Connection conn, int userNo) {
+		
 		int listCount = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
-		
+	
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -53,19 +53,19 @@ public class InquireDao {
 			if(rset.next()) {
 				listCount = rset.getInt(1);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(pstmt);
 		}
 		return listCount;
 	}
 	
-	public ArrayList<Inquire> selectList(Connection conn, PageInfo pi, int userNo){
-		//select문 => 여러행 조회
-		ArrayList<Inquire> list = new ArrayList<>();
+	public ArrayList<Plan> selectList (Connection conn, PageInfo pi, int userNo) {
+		
+		ArrayList<Plan> list = new ArrayList<Plan>();
+		
+		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -75,10 +75,8 @@ public class InquireDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			
 			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit()+1;
 			int endRow = startRow + pi.getBoardLimit()-1;
-			
 			pstmt.setInt(1, userNo);
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
@@ -86,10 +84,11 @@ public class InquireDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Inquire(rset.getInt("INQUIRE_NO"),
-									 rset.getString("INQUIRE_TITLE"),
-									 rset.getString("inquire_content"),
-									 rset.getString("inquire_status")));
+			Plan p = new Plan();
+			p.setPlanTitle(rset.getString("plan_title"));
+			p.setStartDate(rset.getDate("plan_sdate"));							
+			p.setEndDate(rset.getDate("plan_edate"));
+			list.add(p);
 			}
 			
 		} catch (SQLException e) {
@@ -101,24 +100,24 @@ public class InquireDao {
 		return list;
 	}
 	
-	public int deleteInquireList(Connection conn, String[] ino) {
+	public int deleteMyPlanList(Connection conn, String[] mpno) {
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("deleteInquireList");
+		String sql = prop.getProperty("deleteMyPlanList");
 		
-		if(ino.length > 1) {
-			for(int i=1; i<ino.length; i++) {
-				sql += " OR INQUIRE_NO = " + ino[i];
+		if(mpno.length > 1) {
+			for(int i=1; i<mpno.length; i++) {
+				sql += " OR PLAN_NO = " + mpno[i];
 			}
 		}
+		
 		try {
-			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, Integer.parseInt(ino[0]));
-
+			pstmt.setInt(1, Integer.parseInt(mpno[0]));
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,43 +125,6 @@ public class InquireDao {
 			close(pstmt);
 		}
 		return result;
-		
-	}
-	
-	public Inquire selectInquire(Connection conn, int ino) {
-		//select문 => 한 행 조회
-		Inquire i = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectInquire");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, ino);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				i = new Inquire(rset.getInt("INQUIRE_NO"),
-								rset.getString("INQUIRE_TITLE"),
-								rset.getString("INQUIRE_CONTENT"),
-								rset.getDate("INQUIRE_ENROLL_DATE"),
-								rset.getString("INQUIRE_RESPONSE"),
-								rset.getDate("RESPONSE_DATE"),
-								rset.getString("USER_NICK"),
-								rset.getString("ADMIN_ID"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return i;
 	}
 
-	
 }

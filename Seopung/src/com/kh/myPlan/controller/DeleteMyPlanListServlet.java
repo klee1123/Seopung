@@ -1,26 +1,26 @@
-package com.kh.sidebar.controller;
+package com.kh.myPlan.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.kh.myPlan.model.service.MyPlanService;
 
 /**
- * Servlet implementation class MyPlanListServlet
+ * Servlet implementation class DeleteMyPlanListServlet
  */
-@WebServlet("/myPlanList.me")
-public class MyPlanListServlet extends HttpServlet {
+@WebServlet("/delete.mp")
+public class DeleteMyPlanListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPlanListServlet() {
+    public DeleteMyPlanListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +30,16 @@ public class MyPlanListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
+		String[] mpno = request.getParameterValues("mpno");
 		
-		if(session.getAttribute("loginUser") == null) {
-			
-			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
-			//메인으로 다시 되돌아가기
-			response.sendRedirect(request.getContextPath());
-		}else {
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/myPage/myPlanList.jsp");
-			view.forward(request, response);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));		
+		int result = new MyPlanService().deleteMyPlanList(mpno);
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "내 일정 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/list.mp?currentPage=1&userNo=" + userNo);
 		}
+		
 	}
 
 	/**

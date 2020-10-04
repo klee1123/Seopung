@@ -19,17 +19,19 @@
 <title>스크랩커뮤니티</title>
 <script src="../../../resources/js/jquery-3.5.1.min.js"></script>
 <style>
-       .scrapCommunity{
+        .scrapCommunity{
             width: 1000px;
             height: 800px;
-       }
-       
-       #cmBody>tr:hover{
+        }
+        #cmBody>tr:hover{
             cursor:pointer;
             opacity:0.7;
         }
         #scrapCmTable tr{height:30px;}
-        
+        #cmBody>tr a {
+        	color:black;
+        	text-decoration:none;
+        }
 </style>
 </head>
 <body>
