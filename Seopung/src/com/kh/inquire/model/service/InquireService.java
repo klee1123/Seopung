@@ -53,4 +53,15 @@ public class InquireService {
 		return result;
 	}
 	
+	public Inquire selectInquire(int ino) {
+		
+		Connection conn = getConnection();
+		
+		Inquire i = new InquireDao().selectInquire(conn, ino);
+		
+		close(conn);
+		
+		return i;
+	}
+	
 }

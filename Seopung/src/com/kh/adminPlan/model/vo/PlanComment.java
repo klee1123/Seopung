@@ -12,10 +12,30 @@ public class PlanComment {
 	private Date modifyDate;
 	private String status;
 	private String profile;  // 프로필 사진 경로
+	private String userNick;
+	private int userNo;
 	
 	public PlanComment() {
 		
 	}
+	
+
+	public PlanComment(int commentNo, String commentWriter, int planNo, String content, Date enrollDate,
+			Date modifyDate, String status, String profile, String userNick, int userNo) {
+		super();
+		this.commentNo = commentNo;
+		this.commentWriter = commentWriter;
+		this.planNo = planNo;
+		this.content = content;
+		this.enrollDate = enrollDate;
+		this.modifyDate = modifyDate;
+		this.status = status;
+		this.profile = profile;
+		this.userNick = userNick;
+		this.userNo = userNo;
+	}
+
+
 
 	public PlanComment(int commentNo, String commentWriter, int planNo, String content, Date enrollDate,
 			Date modifyDate, String status, String profile) {
@@ -30,9 +50,9 @@ public class PlanComment {
 		this.profile = profile;
 	}
 
-	
-	public PlanComment(int commentNo, String commentWriter, int planNo, String content, Date enrollDate,
-			String profile) {
+
+	public PlanComment(int commentNo, String commentWriter, int planNo, String content, Date enrollDate, String profile,
+			String userNick, int userNo) {
 		super();
 		this.commentNo = commentNo;
 		this.commentWriter = commentWriter;
@@ -40,6 +60,8 @@ public class PlanComment {
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.profile = profile;
+		this.userNick = userNick;
+		this.userNo = userNo;
 	}
 
 	public int getCommentNo() {
@@ -105,6 +127,27 @@ public class PlanComment {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
+
+	public String getUserNick() {
+		return userNick;
+	}
+
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
 
 	@Override
 	public String toString() {

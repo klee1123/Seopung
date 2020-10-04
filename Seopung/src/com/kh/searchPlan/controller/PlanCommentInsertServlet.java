@@ -1,26 +1,28 @@
-package com.kh.inquire.controller;
+package com.kh.searchPlan.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.kh.Member.model.vo.LoginUser;
+import com.kh.adminPlan.model.service.PlanService;
+import com.kh.adminPlan.model.vo.PlanComment;
 
 /**
- * Servlet implementation class DetailInquireListServlet
+ * Servlet implementation class PlanCommentInsertServlet
  */
-@WebServlet("/detail.in")
-public class DetailInquireListServlet extends HttpServlet {
+@WebServlet("/rinsert.pl")
+public class PlanCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailInquireListServlet() {
+    public PlanCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +32,19 @@ public class DetailInquireListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
-	
+		String content = request.getParameter("content");
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		
+		int userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo();
+		
+		PlanComment c = new PlanComment();
+		c.setCommentWriter(userNo+"");
+		c.setContent(content);
+		c.setPlanNo(pno);
+		
+		int result = new PlanService().insertComment(c);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

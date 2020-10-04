@@ -39,4 +39,20 @@
 		   
 	</entry>
 
+	<entry key="selectInquire">
+		SELECT
+               IQ.INQUIRE_NO
+		     , IQ.INQUIRE_TITLE
+		     , IQ.INQUIRE_CONTENT
+		     , IQ.INQUIRE_ENROLL_DATE
+		     , IQ.INQUIRE_RESPONSE
+		     , IQ.RESPONSE_DATE
+		     , M.USER_NICK
+		     , AD.ADMIN_ID
+		  FROM TB_INQUIRE IQ
+		  JOIN TB_MEMBER M ON ( M.USER_NO = IQ.USER_NO)
+		  JOIN TB_ADMIN AD ON ( AD.ADMIN_NO = IQ.ADMIN_NO)
+		 WHERE INQUIRE_NO = ?
+		   AND IQ.STATUS = 'Y'
+	</entry>
 </properties>
