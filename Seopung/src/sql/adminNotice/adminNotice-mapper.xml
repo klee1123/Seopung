@@ -26,6 +26,27 @@
 		          ) A
 		     )
 		 WHERE RNUM BETWEEN ? AND ?
+		 
 	</entry>
+	
+		<entry key="insertAdminNotice">
+		INSERT
+		  INTO TB_NOTICE
+		  (
+		     NOTICE_NO
+		   , NOTICE_TITLE
+		   , NOTICE_CONTENT
+		   , ADMIN_NO
+		  )
+		  VALUES
+		  (
+		     SEQ_NOTICENO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		  )
+	</entry>
+	
+	
 
 </properties>

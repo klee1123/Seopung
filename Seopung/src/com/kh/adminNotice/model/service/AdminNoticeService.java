@@ -1,7 +1,9 @@
 package com.kh.adminNotice.model.service;
 
 import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
 import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -31,6 +33,22 @@ public class AdminNoticeService {
 		
 		return list;
 	}	
+	
+	// 수정잊지마~
+	public int insertAdminNotice(AdminNotice n) {
+		Connection conn = getConnection();
+		
+		int result = new AdminNoticeDao().insertAdminNotice(conn, n);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 	
 
 }

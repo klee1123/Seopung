@@ -100,7 +100,7 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">등록하기</button>
+							<button class="btn btn-primary" onclick="location.href='<%= contextPath %>/adminPage/enrollForm.no';" >등록하기</button>
 							
 						</td>
 					</tr>

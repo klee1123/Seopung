@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.adminNotice.model.vo.AdminNotice;
-import com.kh.adminPlan.model.vo.PlanComment;
 import com.kh.common.PageInfo;
 
 public class AdminNoticeDao {
@@ -99,7 +98,33 @@ private Properties prop = new Properties();
 		
 	}
 	
-	
-	
+	public int insertAdminNotice(Connection conn, AdminNotice n) {
+		// insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertAdminNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, n.getNoticeTitle());
+			pstmt.setString(2, n.getNoticeContent());
+			pstmt.setInt(3, n.getAdminNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
+
+
+
