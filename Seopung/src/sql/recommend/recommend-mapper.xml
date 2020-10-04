@@ -101,4 +101,25 @@
 		    , SYSDATE
 		    )
 	</entry>
+	<entry key="increaseCount">
+		UPDATE
+		       TB_RECOMMEND
+		   SET RECOMMEND_COUNT = RECOMMEND_COUNT +1
+		   WHERE RECOMMEND_NO = ?
+		     AND RECOMMEND_STATUS = 'Y'
+	</entry>
+	<entry key="selectRecommend">
+		SELECT
+		       RECOMMEND_NO
+		     , ADMIN_NO
+		     , RECOMMEND_TITLE
+		     , RECOMMEND_CONTENT
+		     , RECOMMEND_COUNT
+		     , RECOMMEND_LIKE
+		     , RECOMMEND_THUMB
+		     , RECOMMEND_ENROLL
+		  FROM TB_RECOMMEND
+		 WHERE RECOMMEND_NO = ?
+		   AND RECOMMEND_STATUS = 'Y'
+	</entry>
 </properties>

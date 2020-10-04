@@ -30,13 +30,13 @@ public class UpdateEmailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		String email = request.getParameter("email");
 		String updateEmail = request.getParameter("updateEmail");
 		
-		Member updateMem = new InfoService().updateEmail(userNo, email, updateEmail);
+		Member updateMem = new InfoService().updateInfoEmail(userNo, email, updateEmail);
 		
 		HttpSession session = request.getSession();
 		
