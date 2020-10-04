@@ -31,6 +31,20 @@ public class Recommend {
 		this.thumb = thumb;
 		this.userNo = userNo;
 	}
+	
+
+	public Recommend(int reNo, String title, String content, Date enroll, int count, int like, String thumb,
+			int userNo) {
+		super();
+		this.reNo = reNo;
+		this.title = title;
+		this.content = content;
+		this.enroll = enroll;
+		this.count = count;
+		this.like = like;
+		this.thumb = thumb;
+		this.userNo = userNo;
+	}
 
 	public int getReNo() {
 		return reNo;

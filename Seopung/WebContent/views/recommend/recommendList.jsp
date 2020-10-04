@@ -107,7 +107,7 @@ p>img {
 				<option value="최신">최신순</option>
 				<option value="추천">추천순</option>
 				<option value="조회">조회순</option>
-				<option value="스크랩">스크랩순</option>
+				
 			</select>
 
 		</div>
@@ -139,7 +139,7 @@ p>img {
 							style="position: absolute; margin-left: 30px;"
 							src="<%=r.getThumb()%>" width="100px;" height="100%;" alt="">
 					</a> <span  style="text-decoration: none; color: #00c0ff"> <span
-							id="headTitle" style="margin-left: 140px;"></span>
+							id="headTitle" style="margin-left: 80px;"></span>
 					</span> <a href="<%=contextPath%>/detailList.re?cno=<%=r.getReNo()%>"
 						style="text-decoration: none; color: black;"> <span id="title"
 							name="title"><%=r.getTitle()%>&nbsp;</span>
@@ -151,9 +151,9 @@ p>img {
 						<div style="width: 140px;">
 							조회수:
 							<%=r.getCount()%>
-							/<%=r.getUserNo()%></div> <!-- <div style="width:50px">양현우</div> -->
+							/관리자</div> <!-- <div style="width:50px">양현우</div> -->
 				</span> <span style="margin-left: 15px; color: blue;"><%=r.getLike()%></span>
-					<br> <span>스크랩</span> <span id="content"
+					<br> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <span id="content"
 					style="margin-left: 140px;"><%=r.getContent()%></span> <br> <span
 					style="margin-left: 15px; color: red;"></span>
 				</li>

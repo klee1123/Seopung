@@ -51,6 +51,9 @@ public class CommunityDao {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(stmt);
 			}
 			}else {
 				String sql = prop.getProperty("selectListCount");
@@ -66,6 +69,9 @@ public class CommunityDao {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}finally {
+					close(rset);
+					close(stmt);
 				}
 			}
 	
