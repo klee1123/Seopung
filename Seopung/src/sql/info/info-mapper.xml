@@ -47,7 +47,7 @@
 		   AND USER_NICK = ?
 	</entry>
 	
-	<entry key="updateEmail">
+	<entry key="updateInfoEmail">
 		UPDATE
 		       TB_MEMBER
 		   SET EMAIL = ?

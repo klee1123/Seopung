@@ -65,6 +65,27 @@ public class InfoService {
 		
 		return updateMem;
 	}
+	
+	public Member updateInfoEmail(int userNo, String email, String updateEmail) {
+		
+		Connection conn = getConnection();
+		
+		int result = new InfoDao().updateInfoEmail(conn, userNo, email, updateEmail);
+		
+		Member updateMem = null;
+		
+		if(result > 0) {
+			commit(conn);
+			updateMem = new InfoDao().selectMember(conn, userNo);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return updateMem;
+		
+	}
 
 	/**
 	 * 회원탈퇴용 서비스

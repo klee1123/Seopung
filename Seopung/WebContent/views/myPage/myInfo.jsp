@@ -79,7 +79,7 @@
         #infoTable tr{
            height:50px;
        }
-       #pwdSpan{
+       #pwdSpan,#regPwd{
            font-size: 12px;
        }
 </style>
@@ -120,12 +120,10 @@
             <table id="infoTable">
                 <tr>
                     <th align="left" width="100px">아이디</th>
-                    <td><input type="text" name="userId" required value="<%= userId %>" readonly></td>
                     <td><span name="userId"><%= userId %></span></td>
                 </tr>
                 <tr>
                     <th align="left">이름</th>
-                    <td><input type="text" name="userName" required value="<%= userName %>" readonly></td>
                     <td><span name="userName"><%= userName %></span></td>
                 </tr>
                 <tr>
@@ -144,15 +142,15 @@
                 </tr>
                 <tr>
                 	<th align="left">변경할 이메일</th>
-                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="이메일을 입력하세요."></td>
+                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="이메일을 입력하세요.">
+                    <button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
                     <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
-                    <td><button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
                 </tr>
              	<tr>
              		<th>인증확인</th>
-             		<td><input type="text" name="code" id="code" placeholder="인증번호를 입력하세요"><button type="button" id="emBtn">인증확인</button>
+             		<td><input type="text" name="code" id="code" placeholder="인증번호를 입력하세요">
+             		<button type="button" onclick="emBtn();" class="btn btn-secondary btn-sm">인증확인</button></td>
                     
-              		
              	</tr>
                 <tr>
                     <th align="left">생년월일</th>
@@ -171,42 +169,33 @@
             	
             </div>
         </form>
-        	
         </div>
     </div>
     <script>
-    $("#emBtn").click(function(){
-    	var codeChk = $("#code_check");
-    	var code = $("#code");
-    	var updateEmail = $("#updateEmail");
-    	var email = $("#email");
+   function emBtn(){
+    	console.log("클릭됨");
+    	var $codeChk = $("#code_check");
+    	var $code = $("#code");
+    	var $updateEmail = $("#updateEmail");
     	
     	if(codeChk.val() == code.val()) {
-    		alert("확인");
-    		
     		$.ajax({
       			url:"<%= contextPath %>/updateEmail.me",
       			data:{
-      				updateEmail:$updateEmail.val(),
-      				email:$email.val()},
+      				email:$updateEmail.val()
       			type:"post",
       			success:function(result){
-      					alert("성공");
-    	  				updateEmail.innerHTML = (updateEmail.val());
-    	  				
+      				alert("변경 성공");
       			},error:function(){
-      				alert("실패");
+      				alert("변경 실패");
       				console.log("ajax 통신 실패!");
       			}
       		})
-    		
-    		
-    		$("#email").html($("updateEmail"));
     	}else {
-    		$("#cEm").innerHTML = "틀려";
+    		alert("정확한 인증번호를 작성해주세요");
     	}
-    });
-    
+	 }
+ 	   
     
     </script>
     
@@ -237,16 +226,19 @@
                     <tr><td colspan="2" align="center"><span id=nickView></span></td></tr>
                 </table>
                 <br>
-               <button type="submit" class="btn btn-secondary" id="nickChkBtn">닉네임변경</button>
+                <div id="nBtn">
+               	<button type="submit" class="btn btn-secondary" id="nickChkBtn">닉네임변경</button>
+           		</div>
            </form>
         </div>
       </div>
     </div>
   </div>
-  
+  <!-- 닉네임 유효성 -->
   <script>
         var regN = /^[a-z0-9가-힣]{1,10}$/i;
   	function nickCheck(){
+  		
   		var $userNick = $("#updateNick");
   		var $nickChkBtn = $("#nickChkBtn");
   		$.ajax({
@@ -260,8 +252,10 @@
 	  					nickView.innerHTML = ("이미 존재하는 닉네임 입니다");
 	  					$userNick.val("");
 	  					$userNick.focus();
+	  					$("#nBtn").hide();
 	  				}else {
 	  					nickView.innerHTML = ("사용가능한 닉네임 입니다.");
+	  					$("#nBtn").show();
 	  				}
   				}else {
   					alert("유효한 닉네임이 아닙니다.")
@@ -297,20 +291,56 @@
                         <th> 변경할 비밀번호 </th>
                         <td><input type="password" name="updatePwd" id="pwd1" required></td>
                     </tr>
-                    <tr>
+                    <tr><td colspan="2" align="center"><span id="regPwd"></span></td></tr>
+                    <tr id="pwdTwo">
                         <th>변경할 비밀번호 재입력 </th>
                         <td><input type="password" name="checkPwd" id="pwd2" required>
-                    	<br><span id="pwdSpan"></span></td>
+                    	</td>
                     </tr>
+                    <tr><td colspan="2" align="center"><span id="pwdSpan"></span></td></tr>
                 </table>
                 <br>
-               <button type="submit" class="btn btn-secondary" >비밀번호변경</button>
+                <div id="pcBtn">
+                <button type="button" class="btn btn-secondary" id="pwdChkBtn">인증확인</button>
+                </div>
+                <div id="pBtn">
+               	<button type="submit" class="btn btn-secondary" id="pwdBtn">비밀번호변경</button>
+           		</div>
            </form>
-
         </div>
       </div>
     </div>
   </div>
+  <!-- 비밀번호 유효성 -->
+  <script>
+  var regExp = /^[a-z0-9!@#$%^&*]{8,15}$/i;
+	$(function(){
+		$("#pwd1").blur(function(){
+			console.log($("#pwd1").val());
+			if(regExp.test($("#pwd1").val())){
+				$("#regPwd").html("");
+			}else{
+				$("#regPwd").html("유효한 비밀번호가 아닙니다");
+				$("#pwd1").val("");
+			}
+		});
+	}); 
+    	$("#pwdChkBtn").click(function(){
+    		if($("#pwd1").val() != "" && $("#pwd2").val() != "") {
+	    		if($("#pwd1").val() != $("#pwd2").val()){
+	    			$("#pwdSpan").html("똑같은 비밀번호를 적어주세요");
+	    		}else {
+	    			$("#pwdSpan").html("비밀번호가 일치합니다.");
+	    			$("#pcBtn").hide();
+	    			$("#pBtn").show();
+	    		}
+    		}else {
+    			$("#pwdSpan").html("비밀번호를 적어주세요.");
+    		}
+    		
+    	});
+</script>
+
   <script>
   	function emailChk(){
   		var $updateEmail = $("#updateEmail");
@@ -320,7 +350,6 @@
   			type:"post",
   			success:function(result){
   				
-  				console.log("통신성공");
 	  				if(result == "fail"){
 	  					alert("이메일 전송 실패");
 	  					
@@ -336,7 +365,8 @@
   	
         $(function(){
             $("#fileArea").hide();
-			
+            $("#nBtn").hide();
+            $("#pBtn").hide();
             $("#profileBtn").click(function(){
                 $("#profile").click();
                

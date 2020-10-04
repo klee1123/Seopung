@@ -90,7 +90,7 @@
             <% }else { %>
             	<% for(Plan p : list) { %>
 	            <div class="MyplanMap">
-	                <input type="checkbox" id="chk" name="mpno">
+	                <input type="checkbox" id="chk" name="mpno" value="<%= p.getPlanNo() %>">
 	                   <div id="seoulMap" style="width:250px;height:200px;">
 						<img src="resources/images/서울.jpg" name="mapImg">
 						</div>
