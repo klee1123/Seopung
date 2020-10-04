@@ -249,7 +249,7 @@
 							}else{
 					comment +=			
 						"<td align='center'>"+
-							"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>" +
+							"<div style='border: none; background: none;' readonly >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;</div>" +
 						"</td>";
 							}	
 						
