@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "java.util.ArrayList, com.kh.scrapCommunity.model.vo.*"%>
 <%@ page import = "com.kh.common.PageInfo"%>
+
 <%
 	ArrayList<ScrapCommunity> list = (ArrayList<ScrapCommunity>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -68,7 +68,7 @@
                 		<%for(ScrapCommunity cm : list) {%>
 		                   	<tr align="center"> 
 		                        <td><input type="checkbox"id="chk" name="scno" value="<%=cm.getCommunityNo()%>">&nbsp;&nbsp;<%=cm.getCommunityNo() %></td>
-		                        <td><a href=""><%=cm.getCommunityTitle() %></a></td>
+		                        <td><a href="<%=contextPath%>/detailList.co?cno=<%=cm.getCommunityNo()%>"><%=cm.getCommunityTitle() %></a></td>
 		                        <td><%=cm.getCommunityWriter() %></td>
 		                        <td><%=cm.getScrapDate()%></td>
 		                    </tr>

@@ -70,7 +70,7 @@
                 <tbody>
                 <% if(list.isEmpty()){ %>
                 	<tr>
-                		<td colspan="4" align="center">조회된 문의글이 없습니다</td>
+                		<td colspan="3" align="center">조회된 문의글이 없습니다</td>
                 	</tr>
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
