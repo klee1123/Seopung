@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
+
 /**
  * Servlet implementation class AdminEnrollFormServlet
  */
@@ -27,7 +29,7 @@ public class AdminEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("loginUser") != null) {
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 			request.setAttribute("pageTitle", "관리자 등록");
 			request.getRequestDispatcher("../views/admin/manage_member/admin/manageAdminEnrollForm.jsp").forward(request, response);
 		

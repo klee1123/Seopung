@@ -187,6 +187,18 @@ public class PlanService {
 		return result;
 	}
 	
+	
+	public int checkAccom(int userNo, int userNo2, int pNo) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().checkAccom(conn, userNo, userNo2, pNo);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
 	public int accomPlan(int userNo, int userNo2, int pNo) {
 		Connection conn = getConnection();
 		
