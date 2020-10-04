@@ -33,7 +33,7 @@
 			<form action="<%=contextPath%>/adminPage/insert.re" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
 				
 				<!-- 수정 필요! 임시 -->
-				<input type="hidden" name="adminNo" value="1">
+				<input type="hidden" name="adminNo" value="<%=loginUser.getUserNo()%>">
 				
 				<input type="text" name="title" style="width: 100%;"
 					placeholder="제목입력" class="form-control" required> <br>
