@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.adminCommunity.model.vo.Community;
 import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;
 
@@ -123,7 +124,68 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
-
+	
+	public int increaseCount(Connection conn, int nno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public AdminNotice selectAdminNotice(Connection conn, int nno) {
+		// select문 => 한 행 조회
+		AdminNotice n = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAdminNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, nno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new AdminNotice(
+								rset.getString("NOTICE_CONTENT"),
+								rset.getDate("NOTICE_ENROLL"),
+								nno,
+								rset.getString("NOTICE_TITLE"),
+								rset.getInt("NOTICE_VIEWS"),
+								rset.getString("ADMIN_ID"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+	}
+	
+	
 }
 
 

@@ -29,8 +29,8 @@
 		-->
 		<br>
 
-		<div class="outer">
-			<form action="<%=contextPath%>/adminPage/insert.no" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+		<div class="outer"> <!-- 썸네일관련 삭제 method뒤에 -->
+			<form action="<%=contextPath%>/adminPage/insert.no" method="post">
 				
 				<input type="hidden" name="adminNo" value="<%= loginUser.getUserNo() %>">
 				

@@ -37,9 +37,9 @@ public class AdminNoticeInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		AdminNotice n = new AdminNotice();
+		n.setAdminNo(adminNo);
 		n.setNoticeTitle(title);
 		n.setNoticeContent(content);
-		n.setAdminNo(adminNo);
 		
 		int result = new AdminNoticeService().insertAdminNotice(n);
 		
