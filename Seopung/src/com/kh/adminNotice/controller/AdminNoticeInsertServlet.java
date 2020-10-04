@@ -1,27 +1,26 @@
-package com.kh.adminCommunity.controller;
+package com.kh.adminNotice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminCommunity.model.service.CommunityService;
-import com.kh.adminCommunity.model.vo.Community;
+import com.kh.adminNotice.model.service.AdminNoticeService;
+import com.kh.adminNotice.model.vo.AdminNotice;
 
 /**
- * Servlet implementation class AdminCommunityDetailServlet
+ * Servlet implementation class AdminNoticeInsertServlet
  */
-@WebServlet("/adminPage/detail.co")
-public class AdminCommunityDetailServlet extends HttpServlet {
+@WebServlet("/adminPage/insert.no")
+public class AdminNoticeInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityDetailServlet() {
+    public AdminNoticeInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,23 +29,29 @@ public class AdminCommunityDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
+
+		request.setCharacterEncoding("utf-8");
 		
-		int result = new CommunityService().increaseCount(cno);
+		int adminNo = Integer.parseInt(request.getParameter("adminNo"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		AdminNotice n = new AdminNotice();
+		n.setAdminNo(adminNo);
+		n.setNoticeTitle(title);
+		n.setNoticeContent(content);
+		
+		int result = new AdminNoticeService().insertAdminNotice(n);
 		
 		if(result>0) {
-			
-			Community c = new CommunityService().selectCommunity(cno);
-			
-			request.setAttribute("c", c);
-			request.setAttribute("pageTitle", "커뮤니티 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityDetailView.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsg", "공지사항 등록 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.no?currentPage=1");
 			
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.setAttribute("errorMsg", "공지사항 등록 실패");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-		
+	
 	}
 
 	/**

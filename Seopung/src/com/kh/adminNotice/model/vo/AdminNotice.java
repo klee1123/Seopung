@@ -10,11 +10,23 @@ public class AdminNotice {
 	private Date noticeModify;
 	private int noticeNo;
 	private String noticeTitle;
-	private int noticeViews;
+	private int noticeViews;		// 조회수
 	private String status;
+	private String noticeWriter;
 	
 	public AdminNotice() {
 		
+	}
+
+	public AdminNotice(String noticeContent, Date noticeEnroll, int noticeNo, String noticeTitle, int noticeViews,
+			String noticeWriter) {
+		super();
+		this.noticeContent = noticeContent;
+		this.noticeEnroll = noticeEnroll;
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeViews = noticeViews;
+		this.noticeWriter = noticeWriter;
 	}
 
 	public AdminNotice(int adminNo, String noticeContent, Date noticeEnroll, Date noticeModify, int noticeNo,
@@ -94,6 +106,14 @@ public class AdminNotice {
 		this.status = status;
 	}
 
+	public String getNoticeWriter() {
+		return noticeWriter;
+	}
+
+	public void setNoticeWriter(String noticeWriter) {
+		this.noticeWriter = noticeWriter;
+	}
+
 	@Override
 	public String toString() {
 		return "AdminNotice [adminNo=" + adminNo + ", noticeContent=" + noticeContent + ", noticeEnroll=" + noticeEnroll
@@ -103,3 +123,8 @@ public class AdminNotice {
 	
 	
 }
+
+
+
+
+

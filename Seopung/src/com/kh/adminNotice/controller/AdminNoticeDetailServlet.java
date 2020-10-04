@@ -1,7 +1,6 @@
-package com.kh.adminCommunity.controller;
+package com.kh.adminNotice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminCommunity.model.service.CommunityService;
 import com.kh.adminCommunity.model.vo.Community;
+import com.kh.adminNotice.model.service.AdminNoticeService;
+import com.kh.adminNotice.model.vo.AdminNotice;
 
 /**
- * Servlet implementation class AdminCommunityDetailServlet
+ * Servlet implementation class AdminNoticeDetailServlet
  */
-@WebServlet("/adminPage/detail.co")
-public class AdminCommunityDetailServlet extends HttpServlet {
+@WebServlet("/adminPage/detail.no")
+public class AdminNoticeDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityDetailServlet() {
+    public AdminNoticeDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +31,17 @@ public class AdminCommunityDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
+		int nno = Integer.parseInt(request.getParameter("nno"));
 		
-		int result = new CommunityService().increaseCount(cno);
+		int result = new AdminNoticeService().increaseCount(nno);
 		
 		if(result>0) {
 			
-			Community c = new CommunityService().selectCommunity(cno);
+			AdminNotice n = new AdminNoticeService().selectAdminNotice(nno);
 			
-			request.setAttribute("c", c);
-			request.setAttribute("pageTitle", "커뮤니티 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityDetailView.jsp").forward(request, response);
+			request.setAttribute("n", n);
+			request.setAttribute("pageTitle", "공지사항 상세조회");
+			request.getRequestDispatcher("../views/admin/manage_notice/manageNoticeDetailView.jsp").forward(request, response);
 			
 		}else {
 			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");

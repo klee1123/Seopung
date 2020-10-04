@@ -88,33 +88,29 @@
             <div class="pagingArea" align="center">
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1';"> &lt;&lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
 	            <!-- 이전 페이지로 (<) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>';"> &lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
 			<% } %>
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>';"><%= p %></button>
+               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
                <% }else{ %>
                <button class="btn btn-secondary btn-sm" disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage+1 %>"> &gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>"> &gt;&gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>"> &gt;&gt; </button>
 			<% } %>
 
         </div>
 
     <script>
-	    $(function(){
-			$(".listArea>tbody>tr>td").click(function(){
-				location.href = "<%=contextPath%>/detail.bo?bno=" + $(this).children().eq(2).text();
-			});
-		});
+	   
         // 체크박스 전체선택 및 해제
         $(function(){
             $("#chk_all").click(function(){
