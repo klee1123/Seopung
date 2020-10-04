@@ -1,25 +1,28 @@
-package com.kh.searchPlan.controller;
+package com.kh.report.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminPlan.model.service.PlanService;
+import com.kh.Member.model.vo.LoginUser;
+import com.kh.report.model.service.ReportService;
+import com.kh.report.model.vo.Report;
 
 /**
- * Servlet implementation class PlanAccomServlet
+ * Servlet implementation class ReportInsertServlet
  */
-@WebServlet("/accom.pl")
-public class PlanAccomServlet extends HttpServlet {
+@WebServlet("/insert.rp")
+public class ReportInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanAccomServlet() {
+    public ReportInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,19 +31,29 @@ public class PlanAccomServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int userNo2 = Integer.parseInt(request.getParameter("userNo2"));
-		int pNo = Integer.parseInt(request.getParameter("pNo"));
+
+		request.setCharacterEncoding("utf-8");
 		
-		int result = new PlanService().checkAccom(userNo, userNo2, pNo);
-			
+		int postNo = Integer.parseInt(request.getParameter("reportPostNo"));
+		String userNo2 = request.getParameter("reportUserNo2");
+		int reportPostType = Integer.parseInt(request.getParameter("reportPostType"));
+		String reportType = request.getParameter("reportType");
+		String content = request.getParameter("reportContent");
+		
+		String userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo() + "";
+		
+		Report r = new Report(content, userNo, userNo2, postNo, reportType, reportPostType);
+		
+		int result = new ReportService().checkReport(r);
+		
 		if(result>0) {
 			result = 0;
 		}else {
-			result = new PlanService().accomPlan(userNo, userNo2, pNo);
+			result = new ReportService().insertReport(r);
 		}
-	
+
 		response.getWriter().print(result);
+		
 	}
 
 	/**

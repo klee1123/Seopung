@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.adminMember.model.service.MemberService;
 import com.kh.adminMember.model.vo.Member;
 
@@ -43,7 +44,7 @@ public class PlanProfileDetailServlet extends HttpServlet {
 		JSONObject jsonUser = new JSONObject();
 		jsonUser.put("m", m);
 
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create();
 		gson.toJson(jsonUser, response.getWriter());
 	
 	}
