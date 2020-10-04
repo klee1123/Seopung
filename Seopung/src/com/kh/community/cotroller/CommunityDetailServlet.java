@@ -38,10 +38,12 @@ public class CommunityDetailServlet extends HttpServlet {
 		int result = new CommunityService().increaseCount(cno);
 		
 		if(result > 0) {
-			
+			int count = new CommunityService().countComment(cno);
+			System.out.println(count);
 			Community c = new CommunityService().selectCommunity(cno);
 			
 			request.setAttribute("c", c);
+			request.setAttribute("count", count);
 			
 		request.getRequestDispatcher("views/community/communityDetailView.jsp").forward(request, response);
 		}

@@ -39,6 +39,7 @@ public class ReplyListServlet extends HttpServlet {
 			
 		ArrayList<Reply> list = new CommunityService().selectReplyList(cno);
 			
+			
 			response.setContentType("application/json; charset=utf-8");
 			Gson gson = new GsonBuilder().setDateFormat("yyyy년MM월dd일").create();
 			

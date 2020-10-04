@@ -599,7 +599,9 @@ public class CommunityDao {
 			pstmt.setInt(1, cno);
 			rset = pstmt.executeQuery();
 			
-			count = rset.getInt(1);
+			if(rset.next()) {
+				count = rset.getInt(1);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

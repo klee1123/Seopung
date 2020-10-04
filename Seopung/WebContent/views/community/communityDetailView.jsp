@@ -4,7 +4,7 @@
 
  <%
  	Community c = (Community)request.getAttribute("c");
- 	
+ 	int count = (int)request.getAttribute("count");
  %>
  
 <!DOCTYPE html>
@@ -95,7 +95,7 @@
 			</div>
         <%} %>
         <div id="content_4">
-            댓글 2
+            댓글<%=count %>
         </div>
 
         <hr>
