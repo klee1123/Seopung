@@ -602,6 +602,7 @@ height : 500px;
 			</div> <!-- contents -->
 		
 	</div> <!-- wrap end -->
+	
 	<div id="footer">
 	<%@include file="../common/footer.jsp"%>
 	</div>
