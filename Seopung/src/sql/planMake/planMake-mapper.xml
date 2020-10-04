@@ -43,15 +43,17 @@
 		 INSERT
 		  	INTO TB_PLAN_MAP
 		  	(
-		  		PLAN_XY_NO
+		  		PLAN_MAP_NO
 		  	  , PLAN_DAY
 		  	  , PLAN_PLACE
+		  	  , PLAN_NO
 		  	)
 		  	VALUES
 		  	(
-		  		SEQ_PLANXYNO.NEXTVAL
+		  		SEQ_PLANMAPNO.NEXTVAL
 		  	  , ?
 		  	  , ?
+		  	  , SEQ_PLANNO.NEXTVAL - 1
 		  	) 
 	</entry>
 	

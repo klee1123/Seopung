@@ -351,7 +351,9 @@
 			<div id="content2" style="margin-top:20px;">
 				<form action="<%= contextPath %>/planMakePage.pl" style="width:800px;" method="post" name="f">
 					<div>
-					 <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+						<input type="hidden" name="planDay" value="123">
+					
 					</div>
 					
 					<div id="planOption" >
@@ -512,9 +514,9 @@
 							<!-- tap 버튼 및 tap 리스트 -->
 							<div id="planPlace">
 								<div class="tab">
-								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day1"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day2"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day3"></input>
+								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="1"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="2"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="3"></input>
 								</div>
 								
 								<div id="Day1" class="tabcontent">
