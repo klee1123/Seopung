@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page
-	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"%>
+	import="java.util.ArrayList, com.kh.community.model.vo.*, com.kh.common.PageInfo"
+	import="java.text.SimpleDateFormat, java.sql.Date"
+	%>
 <%
 	ArrayList<Community> list = (ArrayList<Community>) request.getAttribute("list");
 	ArrayList<Community> nList = (ArrayList<Community>) request.getAttribute("nList");
@@ -15,6 +17,7 @@
 	String head = (String) request.getAttribute("head");
 	String array = (String) request.getAttribute("array");
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 %>
 <!DOCTYPE html>
@@ -171,7 +174,7 @@ p>img {
 
 				</span> <br> <span
 					style="position: absolute; display: inline-block; margin-left: 800px;">
-						<div style="width: 100px;"><%=c.getEnroll()%></div>
+						<div style="width: 100px;"><%=sdf.format(c.getEnroll())%></div>
 						<div style="width: 140px;">
 							조회수:
 							<%=c.getCount()%>

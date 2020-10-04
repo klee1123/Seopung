@@ -39,7 +39,6 @@ public class CommunityDetailServlet extends HttpServlet {
 		
 		if(result > 0) {
 			int count = new CommunityService().countComment(cno);
-			System.out.println(count);
 			Community c = new CommunityService().selectCommunity(cno);
 			
 			request.setAttribute("c", c);

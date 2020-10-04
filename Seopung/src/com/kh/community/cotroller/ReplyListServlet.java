@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kh.Member.model.vo.Member;
+import com.kh.common.PageInfo;
 import com.kh.community.model.service.CommunityService;
 import com.kh.community.model.vo.Reply;
 
@@ -36,14 +38,48 @@ public class ReplyListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
-			
-		ArrayList<Reply> list = new CommunityService().selectReplyList(cno);
+		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		
+		int maxPage;
+		int startPage;
+		int endPage;
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		listCount = new CommunityService().countComment(cno);
+		pageLimit = 5;
+		boardLimit = 10;
+		
+		if(listCount != 0) {
+			maxPage = (int)Math.ceil((double)listCount/boardLimit);
+		}else {
+			maxPage = 1;
+		}
+		
+		startPage = (currentPage -1)/pageLimit * pageLimit + 1;
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(maxPage<endPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		
+	
+		ArrayList<Reply> list = new CommunityService().selectReplyList(cno, pi);
 			
 			
 			response.setContentType("application/json; charset=utf-8");
-			Gson gson = new GsonBuilder().setDateFormat("yyyy년MM월dd일").create();
+			JSONObject jsonUser = new JSONObject();
+			jsonUser.put("pi", pi);
+			jsonUser.put("list", list);
 			
-			gson.toJson(list, response.getWriter());
+			Gson gson = new GsonBuilder().setDateFormat("yy.MM.dd HH:mm").create();
+			gson.toJson(jsonUser, response.getWriter());
 	}
 
 	/**

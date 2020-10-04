@@ -95,8 +95,8 @@
 			</div>
         <%} %>
         <div id="content_4">
-            댓글<%=count %>
         </div>
+          
 
         <hr>
         
@@ -130,32 +130,48 @@
 
         <hr>
 
-        <div id="replyArea" align="center">
-            
-            <table>
-    	        <tbody>
-        	       <!--  <tr>
-            	        <td>
-                	        <img width="60px" src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg" alt="">  
-                    	</td>
-                    	<td width="700px">
-                        	닉네임1 - 2020.09.09 22:05<br>닉네임1의 댓글내용
-                    	</td>
-                    	<td>
-                        	<button style="border:none; background:none">삭제</button>
-                    	</td>
-                	</tr> -->
-   	         </tbody>
-   
-            </table>            
-        </div>
+			
+			<div id="content_6" align="center">
+				<!--  
+				<table>
+					<tr>
+						<td width="60"><img width="45px" class="rounded-circle"
+							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
+							alt=""></td>
+						<td>닉네임 <br> 2020.09.09 22:05
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
+							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
+							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
+							보이는 약동하다.</td>
+						<td align="center">
+							<button style="border: none; background: none">삭제</button>
+						</td>
+					</tr>
+				</table>
+				-->
+				
+			</div>
 
-        <div id="content_7" align="center">
-            <button>댓글 전체보기</button>
-        </div>
+			
+			
+			<div align="center" id="paging">
 
-    </div>
+			</div>
+
+			<br> <br> <br>
+
+			
+
+			<br> <br>
+
+		</div>
 	<script>
+	
+
 		function del(){
 			if(confirm("정말로 삭제하시겠습니까?")){
 				location.href="<%=contextPath%>/delete.co?cno=<%=c.getComNo()%>"
@@ -165,7 +181,7 @@
 		}
 		
 		$(function(){
-			selectReplyList();
+			selectReplyList(1);
 			
 			
 		});
@@ -173,15 +189,16 @@
 		function addReply(){
 			$.ajax({
 				url:"<%=contextPath%>/rinsert.co",
-				type:"post",
+				type:"get",
 				data:{
 					content:$("#replyContent").val(),
-					cno:<%=c.getComNo()%>	
+					cno:<%=c.getComNo()%>
+					
 				},
 				success:function(result){
-					console.log("통신성공");
+					
 					if(result > 0){
-						selectReplyList();
+						selectReplyList(1);
 						$("#replyContent").val("");
 					}
 				},
@@ -191,26 +208,84 @@
 			});
 		}
 		
-		function selectReplyList(){
+		function selectReplyList(cPage){
 			$.ajax({
 				url:"<%=contextPath%>/rlist.co",
 				type:"get",
-				data:{cno:<%=c.getComNo()%>},
-				success:function(list){
-					var result = "";
-					console.log(list);
-					for(var i in list){
-						result +=  "<tr>" +
-					            	    "<td>" + "<img width='60px' src='" + list[i].profile + "'> </td>" +
-					                	"<td width='700px'>" + list[i].replyWriter + "-" + list[i].createDate +"<br>" +list[i].replyContent +"</td>" +
-					                	"<td><button style='border:none; background:none'>삭제</button></td>" +
-					            	"</tr>";
-					}
-					$("#replyArea tbody").html(result);
+				data:{cno:<%=c.getComNo()%>,
+				      currentPage:cPage
 				},
-				error:function(){
-					console.log("댓글 리스트 조회용 ajax통신 실패");
+				success:function(result){
+					console.log("통신성공");
+					if(result.list.length > 0){
+						var comment="";
+	       				 for(var i in result.list){
+						comment += "<table>" +
+	    				"<tr>" +
+							"<td width='60'>";
+			 
+			 if(result.list[i].profile == "null"){
+				 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+			 }else{
+				 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+			 }
+			 
+			 comment +=         "</td>" +
+							"<td>" + result.list[i].replyWriter + "<br>" + result.list[i].createDate +
+							"</td>" +
+							"<td>" +  "</td>" + 
+						"</tr>" + 
+						"<tr>" + 
+							"<td colspan='2' width='800'>" + 
+								result.list[i].replyContent +
+							"</td>" +
+							"<td align='center'>" +
+								"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>삭제</button>" +
+							"</td>" +
+						"</tr>" +
+					"</table>";
 				}
+	       				var $listCount = result.pi.listCount;     	       					
+ 	       				var $currentPage = result.pi.currentPage;
+                        var $startPage = result.pi.startPage;
+                        var $endPage = result.pi.endPage;
+                        var $maxPage = result.pi.maxPage;
+                        
+                        var $btns = "";
+                        for(var $p = $startPage; $p <= $endPage; $p++ ){
+                           
+                           $btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
+                        }
+                        
+                        if(cPage != "1"){
+                            var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
+                        }else{
+                        	var $prevBtn = "";
+                        }
+                        
+                        if(cPage != $maxPage){
+                            var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
+                        }else{
+                        	var $nextBtn = "";
+                        }
+                        	
+                         
+                        var $buttons = $prevBtn + $btns + $nextBtn ;
+                        
+	       				$("#content_4").html("댓글 " + $listCount);
+ 	       				$("#content_6").html(comment);
+                        
+                        $("#paging").html($buttons);
+                        
+                     }else{
+		       				$("#content_4").html("댓글 0");
+                        $("#content_6").html('작성된 댓글이 없습니다.');
+                     }
+
+       				
+	       		},error:function(){
+	       				console.log("댓글 리스트 조회용 ajax 통신 실패");
+	       		}
 			});
 		}
 	</script>
