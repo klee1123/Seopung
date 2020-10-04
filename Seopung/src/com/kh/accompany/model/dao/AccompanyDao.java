@@ -34,19 +34,26 @@ private Properties prop = new Properties();
 	}
 	
 	
-	public int selectListCount(Connection conn) {
+	public int selectListCount(Connection conn, int userNo) {
 		
 		int listCount = 0;
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
+		
 		
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectListCount");
 		
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
 			
 			if(rset.next()) {
 				listCount = rset.getInt("LISTCOUNT");
@@ -57,7 +64,7 @@ private Properties prop = new Properties();
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 			
 		}
 		
@@ -65,7 +72,7 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public ArrayList<Accompany> selectList(Connection conn , PageInfo pi){
+	public ArrayList<Accompany> selectList(Connection conn , PageInfo pi, int userNo){
 		
 		ArrayList<Accompany> list = new ArrayList<Accompany>();
 		
@@ -81,8 +88,10 @@ private Properties prop = new Properties();
 			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -180,6 +189,38 @@ private Properties prop = new Properties();
 		
 		return profile;
 		
+		
+	}
+	
+	public int sendMessage(Connection conn, int senderNo, int receiverNo, String introduction) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("sendMessage");
+		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, introduction);
+			pstmt.setInt(2, senderNo);
+			pstmt.setInt(3, receiverNo);
+
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 		
 	}
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.accompany.model.service.AccompanyService;
 import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
@@ -50,8 +51,10 @@ public class AccompanyListServlet extends HttpServlet {
 		pageLimit = 5;
 		
 		boardLimit = 5;
+
+		int userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-		int listCount = new AccompanyService().selectListCount();
+		int listCount = new AccompanyService().selectListCount(userNo);
 		
 		// 조회된 동행수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
@@ -68,12 +71,23 @@ public class AccompanyListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
+		
+		
+
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Accompany> list =  new AccompanyService().selectList(pi);
+		
+		ArrayList<Accompany> list =  new AccompanyService().selectList(pi, userNo);
+		
+		
+		
+		
+		System.out.println(list);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("userNo", userNo);
+		
 		
 		request.getRequestDispatcher("views/accompany/accompanyList/accomList.jsp").forward(request, response);
 		

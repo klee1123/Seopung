@@ -23,7 +23,7 @@
 		SELECT COUNT(*) LISTCOUNT
 		  FROM TB_ACCOMPANY
 		 WHERE ACCOM_STATUS = 'Y'
-	
+		   AND (USER_NO = ? OR USER_NO2 = ?)
 	
 	</entry>
 	
@@ -42,7 +42,8 @@
 		                     , C.USER_NO2
 		                  FROM TB_ACCOMPANY C
 		                  JOIN TB_MEMBER M ON(C.USER_NO2 = M.USER_NO)
-		                  WHERE C.ACCOM_STATUS = 'Y'
+		                  WHERE C.ACCOM_STATUS = 'Y' 
+		                    AND (C.USER_NO = ? or C.USER_NO2 = ?) 
 		                 ORDER 
 		                    BY C.ACCOM_NO DESC
 		               ) A
@@ -70,6 +71,27 @@
 		         , USER_INTRO
 		 	  FROM TB_MEMBER
 		     WHERE USER_ID = ?
+	
+	
+	</entry>
+	
+	<entry key="sendMessage">
+		INSERT 
+		  INTO TB_MESSAGE
+		  (	   MESSAGE_NO,
+			   MESSAGE_CONTENT,
+			   USER_NO,
+			   USER_NO2
+		  
+		  )
+		   VALUES
+		  (
+		    SEQ_MESSAGENO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  )
+			
 	
 	
 	</entry>

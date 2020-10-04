@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.service.AccompanyService;
 
 /**
- * Servlet implementation class AccompanyProfileServlet
+ * Servlet implementation class AccompanyMessageServlet
  */
-@WebServlet("/profile.ac")
-public class AccompanyProfileServlet extends HttpServlet {
+@WebServlet("/message.ac")
+public class AccompanyMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyProfileServlet() {
+    public AccompanyMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +29,24 @@ public class AccompanyProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String userId = request.getParameter("userId");
+	
 		
-		System.out.println(userId);
+		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
+		System.out.println(senderNo);
+		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
+		System.out.println(receiverNo);
 		
-		Member profile = new AccompanyService().accomProfile(userId);
 		
-		request.setAttribute("profile", profile);
 		
-		request.getRequestDispatcher("views/accompany/accompanyList/accomList.jsp").forward(request, response);
 		
+		
+		String introduction = request.getParameter("introduction");
+		
+		int result = new AccompanyService().sendMessage(senderNo, receiverNo, introduction);
+		
+		
+		
+		response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
 		
 		
 		
