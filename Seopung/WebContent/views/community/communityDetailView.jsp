@@ -92,6 +92,7 @@
         <div align="center">
 				<button  class="btn btn-secondary" onclick="location.href='<%=contextPath%>/recommend.co?cno=<%=c.getComNo()%>'">추천</button>
 				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">스크랩</button>
+				<button class="btn btn-danger" onclick="location.href='<%=contextPath%>/scrap.co?cno=<%=c.getComNo()%>'">신고</button>
 			</div>
         <%} %>
         <div id="content_4">
@@ -121,7 +122,7 @@
                         <textarea name="replyContent" id="replyContent" cols="90" rows="4" style="resize: none;"></textarea>
                     </td>
                     <td>
-                        <button type="button" onclick="addReply();">등록</button>
+                        <button type="button" class="btn btn-secondary" onclick="addReply();">등록</button>
                     </td>
                 </tr>
                 <%} %>
@@ -233,7 +234,7 @@
 			 }
 			 
 			 comment +=         "</td>" +
-							"<td>" + result.list[i].replyWriter + "<br>" + result.list[i].createDate +
+							"<td>" + result.list[i].replyWriter +"<button style=' border: none; color:red; background: none;' >신고</button> <br>" + result.list[i].createDate +
 							"</td>" +
 							"<td>" +  "</td>" + 
 						"</tr>" + 
@@ -244,7 +245,7 @@
 							if(<%=loginUser.getUserNo()%> == result.list[i].userNo1){
 					comment +=			
 							"<td align='center'>"+
-								"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>삭제</button>" +
+								"<button style='border: none; background: none;' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>삭제</button>" +
 							"</td>";
 							}else{
 					comment +=			
