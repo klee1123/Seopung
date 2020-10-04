@@ -37,7 +37,18 @@ public class DeleteScrapPlanServlet extends HttpServlet {
 		int result = new ScrapPlanService().deleteList(spno, userNo);
 		
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
+			
+			int result1 = new ScrapPlanService().decreasePlanScrapCount(spno);
+			if(result1 > 0) {
+				request.getSession().setAttribute("alertMsg", "스크랩 삭제 성공");
+				response.sendRedirect(request.getContextPath() + "/list.sp?currentPage=1&userNo=" + userNo);
+			}else {
+				request.getSession().setAttribute("alertMsg", "스크랩 삭제 실패");
+				response.sendRedirect(request.getContextPath() + "/list.sp?currentPage=1&userNo=" + userNo);
+			}
+			
+		}else {
+			request.getSession().setAttribute("alertMsg", "스크랩 삭제 실패");
 			response.sendRedirect(request.getContextPath() + "/list.sp?currentPage=1&userNo=" + userNo);
 		}
 	}

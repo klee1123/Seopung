@@ -69,7 +69,7 @@
                 		<%for(ScrapPlan cp : list) {%>
 		                   	<tr align="center"> 
 		                        <td><input type="checkbox"id="chk" name="spno" value="<%=cp.getPlanNo()%>">&nbsp;&nbsp;<%=cp.getPlanNo() %></td>
-		                        <td><a href=""><%=cp.getPlanTitle() %></a></td>
+		                        <td><a href="<%=contextPath%>/detail.pl?pno=<%=cp.getPlanNo()%>"><%=cp.getPlanTitle() %></a></td>
 		                        <td><%=cp.getPlanWriter() %></td>
 		                        <td><%=cp.getpScrapDate()%></td>
 		                    </tr>
@@ -137,6 +137,7 @@
                   		str += "spno=" + selected[i] + "&";
                 	}
               	}
+              	
               
               	if(confirm("정말 삭제하시겠습니까?")) {
               		location.href="<%=contextPath%>/delete.sp?userNo=<%=userNo%>&" + str;

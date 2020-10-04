@@ -17,7 +17,7 @@
        
        .inquire{
             width: 1000px;
-            height: 800px;
+            height: 1000px;
        }
        .inquireEnroll {
            margin-left: 40px;
@@ -40,6 +40,10 @@
         #iqcontent{
             width:250px;
             height:250px;
+        }
+        .Admin{
+        	width:250px;
+            height:200px;
         }
        
     </style>
@@ -65,21 +69,24 @@
             <br>
                 <div id="iqcontent"><%= i.getInquireContent() %></div>
             <hr style="font-weight: 900; font-size: 30px;">
+            <div class="Admin">
             <%if(i.getInquireResponse().equals("NULL")) { %>
-            	<div id="Admin"></div>
+            	<div class="AdminNO"></div>
             <% }else { %>
-                <div id="Admin">
-                    	관리자 답변 : <%= i.getInquireResponse() %>
-                    <span id="iqAdmin"></span> 
+                <div class="AdminYes">
+                    	관리자 답변 : 
+                    <span id="iqAdmin"><%= i.getInquireResponse() %></span> 
                 </div>
             <% } %>
+            </div>
+            <hr>
             <br>
             <div id=enroll align=center>
-             <!-- <button class="btn btn-secondary btn-sm">수정</button> -->
-                <button id="deleteBtn" class="btn btn-secondary btn-sm">삭제</button>
+             	<button id="iqListBtn" class="btn btn-secondary btn-sm"><a style="text-decoration: none; color:white" href="<%= contextPath %>/list.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">목록</a></button>
+                
             </div>
         </div> 
-        
+    </div>    
 	<!-- myContent -->
     </div>
     <!-- myOuter -->

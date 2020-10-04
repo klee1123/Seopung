@@ -38,4 +38,11 @@
 		   AND PLAN_NO = ?)
 	</entry>
 	
+	<entry key="decreasePlanScrapCount">
+		UPDATE
+		       TB_PLAN_OPTION
+		   SET PLAN_SCRAP_COUNT = PLAN_SCRAP_COUNT -1
+		 WHERE PLAN_NO = ? 
+		   
+	</entry>
 </properties>
