@@ -169,8 +169,9 @@
 			<br> <br>
 
 		</div>
+<%if(loginUser != null){ %>		
 	<script>
-	
+		
 
 		function del(){
 			if(confirm("정말로 삭제하시겠습니까?")){
@@ -214,6 +215,7 @@
 				type:"get",
 				data:{cno:<%=c.getComNo()%>,
 				      currentPage:cPage
+				      
 				},
 				success:function(result){
 					console.log("통신성공");
@@ -238,12 +240,23 @@
 						"<tr>" + 
 							"<td colspan='2' width='800'>" + 
 								result.list[i].replyContent +
-							"</td>" +
-							"<td align='center'>" +
+							"</td>"; 
+							if(<%=loginUser.getUserNo()%> == result.list[i].userNo1){
+					comment +=			
+							"<td align='center'>"+
 								"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>삭제</button>" +
-							"</td>" +
+							"</td>";
+							}else{
+					comment +=			
+						"<td align='center'>"+
+							"<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].replyNo + ");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>" +
+						"</td>";
+							}	
+						
+						comment +=		
 						"</tr>" +
 					"</table>";
+							
 				}
 	       				var $listCount = result.pi.listCount;     	       					
  	       				var $currentPage = result.pi.currentPage;
@@ -288,7 +301,182 @@
 	       		}
 			});
 		}
+		function confirmDeleteComment(commentNo){
+       		if(confirm("댓글을 삭제하시겠습니까?")){
+       			deleteComment(commentNo);
+       		}
+       	}
+       	
+       	// 댓글 삭제용 ajax
+       	function deleteComment(commentNo){
+       		
+       		$.ajax({
+       			url:"<%=contextPath%>/adminPage/delete.rco",
+       			type:"post",
+       			data:{"commentNo":commentNo},
+       			success:function(result){
+       				
+       				if(result>0){
+       					selectReplyList(1);
+       					
+       				}
+       				
+       			}, error:function(){
+       				console.log("ajax 통신 실패");
+       			}
+       		});
+       	}
 	</script>
+	<%}else{ %>
+	<script>
+		
+
+		function del(){
+			if(confirm("정말로 삭제하시겠습니까?")){
+				location.href="<%=contextPath%>/delete.co?cno=<%=c.getComNo()%>"
+			}else{
+				
+			}
+		}
+		
+		$(function(){
+			selectReplyList(1);
+			
+			
+		});
+		// 해당 게시글에 댓글 작성용 ajax
+		function addReply(){
+			$.ajax({
+				url:"<%=contextPath%>/rinsert.co",
+				type:"get",
+				data:{
+					content:$("#replyContent").val(),
+					cno:<%=c.getComNo()%>
+					
+				},
+				success:function(result){
+					
+					if(result > 0){
+						selectReplyList(1);
+						$("#replyContent").val("");
+					}
+				},
+				error:function(){
+					console.log("댓글작성용ajax 통신 실패");
+				}
+			});
+		}
+		
+		function selectReplyList(cPage){
+			$.ajax({
+				url:"<%=contextPath%>/rlist.co",
+				type:"get",
+				data:{cno:<%=c.getComNo()%>,
+				      currentPage:cPage
+				      
+				},
+				success:function(result){
+					console.log("통신성공");
+					if(result.list.length > 0){
+						var comment="";
+	       				 for(var i in result.list){
+						comment += "<table>" +
+	    				"<tr>" +
+							"<td width='60'>";
+			 
+			 if(result.list[i].profile == "null"){
+				 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+			 }else{
+				 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+			 }
+			 
+			 comment +=         "</td>" +
+							"<td>" + result.list[i].replyWriter + "<br>" + result.list[i].createDate +
+							"</td>" +
+							"<td>" +  "</td>" + 
+						"</tr>" + 
+						"<tr>" + 
+							"<td colspan='2' width='800'>" + 
+								result.list[i].replyContent +
+							"</td>"; 
+									
+							
+			
+						comment +=		
+						"</tr>" +
+					"</table>";
+							
+				}
+	       				var $listCount = result.pi.listCount;     	       					
+ 	       				var $currentPage = result.pi.currentPage;
+                        var $startPage = result.pi.startPage;
+                        var $endPage = result.pi.endPage;
+                        var $maxPage = result.pi.maxPage;
+                        
+                        var $btns = "";
+                        for(var $p = $startPage; $p <= $endPage; $p++ ){
+                           
+                           $btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
+                        }
+                        
+                        if(cPage != "1"){
+                            var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
+                        }else{
+                        	var $prevBtn = "";
+                        }
+                        
+                        if(cPage != $maxPage){
+                            var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
+                        }else{
+                        	var $nextBtn = "";
+                        }
+                        	
+                         
+                        var $buttons = $prevBtn + $btns + $nextBtn ;
+                        
+	       				$("#content_4").html("댓글 " + $listCount);
+ 	       				$("#content_6").html(comment);
+                        
+                        $("#paging").html($buttons);
+                        
+                     }else{
+		       				$("#content_4").html("댓글 0");
+                        $("#content_6").html('작성된 댓글이 없습니다.');
+                     }
+
+       				
+	       		},error:function(){
+	       				console.log("댓글 리스트 조회용 ajax 통신 실패");
+	       		}
+			});
+		}
+		function confirmDeleteComment(commentNo){
+       		if(confirm("댓글을 삭제하시겠습니까?")){
+       			deleteComment(commentNo);
+       		}
+       	}
+       	
+       	// 댓글 삭제용 ajax
+       	function deleteComment(commentNo){
+       		
+       		$.ajax({
+       			url:"<%=contextPath%>/adminPage/delete.rco",
+       			type:"post",
+       			data:{"commentNo":commentNo},
+       			success:function(result){
+       				
+       				if(result>0){
+       					selectReplyList(1);
+       					
+       				}
+       				
+       			}, error:function(){
+       				console.log("ajax 통신 실패");
+       			}
+       		});
+       	}
+	</script>
+	<%} %>
     <br>
     <br>
 </body>
