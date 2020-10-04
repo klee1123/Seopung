@@ -81,13 +81,14 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				AdminReport a = new AdminReport();
-				a.setReportNo(rset.getInt("report_no"));
-				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정
-				
-				a.setReportDate(rset.getDate("reportDate"));
-				a.setReportType(rset.getString("reportType"));
-				list.add(a);
+				AdminReport rp = new AdminReport();
+				rp.setReportNo(rset.getInt("report_no"));
+				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정 / 변경해씀
+				rp.setUserNo(rset.getString("ID1"));
+				rp.setUserNo2(rset.getString("ID2"));
+				rp.setReportDate(rset.getDate("report_date"));
+				rp.setReportType(rset.getString("report_type"));
+				list.add(rp);
 			}
 			
 		} catch (SQLException e) {

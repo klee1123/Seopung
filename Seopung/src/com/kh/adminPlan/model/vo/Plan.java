@@ -4,27 +4,30 @@ import java.sql.Date;
 
 public class Plan {
 
-	private int planNo;
-	private String planTitle;
-	private Date startDate;
-	private Date endDate;
-	private String age;
-	private String accompany;
-	private String budget;
-	private String scrapYN;
-	private String privateYN;
-	private String memo;
-	private String hashtag;
-	private String tempYN;
-	private String planType;
-	private String transrportations;
-	private int recommendCount;
-	private int scrapCount;
-	private String planWriter; // 회원번호 또는 회원아이디 담기
-	private String status;
-	private Date enrollDate;
-	private Date modifyDate;
-	private int count;
+	private int planNo;				//일정번호
+	private String planTitle;		//일정제목
+	private Date startDate;			//일정시작일
+	private Date endDate;			//일정종료일
+	private String age;				//나이선택
+	private String accompany;		//동행여부
+	private String budget;			//예산
+	private String scrapYN;			//스크랩가능여부
+	private String privateYN;		//공개y, 비공개n
+	private String memo;			//일정메모
+	private String hashtag;			//해시태그   --- 삭제
+	private String tempYN;			//임시저장	 --- 삭제
+	private String planType;		//여행유형
+	private String transrportations;//여행이동수단
+	private int recommendCount;		//추천수
+	private int scrapCount;			//스크랩수
+	private String planWriter; 		//작성자번호 또는 회원아이디 담기
+	private String status;			//상태값
+	private Date enrollDate;		//작성일
+	private Date modifyDate;		//수정일
+	private int count;				//조회수
+	private String userNick;		//닉네임
+	private int userNo;				//회원번호
+	private String profile;			//프로필사진경로
 	
 	public Plan() {
 		
@@ -59,25 +62,6 @@ public class Plan {
 		this.count = count;
 	}
 
-	
-	public Plan(int planNo, String planTitle, Date startDate, Date endDate, String age, String budget, String memo,
-			String planType, String transrportations, int recommendCount, int scrapCount, String planWriter) 
-	{
-		super();
-		this.planNo = planNo;
-		this.planTitle = planTitle;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.age = age;
-		this.budget = budget;
-		this.memo = memo;
-		this.planType = planType;
-		this.transrportations = transrportations;
-		this.recommendCount = recommendCount;
-		this.scrapCount = scrapCount;
-		this.planWriter = planWriter;
-	}
-
 
 	public Plan(int planNo, String planTitle, String planWriter, Date enrollDate, int count) {
 		super();
@@ -86,6 +70,30 @@ public class Plan {
 		this.planWriter = planWriter;
 		this.enrollDate = enrollDate;
 		this.count = count;
+	}
+
+
+	public Plan(int planNo, String planTitle, Date startDate, Date endDate, String age, String accompany, String budget,
+			String scrapYN, String memo, String planType, String transrportations, int recommendCount, int scrapCount,
+			String planWriter, String userNick, int userNo, String profile) {
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.age = age;
+		this.accompany = accompany;
+		this.budget = budget;
+		this.scrapYN = scrapYN;
+		this.memo = memo;
+		this.planType = planType;
+		this.transrportations = transrportations;
+		this.recommendCount = recommendCount;
+		this.scrapCount = scrapCount;
+		this.planWriter = planWriter;
+		this.userNick = userNick;
+		this.userNo = userNo;
+		this.profile = profile;
 	}
 
 
@@ -296,6 +304,36 @@ public class Plan {
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+
+	public String getUserNick() {
+		return userNick;
+	}
+
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+
+	public String getProfile() {
+		return profile;
+	}
+
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 

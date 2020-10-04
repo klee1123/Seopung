@@ -69,7 +69,7 @@
             <ul id="sidenavi">
                 <br><br>
                 <li ><a href="<%= contextPath %>/myPage.me">개인정보 조회 및 변경</a></li> <br>
-                <li ><a href="<%= contextPath %>/myPlanList.me">일정관리</a></li><br>
+                <li ><a href="<%= contextPath %>/list.mp?currentPage=1&userNo=<%=loginUser.getUserNo()%>">일정관리</a></li><br>
     
                 <li>동행인관리
                     <ul>
@@ -81,8 +81,8 @@
                 
                 <li>스크랩
                     <ul>
-                        <li><a href="<%= contextPath %>/scrapP.me">일정</a></li>
-                        <li><a href="<%= contextPath %>/scrapC.me">커뮤니티</a></li>
+                        <li><a href="<%= contextPath %>/list.sp?currentPage=1&userNo=<%=loginUser.getUserNo()%>">일정</a></li>
+                        <li><a href="<%= contextPath %>/list.sc?currentPage=1&userNo=<%=loginUser.getUserNo()%>">커뮤니티</a></li>
                     </ul>
                 </li> <br>
     

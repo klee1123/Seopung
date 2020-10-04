@@ -1,13 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+	<entry key="selectListCountAll">
+		SELECT 
+		       COUNT(*)
+		  FROM TB_COMMUNITY C
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_HEAD IN ('맛집','명소')
+		   AND COMMUNITY_TITLE LIKE '%'||?||'%'
+	</entry>
 	<entry key="selectListCount">
 		SELECT 
 		       COUNT(*)
 		  FROM TB_COMMUNITY C
 		 WHERE COMMUNITY_STATUS = 'Y'
-		   AND COMMUNITY_HEAD = '명소'
-	        OR COMMUNITY_HEAD = '맛집'
+		   AND COMMUNITY_HEAD = ?
+		   AND COMMUNITY_TITLE LIKE '%'||?||'%'
+	</entry>
+	
+	<entry key="selectListAll">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD IN ('맛집', '명소')
+			         ORDER 
+			            BY COMMUNITY_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListAllRe">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD IN ('맛집', '명소')
+			         ORDER 
+			            BY COMMUNITY_RECOMMEND DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListAllCo">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD IN ('맛집', '명소')
+			         ORDER 
+			            BY COMMUNITY_COUNT DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListAllSc">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD IN ('맛집', '명소')
+			         ORDER 
+			            BY COMMUNITY_SCRAP DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectList">
 		SELECT *
@@ -29,10 +150,94 @@
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
-			           AND COMMUNITY_HEAD = '맛집'
-			            OR COMMUNITY_HEAD = '명소'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD = ?
 			         ORDER 
 			            BY COMMUNITY_NO DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListRe">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD = ?
+			         ORDER 
+			            BY COMMUNITY_RECOMMEND DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListCo">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD = ?
+			         ORDER 
+			            BY COMMUNITY_COUNT DESC
+			            ) A
+			     )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectListSc">
+		SELECT *
+			  FROM (
+			    SELECT ROWNUM RNUM
+			         , A.*
+			    FROM (
+			        SELECT 
+			               COMMUNITY_NO
+			             , COMMUNITY_TITLE
+			             , COMMUNITY_CONTENT
+			             , USER_NICK
+			             , COMMUNITY_COUNT
+			             , COMMUNITY_SCRAP
+			             , COMMUNITY_RECOMMEND
+			             , COMMUNITY_THUMB
+			             , COMMUNITY_HEAD
+			             , COMMUNITY_ENROLL
+			          FROM TB_COMMUNITY C
+			          JOIN TB_MEMBER USING(USER_NO)
+			         WHERE COMMUNITY_STATUS = 'Y'
+			           AND COMMUNITY_TITLE LIKE '%'||?||'%'			    
+			           AND COMMUNITY_HEAD = ?
+			         ORDER 
+			            BY COMMUNITY_SCRAP DESC
 			            ) A
 			     )
 			 WHERE RNUM BETWEEN ? AND ?
@@ -51,13 +256,13 @@
 		   )
 		   VALUES
 		   (
-		      SEQ_UNO.NEXTVAL
+		      SEQ_COMMUNITYNO.NEXTVAL
 		    , ?
 		    , ?
 		    , ?
 		    , ?
 		    , ?
-		    , TO_CHAR(SYSDATE, 'YYYY-MM-DD HH:MM)
+		    , SYSDATE
 		    )
 	</entry>
 	<entry key="increaseCount">
@@ -72,6 +277,7 @@
 		       COMMUNITY_NO
 		     , COMMUNITY_TITLE
 		     , USER_NICK
+		     , USER_NO
 		     , COMMUNITY_CONTENT
 		     , COMMUNITY_COUNT
 		     , COMMUNITY_SCRAP
@@ -98,5 +304,159 @@
 		      , COMMUNITY_HEAD = ?
 		  WHERE COMMUNITY_NO = ?
 	</entry>
+	<entry key="increaseRe">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND + 1
+		     , COMMUNITY_COUNT = COMMUNITY_COUNT -1
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="insertRecommend">
+		INSERT
+		  INTO TB_COMMUNITY_RECOMMEND
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   )
+		   VALUES
+		   (
+		      ?
+		    , ?
+		    )
+	</entry>
+	<entry key="decreaseRe">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_RECOMMEND = COMMUNITY_RECOMMEND - 1
+		    
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="increaseScrap">
+			UPDATE TB_COMMUNITY
+		   SET COMMUNITY_SCRAP = COMMUNITY_SCRAP + 1
+		     , COMMUNITY_COUNT = COMMUNITY_COUNT -1
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="insertScrap">
+		INSERT
+		  INTO TB_COMMUNITY_SCRAP
+		  (
+		     COMMUNITY_NO
+		   , USER_NO
+		   , SCRAP_DATE
+		   )
+		   VALUES
+		   (
+		      ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
+	<entry key="decreaseScrap">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_SCRAP = COMMUNITY_SCRAP - 1
+		    
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	<entry key="insertNotice">
+		INSERT 
+		  INTO TB_COMMUNITY
+		  (  COMMUNITY_NO
+		   , USER_NO
+		   , COMMUNITY_TITLE
+		   , COMMUNITY_CONTENT
+		   , COMMUNITY_HEAD
+		   , COMMUNITY_ENROLL
+		   )
+		   VALUES
+		   (
+		      SEQ_COMMUNITYNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		   )
+	</entry>
+	<entry key="selectNoticeList">
+		  SELECT ROWNUM RNUM
+		       , A.*
+		    FROM(   
+		     SELECT
+		            COMMUNITY_NO
+		          , ADMIN_ID
+		          , COMMUNITY_TITLE
+		          , COMMUNITY_CONTENT
+		          , COMMUNITY_ENROLL
+		          , COMMUNITY_COUNT
+		          , COMMUNITY_HEAD
+		       FROM TB_COMMUNITY
+		       JOIN TB_ADMIN ON (USER_NO = ADMIN_NO)
+		      WHERE COMMUNITY_STATUS = 'Y'
+		        AND COMMUNITY_HEAD = '공지'
+		      ORDER
+		         BY COMMUNITY_NO DESC
+		        ) A
+	</entry>
+	<entry key="selectNotice">
+		SELECT
+		       COMMUNITY_NO
+		     , COMMUNITY_TITLE
+		     , USER_NO
+		     , ADMIN_ID
+		     , COMMUNITY_CONTENT
+		     , COMMUNITY_COUNT
+		     , COMMUNITY_ENROLL
+		  FROM TB_COMMUNITY   
+		  JOIN TB_ADMIN ON(USER_NO = ADMIN_NO)
+		 WHERE COMMUNITY_NO = ?
+		   AND COMMUNITY_STATUS = 'Y'
+	</entry>
+	<entry key="insertReply">
+		INSERT
+		  INTO TB_COMMUNITY_COMMENT
+		  (
+		     COMMENT_NO
+		   , COMMENT_CONTENT
+		   , COMMUNITY_NO
+		   , USER_NO
+		   , COMMENT_DATE
+		   )
+		   VALUES
+		   (
+		      SEQ_COMMUNITYCOMMENTNO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+	</entry>
+	<entry key="selectReplyList">
+SELECT *
+	  FROM (
+	    SELECT ROWNUM RNUM
+	         , A.*
+	    FROM (SELECT
+		       COMMENT_NO
+		     , COMMENT_CONTENT
+		     , USER_NICK
+		     , USER_NO
+		     , PROFILEPIC_PATH
+		     , COMMENT_DATE
+		  FROM TB_COMMUNITY_COMMENT 
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE COMMUNITY_NO = ?
+		   AND COMMENT_STATUS = 'Y'
+		 ORDER BY COMMENT_NO DESC
+		 ) A
+		   )
+	WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="countComment">
+		SELECT COUNT(*)
+		  FROM TB_COMMUNITY_COMMENT
+		 WHERE COMMENT_STATUS = 'Y'
+		   AND COMMUNITY_NO = ?
+	</entry>
+
 	
 </properties>

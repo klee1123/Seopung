@@ -58,8 +58,8 @@
 					<tr>
 						<th width="50px"><input type="checkbox"></th>
 						<th width="75px">번호</th>
-						<th width="200px">제목</th>
-						<th width="100px">신고자</th>
+						<th width="200px">신고된 아이디</th>
+						<th width="100px">신고자 아이디</th>
 						<th width="100px">작성일</th>
 						<th width="100px">구분</th>
 					</tr>
@@ -70,14 +70,14 @@
 	                        <td colspan="5">조회된 리스트가 없습니다.</td>
 	                    </tr>
 	                    <% }else{ %>
-	                        <% for(AdminReport n : list){ %>
+	                        <% for(AdminReport rp : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=n.getReportNo()  %>"></td>
-	                            <td><%= n.getReportNo() %></td>
-	                            <td><%= n.getReportTitle() %></td>
-	                            <td><%= n.getReportWriter() %></td>
-	                            <td><%= n.getReportEnroll() %></td>
-	                            <td><%= n.getReportdivision() %></td>
+	                            <td><input type="checkbox" id="chk" name="rno" value="<%=rp.getReportNo()%>"></td>
+	                            <td><%= rp.getReportNo() %></td>
+	                            <td><%= rp.getUserNo() %></td>
+	                            <td><%= rp.getUserNo2() %></td>
+	                            <td><%= rp.getReportDate() %></td>
+	                            <td><%= rp.getReportType() %></td>
 	                        </tr>
 	                        <% } %>
 	                    <% } %>
@@ -91,9 +91,9 @@
 				<table>
 					<tr>
 						<td width=""><span>총 신고글 수 &nbsp;&nbsp;&nbsp;<b
-								style="color: red"><%=listCount%></b>개
+								style="color: black"><%=listCount%></b>개
 						</span></td>
-						<td width="720px;">
+						<td width="650px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
 	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=1';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
@@ -102,30 +102,31 @@
 	
 	                                <% for(int p=startPage; p<=endPage; p++){ %>
 	                                    <% if(p != currentPage){ %>
-	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.no?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+	                                    <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= p %>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 	                                    <% }else{ %>
 	                                    <button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 	                                    <% } %>
 	                                <% } %>
 	
 	                                <% if(currentPage != maxPage){ %>
-	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage+1 %>%>';" class="btn btn-secondary btn-sm">&gt;</button>
+	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= currentPage+1 %>';" class="btn btn-secondary btn-sm">&gt;</button>
 	                                <button onclick="location.href='<%= contextPath %>/adminPage/list.rp?currentPage=<%= maxPage %>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 	                                <% } %>
 								
 							</div>
 						</td>
 						
+						<td>
 						<div align="right">
 							<button type="button" class="btn btn-secondary">삭제</button>
 							<button type="submit" class="btn btn-primary">블랙리스트 등록</button>
 						</div>	
-					
+						</td>
+						
 				</table>
 			</div>
 		</div>
-
-
+		<br><br><br>
 	</div>
 	<!-- /.container-fluid -->
 

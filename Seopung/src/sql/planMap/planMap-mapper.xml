@@ -5,12 +5,12 @@
 		INSERT
 		  INTO TB_PLAN_MAP
 		  (
-		     PLAN_XY_NO
+		     PLAN_MAP_NO
 		   , PLAN_DAY
 		   , ORDER_NO
-		   , LINE_MEMO
-		   , LATITUDE
-		   , LONGITUDE
+		   , PLACE_NAME
+		   , PLAN_NO
+		 
 		    
 		  ) 
 		  VALUES
@@ -20,7 +20,22 @@
 		   , ?
 		   , ?
 		   , ?
-		   , ?
+		 
 		  )
+	</entry>
+	<entry key="planMap">
+		SELECT *
+		  FROM TB_PLAN_MAP
+		 WHERE 
+		 PLAN_NO = ?
+	</entry>
+	<entry key="selectPlanDays">
+		SELECT 
+			   PLAN_NO
+			,  PLAN_SDATE
+			,  PLAN_EDATE
+		  FROM TB_PLAN_OPTION
+		 WHERE 
+		 	PLAN_NO = ?
 	</entry>
 </properties>

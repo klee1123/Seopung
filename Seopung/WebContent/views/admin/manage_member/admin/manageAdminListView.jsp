@@ -69,7 +69,7 @@
 						<div class="dropdown-menu animated--fade-in"
 							aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=">전체</a> 
-							<a class="dropdown-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">회원</a> 
+							<a class="dropdown-item" href="<%=contextPath%>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=Y">관리자</a> 
 							<a class="dropdown-item" href="<%=contextPath %>/adminPage/list.ad?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>&status=N">탈퇴</a>
 						</div>
 					</td>

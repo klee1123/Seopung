@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kh.Member.model.vo.LoginUser"%>
+
 <!doctype html>
 <html lang="zxx">
 
@@ -104,10 +106,16 @@ div {
 </head>
 
 <body>
+	<div id="header" style="margin-bottom:150px;">
 	<%@include file="../common/menubar.jsp"%>
+	</div>
 	<div class="wrap">
-
-		<form action="<%= contextPath %>/planOption.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="GET">
+		
+		<form action="<%= contextPath %>/planOption.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="post">
+			<div>
+			 <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+			</div>
+			
 			<div class="plan_sec">
 				<div class="so_title">일정만들기 < 1 / 2 ></div>
 				<div class="so_title">
@@ -122,18 +130,31 @@ div {
 						<tr>
 							<td style="width: 350px;">
 								<div class="">
-									<input type="date" name="planSdate" id="plan_sdate" size="12">
+									<input type="date" name="planSdate" id="sDate" size="12">
 
 								</div>
 							</td>
 							<td>
 								<div class="">
-									<input type="date" name="planEdate" id="plan_edate" size="12">
+									<input type="date" name="planEdate" id="eDate" size="12">
 
 								</div>
 							</td>
 						</tr>
+						
 					</table>
+					<script>
+		            document.getElementById("sDate").onchange = function () {
+		                var input = document.getElementById("eDate");
+		                input.setAttribute("min", this.value);
+		            }
+		            
+		            document.getElementById("eDate").onchange = function () {
+		                var input = document.getElementById("sDate");
+		                input.setAttribute("max", this.value);
+		            }
+		
+		        </script>
 				</div>
 			</div>
 
@@ -296,29 +317,18 @@ div {
 						style="margin-top: 10px; resize: none; width: 720px; height: 200px"
 						placeholder=" 내용을 입력해주세요"></textarea>
 				</div>
-				<div style="margin-top: 10px;">
-					<input type="text" name="planHashtag" style="width: 720px" placeholder="해시태그">
-				</div>
 			</div>
 
 			<div class="plan_sec" style="margin-top: 370px;">
-				<div style="float: left;">
-					<button class="bbtn" type="submit" name="planTemp" value="y">임시
-						저장</button>
-				</div>
-
 				<div style="text-align: right;">
 					<button class="bbtn" type="submit" name="planTemp" value="n">다음 페이지</button>
 				</div>
 			</div>
 		</form>
-		<%@include file="../common/footer.jsp"%>
 	</div>
-	
-	
-	
-		
-		
+	<div id="footer">
+	<%@include file="../common/footer.jsp"%>
+	</div>
 </body>
 
 </html>

@@ -41,10 +41,10 @@ public class UpdateNickServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		if(updateMem != null) { // 비밀번호 변경 성공
+		if(updateMem != null) { 
 			
 			session.setAttribute("alertMsg", "성공적으로 닉네임이 변경됐습니다.");
-			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("m", updateMem);
 			
 		}else { // 실패
 			session.setAttribute("alertMsg", "닉네임 변경에 실패했습니다");

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +80,7 @@
 				            </b><br><br>
 				
 				            <form action="deleteM.in" method="POST">
-				             <input type="hidden" name="userId" value="<%=loginUser.getUserId()%>">
+				             <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
 				                비밀번호 : 
 				                <input type="password" name="userPwd" required>
 				

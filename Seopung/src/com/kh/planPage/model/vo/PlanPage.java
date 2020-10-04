@@ -22,6 +22,8 @@ public class PlanPage {
 	
 	public PlanPage() {}
 
+	
+	
 	public PlanPage(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planHashtag,
 			String planTemp, String planType, String planTrans, int planRecommend, int planScrapCount, int userNo) {
@@ -44,6 +46,8 @@ public class PlanPage {
 		this.planScrapCount = planScrapCount;
 		this.userNo = userNo;
 	}
+
+
 
 	public int getPlanNo() {
 		return planNo;
@@ -180,11 +184,18 @@ public class PlanPage {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "PlanPage [planNo=" + planNo + ", planTitle=" + planTitle + ", planSdate=" + planSdate + ", planEdate="
+				+ planEdate + ", planAge=" + planAge + ", planAcc=" + planAcc + ", planBudget=" + planBudget
+				+ ", planScrapYn=" + planScrapYn + ", planPrivate=" + planPrivate + ", planMemo=" + planMemo
+				+ ", planHashtag=" + planHashtag + ", planTemp=" + planTemp + ", planType=" + planType + ", planTrans="
+				+ planTrans + ", planRecommend=" + planRecommend + ", planScrapCount=" + planScrapCount + ", userNo="
+				+ userNo + "]";
+	}
+
+	
 	
 	
 }

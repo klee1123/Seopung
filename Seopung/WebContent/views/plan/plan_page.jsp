@@ -121,7 +121,7 @@
 
 			<div class="top" style="height: 40px; ">
 			<!-- 로그인 유저의 유저넘버가 페이지생성자의 유저넘버가 같을때 출력화면 -->
-				<% if(loginUserNo == pageUserNo) { %>
+				
 				<div id="top_01">
 					<!--아이디 넘버 체크시 작성자와 일치하면 해당 div 활성화-->
 					<button style="height: 30px;" class="btn btn-primary btn-sm">수정</button>
@@ -134,15 +134,9 @@
 					<button style="height: 30px;" class="btn btn-primary btn-sm">신고하기</button>
 
 				</div>
-				<% } else{ %>
-				<div id="top_02">
-					<!--아이디 넘버 체크시 작성자와 일치하지 않으면 해당 div 활성화-->
-					<button style="height: 30px;" class="btn btn-primary btn-sm">추천</button>
-					<button style="height: 30px;" class="btn btn-primary btn-sm">스크랩</button>
-					<button style="height: 30px;" class="btn btn-primary btn-sm">신고하기</button>
-
-				</div>
-				<% } %>
+				
+				
+				
 			</div>
 
 			<!-- 지도 API 시작-->

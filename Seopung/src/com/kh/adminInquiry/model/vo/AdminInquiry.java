@@ -13,7 +13,7 @@ public class AdminInquiry {
 	private String inquireResponse;
 	private Date responseDate;
 	private String status;
-	private int userNo;
+	private String inquireWriter; // 회원번호 또는 회원아이디
 	private int adminNo;
 	private String inquireSep;
 	private String inquireType;
@@ -24,7 +24,7 @@ public class AdminInquiry {
 
 	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
 			String inquireStatus, String inquireEmail, String inquireResponse, Date responseDate, String status,
-			int userNo, int adminNo, String inquireSep, String inquireType) {
+			String inquireWriter, int adminNo, String inquireSep, String inquireType) {
 		super();
 		this.inquireNo = inquireNo;
 		this.inquireTitle = inquireTitle;
@@ -35,12 +35,12 @@ public class AdminInquiry {
 		this.inquireResponse = inquireResponse;
 		this.responseDate = responseDate;
 		this.status = status;
-		this.userNo = userNo;
+		this.inquireWriter = inquireWriter;
 		this.adminNo = adminNo;
 		this.inquireSep = inquireSep;
 		this.inquireType = inquireType;
 	}
-	
+
 	public int getInquireNo() {
 		return inquireNo;
 	}
@@ -113,12 +113,12 @@ public class AdminInquiry {
 		this.status = status;
 	}
 
-	public int getUserNo() {
-		return userNo;
+	public String getInquireWriter() {
+		return inquireWriter;
 	}
 
-	public void setUserNo(int userNo) {
-		this.userNo = userNo;
+	public void setInquireWriter(String inquireWriter) {
+		this.inquireWriter = inquireWriter;
 	}
 
 	public int getAdminNo() {
@@ -150,8 +150,10 @@ public class AdminInquiry {
 		return "AdminInquiry [inquireNo=" + inquireNo + ", inquireTitle=" + inquireTitle + ", inquireContent="
 				+ inquireContent + ", inquireEnrollDate=" + inquireEnrollDate + ", inquireStatus=" + inquireStatus
 				+ ", inquireEmail=" + inquireEmail + ", inquireResponse=" + inquireResponse + ", responseDate="
-				+ responseDate + ", status=" + status + ", userNo=" + userNo + ", adminNo=" + adminNo + ", inquireSep="
-				+ inquireSep + ", inquireType=" + inquireType + "]";
+				+ responseDate + ", status=" + status + ", inquireWriter=" + inquireWriter + ", adminNo=" + adminNo
+				+ ", inquireSep=" + inquireSep + ", inquireType=" + inquireType + "]";
 	}
+	
+	
 
 }

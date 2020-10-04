@@ -14,12 +14,29 @@ public class Inquire {
 	private Date responseDate;			// 문의글 관리자 답변 날짜
 	private String status;				// 상태(y/n)
 	private int userNo;					// 작성자 
+	private String userNick;			// 작성자 닉네임
 	private int adminNo;				// 관리자
+	private String adminId;
 	private String inquireSep;			// 회원/비회원
 	private String inquireType;			// 문의글유형
 	
 	
 	public Inquire() {}
+
+
+	public Inquire(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
+			String inquireResponse, Date responseDate, String status, int userNo, int adminNo) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireEnrollDate = inquireEnrollDate;
+		this.inquireResponse = inquireResponse;
+		this.responseDate = responseDate;
+		this.status = status;
+		this.userNo = userNo;
+		this.adminNo = adminNo;
+	}
 
 
 	public Inquire(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
@@ -49,6 +66,20 @@ public class Inquire {
 		this.inquireTitle = inquireTitle;
 		this.inquireContent = inquireContent;
 		this.inquireStatus = inquireStatus;
+	}
+	
+
+	public Inquire(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
+			String inquireResponse, Date responseDate, String userNick, String adminId) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireEnrollDate = inquireEnrollDate;
+		this.inquireResponse = inquireResponse;
+		this.responseDate = responseDate;
+		this.userNick = userNick;
+		this.adminId = adminId;
 	}
 
 
@@ -152,6 +183,16 @@ public class Inquire {
 	}
 
 
+	public String getUserNick() {
+		return userNick;
+	}
+
+
+	public void setUserNick(String userNick) {
+		this.userNick = userNick;
+	}
+
+
 	public int getAdminNo() {
 		return adminNo;
 	}
@@ -159,6 +200,16 @@ public class Inquire {
 
 	public void setAdminNo(int adminNo) {
 		this.adminNo = adminNo;
+	}
+
+
+	public String getAdminId() {
+		return adminId;
+	}
+
+
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
 
 
@@ -184,12 +235,12 @@ public class Inquire {
 
 	@Override
 	public String toString() {
-		return "Inquire [inquireNo=" + inquireNo + ", inquireTitle=" + inquireTitle + ", inquireContent=" + inquireContent
-				+ ", inquireEnrollDate=" + inquireEnrollDate + ", inquireStatus=" + inquireStatus + ", inquireEmail="
-				+ inquireEmail + ", inquireResponse=" + inquireResponse + ", responseDate=" + responseDate + ", status="
-				+ status + ", userNo=" + userNo + ", adminNo=" + adminNo + ", inquireSep=" + inquireSep
-				+ ", inquireType=" + inquireType + "]";
+		return "Inquire [inquireNo=" + inquireNo + ", inquireTitle=" + inquireTitle + ", inquireContent="
+				+ inquireContent + ", inquireEnrollDate=" + inquireEnrollDate + ", inquireStatus=" + inquireStatus
+				+ ", inquireEmail=" + inquireEmail + ", inquireResponse=" + inquireResponse + ", responseDate="
+				+ responseDate + ", status=" + status + ", userNo=" + userNo + ", userNick=" + userNick + ", adminNo="
+				+ adminNo + ", adminId=" + adminId + ", inquireSep=" + inquireSep + ", inquireType=" + inquireType
+				+ "]";
 	}
 
 }
-	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.planMap.model.vo.PlanMap" %>
 
 <!DOCTYPE html>
 <html>
@@ -7,26 +8,24 @@
 <meta charset="utf-8">
 <title>일정 만들기 - 지도</title>
 <style>
-
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
 .notosanskr * { font-family: 'Noto Sans KR', sans-serif; }
+
+
 
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
 }
-
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active {
 	color: #000;
 	text-decoration: none;
 }
-
 .map_wrap {
 	position: relative;
 	width: 100%;
 	height: 500px;
 }
-
 #menu_wrap {
 	position: absolute;
 	top: 0;
@@ -41,11 +40,9 @@
 	font-size: 12px;
 	border-radius: 10px;
 }
-
 .bg_white {
 	background: #fff;
 }
-
 #menu_wrap hr {
 	display: block;
 	height: 1px;
@@ -53,23 +50,18 @@
 	border-top: 2px solid #5F5F5F;
 	margin: 3px 0;
 }
-
 #menu_wrap .option {
 	text-align: center;
 }
-
 #menu_wrap .option p {
 	margin: 10px 0;
 }
-
 #menu_wrap .option button {
 	margin-left: 5px;
 }
-
 #placesList li {
 	list-style: none;
 }
-
 #placesList .item {
 	position: relative;
 	border-bottom: 1px solid #888;
@@ -77,37 +69,30 @@
 	cursor: pointer;
 	min-height: 65px;
 }
-
 #placesList .item span {
 	display: block;
 	margin-top: 4px;
 }
-
 #placesList .item h5, #placesList .item .info {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
-
 #placesList .item .info {
 	padding: 10px 0 10px 55px;
 }
-
 #placesList .info .gray {
 	color: #8a8a8a;
 }
-
 #placesList .info .jibun {
 	padding-left: 26px;
 	background:
 		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
 		no-repeat;
 }
-
 #placesList .info .tel {
 	color: #009900;
 }
-
 #placesList .item .markerbg {
 	float: left;
 	position: absolute;
@@ -118,141 +103,108 @@
 		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
 		no-repeat;
 }
-
 #placesList .item .marker_1 {
 	background-position: 0 -10px;
 }
-
 #placesList .item .marker_2 {
 	background-position: 0 -56px;
 }
-
 #placesList .item .marker_3 {
 	background-position: 0 -102px
 }
-
 #placesList .item .marker_4 {
 	background-position: 0 -148px;
 }
-
 #placesList .item .marker_5 {
 	background-position: 0 -194px;
 }
-
 #placesList .item .marker_6 {
 	background-position: 0 -240px;
 }
-
 #placesList .item .marker_7 {
 	background-position: 0 -286px;
 }
-
 #placesList .item .marker_8 {
 	background-position: 0 -332px;
 }
-
 #placesList .item .marker_9 {
 	background-position: 0 -378px;
 }
-
 #placesList .item .marker_10 {
 	background-position: 0 -423px;
 }
-
 #placesList .item .marker_11 {
 	background-position: 0 -470px;
 }
-
 #placesList .item .marker_12 {
 	background-position: 0 -516px;
 }
-
 #placesList .item .marker_13 {
 	background-position: 0 -562px;
 }
-
 #placesList .item .marker_14 {
 	background-position: 0 -608px;
 }
-
 #placesList .item .marker_15 {
 	background-position: 0 -654px;
 }
-
 #pagination {
 	margin: 10px auto;
 	text-align: center;
 }
-
 #pagination a {
 	display: inline-block;
 	margin-right: 10px;
 }
-
 #pagination .on {
 	font-weight: bold;
 	cursor: default;
 	color: #777;
 }
 
-div {
-	box-sizing: border-box;
-}
+
+
+
 
 /* 전체 감싸는 div */
 .wrap {
 	width: 1200px;
 	height: 500px;
 	margin: auto;
-	border: 1px solid;
-	margin-top: 150px;
 	font-family: 'Noto Sans KR', sans-serif;
 	
 }
-
 /* #header, #content, #footer{ */
 .wrap>div {
 	width: 100%;
 }
-
 #content {
 	height: 100%
 }
-
-/* #content_1, #content_2{ */
 #content>div {
 	height: 100%;
 	float: left;
 }
 
-#content_1 {
-	width: 25%
+#content_1 { 
+width: 400px;
+height : 500px;
 }
 
 #content_2 {
-	width: 75%
+	width: 50%;
 }
-
-#content_2>div {
-	height: 100%;
-	float: top;
-}
-
 #make_h {
 	height: 10%;
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: bold;
 }
-
 #make_m {
 	height: 80%
 }
-
 #make_f {
 	height: 10%;
-	float: left;
 }
-
 .bbtn {
 	display: inline-block;
 	border: 1px solid #dfdfdf;
@@ -266,48 +218,145 @@ div {
 	font-weight: 999;
 	cursor: pointer;
 }
+
+
+/* Style the tab */
+.tab {
+  float: left;
+  background-color: #f1f1f1;
+  width: 20%;
+  height: 400px;
+  border: 1px solid #ccc;
+  overflow:auto;
+}
+
+/* Style the buttons inside the tab */
+.tab .tablinks {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 10px 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+/* Change background color of buttons on hover */
+.tab .tablinks:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab .tablinks.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-left: none;
+  height: 400px;
+  overflow:auto;
+}
 </style>
 
 </head>
 <body>
+	<div id="header" style="margin-bottom:150px;">
 	<%@include file="../common/menubar.jsp"%>
+	</div>
+
 	<div class="wrap">
-		<div id="header">
-		</div>
-		<form action="<%= contextPath %>/planMap.pl" style="width: 1200px; height: 500px" method="get">
-			<div id="content">
-			
-				<div id="content_1">
-					<div id="make_h">일정 만들기 < 2 / 2 ></div>
-					<div id="make_m">
-						<select name="" style="width: 300px;">
-							<option value="null" selected>일정일을 선택하세요</option>
-							<option value="day1">Day 1</option>
-							<option value="day2">Day 2</option>
-						</select>
-					</div>
-					<div id="make_f">
-						<table style="width: 300px;">
-							<tr>
-								<td>
-									<button class="bbtn" type="submit" name="plan_temp" value="n">임시 저장</button>
-								</td>
-								<td style="text-align: right;">
-									<button class="bbtn" type="submit" name="plan_temp" value="n">작성 완료</button>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div> <!-- content_1 end -->
+		
+			<div id="content" style="float:left;">
+				<form action="<%= contextPath %>/planMap.pl"" style="float:left; border: 1px solid #ccc;" method="post">
+					
+					<div id="content_1">
+						<div id="make_h" style="text-align: center; line-height:40px" >일정 만들기 < 2 / 2 ></div>
+						
+						<div id="make_m">
+							<div class="tab">
+						
+							  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day1"></input>
+						      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day2"></input>
+						      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day3"></input>
+						     
+						      
+							</div>
+							
+							<div id="Day1" class="tabcontent">
+								<div>장소명</div>
+						 		<div id="placeName1" ><input type="text" name="placeName"><input type="button" class="btnAdd1" value="Add"><br></div>
+							</div>
+							
+							<div id="Day2" class="tabcontent">
+							 	<div id="placeName2" ><input type="text" name="placeName"><input type="button" class="btnAdd2" value="Add"><br></div>
+							</div>
+							
+							<div id="Day3" class="tabcontent">
+							  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd" value="Add"><br></div>
+							</div>
+							
+							<script>
+							function openCity(evt, days) {
+							  var i, tabcontent, tablinks;
+							  tabcontent = document.getElementsByClassName("tabcontent");
+							  for (i = 0; i < tabcontent.length; i++) {
+							    tabcontent[i].style.display = "none";
+							  }
+							  tablinks = document.getElementsByClassName("tablinks");
+							  for (i = 0; i < tablinks.length; i++) {
+							    tablinks[i].className = tablinks[i].className.replace(" active", "");
+							  }
+							  document.getElementById(days).style.display = "block";
+							  evt.currentTarget.className += " active";
+							}
+
+							// Get the element with id="defaultOpen" and click on it
+							document.getElementById("defaultOpen").click();
+							</script>
+							
+						 	<script>
+						 		 $(document).ready (function () {                
+						             $('.btnAdd1').click (function () {                                        
+						                 $('#placeName1').append (                        
+						                     '<div><input type="text" name="placeName"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
+						                 ); // end append      
+						                 
+						                 $('.btnRemove1').on('click', function () { 
+						                	 $(this).prev().remove (); // remove the textbox
+						                     $(this).next().remove (); // remove the <div>
+						                     $(this).next().remove (); // ㅇㅇ
+						                     $(this).remove (); // remove the button
+						                 });
+						             }); // end click                                            
+						         }); // end ready 
+						 	</script>
+						
+							
+						</div>
+						
+						<div id="make_f" style="margin-top:4px; text-align: center">
+							<button class="bbtn" type="submit" name="plan_temp" value="n">작성 완료</button>
+						</div>
+					</div> <!-- content_1 end -->
+				</form>
 				
 				<div id="content_2">
 					<div class="map_wrap">
-						<div id="map" style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<div id="map" style="width: 800px; height: 500px; position: relative; overflow: hidden;"></div>
 						<div id="menu_wrap" class="bg_white">
 							<div class="option">
 								<div>
 									<form onsubmit="searchPlaces(); return false;">
-										<input type="text" value="" id="keyword" placeholder="추가할 일정지 검색">
+										<input type="text" value="서울" id="keyword" placeholder="추가할 일정지 검색">
 										<button type="submit">검색</button>
 									</form>
 								</div>
@@ -551,10 +600,12 @@ div {
 					</script>
 				</div> <!-- content_2 end -->
 			</div> <!-- contents -->
-		</form>
-		<%@include file="../common/footer.jsp"%>
+		
 	</div> <!-- wrap end -->
 	
-
+	<div id="footer">
+	<%@include file="../common/footer.jsp"%>
+	</div>
+	
 </body>
 </html>

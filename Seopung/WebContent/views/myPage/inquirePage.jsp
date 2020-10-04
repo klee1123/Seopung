@@ -62,24 +62,22 @@
             <table id="inquireTable" class = "table table-hover">
                 <thead>
                     <tr align="center">
-                        <th width="70"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;번호</th>
-                        <th width="400">제목</th>
-                        <th width="100">내용</th>
-                        <th width="100">처리상태</th>
+                        <th width="100"><input type="checkbox" class="chk" id="chk_all" name="ino">&nbsp;&nbsp;문의번호</th>
+                        <th width="600">제목</th>
+                        <th width="200">처리상태</th>
                     </tr>
                 </thead>
                 <tbody>
                 <% if(list.isEmpty()){ %>
                 	<tr>
-                		<td colspan="4" align="center">조회된 리스트가 없습니다</td>
+                		<td colspan="3" align="center">조회된 문의글이 없습니다</td>
                 	</tr>
                 <% }else { %>
                 		<% for(Inquire i : list) { %>
 		                    <tr align="center">
 		                        <td><input type="checkbox" id="chk" name="ino" value="<%= i.getInquireNo() %>">
 		                        	&nbsp;&nbsp;<%= i.getInquireNo() %></td>
-		                        <td><a href=""><%= i.getInquireTitle() %></a></td>
-		                        <td><%= i.getInquireContent() %></td>
+		                        <td><a href="<%=contextPath %>/detail.in?ino=<%=i.getInquireNo()%>"><%= i.getInquireTitle() %></a></td>
 		                        <td><%= i.getInquireStatus() %></td>
 		                    </tr>	
                     	<% } %>
@@ -90,29 +88,29 @@
             <div class="pagingArea" align="center">
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
 	            <!-- 이전 페이지로 (<) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
 			<% } %>
-            <!-- button{$}*10 -->
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
+               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
                <% }else{ %>
-               <button disabled><%= p %></button>
+               <button class="btn btn-secondary btn-sm" disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button onclick="location.href='<%=contextPath %>/inquire.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>';"> &gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button onclick="location.href='<%=contextPath%>/inquire.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>';"> &gt;&gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>"> &gt;&gt; </button>
 			<% } %>
 
         </div>
 
     <script>
+	   
         // 체크박스 전체선택 및 해제
         $(function(){
             $("#chk_all").click(function(){

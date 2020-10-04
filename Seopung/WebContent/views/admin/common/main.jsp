@@ -14,8 +14,11 @@
 	<div class="container-fluid">
 
 		<!-- Page Heading -->
-		<div align="center" style="margin-top:200px;">
+		<div align="center" style="margin-top:130px;color:#5aa5ff;">
 			<h1>환영합니다</h1>
+			<h1>이곳은 관리자 페이지 입니다</h1>
+			<br><br>
+			<img src="<%=contextPath%>/resources/images/로고.png" width="850px;">
 		</div>
 		
 

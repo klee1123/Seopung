@@ -116,20 +116,19 @@ $(function(){
 									aria-haspopup="true" aria-expanded="false"> 일정서비스 </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="">일정만들기</a> <a
-											class="dropdown-item" href="">일정검색</a>
+											class="dropdown-item" href="<%=contextPath%>/list.pl?currentPage=1">일정검색</a>
 									</div></li>
-								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1">커뮤니티</a>
+								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1&head=전체&array=최신">커뮤니티</a>
 								</li>
 								<li class="nav-item"><a class="nav-link"
-									href="packages.html">추천코스</a></li>
+									href="<%=contextPath%>/list.re?currentPage=1&array=최신">추천코스</a></li>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="blog.html"
 									id="navbarDropdown1" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"> 고객센터 </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-										<a class="dropdown-item" href="">고객센터</a> <a
-											class="dropdown-item" href="">FAQ</a> <a
-											class="dropdown-item" href="">1:1문의</a>
+										<a class="dropdown-item" href="<%=contextPath%>/list.no?currentPage=1">공지사항</a>
+										<a class="dropdown-item" href="<%=contextPath%>/enrollForm.iq?">1:1문의</a>
 									</div></li>
 							</ul>
 							<div style="width: 210px;">

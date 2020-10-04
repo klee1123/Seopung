@@ -114,6 +114,8 @@ public class AdminDao {
 		return list;
 	}
 	
+	// public int inserAdmin(Connection conn, String AdminName, String AdminId, 
+	//						String AdminPwd) {
 	
 	public int insertAdmin(Connection conn, Admin ad) {
 		// insert문 => 처리된 행 수

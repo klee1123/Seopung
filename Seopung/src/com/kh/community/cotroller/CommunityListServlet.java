@@ -33,6 +33,18 @@ public class CommunityListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		String keyword;
+		if(request.getParameter("keyword") != null) {
+			keyword = request.getParameter("keyword");
+		}else {
+			keyword = "";
+		}
+		String head = request.getParameter("head");
+		String array = request.getParameter("array");
+		
+//		int cno = Integer.parseInt(request.getParameter("cCno"));
+//		System.out.println(cno);
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -42,7 +54,7 @@ public class CommunityListServlet extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new CommunityService().selectListCount();
+		listCount = new CommunityService().selectListCount(keyword, head);
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		pageLimit = 10;
@@ -61,14 +73,23 @@ public class CommunityListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage );
 		
-		ArrayList<Community> list = new CommunityService().selectList(pi);
+//		int count = new CommunityService().countComment(cno);
+//		request.setAttribute("count", count);
+		
+		ArrayList<Community> list = new CommunityService().selectList(pi, keyword, head, array);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("head", head);
+		request.setAttribute("array", array);
 		
+		ArrayList<Community> nList = new CommunityService().selectNoticeList();
 		
+		request.setAttribute("nList", nList);
 		request.getRequestDispatcher("views/community/communityList.jsp").forward(request, response);
+		
+	
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

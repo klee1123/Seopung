@@ -2,40 +2,40 @@ package com.kh.planMap.model.vo;
 
 public class PlanMap {
 
-	private int planXyNo;		// 좌표번호
+	private String planMapNo;		// 좌표번호
 	private String planDay;		// 일정일
-	private int orderNo;		// 순서
-	private String lineMemo;	// 한줄메모
-	private String latitude;	// 위도
-	private String longitude;	// 경도
+	private String orderNo;		// 순서
+	private String placeName;	// 한줄메모
+	private String planNo;		// 일정번호
 	
 	public PlanMap() {}
-	
-	public PlanMap(int planXyNo, String planDay, int orderNo, String lineMemo, String latitude, String longitude) {
+
+	public PlanMap(String planMapNo, String planDay, String orderNo, String placeName, String planNo) {
 		super();
-		this.planXyNo = planXyNo;
+		this.planMapNo = planMapNo;
 		this.planDay = planDay;
 		this.orderNo = orderNo;
-		this.lineMemo = lineMemo;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.placeName = placeName;
+		this.planNo = planNo;
 	}
-	
-	public PlanMap(String planDay, int orderNo, String lineMemo, String latitude, String longitude) {
+
+
+
+	public PlanMap(String planDay, String orderNo, String placeName, String planNo) {
 		super();
 		this.planDay = planDay;
 		this.orderNo = orderNo;
-		this.lineMemo = lineMemo;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.placeName = placeName;
+		this.planNo = planNo;
 	}
 
-	public int getPlanXyNo() {
-		return planXyNo;
+
+	public String getPlanMapNo() {
+		return planMapNo;
 	}
 
-	public void setPlanXyNo(int planXyNo) {
-		this.planXyNo = planXyNo;
+	public void setPlanMapNo(String planMapNo) {
+		this.planMapNo = planMapNo;
 	}
 
 	public String getPlanDay() {
@@ -46,46 +46,38 @@ public class PlanMap {
 		this.planDay = planDay;
 	}
 
-	public int getOrderNo() {
+	public String getOrderNo() {
 		return orderNo;
 	}
 
-	public void setOrderNo(int orderNo) {
+	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
 	}
 
-	public String getLineMemo() {
-		return lineMemo;
+	public String getPlaceName() {
+		return placeName;
 	}
 
-	public void setLineMemo(String lineMemo) {
-		this.lineMemo = lineMemo;
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
 	}
 
-	public String getLatitude() {
-		return latitude;
+	public String getPlanNo() {
+		return planNo;
 	}
 
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
+	public void setPlanNo(String planNo) {
+		this.planNo = planNo;
 	}
 
 	@Override
 	public String toString() {
-		return "PlanMap [planXyNo=" + planXyNo + ", planDay=" + planDay + ", orderNo=" + orderNo + ", lineMemo="
-				+ lineMemo + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+		return "PlanMap [planMapNo=" + planMapNo + ", planDay=" + planDay + ", orderNo=" + orderNo + ", placeName="
+				+ placeName + ", planNo=" + planNo + "]";
 	}
 	
 	
 	
 	
-	
+
 }

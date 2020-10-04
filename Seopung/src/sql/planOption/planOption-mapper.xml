@@ -16,7 +16,6 @@
 		   , PLAN_PRIVATE
 		   , PLAN_MEMO
 		   , PLAN_HASHTAG
-		   , PLAN_TEMP
 		   , PLAN_TYPE
 		   , PLAN_TRANS
 		   , USER_NO
@@ -38,7 +37,6 @@
 		   , ?
 		   , ?
 		   , ?
-		   , 1
 		  )
 	</entry>
 </properties>

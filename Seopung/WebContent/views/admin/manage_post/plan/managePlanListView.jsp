@@ -107,21 +107,21 @@
 						<td width="750px;">
 							<div align="center">
 								<% if(currentPage != 1){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.pl?currentPage=1&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;&lt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.pl?currentPage=<%= currentPage-1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&lt;</button>
 								<% } %>
 	
 								<% for(int p=startPage; p<=endPage; p++){ %>
 									<% if(p != currentPage){ %>
-									<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
+									<button onclick="location.href='<%= contextPath %>/adminPage/list.pl?currentPage=<%= p %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% }else{ %>	
 									<button disabled class="btn btn-outline-secondary btn-sm"><%= p %></button>
 									<% } %>
 								<% } %>
 
 								<% if(currentPage != maxPage){ %>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;</button>
-								<button onclick="location.href='<%= contextPath %>/adminPage/list.co?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.pl?currentPage=<%= currentPage+1 %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;</button>
+								<button onclick="location.href='<%= contextPath %>/adminPage/list.pl?currentPage=<%= maxPage %>&keyfield=<%=keyfield%>&keyword=<%=keyword%>';" class="btn btn-secondary btn-sm">&gt;&gt;</button>
 								<% } %>
 							</div>
 						</td>

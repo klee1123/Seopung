@@ -51,7 +51,7 @@ public class AdminReportListServlet extends HttpServlet {
 		
 		// 상태분류와 키워드에 해당하는 데이터 수 조회
 		listCount = new AdminReportService().selectListCount();
-		
+		//System.out.println(listCount);
 		pageLimit = 5;
 		
 		boardLimit = 10;

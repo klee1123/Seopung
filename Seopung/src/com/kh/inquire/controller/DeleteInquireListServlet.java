@@ -38,11 +38,10 @@ public class DeleteInquireListServlet extends HttpServlet {
 		if(result>0) {
 			request.getSession().setAttribute("alertMsg", "문의 내용 삭제 성공");
 			response.sendRedirect(request.getContextPath() + "/list.in?currentPage=1&userNo=" + userNo);
-		}
-//		}else {
+		}else {
 //			request.setAttribute("errorMsg", "문의 내용 삭제 실패");
 //			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-//		}
+		}
 		
 	}
 
