@@ -105,6 +105,46 @@ public class AdminInquiryDao {
 		
 	}
 	
+	public AdminInquiry selectAdminInquiry(Connection conn, int ino) {
+		// select문 => 한 행 조회
+		AdminInquiry i = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAdminInquiry");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ino);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				i = new AdminInquiry(rset.getInt("INQUIRE_NO"),
+								 	 rset.getString("INQUIRE_TITLE"),
+									 rset.getString("INQUIRE_CONTENT"),
+									 rset.getDate("INQUIRE_ENROLL_DATE"),
+									 rset.getString("INQUIRE_RESPONSE"),
+									 rset.getString("INQUIRE_TYPE"),
+									 rset.getString("INQUIRE_SEP"),
+									 rset.getString("INQUIRE_EMAIL"),
+									 rset.getString("ADMIN_ID"));
+						}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return i;
+	}
+	
+	
+	
 	
 	
 

@@ -85,6 +85,7 @@
 
 		<div class="outer">
 
+			<!-- 들어가는 요소 : 1.타이틀 2.등록일  3. -->
 			<div id="content_1">
 				<div style="width: 740px; font-size: 18px;"><%=i.getInquireTitle()%></div>
 				<div style="text-align: right;"><%=i.getInquireEnrollDate()%></div>
@@ -92,6 +93,15 @@
 
 			<div id="content_2">
 				<div style="width: 740px;"><%=i.getInquireWriter()%></div> <!-- 수정! 답변자 관리자 입력해야함 -->
+				<div style="width: 740px;"><%=i.getInquireType()%> <!-- 문의 타입 -->
+				<div><%=i.getInquireNo()%>
+					 <% if(i.getInquireSep().equals("회원")){ %>
+	                 <div><%= i.getInquireWriter() %></div> <!-- 작성자 -->
+	                 <% } else {%>
+	                 <div><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
+	                 <% } %>
+					
+				</div> <!-- 회원 넘버 -->
 			</div>
 
 			<hr>
@@ -124,7 +134,7 @@
 	       		
 	       		$("#deleteBtn").click(function(){
 	       			if(confirm("정말 삭제하시겠습니까?")) {
-	       				location.href="<%=contextPath%>/adminPage/delete.no?nno=<%=i.getNoticeNo()%>";
+	       				location.href="<%=contextPath%>/adminPage/delete.iq?ino=<%=i.getInquireNo()%>";
 	       			}
 	       		});
 	       		
