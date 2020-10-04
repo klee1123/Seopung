@@ -202,6 +202,14 @@
 		  )
 	</entry>
 	
+	<entry key="checkAccom">
+		SELECT COUNT(*)
+		  FROM TB_ACCOMPANY
+		 WHERE USER_NO = ?
+		   AND USER_NO2 = ?
+		   AND PLAN_NO = ?
+	</entry>
+	
 	<entry key="accomPlan">
 		INSERT
 		  INTO TB_ACCOMPANY
@@ -213,7 +221,7 @@
 		  )
 		  VALUES
 		  ( 
-		     SEQ_ACCOMNO
+		     SEQ_ACCOMNO.NEXTVAL
 		   , ?
 		   , ?
 		   , ?

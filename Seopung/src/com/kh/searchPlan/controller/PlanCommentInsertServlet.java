@@ -32,6 +32,8 @@ public class PlanCommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		
 		String content = request.getParameter("content");
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		

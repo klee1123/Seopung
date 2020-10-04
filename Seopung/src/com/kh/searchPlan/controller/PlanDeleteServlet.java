@@ -38,7 +38,8 @@ public class PlanDeleteServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/list.pl?currentPage=1");
 			
 		}else {
-			
+			request.setAttribute("errorMsg", "일정 삭제 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

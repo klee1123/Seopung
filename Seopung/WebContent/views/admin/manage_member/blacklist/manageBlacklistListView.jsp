@@ -74,8 +74,8 @@
 						<th width="75px">번호</th>
 						<th width="120px">아이디</th>
 						<th width="120px">이름</th>
-						<th width="250px">제제 사유</th>
-						<th width="150px">제제 날짜</th>
+						<th width="250px">제재 사유</th>
+						<th width="150px">제재 날짜</th>
 					</tr>
 				</thead>
 				<tbody style="text-align:center;">

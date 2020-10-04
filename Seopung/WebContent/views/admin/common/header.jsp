@@ -174,7 +174,7 @@
           <h3 class="text-gray-800">&nbsp;<%= pageTitle %></h3>
           
           <!-- Topbar Navbar -->
-		 <%if(loginUser!=null){ %>
+		 <%if(loginUser!=null && loginUser.getCategory() == 2){ %>
           <ul class="navbar-nav ml-auto">
             
             <div class="topbar-divider d-none d-sm-block"></div>

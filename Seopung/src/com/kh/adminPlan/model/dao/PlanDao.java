@@ -388,6 +388,40 @@ public class PlanDao {
 		return result;
 	}
 	
+	
+	public int checkAccom(Connection conn, int userNo, int userNo2, int pNo) {
+		//insert문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkAccom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, userNo2);
+			pstmt.setInt(3, pNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	public int accomPlan(Connection conn, int userNo, int userNo2, int pNo) {
 		//insert문 => 처리된 행 수
 		int result = 0;

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="checkReport">
+		SELECT COUNT(*)
+		  FROM TB_REPORT
+		 WHERE USER_NO = ?
+		   AND USER_NO2= ?
+		   AND REPORT_POSTNO = ?
+		   AND REPORT_POSTTYPE = ?
+	</entry>
+
+	<entry key="insertReport">
+		INSERT
+		  INTO TB_REPORT
+		  (
+		     REPORT_NO
+		   , USER_NO
+		   , USER_NO2
+		   , REPORT_POSTNO
+		   , REPORT_TYPE
+		   , REPORT_POSTTYPE
+		   , REPORT_CONTENT
+		  )
+		  VALUES
+		  (
+		     SEQ_REPORTNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		  )
+	</entry>
+
+</properties>
+

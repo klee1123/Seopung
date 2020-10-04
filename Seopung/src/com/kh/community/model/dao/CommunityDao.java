@@ -577,6 +577,7 @@ public class CommunityDao {
 				list.add(new Reply(rset.getInt("COMMENT_NO"),
 						           rset.getString("COMMENT_CONTENT"),
 						           rset.getString("USER_NICK"),
+						           rset.getInt("USER_NO"),
 						           rset.getString("PROFILEPIC_PATH"),
 						           rset.getDate("COMMENT_DATE")));
 			}
