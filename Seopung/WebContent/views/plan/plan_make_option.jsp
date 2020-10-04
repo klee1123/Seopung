@@ -106,7 +106,9 @@ div {
 </head>
 
 <body>
+	<div id="header" style="margin-bottom:150px;">
 	<%@include file="../common/menubar.jsp"%>
+	</div>
 	<div class="wrap">
 		
 		<form action="<%= contextPath %>/planOption.pl"  style ="width: 720px; height: 1000px; margin: auto;" method="post">
@@ -323,13 +325,10 @@ div {
 				</div>
 			</div>
 		</form>
-		<%@include file="../common/footer.jsp"%>
 	</div>
-	
-	
-	
-		
-		
+	<div id="footer">
+	<%@include file="../common/footer.jsp"%>
+	</div>
 </body>
 
 </html>
