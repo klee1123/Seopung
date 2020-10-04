@@ -51,6 +51,15 @@ public class PlanOption {
 		this.planSdate = planSdate;
 		this.planEdate = planEdate;
 	}
+	
+	
+	public PlanOption(int planNo, String planTitle, String planSdate, String planEdate) {
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+	}
 
 	public int getPlanNo() {
 		return planNo;

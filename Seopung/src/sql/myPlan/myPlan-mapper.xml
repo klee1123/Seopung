@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectListCount">
+		SELECT COUNT(*) LISTCOUNT
+	      FROM TB_PLAN_OPTION
+	     WHERE STATUS = 'Y'
+	       AND USER_NO = ?
+	</entry>
+
+	<entry key="selectList">
+		 SELECT *
+		   FROM (
+		         SELECT 
+		                ROWNUM RNUM
+		               ,A.* 
+		           FROM (
+		                 SELECT
+		                        PLAN_NO
+		                      , PLAN_TITLE
+		                      , PLAN_SDATE
+		                      , PLAN_EDATE
+		                   FROM TB_PLAN_OPTION
+		                  WHERE STATUS = 'Y'
+		                    AND USER_NO = ?
+		                  ORDER
+		                     BY PLAN_NO DESC
+		                ) A
+		           )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="deleteMyPlanList">
+	  UPDATE
+	         TB_PLAN_OPTION
+	     SET STATUS = 'N'
+	   WHERE PLAN_NO = ?
+	</entry>
+</properties>
