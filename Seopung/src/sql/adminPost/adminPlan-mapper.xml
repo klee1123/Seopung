@@ -242,4 +242,17 @@
 		 WHERE PLAN_NO = ?
 	</entry>
 	
+	<entry key="selectDayCount">
+		SELECT PLAN_EDATE - PLAN_SDATE + 1 AS DAYCOUNT
+		  FROM TB_PLAN_OPTION
+		 WHERE PLAN_NO = ?
+	</entry>
+	
+	<entry key="selectPlanPlaces">
+		SELECT PLAN_PLACE
+		  FROM TB_PLAN_MAP
+		 WHERE PLAN_NO = ?
+		   AND PLAN_DAY= ?
+	</entry>
+	
 </properties>

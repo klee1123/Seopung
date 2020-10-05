@@ -269,7 +269,7 @@
         
         <div class="listArea">
             <%if(list.isEmpty()){ %>
-            <div align="center">조회 결과가 없습니다.</div>
+            <div align="center" style="height:100px; font-size:17px;"><br><br>조회 결과가 없습니다.</div>
             <%}else{ %>
             	<%for(int i=0;i<list.size();i++){ %>
 	            <div class="thumbnail" align="center">
