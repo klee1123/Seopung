@@ -40,6 +40,10 @@ public class CommunityDetailNoticeServlet extends HttpServlet {
 			request.setAttribute("nc", nc);
 			request.getRequestDispatcher("views/community/communityDetailNoticeView.jsp").forward(request, response);
 
+		}else {
+			request.setAttribute("errorMsg", "잘못된 주소입니다.");
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

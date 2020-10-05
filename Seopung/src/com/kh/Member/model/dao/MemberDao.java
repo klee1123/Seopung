@@ -105,11 +105,12 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, checkId);
+			pstmt.setString(2, checkId);
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				count = rset.getInt(1);
+			while(rset.next()) {
+				count += rset.getInt(1);
 			}
 			
 		} catch (SQLException e) {

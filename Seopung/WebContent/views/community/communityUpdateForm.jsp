@@ -55,7 +55,7 @@
 				<img width="140" height="140" id="thumbPreview" src="<%=c.getThumb()%>"> 
 				
 				<input type="file" id="thumbnail" name="thumbnail"
-					onchange="loadImage(this)" required> <br>
+					onchange="loadImage(this)" > <br>
 				<br>
 				<br>
 

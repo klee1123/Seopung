@@ -93,6 +93,34 @@ public class RecommendService {
 		return result;
 	}
 	
+	public int increaseLike(int cno, int userNo) {
+		Connection conn = getConnection();
+		
+		int result1 = new RecommendDao().increaseLike(conn, cno);
+		int result2 = new RecommendDao().insertLike(conn, cno, userNo);
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result1 * result2;
+	}
+	
+	public int decreaseLike(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().decreaseLike(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	

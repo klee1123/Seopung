@@ -48,7 +48,7 @@ public class CommunityDetailServlet extends HttpServlet {
 		}else {
 			request.setAttribute("errorMsg", "잘못된 주소입니다.");
 			
-			request.getRequestDispatcher("views/common/erroPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 
