@@ -55,10 +55,10 @@
 	
 	<entry key="deleteInquiry">
 		UPDATE 
-		       TB_PLAN_OPTION
+		       TB_INQUIRE
 		   SET STATUS = 'N'
-		     , MODIFY_DATE = SYSDATE
-		 WHERE PLAN_NO = ?
+		     , RESPONSE_DATE = SYSDATE
+		 WHERE INQUIRE_NO = ?
 	</entry>
 	
 
