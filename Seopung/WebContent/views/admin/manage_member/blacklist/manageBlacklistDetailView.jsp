@@ -25,6 +25,7 @@
 	margin: auto;
 	width: 1000px;
 }
+#listArea{table-layout:fixed;}
 </style>
 <body>
 
@@ -64,7 +65,7 @@
 						<% for(Report r : reportList){ %>
 						<tr>
 							<td><%= r.getReportNo() %></td>
-							<td><%= r.getReportContent() %></td>
+							<td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><div><%= r.getReportContent() %></div></div></td>
 							<td><%= r.getReportType() %></td>
 							<td><%= r.getReportDate() %></td>
 						</tr>
