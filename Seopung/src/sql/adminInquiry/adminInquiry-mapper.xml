@@ -36,7 +36,7 @@
 	<!-- 관리자 1:1문의 상세 조회 -->
 	<entry key="selectAdminInquiry">
 	SELECT 
-		   IQUIRE_NO
+		   INQUIRE_NO
 	     , INQUIRE_TITLE
 	     , INQUIRE_CONTENT
 	     , INQUIRE_ENROLL_DATE
@@ -45,8 +45,10 @@
 	     , INQUIRE_SEP
 	     , INQUIRE_EMAIL
 	     , ADMIN_ID
+	     , USER_ID
 	  FROM TB_INQUIRE I
-	  JOIN TB_ADMIN USING(INQUIRE_NO)
+FULL OUTER JOIN TB_MEMBER USING(USER_NO)
+FULL OUTER JOIN TB_ADMIN USING(ADMIN_NO)
 	 WHERE I.STATUS = 'Y'
 	   AND INQUIRE_NO = ?
 	</entry>

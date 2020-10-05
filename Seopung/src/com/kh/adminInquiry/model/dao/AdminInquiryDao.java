@@ -126,10 +126,11 @@ public class AdminInquiryDao {
 								 	 rset.getString("INQUIRE_TITLE"),
 									 rset.getString("INQUIRE_CONTENT"),
 									 rset.getDate("INQUIRE_ENROLL_DATE"),
-									 rset.getString("INQUIRE_RESPONSE"),
-									 rset.getString("INQUIRE_TYPE"),
-									 rset.getString("INQUIRE_SEP"),
 									 rset.getString("INQUIRE_EMAIL"),
+									 rset.getString("INQUIRE_RESPONSE"),
+									 rset.getString("USER_ID"),
+									 rset.getString("INQUIRE_SEP"),
+									 rset.getString("INQUIRE_TYPE"),
 									 rset.getString("ADMIN_ID"));
 						}
 			

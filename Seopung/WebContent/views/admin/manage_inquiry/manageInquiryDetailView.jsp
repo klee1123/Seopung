@@ -94,30 +94,34 @@
 			</div>
 
 			<div id="content_2">
-				<div style="width: 740px;"><%=i.getInquireWriter()%></div> <!-- 수정! 답변자 관리자 입력해야함 -->
-				<div style="width: 740px;"><%=i.getInquireType()%> <!-- 문의 타입 -->
-				<div><%=i.getInquireNo()%>
-					 <% if(i.getInquireSep().equals("회원")){ %>
-	                 <div><%= i.getInquireWriter() %></div> <!-- 작성자 -->
-	                 <% } else {%>
-	                 <div><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
-	                 <% } %>
+				<% if(i.getInquireSep().equals("회원")){ %>
+                <div style="width: 740px;"><%= i.getInquireWriter() %></div> <!-- 작성자 -->
+                <% } else {%>
+                <div style="width: 740px;"><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
+                <% } %>
 					
+				<div><%=i.getInquireType()%> <!-- 문의 타입 -->
 				</div>
 			</div>
 
 			<hr>
 			
 			<!-- 사용자가 문의한 내용 -->
-			<div id="content_3"><%= i.getInquireContent() %></div>
+			<div id="content_3" style="height: 300px;"><%= i.getInquireContent() %></div>
 
 			<hr>
 			
 			<!-- 관리자가 답변한 내용 -->
-			<div id="content_4">A. <%= i.getInquireResponse() %></div>
-			
+			<div id="content_4" style="height: 300px;">
+			<% if(i.getAdminWriter() == null) { %>
+			<div>답변 필요</div>
+			<%} else {%>
+			<div><%=i.getAdminWriter()%></div> <!-- 답변한 관리자 -->
+			<div>A. <%= i.getInquireResponse() %></div>
+			<%} %>
 			</div>
 
+			<hr>
 			<br> <br> <br>
 
 			<div align="center">

@@ -33,11 +33,9 @@ public class AdminInquiryDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int ino = Integer.parseInt(request.getParameter("ino"));
 		
-		int result = 0; // 조회수 필요없어서 삭제했음
+		AdminInquiry i = new AdminInquiryService().selectAdminInquiry(ino);
 		
-		if(result>0) {
-			
-			AdminInquiry i = new AdminInquiryService().selectAdminInquiry(ino);
+		if(i != null) {
 			
 			request.setAttribute("i", i);
 			request.setAttribute("pageTitle", "1:1 문의 상세조회");
