@@ -123,6 +123,90 @@ public class RecommendDao {
 		return result;
 	}
 	
+	public int increaseCount(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public Recommend selectRecommend(Connection conn, int cno) {
+		Recommend nc = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				nc = new Recommend(rset.getInt("RECOMMEND_NO"),
+						           rset.getString("RECOMMEND_TITLE"),
+						           rset.getString("RECOMMEND_CONTENT"),
+						           rset.getDate("RECOMMEND_ENROLL"),
+						           rset.getInt("RECOMMEND_COUNT"),
+						           rset.getInt("RECOMMEND_LIKE"),
+						           rset.getString("RECOMMEND_THUMB"),
+						           rset.getInt("ADMIN_NO")
+						           );
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return nc;
+		
+	}
+	
+	public int updateRecommend(Connection conn, Recommend nc) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nc.getTitle());
+			pstmt.setString(2, nc.getContent());
+			pstmt.setString(3, nc.getThumb());
+			pstmt.setInt(4, nc.getReNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	

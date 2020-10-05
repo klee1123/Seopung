@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.planMap.model.vo.PlanMap" %>
 
 <!DOCTYPE html>
 <html>
@@ -169,6 +168,7 @@
 #so_title {
 	font-size: 18px;
 	font-weight: bold;
+	color: #fec104;
 }
 /* 전체 감싸는 div */
 .wrap {
@@ -176,6 +176,7 @@
 	margin-top:0px;
 	margin: auto;
 	font-family: 'Noto Sans KR', sans-serif;
+	
 }
 
 #contents{
@@ -326,9 +327,12 @@
 	<div class="wrap">
 	
 		<div id="contents">
+			<div id="so_title" style="text-align:center; font-size:30px;">일정 만들기</div>
 			<div id="content1">
 			<!-- 지도 div -->
+			<div id="so_title">지도 검색</div>
 				<div class="map_wrap">
+					
 					<div id="map" style="width: 800px; height: 500px; position: relative; overflow: hidden;"></div>
 					<div id="menu_wrap" class="bg_white">
 						<div class="option">
@@ -348,15 +352,18 @@
 			
 			
 			<!-- 입력 폼 양식 div -->
-			<div id="content2" style="margin-top:20px;">
+			<div id="content2" style="margin-top:10px;">
 				<form action="<%= contextPath %>/planMakePage.pl" style="width:800px;" method="post" name="f">
 					<div>
-					 <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+						<input type="hidden" name="planDay" value="123">
+					
 					</div>
 					
 					<div id="planOption" >
 					
-						<div style="height:40px;">
+						<div style="height:70px;">
+							<div id="so_title">일정 제목</div>
 							<div id="so_title"> <input type="text" style="width: 800px" name="planTitle" id="plan_title" placeholder="일정 제목" required> </div>
 						</div>
 						
@@ -365,7 +372,7 @@
 							<div id="planDate">
 								<table>
 									<tr>
-										<td style="width: 350px;">
+										<td style="width: 400px;">
 											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" required> </div>
 										</td>
 										<td>
@@ -508,17 +515,17 @@
 							</table>
 						</div>
 						
-						<div id="inputBox" style="margin-top:20px;">
+						<div id="inputBox" style="margin-top:0px;">
 							<!-- tap 버튼 및 tap 리스트 -->
 							<div id="planPlace">
+								<div id="so_title">장소명</div>
 								<div class="tab">
-								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day1"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day2"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day3"></input>
+								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day - 1"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day - 2"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day - 3"></input>
 								</div>
 								
 								<div id="Day1" class="tabcontent">
-									<div>장소명</div>
 							 		<div id="placeName1" ><input type="text" name="placeName"><input type="button" class="btnAdd1" value="Add"><br></div>
 								</div>
 								
@@ -527,19 +534,19 @@
 								</div>
 								
 								<div id="Day3" class="tabcontent">
-								  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd" value="Add"><br></div>
+								  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd3" value="Add"><br></div>
 								</div>
 							</div>
 							
 						</div>
 						
-						<div style="margin-top:130px;">
-							<textarea name="planMemo" style="margin-top: 10px; resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
+						<div style="margin-top:160px;">
+							<div id="so_title">메모작성</div>
+							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
 						</div>
 						
-						
-						<div style="text-align: right; margin-top:20px; margin-bottom: 20px;">
-							<button class="bbtn" type="submit" style="width:800px;" onclick="send_go()">작성완료</button>
+						<div style="margin-top:20px;">
+							<button class="bbtn" type="submit" style="width:800px;">작성완료</button>
 						</div>
 						
 					</div> <!-- planOption end -->

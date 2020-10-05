@@ -78,7 +78,7 @@ public class ReplyListServlet extends HttpServlet {
 			jsonUser.put("pi", pi);
 			jsonUser.put("list", list);
 			
-			Gson gson = new GsonBuilder().setDateFormat("yy.MM.dd HH:mm").create();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy.MM.dd").create();
 			gson.toJson(jsonUser, response.getWriter());
 	}
 

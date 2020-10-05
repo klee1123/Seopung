@@ -1,8 +1,6 @@
-package com.kh.community.cotroller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.community.model.service.CommunityService;
-import com.kh.community.model.vo.Community;
+import com.kh.recommend.model.service.RecommendService;
+import com.kh.recommend.model.vo.Recommend;
 
 /**
- * Servlet implementation class CommunityDetailServlet
+ * Servlet implementation class RecommendDetailListServlet1
  */
-@WebServlet("/detailList.co")
-public class CommunityDetailServlet extends HttpServlet {
+@WebServlet("/detailList.re")
+public class RecommendDetailListServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityDetailServlet() {
+    public RecommendDetailListServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +33,20 @@ public class CommunityDetailServlet extends HttpServlet {
 		
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		int result = new CommunityService().increaseCount(cno);
+		int result = new RecommendService().increaseCount(cno);
 		
 		if(result > 0) {
-			int count = new CommunityService().countComment(cno);
-			Community c = new CommunityService().selectCommunity(cno);
-			
-			request.setAttribute("c", c);
-			request.setAttribute("count", count);
-			
-		request.getRequestDispatcher("views/community/communityDetailView.jsp").forward(request, response);
+			Recommend nc = new RecommendService().selectRecommend(cno);
+			request.setAttribute("nc", nc);
+			request.getRequestDispatcher("views/recommend/recommendDetailView.jsp").forward(request, response);
+	
 		}else {
 			request.setAttribute("errorMsg", "잘못된 주소입니다.");
 			
 			request.getRequestDispatcher("views/common/erroPage.jsp").forward(request, response);
 		}
+		
+		
 	}
 
 	/**

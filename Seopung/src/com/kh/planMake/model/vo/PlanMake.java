@@ -18,7 +18,7 @@ public class PlanMake {
 	private int planScrapCount;			// 스크랩수
 	private int userNo;					// 회원 번호
 	
-	private int planXyNo;				// 장소번호
+	private int planMapNo;				// 장소번호
 	private String planDay;				// 일정일
 	private String planPlace;			// 장소명
 	
@@ -28,7 +28,7 @@ public class PlanMake {
 
 	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
-			String planTrans, int planRecommend, int planScrapCount, int userNo, int planXyNo, String planDay,
+			String planTrans, int planRecommend, int planScrapCount, int userNo, int planMapNo, String planDay,
 			String planPlace) {
 		super();
 		this.planNo = planNo;
@@ -46,7 +46,7 @@ public class PlanMake {
 		this.planRecommend = planRecommend;
 		this.planScrapCount = planScrapCount;
 		this.userNo = userNo;
-		this.planXyNo = planXyNo;
+		this.planMapNo = planMapNo;
 		this.planDay = planDay;
 		this.planPlace = planPlace;
 	}
@@ -72,9 +72,11 @@ public class PlanMake {
 		this.userNo = userNo;
 	}
 
-	public PlanMake(int planXyNo, String planDay, String planPlace) {
+	
+	public PlanMake(int planNo, int planMapNo, String planDay, String planPlace) {
 		super();
-		this.planXyNo = planXyNo;
+		this.planNo = planNo;
+		this.planMapNo = planMapNo;
 		this.planDay = planDay;
 		this.planPlace = planPlace;
 	}
@@ -199,12 +201,12 @@ public class PlanMake {
 		this.userNo = userNo;
 	}
 
-	public int getPlanXyNo() {
-		return planXyNo;
+	public int getPlanMapNo() {
+		return planMapNo;
 	}
 
-	public void setPlanXyNo(int planXyNo) {
-		this.planXyNo = planXyNo;
+	public void setPlanMapNo(int planMapNo) {
+		this.planMapNo = planMapNo;
 	}
 
 	public String getPlanDay() {
@@ -229,7 +231,7 @@ public class PlanMake {
 				+ planEdate + ", planAge=" + planAge + ", planAcc=" + planAcc + ", planBudget=" + planBudget
 				+ ", planScrapYn=" + planScrapYn + ", planPrivate=" + planPrivate + ", planMemo=" + planMemo
 				+ ", planType=" + planType + ", planTrans=" + planTrans + ", planRecommend=" + planRecommend
-				+ ", planScrapCount=" + planScrapCount + ", userNo=" + userNo + ", planXyNo=" + planXyNo + ", planDay="
+				+ ", planScrapCount=" + planScrapCount + ", userNo=" + userNo + ", planMapNo=" + planMapNo + ", planDay="
 				+ planDay + ", planPlace=" + planPlace + "]";
 	}
 

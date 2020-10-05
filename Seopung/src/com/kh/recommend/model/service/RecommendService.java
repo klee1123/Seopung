@@ -39,4 +39,59 @@ public class RecommendService {
 		close(conn);
 		return result;
 	}
+	
+	public int increaseCount(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().increaseCount(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public Recommend selectRecommend(int cno) {
+		Connection conn = getConnection();
+		
+		Recommend nc = new RecommendDao().selectRecommend(conn, cno);
+		
+		close(conn);
+		return nc;
+	}
+	
+	public int updateRecommend(Recommend nc) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().updateRecommend(conn, nc);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

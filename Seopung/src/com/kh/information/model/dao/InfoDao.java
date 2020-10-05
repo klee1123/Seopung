@@ -122,6 +122,30 @@ public class InfoDao {
 		return result;
 	}
 	
+	public int updateInfoEmail(Connection conn, int userNo, String email, String updateEmail) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, updateEmail);
+			pstmt.setInt(2, userNo);
+			pstmt.setString(3, email);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	public int deleteMember(Connection conn , int userNo, String userPwd) {
 		// update문 = > 처리된 행 수
