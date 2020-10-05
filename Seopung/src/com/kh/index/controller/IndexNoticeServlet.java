@@ -1,11 +1,17 @@
 package com.kh.index.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.index.model.service.IndexService;
 
 /**
  * Servlet implementation class IndexNoticeServlet
@@ -27,7 +33,12 @@ public class IndexNoticeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Notice> list = new IndexService().selectNotice();
+		ArrayList<AdminNotice> list = new IndexService().selectNotice();
+		System.out.println(list);
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new Gson();
+		gson.toJson(list, response.getWriter());
 	
 	}
 

@@ -22,4 +22,12 @@
 		    BY PLAN_RECOMMEND DESC
 	</entry>
 
+	<entry key="selectNotice">
+		SELECT 
+		       NOTICE_NO
+		     , NOTICE_TITLE
+		  FROM TB_NOTICE
+		 ORDER
+		    BY NOTICE_NO DESC
+	</entry>
 </properties>

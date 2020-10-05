@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.planMake.model.vo.PlanMake;
 import com.kh.recommend.model.vo.Recommend;
 
@@ -29,6 +30,11 @@ public class IndexDao {
 		}
 	}
 
+	/**
+	 * 추천코스 게시판 
+	 * @param conn
+	 * @return
+	 */
 	public ArrayList<Recommend> selectRecommend(Connection conn) {
 		
 		ArrayList<Recommend> list = new ArrayList<>();
@@ -56,6 +62,11 @@ public class IndexDao {
 		return list;
 	}
 	
+	/**
+	 * 인기글(추천순으로 나열)
+	 * @param conn
+	 * @return
+	 */
 	public ArrayList<PlanMake> selectPlanRec(Connection conn){
 		
 		ArrayList<PlanMake> list = new ArrayList<>();
@@ -84,5 +95,34 @@ public class IndexDao {
 		return list;
 	}
 	
-	
+	/**
+	 * 공지사항 게시판
+	 * @param conn
+	 * @return
+	 */
+	public ArrayList<AdminNotice> selectNotice(Connection conn) {
+		
+		ArrayList<AdminNotice> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectNotice");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new AdminNotice(rset.getInt("NOTICE_NO"),
+										 rset.getString("NOTICE_TITLE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
 }

@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.index.model.dao.IndexDao;
 import com.kh.planMake.model.vo.PlanMake;
 import com.kh.recommend.model.vo.Recommend;
@@ -29,6 +30,17 @@ public class IndexService {
 		close(conn);
 		
 		return list;
+	}
+	
+	public ArrayList<AdminNotice> selectNotice(){
+		Connection conn = getConnection();
+		
+		ArrayList<AdminNotice> list = new IndexDao().selectNotice(conn);
+		
+		close(conn);
+		
+		return list;
+		
 	}
 
 }

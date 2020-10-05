@@ -103,9 +103,9 @@
                     <div class="single_donation_item" style="margin-left: 40px;">
                         <h4>공지사항</h4><br>
                         <p><table id="mainNotice" >
-                           <tr>
+                           <!-- <tr>
                            		<td><a href="">공지사항 제목 공지사항 제목</a></td>
-                           </tr>
+                           </tr>  -->
                         </table></p><br>
                         <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
@@ -200,7 +200,6 @@
 					url:"<%=contextPath%>/IndexPl.in",
 					type:"get",
 					success:function(list){
-						console.log(list);
 						
 						var result = "";
 						for(var i=0; i<5; i++) {
@@ -229,13 +228,18 @@
 					url:"<%=contextPath%>/IndexNo.in",
 					type:"get",
 					success:function(list){
-						
 						var result = "";
 						for(var i=0; i<5; i++) {
 							result +=
-										
+								"<tr>" +
+                       				"<td>" + 
+                       					"<a href=''>" + list[i].noticeTitle + "</a>" +
+                       				"</td>" +
+                       			"</tr>";
 						}
-						
+						$("#mainNotice").html(result);
+					},error:function(){
+						console.log("ajax통신실패");
 					}
 			})
 		}
