@@ -97,9 +97,10 @@ table {
 #content *{
 	font-size:15px;
 	color:black;
+	background-color:white;
 	font-weight:lighter;
-	font-family:나눔고딕;
 	display:inline;
+	font-family:나눔고딕;
 }
 #content font{
 background-color:white;}
