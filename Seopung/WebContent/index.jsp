@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.ArrayList , com.kh.recommend.model.vo.*" %>
+<%
+	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,26 +135,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_blog_part">
-                        <div class="blog_text">
-                            <h2>제목</h2>
-                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
-                                <a href=""><img src="resources/달.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_blog_part">
-                        <div class="blog_text">
-                            <h2>제목</h2>
-                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
-                                <a href=""><img src="resources/달.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
+                
+                
             </div>
         </div>
     </section>

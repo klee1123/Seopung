@@ -145,7 +145,7 @@
                 }
 
               	var str = "";
-              	for(var i=0;i<selected.length; i++){
+              	for(var i=0; i<selected.length; i++){
                 	if(i == selected.length-1){
                   		str += "mpno=" + selected[i];
                 	}else{

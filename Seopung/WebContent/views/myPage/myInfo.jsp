@@ -154,7 +154,6 @@
              	</tr>
                 <tr>
                     <th align="left">생년월일</th>
-                    <td><input type="text" name="birth" value="<%= year %>년  <%=month %>월  <%=day %>일" ></td>
                 	<td><span name="birth"><%= year %>년  <%=month %>월  <%=day %>일</span></td>
                 </tr>
                 
