@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="com.kh.adminPlan.model.vo.Plan, com.kh.Member.model.vo.LoginUser"%>
 <%
 	Plan p = (Plan)request.getAttribute("p");
+	int dayCount = (int)request.getAttribute("dayCount");
 
 	String[] ages = p.getAge().split(",");
 	String[] types = p.getPlanType().split(",");
@@ -10,6 +11,12 @@
 	int userNo = 0;
 	if(session.getAttribute("loginUser") != null){
 		userNo = ((LoginUser)session.getAttribute("loginUser")).getUserNo();
+	}
+	
+	
+	int category = 0;
+	if(session.getAttribute("loginUser") != null){
+		category = ((LoginUser)session.getAttribute("loginUser")).getCategory();
 	}
 %>
 <!DOCTYPE html>
@@ -193,10 +200,12 @@
 		<hr>
 		
 		<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
-		<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo()){ %>
+		<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
 		<div id="buttonArea" style="padding-left:15px;">
 			
+			<%if(category == 1){ %>
 			<button class="btn btn-primary btn-sm">수정</button>
+			<%} %>
 			<button class="btn btn-danger btn-sm" onclick="confirmDeletePlan();">삭제</button>
 			
 		</div>
@@ -234,13 +243,14 @@
 				<input type="hidden" name="userNo" value="<%=p.getUserNo()%>">
 				<table style="width:250px;">
 					<tr style="height: 75px;">
-						<td width="80" align="center">
+						<td width="85" align="center">
 							<%if(p.getProfile().equals("null")){ %>
-							<img width="55" height="55"
+							<img width="55" height="55" class='rounded-circle'
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
 							<%}else{ %>
-							<img width="55" height"55" src="<%=contextPath %>/<%=p.getProfile() %>">
+							<img width="55" height"55" class='rounded-circle'
+							src="<%=contextPath %>/<%=p.getProfile() %>">
 							<%} %>
 						<td><b style="font-size: 18px; color:rgb(75, 75, 75);"><%=p.getUserNick()%></b> <br>
 							클릭시 프로필 조회 가능</td>
@@ -277,42 +287,23 @@
 				
 				<div id="content_2_2_1">
 					<div class="tab" style="overflow: auto;">
-						<button class="tablinks" onclick="openCity(event, 'London')"
-							id="defaultOpen">day1</button>
-						<button class="tablinks" onclick="openCity(event, 'Paris')">day2</button>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day3</button>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day4</button>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day5</button>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day6</button>
-						<button class="tablinks" onclick="openCity(event, 'Tokyo')">day7</button>
+						<%for(int i=1; i<=dayCount; i++){ %>
+							<%if(i==1){ %>
+							<button class="tablinks" onclick="openDay(event, '<%=i %>')" id="defaultOpen">day<%=i %></button>
+							<%}else{ %>
+							<button class="tablinks" onclick="openDay(event, '<%=i %>')">day<%=i %></button>
+							<%} %>
+						<%} %>
 					</div>
 		
-					<div id="London" class="tabcontent">
-						<h3>Day1</h3>
-						<ol style="padding:0;">
-							<ul>광화문</ul>
-							<ul>경복궁</ul>
-							<ul>창덕궁</ul>
+					<%for(int i=1; i<=dayCount; i++){ %>
+					<div id="<%=i %>" class="tabcontent">
+						<h3>Day<%=i %></h3>
+						<ol id="placeArea<%=i%>">
+							
 						</ol>
 					</div>
-		
-					<div id="Paris" class="tabcontent">
-						<h3>Day2</h3>
-						<ol style="padding:0;">
-							<ul>광화문</ul>
-							<ul>경복궁</ul>
-							<ul>창덕궁</ul>
-						</ol>
-					</div>
-		
-					<div id="Tokyo" class="tabcontent">
-						<h3>Day3</h3>
-						<ol style="padding:0;">
-							<ul>광화문</ul>
-							<ul>경복궁</ul>
-							<ul>창덕궁</ul>
-						</ol>
-					</div>
+					<%} %>
 				</div>
 				
 				<div id="content_2_2_2">
@@ -327,10 +318,10 @@
 			
 		</div> <!-- content_2 end -->
 		
-		<!-- 일정스크립트 -->
+		<!-- 세부일정스크립트 -->
 		<script>
 
-			function openCity(evt, cityName) {
+			function openDay(evt, dayName) {
 				var i, tabcontent, tablinks;
 				tabcontent = document.getElementsByClassName("tabcontent");
 				for (i = 0; i < tabcontent.length; i++) {
@@ -338,15 +329,48 @@
 				}
 				tablinks = document.getElementsByClassName("tablinks");
 				for (i = 0; i < tablinks.length; i++) {
-					tablinks[i].className = tablinks[i].className.replace(
-							" active", "");
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
 				}
-				document.getElementById(cityName).style.display = "block";
+				selectPlace(dayName);
+				document.getElementById(dayName).style.display = "block";
 				evt.currentTarget.className += " active";
 			}
 
 			// Get the element with id="defaultOpen" and click on it
 			document.getElementById("defaultOpen").click();
+			
+			$(function(){
+				
+				selectPlace(1);
+				
+			});
+		
+			function selectPlace(day){
+				
+				$.ajax({
+					type:"get",
+					url:"<%=contextPath%>/place.pl",
+					data:{
+						"day":day,
+						"pno":<%=p.getPlanNo()%>
+					}, success:function(place){
+						
+						var places = place.split(',');
+						
+						var str = ""
+						for(var i=0; i<places.length; i++){
+							str += "<li>" + places[i] + "</li>";
+						}
+						
+						$("#placeArea" + day).html(str);
+						
+					}, error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+				
+				
+			}
 		</script>
 		
 		<br><br>
@@ -602,159 +626,159 @@
 	
 	<!-- 댓글 관련 ajax 스크립트 -->
 	<script>
-			$(function(){
-				
-				selectReplyList(1); // 페이지 로딩된 직후에 이 게시글에 딸려있는 댓글 리스트 조회
-				
-				$("#deleteBtn").click(function(){
-		   			if(confirm("정말 삭제하시겠습니까?")) {
-		   				location.href="<%=contextPath%>/adminPage/delete.pl?pno=<%=p.getPlanNo()%>";
-		   			}
-		   		});
-				
-			});
-		
-            
-	       	// 해당 게시글에 딸려있는 댓글리스트 조회용 ajax
-	       	function selectReplyList(cPage){
-	       		$.ajax({
-	       			url:"<%=contextPath%>/adminPage/rlist.pl",
-	       			type:"get",
-	       			data:{
-	       				"pno":<%=p.getPlanNo()%>,
-	       				"currentPage":cPage
-	       			},
-	       			success:function(result){
-	       				
-                        if(result.list.length > 0){
-                             
-                             var comment="";
-     	       				 for(var i in result.list){
-     	       					comment += "<table>" +
-					    	    				"<tr>" +
-					    							"<td width='60'>";
-     	       					 
-     	       					 if(result.list[i].profile == "null"){
-     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
-     	       					 }else{
-     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
-     	       					 }
-     	       					 
-     	       					 comment += "</td>" +
-			    							"<td>" + result.list[i].userNick + "<br>" + result.list[i].enrollDate +
-			    							"</td>" +
-			    							"<td>" +  "</td>" + 
-			    						"</tr>" + 
-			    						"<tr>" + 
-			    							"<td colspan='2' width='900'>" + 
-			    								result.list[i].content +
-			    							"</td>" +
-			    							"<td align='center'>";
-					    		
-					    		 if(<%=userNo%>!=0 && <%=userNo%> == result.list[i].userNo) {
-					    			 comment += "<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>";
-					    		 }else if(<%=userNo%>!=0){
-					    			 comment += "<button style='border: none; background: none' onclick='report(" + result.list[i].commentNo + ", " + result.list[i].userNo + ", 3);'>신고</button>";
-					    		 }
-					    		 comment +=	"</td>" +
-					    						"</tr>" +
-					    					"</table>";
-     	       				 }
-                            
-	                          
-     	       				var $listCount = result.pi.listCount;     	       					
-     	       				var $currentPage = result.pi.currentPage;
-                            var $startPage = result.pi.startPage;
-                            var $endPage = result.pi.endPage;
-                            var $maxPage = result.pi.maxPage;
-                            
-                            var $btns = "";
-                            for(var $p = $startPage; $p <= $endPage; $p++ ){
-                               
-                               $btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
-                            }
-                            
-                            if(cPage != "1"){
-	                            var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
-                            }else{
-                            	var $prevBtn = "";
-                            }
-                            
-                            if(cPage != $maxPage){
-	                            var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
-                            }else{
-                            	var $nextBtn = "";
-                            }
-                            	
-                             
-                            var $buttons = $prevBtn + $btns + $nextBtn ;
-                            
-		       				$("#content_4").html("댓글 " + $listCount);
-     	       				$("#content_5").html(comment);
-                            
-                            $("#paging").html($buttons);
-                            
-                         }else{
- 		       				$("#content_4").html("댓글 0");
-                            $("#content_5").html('작성된 댓글이 없습니다.');
-                         }
+		$(function(){
+			
+			selectReplyList(1); // 페이지 로딩된 직후에 이 게시글에 딸려있는 댓글 리스트 조회
+			
+			$("#deleteBtn").click(function(){
+	   			if(confirm("정말 삭제하시겠습니까?")) {
+	   				location.href="<%=contextPath%>/adminPage/delete.pl?pno=<%=p.getPlanNo()%>";
+	   			}
+	   		});
+			
+		});
 	
-	       				
-		       		},error:function(){
-		       				console.log("댓글 리스트 조회용 ajax 통신 실패");
-		       		}
-		       	});
-			}
-	       	
-	       	// 댓글 작성용 ajax
-	       	function addComment(){
-        		
-        		$.ajax({
-        			url:"<%=contextPath%>/rinsert.pl",
-        			type:"post",
-        			data:{
-        				content:$("#commentContent").val(),
-        				pno:<%=p.getPlanNo()%>
-        			}, success:function(result){
-        				
-        				if(result>0){
-        					selectReplyList(1);
-        					$("#commentContent").val("");
-        				}
-        				
-        			}, error:function(){
-        				console.log("댓글작성용 ajax 통신 실패");
-        			}
-        		});
-        		
-        	}
-	       	
-	       	
-	       	// 댓글 삭제 CONFIRM 용
-	       	function confirmDeleteComment(commentNo){
-	       		if(confirm("댓글을 삭제하시겠습니까?")){
-	       			deleteComment(commentNo);
+           
+       	// 해당 게시글에 딸려있는 댓글리스트 조회용 ajax
+       	function selectReplyList(cPage){
+       		$.ajax({
+       			url:"<%=contextPath%>/adminPage/rlist.pl",
+       			type:"get",
+       			data:{
+       				"pno":<%=p.getPlanNo()%>,
+       				"currentPage":cPage
+       			},
+       			success:function(result){
+       				
+                       if(result.list.length > 0){
+                            
+                            var comment="";
+    	       				 for(var i in result.list){
+    	       					comment += "<table>" +
+				    	    				"<tr>" +
+				    							"<td width='60'>";
+    	       					 
+    	       					 if(result.list[i].profile == "null"){
+    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+    	       					 }else{
+    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+    	       					 }
+    	       					 
+    	       					 comment += "</td>" +
+		    							"<td>" + result.list[i].userNick + "<br>" + result.list[i].enrollDate +
+		    							"</td>" +
+		    							"<td>" +  "</td>" + 
+		    						"</tr>" + 
+		    						"<tr>" + 
+		    							"<td colspan='2' width='900'>" + 
+		    								result.list[i].content +
+		    							"</td>" +
+		    							"<td align='center'width='50'>";
+				    		
+				    		 if(<%=userNo%>!=0 && <%=userNo%> == result.list[i].userNo || <%=category%>== 2 ) {
+				    			 comment += "<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>";
+				    		 }else if(<%=userNo%>!=0){
+				    			 comment += "<button style='border: none; background: none; color:red;' onclick='report(" + result.list[i].commentNo + ", " + result.list[i].userNo + ", 3);'>신고</button>";
+				    		 }
+				    		 comment +=	"</td>" +
+				    						"</tr>" +
+				    					"</table>";
+    	       				 }
+                           
+                          
+    	       				var $listCount = result.pi.listCount;     	       					
+    	       				var $currentPage = result.pi.currentPage;
+                           var $startPage = result.pi.startPage;
+                           var $endPage = result.pi.endPage;
+                           var $maxPage = result.pi.maxPage;
+                           
+                           var $btns = "";
+                           for(var $p = $startPage; $p <= $endPage; $p++ ){
+                              
+                              $btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
+                           }
+                           
+                           if(cPage != "1"){
+                            var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
+                           }else{
+                           	var $prevBtn = "";
+                           }
+                           
+                           if(cPage != $maxPage){
+                            var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
+                           }else{
+                           	var $nextBtn = "";
+                           }
+                           	
+                            
+                           var $buttons = $prevBtn + $btns + $nextBtn ;
+                           
+	       				$("#content_4").html("댓글 " + $listCount);
+    	       				$("#content_5").html(comment);
+                           
+                           $("#paging").html($buttons);
+                           
+                        }else{
+		       				$("#content_4").html("댓글 0");
+                           $("#content_5").html('작성된 댓글이 없습니다.');
+                        }
+
+       				
+	       		},error:function(){
+	       				console.log("댓글 리스트 조회용 ajax 통신 실패");
 	       		}
-	       	}
-	       	
-	       	// 댓글 삭제용 ajax
-	       	function deleteComment(commentNo){
-	       		
-	       		$.ajax({
-	       			url:"<%=contextPath%>/adminPage/delete.rpl",
-	       			type:"post",
-	       			data:{"commentNo":commentNo},
-	       			success:function(result){
-	       				
-	       				if(result>0){
-	       					selectReplyList(1);
-	       				}
-	       				
-	       			}, error:function(){
-	       				console.log("ajax 통신 실패");
-	       			}
-	       		});
-	       	}
+	       	});
+		}
+       	
+       	// 댓글 작성용 ajax
+       	function addComment(){
+       		
+       		$.ajax({
+       			url:"<%=contextPath%>/rinsert.pl",
+       			type:"post",
+       			data:{
+       				content:$("#commentContent").val(),
+       				pno:<%=p.getPlanNo()%>
+       			}, success:function(result){
+       				
+       				if(result>0){
+       					selectReplyList(1);
+       					$("#commentContent").val("");
+       				}
+       				
+       			}, error:function(){
+       				console.log("댓글작성용 ajax 통신 실패");
+       			}
+       		});
+       		
+       	}
+       	
+       	
+       	// 댓글 삭제 CONFIRM 용
+       	function confirmDeleteComment(commentNo){
+       		if(confirm("댓글을 삭제하시겠습니까?")){
+       			deleteComment(commentNo);
+       		}
+       	}
+       	
+       	// 댓글 삭제용 ajax
+       	function deleteComment(commentNo){
+       		
+       		$.ajax({
+       			url:"<%=contextPath%>/adminPage/delete.rpl",
+       			type:"post",
+       			data:{"commentNo":commentNo},
+       			success:function(result){
+       				
+       				if(result>0){
+       					selectReplyList(1);
+       				}
+       				
+       			}, error:function(){
+       				console.log("ajax 통신 실패");
+       			}
+       		});
+       	}
 	       
 	</script>
 	

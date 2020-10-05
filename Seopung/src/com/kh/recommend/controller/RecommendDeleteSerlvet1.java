@@ -1,6 +1,7 @@
-package com.kh.adminInquiry.controller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,21 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminInquiry.model.service.AdminInquiryService;
-import com.kh.adminInquiry.model.vo.AdminInquiry;
-import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.recommend.model.service.RecommendService;
 
 /**
- * Servlet implementation class AdminNoticeDetailServlet
+ * Servlet implementation class RecommendDeleteSerlvet1
  */
-@WebServlet("/adminPage/detail.iq")
-public class AdminInquiryDetailServlet extends HttpServlet {
+@WebServlet("/delete.re")
+public class RecommendDeleteSerlvet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInquiryDetailServlet() {
+    public RecommendDeleteSerlvet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,18 @@ public class AdminInquiryDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int ino = Integer.parseInt(request.getParameter("ino"));
+	
+		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		AdminInquiry i = new AdminInquiryService().selectAdminInquiry(ino);
+		int result = new RecommendService().deleteRecommend(cno);
 		
-		if(i != null) {
+		if(result > 0) {
 			
-			request.setAttribute("i", i);
-			request.setAttribute("pageTitle", "1:1 문의 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_inquiry/manageInquiryDetailView.jsp").forward(request, response);
+			request.getSession().setAttribute("alertMsg", "게시물이 삭제되었습니다");
 			
-		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			String neww = URLEncoder.encode("최신");
+			
+			response.sendRedirect(request.getContextPath() + "/list.re?currentPage=1&array=" + neww);
 		}
 		
 	}

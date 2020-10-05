@@ -79,15 +79,15 @@
 
 			<br>
 
-			<table align="center" id="listArea" class="table table-hover">
+			<table align="center" id="listArea" class="table table-hover" style="table-layout:fixed;">
 				<thead style="text-align: center;">
 					<tr>
-						<th width="20px"><input type="checkbox" id="chk_all" name="rno"></th>
+						<th width="30px"><input type="checkbox" id="chk_all" name="rno"></th>
 						<th width="50px">번호</th>
 						<th width="355px">제목</th>
 						<th width="125px">작성자아이디</th>
 						<th width="125px">작성일</th>
-						<th width="75px">조회수</th>
+						<th width="65px">조회수</th>
 					</tr>
 				</thead>
 				<tbody style="text-align: center;">
@@ -100,7 +100,7 @@
 						<tr>
 							<td><input type="checkbox" id="chk" name="rno" value="<%= c.getCommunityNo() %>"></td>
 							<td><%= c.getCommunityNo() %></td>
-							<td>[<%= c.getHead() %>] <%= c.getTitle() %></td>
+							<td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;">[<%= c.getHead() %>] <%= c.getTitle() %></td>
 							<td><%= c.getCommunityWriter() %></td>
 							<td><%= c.getEnrollDate() %></td>
 							<td><%= c.getCount() %></td>

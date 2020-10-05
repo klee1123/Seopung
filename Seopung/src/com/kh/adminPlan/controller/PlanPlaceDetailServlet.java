@@ -1,29 +1,25 @@
-package com.kh.information.controller;
+package com.kh.adminPlan.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.Member.model.vo.LoginUser;
-import com.kh.Member.model.vo.Member;
-import com.kh.information.model.service.InfoService;
+import com.kh.adminPlan.model.service.PlanService;
 
 /**
- * Servlet implementation class UpdateEmailServlet
+ * Servlet implementation class PlanPlaceDetailServlet
  */
-@WebServlet("/updateEmail.me")
-public class UpdateEmailServlet extends HttpServlet {
+@WebServlet("/place.pl")
+public class PlanPlaceDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateEmailServlet() {
+    public PlanPlaceDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +28,15 @@ public class UpdateEmailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		int day = Integer.parseInt(request.getParameter("day"));
 		
-		int userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo();
-		String updateEmail = request.getParameter("updateEmail");
+		String placeList = new PlanService().selectPlanPlaces(pno, day);
 		
-		int result = new InfoService().updateInfoEmail(userNo, updateEmail);
-		
-		response.getWriter().print(result);
-		
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().print(placeList);
+	
 	}
 
 	/**

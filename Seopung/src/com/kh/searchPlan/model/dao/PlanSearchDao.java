@@ -21,7 +21,7 @@ public class PlanSearchDao {
 	
 	public PlanSearchDao() {
 		
-		String fileName = PlanSearchDao.class.getResource("/sql/planSearch/planSearch-mapper.xml").getPath();
+		String fileName = PlanSearchDao.class.getResource("/sql/searchPlan/planSearch-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -57,11 +57,12 @@ public class PlanSearchDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, filter.getKeyword());
-			pstmt.setString(2, filter.getsDate());
-			pstmt.setString(3, filter.geteDate());
-			pstmt.setString(4, filter.getsDate());
-			pstmt.setString(5, filter.geteDate());
-			pstmt.setString(6, filter.getType());
+			pstmt.setString(2, filter.getKeyword());
+			pstmt.setString(3, filter.getsDate());
+			pstmt.setString(4, filter.geteDate());
+			pstmt.setString(5, filter.getsDate());
+			pstmt.setString(6, filter.geteDate());
+			pstmt.setString(7, filter.getType());
 			
 			rset = pstmt.executeQuery();
 			
@@ -114,11 +115,12 @@ public class PlanSearchDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, filter.getKeyword());
-			pstmt.setString(2, filter.getsDate());
-			pstmt.setString(3, filter.geteDate());
-			pstmt.setString(4, filter.getsDate());
-			pstmt.setString(5, filter.geteDate());
-			pstmt.setString(6, filter.getType());
+			pstmt.setString(2, filter.getKeyword());
+			pstmt.setString(3, filter.getsDate());
+			pstmt.setString(4, filter.geteDate());
+			pstmt.setString(5, filter.getsDate());
+			pstmt.setString(6, filter.geteDate());
+			pstmt.setString(7, filter.getType());
 			
 			rset = pstmt.executeQuery();
 			

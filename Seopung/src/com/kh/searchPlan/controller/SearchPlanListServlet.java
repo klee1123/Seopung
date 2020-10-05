@@ -49,12 +49,11 @@ public class SearchPlanListServlet extends HttpServlet {
 		}else {
 			eDate = request.getParameter("eDate");
 		}
-
+		
 		String keyword = "";
 		if(request.getParameter("keyword") != null) {
 			keyword = request.getParameter("keyword");			
 		}
-		
 		String type="";
 		if(request.getParameter("type") != null) {
 			type = request.getParameter("type");
@@ -62,7 +61,6 @@ public class SearchPlanListServlet extends HttpServlet {
 		
 		String [] age = request.getParameterValues("age");
 		String[] trans = request.getParameterValues("trans");
-		
 		
 		SearchPlan filter = new SearchPlan(sDate, eDate, age, type, trans, keyword);
 	
@@ -100,7 +98,7 @@ public class SearchPlanListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		ArrayList<Plan> list = new PlanSearchService().selectList(pi, filter);
-		
+
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 		request.setAttribute("filter", filter);

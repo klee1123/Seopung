@@ -9,20 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminInquiry.model.service.AdminInquiryService;
-import com.kh.adminInquiry.model.vo.AdminInquiry;
-import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.adminPlan.model.service.PlanService;
 
 /**
- * Servlet implementation class AdminNoticeDetailServlet
+ * Servlet implementation class AdminCommunityDeleteServlet
  */
-@WebServlet("/adminPage/detail.iq")
-public class AdminInquiryDetailServlet extends HttpServlet {
+@WebServlet("/adminPage/delete.iq")
+public class AdminInquiryDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminInquiryDetailServlet() {
+    public AdminInquiryDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +30,19 @@ public class AdminInquiryDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int ino = Integer.parseInt(request.getParameter("ino"));
 		
-		AdminInquiry i = new AdminInquiryService().selectAdminInquiry(ino);
+		String[] ino = request.getParameterValues("ino");
 		
-		if(i != null) {
-			
-			request.setAttribute("i", i);
-			request.setAttribute("pageTitle", "1:1 문의 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_inquiry/manageInquiryDetailView.jsp").forward(request, response);
+		int result = new AdminInquiryService().deleteInquiry(ino);
+		
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "1:1 문의 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.iq?currentPage=1");
 			
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.setAttribute("errorMsg", "일정 삭제 실패");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-		
 	}
 
 	/**

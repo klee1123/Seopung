@@ -3,10 +3,12 @@
 <properties>
 	<entry key="selectListCount">
 		SELECT COUNT(*)
-		  FROM TB_PLAN_OPTION
-		 WHERE STATUS = 'Y'
+		  FROM TB_PLAN_OPTION P
+		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE P.STATUS = 'Y'
 		   AND PLAN_PRIVATE = 'Y'
-		   AND PLAN_TITLE LIKE '%' || ? || '%'
+		   AND (PLAN_TITLE LIKE '%' || ? || '%'
+		    OR USER_NICK LIKE '%' || ? || '%')
 		   AND PLAN_SDATE BETWEEN ? AND ?
 		   AND PLAN_EDATE BETWEEN ? AND ?
 		   AND PLAN_TYPE LIKE '%' || ? || '%'  
@@ -23,7 +25,8 @@
           JOIN TB_MEMBER USING(USER_NO)
          WHERE P.STATUS = 'Y'
            AND PLAN_PRIVATE = 'Y'
-           AND PLAN_TITLE LIKE '%' || ? || '%'
+           AND (PLAN_TITLE LIKE '%' || ? || '%'
+            OR USER_NICK LIKE '%' || ? || '%')
            AND PLAN_SDATE BETWEEN ? AND ?
            AND PLAN_EDATE BETWEEN ? AND ?
            AND PLAN_TYPE LIKE '%' || ? || '%' 

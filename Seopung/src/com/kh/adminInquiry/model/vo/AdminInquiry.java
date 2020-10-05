@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class AdminInquiry {
 	
-	private int inquireNo;
+	private int inquireNo;				//
 	private String inquireTitle;
 	private String inquireContent;
 	private Date inquireEnrollDate;
@@ -13,29 +13,13 @@ public class AdminInquiry {
 	private String inquireResponse;
 	private Date responseDate;
 	private String status;
-	private String inquireWriter; // 회원번호 또는 회원아이디
-	private int adminNo;
+	private String inquireWriter; 		// 회원번호 또는 회원아이디
+	private int adminNo;				// 
 	private String inquireSep;
 	private String inquireType;
+	private String adminWriter;			// 관리자 아이디 / 답변한
 	
-	public AdminInquiry() {
-		
-	}
-
-	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
-			String inquireEmail, String inquireResponse, int adminNo, String inquireSep, String inquireType) {
-		super();
-		this.inquireNo = inquireNo;
-		this.inquireTitle = inquireTitle;
-		this.inquireContent = inquireContent;
-		this.inquireEnrollDate = inquireEnrollDate;
-		this.inquireEmail = inquireEmail;
-		this.inquireResponse = inquireResponse;
-		this.adminNo = adminNo;
-		this.inquireSep = inquireSep;
-		this.inquireType = inquireType;
-	}
-
+	public AdminInquiry() {}
 
 	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
 			String inquireStatus, String inquireEmail, String inquireResponse, Date responseDate, String status,
@@ -56,6 +40,24 @@ public class AdminInquiry {
 		this.inquireType = inquireType;
 	}
 	
+	
+
+	public AdminInquiry(int inquireNo, String inquireTitle, String inquireContent, Date inquireEnrollDate,
+			String inquireEmail, String inquireResponse, String inquireWriter, String inquireSep, String inquireType,
+			String adminWriter) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireEnrollDate = inquireEnrollDate;
+		this.inquireEmail = inquireEmail;
+		this.inquireResponse = inquireResponse;
+		this.inquireWriter = inquireWriter;
+		this.inquireSep = inquireSep;
+		this.inquireType = inquireType;
+		this.adminWriter = adminWriter;
+	}
+
 	public int getInquireNo() {
 		return inquireNo;
 	}
@@ -160,7 +162,13 @@ public class AdminInquiry {
 		this.inquireType = inquireType;
 	}
 	
-	
+	public String getAdminWriter() {
+		return adminWriter;
+	}
+
+	public void setAdminWriter(String adminWriter) {
+		this.adminWriter = adminWriter;
+	}
 
 	@Override
 	public String toString() {

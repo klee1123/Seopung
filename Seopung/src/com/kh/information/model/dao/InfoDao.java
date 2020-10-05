@@ -122,30 +122,6 @@ public class InfoDao {
 		return result;
 	}
 	
-	public int updateInfoEmail(Connection conn, int userNo, String email, String updateEmail) {
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updateEmail");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, updateEmail);
-			pstmt.setInt(2, userNo);
-			pstmt.setString(3, email);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
 	
 	public int deleteMember(Connection conn , int userNo, String userPwd) {
 		// update문 = > 처리된 행 수
@@ -203,29 +179,6 @@ public class InfoDao {
 		return count;
 	}
 	
-	public int updateEmail(Connection conn, int userNo, String email, String updateEmail) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updateEmail");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, updateEmail);
-			pstmt.setInt(2, userNo);
-			pstmt.setString(3, email);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
 	
 	public int updateInfo(Connection conn, Member m) {
 		int result = 0;
@@ -239,8 +192,7 @@ public class InfoDao {
 			
 			pstmt.setString(1, m.getUserIntro());
 			pstmt.setString(2, m.getProfile());
-			pstmt.setString(3, m.getEmail());
-			pstmt.setInt(4, m.getUserNo());
+			pstmt.setInt(3, m.getUserNo());
 			
 			result = pstmt.executeUpdate();
 
@@ -251,5 +203,28 @@ public class InfoDao {
 		}
 		return result;
 	}
+	
+	public int updateInfoEmail(Connection conn, int userNo, String updateEmail) {
+        int result = 0;
+
+        PreparedStatement pstmt = null;
+
+        String sql = prop.getProperty("updateInfoEmail");
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, updateEmail);
+            pstmt.setInt(2, userNo);
+
+            result = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        return result;
+    }
 	
 }

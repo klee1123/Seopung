@@ -133,16 +133,12 @@
                 <tr>
                     <th align="left">비밀번호</th>
                     <td><button type="button" data-toggle="modal" data-target="#updatePwdForm" class="btn btn-secondary btn-sm">비밀번호변경</button></td>
-                    
+                
                 </tr>
-                <tr>
-                    <th align="left">이메일</th>
-                    <td><input type="text" id="email" name="email" required value="<%= email %>"></td>
-                    <td><span id="email" name="email"><%= email %></span></td>
-                </tr>
+                
                 <tr>
                 	<th align="left">변경할 이메일</th>
-                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="이메일을 입력하세요.">
+                	<td><input type="text" id="updateEmail" name="updateEmail" placeholder="현재 : <%= email %>">
                     <button type="button" onclick="emailChk();" class="btn btn-secondary btn-sm">이메일인증</button></td>
                     <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>">
                 </tr>
@@ -177,21 +173,29 @@
     	var $code = $("#code");
     	var $updateEmail = $("#updateEmail");
     	
-    	if(codeChk.val() == code.val()) {
+    	if($codeChk.val() == $code.val()) {
     		$.ajax({
       			url:"<%= contextPath %>/updateEmail.me",
       			data:{
-      				email:$updateEmail.val()
+      				updateEmail:$updateEmail.val()
+      			},
       			type:"post",
       			success:function(result){
-      				alert("변경 성공");
+      				if(result>0){
+      					alert("변경 성공");
+      					
+      				}else{
+      					alert("변경 실패");
+      				
+      				}
+      				
       			},error:function(){
-      				alert("변경 실패");
-      				console.log("ajax 통신 실패!");
+      				console.log("통신실패");
       			}
       		})
     	}else {
     		alert("정확한 인증번호를 작성해주세요");
+    		$code.val("");
     	}
 	 }
  	   

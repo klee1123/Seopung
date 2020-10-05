@@ -85,6 +85,12 @@
 		SELECT COUNT(*)
 		  FROM TB_ADMIN
 		 WHERE ADMIN_ID = ?
+		 
+		 UNION ALL
+			
+		SELECT COUNT(*)
+	      FROM TB_MEMBER
+	     WHERE USER_ID = ?
 	</entry>
 	
 	<entry key="selectAdmin">

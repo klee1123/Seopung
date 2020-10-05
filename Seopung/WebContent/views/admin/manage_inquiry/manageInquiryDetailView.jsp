@@ -85,37 +85,43 @@
 
 		<div class="outer">
 
-			<!-- 들어가는 요소 : 1.타이틀 2.등록일  3. -->
+			<!-- 들어가는 요소 : 1.타이틀 2.질문 등록일  / 
+							3.답변자 4.문의 타입 5.회원이면 넘버/비회원이면 이메일 
+							6.회원 문의 내용 7. 관리자 답변 내용 -->
 			<div id="content_1">
 				<div style="width: 740px; font-size: 18px;"><%=i.getInquireTitle()%></div>
 				<div style="text-align: right;"><%=i.getInquireEnrollDate()%></div>
 			</div>
 
 			<div id="content_2">
-				<div style="width: 740px;"><%=i.getInquireWriter()%></div> <!-- 수정! 답변자 관리자 입력해야함 -->
-				<div style="width: 740px;"><%=i.getInquireType()%> <!-- 문의 타입 -->
-				<div><%=i.getInquireNo()%>
-					 <% if(i.getInquireSep().equals("회원")){ %>
-	                 <div><%= i.getInquireWriter() %></div> <!-- 작성자 -->
-	                 <% } else {%>
-	                 <div><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
-	                 <% } %>
+				<% if(i.getInquireSep().equals("회원")){ %>
+                <div style="width: 740px;"><%= i.getInquireWriter() %></div> <!-- 작성자 -->
+                <% } else {%>
+                <div style="width: 740px;"><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
+                <% } %>
 					
-				</div> <!-- 회원 넘버 -->
+				<div><%=i.getInquireType()%> <!-- 문의 타입 -->
+				</div>
 			</div>
 
 			<hr>
 			
 			<!-- 사용자가 문의한 내용 -->
-			<div id="content_3"><%= i.getInquireContent() %></div>
+			<div id="content_3" style="height: 300px;"><%= i.getInquireContent() %></div>
 
 			<hr>
 			
 			<!-- 관리자가 답변한 내용 -->
-			<div id="content_4">A. <%= i.getInquireResponse() %></div>
-			
+			<div id="content_4" style="height: 300px;">
+			<% if(i.getAdminWriter() == null) { %>
+			<div>답변 필요</div>
+			<%} else {%>
+			<div><%=i.getAdminWriter()%></div> <!-- 답변한 관리자 -->
+			<div>A. <%= i.getInquireResponse() %></div>
+			<%} %>
 			</div>
 
+			<hr>
 			<br> <br> <br>
 
 			<div align="center">

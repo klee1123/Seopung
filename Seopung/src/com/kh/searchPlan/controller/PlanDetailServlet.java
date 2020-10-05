@@ -31,13 +31,14 @@ public class PlanDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int pno = Integer.parseInt(request.getParameter("pno"));
-		
 		int result = new PlanService().increaseCount(pno);
 		
 		if(result>0) {
 			
 			Plan p = new PlanService().selectPlan(pno);
+			int dayCount = new PlanService().selectDayCount(pno);
 			
+			request.setAttribute("dayCount", dayCount);
 			request.setAttribute("p", p);
 			request.getRequestDispatcher("views/search/planDetailView.jsp").forward(request, response);
 

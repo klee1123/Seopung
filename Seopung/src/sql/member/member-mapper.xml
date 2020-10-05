@@ -52,7 +52,13 @@
 		SELECT
 		       COUNT(*)
 		  FROM TB_MEMBER
-		 WHERE USER_ID = ?    
+		 WHERE USER_ID = ?
+		 
+		 UNION ALL
+		 
+		 SELECT COUNT(*)
+		  FROM TB_ADMIN
+		 WHERE ADMIN_ID = ?    
 	</entry>
 	<entry key="nickCheck">
 		SELECT

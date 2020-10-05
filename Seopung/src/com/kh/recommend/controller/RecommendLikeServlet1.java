@@ -1,4 +1,4 @@
-package com.kh.community.cotroller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.Member.model.vo.LoginUser;
-import com.kh.community.model.service.CommunityService;
+import com.kh.recommend.model.service.RecommendService;
 
 /**
- * Servlet implementation class CommunityRecommendServlet
+ * Servlet implementation class RecommendLikeServlet1
  */
-@WebServlet("/recommend.co")
-public class CommunityRecommendServlet extends HttpServlet {
+@WebServlet("/like.re")
+public class RecommendLikeServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityRecommendServlet() {
+    public RecommendLikeServlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +31,26 @@ public class CommunityRecommendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	 LoginUser loginUser = (LoginUser)request.getSession().getAttribute("loginUser");
-	 
-	 	int userNo = loginUser.getUserNo();
+		LoginUser loginUser = (LoginUser)request.getSession().getAttribute("loginUser");
+		
+		int userNo = loginUser.getUserNo();
 		int cno = Integer.parseInt(request.getParameter("cno"));
-		int result = new CommunityService().increaseRe(cno, userNo);
+		int result = new RecommendService().increaseLike(cno, userNo);
 		
 		if(result > 0) {
 			
-			request.getSession().setAttribute("alertMsg", "추천되었습니다.");
-			
-			response.sendRedirect(request.getContextPath() + "/detailList.co?cno=" + cno);
+			request.getSession().setAttribute("alertMsg", "추천됐습니다");
+			response.sendRedirect(request.getContextPath() + "/detailList.re?cno=" + cno);
 		}else {
 			
-			int result1 = new CommunityService().decreaseRe(cno);
+			int result1 = new RecommendService().decreaseLike(cno);
 			if(result1 > 0) {
-			request.getSession().setAttribute("alertMsg", "이미 추천했습니다.");
-			response.sendRedirect(request.getContextPath() + "/detailList.co?cno=" + cno);
+				request.getSession().setAttribute("alertMsg", "이미 추천했습니다.");
+				response.sendRedirect(request.getContextPath() + "/detailList.re?cno=" + cno);
 			}
+			
 		}
+		
 	}
 
 	/**

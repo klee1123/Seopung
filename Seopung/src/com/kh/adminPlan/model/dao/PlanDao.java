@@ -498,4 +498,77 @@ public class PlanDao {
 		return result;
 	}
 	
+	public int selectDayCount(Connection conn, int pno) {
+		//select문 => 조회된 결과 값
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectDayCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public String selectPlanPlaces(Connection conn, int pno, int day) {
+		// select문 => 조회된 결과
+		String placeList = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlanPlaces");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, pno);
+			pstmt.setInt(2, day);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				placeList = rset.getString("plan_place");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return placeList;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -126,10 +126,11 @@ public class AdminInquiryDao {
 								 	 rset.getString("INQUIRE_TITLE"),
 									 rset.getString("INQUIRE_CONTENT"),
 									 rset.getDate("INQUIRE_ENROLL_DATE"),
-									 rset.getString("INQUIRE_RESPONSE"),
-									 rset.getString("INQUIRE_TYPE"),
-									 rset.getString("INQUIRE_SEP"),
 									 rset.getString("INQUIRE_EMAIL"),
+									 rset.getString("INQUIRE_RESPONSE"),
+									 rset.getString("USER_ID"),
+									 rset.getString("INQUIRE_SEP"),
+									 rset.getString("INQUIRE_TYPE"),
 									 rset.getString("ADMIN_ID"));
 						}
 			
@@ -143,9 +144,36 @@ public class AdminInquiryDao {
 		return i;
 	}
 	
-	
-	
-	
-	
+	// 1:1문의글 삭제
+	public int deleteInquiry(Connection conn, String[] ino) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteInquiry");
+		
+		// 삭제할 추천코스 갯수가 복수일 경우
+		if(ino.length > 1) {
+			for(int i=1; i<ino.length; i++) {
+				sql += " OR INQUIRE_NO =" + ino[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(ino[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
