@@ -79,6 +79,20 @@ public class RecommendService {
 		
 	}
 	
+	public int deleteRecommend(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().deleteRecommend(conn, cno);
+		
+		if(result > 0){
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	
