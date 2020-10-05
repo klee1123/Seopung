@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.vo.Accompany;
+import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
 
 
@@ -101,7 +102,8 @@ private Properties prop = new Properties();
 									   rset.getString("USER_ID"),
 						               rset.getString("USER_NICK"),
 						               rset.getInt("USER_NO"),
-						               rset.getInt("USER_NO2")));
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO")));
 				
 			}
 			
@@ -212,6 +214,66 @@ private Properties prop = new Properties();
 			result = pstmt.executeUpdate();
 			
 			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int checkReport(Connection conn , Report accomReport){
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomCheckReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(accomReport.getUserNo1()));
+			pstmt.setInt(2, Integer.parseInt(accomReport.getUserNo2()));
+			pstmt.setInt(3, accomReport.getReportPostNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int insertReport(Connection conn, Report accomReport) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomInsertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(accomReport.getUserNo1()));
+			pstmt.setInt(2, Integer.parseInt(accomReport.getUserNo2()));
+			pstmt.setInt(3, accomReport.getReportPostNo());
+			pstmt.setString(4, accomReport.getReportType());
+			pstmt.setString(5, accomReport.getReportContent());
+			
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

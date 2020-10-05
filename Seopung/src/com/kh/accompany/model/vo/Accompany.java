@@ -32,13 +32,14 @@ public class Accompany {
 	
 	
 
-	public Accompany(int accomNo,  String userId, String userNick , int userNo1 , int userNo2) {
+	public Accompany(int accomNo,  String userId, String userNick , int userNo1 , int userNo2, int planNo) {
 		super();
 		this.accomNo = accomNo;
 		this.userId = userId;
 		this.userNick = userNick;
 		this.userNo1 = userNo1;
 		this.userNo2 = userNo2;
+		this.planNo = planNo;
 	}
 
 	public int getAccomNo() {

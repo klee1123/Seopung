@@ -44,6 +44,18 @@ public class Report {
 		this.reportType = reportType;
 		this.reportContent = reportContent;
 	}
+	
+	
+
+
+	public Report(String userNo1, String userNo2, int reportPostNo, String reportType, String reportContent) {
+		super();
+		this.userNo1 = userNo1;
+		this.userNo2 = userNo2;
+		this.reportPostNo = reportPostNo;
+		this.reportType = reportType;
+		this.reportContent = reportContent;
+	}
 
 
 	public int getReportNo() {

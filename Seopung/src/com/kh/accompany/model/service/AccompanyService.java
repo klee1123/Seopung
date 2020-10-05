@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.dao.AccompanyDao;
 import com.kh.accompany.model.vo.Accompany;
+import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
 
 public class AccompanyService {
@@ -102,6 +103,43 @@ public class AccompanyService {
 		return result;
 		
 		
+		
+	}
+	
+	public int checkReport(Report accomReport) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().checkReport(conn, accomReport);
+		
+		close(conn);
+		
+		return result;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	public int insertReport(Report accomReport) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().insertReport(conn, accomReport);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		
+		close(conn);
+		
+		return result;
 		
 	}
 	

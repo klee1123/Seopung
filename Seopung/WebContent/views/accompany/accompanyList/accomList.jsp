@@ -123,7 +123,7 @@
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile('<%= a.getUserId() %>');">프로필</a></td>
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%= a.getUserNick() %>')">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= a.getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="userId" id="accomProfile" >
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
 							<input type="hidden" name="userNo" id="userNo1" value="<%= a.getUserNo1() %>">
@@ -186,7 +186,34 @@
                 	
                 }
 				
-				
+				function accomReport(planNo){
+					
+					$("#reportNo").val($("#loginUserNo").val());
+					
+					var reportUserNo = $("#reportNo").val();
+					console.log(reportUserNo);
+                	var userNo1 = $("#userNo1").val();
+                	var userNo2 = $("#userNo2").val();
+                	
+                	$("#reportPlanNo").val(planNo);
+                	console.log($("#reportPlanNo").val());
+                	
+                	if(reportUserNo == userNo1){
+                		$("#reportNo2").val(userNo2);
+                		console.log($("#reportNo2").val());
+                	}else{
+                		$("#reportNo2").val(userNo1);
+                		console.log($("#reportNo2").val());
+                	}
+					
+					
+					
+					
+					
+				}
+                
+                
+                
                 </script>
 				
 				                
@@ -348,23 +375,25 @@
                             <!-- Modal body -->
                             <div class="modal-body" align="center">
                         
-                                <form action="" method="post">
-            
+                                <form action="<%= contextPath %>/report.ac" method="get">
+            						<input type="hidden" name="reportUserNo" id="reportNo">
+            						<input type="hidden" name="reportUserNo2" id="reportNo2">
+            						<input type="hidden" name="planNo" id= "reportPlanNo">
                                     <table>
                                         <tr>
                                             <th>신고 사유</th>
                                                 
                                             <td>
                                                 <div class="default-select" id="default-select_2">
-                                                    <select>
-                                                        <option value="1">영리목적, 홍보성</option>
-                                                        <option value="1">불법성</option>
-                                                        <option value="1">욕설,인신공격</option>
-                                                        <option value="1">도배 및 광고</option>
-                                                        <option value="1">개인정보 노출</option>
-                                                        <option value="1">음란성, 선정성</option>
-                                                        <option value="1">모방 또는 명의 도용</option>
-                                                        <option value="1">기타</option>
+                                                    <select name="reportType">
+                                                        <option value="영리목적">영리목적</option>
+                                                        <option value="불법성">불법성</option>
+                                                        <option value="욕설">욕설</option>
+                                                        <option value="도배">도배</option>
+                                                        <option value="개인정보노출">개인정보노출</option>
+                                                        <option value="음란성">음란성</option>
+                                                        <option value="명의도용">명의도용</option>
+                                                        <option value="기타">기타</option>
                                                     </select>
                                                 </div>
                                                 

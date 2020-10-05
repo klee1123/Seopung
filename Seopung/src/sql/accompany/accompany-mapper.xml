@@ -40,6 +40,7 @@
 		                     , M.USER_NICK
 		                     , C.USER_NO
 		                     , C.USER_NO2
+		                     , C.PLAN_NO
 		                  FROM TB_ACCOMPANY C
 		                  JOIN TB_MEMBER M ON(C.USER_NO2 = M.USER_NO)
 		                  WHERE C.ACCOM_STATUS = 'Y' 
@@ -94,6 +95,39 @@
 			
 	
 	
+	</entry>
+	
+	<entry key="accomCheckReport">
+		SELECT COUNT(*)
+		  FROM TB_REPORT
+		 WHERE USER_NO = ?
+		   AND USER_NO2= ?
+		   AND REPORT_POSTNO = ?
+		   AND REPORT_POSTTYPE = 2
+	</entry>
+	
+	<entry key="accomInsertReport">
+		INSERT
+		  INTO TB_REPORT
+		  (
+		     REPORT_NO
+		   , USER_NO
+		   , USER_NO2
+		   , REPORT_POSTNO
+		   , REPORT_TYPE
+		   , REPORT_POSTTYPE
+		   , REPORT_CONTENT
+		  )
+		  VALUES
+		  (
+		     SEQ_REPORTNO.NEXTVAL
+		   , ?
+		   , ?
+		   , ?
+		   , ?
+		   , 2
+		   , ?
+		  )
 	</entry>
 	
 	
