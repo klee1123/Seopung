@@ -93,11 +93,7 @@
                     <div class="single_donation_item" style="margin-left: 40px;">
                         <h4>공지사항</h4><br>
                         <p><table id="mainRecommendTable" >
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                           <tr><td><a href="">공지사항 제목 공지사항 제목</a></td></tr>
                         </table></p><br>
                         <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
@@ -106,12 +102,8 @@
                     <div class="single_donation_item">
                         <h4>인기글</h4><br>
                         <p><table id="mainRecommendTable" >
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                        </table></p><br> 
+                            <tr><td><a href="">인기글 제목</a></td></tr>
+                            </table></p><br> 
                         <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
                 </div>
@@ -133,23 +125,64 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_blog_part">
-                        <div class="blog_text">
-                            <h2>제목</h2>
-                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
-                            <a href=""><img src="resources/달.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                
-                
-            </div>
+	          <div class="row" id="row">
+	              <!-- <div class="col-lg-4 col-sm-6">
+	                    <div class="single_blog_part">
+	                        <div class="blog_text">
+	                            <h2>제목</h2>
+	                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
+	                            <a href=""><img src="resources/달.jpg" alt=""></a>
+	                            </div>
+	                        </div>
+	                    </div>
+	               </div> -->
+             </div>
         </div>
     </section>
+	<script>
+		$(function(){
+			selectRecommendList();
+			selectNoticeList();
+		});
+		
+		function selectRecommendList(){
+			
+			$.ajax({
+					url:"<%=contextPath%>/IndexRe.in",
+					type:"get",
+					success:function(list){
+						console.log(list);
+						
+						var result = "";
+						for(var i=0; i<3; i++) {
+							result += 
+									
+					                "<div class='col-lg-4 col-sm-6'>" +
+					                    "<div class='single_blog_part'>" +
+					                        "<div class='blog_text'>" +
+					                            "<h2>" + list[i].title + "</h2>" +
+					                            "<div class='recommendRank' style='width: 200; height:250px;border: 1px solid black;'>" +
+					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img src=" + list[i].thumb + "></a>" +
+					                            "</div>" +
+					                        "</div>" +
+					                    "</div>" +
+					                 "</div>";
+							
+						}
+						$("#row").html(result);
+						
+					},error:function(){
+						console.log("ajax통신 실패")
+					}
+			});
+		}
+		
+		function selectNoticeList(){
+			
+		}
+		
+		
+	</script>
 
 	<footer>
 	<%@include file="views/common/footer.jsp" %>

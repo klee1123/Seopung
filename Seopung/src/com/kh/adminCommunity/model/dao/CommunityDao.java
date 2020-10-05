@@ -395,11 +395,38 @@ public class CommunityDao {
 		return result;
 	}
 	
-	public int decreaseReCount(Connection conn, int cno) {
+	public int updateCommunity(Connection conn, Community c) {
+		// update문 => 처리된 행 수
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
+		String sql = prop.getProperty("updateCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getTitle());
+			pstmt.setString(2, c.getContent());
+			pstmt.setInt(3, c.getCommunityNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	public int decreaseReCount(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+
 		String sql = prop.getProperty("decreaseReCount");
 		
 		try {

@@ -1,6 +1,7 @@
-package com.kh.adminRecommend.controller;
+package com.kh.index.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,19 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.LoginUser;
+import com.google.gson.Gson;
+import com.kh.index.model.service.IndexService;
+import com.kh.recommend.model.vo.Recommend;
 
 /**
- * Servlet implementation class RecommendEnrollFormServlet
+ * Servlet implementation class IndexRecommendServlet
  */
-@WebServlet("/adminPage/enrollForm.re")
-public class RecommendEnrollFormServlet extends HttpServlet {
+@WebServlet("/IndexRe.in")
+public class IndexRecommendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollFormServlet() {
+    public IndexRecommendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +33,12 @@ public class RecommendEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
-			request.setAttribute("pageTitle", "추천코스 글 등록");
-			request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendEnrollForm.jsp").forward(request, response);
-		}else {
-			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
-		}
-	
+		ArrayList<Recommend> list = new IndexService().selectRecommend();
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new Gson();
+		gson.toJson(list, response.getWriter());
 	}
 
 	/**
