@@ -217,6 +217,7 @@
 		     , COMMUNITY_CONTENT = ?
 		     , COMMUNITY_MODIFY = SYSDATE
  		 WHERE COMMUNITY_NO = ?
+ 	</entry>
 
 	<entry key="decreaseReCount">
 		UPDATE TB_COMMUNITY
