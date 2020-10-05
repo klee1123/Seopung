@@ -892,15 +892,4 @@ CREATE SEQUENCE SEQ_RECOMMENDNO
 NOCACHE;
 CREATE SEQUENCE SEQ_REPORTNO
 NOCACHE;
-? 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+

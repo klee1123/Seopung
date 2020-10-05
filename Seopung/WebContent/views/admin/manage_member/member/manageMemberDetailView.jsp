@@ -92,7 +92,7 @@
 							<td colspan="2">자기소개</td>
 						</tr>
 						<tr>
-							<%if(m.getUserIntro().equals("null")){ %>
+							<%if(m.getUserIntro() == null || m.getUserIntro().equals("null")){ %>
 							<td colspan="2"><textarea name="userSelfIntro" rows="5"  class="form-control"
 									style="resize: none;"></textarea></td>
 							<%}else{ %>		

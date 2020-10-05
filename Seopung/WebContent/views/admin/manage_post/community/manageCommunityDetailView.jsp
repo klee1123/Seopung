@@ -125,7 +125,7 @@
 			<div align="center">
 				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/adminPage/list.co?currentPage=1';">취소</button>
 				<%if(c.getHead().equals("공지")){ %>
-				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/updateForm.co?&cno=<%=c.getCommunityNo()%>';">수정</button>
+				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/updateForm.co?&cno=<%=c.getCommunityNo()%>&head=<%=c.getHead()%>';">수정</button>
 				<%} %>
 				<button class="btn btn-danger" id="deleteBtn">삭제</button>
 			</div>

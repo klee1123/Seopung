@@ -39,7 +39,9 @@ public class AdminCommunityDetailServlet extends HttpServlet {
 			
 			if(result>0) {
 				
-				Community c = new CommunityService().selectCommunity(cno);
+				String head = new CommunityService().selectHead(cno);
+				
+				Community c = new CommunityService().selectCommunity(cno, head);
 				
 				request.setAttribute("c", c);
 				request.setAttribute("pageTitle", "커뮤니티 상세조회");

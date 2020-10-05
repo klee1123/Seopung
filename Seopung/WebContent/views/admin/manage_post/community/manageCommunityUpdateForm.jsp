@@ -33,8 +33,7 @@
 		<div class="outer">
 			<form action="<%=contextPath %>/adminPage/update.co" method="post">
 				<input type="hidden" name="cno" value="<%= c.getCommunityNo()%>">
-				<input type="text" name="title" style="width: 100%;"
-					value="<%= c.getTitle() %>" class="form-control form-control" required>
+				<input type="text" name="title" style="width: 100%;" value="<%= c.getTitle() %>" class="form-control form-control" required>
 				<br>
 				<textarea id="summernote" name="content" required><%=c.getContent()%></textarea>
 

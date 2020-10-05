@@ -88,10 +88,10 @@ public class CommunityService {
 	}
 	
 	
-	public Community selectCommunity(int cno) {
+	public Community selectCommunity(int cno, String head) {
 		Connection conn = getConnection();
 		
-		Community c = new CommunityDao().selectCommunity(conn, cno);
+		Community c = new CommunityDao().selectCommunity(conn, cno, head);
 		
 		close(conn);
 		
@@ -177,5 +177,15 @@ public class CommunityService {
 		}
 		
 		return result;
+	}
+	
+	public String selectHead(int cno) {
+		Connection conn = getConnection();
+		
+		String head = new CommunityDao().selectHead(conn, cno);
+		
+		close(conn);
+		
+		return head;
 	}
 }

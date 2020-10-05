@@ -244,7 +244,7 @@
 				<table style="width:250px;">
 					<tr style="height: 75px;">
 						<td width="85" align="center">
-							<%if(p.getProfile().equals("null")){ %>
+							<%if(p.getProfile() == null || p.getProfile().equals("null")){ %>
 							<img width="55" height="55" class='rounded-circle'
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
@@ -298,7 +298,7 @@
 		
 					<%for(int i=1; i<=dayCount; i++){ %>
 					<div id="<%=i %>" class="tabcontent">
-						<h3>Day<%=i %></h3>
+						<h4>Day<%=i %></h4>
 						<ol id="placeArea<%=i%>">
 							
 						</ol>
@@ -608,7 +608,7 @@
 	                    "<br>" +
 	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
 	                    
-	                if(profile.m.userIntro != "null"){
+	                if(profile.m.userIntro != null){
 	                	content += profile.m.userIntro + "</textarea>";
 	                }else{
 	                	content +=  "</textarea><br>";

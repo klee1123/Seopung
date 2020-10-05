@@ -266,7 +266,7 @@
 					<table>
 						<tr style="height: 100px;">
 							<td width="100" align="center">
-								<%if(p.getProfile().equals("null")){ %>
+								<%if(p.getProfile() == null || p.getProfile().equals("null")){ %>
 								<img width="65" height="65" class='rounded-circle'
 								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 								alt=""></td>
@@ -472,7 +472,7 @@
 	       				
 	       				var content = "<br>";
 	       				
-	       				if(profile.m.profile != "null"){
+	       				if(profile.m.profile != null){
 		       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
 	       				}else{
 	       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
@@ -502,8 +502,8 @@
 		                    //"<br>" +
 		                    "<textarea cols='27' rows='3' readonly style='resize: none; margin-top:10px; overflow: auto;'>";
 		                    
-		                if(profile.m.userIntro != "null"){
-		                	content += profile.m.userIntro + "</textarea>";
+		                if(profile.m.userIntro != null){
+			                content += profile.m.userIntro + "</textarea>";		                		
 		                }else{
 		                	content +=  "</textarea><br>";
 		                }

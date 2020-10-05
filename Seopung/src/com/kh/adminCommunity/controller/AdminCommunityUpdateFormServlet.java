@@ -34,8 +34,9 @@ public class AdminCommunityUpdateFormServlet extends HttpServlet {
 		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 		
 			int cno = Integer.parseInt(request.getParameter("cno"));
+			String head = request.getParameter("head");
 			
-			Community c = new CommunityService().selectCommunity(cno);
+			Community c = new CommunityService().selectCommunity(cno, head);
 			
 			request.setAttribute("c", c);
 			request.setAttribute("pageTitle", "커뮤니티 글 수정");
