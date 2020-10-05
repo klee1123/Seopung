@@ -1,5 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.*" %>
+<%@ page import = "com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
+<%@ page import = "com.kh.Member.model.vo.*" %>    
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");	
+
+
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+
+
+%>
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +97,7 @@
 			<div class="request"> <br>
 				
 						
-	            <form action="" method="POST">
+	            <form action="<%= contextPath %>/request.ac" method="GET">
 	            
 				<br><br>
 				
@@ -93,76 +114,69 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                <%if(list.isEmpty()){ %>
+	                <tr>
+	                	<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
+	                </tr>
+	                <%} else { %>
+	                	<% for(int i=0; i<list.size(); i++){ %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td>닉네임</td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
+	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;<%= i+1 %></td>
+	                        <td ><%= list.get(i).getUserId() %></td>
+	                        <td><%= list.get(i).getUserNick() %></td>
+	                        <td><%= list.get(i).getAccomApply() %></td>
+                            <td><a href="#"><%= list.get(i).getPlanTitle() %></a></td>
                             <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
                                 <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
                             </td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-
+                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
+							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
+							<input type="hidden" name="userNo" id="userNo1" value="<%= list.get(i).getUserNo1() %>">
                         </tr>
-
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td>닉네임</td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
-                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
-                            </td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-
-                        </tr>
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td>닉네임</td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
-                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
-                            </td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-
-                        </tr>
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td>닉네임</td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
-                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
-                            </td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-
-                        </tr>
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td>닉네임</td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
-                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
-                            </td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-
-                        </tr>
-
-
-
-                       
+						<% } %>
+                    <% } %>
 	                </tbody>
 				</table>
 				
 			
 				</form>
+               
+               <script>
+               
+				function accomReport(planNo){
+					
+					$("#reportNo").val($("#loginUserNo").val());
+					
+					var reportUserNo = $("#reportNo").val();
+					console.log(reportUserNo);
+                	var userNo1 = $("#userNo1").val();
+                	
+                	
+                	$("#reportPlanNo").val(planNo);
+                	console.log($("#reportPlanNo").val());
+                	
+               
+                		$("#reportNo2").val(userNo1);
+                		console.log($("#reportNo2").val());
+                
+					
+					
+					
+					
+					
+				}
+                
+               
+               
+               
+               
+               
+               </script>
+               
+               
+               
+               
+               
                 <!-- 수락 modal -->
                 <div class="modal" id="accept">
                     <div class="modal-dialog">
@@ -225,6 +239,8 @@
                 </div>
                 
 
+             
+
                 <!-- 신고하기 modal -->
 
                 <div class="modal" id="report">
@@ -240,41 +256,38 @@
                             <!-- Modal body -->
                             <div class="modal-body" align="center">
                         
-                                <form action="" method="post">
-            
-                                    <table>
-                                        <tr>
-                                            <th>신고 사유</th>
-                                                
-                                            <td>
-                                                <div class="default-select" id="default-select_2">
-                                                    <select>
-                                                        <option value="1">영리목적, 홍보성</option>
-                                                        <option value="1">불법성</option>
-                                                        <option value="1">욕설,인신공격</option>
-                                                        <option value="1">도배 및 광고</option>
-                                                        <option value="1">개인정보 노출</option>
-                                                        <option value="1">음란성, 선정성</option>
-                                                        <option value="1">모방 또는 명의 도용</option>
-                                                        <option value="1">기타</option>
-                                                    </select>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 제목 &nbsp;</th>
-                                            <td><input type="text" name="reportTitle" required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 내용</th>
-                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <button type="submit" class="genric-btn info-border radius">작성</button>
-                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
-                                    
+                                <form action="<%= contextPath %>/report.ac" method="get">
+            						<input type="hidden" name="reportUserNo" id="reportNo">
+            						<input type="hidden" name="reportUserNo2" id="reportNo2">
+            						<input type="hidden" name="planNo" id= "reportPlanNo">
+                                    <p style="font-size: 13px; padding-left:20px;">
+                                * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
+                                * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
+                                * 허위 신고의 경우 신고자가 제재받을 수 있음을 유념해주세요. <br>
+		                            </p>
+		                            <br>
+		                            <b style="color:black;">신고유형</b>
+		                            <select name="reportType" class="form-control" required>
+		                            	<option value="" disabled selected hidden>신고 내용을 선택하세요.</option>
+		                                <option value="영리목적">영리목적</option>
+		                                <option value="불법성">불법성</option>
+		                                <option value="욕설">욕설</option>
+		                                <option value="도배">도배</option>
+		                                <option value="개인정보노출">개인정보노출</option>
+		                                <option value="음란성">음란성</option>
+		                                <option value="명의도용">명의도용</option>
+		                                <option value="기타">기타</option>
+		                            </select>
+		                            <br>
+		                            <b style="color:black;">신고내용</b>
+		                            <textarea name="reportContent" id="reportContent" cols="30" rows="6" style="resize: none;overflow:auto;" class="form-control" maxlength="1000" required></textarea>
+		                            <br>
+		                            <div align="center">
+		                                <input type="checkbox" required id="agreeCheck"> <label for="agreeCheck">개인 정보 수집 및 이용에 동의합니다.</label>
+		                                <br><br><br>
+		                                <button type="submit" class="btn btn-primary">제출</button>
+		                            </div>
+		                                   
                                 </form>
             
                             </div>
@@ -289,20 +302,26 @@
 
 	            <br><br>
 	            <div class="pagingArea" align="center">
-	
                     <div align="center">
+					<% if(currentPage != 1){ %>
+	            	<!-- 맨 처음으로 (<<) -->
                         <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                    <!-- 이전페이지로 (<) -->    
                         <button class="btn btn-secondary btn-sm">&lt;</button>
-
-                        <button class="btn btn-outline-secondary btn-sm">1</button>
-                        <button class="btn btn-outline-secondary btn-sm">2</button>
-                        <button class="btn btn-outline-secondary btn-sm">3</button>
-                        <button class="btn btn-outline-secondary btn-sm">4</button>
-                        <button class="btn btn-outline-secondary btn-sm">5</button>
-
-                        <button class="btn btn-secondary btn-sm">&gt;</button>
-                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-                    
+					<% } %>
+					
+				<% for(int p=startPage; p<=endPage; p++){ %>
+					<% if(p != currentPage){ %>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+                	<% } %>        
+                <% } %>
+                
+                <% if(currentPage != maxPage){ %>  
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                <% } %>    
                     </div>
 	            </div>
 	        </div>

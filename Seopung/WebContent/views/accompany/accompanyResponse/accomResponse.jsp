@@ -61,7 +61,7 @@
 			<div class="response"> <br>
 				
 						
-	            <form action="" method="POST">
+	            <form action="<%=contextPath %>/response.ac" method="GET">
 	            
 				<br><br>
 				

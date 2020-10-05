@@ -379,39 +379,34 @@
             						<input type="hidden" name="reportUserNo" id="reportNo">
             						<input type="hidden" name="reportUserNo2" id="reportNo2">
             						<input type="hidden" name="planNo" id= "reportPlanNo">
-                                    <table>
-                                        <tr>
-                                            <th>신고 사유</th>
-                                                
-                                            <td>
-                                                <div class="default-select" id="default-select_2">
-                                                    <select name="reportType">
-                                                        <option value="영리목적">영리목적</option>
-                                                        <option value="불법성">불법성</option>
-                                                        <option value="욕설">욕설</option>
-                                                        <option value="도배">도배</option>
-                                                        <option value="개인정보노출">개인정보노출</option>
-                                                        <option value="음란성">음란성</option>
-                                                        <option value="명의도용">명의도용</option>
-                                                        <option value="기타">기타</option>
-                                                    </select>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 제목 &nbsp;</th>
-                                            <td><input type="text" name="reportTitle" required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 내용</th>
-                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <button type="submit" class="genric-btn info-border radius">작성</button>
-                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
-                                    
+                                    <p style="font-size: 13px; padding-left:20px;">
+                                * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
+                                * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
+                                * 허위 신고의 경우 신고자가 제재받을 수 있음을 유념해주세요. <br>
+		                            </p>
+		                            <br>
+		                            <b style="color:black;">신고유형</b>
+		                            <select name="reportType" class="form-control" required>
+		                            	<option value="" disabled selected hidden>신고 내용을 선택하세요.</option>
+		                                <option value="영리목적">영리목적</option>
+		                                <option value="불법성">불법성</option>
+		                                <option value="욕설">욕설</option>
+		                                <option value="도배">도배</option>
+		                                <option value="개인정보노출">개인정보노출</option>
+		                                <option value="음란성">음란성</option>
+		                                <option value="명의도용">명의도용</option>
+		                                <option value="기타">기타</option>
+		                            </select>
+		                            <br>
+		                            <b style="color:black;">신고내용</b>
+		                            <textarea name="reportContent" id="reportContent" cols="30" rows="6" style="resize: none;overflow:auto;" class="form-control" maxlength="1000" required></textarea>
+		                            <br>
+		                            <div align="center">
+		                                <input type="checkbox" required id="agreeCheck"> <label for="agreeCheck">개인 정보 수집 및 이용에 동의합니다.</label>
+		                                <br><br><br>
+		                                <button type="submit" class="btn btn-primary">제출</button>
+		                            </div>
+		                                   
                                 </form>
             
                             </div>

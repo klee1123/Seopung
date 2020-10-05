@@ -130,5 +130,52 @@
 		  )
 	</entry>
 	
+	<entry key="updateReport">
+		UPDATE
+				TB_ACCOMPANY
+		   SET	ACCOM_STATUS = 'N'
+		 WHERE   
+	
+	</entry>
+	
+	<entry key="selectRequestListCount">
+		SELECT COUNT(*) LISTCOUNT
+		  FROM TB_ACCOMPANY
+		 WHERE ACCOM_STATUS IS NULL
+           AND USER_NO2 = ?
+	
+	
+	</entry>
+	
+	<entry key="selectRequestList">
+				SELECT *
+		 FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       C.ACCOM_NO
+		                     , M.USER_ID
+		                     , M.USER_NICK
+                             , C.ACCOM_APPLY
+		                     , C.USER_NO
+		                     , C.USER_NO2
+		                     , C.PLAN_NO
+                             , P.PLAN_TITLE
+		                  FROM TB_ACCOMPANY C
+		                  JOIN TB_MEMBER M ON(C.USER_NO = M.USER_NO)
+                          JOIN TB_PLAN_OPTION P ON(C.PLAN_NO = P.PLAN_NO)
+		                  WHERE C.ACCOM_STATUS IS NULL 
+		                    AND C.USER_NO2 = ? 
+		                 ORDER 
+		                    BY C.ACCOM_NO DESC
+		               ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	
+	
+	</entry>
+	
 	
 </properties>

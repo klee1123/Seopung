@@ -51,8 +51,17 @@ public class AccompanyReportServlet extends HttpServlet {
 			
 			result = 0;
 			
+			request.getSession().setAttribute("alertMsg", "이미 신고된 회원입니다.");
+			
 		}else {
+			
 			result = new AccompanyService().insertReport(accomReport);
+			request.getSession().setAttribute("alertMsg", "신고가 성공적으로 접수되었습니다.");
+			
+			result = new AccompanyService().updateReport(accomReport);
+			
+			
+			
 		}
 
 		

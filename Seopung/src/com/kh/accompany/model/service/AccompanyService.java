@@ -143,5 +143,52 @@ public class AccompanyService {
 		
 	}
 	
+	public int updateReport(Report accomReport) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().updateReport(conn, accomReport);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+				
+		return result;
+		
+	}
+	
+	
+	public int selectRequestListCount(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new AccompanyDao().selectRequestListCount(conn, userNo);
+		
+		close(conn);
+		
+		return listCount;
+		
+		
+		
+	}
+	
+	public ArrayList<Accompany> selectRequestList(PageInfo pi, int userNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Accompany> list = new AccompanyDao().selectRequestList(conn, pi, userNo);
+		
+		close(conn);
+		
+		return list;
+		
+		
+	}
+	
+	
+	
+	
 	
 }
