@@ -37,4 +37,52 @@
 	     SET STATUS = 'N'
 	   WHERE PLAN_NO = ?
 	</entry>
+	
+	<entry key="privateY">
+		 SELECT *
+		   FROM (
+		         SELECT 
+		                ROWNUM RNUM
+		               ,A.* 
+		           FROM (
+		                 SELECT
+		                        PLAN_NO
+		                      , PLAN_TITLE
+		                      , PLAN_SDATE
+		                      , PLAN_EDATE
+		                   FROM TB_PLAN_OPTION
+		                  WHERE STATUS = 'Y'
+		                    AND USER_NO = ?
+		                    AND (PLAN_PRIVATE = 'Y'
+		                     OR PLAN_PRIVATE = 'y')
+		                  ORDER
+		                     BY PLAN_NO DESC
+		                ) A
+		           )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="privateN">
+		 SELECT *
+		   FROM (
+		         SELECT 
+		                ROWNUM RNUM
+		               ,A.* 
+		           FROM (
+		                 SELECT
+		                        PLAN_NO
+		                      , PLAN_TITLE
+		                      , PLAN_SDATE
+		                      , PLAN_EDATE
+		                   FROM TB_PLAN_OPTION
+		                  WHERE STATUS = 'Y'
+		                    AND USER_NO = ?
+		                    AND (PLAN_PRIVATE = 'N'
+		                     OR PLAN_PRIVATE = 'n')
+		                  ORDER
+		                     BY PLAN_NO DESC
+		                ) A
+		           )
+		  WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>

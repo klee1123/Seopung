@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<entry key="selectRecommend">
+		SELECT
+			   RECOMMEND_NO
+		     , RECOMMEND_TITLE
+		     , RECOMMEND_THUMB
+		  FROM TB_RECOMMEND
+		 ORDER 
+		    BY RECOMMEND_NO DESC
+	</entry>
+	
+	<entry key="">
+	
+	</entry>
+
+</properties>

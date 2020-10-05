@@ -75,12 +75,13 @@
             <button class="btn btn-secondary btn-sm" id="btnMyPlan">삭제</button>
         </div>
         <div class="MyplanArea">
-
+			<a href="views/plan/planMakePage.jsp">
             <div class="MakeMap" align="center" >
+                <p><img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;"></p>
+                <p>여행 만들러 가기</p>
                 
-                <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
-                <p><a href="<%=contextPath%>/planPage.pl?currentPage=1">여행 만들러 가기</a></p>
             </div>
+            </a>
            
             <!-- 각각 게시판 div -->
             <%if(list.isEmpty()) { %>
@@ -90,17 +91,20 @@
             <% }else { %>
             	<% for(Plan p : list) { %>
 	            <div class="MyplanMap">
+	             <a href="<%=contextPath%>/detail.pl?pno=<%=p.getPlanNo()%>">
 	                <input type="checkbox" id="chk" name="mpno" value="<%= p.getPlanNo() %>">
 	                
-	                   <div id="seoulMap" style="width:250px;height:200px;">
+                    <div id="seoulMap" style="width:250px;height:200px;">
 						<img src="resources/images/서울.jpg" name="mapImg">
-						</div>
-						<br><br>
+					</div>
+					<br><br>
+					<div id="MapComment">
 	                    <p align="center">
-	                     <a href=""></a>
-			             <%= p.getPlanTitle()%> <br>
-			             <%= p.getStartDate()%> ~ <%= p.getEndDate()%>
+			            <%= p.getPlanTitle()%> <br>
+			            <%= p.getStartDate()%> ~ <%= p.getEndDate()%>
 			            </p>
+		            </div>
+			     </a>
 	            </div>
 	            <% } %>
             <% } %>
