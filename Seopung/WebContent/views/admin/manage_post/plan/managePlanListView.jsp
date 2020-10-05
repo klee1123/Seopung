@@ -65,15 +65,15 @@
 
 			<br>
 
-			<table align="center" id="listArea" class="table table-hover">
+			<table align="center" id="listArea" class="table table-hover" style="table-layout:fixed;">
 				<thead style="text-align: center;">
 					<tr>
-						<th width="20px"><input type="checkbox" id="chk_all"></th>
+						<th width="30px"><input type="checkbox" id="chk_all"></th>
 						<th width="50px">번호</th>
 						<th width="355px">제목</th>
 						<th width="125px">작성자아이디</th>
 						<th width="125px">작성일</th>
-						<th width="75px">조회수</th>
+						<th width="65px">조회수</th>
 					</tr>
 				</thead>
 				<tbody style="text-align: center;">
@@ -86,7 +86,7 @@
 						<tr>
 							<td><input type="checkbox" id="chk" name="pno" value="<%= p.getPlanNo() %>"></td>
 							<td><%= p.getPlanNo() %></td>
-							<td><%= p.getPlanTitle() %></td>
+							<td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><%= p.getPlanTitle() %></td>
 							<td><%= p.getPlanWriter() %></td>
 							<td><%= p.getEnrollDate() %></td>
 							<td><%= p.getCount() %></td>
