@@ -82,5 +82,19 @@ public class AdminNoticeService {
 		return n;
 	}
 	
+	public int deleteAdminNotice(String[] nno) {
+		Connection conn = getConnection();
+		
+		int result = new AdminNoticeDao().deleteAdminNotice(conn, nno);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 
 }

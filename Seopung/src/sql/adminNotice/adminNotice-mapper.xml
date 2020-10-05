@@ -68,5 +68,13 @@
 	   AND NOTICE_NO = ?
 	</entry>
 	
+	<entry key="deleteAdminNotice">
+		UPDATE 
+		       TB_NOTICE
+		   SET STATUS = 'N'
+		     , NOTICE_MODIFY = SYSDATE
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
 	
 </properties>
