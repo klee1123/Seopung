@@ -1,6 +1,7 @@
 package com.kh.index.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.planMake.model.vo.PlanMake;
 import com.kh.recommend.model.vo.Recommend;
 
 public class IndexDao {
@@ -53,4 +55,34 @@ public class IndexDao {
 		}
 		return list;
 	}
+	
+	public ArrayList<PlanMake> selectPlanRec(Connection conn){
+		
+		ArrayList<PlanMake> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPlanRec");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new PlanMake(rset.getInt("PLAN_NO"),
+									  rset.getString("PLAN_TITLE"),
+									  rset.getInt("PLAN_RECOMMEND")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
 }

@@ -12,7 +12,7 @@
 		    BY RECOMMEND_NO DESC
 	</entry>
 	
-	<entry key="selectPlanRecommend">
+	<entry key="selectPlanRec">
 		SELECT
 		       PLAN_NO
 		     , PLAN_TITLE
