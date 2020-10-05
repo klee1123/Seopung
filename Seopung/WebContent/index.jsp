@@ -28,14 +28,24 @@
       });
   	</script>
     <style>
-    	#mainRecommendTable{
+    	#mainPlanRec{
             width:300px;
         }
-        #mainRecommendTable a{
+        #mainPlanRec a{
             text-decoration: none;
             color:black;
         }
-        #mainRecommendTable tr{
+        #mainPlanRec tr{
+            height:40px;
+        }
+        #mainNotice{
+            width:300px;
+        }
+        #mainNotice a{
+            text-decoration: none;
+            color:black;
+        }
+        #mainNotice tr{
             height:40px;
         }
         .blog_text img{
@@ -92,8 +102,10 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item" style="margin-left: 40px;">
                         <h4>공지사항</h4><br>
-                        <p><table id="mainRecommendTable" >
-                           <tr><td><a href="">공지사항 제목 공지사항 제목</a></td></tr>
+                        <p><table id="mainNotice" >
+                           <tr>
+                           		<td><a href="">공지사항 제목 공지사항 제목</a></td>
+                           </tr>
                         </table></p><br>
                         <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
@@ -101,8 +113,10 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
                         <h4>인기글</h4><br>
-                        <p><table id="mainRecommendTable" >
-                            <tr><td><a href="">인기글 제목</a></td></tr>
+                        <p><table id="mainPlanRec">
+                           <!-- <tr>
+                           		<td><a href="">인기글 제목</a></td>
+                            </tr>  --> 
                             </table></p><br> 
                         <a href="#" style="text-decoration: none; color: black;">더보기</a>
                     </div>
@@ -142,7 +156,7 @@
 	<script>
 		$(function(){
 			selectRecommendList();
-			selectNoticeList();
+			selectPlanList();
 		});
 		
 		function selectRecommendList(){
@@ -151,7 +165,6 @@
 					url:"<%=contextPath%>/IndexRe.in",
 					type:"get",
 					success:function(list){
-						console.log(list);
 						
 						var result = "";
 						for(var i=0; i<3; i++) {
@@ -176,19 +189,56 @@
 					}
 			});
 		}
+	</script>
+	<script>
+		$(function(){
+			selectPlanList();
+		});
 		
-		function selectNoticeList(){
+		function selectPlanList(){
 			$.ajax({
-					url:"<%=contextPath%>/IndexRe.in",
+					url:"<%=contextPath%>/IndexPl.in",
 					type:"get",
 					success:function(list){
+						console.log(list);
+						
 						var result = "";
-						for()
+						for(var i=0; i<5; i++) {
+							result += 
+								"<tr>" +
+                       				"<td>" + 
+                       					"<a href='<%=contextPath%>/detail.pl?pno=" + list[i].planNo + "'>" + list[i].planTitle + "</a>" + 
+                       				"</td>" +
+                       			"</tr>";
+						}
+						$("#mainPlanRec").html(result)
+					},error:function(){
+						console.log("ajax통신 실패");
 					}
 			})
 		}
+	</script>
+	
+	<script>
+		$(function(){
+			selectNoticeList();
+		});
 		
-		
+		function selectNoticeList(){
+			$.ajax({
+					url:"<%=contextPath%>/IndexNo.in",
+					type:"get",
+					success:function(list){
+						
+						var result = "";
+						for(var i=0; i<5; i++) {
+							result +=
+										
+						}
+						
+					}
+			})
+		}
 	</script>
 
 	<footer>
