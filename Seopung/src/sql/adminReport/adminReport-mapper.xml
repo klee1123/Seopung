@@ -29,6 +29,14 @@
              )
          WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	<entry key="deleteReport">
+		UPDATE 
+		       TB_REPORT
+		   SET REPORT_STATUS = 'N'
+		     , REPORT_DATE = SYSDATE
+		 WHERE REPORT_NO = ?
+	</entry>
 
 </properties>
 
