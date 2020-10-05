@@ -184,6 +184,29 @@ public class RecommendDao {
 		
 	}
 	
+	public int updateRecommend(Connection conn, Recommend nc) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateRecommend");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nc.getTitle());
+			pstmt.setString(2, nc.getContent());
+			pstmt.setString(3, nc.getThumb());
+			pstmt.setInt(4, nc.getReNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	
 	

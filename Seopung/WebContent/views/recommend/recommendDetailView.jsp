@@ -84,8 +84,9 @@
         <div align="center">
         <%if(loginUser != null && loginUser.getCategory() == 2){  %>
 				
+				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/updateForm.re?cno=<%=nc.getReNo()%>'">수정</button>
 				<button class="btn btn-danger" onclick="del();">삭제</button>
-        <%}else{ %>
+        <%}else if(loginUser != null && loginUser.getCategory() == 1){ %>
 				<button  class="btn btn-secondary" onclick="del();">추천</button>
         		
         <%} %>
