@@ -12,8 +12,14 @@
 		    BY RECOMMEND_NO DESC
 	</entry>
 	
-	<entry key="">
-	
+	<entry key="selectPlanRecommend">
+		SELECT
+		       PLAN_NO
+		     , PLAN_TITLE
+		     , PLAN_RECOMMEND
+		  FROM TB_PLAN_OPTION
+		 ORDER
+		    BY PLAN_RECOMMEND DESC
 	</entry>
 
 </properties>

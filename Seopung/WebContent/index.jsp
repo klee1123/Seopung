@@ -178,7 +178,14 @@
 		}
 		
 		function selectNoticeList(){
-			
+			$.ajax({
+					url:"<%=contextPath%>/IndexRe.in",
+					type:"get",
+					success:function(list){
+						var result = "";
+						for()
+					}
+			})
 		}
 		
 		

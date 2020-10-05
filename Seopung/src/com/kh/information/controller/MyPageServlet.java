@@ -45,7 +45,7 @@ public class MyPageServlet extends HttpServlet {
 		}else {
 			
 			Member m = new InfoService().selectMember(loginUser.getUserNo());
-			
+			System.out.println(m);
 			request.setAttribute("m", m);
 			RequestDispatcher view = request.getRequestDispatcher("views/myPage/myInfo.jsp");
 			view.forward(request, response);

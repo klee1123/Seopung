@@ -86,7 +86,7 @@
             <!-- 각각 게시판 div -->
             <%if(list.isEmpty()) { %>
             	<div class="MyPlanMap">
-             		<p>조회된 문의글이 없습니다</p>
+             		
                 </div>
             <% }else { %>
             	<% for(Plan p : list) { %>

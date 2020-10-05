@@ -20,7 +20,8 @@
 	String year = birth.substring(0, 4);
 	String month = birth.substring(4, 6);
 	String day = birth.substring(6);
-	String intro = m.getUserIntro().equals("null") ? "" : m.getUserIntro() ;
+	String intro = m.getUserIntro() == null ? "" : m.getUserIntro();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -102,7 +103,7 @@
              <br><br>
         
             <div class="infoPoto">
-            	<% if(profile.equals("null")) { %>
+            	<% if(profile == null || profile.equals("null")) { %>
        			<img src="<%= contextPath %>/resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
        			<% }else { %>
                 <img src="<%= contextPath %>/<%=profile%>"  
