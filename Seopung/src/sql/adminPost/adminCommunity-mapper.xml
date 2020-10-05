@@ -209,4 +209,13 @@
   		       COMMENT_MODIFY = SYSDATE
 		 WHERE COMMENT_NO = ?
 	</entry>
+	
+	<entry key="updateCommunity">
+		UPDATE 
+		       TB_COMMUNITY
+		   SET COMMUNITY_TITLE = ?
+		     , COMMUNITY_CONTENT = ?
+		     , COMMUNITY_MODIFY = SYSDATE
+		 WHERE COMMUNITY_NO = ?
+	</entry>
 </properties>

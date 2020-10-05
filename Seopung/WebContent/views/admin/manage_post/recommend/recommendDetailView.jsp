@@ -57,12 +57,12 @@
 		<div class="outer">
 
 			<div id="content_1">
-				<div style="width: 740px; font-size: 18px;"><%= r.getRecommendTitle() %></div>
+				<div style="width: 780px; font-size: 18px;"><%= r.getRecommendTitle() %></div>
 				<div style="text-align: right;"><%=r.getEnrollDate() %></div>
 			</div>
 
 			<div id="content_2">
-				<div style="width: 725px;"><%= r.getRecommendWriter() %></div>
+				<div style="width: 730px;"><%= r.getRecommendWriter() %></div>
 				<div>조회수 <%=r.getCount() %></div>
 				<div>추천수 <%=r.getLike() %></div>
 			</div>

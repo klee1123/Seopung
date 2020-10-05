@@ -1,4 +1,4 @@
-package com.kh.adminRecommend.controller;
+package com.kh.adminCommunity.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.LoginUser;
+import com.kh.adminCommunity.model.service.CommunityService;
+import com.kh.adminCommunity.model.vo.Community;
 
 /**
- * Servlet implementation class RecommendEnrollFormServlet
+ * Servlet implementation class AdminCommunityUpdateServlet
  */
-@WebServlet("/adminPage/enrollForm.re")
-public class RecommendEnrollFormServlet extends HttpServlet {
+@WebServlet("/adminPage/update.co")
+public class AdminCommunityUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecommendEnrollFormServlet() {
+    public AdminCommunityUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +31,26 @@ public class RecommendEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
-			request.setAttribute("pageTitle", "추천코스 글 등록");
-			request.getRequestDispatcher("../views/admin/manage_post/recommend/recommendEnrollForm.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		Community c = new Community();
+		c.setCommunityNo(cno);
+		c.setTitle(title);
+		c.setContent(content);
+		
+		int result = new CommunityService().updateCommunity(c);
+		
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "커뮤니티 수정 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/detail.co?cno=" + cno);
 		}else {
-			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.setAttribute("errorMsg", "추천코스 수정 실패");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-	
 	}
 
 	/**

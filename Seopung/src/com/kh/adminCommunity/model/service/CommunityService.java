@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import com.kh.adminCommunity.model.dao.CommunityDao;
 import com.kh.adminCommunity.model.vo.ComComment;
 import com.kh.adminCommunity.model.vo.Community;
-import com.kh.adminRecommend.model.dao.RecommendDao;
 import com.kh.common.PageInfo;
 
 public class CommunityService {
@@ -140,6 +139,20 @@ public class CommunityService {
 		Connection conn = getConnection();
 		
 		int result = new CommunityDao().deleteComment(conn, commentNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int updateCommunity(Community c) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().updateCommunity(conn, c);
 		
 		if(result>0) {
 			commit(conn);

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminPlan.model.service.PlanService;
 import com.kh.adminPlan.model.vo.Plan;
 
@@ -31,21 +32,27 @@ public class AdminPlanDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		int result = new PlanService().increaseCount(pno);
-		
-		if(result>0) {
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 			
-			Plan p = new PlanService().selectPlan(pno);
-			int dayCount = new PlanService().selectDayCount(pno);
+			int pno = Integer.parseInt(request.getParameter("pno"));
+			int result = new PlanService().increaseCount(pno);
 			
-			request.setAttribute("dayCount", dayCount);
-			request.setAttribute("p", p);
-			request.setAttribute("pageTitle", "일정 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanDetailView.jsp").forward(request, response);
-
+			if(result>0) {
+				
+				Plan p = new PlanService().selectPlan(pno);
+				int dayCount = new PlanService().selectDayCount(pno);
+				
+				request.setAttribute("dayCount", dayCount);
+				request.setAttribute("p", p);
+				request.setAttribute("pageTitle", "일정 상세조회");
+				request.getRequestDispatcher("../views/admin/manage_post/plan/managePlanDetailView.jsp").forward(request, response);
+	
+			}else {
+				request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			}
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	}
