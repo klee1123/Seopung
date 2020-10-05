@@ -101,8 +101,10 @@ public class PlanMakeInsertServlet extends HttpServlet {
 			
 		} else {	//  저장 실패
 			
-			RequestDispatcher view = request.getRequestDispatcher("실패");
-			view.forward(request,response);
+			//RequestDispatcher view = request.getRequestDispatcher("실패");
+			//view.forward(request,response);
+			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		
 		}
 		

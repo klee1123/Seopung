@@ -63,6 +63,22 @@ public class RecommendService {
 		return nc;
 	}
 	
+	public int updateRecommend(Recommend nc) {
+		Connection conn = getConnection();
+		
+		int result = new RecommendDao().updateRecommend(conn, nc);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+		
+	}
+	
 	
 	
 	
