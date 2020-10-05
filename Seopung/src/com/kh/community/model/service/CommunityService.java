@@ -235,6 +235,24 @@ public class CommunityService {
 		return count;
 	}
 	
+	public int increaseReply(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().increaseReply(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+			
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
 	
 	
 	

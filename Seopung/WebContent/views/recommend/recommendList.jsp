@@ -101,6 +101,9 @@ p>img {
 	display:inline
 	
 }
+#content img{
+	display: none;
+}
 #content br {
 	display: none;
 }

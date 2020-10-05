@@ -34,7 +34,6 @@ public class ReplyInsertServlet extends HttpServlet {
 		
 		String replyContent = request.getParameter("content");
 		int cno = Integer.parseInt(request.getParameter("cno"));
-		System.out.println(cno);
 		LoginUser loginUser = ((LoginUser)request.getSession().getAttribute("loginUser"));
 		
 		int userNo = loginUser.getUserNo();
@@ -47,8 +46,12 @@ public class ReplyInsertServlet extends HttpServlet {
 		
 		int result = new CommunityService().insertReply(r);
 		
+		if(result > 0) {
+			int result1 = new CommunityService().increaseReply(cno);
+			
 		response.getWriter().print(result);
 		
+		}
 	}
 
 	/**

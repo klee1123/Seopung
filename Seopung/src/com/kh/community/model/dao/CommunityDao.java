@@ -118,7 +118,8 @@ public class CommunityDao {
 						               rset.getInt("COMMUNITY_SCRAP"),
 						               rset.getInt("COMMUNITY_RECOMMEND"),
 						               rset.getString("COMMUNITY_THUMB"),
-						               rset.getString("COMMUNITY_HEAD")));
+						               rset.getString("COMMUNITY_HEAD"),
+									   rset.getInt("COMMUNITY_COMMENT")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -161,7 +162,9 @@ public class CommunityDao {
 							               rset.getInt("COMMUNITY_SCRAP"),
 							               rset.getInt("COMMUNITY_RECOMMEND"),
 							               rset.getString("COMMUNITY_THUMB"),
-							               rset.getString("COMMUNITY_HEAD")));
+							               rset.getString("COMMUNITY_HEAD"),
+							               rset.getInt("COMMUNITY_COMMENT")));
+							               
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -623,6 +626,28 @@ public class CommunityDao {
 			close(pstmt);
 		}
 		return count;
+	}
+	
+	public int increaseReply(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	
