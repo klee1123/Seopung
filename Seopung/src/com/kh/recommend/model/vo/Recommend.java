@@ -46,6 +46,17 @@ public class Recommend {
 		this.userNo = userNo;
 	}
 
+	
+	
+	
+
+	public Recommend(int reNo, String title, String thumb) {
+		super();
+		this.reNo = reNo;
+		this.title = title;
+		this.thumb = thumb;
+	}
+
 	public int getReNo() {
 		return reNo;
 	}
