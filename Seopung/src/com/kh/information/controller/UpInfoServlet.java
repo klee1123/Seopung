@@ -49,12 +49,10 @@ public class UpInfoServlet extends HttpServlet {
 			
 			int userNo = Integer.parseInt(multiRequest.getParameter("userNo"));
 			String userIntro = multiRequest.getParameter("userIntro");
-			String email = multiRequest.getParameter("email");
 			
 			Member m = new Member();
 			m.setUserNo(userNo);
 			m.setUserIntro(userIntro);
-			m.setEmail(email);
 			
 			if(multiRequest.getOriginalFileName("profile") != null) {
 				String changeName = multiRequest.getFilesystemName("profile");

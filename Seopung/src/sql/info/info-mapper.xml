@@ -47,14 +47,6 @@
 		   AND USER_NICK = ?
 	</entry>
 	
-	<entry key="updateInfoEmail">
-		UPDATE
-		       TB_MEMBER
-		   SET EMAIL = ?
-		 WHERE USER_NO = ?
-		   AND EMAIL = ?
-	</entry>
-	
 	<entry key="deleteMember">
 		UPDATE
 		       TB_MEMBER
@@ -76,7 +68,15 @@
 		       TB_MEMBER
 		   SET USER_INTRO = ?
 		     , PROFILEPIC_PATH = ?
-		     , EMAIL = ?
 		 WHERE USER_NO = ?
 	</entry>
+	
+	<entry key="updateInfoEmail">
+        UPDATE
+               TB_MEMBER
+           SET EMAIL = ?
+             , MODIFY_DATE = SYSDATE
+         WHERE USER_NO = ?
+           
+    </entry>
 </properties>

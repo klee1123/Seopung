@@ -85,6 +85,7 @@ public class MyPlanDao {
 			
 			while(rset.next()) {
 			Plan p = new Plan();
+			p.setPlanNo(rset.getInt("plan_no"));
 			p.setPlanTitle(rset.getString("plan_title"));
 			p.setStartDate(rset.getDate("plan_sdate"));							
 			p.setEndDate(rset.getDate("plan_edate"));
