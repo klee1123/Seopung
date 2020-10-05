@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList , com.kh.recommend.model.vo.*" %>
-<%
-	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,20 +13,14 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <!-- 달력 -->
     <script src="resources/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
-   	<script>
-   	  $( function() {
-        $( "#calendar" ).datepicker({
-          firstDay: 1
-        });
-      });
-  	</script>
+   
     <style>
     	#mainPlanRec{
-            width:300px;
+            width:250px;
         }
         #mainPlanRec a{
             text-decoration: none;
@@ -39,7 +30,7 @@
             height:40px;
         }
         #mainNotice{
-            width:300px;
+            width:250px;
         }
         #mainNotice a{
             text-decoration: none;
@@ -55,6 +46,9 @@
         .single_donation_item{
         
             font-size: 18px;
+        }
+        table {
+        	border : 1px; solid; lightgray;
         }
         
         .ui-datepicker{ font-size: 20px; width:280px; height: 300px; }
@@ -96,29 +90,29 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
-                       	<div id="calendar"></div>
+                       	<div id="datepicker"></div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item" style="margin-left: 40px;">
-                        <h4>공지사항</h4><br>
-                        <p><table id="mainNotice" >
+                        <h3>공지사항</h3><br>
+                        <p><table id="mainNotice" border="1" >
                            <!-- <tr>
                            		<td><a href="">공지사항 제목 공지사항 제목</a></td>
                            </tr>  -->
                         </table></p><br>
-                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
+                        <a href="<%= contextPath %>/list.no?currentPage=1" style="text-decoration: none; color: black; font-size:13px">공지사항 더보기</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item">
-                        <h4>인기글</h4><br>
-                        <p><table id="mainPlanRec">
+                        <h3>인기글</h3><br>
+                        <p><table id="mainPlanRec" border="1">
                            <!-- <tr>
                            		<td><a href="">인기글 제목</a></td>
                             </tr>  --> 
                             </table></p><br> 
-                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
+                        <a href="<%= contextPath %>/list.pl?currentPage=1" style="text-decoration: none; color: black; font-size:13px"">일정 더보기</a>
                     </div>
                 </div>
             </div>
@@ -245,9 +239,17 @@
 		}
 	</script>
 
+	<script>
+	$( function() {
+        $( "#datepicker" ).datepicker({
+          firstDay: 1
+        });
+      });
+  	</script>
+  	
 	<footer>
-	<%@include file="views/common/footer.jsp" %>
 	
+	<%@include file="views/common/footer.jsp" %>
 	</footer>
 
 

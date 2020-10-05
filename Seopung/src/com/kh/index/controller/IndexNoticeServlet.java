@@ -34,7 +34,7 @@ public class IndexNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<AdminNotice> list = new IndexService().selectNotice();
-		System.out.println(list);
+		
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new Gson();
