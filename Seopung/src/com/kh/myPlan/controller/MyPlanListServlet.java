@@ -72,7 +72,7 @@ public class MyPlanListServlet extends HttpServlet {
 		       
 		        // 2. 현재 요청한 페이지(currentPage)에 보여질 게시글 리스트 조회해오기
 		        ArrayList<Plan> list = new MyPlanService().selectList(pi, userNo);
-		        
+
 		        request.setAttribute("pi", pi);
 		        request.setAttribute("list", list);
 		        request.setAttribute("userNo", userNo);

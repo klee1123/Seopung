@@ -1,6 +1,7 @@
 package com.kh.information.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.Member.model.vo.Member;
 import com.kh.information.model.service.InfoService;
 
@@ -32,23 +34,12 @@ public class UpdateEmailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		String email = request.getParameter("email");
+		int userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo();
 		String updateEmail = request.getParameter("updateEmail");
 		
-		Member updateMem = new InfoService().updateInfoEmail(userNo, email, updateEmail);
+		int result = new InfoService().updateInfoEmail(userNo, updateEmail);
 		
-		HttpSession session = request.getSession();
-		
-		if(updateMem != null) { // 비밀번호 변경 성공
-			
-			session.setAttribute("alertMsg", "성공적으로 닉네임이 변경됐습니다.");
-			session.setAttribute("m", updateMem);
-			
-		}else { // 실패
-			session.setAttribute("alertMsg", "닉네임 변경에 실패했습니다");
-		}
-		response.sendRedirect(request.getContextPath() + "/myPage.me");
+		response.getWriter().print(result);
 		
 	}
 

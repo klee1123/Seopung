@@ -85,7 +85,9 @@
 
 		<div class="outer">
 
-			<!-- 들어가는 요소 : 1.타이틀 2.등록일  3. -->
+			<!-- 들어가는 요소 : 1.타이틀 2.질문 등록일  / 
+							3.답변자 4.문의 타입 5.회원이면 넘버/비회원이면 이메일 
+							6.회원 문의 내용 7. 관리자 답변 내용 -->
 			<div id="content_1">
 				<div style="width: 740px; font-size: 18px;"><%=i.getInquireTitle()%></div>
 				<div style="text-align: right;"><%=i.getInquireEnrollDate()%></div>
@@ -101,7 +103,7 @@
 	                 <div><%= i.getInquireEmail() %></div> <!-- 비회원일시 이메일 보이게 -->
 	                 <% } %>
 					
-				</div> <!-- 회원 넘버 -->
+				</div>
 			</div>
 
 			<hr>
