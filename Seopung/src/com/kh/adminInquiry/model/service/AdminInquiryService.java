@@ -12,6 +12,7 @@ import com.kh.adminInquiry.model.dao.AdminInquiryDao;
 import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminNotice.model.dao.AdminNoticeDao;
 import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.adminPlan.model.dao.PlanDao;
 import com.kh.common.PageInfo;
 
 public class AdminInquiryService {
@@ -45,6 +46,25 @@ public class AdminInquiryService {
 		close(conn);
 		
 		return i;
+	}
+	
+	/**
+	 * 1:1 문의글 삭제용 서비스
+	 * @param pno		삭제할 글 번호
+	 * @return			처리된 행 수
+	 */
+	public int deleteInquiry(String[] ino) {
+		Connection conn = getConnection();
+		
+		int result = new AdminInquiryDao().deleteInquiry(conn, ino);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
 	}
 	
 
