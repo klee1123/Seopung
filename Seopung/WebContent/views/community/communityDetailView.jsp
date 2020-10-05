@@ -79,7 +79,7 @@
 
         <hr>
 
-        <div id="content_3">
+        <div id="content_3" style="overflow:auto;">
             <%=c.getContent() %>
         </div>
         <%if(loginUser != null && loginUser.getUserNo() == c.getUserNo1() && loginUser.getCategory() == 1){  %>

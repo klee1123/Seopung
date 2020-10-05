@@ -16,7 +16,6 @@
 			    FROM (
 			        SELECT 
 			               RECOMMEND_NO
-			             , COUNT() 
 			             , RECOMMEND_TITLE
 			             , RECOMMEND_CONTENT
 			             , ADMIN_NO
