@@ -1,6 +1,7 @@
-package com.kh.community.cotroller;
+package com.kh.recommend.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.LoginUser;
-import com.kh.community.model.service.CommunityService;
+import com.kh.recommend.model.service.RecommendService;
 
 /**
- * Servlet implementation class CommunityRecommendServlet
+ * Servlet implementation class RecommendDeleteSerlvet1
  */
-@WebServlet("/recommend.co")
-public class CommunityRecommendServlet extends HttpServlet {
+@WebServlet("/delete.re")
+public class RecommendDeleteSerlvet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityRecommendServlet() {
+    public RecommendDeleteSerlvet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +30,20 @@ public class CommunityRecommendServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	 LoginUser loginUser = (LoginUser)request.getSession().getAttribute("loginUser");
-	 
-	 	int userNo = loginUser.getUserNo();
+	
 		int cno = Integer.parseInt(request.getParameter("cno"));
-		int result = new CommunityService().increaseRe(cno, userNo);
+		
+		int result = new RecommendService().deleteRecommend(cno);
 		
 		if(result > 0) {
 			
-			request.getSession().setAttribute("alertMsg", "추천되었습니다.");
+			request.getSession().setAttribute("alertMsg", "게시물이 삭제되었습니다");
 			
-			response.sendRedirect(request.getContextPath() + "/detailList.co?cno=" + cno);
-		}else {
+			String neww = URLEncoder.encode("최신");
 			
-			int result1 = new CommunityService().decreaseRe(cno);
-			if(result1 > 0) {
-			request.getSession().setAttribute("alertMsg", "이미 추천했습니다.");
-			response.sendRedirect(request.getContextPath() + "/detailList.co?cno=" + cno);
-			}
+			response.sendRedirect(request.getContextPath() + "/list.re?currentPage=1&array=" + neww);
 		}
+		
 	}
 
 	/**

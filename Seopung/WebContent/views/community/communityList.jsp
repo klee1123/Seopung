@@ -41,9 +41,7 @@
 	position: absolute;
 }
 
-#content br {
-	display: none;
-}
+
 
 table {
 	border-spacing: 3px;
@@ -94,6 +92,18 @@ p>img {
 }
 #notic a{
 	color:black;
+}
+
+#content *{
+	font-size:15px;
+	color:black;
+	background-color:white;
+	font-weight:normal;
+	display:inline	
+
+}
+#content br{
+	display: none;
 }
 </style>
 </head>

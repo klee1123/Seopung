@@ -79,7 +79,7 @@
             <div class="MakeMap" align="center" >
                 
                 <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
-                <p><a href="<%=contextPath%>/planOption.pl">여행 만들러 가기</a></p>
+                <p><a href="<%=contextPath%>/planPage.pl?currentPage=1">여행 만들러 가기</a></p>
             </div>
            
             <!-- 각각 게시판 div -->
@@ -91,6 +91,7 @@
             	<% for(Plan p : list) { %>
 	            <div class="MyplanMap">
 	                <input type="checkbox" id="chk" name="mpno" value="<%= p.getPlanNo() %>">
+	                
 	                   <div id="seoulMap" style="width:250px;height:200px;">
 						<img src="resources/images/서울.jpg" name="mapImg">
 						</div>
