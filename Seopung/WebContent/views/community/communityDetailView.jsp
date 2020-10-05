@@ -406,7 +406,8 @@
        		$.ajax({
        			url:"<%=contextPath%>/adminPage/delete.rco",
        			type:"post",
-       			data:{"commentNo":commentNo},
+       			data:{"commentNo":commentNo,
+       				  "cno":<%=c.getComNo()%>},
        			success:function(result){
        				
        				if(result>0){
@@ -556,7 +557,8 @@
        		$.ajax({
        			url:"<%=contextPath%>/adminPage/delete.rco",
        			type:"post",
-       			data:{"commentNo":commentNo},
+       			data:{"commentNo":commentNo,
+       				  "cno":<%=c.getComNo()%>},
        			success:function(result){
        				
        				if(result>0){

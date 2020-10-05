@@ -216,6 +216,11 @@
 		   SET COMMUNITY_TITLE = ?
 		     , COMMUNITY_CONTENT = ?
 		     , COMMUNITY_MODIFY = SYSDATE
+ 		 WHERE COMMUNITY_NO = ?
+
+	<entry key="decreaseReCount">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_COMMENT = COMMUNITY_COMMENT -1
 		 WHERE COMMUNITY_NO = ?
 	</entry>
 </properties>

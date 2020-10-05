@@ -1,4 +1,4 @@
-package com.kh.adminCommunity.controller;
+package com.kh.adminNotice.controller;
 
 import java.io.IOException;
 
@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminCommunity.model.service.CommunityService;
-
+import com.kh.adminNotice.model.service.AdminNoticeService;
 
 /**
- * Servlet implementation class AdminCommunityCommentDeleteServlet
+ * Servlet implementation class AdminCommunityDeleteServlet
  */
-@WebServlet("/adminPage/delete.rco")
-public class AdminCommunityCommentDeleteServlet extends HttpServlet {
+@WebServlet("/adminPage/delete.no")
+public class AdminNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCommunityCommentDeleteServlet() {
+    public AdminNoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +31,19 @@ public class AdminCommunityCommentDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-		int cno = Integer.parseInt(request.getParameter("cno"));
-		int result = new CommunityService().deleteComment(commentNo);
-		int result1 = new CommunityService().decreaseReCount(cno);
-		response.getWriter().print(result);
+		String[] nno = request.getParameterValues("nno");
+		
+		int result = new AdminNoticeService().deleteAdminNotice(nno);
+		
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "공지사항 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.no?currentPage=1");
+			
+		}else {
+			request.setAttribute("errorMsg", "공지사항 삭제 실패");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
+		
 	}
 
 	/**

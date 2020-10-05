@@ -97,9 +97,14 @@ p>img {
 	font-size:15px;
 	color:black;
 	background-color:white;
-	font-weight:normal;
-	display:inline
+	font-weight:lighter;
+	display:inline;
+	font-family:나눔고딕;
+}
 	
+}
+#content img{
+	display: none;
 }
 #content br {
 	display: none;

@@ -82,7 +82,7 @@ table {
 	font-size: 15px;
 }
 
-p>img {
+#content img{
 	display: none;
 }
 
@@ -98,10 +98,12 @@ p>img {
 	font-size:15px;
 	color:black;
 	background-color:white;
-	font-weight:normal;
-	display:inline	
-
+	font-weight:lighter;
+	display:inline;
+	font-family:나눔고딕;
 }
+#content font{
+background-color:white;}
 #content br{
 	display: none;
 }
@@ -179,7 +181,7 @@ p>img {
 							id="headTitle" style="margin-left: 140px;"><%=c.getHead()%></span>
 					</span> <a href="<%=contextPath%>/detailList.co?cno=<%=c.getComNo()%>"
 						style="text-decoration: none; color: black;"> <span id="title"
-							name="title"><%=c.getTitle()%>&nbsp;</span>
+							name="title"><%=c.getTitle()%>&nbsp;[<%=c.getReCount()%>]</span>
 					</a>
 
 				</span> <br> <span

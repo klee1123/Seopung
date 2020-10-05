@@ -162,4 +162,20 @@ public class CommunityService {
 		
 		return result;
 	}
+
+
+
+	public int decreaseReCount(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().decreaseReCount(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 }
