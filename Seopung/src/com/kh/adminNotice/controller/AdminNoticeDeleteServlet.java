@@ -1,26 +1,27 @@
-package com.kh.searchPlan.controller;
+package com.kh.adminNotice.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.adminPlan.model.service.PlanService;
-import com.kh.adminPlan.model.vo.Plan;
+import com.kh.adminCommunity.model.service.CommunityService;
+import com.kh.adminNotice.model.service.AdminNoticeService;
 
 /**
- * Servlet implementation class PlanDetailViewServlet
+ * Servlet implementation class AdminCommunityDeleteServlet
  */
-@WebServlet("/detail.pl")
-public class PlanDetailServlet extends HttpServlet {
+@WebServlet("/adminPage/delete.no")
+public class AdminNoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanDetailServlet() {
+    public AdminNoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +31,19 @@ public class PlanDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		int result = new PlanService().increaseCount(pno);
+		String[] nno = request.getParameterValues("nno");
+		
+		int result = new AdminNoticeService().deleteAdminNotice(nno);
 		
 		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "공지사항 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/adminPage/list.no?currentPage=1");
 			
-			Plan p = new PlanService().selectPlan(pno);
-			int dayCount = new PlanService().selectDayCount(pno);
-			
-			request.setAttribute("dayCount", dayCount);
-			request.setAttribute("p", p);
-			request.getRequestDispatcher("views/search/planDetailView.jsp").forward(request, response);
-
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "공지사항 삭제 실패");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-	
-	
+		
 	}
 
 	/**

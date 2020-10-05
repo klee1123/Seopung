@@ -128,16 +128,15 @@
 							</div>
 						</td>
 						<td width="">
-							<button class="btn btn-primary">삭제하기</button>
-							
+							<button class="btn btn-primary" id="btnDelete">삭제</button>
 						</td>
-					</tr>
+						</tr>
 				</table>
-			</div>
+				</div>
 			
 			<br><br>
 
-		</div>
+			</div>
 		
 			<script>
 			// 제목 선택시 상세조회 페이지로 이동

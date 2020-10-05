@@ -101,5 +101,37 @@ private Properties prop = new Properties();
 		return list;
 		
 	}
+	
+	public int deleteReport(Connection conn, String[] rno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteReport");
+		
+		// 삭제할 신고글 갯수가 복수일 경우
+		if(rno.length > 1) {
+			for(int i=1; i<rno.length; i++) {
+				sql += " OR REPORT_NO =" + rno[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(rno[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
 }
 

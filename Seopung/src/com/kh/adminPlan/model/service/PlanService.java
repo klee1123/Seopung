@@ -246,4 +246,26 @@ public class PlanService {
 		
 		return result;
 	}
+	
+	public int selectDayCount(int pno) {
+		Connection conn = getConnection();
+		
+		int result = new PlanDao().selectDayCount(conn, pno);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	public String selectPlanPlaces(int pno, int day) {
+		Connection conn = getConnection();
+		
+		String placeList = new PlanDao().selectPlanPlaces(conn, pno, day);
+		
+		close(conn);
+		
+		return placeList;
+	}
+	
 }

@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8" import="com.kh.adminPlan.model.vo.Plan"%>
 <%
 	Plan p = (Plan)request.getAttribute("p");
+	int dayCount = (int)request.getAttribute("dayCount");
 
 	String[] ages = p.getAge().split(",");
 	String[] types = p.getPlanType().split(",");
 	String[] trans = p.getTransrportations().split(",");
+	
 
 %>
 <!DOCTYPE html>
@@ -31,7 +33,7 @@
 #content_2_2 {
 	background-color: lightgrey;
 	width: 420px;
-	height: 130px;
+	height: 75px;
 	padding: 20px;
 	box-sizing: border-box;
 	margin-top: 10px;
@@ -39,32 +41,33 @@
 }
 
 #content_2_2>button {
-	margin: 3px;
+	margin: 1px;
 }
 
 #content_2_3 {
 	width: 420px;
-	height: 155px;
-	border: 1px solid lightgrey;
+	height: 212px;
 	margin-top: 10px;
-	padding: 10px;
 	float: left;
 }
 
 #content_3 table {
-	width: 345px;
+	
+	width: 300px;
 	background: white;
 	box-shadow: 5px 5px 10px -4px gray; 
 	float : left; 
 	margin-right : 20px;
 	margin-top: 15px;
 	float: left;
+	cursor:pointer;
 }
 
 #content_3_2 {
 	width: 420px;
-	height: 100px;
+	height: 110px;
 	margin-top: 15px;
+	margin-left:20px;
 	padding: 10px;
 	color: grey;
 	border: 1px solid lightgrey;
@@ -74,6 +77,52 @@
 
 #content_5 table {
 	margin-bottom: 20px;
+}
+
+/* Style the tab */
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color:#eeeeee;
+  width: 20%;
+  height: 100%;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  height:20px;
+  line-height:1px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 12px;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-left: none;
+  height: 100%;
 }
 </style>
 </head>
@@ -178,28 +227,34 @@
 				</div>
 				<div id="content_2_2" style="overflow:auto;">
 					<%for(int i=0; i<ages.length; i++){ %>
-						<button disabled class="btn btn-secondary"><%= ages[i] %>대</button>					
+						<button disabled class="btn btn-secondary btn-sm"><%= ages[i] %>대</button>					
 					<%} %>
 					<%for(int i=0; i<types.length; i++){ %>
-						<button disabled class="btn btn-secondary"><%= types[i] %></button>					
+						<button disabled class="btn btn-secondary btn-sm"><%= types[i] %></button>					
 					<%} %>
 					<%for(int i=0; i<trans.length; i++){ %>
-						<button disabled class="btn btn-secondary"><%= trans[i] %></button>					
+						<button disabled class="btn btn-secondary btn-sm"><%= trans[i] %></button>					
 					<%} %>
 				</div>
 				<div id="content_2_3" style="overflow:auto;">
-					<select name="" id="">
-						<option value="">day1</option>
-						<option value="">day2</option>
-						<option value="">day3</option>
-						<option value="">day4</option>
-					</select> <br> <br>
-
-					<ol>
-						<li>서울역</li>
-						<li>경복궁</li>
-						<li>창덕궁</li>
-					</ol>
+					<div class="tab" style="overflow: auto;">
+						<%for(int i=1; i<=dayCount; i++){ %>
+							<%if(i==1){ %>
+							<button class="tablinks" onclick="openDay(event, '<%=i %>')" id="defaultOpen">day<%=i %></button>
+							<%}else{ %>
+							<button class="tablinks" onclick="openDay(event, '<%=i %>')">day<%=i %></button>
+							<%} %>
+						<%} %>
+					</div>
+		
+					<%for(int i=1; i<=dayCount; i++){ %>
+					<div id="<%=i %>" class="tabcontent">
+						<h4>Day<%=i %></h4>
+						<ol id="placeArea<%=i%>">
+							
+						</ol>
+					</div>
+					<%} %>
 				</div>
 			</div>
 
@@ -207,18 +262,34 @@
 
 			<div id="content_3">
 				<div id="content_3_1">
+					<input type="hidden" name="userNo" value="<%=p.getUserNo()%>">
 					<table>
 						<tr style="height: 100px;">
-							<td width="100" align="center"><img width="60"
+							<td width="100" align="center">
+								<%if(p.getProfile().equals("null")){ %>
+								<img width="65" height="65" class='rounded-circle'
 								src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 								alt=""></td>
+								<%}else{ %>
+								<img width="65" height"65" class="rounded-circle" src="<%=contextPath %>/<%=p.getProfile() %>">
+								<%} %>
+							</td>
 							<td><b style="font-size:18px;"><%=p.getPlanWriter() %></b> <br> 클릭시 프로필 조회 가능</td>
 						</tr>
 					</table>
-					<div
-						style="line-height: 100px; float: left; margin-right: 20px; margin-top: 10px;">
-						<button style="height: 60px;" disabled
-							class="btn btn-primary btn-sm">동행신청</button>
+					<div style="float:left;">
+						<br>
+						<%if(p.getAccompany().equals("Y")){ %>
+						<button disabled class="btn btn-success btn-sm" style="margin-bottom:10px; margin-top:5px; width:120px;">동행신청 허용</button> <br>
+						<%}else{ %>
+						<button disabled class="btn btn-success btn-sm" style="margin-bottom:10px; margin-top:5px; width:120px;">동행신청 비허용</button> <br>
+						<%} %>
+						
+						<%if(p.getScrapYN().equals("Y")){ %>
+						<button disabled class="btn btn-primary btn-sm" style="width:120px;">스크랩 허용</button> <br>
+						<%}else{ %>
+						<button disabled class="btn btn-primary btn-sm" style="width:120px;">스크랩 비허용</button> <br>
+						<%} %>
 					</div>
 				</div>
 				<div id="content_3_2" style="overflow:auto;">
@@ -292,6 +363,162 @@
 			<br> <br>
 
 		</div>
+		
+		<!--  프로필 모달 -->
+		<div class="modal" id="myProfile">
+	        <div class="modal-dialog modal-sm">
+	            <div class="modal-content" align="center">
+	            
+	                <!-- Modal Header -->
+	                <div class="modal-header">
+	                <h5>프로필</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+	                
+	                <!-- Modal body -->
+	                <div class="modal-profile" style="height:370px;">
+					</div>          
+	            </div>
+	        </div>
+	    </div><!-- profile modal end -->
+	    
+	    
+	    <!-- 상세일정 조회용 -->
+		<script>
+			function openDay(evt, dayName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+				selectPlace(dayName);
+				document.getElementById(dayName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
+	
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+		
+			$(function(){
+				
+				selectPlace(1);
+				
+			});
+		
+			function selectPlace(day){
+				
+				$.ajax({
+					type:"get",
+					url:"<%=contextPath%>/place.pl",
+					data:{
+						"day":day,
+						"pno":<%=p.getPlanNo()%>
+					}, success:function(place){
+						
+						var places = place.split(',');
+						
+						var str = ""
+						for(var i=0; i<places.length; i++){
+							str += "<li>" + places[i] + "</li>";
+						}
+						
+						$("#placeArea" + day).html(str);
+						
+					}, error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+				
+				
+			}
+		</script>
+	    
+	    <!-- 프로필 모달 ajax 스크립트 -->
+		<script>
+			var modal = document.getElementById("myProfile");
+		
+			$(function(){
+				$("#content_3_1").click(function(){
+					
+					modal.style.display = "block";
+					selectProfile($("#content_3_1").children().eq(0).val());					
+
+						
+				});
+				$(".close").click(function() {
+					modal.style.display = "none";
+				});
+				
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+					}
+				}
+			
+			});
+			
+			function selectProfile(userNo){
+	       		$.ajax({
+	       			url:"<%=contextPath%>/profile.pl",
+	       			type:"post",
+	       			data:{
+	       				"userNo":userNo
+	       			},
+	       			success:function(profile){
+	       				
+	       				var content = "<br>";
+	       				
+	       				if(profile.m.profile != "null"){
+		       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+	       				}else{
+	       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+	       				}
+	       					
+		                content += "<br><br>" +
+		                    "<table>" +
+		                        "<tr>" +
+		                            "<th  width='70'>닉네임</th>" +
+		                            "<td width='140'>" +
+		                                profile.m.nickName + 
+		                            "</td>" +
+		                        "</tr>" +
+		                        "<tr>" +
+		                            "<th>이메일</th>" +
+		                            "<td>" +
+		                                profile.m.email + 
+		                            "</td>" +
+		                        "</tr>" +
+		                        "<tr>" +
+		                            "<th>가입일</th>" +
+		                            "<td>" +
+		                                profile.m.enrollDate +
+		                            "</td>" +
+		                        "</tr>" +
+		                    "</table>" +
+		                    //"<br>" +
+		                    "<textarea cols='27' rows='3' readonly style='resize: none; margin-top:10px; overflow: auto;'>";
+		                    
+		                if(profile.m.userIntro != "null"){
+		                	content += profile.m.userIntro + "</textarea>";
+		                }else{
+		                	content +=  "</textarea><br>";
+		                }
+		               
+		                $(".modal-profile").html(content);
+	
+	       			}, error:function(){
+	       				console.log("프로필 조회용 ajax 통신 실패");
+		       		}
+		       	});
+			}
+		</script>
+		
+		
+		<!--  댓글 관련 스크립트 -->
 		<script>
 			$(function(){
 				

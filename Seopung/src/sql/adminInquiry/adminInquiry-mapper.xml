@@ -35,22 +35,30 @@
 	
 	<!-- 관리자 1:1문의 상세 조회 -->
 	<entry key="selectAdminInquiry">
-	SELECT 
-		   INQUIRE_NO
-	     , INQUIRE_TITLE
-	     , INQUIRE_CONTENT
-	     , INQUIRE_ENROLL_DATE
-	     , INQUIRE_RESPONSE
-	     , INQUIRE_TYPE
-	     , INQUIRE_SEP
-	     , INQUIRE_EMAIL
-	     , ADMIN_ID
-	     , USER_ID
-	  FROM TB_INQUIRE I
-FULL OUTER JOIN TB_MEMBER USING(USER_NO)
-FULL OUTER JOIN TB_ADMIN USING(ADMIN_NO)
-	 WHERE I.STATUS = 'Y'
-	   AND INQUIRE_NO = ?
+		SELECT 
+			   INQUIRE_NO
+		     , INQUIRE_TITLE
+		     , INQUIRE_CONTENT
+		     , INQUIRE_ENROLL_DATE
+		     , INQUIRE_RESPONSE
+		     , INQUIRE_TYPE
+		     , INQUIRE_SEP
+		     , INQUIRE_EMAIL
+		     , ADMIN_ID
+		     , USER_ID
+		  FROM TB_INQUIRE I
+	FULL OUTER JOIN TB_MEMBER USING(USER_NO)
+	FULL OUTER JOIN TB_ADMIN USING(ADMIN_NO)
+		 WHERE I.STATUS = 'Y'
+		   AND INQUIRE_NO = ?
+	</entry>
+	
+	<entry key="deleteInquiry">
+		UPDATE 
+		       TB_INQUIRE
+		   SET STATUS = 'N'
+		     , RESPONSE_DATE = SYSDATE
+		 WHERE INQUIRE_NO = ?
 	</entry>
 	
 
