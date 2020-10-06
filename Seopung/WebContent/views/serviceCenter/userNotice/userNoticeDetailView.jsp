@@ -116,7 +116,7 @@ div {
         <hr>
 
         <div class="outer" align="left">
-			<form action="<%= contextPath %>/detail.uno" 
+			<form action="<%= contextPath %>/detail.no" 
 				  method="post" id="userNoticeForm">
 
 				<div>
