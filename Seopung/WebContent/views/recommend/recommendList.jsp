@@ -82,7 +82,7 @@ table {
 	font-size: 15px;
 }
 
-p>img {
+#content img{
 	display: none;
 }
 
@@ -93,6 +93,7 @@ p>img {
 #notic a{
 	color:black;
 }
+
 #content *{
 	font-size:15px;
 	color:black;
@@ -101,13 +102,11 @@ p>img {
 	display:inline;
 	font-family:나눔고딕;
 }
-	
-}
-#content img{
+#content font{
+background-color:white;}
+#content br{
 	display: none;
 }
-#content br {
-	display: none;
 }
 </style>
 </head>
