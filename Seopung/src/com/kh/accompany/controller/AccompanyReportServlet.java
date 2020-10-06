@@ -31,13 +31,19 @@ public class AccompanyReportServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int flagNo = Integer.parseInt(request.getParameter("flagNo"));
+		
 		String reportUserNo = request.getParameter("reportUserNo");
 		String reportUserNo2 = request.getParameter("reportUserNo2");
 		System.out.println(reportUserNo2);
 		int reportPostNo = Integer.parseInt(request.getParameter("planNo"));
 		System.out.println(reportPostNo);
+		int accomNo = Integer.parseInt(request.getParameter("accomNo"));
+		
 		String reportType = request.getParameter("reportType");
 		String reportContent = request.getParameter("reportContent");
+		
+		
 		
 		
 		
@@ -58,15 +64,26 @@ public class AccompanyReportServlet extends HttpServlet {
 			result = new AccompanyService().insertReport(accomReport);
 			request.getSession().setAttribute("alertMsg", "신고가 성공적으로 접수되었습니다.");
 			
-			result = new AccompanyService().updateReport(accomReport);
+			result = new AccompanyService().updateReport(accomNo);
 			
 			
 			
 		}
-
 		
-		response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
+		
+		if(flagNo == 1) {
+		
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1&accomNo=" + accomNo);
 	 
+		}else if(flagNo == 2){
+			
+			response.sendRedirect(request.getContextPath() + "/request.ac?currentPage=1&accomNo=" + accomNo);
+		
+		}else {
+			
+			response.sendRedirect(request.getContextPath() + "/response.ac?currentPage=1&accomNo=" + accomNo);
+		}
+		
 		
 		
 		

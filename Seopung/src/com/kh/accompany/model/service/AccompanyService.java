@@ -143,11 +143,11 @@ public class AccompanyService {
 		
 	}
 	
-	public int updateReport(Report accomReport) {
+	public int updateReport(int accomNo) {
 		
 		Connection conn = getConnection();
 		
-		int result = new AccompanyDao().updateReport(conn, accomReport);
+		int result = new AccompanyDao().updateReport(conn, accomNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -184,6 +184,22 @@ public class AccompanyService {
 		
 		return list;
 		
+		
+	}
+	
+	public int agree(int accomNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().agree(conn, accomNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
 		
 	}
 	

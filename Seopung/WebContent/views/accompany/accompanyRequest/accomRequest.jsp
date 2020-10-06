@@ -126,12 +126,14 @@
 	                        <td><%= list.get(i).getUserNick() %></td>
 	                        <td><%= list.get(i).getAccomApply() %></td>
                             <td><a href="#"><%= list.get(i).getPlanTitle() %></a></td>
-                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">수락</a> /
+                            <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;" onclick="agree(<%=list.get(i).getAccomNo() %>);">수락</a> /
                                 <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
                             </td>
                             <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
 							<input type="hidden" name="userNo" id="userNo1" value="<%= list.get(i).getUserNo1() %>">
+                        	<input type="hidden" id="accomNo1" value="<%= list.get(i).getAccomNo() %>">
+                        
                         </tr>
 						<% } %>
                     <% } %>
@@ -150,17 +152,22 @@
 					var reportUserNo = $("#reportNo").val();
 					console.log(reportUserNo);
                 	var userNo1 = $("#userNo1").val();
+                	var accomNo = $("#accomNo1").val();
                 	
                 	
                 	$("#reportPlanNo").val(planNo);
-                	console.log($("#reportPlanNo").val());
                 	
                
-                		$("#reportNo2").val(userNo1);
-                		console.log($("#reportNo2").val());
-                
+                	$("#reportNo2").val(userNo1);
 					
+                	$("#accomNo").val(accomNo);
+                	
 					
+				}
+				
+				function agree(accomNo){
+					
+					$("#accomNo").val(accomNo);
 					
 					
 					
@@ -194,8 +201,8 @@
                                 </h4>
                                 <br>
             
-                                <form action="" method="post">
-                        
+                                <form action="<%= contextPath %>/agree.ac" method="GET">
+                        			<input type="hidden" name="accomNo" id="accomNo">
                                     <button type="submit" class="genric-btn info-border radius">확인</button>
                                     <button type="reset" class="genric-btn danger-border radius">취소</button>
                                 </form>
@@ -257,9 +264,11 @@
                             <div class="modal-body" align="center">
                         
                                 <form action="<%= contextPath %>/report.ac" method="get">
+                                	<input type="hidden" name="flagNo" value=2>
             						<input type="hidden" name="reportUserNo" id="reportNo">
             						<input type="hidden" name="reportUserNo2" id="reportNo2">
             						<input type="hidden" name="planNo" id= "reportPlanNo">
+            						<input type="hidden" name="accomNo" id= "accomNo">
                                     <p style="font-size: 13px; padding-left:20px;">
                                 * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
                                 * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>

@@ -42,7 +42,7 @@
 		                     , C.USER_NO2
 		                     , C.PLAN_NO
 		                  FROM TB_ACCOMPANY C
-		                  JOIN TB_MEMBER M ON(C.USER_NO2 = M.USER_NO)
+		                  JOIN TB_MEMBER M ON(C.USER_NO = M.USER_NO)
 		                  WHERE C.ACCOM_STATUS = 'Y' 
 		                    AND (C.USER_NO = ? or C.USER_NO2 = ?) 
 		                 ORDER 
@@ -134,7 +134,7 @@
 		UPDATE
 				TB_ACCOMPANY
 		   SET	ACCOM_STATUS = 'N'
-		 WHERE   
+		 WHERE  ACCOM_NO = ?
 	
 	</entry>
 	
@@ -176,6 +176,16 @@
 	
 	
 	</entry>
+	<entry key="accomAgree">
+		UPDATE TB_ACCOMPANY
+		   SET ACCOM_STATUS = 'Y'
+		 WHERE ACCOM_NO = ?
+	
+	
+	</entry>
+	
+	
+	
 	
 	
 </properties>

@@ -117,7 +117,7 @@
 	                <%} else { %>
 	                	<% for(Accompany a : list) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> <input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>"></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> </td>
 	                        <td><%= a.getUserId() %></td>
 	                        <td><%= a.getUserNick() %></td>
 	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile('<%= a.getUserId() %>');">프로필</a></td>
@@ -128,6 +128,8 @@
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
 							<input type="hidden" name="userNo" id="userNo1" value="<%= a.getUserNo1() %>">
 							<input type="hidden" name="userNo2" id="userNo2" value="<%= a.getUserNo2() %>">
+	                   		<input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>">
+	                   		
 	                    </tr>
 	                    <% } %>
                     <% } %>
@@ -194,9 +196,16 @@
 					console.log(reportUserNo);
                 	var userNo1 = $("#userNo1").val();
                 	var userNo2 = $("#userNo2").val();
+                	var accomNo = $("#accomNo1").val();
+                	
+                	
                 	
                 	$("#reportPlanNo").val(planNo);
                 	console.log($("#reportPlanNo").val());
+                	$("#accomNo").val(accomNo);
+                	
+                	
+                	
                 	
                 	if(reportUserNo == userNo1){
                 		$("#reportNo2").val(userNo2);
@@ -376,9 +385,11 @@
                             <div class="modal-body" align="center">
                         
                                 <form action="<%= contextPath %>/report.ac" method="get">
+                                	<input type="hidden" name="flagNo" value=1>
             						<input type="hidden" name="reportUserNo" id="reportNo">
             						<input type="hidden" name="reportUserNo2" id="reportNo2">
             						<input type="hidden" name="planNo" id= "reportPlanNo">
+            						<input type="hidden" name="accomNo" id= "accomNo">
                                     <p style="font-size: 13px; padding-left:20px;">
                                 * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
                                 * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>

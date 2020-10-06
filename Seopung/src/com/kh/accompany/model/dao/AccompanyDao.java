@@ -294,25 +294,31 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public int updateReport(Connection conn, Report accomReport) {
+	public int updateReport(Connection conn, int accomNo) {
 		
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("udateReport");
+		String sql = prop.getProperty("updateReport");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
 		}
 		
-		
+		return result;
 	}
 	
 	
@@ -403,6 +409,36 @@ private Properties prop = new Properties();
 		return list;
 		
 	}
+	
+	public int agree(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomAgree");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
 
 	
 	
