@@ -140,7 +140,7 @@ background-color:white;}
 					<!-- 관리자가 작성했을시 -->
 					<td style="width: 900px;">
 					 <a style="color:black; font-size:15px; font-weight:bold;" href="<%=contextPath%>/detailNotice.co?cno=<%=nc.getComNo()%>" "name="title1"><%=nc.getTitle() %></a></td>
-					<td><%=nc.getUserNo() %>&nbsp;&nbsp;&nbsp;</td>
+					<td>관리자&nbsp;&nbsp;&nbsp;</td>
 				</tr>
 
 				<tr>
