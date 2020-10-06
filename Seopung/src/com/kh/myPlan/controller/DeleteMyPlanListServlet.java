@@ -1,6 +1,7 @@
 package com.kh.myPlan.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,9 @@ public class DeleteMyPlanListServlet extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "내 일정 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/list.mp?currentPage=1&userNo=" + userNo);
+			String plan = URLEncoder.encode("모든일정");
+			
+			response.sendRedirect(request.getContextPath() + "/list.mp?currentPage=1&userNo=" + userNo +"&planOp=" + plan);
 		}
 		
 	}
