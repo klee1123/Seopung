@@ -54,7 +54,12 @@
         	border-radius:5px;
         	height:310px;
         }
-        
+        #recommendR>img{
+        	border-radius:5px;
+        }
+        #reImg{
+        	border-radius:5px;
+        }
         
     </style>
 </head>
@@ -174,7 +179,7 @@
 					                        "<div class='blog_text'>" +
 					                            "<p id='fontStyle' style='font-size:20px'>" + list[i].title + "</p>" + "<br>" +
 					                            "<div class='recommendRank' id='recommendR' style='width: 200; height:250px;'>" +
-					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img src=" + list[i].thumb + "></a>" +
+					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img id='reImg' src=" + list[i].thumb + "></a>" +
 					                            "</div>" +
 					                        "</div>" +
 					                    "</div>" +
