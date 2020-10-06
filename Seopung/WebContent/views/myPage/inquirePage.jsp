@@ -95,9 +95,9 @@
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
+               <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
                <% }else{ %>
-               <button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+               <button class="btn btn-outline-secondary btn-sm" disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>

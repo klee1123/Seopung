@@ -91,7 +91,7 @@
 	    			<%if(p != currentPage) {%>
 	                <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.sc?currentPage=<%=p%>&userNo=<%=userNo%>';"><%=p%></button>
 	                <%}else {%>
-	                <button class="btn btn-secondary btn-sm" disabled><%=p%></button>
+	                <button class="btn btn-outline-secondary btn-sm" disabled><%=p%></button>
 	                <% } %>
                 <% } %>
                 <% if(currentPage != maxPage) { %>

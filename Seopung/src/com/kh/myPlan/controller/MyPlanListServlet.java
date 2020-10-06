@@ -48,14 +48,13 @@ public class MyPlanListServlet extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		listCount = new MyPlanService().selectListCount(userNo);
-		
 		// * currentPage : 현재 요청한 페이지(요청한페이지)
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// * pageLimit : 한 페이지 하단에 보여질 페이지 최대 갯수 (페이지 목록을 몇 개 단위)
 		pageLimit = 5;
 		
-		boardLimit = 10;
+		boardLimit = 5;
 		
 		if(listCount != 0) {
             maxPage = (int)Math.ceil((double)listCount/boardLimit);
