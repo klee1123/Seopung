@@ -274,33 +274,24 @@
             	<%for(int i=0;i<list.size();i++){ %>
 	            <div class="thumbnail" align="center">
 	            	<input type="hidden" value="<%= list.get(i).getPlanNo() %>">
-	                <div id="staticMap<%=i %>" style="width:200px; height:200px;"></div>
+	                <div id="staticMap" style="width:200px; height:200px;"><img src="<%=contextPath %>/resources/images/map3.jpg" width="200" height="200"></div>
 	                <p>
-	                    <%= list.get(i).getPlanTitle() %> <br>
+	                    <div style="font-weight:700;overflow:hidden; white-space: nowrap;text-overflow: ellipsis; width:190px;font-size:17px;"><%= list.get(i).getPlanTitle() %></div>
 	                    <%= list.get(i).getStartDate() %> ~ <%= list.get(i).getEndDate() %><br>
 	                    <%= list.get(i).getPlanWriter() %> <br>
 	                </p>
 	            </div>
 	            <script>
-		         	// 이미지 지도에서 마커가 표시될 위치입니다 
-		            var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-	
-		            // 이미지 지도에 표시할 마커입니다
-		            // 이미지 지도에 표시할 마커는 Object 형태입니다
-		            var marker = {
-		                position: markerPosition
-		            };
-	            
-	            
+	            	
 					var staticMapContainer  = document.getElementById('staticMap<%=i%>'), // 이미지 지도를 표시할 div  
 					staticMapOption = { 
 				        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
 				        level: 3, // 이미지 지도의 확대 레벨
-				        marker: marker // 이미지 지도에 표시할 마커 
 				    };
 					
 					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
 					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+					
 				</script>
 	            <%} %>
             <%} %>
@@ -311,7 +302,7 @@
 			<table>
 				<tr>
 					<td width="150"><span style="font-size:17px;">총 일정 수 &nbsp;&nbsp;&nbsp;
-					<b style="color:black;"><%=listCount %></b> 개
+					<b style="color:grey;"><%=listCount %></b> 개
 					</span></td>
 					<td width="680px;">
 						<div align="center">

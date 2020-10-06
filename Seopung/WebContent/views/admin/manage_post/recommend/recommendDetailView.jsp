@@ -69,7 +69,7 @@
 
 			<hr>
 
-			<div id="content_3"><%= r.getRecommendContent() %></div>
+			<div id="content_3" style="overflow:auto;"><%= r.getRecommendContent() %></div>
 			
             <hr>
 

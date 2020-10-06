@@ -39,7 +39,7 @@
 #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;margin-top:4px;}
 #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 10px;}
+#placesList .item .info{padding:10px 0 10px 55px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color:#009900;}
@@ -228,14 +228,14 @@
 			
 			<div id="content_1_3">
 				<%for(int i=0; i<ages.length; i++){ %>
-				<button disabled class="btn btn-secondary btn-sm"><%= ages[i] %>대
+				<button disabled class="btn btn-primary btn-sm"><%= ages[i] %>대
 				</button>
 				<%} %>
 				<%for(int i=0; i<types.length; i++){ %>
-				<button disabled class="btn btn-secondary btn-sm"><%= types[i] %></button>
+				<button disabled class="btn btn-success btn-sm"><%= types[i] %></button>
 				<%} %>
 				<%for(int i=0; i<trans.length; i++){ %>
-				<button disabled class="btn btn-secondary btn-sm"><%= trans[i] %></button>
+				<button disabled class="btn btn-warning btn-sm"><%= trans[i] %></button>
 				<%} %>
 			</div>
 			
@@ -268,12 +268,12 @@
 		
 				<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				
-				<div id="menu_wrap" class="bg_white" style="width:200px;height:115px;">
+				<div id="menu_wrap" class="bg_white" style="width:220px;height:115px;">
 			        <div class="option">
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
-			                    <input type="text" value="서울" id="keyword" size="17"> 
-			                    <button type="submit" style="border:none; background-color:grey;color:white;">검색</button> 
+			                    <input type="text" value="서울" id="keyword" size="20"> 
+			                    <button type="submit" style="background-color:grey;color:white;width:37px;">검색</button> 
 			                </form>
 			            </div>
 			        </div>
@@ -578,10 +578,10 @@
        				
        				var content = "<br>";
        				
-       				if(profile.m.profile != "null"){
-	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+       				if(profile.m.profile == null || profile.m.profile == "null"){
+       					content += "<img src='<%=contextPath%>/resources/images/default-user.png' class='rounded-circle' height='120' width='120'>";
        				}else{
-       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
        				}
        					
 	                content += "<br><br>" +
@@ -608,10 +608,10 @@
 	                    "<br>" +
 	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
 	                    
-	                if(profile.m.userIntro != null){
-	                	content += profile.m.userIntro + "</textarea>";
-	                }else{
+	                if(profile.m.userIntro == null || profile.m.userIntro == "null"){
 	                	content +=  "</textarea><br>";
+	                }else{
+	                	content += profile.m.userIntro + "</textarea>";
 	                }
 	               
 	                $(".modal-profile").html(content);
@@ -658,8 +658,8 @@
 				    	    				"<tr>" +
 				    							"<td width='60'>";
     	       					 
-    	       					 if(result.list[i].profile == "null"){
-    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+    	       					 if(result.list[i].profile == null || result.list[i].profile == "null"){
+    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
     	       					 }else{
     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
     	       					 }
@@ -992,7 +992,7 @@
 		function getListItem(index, places) {
 
 		    var el = document.createElement('li'),
-		    itemStr =  (index+1) +
+		    itemStr =  '<span class="markerbg marker_' + (index+1) + '"></span>' +
 		                '<div class="info">' +
 		                '   <h5>' + places.place_name + '</h5>';
 

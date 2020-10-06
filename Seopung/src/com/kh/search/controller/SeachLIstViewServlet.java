@@ -43,7 +43,7 @@ public class SeachLIstViewServlet extends HttpServlet {
 		ArrayList<Plan> plist = new SearchService().searchPlan(keyword);
 		ArrayList<Community> clist = new SearchService().searchCommunity(keyword);
 		ArrayList<Recommend> rlist = new SearchService().searchRecommend(keyword);
-
+		
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("pCount", pCount);
 		request.setAttribute("cCount", cCount);

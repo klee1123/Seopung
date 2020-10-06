@@ -7,6 +7,7 @@
 		  FROM TB_PLAN_OPTION
 		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
 		   AND STATUS = 'Y'
+		   AND PLAN_PRIVATE = 'Y'
 	</entry>
 
 	<entry key="searchCommunityCount">
@@ -14,6 +15,8 @@
 		       COUNT(*) 
 		  FROM TB_COMMUNITY
 		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		   AND (COMMUNITY_HEAD = '맛집' 
+            OR COMMUNITY_HEAD = '명소')
 		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
 	
@@ -32,6 +35,7 @@
 		  FROM TB_PLAN_OPTION
 		 WHERE PLAN_TITLE LIKE '%' || ? || '%'
 		   AND STATUS = 'Y'
+		   AND PLAN_PRIVATE = 'Y'
 	</entry>
 	
 	<entry key="searchCommunity">
@@ -40,6 +44,8 @@
 		     , COMMUNITY_TITLE  
 		  FROM TB_COMMUNITY
 		 WHERE COMMUNITY_TITLE LIKE '%' || ? || '%'
+		   AND (COMMUNITY_HEAD = '맛집' 
+            OR COMMUNITY_HEAD = '명소')
 		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
 	

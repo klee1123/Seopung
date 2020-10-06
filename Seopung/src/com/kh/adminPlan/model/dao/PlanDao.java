@@ -172,6 +172,8 @@ public class PlanDao {
 							 rset.getString("user_nick"),
 							 rset.getInt("user_no"),
 							 rset.getString("profilepic_path"));
+				
+				p.setPrivateYN(rset.getString("plan_private"));
 			}
 			
 		} catch (SQLException e) {

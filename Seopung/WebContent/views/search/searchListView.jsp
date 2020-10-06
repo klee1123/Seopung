@@ -58,25 +58,25 @@ com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
         	<%if(pCount > 0){ %>
 	            <%for(int i=0; i<plist.size(); i++){ %>
 	            	<%if(i==0){ %>
-			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <a href="<%=contextPath %>/detail.pl?pno=<%=plist.get(i).getPlanNo()%>"><%=plist.get(i).getPlanTitle() %></a>
 			        <%}else if(i==3 && plist.size()==4){ %> 
 			            <hr>
 			            <span id="more1">
-			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <a href="<%=contextPath %>/detail.pl?pno=<%=plist.get(i).getPlanNo()%>"><%=plist.get(i).getPlanTitle() %></a>
 			            <hr>
 			            </span>
 	            	<%}else if(i==3){ %>
 			            <hr>
 		            	<span id="more1">
-			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <a href="<%=contextPath %>/detail.pl?pno=<%=plist.get(i).getPlanNo()%>"><%=plist.get(i).getPlanTitle() %></a>
 		            <%}else if(i>2 && i==plist.size()-1){ %>
 		            	<hr>
-			            <a href=""><%=plist.get(i).getPlanTitle() %></a>
+			            <a href="<%=contextPath %>/detail.pl?pno=<%=plist.get(i).getPlanNo()%>"><%=plist.get(i).getPlanTitle() %></a>
 			            <hr>
 			            </span>
 		            <%}else{ %>
 		            	<hr>
-		            	<a href=""><%=plist.get(i).getPlanTitle() %></a>
+		            	<a href="<%=contextPath %>/detail.pl?pno=<%=plist.get(i).getPlanNo()%>"><%=plist.get(i).getPlanTitle() %></a>
 		            <%} %>
 	            <%} %>
 	            
@@ -101,25 +101,25 @@ com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
             <%if(cCount > 0){ %>
 	            <%for(int i=0; i<clist.size(); i++){ %>
 	            	<%if(i==0){ %>
-			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.co?cno=<%=clist.get(i).getCommunityNo()%>"><%=clist.get(i).getTitle() %></a>
 			        <%}else if(i==3 && clist.size()==4){ %> 
 			            <hr>
 			            <span id="more2">
-			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.co?cno=<%=clist.get(i).getCommunityNo()%>"><%=clist.get(i).getTitle() %></a>
 			            <hr>
 			            </span>
 	            	<%}else if(i==3){ %>
 			            <hr>
 		            	<span id="more2">
-			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.co?cno=<%=clist.get(i).getCommunityNo()%>"><%=clist.get(i).getTitle() %></a>
 		            <%}else if(i>2 && i==clist.size()-1){ %>
 		            	<hr>
-			            <a href=""><%=clist.get(i).getTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.co?cno=<%=clist.get(i).getCommunityNo()%>"><%=clist.get(i).getTitle() %></a>
 			            <hr>
 			            </span>
 		            <%}else{ %>
 		            	<hr>
-		            	<a href=""><%=clist.get(i).getTitle() %></a>
+		            	<a href="<%=contextPath%>/detailList.co?cno=<%=clist.get(i).getCommunityNo()%>"><%=clist.get(i).getTitle() %></a>
 		            <%} %>
 	            <%} %>
 	            
@@ -142,25 +142,25 @@ com.kh.adminPlan.model.vo.Plan, com.kh.adminRecommend.model.vo.Recommend" %>
         	<%if(rCount > 0){ %>
 	            <%for(int i=0; i<rlist.size(); i++){ %>
 	            	<%if(i==0){ %>
-			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.re?cno=<%=rlist.get(i).getRecommendNo()%>"><%=rlist.get(i).getRecommendTitle() %></a>
 			        <%}else if(i==3 && rlist.size()==4){ %> 
 			            <hr>
 			            <span id="more3">
-			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.re?cno=<%=rlist.get(i).getRecommendNo()%>"><%=rlist.get(i).getRecommendTitle() %></a>
 			            <hr>
 			            </span>
 	            	<%}else if(i==3){ %>
 			            <hr>
 		            	<span id="more3">
-			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.re?cno=<%=rlist.get(i).getRecommendNo()%>"><%=rlist.get(i).getRecommendTitle() %></a>
 		            <%}else if(i>2 && i==rlist.size()-1){ %>
 		            	<hr>
-			            <a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+			            <a href="<%=contextPath%>/detailList.re?cno=<%=rlist.get(i).getRecommendNo()%>"><%=rlist.get(i).getRecommendTitle() %></a>
 			            <hr>
 			            </span>
 		            <%}else{ %>
 		            	<hr>
-		            	<a href=""><%=rlist.get(i).getRecommendTitle() %></a>
+		            	<a href="<%=contextPath%>/detailList.re?cno=<%=rlist.get(i).getRecommendNo()%>"><%=rlist.get(i).getRecommendTitle() %></a>
 		            <%} %>
 	            <%} %>
 	            

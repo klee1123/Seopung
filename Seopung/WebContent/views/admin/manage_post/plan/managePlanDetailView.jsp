@@ -249,7 +249,7 @@
 		
 					<%for(int i=1; i<=dayCount; i++){ %>
 					<div id="<%=i %>" class="tabcontent">
-						<h4>Day<%=i %></h4>
+						<h5>Day<%=i %></h5>
 						<ol id="placeArea<%=i%>">
 							
 						</ol>
@@ -279,10 +279,15 @@
 					</table>
 					<div style="float:left;">
 						<br>
-						<%if(p.getAccompany().equals("Y")){ %>
-						<button disabled class="btn btn-success btn-sm" style="margin-bottom:10px; margin-top:5px; width:120px;">동행신청 허용</button> <br>
+						<%if(p.getPrivateYN().equals("Y")){ %>
+						<button disabled class="btn btn-danger btn-sm" style="width:120px;">일정 공개</button> <br>
 						<%}else{ %>
-						<button disabled class="btn btn-success btn-sm" style="margin-bottom:10px; margin-top:5px; width:120px;">동행신청 비허용</button> <br>
+						<button disabled class="btn btn-danger btn-sm" style="width:120px;">일정 비공개</button> <br>
+						<%} %>
+						<%if(p.getAccompany().equals("Y")){ %>
+						<button disabled class="btn btn-success btn-sm" style="width:120px;">동행신청 허용</button> <br>
+						<%}else{ %>
+						<button disabled class="btn btn-success btn-sm" style="width:120px;">동행신청 비허용</button> <br>
 						<%} %>
 						
 						<%if(p.getScrapYN().equals("Y")){ %>
@@ -290,6 +295,7 @@
 						<%}else{ %>
 						<button disabled class="btn btn-primary btn-sm" style="width:120px;">스크랩 비허용</button> <br>
 						<%} %>
+						
 					</div>
 				</div>
 				<div id="content_3_2" style="overflow:auto;">
@@ -472,10 +478,10 @@
 	       				
 	       				var content = "<br>";
 	       				
-	       				if(profile.m.profile != null){
-		       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+	       				if(profile.m.profile == null || profile.m.profile == "null"){
+	       					content += "<img src='<%=contextPath%>/resources/images/default-user.png' class='rounded-circle' height='120' width='120'>";
 	       				}else{
-	       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+		       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
 	       				}
 	       					
 		                content += "<br><br>" +
@@ -502,10 +508,10 @@
 		                    //"<br>" +
 		                    "<textarea cols='27' rows='3' readonly style='resize: none; margin-top:10px; overflow: auto;'>";
 		                    
-		                if(profile.m.userIntro != null){
-			                content += profile.m.userIntro + "</textarea>";		                		
-		                }else{
+		                if(profile.m.userIntro == null || profile.m.userIntro == "null"){
 		                	content +=  "</textarea><br>";
+		                }else{
+			                content += profile.m.userIntro + "</textarea>";		                		
 		                }
 		               
 		                $(".modal-profile").html(content);
@@ -552,8 +558,8 @@
 					    	    				"<tr>" +
 					    							"<td width='60'>";
      	       					 
-     	       					 if(result.list[i].profile == "null"){
-     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+     	       					 if(result.list[i].profile == null){
+     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
      	       					 }else{
      	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
      	       					 }
