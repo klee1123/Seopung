@@ -255,8 +255,8 @@
                             <div class="modal-body" align="center">
                             
                                 <div class="message">
-                                    <form action="message.ac" method="GET">
-                                        
+                                    <form action="<%= contextPath %>/message.ac" method="GET">
+                                        <input type="hidden" name="flagNo" value="1">
                                         <input type="hidden" name="senderNo" id="myNo">
                                         <input type="hidden" name="receiverNo" id="userNo">
                                         

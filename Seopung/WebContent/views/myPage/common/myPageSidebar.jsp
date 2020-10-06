@@ -89,7 +89,7 @@
                 <li>메시지함
                     <ul>
                        
-                        <li><a href="<%= contextPath %>/receiver.ms">받은 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/receiver.ms?currentPage=1">받은 메세지함</a></li>
                         <li><a href="<%= contextPath %>/send.ms">보낸 메세지함</a></li>
                     </ul>
                 </li><br>

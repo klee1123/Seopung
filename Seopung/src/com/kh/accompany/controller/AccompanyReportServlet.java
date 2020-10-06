@@ -79,7 +79,7 @@ public class AccompanyReportServlet extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath() + "/request.ac?currentPage=1&accomNo=" + accomNo);
 		
-		}else {
+		}else if(flagNo == 3){
 			
 			response.sendRedirect(request.getContextPath() + "/response.ac?currentPage=1&accomNo=" + accomNo);
 		}

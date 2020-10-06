@@ -36,7 +36,7 @@ public class AccompanyMessageServlet extends HttpServlet {
 		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
 		System.out.println(receiverNo);
 		
-		
+		int flagNo = Integer.parseInt(request.getParameter("flagNo"));
 		
 		
 		
@@ -45,8 +45,15 @@ public class AccompanyMessageServlet extends HttpServlet {
 		int result = new AccompanyService().sendMessage(senderNo, receiverNo, introduction);
 		
 		
+		if(flagNo == 1) {
 		
-		response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
+		
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
+		}else {
+			
+			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
+		}
+		
 		
 		
 		
