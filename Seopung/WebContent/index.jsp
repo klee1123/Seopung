@@ -11,12 +11,7 @@
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   	<link rel="stylesheet" href="resouces/css/all.css">
     <link rel="stylesheet" href="resources/css/style.css">
-    <!-- 달력 -->
-    <script src="resources/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+
    
     <style>
     	#mainPlanRec{
@@ -24,7 +19,8 @@
         }
         #mainPlanRec a{
             text-decoration: none;
-            color:black;
+            color: rgb(75, 75, 75);
+            font-size : 15px;
         }
         #mainPlanRec tr{
             height:40px;
@@ -34,7 +30,8 @@
         }
         #mainNotice a{
             text-decoration: none;
-            color:black;
+            color: rgb(75, 75, 75);
+            font-size : 15px;
         }
         #mainNotice tr{
             height:40px;
@@ -44,14 +41,21 @@
             height: 100%;
         }
         .single_donation_item{
-        
             font-size: 18px;
+            width : 300px;
         }
-        table {
-        	border : 1px; solid; lightgray;
+        #fontStyle{
+        	color: rgb(75, 75, 75);
+        	font-size:20px;
+        	font-weight: bold;
+        }
+        #caImg{
+        	border:1px solid rgb(230,230,230);
+        	border-radius:5px;
+        	height:310px;
         }
         
-        .ui-datepicker{ font-size: 20px; width:280px; height: 300px; }
+        
     </style>
 </head>
 <body>
@@ -66,7 +70,7 @@
                     <div class="banner_text">
                         <div class="banner_text_iner">
                             <h5 style="font-family: 'Do Hyeon', sans-serif;">나만의 여행 플래너 서풍</h5>
-                            <h5 style="font-family: 'Do Hyeon', sans-serif;">쉽고 빠르게 여행을 기록하세요</h5><br><br>
+                            <h5 style="font-family: 'Do Hyeon', sans-serif;">쉽고 빠르게 여행을 계획하세요</h5><br><br>
                             <%if (loginUser != null) { %>
                              <a href="views/plan/planMakePage.jsp" onClick="planMake_click();" class="genric-btn primary e-large" 
                              style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: rgb(75, 75, 75); font-weight:100;">일정 만들기</a>
@@ -88,15 +92,16 @@
     <section class="search_your_country">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item">
-                       	<div id="datepicker"></div>
-                    </div>
+                 <div class="col-lg-4 col-sm-6">
+                   <!--  <div class="single_donation_item" style="border: 1px solid black;">  --> 
+                       	<img id="caImg" class="single_donation_item" src="resources/images/calendar.jpg"  >
+                    <!-- </div> -->
                 </div>
+                
                 <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item" style="margin-left: 40px;">
-                        <h3>공지사항</h3><br>
-                        <p><table id="mainNotice" border="1" >
+                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                        <p id="fontStyle">공지사항</p><br>
+                        <p><table id="mainNotice" >
                            <!-- <tr>
                            		<td><a href="">공지사항 제목 공지사항 제목</a></td>
                            </tr>  -->
@@ -104,10 +109,10 @@
                         <a href="<%= contextPath %>/list.no?currentPage=1" style="text-decoration: none; color: black; font-size:13px">공지사항 더보기</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item">
-                        <h3>인기글</h3><br>
-                        <p><table id="mainPlanRec" border="1">
+                <div class="col-lg-4 col-sm-6" >
+                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                        <p id="fontStyle">인기글</p><br>
+                        <p><table id="mainPlanRec" >
                            <!-- <tr>
                            		<td><a href="">인기글 제목</a></td>
                             </tr>  --> 
@@ -128,7 +133,7 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section_tittle">
-                        <h2>추천 코스</h2>
+                        <p id="fontStyle" style="font-size:25px">추천 코스</p>
                         <p>내가 계획한 일정과 서울 주요 관광지 정보를 빠르고 쉽게 찾을 수 있습니다. 서풍에서 제공하는 추천코스를 활용해보세요!</p>
                     </div>
                 </div>
@@ -137,7 +142,7 @@
 	              <!-- <div class="col-lg-4 col-sm-6">
 	                    <div class="single_blog_part">
 	                        <div class="blog_text">
-	                            <h2>제목</h2>
+	                            <p>제목</h2>
 	                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
 	                            <a href=""><img src="resources/달.jpg" alt=""></a>
 	                            </div>
@@ -167,8 +172,8 @@
 					                "<div class='col-lg-4 col-sm-6'>" +
 					                    "<div class='single_blog_part'>" +
 					                        "<div class='blog_text'>" +
-					                            "<h2>" + list[i].title + "</h2>" +
-					                            "<div class='recommendRank' style='width: 200; height:250px;border: 1px solid black;'>" +
+					                            "<p id='fontStyle' style='font-size:20px'>" + list[i].title + "</p>" + "<br>" +
+					                            "<div class='recommendRank' id='recommendR' style='width: 200; height:250px;'>" +
 					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img src=" + list[i].thumb + "></a>" +
 					                            "</div>" +
 					                        "</div>" +
@@ -227,7 +232,7 @@
 							result +=
 								"<tr>" +
                        				"<td>" + 
-                       					"<a href=''>" + list[i].noticeTitle + "</a>" +
+                       					"<a href='<%=contextPath%>/detail.no?nno=" + list[i].noticeNo + "'>" + list[i].noticeTitle + "</a>" +
                        				"</td>" +
                        			"</tr>";
 						}
@@ -239,13 +244,6 @@
 		}
 	</script>
 
-	<script>
-	$( function() {
-        $( "#datepicker" ).datepicker({
-          firstDay: 1
-        });
-      });
-  	</script>
   	
 	<footer>
 	

@@ -21,11 +21,11 @@ public class MyPlanService {
 		return listCount;
 	}
 	
-	public ArrayList<Plan> selectList(PageInfo pi, int userNo) {
+	public ArrayList<Plan> selectList(PageInfo pi, int userNo, String planOp) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Plan> list = new MyPlanDao().selectList(conn, pi,userNo);
+		ArrayList<Plan> list = new MyPlanDao().selectList(conn, pi, userNo, planOp);
 		
 		close(conn);
 		
