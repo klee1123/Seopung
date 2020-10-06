@@ -9,23 +9,28 @@ public class AdminReport {
 	private Date reportDate;
 	private String reportstatus;
 	private String userNo; // userNo 신고한사람
-	private String userNo2;// userNo2 신고당한사람
+	private String userId2;// userNo2 신고당한사람
 	private int reportPostno;
 	private String reportType;
 	private int reportPosttype;
+	private int userNo2;
+	
 	
 	public AdminReport() {
 		
 	}
 	
+
 	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, String userNo,
-			String userNo2) {
+			String userId2, String reportType, int userNo2) {
 		super();
 		this.reportNo = reportNo;
 		this.reportContent = reportContent;
 		this.reportDate = reportDate;
 		this.reportstatus = reportstatus;
 		this.userNo = userNo;
+		this.userId2 = userId2;
+		this.reportType = reportType;
 		this.userNo2 = userNo2;
 	}
 
@@ -38,7 +43,6 @@ public class AdminReport {
 		this.reportDate = reportDate;
 		this.reportstatus = reportstatus;
 		this.userNo = userNo;
-		this.userNo2 = userNo2;
 		this.reportPostno = reportPostno;
 		this.reportType = reportType;
 		this.reportPosttype = reportPosttype;
@@ -83,14 +87,27 @@ public class AdminReport {
 	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
+	
 
-	public String getUserNo2() {
+	public int getUserNo2() {
 		return userNo2;
 	}
 
-	public void setUserNo2(String userNo2) {
+
+	public String getUserId2() {
+		return userId2;
+	}
+
+
+	public void setUserId2(String userId2) {
+		this.userId2 = userId2;
+	}
+
+
+	public void setUserNo2(int userNo2) {
 		this.userNo2 = userNo2;
 	}
+
 
 	public int getReportPostno() {
 		return reportPostno;

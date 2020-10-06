@@ -30,12 +30,12 @@ public class AdminReportBlacklist extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] enrollList = request.getParameterValues("rno");
+		String[] enrollList = request.getParameterValues("uno");
 		
 		int result = new AdminReportService().enrollBlacklist(enrollList);
 		
 		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "블랙리스트에서 등록 성공");
+			request.getSession().setAttribute("alertMsg", "블랙리스트 등록 성공");
 			response.sendRedirect(request.getContextPath()+"/adminPage/list.rp?currentPage=1");
 		}else {
 			request.setAttribute("errorMsg", "블랙리스트 등록 실패");

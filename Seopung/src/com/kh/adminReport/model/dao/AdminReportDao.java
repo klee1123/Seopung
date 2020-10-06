@@ -86,7 +86,8 @@ private Properties prop = new Properties();
 				rp.setReportNo(rset.getInt("report_no"));
 				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정 / 변경해씀
 				rp.setUserNo(rset.getString("ID1"));
-				rp.setUserNo2(rset.getString("ID2"));
+				rp.setUserNo2(rset.getInt("USER_NO2"));
+				rp.setUserId2(rset.getString("ID2"));
 				rp.setReportDate(rset.getDate("report_date"));
 				rp.setReportType(rset.getString("report_type"));
 				list.add(rp);

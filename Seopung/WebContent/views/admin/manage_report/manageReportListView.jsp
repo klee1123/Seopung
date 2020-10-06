@@ -56,7 +56,7 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
-						<th width="50px"><input type="checkbox"></th>
+						<th width="50px"><input type="checkbox" id="chk_all"></th>
 						<th width="75px">번호</th>
 						<th width="200px">신고된 아이디</th>
 						<th width="100px">신고자 아이디</th>
@@ -72,10 +72,10 @@
 	                    <% }else{ %>
 	                        <% for(AdminReport rp : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=rp.getReportNo()%>"></td>
+	                            <td><input type="checkbox" id="chk" name="uno" value="<%=rp.getUserNo2()%>"></td>
 	                            <td><%= rp.getReportNo() %></td>
+	                            <td><%= rp.getUserId2() %></td>
 	                            <td><%= rp.getUserNo() %></td>
-	                            <td><%= rp.getUserNo2() %></td>
 	                            <td><%= rp.getReportDate() %></td>
 	                            <td><%= rp.getReportType() %></td>
 	                        </tr>
@@ -169,9 +169,9 @@
 	              	var str = "";
 	              	for(var i=0;i<selected.length; i++){
 	                	if(i == selected.length-1){
-	                  		str += "rno=" + selected[i];
+	                  		str += "uno=" + selected[i];
 	                	}else{
-	                  		str += "rno=" + selected[i] + "&";
+	                  		str += "uno=" + selected[i] + "&";
 	                	}
 	              	}
 	              
