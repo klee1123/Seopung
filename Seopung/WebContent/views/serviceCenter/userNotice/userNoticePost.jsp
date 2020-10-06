@@ -116,7 +116,8 @@ div {
         <hr>
 
         <div class="outer" align="left">
-			<form action="" method="post" id="faqPost">
+			<form action="<%= contextPath %>/detail.uno" 
+				  method="post" id="userNoticeForm">
 
 				<div>
 
@@ -126,33 +127,32 @@ div {
 					<hr>
 
 					<h6>
-                        안녕하세요, 서풍 커뮤니티 팀입니다.<br>
-                        언제나 저희 서풍을 이용해주셔서 고맙습니다.<br><br>
-
-                        네이버페이 결제수단 제공 서비스가 네이버페이의 DB 점검으로 인해 일시중지될 예정이오니<br>
-                        이용에 참고해 주시기 바랍니다.<br><br>
-
-                        점검 일시 : 2020년 8월 8일 오전 2:00 ~ 7:00<br>
-                        점검 대상 : 네이버페이 결제 예약 및 결제수단 등록<br><br>
-
-                        본 점검에 관해 궁금하신 사항은 헬프센터로 문의해 주시기 바랍니다.<br>
-                        감사합니다.
-
+			                        안녕하세요, 서풍 커뮤니티 팀입니다.<br>
+			                        언제나 저희 서풍을 이용해주셔서 고맙습니다.<br><br>
+			
+			                        네이버페이 결제수단 제공 서비스가 네이버페이의 DB 점검으로 인해 일시중지될 예정이오니<br>
+			                        이용에 참고해 주시기 바랍니다.<br><br>
+			
+			                        점검 일시 : 2020년 8월 8일 오전 2:00 ~ 7:00<br>
+			                        점검 대상 : 네이버페이 결제 예약 및 결제수단 등록<br><br>
+			
+			                        본 점검에 관해 궁금하신 사항은 헬프센터로 문의해 주시기 바랍니다.<br>
+			                        감사합니다.
                     </h6>
 
 					<hr>
-                     
 
 				<br><br>
 
                 <div align="center">
-					<button type="submit" class="btn btn-primary">목록으로 돌아가기</button>
-				</div>
+					<button type="submit" class="btn btn-primary" onclick="history.back();">
+					목록으로 돌아가기</button>
+				</div></div>
+				</form>
                 
                 <br><br>
     
             </div>
-    
     
         </div>
         <!-- /.container-fluid -->
