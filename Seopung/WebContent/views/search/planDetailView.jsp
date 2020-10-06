@@ -81,6 +81,9 @@
 	width:400px;
 	height:80px;
 	padding:5px;
+	padding-left:10px;
+	border: 1px solid rgb(231, 231, 231);
+	padding-top:8px;
 }
 #content_1_2{
 	width: 250px;
@@ -89,13 +92,14 @@
 	height:80px;
 }
 #content_1_2 table {
-	background: white;
-	box-shadow: 5px 5px 5px -4px gray;
+	border: 1px solid rgb(231, 231, 231);
+	height: 80px;
 	cursor:pointer;
 }
 
 #content_1_3 {
 	background-color: #f9f9f9;
+	border: 1px solid rgb(231, 231, 231);
 	width: 300px;
 	height: 80px;
 	padding: 10px;
@@ -133,8 +137,8 @@
 	margin-top: 15px;
 	padding: 10px;
 	color: grey;
-	border: 1px solid lightgrey;
-	background: white;
+	border: 1px solid rgb(231, 231, 231);
+	background: #f9f9f9;
 	float: left;
 	overflow:auto;
 }
@@ -146,8 +150,8 @@
 /* Style the tab */
 .tab {
   float: left;
-  border: 1px solid #ccc;
-  background-color:#f9f9f9;
+  border: 1px solid rgb(231, 231, 231);
+  background-color:rgb(250, 250, 250);
   width: 25%;
   height: 100%;
 }
@@ -176,14 +180,14 @@
 
 /* Create an active/current "tab button" class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: rgb(231, 231, 231);
 }
 
 /* Style the tab content */
 .tabcontent {
   float: left;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(231, 231, 231);
   width: 75%;
   border-left: none;
   height: 100%;
@@ -195,21 +199,43 @@
 
 
 	<div class="outer">
-	
-		<h2>일정 상세조회</h2>
-		<hr>
+		<table>
+			<tr>
+				<td width="720">
+					<h2 style="color: rgb(75, 75, 75);">일정 상세조회</h2>				
+				</td>
+				<td width="270">
+					<%if(loginUser != null && loginUser.getUserNo() != p.getUserNo() && loginUser.getCategory()==1){ %>
+					<div id="content_3"  align="right">
+						<button class="btn btn-outline-secondary btn-sm" onclick="likePlan();">추천</button>
+						<%if(p.getScrapYN().equals("Y")){ %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="scrapPlan();">스크랩</button>
+						<%}else{ %>
+						<button class="btn btn-outline-secondary btn-sm" disabled>스크랩</button>
+						<%} %>
+						<%if(p.getAccompany().equals("Y")){ %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="confirmAccom();">동행신청</button>
+						<%}else{ %>
+						<button class="btn btn-outline-secondary btn-sm" disabled>동행신청</button>
+						<%} %>
+						<button class="btn btn-outline-secondary btn-sm" id="report" onclick="report(<%=p.getPlanNo()%>, <%=p.getUserNo()%>, 2);">신고하기</button>
+					</div>
+					<%}%>
+					<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
+					<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
+					<div align="right">
+						<%if(category == 1){ %>
+						<button class="btn btn-outline-secondary btn-sm">수정</button>
+						<%} %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="confirmDeletePlan();">삭제</button>
+					</div>
+					<%} %>
+				</td>
+			</tr>
+		</table>
 		
-		<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
-		<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
-		<div id="buttonArea" style="padding-left:15px;">
-			
-			<%if(category == 1){ %>
-			<button class="btn btn-primary btn-sm">수정</button>
-			<%} %>
-			<button class="btn btn-danger btn-sm" onclick="confirmDeletePlan();">삭제</button>
-			
-		</div>
-		<%} %>
+		<hr style="margin-top:5px;">
+		
 		
 		<div id="content_1">
 		
@@ -228,14 +254,14 @@
 			
 			<div id="content_1_3">
 				<%for(int i=0; i<ages.length; i++){ %>
-				<button disabled class="btn btn-primary btn-sm"><%= ages[i] %>대
+				<button disabled class="btn btn-secondary btn-sm"><%= ages[i] %>대
 				</button>
 				<%} %>
 				<%for(int i=0; i<types.length; i++){ %>
-				<button disabled class="btn btn-success btn-sm"><%= types[i] %></button>
+				<button disabled class="btn btn-secondary btn-sm"><%= types[i] %></button>
 				<%} %>
 				<%for(int i=0; i<trans.length; i++){ %>
-				<button disabled class="btn btn-warning btn-sm"><%= trans[i] %></button>
+				<button disabled class="btn btn-secondary btn-sm"><%= trans[i] %></button>
 				<%} %>
 			</div>
 			
@@ -373,26 +399,8 @@
 			}
 		</script>
 		
-		<br><br>
+		<br>
 		
-		<!-- 각종 버튼들(조건있음) -->
-		<%if(loginUser != null && loginUser.getUserNo() != p.getUserNo() && loginUser.getCategory()==1){ %>
-		<div id="content_3" align="center">
-			<button class="btn btn-outline-warning btn-sm" onclick="likePlan();">추천</button>
-			<%if(p.getScrapYN().equals("Y")){ %>
-			<button class="btn btn-outline-primary btn-sm" onclick="scrapPlan();">스크랩</button>
-			<%}else{ %>
-			<button class="btn btn-outline-primary btn-sm" disabled>스크랩</button>
-			<%} %>
-			<%if(p.getAccompany().equals("Y")){ %>
-			<button class="btn btn-outline-success btn-sm" onclick="confirmAccom();">동행신청</button>
-			<%}else{ %>
-			<button class="btn btn-outline-success btn-sm" disabled>동행신청</button>
-			<%} %>
-			<button class="btn btn-outline-danger btn-sm" id="report" onclick="report(<%=p.getPlanNo()%>, <%=p.getUserNo()%>, 2);">신고하기</button>
-		</div>
-		<%}%>
-	
 		<br clear="all">
 	
 		<div id="content_4" style="padding-left: 15px;"></div>

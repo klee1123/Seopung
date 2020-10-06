@@ -139,7 +139,8 @@
          width: 227px;
          display:inline-block;
          margin:10px;
-         padding:10px;
+         padding:px;
+         margin-bottom:50px;
      }
      .thumbnail:hover{
          cursor:pointer;
@@ -154,7 +155,7 @@
 	
 	<div class="outer">
 	
-		<h2>일정검색</h2>
+		<h2 style="color: rgb(75, 75, 75);">일정검색</h2>
 		<hr>
 	
         <form action="<%=contextPath %>/list.pl?currentPage=1" method="get">
@@ -263,7 +264,7 @@
 
             </div>
         </form>
-        <div style="font-size:16px;padding: 10px;">
+        <div style="font-size:16px;padding: 10px;margin-bottom:20px;">
         	검색조건 &gt; <%=result %>
         </div>
         
@@ -274,31 +275,20 @@
             	<%for(int i=0;i<list.size();i++){ %>
 	            <div class="thumbnail" align="center">
 	            	<input type="hidden" value="<%= list.get(i).getPlanNo() %>">
-	                <div id="staticMap" style="width:200px; height:200px;"><img src="<%=contextPath %>/resources/images/map3.jpg" width="200" height="200"></div>
-	                <p>
-	                    <div style="font-weight:700;overflow:hidden; white-space: nowrap;text-overflow: ellipsis; width:190px;font-size:17px;"><%= list.get(i).getPlanTitle() %></div>
-	                    <%= list.get(i).getStartDate() %> ~ <%= list.get(i).getEndDate() %><br>
-	                    <%= list.get(i).getPlanWriter() %> <br>
-	                </p>
+	                <div style="margin-bottom:15px;"><img src="<%=contextPath %>/resources/images/map2.jpg" width="227" height="170" style="border-radius:5px;"></div>
+	                <div align="left">
+	                    <div style="font-size:14px;margin-bottom:5px;"><%= list.get(i).getStartDate() %> ~ <%= list.get(i).getEndDate() %></div>
+	                    <div style="margin-bottom:5px;overflow:hidden; white-space: nowrap;text-overflow: ellipsis; width:210px;font-size:18px;"><%= list.get(i).getPlanTitle() %></div>
+	                    <div><%= list.get(i).getPlanWriter() %> </div>
+	                </div>
 	            </div>
-	            <script>
-	            	
-					var staticMapContainer  = document.getElementById('staticMap<%=i%>'), // 이미지 지도를 표시할 div  
-					staticMapOption = { 
-				        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
-				        level: 3, // 이미지 지도의 확대 레벨
-				    };
-					
-					// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
-					var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-					
-				</script>
+	            
 	            <%} %>
             <%} %>
 
         </div>
 
-        <div id="pagingArea" style="margin-top: 50px;" align="center">
+        <div id="pagingArea" style="margin-top: 30px;" align="center">
 			<table>
 				<tr>
 					<td width="150"><span style="font-size:17px;">총 일정 수 &nbsp;&nbsp;&nbsp;
