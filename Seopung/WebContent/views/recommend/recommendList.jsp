@@ -121,7 +121,6 @@ p>img {
 				<option value="최신">최신순</option>
 				<option value="추천">추천순</option>
 				<option value="조회">조회순</option>
-				
 			</select>
 
 		</div>
