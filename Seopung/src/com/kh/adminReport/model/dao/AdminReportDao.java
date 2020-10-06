@@ -86,7 +86,8 @@ private Properties prop = new Properties();
 				rp.setReportNo(rset.getInt("report_no"));
 				// 유저 넘버 / 신고당한 아이디 신고한 아이디 2개 변경 예정 / 변경해씀
 				rp.setUserNo(rset.getString("ID1"));
-				rp.setUserNo2(rset.getString("ID2"));
+				rp.setUserNo2(rset.getInt("USER_NO2"));
+				rp.setUserId2(rset.getString("ID2"));
 				rp.setReportDate(rset.getDate("report_date"));
 				rp.setReportType(rset.getString("report_type"));
 				list.add(rp);
@@ -165,5 +166,38 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-}
+	public int enrollBlacklist(Connection conn, String[] enrollList) {
+
+		//update문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("enrollBlacklist");
+			
+			// 등록할 회원수가 복수일 경우
+			if(enrollList.length > 1) {
+				for(int i=1; i<enrollList.length; i++) {
+					sql += " OR USER_NO =" + enrollList[i];
+				}
+			}
+					
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, Integer.parseInt(enrollList[0]));
+					
+				result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+	}
 

@@ -22,7 +22,7 @@
 <title>나의 일정</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
-        #selectPlan{padding: 5px;margin-left: 20px;}
+        #planOp{padding: 5px;margin-left: 20px;}
         /*#plan > button {width: 50px;}*/
         .myplan{
             /* border: 1px solid black; */
@@ -75,7 +75,10 @@
             </select>
             <button class="btn btn-secondary btn-sm" id="btnMyPlan">삭제</button>
         </div>
+        
         <div class="MyplanArea">
+        <% if(currentPage>1){ %>
+        <% }else{ %>
 			<a href="views/plan/planMakePage.jsp">
             <div class="MakeMap" align="center" >
                 <p><img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;"></p>
@@ -84,7 +87,7 @@
                 
             </div>
             </a>
-           
+           <%} %>
             <!-- 각각 게시판 div -->
             <%if(list.isEmpty()) { %>
             	<div class="MyPlanMap">
@@ -106,36 +109,33 @@
 			            <%= p.getStartDate()%> ~ <%= p.getEndDate()%>
 			            </p>
 		            </div>
-			     </a>
-	            </div>
+			     </a><br>
+	           </div>
 	            <% } %>
             <% } %>
-        </div>
-    </div>
 	<!-- myplan -->
-    </div>
     <div class="pagingArea" align="center">
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.mp?currentPage=1&userNo=<%=userNo%>';"> &lt;&lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.mp?currentPage=1&userNo=<%=userNo%>&planOp=<%=planOp%>';"> &lt;&lt; </button>
 	            <!-- 이전 페이지로 (<) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>';"> &lt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=currentPage-1%>&userNo=<%=userNo%>&planOp=<%=planOp%>';"> &lt; </button>
 			<% } %>
             
 			<% for(int p=startPage; p<=endPage; p++){ %>
                <%if(p != currentPage) {%>
-               <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=p%>&userNo=<%=userNo%>';"><%= p %></button>
+               <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=p%>&userNo=<%=userNo%>&planOp=<%=planOp%>';"><%= p %></button>
                <% }else{ %>
-               <button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+               <button class="btn btn-outline-secondary btn-sm" disabled><%= p %></button>
                <% } %>
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.mp?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>"> &gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.mp?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>&planOp=<%=planOp%>';"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=maxPage%>&userNo=<%=userNo%>"> &gt;&gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.mp?currentPage=<%=maxPage%>&userNo=<%=userNo%>&planOp=<%=planOp%>';"> &gt;&gt; </button>
 			<% } %>
-
+		
         </div>
         <script>
         $(function(){
@@ -178,7 +178,6 @@
 			
 								});
 				$("#planOp option[value=<%=planOp%>]").attr("selected", true);
-			
 			
 		});
 	</script>

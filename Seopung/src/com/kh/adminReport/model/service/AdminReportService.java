@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.adminInquiry.model.dao.AdminInquiryDao;
 import com.kh.adminInquiry.model.vo.AdminInquiry;
+import com.kh.adminMember.model.dao.MemberDao;
 import com.kh.adminPlan.model.dao.PlanDao;
 import com.kh.adminReport.model.dao.AdminReportDao;
 import com.kh.adminReport.model.vo.AdminReport;
@@ -37,10 +38,10 @@ public class AdminReportService {
 		return list;
 	}	
 	
-	public AdminReport selectAdminReport(int rno) {
+	public AdminReport selectAdminReport(int rpno) {
 		Connection conn = getConnection();
 		
-		 AdminReport r = new AdminReportDao().selectAdminReport(conn, rno);
+		 AdminReport r = new AdminReportDao().selectAdminReport(conn, rpno);
 		
 		close(conn);
 		
@@ -65,6 +66,23 @@ public class AdminReportService {
 		}
 		
 		return result;
+	}
+
+	// 블랙리스트 등록
+	public int enrollBlacklist(String[] enrollList) {
+		Connection conn = getConnection();
+		
+		int result = new AdminReportDao().enrollBlacklist(conn, enrollList);
+		
+		if(result>0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+		
 	}
 	
 

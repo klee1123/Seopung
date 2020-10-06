@@ -56,7 +56,7 @@
 			<table align="center" id="listArea" class="table table-hover">
 				<thead style="text-align:center;">
 					<tr>
-						<th width="50px"><input type="checkbox"></th>
+						<th width="50px"><input type="checkbox" id="chk_all"></th>
 						<th width="75px">번호</th>
 						<th width="200px">신고된 아이디</th>
 						<th width="100px">신고자 아이디</th>
@@ -72,10 +72,10 @@
 	                    <% }else{ %>
 	                        <% for(AdminReport rp : list){ %>
 	                        <tr>
-	                            <td><input type="checkbox" id="chk" name="rno" value="<%=rp.getReportNo()%>"></td>
+	                            <td><input type="checkbox" id="chk" name="uno" value="<%=rp.getUserNo2()%>"></td>
 	                            <td><%= rp.getReportNo() %></td>
+	                            <td><%= rp.getUserId2() %></td>
 	                            <td><%= rp.getUserNo() %></td>
-	                            <td><%= rp.getUserNo2() %></td>
 	                            <td><%= rp.getReportDate() %></td>
 	                            <td><%= rp.getReportType() %></td>
 	                        </tr>
@@ -119,7 +119,7 @@
 						<td>
 						<div align="right">
 							<button type="button" class="btn btn-secondary" id="btnDelete">삭제</button>
-							<button type="submit" class="btn btn-primary">블랙리스트 등록</button>
+							<button type="submit" class="btn btn-primary" id="btnBlacklist">블랙리스트 등록</button>
 						</div>	
 						</td>
 						
@@ -152,9 +152,9 @@
                 });
             });
          	
-         	// 삭제시
+         	// 블랙리스트 등록시
             $(function(){
-            	$("#btnDelete").click(function(){
+            	$("#btnBlacklist").click(function(){
 
               		var selected = new Array();
               		$("input[id=chk]:checked").each(function(){
@@ -169,14 +169,14 @@
 	              	var str = "";
 	              	for(var i=0;i<selected.length; i++){
 	                	if(i == selected.length-1){
-	                  		str += "rno=" + selected[i];
+	                  		str += "uno=" + selected[i];
 	                	}else{
-	                  		str += "rno=" + selected[i] + "&";
+	                  		str += "uno=" + selected[i] + "&";
 	                	}
 	              	}
 	              
-	              	if(confirm("정말 삭제하시겠습니까?")) {
-	                	location.href="<%=contextPath%>/adminPage/delete.rp?" + str;
+	              	if(confirm("정말 등록하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/blacklist.rp?" + str;
 	              	} 
 	            });
             });
