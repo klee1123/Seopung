@@ -129,10 +129,10 @@
                                     <td ><%= list.get(i).getUserId() %></td>
                                     <td><%=list.get(i).getUserNick() %></td>
                                     <td><%= list.get(i).getMessageDate() %></td>
-                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" data-toggle="modal" data-target="#messageContent" ><%= list.get(i).getMessageContent() %></a></td>
+                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
                                     <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#reply" style="font-size: 10px;" onclick = "replyMessage('<%= list.get(i).getUserNick() %>');">답장하기</a>
                                     </td>
-                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
+                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#reportModal"  style="font-size: 10px;"onclick="report(<%=list.get(i).getMassageNo()%>, <%= list.get(i).getUserNo2()%>, 4);">신고</a></td>
         							<input type="hidden" id="userNo1" value="<%= list.get(i).getUserNo() %>">
         							<input type="hidden" id="userNo2" value="<%= list.get(i).getUserNo2() %>">
         							
@@ -164,9 +164,9 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <form action="" method="post" id="reportForm">
-                        	<input type="hidden" name="reportPostNo" id="reportPostNo">
+                        	<input type="hidden" name="reportPostNo" id="reportPostNo" >
                         	<input type="hidden" name="reportUserNo2" id="reportUserNo2">
-                        	<input type="hidden" name="reportPostType" id="reportPostType">
+                        	<input type="hidden" name="reportPostType" id="reportPostType" value="4">
                             <p style="font-size: 13px; padding-left:20px;">
                                 * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
                                 * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
@@ -328,6 +328,9 @@
                 </div>
 
 
+
+
+
 				<!--  프로필 모달 -->
 		<div class="modal" id="myProfile">
 	        <div class="modal-dialog modal-sm">
@@ -430,7 +433,28 @@
 		}
 	</script>
 
-
+				<script>
+				function messageContent(userId, messageContent){
+					
+					console.log(userId);
+					
+					$("#userId2").val(userId);
+					
+					console.log($("#userId2").val());
+					
+					$("#introduction").val(messageContent);
+					
+					
+				}
+				
+				
+				
+				
+				
+				</script>
+				
+				
+				
 
                 <!-- 메세지내용 modal -->
                 <div class="modal" id="messageContent">
@@ -451,15 +475,15 @@
                                         
                                     
                                         <div class="profilePhoto" style="float: left; margin-left: 50px;" >
-                                            <img src="../../../resources/images/회원.jpg" style="width: 20px; height: 20px;" alt="">
-                                            <a href="#" data-toggle="modal" data-target="#profile">  아이디 &nbsp;</a>
-                                            <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;">답장하기</a>
+                                            <input type="text" id="userId2" readonly>
+                                            <a href="#" data-toggle="modal" data-target="#profile">&nbsp;</a>
+                                            <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;" onclick= >프로필보기</a>
                                             <br><br>
                                            
                                         </div>
                                         
                                         <div>
-                                            <textarea name="introduction" cols="50" rows="8"style="resize: none;">메세지내용 </textarea>
+                                            <textarea name="introduction" id="introduction" cols="50" rows="8"style="resize: none;" readonly></textarea>
                                         </div>
                                         <br><br>
 
