@@ -347,11 +347,8 @@ public class MemberDao {
 		
 		return result;
 	}
+
 }
-
-
-
-
 
 
 

@@ -29,7 +29,7 @@
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
@@ -115,7 +115,7 @@
 
 
 .map_wrap {
-	width: 610px;
+	width: 580px;
 	height: 500px;
 	/*border: 1px solid lightgrey;*/
 	float: left;
@@ -125,14 +125,14 @@
 
 #content_2_2{float:left;}
 #content_2_2_1 {
-	width: 350px;
+	width: 380px;
 	height: 340px;
 	/*border: 1px solid lightgrey;*/
 }
 
 
 #content_2_2_2 {
-	width: 350px;
+	width: 380px;
 	height: 146px;
 	margin-top: 15px;
 	padding: 10px;
@@ -242,11 +242,11 @@
 			<div id="content_1_1">
 				<table>
 					<tr>
-						<td width="250px" style="font-size: 15px;"><b
+						<td width="235px" style="font-size: 15px;"><b
 							style="font-size: 20px; color:rgb(75, 75, 75);"><%= p.getPlanTitle() %></b> <br> <%=p.getStartDate() %>
 							~ <%=p.getEndDate() %></td>
 						<td>추천 : <span id="recommendCount"><%=p.getRecommendCount() %></span> <br> 스크랩 : <span id="scrapCount"><%=p.getScrapCount() %></span>
-							<br> 예산금액 : <%=p.getBudget() %> 원
+							<br> 예산금액 : <%=p.getBudget() %>원
 						</td>
 					</tr>
 				</table>

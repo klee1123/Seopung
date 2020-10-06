@@ -31,13 +31,14 @@
 }
 
 #content_2_2 {
-	background-color: lightgrey;
+	background-color: #eeeeee;
 	width: 420px;
 	height: 75px;
 	padding: 20px;
 	box-sizing: border-box;
 	margin-top: 10px;
 	float: left;
+	border: 1px solid rgb(220, 220, 220);
 }
 
 #content_2_2>button {
@@ -279,7 +280,7 @@
 					<div style="float:left;">
 						<br>
 						<%if(p.getPrivateYN().equals("Y")){ %>
-						<button disabled class="btn btn-outline-secondary btn-sm" style="width:120px;height:25px;line-height:50px;margin:3px;">일정 공개</button> <br>
+						<button disabled class="btn btn-outline-secondary btn-sm" style="width:120px;height:25px;line-height:5px;margin:3px;">일정 공개</button> <br>
 						<%}else{ %>
 						<button disabled class="btn btn-outline-secondary btn-sm" style="width:120px;height:25px;line-height:5px;margin:3px;">일정 비공개</button> <br>
 						<%} %>

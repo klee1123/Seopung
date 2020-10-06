@@ -19,7 +19,8 @@
                             M1.USER_ID AS ID1,
                             M2.USER_ID AS ID2,
                             REPORT_DATE,
-                            REPORT_TYPE
+                            REPORT_TYPE,
+                            USER_NO2
                        FROM TB_REPORT R
                        JOIN TB_MEMBER M1 ON (R.USER_NO = M1.USER_NO)
                        JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO) 
@@ -50,6 +51,14 @@
 		   SET REPORT_STATUS = 'N'
 		     , REPORT_DATE = SYSDATE
 		 WHERE REPORT_NO = ?
+	</entry>
+	
+	<entry key="enrollBlacklist">
+		UPDATE 
+		       TB_MEMBER
+		   SET STATUS = 'B'
+		  	 , MODIFY_DATE = SYSDATE
+		 WHERE USER_NO = ?
 	</entry>
 
 </properties>
