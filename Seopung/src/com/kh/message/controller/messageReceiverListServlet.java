@@ -1,4 +1,4 @@
-package com.kh.accompany.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.accompany.model.service.AccompanyService;
-
 /**
- * Servlet implementation class AccompanyResponseCancelServlet
+ * Servlet implementation class messageReceiverListServlet
  */
-@WebServlet("/responseCancel.ac")
-public class AccompanyResponseCancelServlet extends HttpServlet {
+@WebServlet("/receiver.ms")
+public class messageReceiverListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyResponseCancelServlet() {
+    public messageReceiverListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +28,8 @@ public class AccompanyResponseCancelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		
-		int accomNo = Integer.parseInt(request.getParameter("accomNo"));
 		
-		int result = new AccompanyService().responseCancel(accomNo);
-		
-		
-		
-		response.sendRedirect(request.getContextPath() + "/response.ac?currentPage=1&accomNo=" + accomNo);
-		
-		
+		request.getRequestDispatcher("views/message/receive/receiveMessage.jsp").forward(request, response);
 		
 	}
 

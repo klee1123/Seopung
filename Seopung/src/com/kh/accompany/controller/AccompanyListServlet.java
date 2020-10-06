@@ -54,6 +54,8 @@ public class AccompanyListServlet extends HttpServlet {
 
 		int userNo = ((LoginUser)request.getSession().getAttribute("loginUser")).getUserNo();
 		
+		
+		
 		int listCount = new AccompanyService().selectListCount(userNo);
 		
 		// 조회된 동행수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
@@ -82,10 +84,13 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		
 		
+		
 		System.out.println(list);
+		
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		
 		request.setAttribute("userNo", userNo);
 		
 		

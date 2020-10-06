@@ -90,9 +90,13 @@ private Properties prop = new Properties();
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
 			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, userNo);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			pstmt.setInt(4, userNo);
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
+
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -120,6 +124,9 @@ private Properties prop = new Properties();
 		
 		
 	}
+	
+	
+
 	
 	public int deleteAccom(Connection conn, int accomNo) {
 		
@@ -555,6 +562,35 @@ private Properties prop = new Properties();
 		}
 		
 		return list;
+		
+	}
+	
+	public int responseCancel(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomResponseCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
 		
 	}
 	

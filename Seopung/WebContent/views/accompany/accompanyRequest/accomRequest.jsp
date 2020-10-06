@@ -125,7 +125,7 @@
 	                        <td ><%= list.get(i).getUserId() %></td>
 	                        <td><%= list.get(i).getUserNick() %></td>
 	                        <td><%= list.get(i).getAccomApply() %></td>
-                            <td><a href="#"><%= list.get(i).getPlanTitle() %></a></td>
+                            <td><a href="<%= contextPath %>/detail.pl?pno=<%= list.get(i).getPlanNo() %>"><%= list.get(i).getPlanTitle() %></a></td>
                             <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;" onclick="agree(<%=list.get(i).getAccomNo() %>);">수락</a> /
                                 <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;" onclick="cancel(<%=list.get(i).getAccomNo() %>);" >거절</a>
                             </td>

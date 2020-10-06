@@ -1,5 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.*" %>
+<%@ page import="com.kh.message.model.vo.* , com.kh.Member.model.vo.*" %>
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
+	
+	
+	
+	int userNo = 0;
+	if(session.getAttribute("loginUser") != null){
+		userNo = ((LoginUser)session.getAttribute("loginUser")).getUserNo();
+	}
+	
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	String userNick = (String)request.getAttribute("userNick");
+	
+
+%>    
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +56,10 @@
 <style>
         .receiveMessage{
       
-      margin-top: 30px;
-      float: left;
-
-      width: 1100px;
-      height: 800px;
+       			width: 1000px;
+                height: 800px;
+                margin-top: 30px;
+                float: left;
   }
 
   tbody>tr:hover{
@@ -60,7 +86,7 @@
 
         <%@ include file="../../common/menubar.jsp" %>
         <%@ include file="../../myPage/common/myPageSidebar.jsp" %>
-        
+        <div class="myContent">
         
         <class class="receiveMessage">
         
@@ -72,8 +98,8 @@
                 
                 <div class="receive"> <br>
                     
-                    <a href="#"  class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px; float: right; margin-right: 10px;">선택삭제</a>    
-                    <form action="" method="POST">
+                    <a href="#"  class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>    
+                    <form action="<%= contextPath %>/receiver.ms" method="POST">
                     <br>
                   
                    
@@ -85,12 +111,19 @@
                                     <th width="150">발신자 아이디</th>
                                     <th width="100">닉네임</th>
                                     <th width="100">수신일</th>
-                                    <th width="300">메세지내용</th>
+                                    <th width="200">메세지내용</th>
                                     <th width="200"></th>
                                     <th width="70">신고</th>
                                 </tr>
                             </thead>
                             <tbody>
+                          	<%if(list.isEmpty()){ %>
+	                		<tr>
+	                			<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
+	                		</tr>
+	                		<%} else { %>
+	                			<% for(int i=0; i<list.size(); i++) { %>
+                            
                                 <tr align="center" style="line-height: 2;">
                                     <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
                                     <td >아이디 넣을칸</td>
@@ -102,54 +135,10 @@
                                     <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
         
                                 </tr>
-        
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-                                    <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#reply" style="font-size: 10px;">답장하기</a>
-                                    </td>
-                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-        
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-                                    <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">답장하기</a>
-                                    </td>
-                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-        
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-                                    <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">답장하기</a>
-                                    </td>
-                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-        
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-                                    <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;">답장하기</a>
-                                    </td>
-                                    <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;">신고</a></td>
-        
-                                </tr>
+        						<% } %>
+                            <% } %>
+                            
+                            
                             
                             </tbody>
                         </table>
@@ -160,24 +149,32 @@
 
                     
 	            <br><br>
-	            <div class="pagingArea" align="center">
-	
+                <div class="pagingArea" align="center">
                     <div align="center">
-                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-                        <button class="btn btn-secondary btn-sm">&lt;</button>
-
-                        <button class="btn btn-outline-secondary btn-sm">1</button>
-                        <button class="btn btn-outline-secondary btn-sm">2</button>
-                        <button class="btn btn-outline-secondary btn-sm">3</button>
-                        <button class="btn btn-outline-secondary btn-sm">4</button>
-                        <button class="btn btn-outline-secondary btn-sm">5</button>
-
-                        <button class="btn btn-secondary btn-sm">&gt;</button>
-                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-                    
-                    </div>
-                </div>
+					<% if(currentPage != 1){ %>
+	            	<!-- 맨 처음으로 (<<) -->
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=1">&lt;&lt;</button>
+                    <!-- 이전페이지로 (<) -->    
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
+					<% } %>
+					
+				<% for(int p=startPage; p<=endPage; p++){ %>
+					<% if(p != currentPage){ %>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+                	<% } %>        
+                <% } %>
                 
+                <% if(currentPage != maxPage){ %>  
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                <% } %>    
+                    </div>
+	            </div>
+                
+                
+                </div>
                 <!-- 신고하기 modal -->
 
                 <div class="modal" id="report">

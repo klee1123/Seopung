@@ -1,5 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.*" %>
+<%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
+	
+	
+	
+	int userNo = 0;
+	if(session.getAttribute("loginUser") != null){
+		userNo = ((LoginUser)session.getAttribute("loginUser")).getUserNo();
+	}
+	
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
+	String userNick = (String)request.getAttribute("userNick");
+	
+
+%>    
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +59,7 @@
       margin-top: 30px;
       float: left;
 
-      width: 1100px;
+      width: 1000px;
       height: 800px;
   }
 
@@ -54,12 +81,13 @@
 </head>
 <body>
     
-    <body>
+    
 
   
 
         <%@ include file="../../common/menubar.jsp" %>
         <%@ include file="../../myPage/common/myPageSidebar.jsp" %>
+        <div class="myContent">
         
         
         <class class="sendMessage">
@@ -85,7 +113,7 @@
                                     <th width="150">수신자 아이디</th>
                                     <th width="100">닉네임</th>
                                     <th width="100">발신일</th>
-                                    <th width="300">메세지내용</th>
+                                    <th width="250">메세지내용</th>
 
                                 </tr>
                             </thead>
@@ -144,28 +172,34 @@
 
                     
 	            <br><br>
-	            <div class="pagingArea" align="center">
-	
+                <div class="pagingArea" align="center">
                     <div align="center">
-                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-                        <button class="btn btn-secondary btn-sm">&lt;</button>
-
-                        <button class="btn btn-outline-secondary btn-sm">1</button>
-                        <button class="btn btn-outline-secondary btn-sm">2</button>
-                        <button class="btn btn-outline-secondary btn-sm">3</button>
-                        <button class="btn btn-outline-secondary btn-sm">4</button>
-                        <button class="btn btn-outline-secondary btn-sm">5</button>
-
-                        <button class="btn btn-secondary btn-sm">&gt;</button>
-                        <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-                    
+					<% if(currentPage != 1){ %>
+	            	<!-- 맨 처음으로 (<<) -->
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=1">&lt;&lt;</button>
+                    <!-- 이전페이지로 (<) -->    
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
+					<% } %>
+					
+				<% for(int p=startPage; p<=endPage; p++){ %>
+					<% if(p != currentPage){ %>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+                	<% } %>        
+                <% } %>
+                
+                <% if(currentPage != maxPage){ %>  
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                <% } %>    
                     </div>
 	            </div>
 	        </div>
 	    
 	    </div>   
 	</class>
-
+	</div>
 
     
     

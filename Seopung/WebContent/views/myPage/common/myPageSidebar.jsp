@@ -89,8 +89,8 @@
                 <li>메시지함
                     <ul>
                        
-                        <li><a href="../../message/receive/receiveMessage.jsp">받은 메세지함</a></li>
-                        <li><a href="../../message/send/sendMessage.jsp">보낸 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/receiver.ms">받은 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/send.ms">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
                 <li><a href="<%= contextPath %>/list.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">1:1 문의</a></li> <br>

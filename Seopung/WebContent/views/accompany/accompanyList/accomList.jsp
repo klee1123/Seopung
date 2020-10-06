@@ -2,12 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
 <%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
-<%@ page import="com.kh.Member.model.vo.*" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
-	Member profile = (Member)request.getAttribute("profile");
+	
 	
 	
 	int userNo = 0;
@@ -120,25 +119,28 @@
 	                	<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
 	                </tr>
 	                <%} else { %>
-	                	<% for(Accompany a : list) { %>
+	                	<% for(int i=0; i<list.size(); i++) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> </td>
-	                        <td><%= a.getUserId() %></td>
-	                        <td><%= a.getUserNick() %></td>
-	                        <% if( loginUser.getUserNo() == a.getUserNo1()) {%>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" id="accomProfile" )>프로필</a><input type="hidden" value="<%= a.getUserNo2() %>"></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= i+1 %> </td>
+	                        
+	                        
+	                        <td><%= list.get(i).getUserId() %></td>
+	                        <td><%= list.get(i).getUserNick() %></td>
+	                        
+	                        <% if( loginUser.getUserNo() == list.get(i).getUserNo1()) {%>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="openProfile(<%= list.get(i).getUserNo2() %>);">프로필</a></td>
                             <% } else { %>
-                            <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" id="accomProfile" )>프로필</a><input type="hidden" value="<%= a.getUserNo1() %>"></td>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="openProfile(<%= list.get(i).getUserNo1() %>);">프로필</a></td>
                             <% } %>
                             
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%= a.getUserNick() %>')">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= a.getPlanNo() %>);">신고</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%=  list.get(i).getUserNick() %>')">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= list.get(i).getAccomNo()  %>);" >동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="userId" id="accomProfile" >
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
-							<input type="hidden" name="userNo" id="userNo1" value="<%= a.getUserNo1() %>">
-							<input type="hidden" name="userNo2" id="userNo2" value="<%= a.getUserNo2() %>">
-	                   		<input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>">
+							<input type="hidden" name="userNo" id="userNo1" value="<%= list.get(i).getUserNo1() %>">
+							<input type="hidden" name="userNo2" id="userNo2" value="<%= list.get(i).getUserNo1() %>">
+	                   		<input type="hidden" id="accomNo1" value="<%= list.get(i).getAccomNo() %>">
 	                   		
 	                    </tr>
 	                    <% } %>
@@ -318,13 +320,7 @@
 		var modal = document.getElementById("myProfile");
 	
 		$(function(){
-			$("#accomProfile").click(function(){
-				
-				modal.style.display = "block";
-				
-				selectProfile($(this).next().val());		
-					
-			});
+			
 			$(".close").click(function() {
 				modal.style.display = "none";
 			});
@@ -336,6 +332,16 @@
 			}
 		
 		});
+		
+		function openProfile(userNo){
+			
+			modal.style.display = "block";
+			selectProfile(userNo);	
+			
+			
+			
+			
+		}
 		
 		function selectProfile(userNo){
        		$.ajax({

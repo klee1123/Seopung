@@ -48,6 +48,8 @@ public class AccompanyService {
 		
 	}
 	
+
+	
 	public int deleteAccom(int accomNo) {
 		
 		Connection conn = getConnection();
@@ -247,6 +249,22 @@ public class AccompanyService {
 	
 	}
 	
+	
+	public int responseCancel(int accomNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().responseCancel(conn, accomNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	
