@@ -30,6 +30,20 @@
          WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
+		<entry key="selectAdminReport">
+		SELECT 
+			   REPORT_NO
+		     , REPORT_CONTENT
+		     , REPORT_DATE
+		     , REPORT_TYPE
+		     , USER_NO
+		     , USER_NO2
+		  FROM TB_REPORT R
+	FULL OUTER JOIN TB_MEMBER USING(USER_NO)
+		 WHERE R.REPORT_STATUS = 'Y'
+		   AND REPORT_NO = ?
+	</entry>
+	
 	<entry key="deleteReport">
 		UPDATE 
 		       TB_REPORT

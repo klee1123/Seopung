@@ -17,6 +17,20 @@ public class AdminReport {
 	public AdminReport() {
 		
 	}
+	
+	
+
+	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, String userNo,
+			String userNo2) {
+		super();
+		this.reportNo = reportNo;
+		this.reportContent = reportContent;
+		this.reportDate = reportDate;
+		this.reportstatus = reportstatus;
+		this.userNo = userNo;
+		this.userNo2 = userNo2;
+	}
+
 
 	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, String userNo,
 			String userNo2, int reportPostno, String reportType, int reportPosttype) {

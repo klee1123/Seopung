@@ -41,7 +41,7 @@ import com.kh.adminNotice.model.vo.AdminNotice;
 				AdminNotice n = new AdminNoticeService().selectAdminNotice(nno);
 				
 				request.setAttribute("n", n);
-				request.setAttribute("pageTitle", "공지사항 상세조회");
+				request.setAttribute("pageTitle", "공지사항");
 				request.getRequestDispatcher("views/serviceCenter/userNotice/userNoticeDetailView.jsp").forward(request, response);
 				
 			}else {
