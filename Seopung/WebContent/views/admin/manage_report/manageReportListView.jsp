@@ -119,7 +119,7 @@
 						<td>
 						<div align="right">
 							<button type="button" class="btn btn-secondary" id="btnDelete">삭제</button>
-							<button type="submit" class="btn btn-primary">블랙리스트 등록</button>
+							<button type="submit" class="btn btn-primary" id="btnBlacklist">블랙리스트 등록</button>
 						</div>	
 						</td>
 						
@@ -152,9 +152,9 @@
                 });
             });
          	
-         	// 삭제시
+         	// 블랙리스트 등록시
             $(function(){
-            	$("#btnDelete").click(function(){
+            	$("#btnBlacklist").click(function(){
 
               		var selected = new Array();
               		$("input[id=chk]:checked").each(function(){
@@ -175,8 +175,8 @@
 	                	}
 	              	}
 	              
-	              	if(confirm("정말 삭제하시겠습니까?")) {
-	                	location.href="<%=contextPath%>/adminPage/delete.rp?" + str;
+	              	if(confirm("정말 등록하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/blacklist.rp?" + str;
 	              	} 
 	            });
             });

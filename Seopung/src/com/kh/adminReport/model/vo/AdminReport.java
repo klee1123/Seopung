@@ -18,8 +18,6 @@ public class AdminReport {
 		
 	}
 	
-	
-
 	public AdminReport(int reportNo, String reportContent, Date reportDate, String reportstatus, String userNo,
 			String userNo2) {
 		super();

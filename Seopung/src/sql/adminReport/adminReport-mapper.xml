@@ -51,6 +51,13 @@
 		     , REPORT_DATE = SYSDATE
 		 WHERE REPORT_NO = ?
 	</entry>
+	
+	<entry key="enrollBlacklist">
+		UPDATE 
+		       TB_MEMBER
+		   SET STATUS = 'B'
+		 WHERE USER_NO = ?
+	</entry>
 
 </properties>
 

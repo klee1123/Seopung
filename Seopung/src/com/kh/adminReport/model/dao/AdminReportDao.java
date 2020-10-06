@@ -165,5 +165,38 @@ private Properties prop = new Properties();
 		return result;
 	}
 	
-}
+	public int enrollBlacklist(Connection conn, String[] enrollList) {
+
+		//update문 => 처리된 행 수
+			int result = 0;
+			
+			PreparedStatement pstmt = null;
+			
+			String sql = prop.getProperty("enrollBlacklist");
+			
+			// 등록할 회원수가 복수일 경우
+			if(enrollList.length > 1) {
+				for(int i=1; i<enrollList.length; i++) {
+					sql += " OR USER_NO =" + enrollList[i];
+				}
+			}
+					
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, Integer.parseInt(enrollList[0]));
+					
+				result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+	}
 
