@@ -8,8 +8,6 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.adminCommunity.model.dao.CommunityDao;
-import com.kh.adminCommunity.model.vo.Community;
 import com.kh.adminNotice.model.dao.AdminNoticeDao;
 import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;

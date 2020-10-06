@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.adminCommunity.model.vo.Community;
 import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.common.PageInfo;
 
