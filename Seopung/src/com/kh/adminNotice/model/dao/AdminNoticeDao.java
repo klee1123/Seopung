@@ -185,6 +185,36 @@ private Properties prop = new Properties();
 		return n;
 	}
 	
+	public int deleteAdminNotice(Connection conn, String[] nno) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteAdminNotice");
+		
+		// 삭제할 공지사항 갯수가 복수일 경우
+		if(nno.length > 1) {
+			for(int i=1; i<nno.length; i++) {
+				sql += " OR NOTICE_NO =" + nno[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(nno[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 }
 

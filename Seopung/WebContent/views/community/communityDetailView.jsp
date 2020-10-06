@@ -79,7 +79,7 @@
 
         <hr>
 
-        <div id="content_3">
+        <div id="content_3" style="overflow:auto;">
             <%=c.getContent() %>
         </div>
         <%if(loginUser != null && loginUser.getUserNo() == c.getUserNo1() && loginUser.getCategory() == 1){  %>
@@ -319,11 +319,11 @@
 	    				"<tr>" +
 							"<td width='60'>";
 			 
-			 if(result.list[i].profile == "null"){
-				 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
-			 }else{
-				 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
-			 }
+					if(result.list[i].profile == null){
+                            comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
+                    }else{
+                            comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+                     }
 			 
 			 comment +=         "</td>" +
 							"<td>" + result.list[i].replyWriter +"<br>" + result.list[i].createDate +
@@ -406,7 +406,8 @@
        		$.ajax({
        			url:"<%=contextPath%>/adminPage/delete.rco",
        			type:"post",
-       			data:{"commentNo":commentNo},
+       			data:{"commentNo":commentNo,
+       				  "cno":<%=c.getComNo()%>},
        			success:function(result){
        				
        				if(result>0){
@@ -556,7 +557,8 @@
        		$.ajax({
        			url:"<%=contextPath%>/adminPage/delete.rco",
        			type:"post",
-       			data:{"commentNo":commentNo},
+       			data:{"commentNo":commentNo,
+       				  "cno":<%=c.getComNo()%>},
        			success:function(result){
        				
        				if(result>0){

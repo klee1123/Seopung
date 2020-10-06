@@ -13,6 +13,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	String planOp = (String)request.getAttribute("planOp");
 %>
 <!DOCTYPE html>
 <html>
@@ -67,40 +68,45 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;나의 일정</h1>
             <hr style="color: black;">
         <div id="selectButton" >
-            <select name="selectPlan" id="selectPlan">
-                <option value="selectPlan">모든일정</option>
-                <option value="selectPlan">일정(공개)</option>
-                <option value="selectPlan">비공개(비공개)</option>
+            <select name="planOp" id="planOp">
+                <option value="모든일정">모든일정</option>
+                <option value="공개">일정(공개)</option>
+                <option value="비공개">일정(비공개)</option>
             </select>
             <button class="btn btn-secondary btn-sm" id="btnMyPlan">삭제</button>
         </div>
         <div class="MyplanArea">
-
+			<a href="views/plan/planMakePage.jsp">
             <div class="MakeMap" align="center" >
+                <p><img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;"></p>
+                <br>
+                <p>여행 만들러 가기</p>
                 
-                <img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;">
-                <p><a href="<%=contextPath%>/planPage.pl?currentPage=1">여행 만들러 가기</a></p>
             </div>
+            </a>
            
             <!-- 각각 게시판 div -->
             <%if(list.isEmpty()) { %>
             	<div class="MyPlanMap">
-             		<p>조회된 문의글이 없습니다</p>
+             		
                 </div>
             <% }else { %>
             	<% for(Plan p : list) { %>
 	            <div class="MyplanMap">
+	             <a href="<%=contextPath%>/detail.pl?pno=<%=p.getPlanNo()%>">
 	                <input type="checkbox" id="chk" name="mpno" value="<%= p.getPlanNo() %>">
 	                
-	                   <div id="seoulMap" style="width:250px;height:200px;">
-						<img src="resources/images/서울.jpg" name="mapImg">
-						</div>
-						<br><br>
+                    <div id="seoulMap" style="width:250px;height:188px;">
+						<img src="<%=contextPath %>/resources/images/map2.jpg" name="mapImg">
+					</div>
+					<br>
+					<div id="MapComment">
 	                    <p align="center">
-	                     <a href=""></a>
-			             <%= p.getPlanTitle()%> <br>
-			             <%= p.getStartDate()%> ~ <%= p.getEndDate()%>
+			            <%= p.getPlanTitle()%> <br>
+			            <%= p.getStartDate()%> ~ <%= p.getEndDate()%>
 			            </p>
+		            </div>
+			     </a>
 	            </div>
 	            <% } %>
             <% } %>
@@ -161,6 +167,21 @@
         });
         
         </script>
+        <script>
+		$(function(){
+			 
+			
+			 $("select").change(function(){
+			 var plan = $("select[name=planOp]").val()
+		
+			location.href="<%=contextPath%>/list.mp?currentPage=1&userNo=<%=userNo%>&planOp=" + plan;
+			
+								});
+				$("#planOp option[value=<%=planOp%>]").attr("selected", true);
+			
+			
+		});
+	</script>
     <!-- content -->
     </div>
     <!-- outer div -->

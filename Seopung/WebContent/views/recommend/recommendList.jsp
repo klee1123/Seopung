@@ -97,9 +97,14 @@ p>img {
 	font-size:15px;
 	color:black;
 	background-color:white;
-	font-weight:normal;
-	display:inline
+	font-weight:lighter;
+	display:inline;
+	font-family:나눔고딕;
+}
 	
+}
+#content img{
+	display: none;
 }
 #content br {
 	display: none;
@@ -116,7 +121,6 @@ p>img {
 				<option value="최신">최신순</option>
 				<option value="추천">추천순</option>
 				<option value="조회">조회순</option>
-				
 			</select>
 
 		</div>

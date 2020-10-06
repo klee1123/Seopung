@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminCommunity.model.service.CommunityService;
 import com.kh.adminCommunity.model.vo.Community;
 
@@ -30,23 +31,30 @@ public class AdminCommunityDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		int result = new CommunityService().increaseCount(cno);
-		
-		if(result>0) {
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
+			int cno = Integer.parseInt(request.getParameter("cno"));
 			
-			Community c = new CommunityService().selectCommunity(cno);
+			int result = new CommunityService().increaseCount(cno);
 			
-			request.setAttribute("c", c);
-			request.setAttribute("pageTitle", "커뮤니티 상세조회");
-			request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityDetailView.jsp").forward(request, response);
-			
+			if(result>0) {
+				
+				String head = new CommunityService().selectHead(cno);
+				
+				Community c = new CommunityService().selectCommunity(cno, head);
+				
+				request.setAttribute("c", c);
+				request.setAttribute("pageTitle", "커뮤니티 상세조회");
+				request.getRequestDispatcher("../views/admin/manage_post/community/manageCommunityDetailView.jsp").forward(request, response);
+				
+			}else {
+				request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+				request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			}
 		}else {
-			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
-		
 	}
 
 	/**

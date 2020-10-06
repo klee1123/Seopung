@@ -8,6 +8,8 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.adminInquiry.model.dao.AdminInquiryDao;
+import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminPlan.model.dao.PlanDao;
 import com.kh.adminReport.model.dao.AdminReportDao;
 import com.kh.adminReport.model.vo.AdminReport;
@@ -34,6 +36,17 @@ public class AdminReportService {
 		
 		return list;
 	}	
+	
+	public AdminReport selectAdminReport(int rno) {
+		Connection conn = getConnection();
+		
+		 AdminReport r = new AdminReportDao().selectAdminReport(conn, rno);
+		
+		close(conn);
+		
+		return r;
+	}
+	
 	
 	/**
 	 * 신고 글 삭제용 서비스

@@ -1,6 +1,6 @@
 package com.kh.admin.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -262,6 +262,7 @@ public class AdminDao {
 		
 		return result;
 	}
+	
 	
 }
 

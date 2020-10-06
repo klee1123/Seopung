@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.adminCommunity.model.service.CommunityService;
 
+
 /**
  * Servlet implementation class AdminCommunityCommentDeleteServlet
  */
@@ -31,9 +32,9 @@ public class AdminCommunityCommentDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
-		
+		int cno = Integer.parseInt(request.getParameter("cno"));
 		int result = new CommunityService().deleteComment(commentNo);
-		
+		int result1 = new CommunityService().decreaseReCount(cno);
 		response.getWriter().print(result);
 	}
 

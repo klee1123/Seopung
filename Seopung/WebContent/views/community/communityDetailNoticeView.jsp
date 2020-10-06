@@ -78,7 +78,7 @@
 
         <hr>
 
-        <div id="content_3">
+        <div id="content_3" style="overflow:auto;">
             <%=nc.getContent() %>
         </div>
         <%if(loginUser != null && loginUser.getUserNo() == nc.getUserNo1()&& loginUser.getCategory() == 2){  %>

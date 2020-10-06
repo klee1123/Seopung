@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.ArrayList , com.kh.recommend.model.vo.*" %>
-<%
-	ArrayList<Recommend> list = (ArrayList<Recommend>)request.getAttribute("list");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,28 +11,29 @@
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
   	<link rel="stylesheet" href="resouces/css/all.css">
     <link rel="stylesheet" href="resources/css/style.css">
-    <!-- 달력 -->
-    <script src="resources/js/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
-   	<script>
-   	  $( function() {
-        $( "#calendar" ).datepicker({
-          firstDay: 1
-        });
-      });
-  	</script>
+
+   
     <style>
-    	#mainRecommendTable{
-            width:300px;
+    	#mainPlanRec{
+            width:250px;
         }
-        #mainRecommendTable a{
+        #mainPlanRec a{
             text-decoration: none;
-            color:black;
+            color: rgb(75, 75, 75);
+            font-size : 15px;
         }
-        #mainRecommendTable tr{
+        #mainPlanRec tr{
+            height:40px;
+        }
+        #mainNotice{
+            width:250px;
+        }
+        #mainNotice a{
+            text-decoration: none;
+            color: rgb(75, 75, 75);
+            font-size : 15px;
+        }
+        #mainNotice tr{
             height:40px;
         }
         .blog_text img{
@@ -43,11 +41,26 @@
             height: 100%;
         }
         .single_donation_item{
-        
             font-size: 18px;
+            width : 300px;
+        }
+        #fontStyle{
+        	color: rgb(75, 75, 75);
+        	font-size:20px;
+        	font-weight: bold;
+        }
+        #caImg{
+        	border:1px solid rgb(230,230,230);
+        	border-radius:5px;
+        	height:310px;
+        }
+        #recommendR>img{
+        	border-radius:5px;
+        }
+        #reImg{
+        	border-radius:5px;
         }
         
-        .ui-datepicker{ font-size: 20px; width:280px; height: 300px; }
     </style>
 </head>
 <body>
@@ -62,7 +75,7 @@
                     <div class="banner_text">
                         <div class="banner_text_iner">
                             <h5 style="font-family: 'Do Hyeon', sans-serif;">나만의 여행 플래너 서풍</h5>
-                            <h5 style="font-family: 'Do Hyeon', sans-serif;">쉽고 빠르게 여행을 기록하세요</h5><br><br>
+                            <h5 style="font-family: 'Do Hyeon', sans-serif;">쉽고 빠르게 여행을 계획하세요</h5><br><br>
                             <%if (loginUser != null) { %>
                              <a href="views/plan/planMakePage.jsp" onClick="planMake_click();" class="genric-btn primary e-large" 
                              style="font-family: 'Do Hyeon', sans-serif; font-size: 20px; color: rgb(75, 75, 75); font-weight:100;">일정 만들기</a>
@@ -84,35 +97,32 @@
     <section class="search_your_country">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item">
-                       	<div id="calendar"></div>
-                    </div>
+                 <div class="col-lg-4 col-sm-6">
+                   <!--  <div class="single_donation_item" style="border: 1px solid black;">  --> 
+                       	<img id="caImg" class="single_donation_item" src="resources/images/calendar.jpg"  >
+                    <!-- </div> -->
                 </div>
+                
                 <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item" style="margin-left: 40px;">
-                        <h4>공지사항</h4><br>
-                        <p><table id="mainRecommendTable" >
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">공지사항 제목공지사항 제목</a></td></tr>
+                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                        <p id="fontStyle">공지사항</p><br>
+                        <p><table id="mainNotice" >
+                           <!-- <tr>
+                           		<td><a href="">공지사항 제목 공지사항 제목</a></td>
+                           </tr>  -->
                         </table></p><br>
-                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
+                        <a href="<%= contextPath %>/list.no?currentPage=1" style="text-decoration: none; color: black; font-size:13px">공지사항 더보기</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item">
-                        <h4>인기글</h4><br>
-                        <p><table id="mainRecommendTable" >
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                            <tr><td><a href="">인기글 제목공지사항 제목</a></td></tr>
-                        </table></p><br> 
-                        <a href="#" style="text-decoration: none; color: black;">더보기</a>
+                <div class="col-lg-4 col-sm-6" >
+                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                        <p id="fontStyle">인기글</p><br>
+                        <p><table id="mainPlanRec" >
+                           <!-- <tr>
+                           		<td><a href="">인기글 제목</a></td>
+                            </tr>  --> 
+                            </table></p><br> 
+                        <a href="<%= contextPath %>/list.pl?currentPage=1" style="text-decoration: none; color: black; font-size:13px"">일정 더보기</a>
                     </div>
                 </div>
             </div>
@@ -128,32 +138,121 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="section_tittle">
-                        <h2>추천 코스</h2>
+                        <p id="fontStyle" style="font-size:25px">추천 코스</p>
                         <p>내가 계획한 일정과 서울 주요 관광지 정보를 빠르고 쉽게 찾을 수 있습니다. 서풍에서 제공하는 추천코스를 활용해보세요!</p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_blog_part">
-                        <div class="blog_text">
-                            <h2>제목</h2>
-                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
-                            <a href=""><img src="resources/달.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                
-                
-            </div>
+	          <div class="row" id="row">
+	              <!-- <div class="col-lg-4 col-sm-6">
+	                    <div class="single_blog_part">
+	                        <div class="blog_text">
+	                            <p>제목</h2>
+	                            <div class="recommendRank" style="width: 200; height:250px;border: 1px solid black;">
+	                            <a href=""><img src="resources/달.jpg" alt=""></a>
+	                            </div>
+	                        </div>
+	                    </div>
+	               </div> -->
+             </div>
         </div>
     </section>
-
-	<footer>
-	<%@include file="views/common/footer.jsp" %>
+	<script>
+		$(function(){
+			selectRecommendList();
+			selectPlanList();
+		});
+		
+		function selectRecommendList(){
+			
+			$.ajax({
+					url:"<%=contextPath%>/IndexRe.in",
+					type:"get",
+					success:function(list){
+						
+						var result = "";
+						for(var i=0; i<3; i++) {
+							result += 
+									
+					                "<div class='col-lg-4 col-sm-6'>" +
+					                    "<div class='single_blog_part'>" +
+					                        "<div class='blog_text'>" +
+					                            "<p id='fontStyle' style='font-size:20px'>" + list[i].title + "</p>" + "<br>" +
+					                            "<div class='recommendRank' id='recommendR' style='width: 200; height:250px;'>" +
+					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img id='reImg' src=" + list[i].thumb + "></a>" +
+					                            "</div>" +
+					                        "</div>" +
+					                    "</div>" +
+					                 "</div>";
+							
+						}
+						$("#row").html(result);
+						
+					},error:function(){
+						console.log("ajax통신 실패")
+					}
+			});
+		}
+	</script>
+	<script>
+		$(function(){
+			selectPlanList();
+		});
+		
+		function selectPlanList(){
+			$.ajax({
+					url:"<%=contextPath%>/IndexPl.in",
+					type:"get",
+					success:function(list){
+						
+						var result = "";
+						for(var i=0; i<5; i++) {
+							result += 
+								"<tr>" +
+                       				"<td>" + 
+                       					"<a href='<%=contextPath%>/detail.pl?pno=" + list[i].planNo + "'>" + list[i].planTitle + "</a>" + 
+                       				"</td>" +
+                       			"</tr>";
+						}
+						$("#mainPlanRec").html(result)
+					},error:function(){
+						console.log("ajax통신 실패");
+					}
+			})
+		}
+	</script>
 	
+	<script>
+		$(function(){
+			selectNoticeList();
+		});
+		
+		function selectNoticeList(){
+			$.ajax({
+					url:"<%=contextPath%>/IndexNo.in",
+					type:"get",
+					success:function(list){
+						var result = "";
+						for(var i=0; i<5; i++) {
+							result +=
+								"<tr>" +
+                       				"<td>" + 
+                       					"<a href='<%=contextPath%>/detail.no?nno=" + list[i].noticeNo + "'>" + list[i].noticeTitle + "</a>" +
+                       				"</td>" +
+                       			"</tr>";
+						}
+						$("#mainNotice").html(result);
+					},error:function(){
+						console.log("ajax통신실패");
+					}
+			})
+		}
+	</script>
+
+  	
+	<footer>
+	
+	<%@include file="views/common/footer.jsp" %>
 	</footer>
 
 

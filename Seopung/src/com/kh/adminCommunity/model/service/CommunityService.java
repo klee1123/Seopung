@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import com.kh.adminCommunity.model.dao.CommunityDao;
 import com.kh.adminCommunity.model.vo.ComComment;
 import com.kh.adminCommunity.model.vo.Community;
-import com.kh.adminRecommend.model.dao.RecommendDao;
 import com.kh.common.PageInfo;
 
 public class CommunityService {
@@ -89,10 +88,10 @@ public class CommunityService {
 	}
 	
 	
-	public Community selectCommunity(int cno) {
+	public Community selectCommunity(int cno, String head) {
 		Connection conn = getConnection();
 		
-		Community c = new CommunityDao().selectCommunity(conn, cno);
+		Community c = new CommunityDao().selectCommunity(conn, cno, head);
 		
 		close(conn);
 		
@@ -148,5 +147,45 @@ public class CommunityService {
 		}
 		
 		return result;
+	}
+	
+	public int updateCommunity(Community c) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().updateCommunity(conn, c);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+
+
+	public int decreaseReCount(int cno) {
+		Connection conn = getConnection();
+		
+		int result = new CommunityDao().decreaseReCount(conn, cno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public String selectHead(int cno) {
+		Connection conn = getConnection();
+		
+		String head = new CommunityDao().selectHead(conn, cno);
+		
+		close(conn);
+		
+		return head;
 	}
 }

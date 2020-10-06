@@ -4,7 +4,7 @@
 <%
 
 	ArrayList<Community> list = (ArrayList<Community>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");;
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();

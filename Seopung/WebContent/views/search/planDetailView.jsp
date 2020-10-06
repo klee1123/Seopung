@@ -39,7 +39,7 @@
 #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
 #placesList .item span {display: block;margin-top:4px;}
 #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 10px;}
+#placesList .item .info{padding:10px 0 10px 55px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color:#009900;}
@@ -81,6 +81,9 @@
 	width:400px;
 	height:80px;
 	padding:5px;
+	padding-left:10px;
+	border: 1px solid rgb(231, 231, 231);
+	padding-top:8px;
 }
 #content_1_2{
 	width: 250px;
@@ -89,13 +92,14 @@
 	height:80px;
 }
 #content_1_2 table {
-	background: white;
-	box-shadow: 5px 5px 5px -4px gray;
+	border: 1px solid rgb(231, 231, 231);
+	height: 80px;
 	cursor:pointer;
 }
 
 #content_1_3 {
 	background-color: #f9f9f9;
+	border: 1px solid rgb(231, 231, 231);
 	width: 300px;
 	height: 80px;
 	padding: 10px;
@@ -133,8 +137,8 @@
 	margin-top: 15px;
 	padding: 10px;
 	color: grey;
-	border: 1px solid lightgrey;
-	background: white;
+	border: 1px solid rgb(231, 231, 231);
+	background: #f9f9f9;
 	float: left;
 	overflow:auto;
 }
@@ -146,8 +150,8 @@
 /* Style the tab */
 .tab {
   float: left;
-  border: 1px solid #ccc;
-  background-color:#f9f9f9;
+  border: 1px solid rgb(231, 231, 231);
+  background-color:rgb(250, 250, 250);
   width: 25%;
   height: 100%;
 }
@@ -176,14 +180,14 @@
 
 /* Create an active/current "tab button" class */
 .tab button.active {
-  background-color: #ccc;
+  background-color: rgb(231, 231, 231);
 }
 
 /* Style the tab content */
 .tabcontent {
   float: left;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(231, 231, 231);
   width: 75%;
   border-left: none;
   height: 100%;
@@ -195,21 +199,43 @@
 
 
 	<div class="outer">
-	
-		<h2>일정 상세조회</h2>
-		<hr>
+		<table>
+			<tr>
+				<td width="720">
+					<h2 style="color: rgb(75, 75, 75);">일정 상세조회</h2>				
+				</td>
+				<td width="270">
+					<%if(loginUser != null && loginUser.getUserNo() != p.getUserNo() && loginUser.getCategory()==1){ %>
+					<div id="content_3"  align="right">
+						<button class="btn btn-outline-secondary btn-sm" onclick="likePlan();">추천</button>
+						<%if(p.getScrapYN().equals("Y")){ %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="scrapPlan();">스크랩</button>
+						<%}else{ %>
+						<button class="btn btn-outline-secondary btn-sm" disabled>스크랩</button>
+						<%} %>
+						<%if(p.getAccompany().equals("Y")){ %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="confirmAccom();">동행신청</button>
+						<%}else{ %>
+						<button class="btn btn-outline-secondary btn-sm" disabled>동행신청</button>
+						<%} %>
+						<button class="btn btn-outline-secondary btn-sm" id="report" onclick="report(<%=p.getPlanNo()%>, <%=p.getUserNo()%>, 2);">신고하기</button>
+					</div>
+					<%}%>
+					<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
+					<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
+					<div align="right">
+						<%if(category == 1){ %>
+						<button class="btn btn-outline-secondary btn-sm">수정</button>
+						<%} %>
+						<button class="btn btn-outline-secondary btn-sm" onclick="confirmDeletePlan();">삭제</button>
+					</div>
+					<%} %>
+				</td>
+			</tr>
+		</table>
 		
-		<!--  작성자에게만 보여줄 수정 삭제 버튼 -->
-		<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
-		<div id="buttonArea" style="padding-left:15px;">
-			
-			<%if(category == 1){ %>
-			<button class="btn btn-primary btn-sm">수정</button>
-			<%} %>
-			<button class="btn btn-danger btn-sm" onclick="confirmDeletePlan();">삭제</button>
-			
-		</div>
-		<%} %>
+		<hr style="margin-top:5px;">
+		
 		
 		<div id="content_1">
 		
@@ -244,7 +270,7 @@
 				<table style="width:250px;">
 					<tr style="height: 75px;">
 						<td width="85" align="center">
-							<%if(p.getProfile().equals("null")){ %>
+							<%if(p.getProfile() == null || p.getProfile().equals("null")){ %>
 							<img width="55" height="55" class='rounded-circle'
 							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
 							alt=""></td>
@@ -268,12 +294,12 @@
 		
 				<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 				
-				<div id="menu_wrap" class="bg_white" style="width:200px;height:115px;">
+				<div id="menu_wrap" class="bg_white" style="width:220px;height:115px;">
 			        <div class="option">
 			            <div>
 			                <form onsubmit="searchPlaces(); return false;">
-			                    <input type="text" value="서울" id="keyword" size="17"> 
-			                    <button type="submit" style="border:none; background-color:grey;color:white;">검색</button> 
+			                    <input type="text" value="서울" id="keyword" size="20"> 
+			                    <button type="submit" style="background-color:grey;color:white;width:37px;">검색</button> 
 			                </form>
 			            </div>
 			        </div>
@@ -298,7 +324,7 @@
 		
 					<%for(int i=1; i<=dayCount; i++){ %>
 					<div id="<%=i %>" class="tabcontent">
-						<h3>Day<%=i %></h3>
+						<h4>Day<%=i %></h4>
 						<ol id="placeArea<%=i%>">
 							
 						</ol>
@@ -373,26 +399,8 @@
 			}
 		</script>
 		
-		<br><br>
+		<br>
 		
-		<!-- 각종 버튼들(조건있음) -->
-		<%if(loginUser != null && loginUser.getUserNo() != p.getUserNo() && loginUser.getCategory()==1){ %>
-		<div id="content_3" align="center">
-			<button class="btn btn-outline-warning btn-sm" onclick="likePlan();">추천</button>
-			<%if(p.getScrapYN().equals("Y")){ %>
-			<button class="btn btn-outline-primary btn-sm" onclick="scrapPlan();">스크랩</button>
-			<%}else{ %>
-			<button class="btn btn-outline-primary btn-sm" disabled>스크랩</button>
-			<%} %>
-			<%if(p.getAccompany().equals("Y")){ %>
-			<button class="btn btn-outline-success btn-sm" onclick="confirmAccom();">동행신청</button>
-			<%}else{ %>
-			<button class="btn btn-outline-success btn-sm" disabled>동행신청</button>
-			<%} %>
-			<button class="btn btn-outline-danger btn-sm" id="report" onclick="report(<%=p.getPlanNo()%>, <%=p.getUserNo()%>, 2);">신고하기</button>
-		</div>
-		<%}%>
-	
 		<br clear="all">
 	
 		<div id="content_4" style="padding-left: 15px;"></div>
@@ -578,10 +586,10 @@
        				
        				var content = "<br>";
        				
-       				if(profile.m.profile != "null"){
-	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+       				if(profile.m.profile == null || profile.m.profile == "null"){
+       					content += "<img src='<%=contextPath%>/resources/images/default-user.png' class='rounded-circle' height='120' width='120'>";
        				}else{
-       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
        				}
        					
 	                content += "<br><br>" +
@@ -608,10 +616,10 @@
 	                    "<br>" +
 	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
 	                    
-	                if(profile.m.userIntro != "null"){
-	                	content += profile.m.userIntro + "</textarea>";
-	                }else{
+	                if(profile.m.userIntro == null || profile.m.userIntro == "null"){
 	                	content +=  "</textarea><br>";
+	                }else{
+	                	content += profile.m.userIntro + "</textarea>";
 	                }
 	               
 	                $(".modal-profile").html(content);
@@ -658,8 +666,8 @@
 				    	    				"<tr>" +
 				    							"<td width='60'>";
     	       					 
-    	       					 if(result.list[i].profile == "null"){
-    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+    	       					 if(result.list[i].profile == null || result.list[i].profile == "null"){
+    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
     	       					 }else{
     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
     	       					 }
@@ -992,7 +1000,7 @@
 		function getListItem(index, places) {
 
 		    var el = document.createElement('li'),
-		    itemStr =  (index+1) +
+		    itemStr =  '<span class="markerbg marker_' + (index+1) + '"></span>' +
 		                '<div class="info">' +
 		                '   <h5>' + places.place_name + '</h5>';
 

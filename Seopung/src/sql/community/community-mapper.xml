@@ -35,6 +35,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -63,6 +64,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -91,6 +93,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -119,6 +122,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -147,6 +151,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -175,6 +180,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -203,6 +209,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -231,6 +238,7 @@
 			             , COMMUNITY_THUMB
 			             , COMMUNITY_HEAD
 			             , COMMUNITY_ENROLL
+			             , COMMUNITY_COMMENT
 			          FROM TB_COMMUNITY C
 			          JOIN TB_MEMBER USING(USER_NO)
 			         WHERE COMMUNITY_STATUS = 'Y'
@@ -457,6 +465,9 @@ SELECT *
 		 WHERE COMMENT_STATUS = 'Y'
 		   AND COMMUNITY_NO = ?
 	</entry>
-
-	
+	<entry key="increaseReply">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_COMMENT = COMMUNITY_COMMENT + 1
+		 WHERE COMMUNITY_NO = ?
+	</entry>	
 </properties>

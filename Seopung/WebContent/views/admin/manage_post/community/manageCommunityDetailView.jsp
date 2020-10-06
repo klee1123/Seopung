@@ -86,62 +86,47 @@
 		<div class="outer">
 
 			<div id="content_1">
-				<div style="width: 740px; font-size: 18px;"><%=c.getTitle() %></div>
+				<div style="width: 770px; font-size: 18px;">[<%=c.getHead() %>] <%=c.getTitle() %></div>
 				<div style="text-align: right;"><%=c.getEnrollDate() %></div>
 			</div>
 
 			<div id="content_2">
-				<div style="width: 600px;"><%=c.getCommunityWriter() %></div>
+				<%if(c.getHead().equals("공지")){ %>
+				<div style="width: 790px;"><%=c.getCommunityWriter() %></div>
 				<div>조회수 <%=c.getCount() %></div>
+				<%}else{ %>
+				<div style="width: 610px;"><%=c.getCommunityWriter() %></div>
 				<div>추천수 <%=c.getRecommendCount() %></div>
 				<div>스크랩수 <%=c.getScrapCount() %></div>
+				<div>조회수 <%=c.getCount() %></div>
+				<%} %>
 			</div>
 
 			<hr>
 
-			<div id="content_3"><%=c.getContent() %></div>
+			<div id="content_3" style="overflow:auto;"><%=c.getContent() %></div>
 
-			<!-- 댓글 수 -->
+			<%if(c.getHead().equals("공지")){ %>
+			<hr>
+			<%}else{ %>
+			
 			<div id="content_4"></div>
 
 			<hr>
 
-			
 			<div id="content_6" align="center">
-				<!--  
-				<table>
-					<tr>
-						<td width="60"><img width="45px" class="rounded-circle"
-							src="https://ucanr.edu/sb3/display_2018/images/default-user.png"
-							alt=""></td>
-						<td>닉네임 <br> 2020.09.09 22:05
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td colspan="2" width="800">것이 이상이 찾아다녀도, 얼음 주음 주는 품으며, 찾아 피가
-							것이다. 낙원을 얼마나 무엇을 살 인간이 같지 되려니와, 그와 살았으며, 아니다. 있는 새 천지는 못할 쓸쓸한 밥을
-							어디 뿐이다. 없는 인간의 청춘의 못할 같이 청춘의 그들은 피가 우리 것이다. 곳이 너의 새가 불러 보이는 약동하다.
-							보이는 약동하다.</td>
-						<td align="center">
-							<button style="border: none; background: none">삭제</button>
-						</td>
-					</tr>
-				</table>
-				-->
-				
 			</div>
-
-			
 			
 			<div align="center" id="paging">
-
 			</div>
-
+			<%} %>
 			<br> <br> <br>
 
 			<div align="center">
-				<button class="btn btn-secondary" onclick="history.back();">취소</button>
+				<button class="btn btn-secondary" onclick="location.href='<%=contextPath%>/adminPage/list.co?currentPage=1';">취소</button>
+				<%if(c.getHead().equals("공지")){ %>
+				<button class="btn btn-primary" onclick="location.href='<%=contextPath%>/adminPage/updateForm.co?&cno=<%=c.getCommunityNo()%>&head=<%=c.getHead()%>';">수정</button>
+				<%} %>
 				<button class="btn btn-danger" id="deleteBtn">삭제</button>
 			</div>
 
@@ -185,8 +170,8 @@
 					    	    				"<tr>" +
 					    							"<td width='60'>";
      	       					 
-     	       					 if(result.list[i].profile == "null"){
-     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
+     	       					 if(result.list[i].profile == null || result.list[i].profile == "null"){
+     	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
      	       					 }else{
      	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
      	       					 }

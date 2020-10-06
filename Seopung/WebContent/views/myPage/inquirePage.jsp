@@ -57,7 +57,7 @@
             <hr>
         
         <div class="inquire">
-            <button type="button" id="btn_deleteIq" class="btn btn-secondary" >삭제</button>
+            <button type="button" id="btn_deleteIq" class="btn btn-secondary btn-sm" >삭제</button>
             <br><br>
             <table id="inquireTable" class = "table table-hover">
                 <thead>

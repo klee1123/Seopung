@@ -65,7 +65,7 @@
 						<tr>
 							<td colspan="2" align="center">
 								<%if(m.getProfile()==null || m.getProfile().equals("null")){ %>
-								<img src="https://ucanr.edu/sb3/display_2018/images/default-user.png" 
+								<img src="<%=contextPath%>/resources/images/default-user.png" 
 								alt="프로필사진" height="180px;" width="180px;"  class="rounded-circle">
 								<%}else{ %>
 								<img src="<%=contextPath %>/<%=m.getProfile() %>" id="propicPreview"
@@ -92,7 +92,7 @@
 							<td colspan="2">자기소개</td>
 						</tr>
 						<tr>
-							<%if(m.getUserIntro().equals("null")){ %>
+							<%if(m.getUserIntro() == null || m.getUserIntro().equals("null")){ %>
 							<td colspan="2"><textarea name="userSelfIntro" rows="5"  class="form-control"
 									style="resize: none;"></textarea></td>
 							<%}else{ %>		

@@ -143,6 +143,13 @@
 		   AND COMMUNITY_STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectHead">
+		SELECT 
+		       COMMUNITY_HEAD
+		  FROM TB_COMMUNITY
+		 WHERE COMMUNITY_NO = ?
+	</entry>
+	
 	<entry key="selectCommunity">
 		SELECT 
 		       USER_ID
@@ -156,6 +163,23 @@
 		     , COMMUNITY_HEAD
 		  FROM TB_COMMUNITY
 		  JOIN TB_MEMBER USING(USER_NO)
+		 WHERE COMMUNITY_STATUS = 'Y'
+		   AND COMMUNITY_NO = ?
+	</entry>
+	
+	<entry key="selectNoticeCommunity">
+		SELECT 
+		       ADMIN_ID
+		     , COMMUNITY_TITLE
+		     , COMMUNITY_CONTENT
+		     , COMMUNITY_ENROLL
+		     , COMMUNITY_COUNT
+		     , COMMUNITY_SCRAP
+		     , COMMUNITY_RECOMMEND
+		     , COMMUNITY_THUMB
+		     , COMMUNITY_HEAD
+		  FROM TB_COMMUNITY
+		  JOIN TB_ADMIN ON(USER_NO = ADMIN_NO)
 		 WHERE COMMUNITY_STATUS = 'Y'
 		   AND COMMUNITY_NO = ?
 	</entry>
@@ -208,5 +232,20 @@
 		   SET COMMENT_STATUS = 'N',
   		       COMMENT_MODIFY = SYSDATE
 		 WHERE COMMENT_NO = ?
+	</entry>
+	
+	<entry key="updateCommunity">
+		UPDATE 
+		       TB_COMMUNITY
+		   SET COMMUNITY_TITLE = ?
+		     , COMMUNITY_CONTENT = ?
+		     , COMMUNITY_MODIFY = SYSDATE
+ 		 WHERE COMMUNITY_NO = ?
+ 	</entry>
+
+	<entry key="decreaseReCount">
+		UPDATE TB_COMMUNITY
+		   SET COMMUNITY_COMMENT = COMMUNITY_COMMENT -1
+		 WHERE COMMUNITY_NO = ?
 	</entry>
 </properties>

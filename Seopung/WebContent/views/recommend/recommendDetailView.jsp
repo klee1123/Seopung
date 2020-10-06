@@ -78,7 +78,7 @@
 
         <hr>
 
-        <div id="content_3">
+        <div id="content_3" style="overflow:auto;">
             <%=nc.getContent() %>
         </div>
         <div align="center">

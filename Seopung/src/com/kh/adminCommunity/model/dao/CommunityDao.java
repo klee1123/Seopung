@@ -230,14 +230,19 @@ public class CommunityDao {
 	}
 	
 	
-	public Community selectCommunity(Connection conn, int cno) {
+	public Community selectCommunity(Connection conn, int cno, String head) {
 		// select문 => 한 행 조회
 		Community c = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectCommunity");
+		String sql = "";
+		if(head.equals("공지")) {
+			sql = prop.getProperty("selectNoticeCommunity");
+		}else {
+			sql = prop.getProperty("selectCommunity");
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -248,7 +253,7 @@ public class CommunityDao {
 			
 			if(rset.next()) {
 				c = new Community(cno,
-								rset.getString("USER_ID"),
+								rset.getString(1),
 								rset.getString("COMMUNITY_TITLE"),
 								rset.getString("COMMUNITY_CONTENT"),
 								rset.getDate("COMMUNITY_ENROLL"),
@@ -393,6 +398,83 @@ public class CommunityDao {
 		}
 		
 		return result;
+	}
+	
+	public int updateCommunity(Connection conn, Community c) {
+		// update문 => 처리된 행 수
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getTitle());
+			pstmt.setString(2, c.getContent());
+			pstmt.setInt(3, c.getCommunityNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	public int decreaseReCount(Connection conn, int cno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+
+		String sql = prop.getProperty("decreaseReCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public String selectHead(Connection conn, int cno) {
+		// select => 한 행 조회
+		String head = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectHead");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				head = rset.getString(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return head;
 	}
 	
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.adminReport.model.vo.AdminReport;
+import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminNotice.model.dao.AdminNoticeDao;
 import com.kh.adminNotice.model.vo.AdminNotice;
 import com.kh.adminPlan.model.vo.PlanComment;
@@ -101,6 +102,37 @@ private Properties prop = new Properties();
 		return list;
 		
 	}
+	
+	public AdminReport selectAdminReport(Connection conn, int rpno) {
+		// select문 => 한 행 조회
+		AdminReport r = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAdminReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, rpno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r = new AdminReport();
+						}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
+	}
+	
 	
 	public int deleteReport(Connection conn, String[] rno) {
 		// update문 => 처리된 행 수

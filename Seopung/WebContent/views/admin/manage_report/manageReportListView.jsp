@@ -135,7 +135,7 @@
                     $(this).find("td:eq(2)").css("cursor","pointer");
                   
                     $(this).find("td:eq(2)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.pl?pno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/adminPage/detail.rp?rpno=" + $(this).prev().text();
                     });
                   });
 			});

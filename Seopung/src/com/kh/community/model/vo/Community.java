@@ -17,7 +17,7 @@ public class Community {
 	private String status;
 	private String thumb;
 	private String head;
-	
+	private int reCount;
 	public Community() {}
 
 	public Community(int comNo, String userNo, int userNo1, String title, String content, Date enroll, Date modify, int count,
@@ -104,6 +104,24 @@ public class Community {
 		this.content = content;
 		this.enroll = enroll;
 		this.count = count;
+	}
+	
+	
+
+	public Community(int comNo, String userNo, String title, String content, Date enroll, int count, int scrap,
+			int recommend, String thumb, String head, int reCount) {
+		super();
+		this.comNo = comNo;
+		this.userNo = userNo;
+		this.title = title;
+		this.content = content;
+		this.enroll = enroll;
+		this.count = count;
+		this.scrap = scrap;
+		this.recommend = recommend;
+		this.thumb = thumb;
+		this.head = head;
+		this.reCount = reCount;
 	}
 
 	public int getComNo() {
@@ -209,13 +227,26 @@ public class Community {
 	public void setHead(String head) {
 		this.head = head;
 	}
+	
+
+	public int getReCount() {
+		return reCount;
+	}
+
+	public void setReCount(int reCount) {
+		this.reCount = reCount;
+	}
 
 	@Override
 	public String toString() {
-		return "Community [comNo=" + comNo + ", userNo=" + userNo + ", title=" + title + ", content=" + content
-				+ ", enroll=" + enroll + ", modify=" + modify + ", count=" + count + ", scrap=" + scrap + ", recommend="
-				+ recommend + ", status=" + status + ", thumb=" + thumb + ", head=" + head + "]";
+		return "Community [comNo=" + comNo + ", userNo=" + userNo + ", userNo1=" + userNo1 + ", title=" + title
+				+ ", content=" + content + ", enroll=" + enroll + ", modify=" + modify + ", count=" + count + ", scrap="
+				+ scrap + ", recommend=" + recommend + ", status=" + status + ", thumb=" + thumb + ", head=" + head
+				+ ", reCount=" + reCount + "]";
 	}
+
+
+	
 	
 	
 }

@@ -42,6 +42,13 @@ public class AdminNotice {
 		this.status = status;
 	}
 
+
+	public AdminNotice(int noticeNo, String noticeTitle) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+	}
+
 	public int getAdminNo() {
 		return adminNo;
 	}

@@ -20,7 +20,8 @@
 	String year = birth.substring(0, 4);
 	String month = birth.substring(4, 6);
 	String day = birth.substring(6);
-	String intro = m.getUserIntro().equals("null") ? "" : m.getUserIntro() ;
+	String intro = (m.getUserIntro() == null ? "" : m.getUserIntro());
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -102,8 +103,8 @@
              <br><br>
         
             <div class="infoPoto">
-            	<% if(profile.equals("null")) { %>
-       			<img src="<%= contextPath %>/resources/images/회원.jpg" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
+            	<% if(profile == null || profile.equals("null")) { %>
+       			<img src="<%= contextPath %>/resources/images/default-user.png" id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
        			<% }else { %>
                 <img src="<%= contextPath %>/<%=profile%>"  
                 		id="profileImg" width="150px" height="150px" onchange="loadImg(this);";>
@@ -220,7 +221,7 @@
                 <table>
                 	<tr>
                 		<th>현재닉네임</th>
-                		<td><input type="text" name="userNick" id="userNick" required value="<%= nickName %>"></td>
+                		<td><input type="text" name="userNick" id="userNick" readonly value="<%= nickName %>"></td>
                     <tr>
                         <th>변경할 닉네임</th>
                         <td><input type="text" name="updateNick" id="updateNick" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn" onclick="nickCheck();">중복확인</button></td>
@@ -391,12 +392,12 @@
                 };
             }else if (inputFile.files.length == 0) {
             	
-               $("#profileImg").attr("src", "resources/images/회원.jpg");
+               $("#profileImg").attr("src", "resources/images/default-user.png");
               
             }
         }
         $("#deleteProfile").click(function(){
-            $("#profileImg").attr("src", "resources/images/회원.jpg");
+            $("#profileImg").attr("src", "resources/images/default-user.png");
         });
         
     </script>

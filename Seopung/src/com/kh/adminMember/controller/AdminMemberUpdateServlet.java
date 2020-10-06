@@ -42,8 +42,8 @@ public class AdminMemberUpdateServlet extends HttpServlet {
 		
 		// 생일
 		String year = request.getParameter("year");
-		String month ="";
-		String day ="";
+		String month =request.getParameter("month");
+		String day =request.getParameter("day");
 		
 		int imonth = Integer.parseInt(request.getParameter("month"));
 		if(imonth<10) {

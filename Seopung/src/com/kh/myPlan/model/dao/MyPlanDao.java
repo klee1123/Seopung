@@ -61,17 +61,21 @@ public class MyPlanDao {
 		return listCount;
 	}
 	
-	public ArrayList<Plan> selectList (Connection conn, PageInfo pi, int userNo) {
+	public ArrayList<Plan> selectList (Connection conn, PageInfo pi, int userNo, String planOp) {
 		
 		ArrayList<Plan> list = new ArrayList<Plan>();
 		
-		
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectList");
-		
+
+		String sql = "";
+		if(planOp.equals("모든일정")) {
+			sql = prop.getProperty("selectList");		
+		}else if(planOp.equals("공개")) {
+			sql = prop.getProperty("selectListY");
+		}else if(planOp.equals("비공개")){
+			sql = prop.getProperty("selectListN");
+		}
 		try {
 			pstmt = conn.prepareStatement(sql);
 			

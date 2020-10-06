@@ -107,27 +107,17 @@
 
 			<div align="center">
 				<button class="btn btn-secondary" onclick="history.back();">취소</button>
-				<button class="btn btn-danger" id="deleteBtn">삭제</button>
+				<button class="btn btn-danger" onclick="deleteAdminNotice();" id="deleteBtn">삭제</button>
 			</div>
 
 			<br> <br>
 
 		<script>
-            
-	       	$(function(){
-	       		selectReplyList(1); // 페이지 로딩된 직후에 이 게시글에 딸려있는 댓글 리스트 조회
-	       		
-	       		//setInterval(selectReplyList,1000);
-	       		
-	       		$("#deleteBtn").click(function(){
-	       			if(confirm("정말 삭제하시겠습니까?")) {
-	       				location.href="<%=contextPath%>/adminPage/delete.no?nno=<%=n.getNoticeNo()%>";
-	       			}
-	       		});
-	       		
-	       		
-	       	});	 
-	       	
+		function deleteAdminNotice(){
+			if(confirm("정말 삭제하시겠습니까?")) {
+            	location.href= "<%=contextPath%>/adminPage/delete.no?nno=<%=n.getNoticeNo()%>";
+          	} 
+		}
        	</script>
 	
 
