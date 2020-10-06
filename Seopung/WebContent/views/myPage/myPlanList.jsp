@@ -78,6 +78,7 @@
         
         <div class="MyplanArea">
         <% if(currentPage>1){ %>
+        
         <% }else{ %>
 			<a href="views/plan/planMakePage.jsp">
             <div class="MakeMap" align="center" >
@@ -115,6 +116,7 @@
             <% } %>
 	<!-- myplan -->
     <div class="pagingArea" align="center">
+    		
 			<% if(currentPage != 1) { %>
 	            <!-- 맨 처음으로 (<<) -->
 	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.mp?currentPage=1&userNo=<%=userNo%>&planOp=<%=planOp%>';"> &lt;&lt; </button>

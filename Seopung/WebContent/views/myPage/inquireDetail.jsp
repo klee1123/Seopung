@@ -70,7 +70,7 @@
                 <div id="iqcontent"><%= i.getInquireContent() %></div>
             <hr style="font-weight: 900; font-size: 30px;">
             <div class="Admin">
-            <%if(i.getInquireResponse().equals("NULL")) { %>
+            <%if(i.getInquireResponse() == null) { %>
             	<div class="AdminNO"></div>
             <% }else { %>
                 <div class="AdminYes">
