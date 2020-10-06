@@ -127,7 +127,7 @@
 	                        <td><%= list.get(i).getAccomApply() %></td>
                             <td><a href="#"><%= list.get(i).getPlanTitle() %></a></td>
                             <td><a href="#" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#accept" style="font-size: 10px;" onclick="agree(<%=list.get(i).getAccomNo() %>);">수락</a> /
-                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;">거절</a>
+                                <a href="#" class="btn btn-outline-warning btn-sm"   data-toggle="modal" data-target="#refusal"  style="font-size: 10px;" onclick="cancel(<%=list.get(i).getAccomNo() %>);" >거절</a>
                             </td>
                             <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px;" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
@@ -162,6 +162,7 @@
 					
                 	$("#accomNo").val(accomNo);
                 	
+                	
 					
 				}
 				
@@ -169,8 +170,10 @@
 					
 					$("#accomNo").val(accomNo);
 					
-					
-					
+				}
+				
+				function cancel(accomNo){
+					$("#accomNo2").val(accomNo);
 				}
                 
                
@@ -232,8 +235,8 @@
                                 </h4>
                                 <br>
             
-                                <form action="" method="post">
-                        
+                                <form action="<%= contextPath %>/cancel.ac" method="get">
+                        			<input type="hidden" name="accomNo" id="accomNo2">
                                     <button type="submit" class="genric-btn info-border radius">확인</button>
                                     <button type="reset" class="genric-btn danger-border radius">취소</button>
                                 </form>
@@ -310,26 +313,26 @@
 
 
 	            <br><br>
-	            <div class="pagingArea" align="center">
+                <div class="pagingArea" align="center">
                     <div align="center">
 					<% if(currentPage != 1){ %>
 	            	<!-- 맨 처음으로 (<<) -->
-                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/request.ac?currentPage=1">&lt;&lt;</button>
                     <!-- 이전페이지로 (<) -->    
-                        <button class="btn btn-secondary btn-sm">&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/request.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
 					<% } %>
 					
 				<% for(int p=startPage; p<=endPage; p++){ %>
 					<% if(p != currentPage){ %>
-                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/request.ac?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
                 	<% } %>        
                 <% } %>
                 
                 <% if(currentPage != maxPage){ %>  
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/request.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/request.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
                 <% } %>    
                     </div>
 	            </div>

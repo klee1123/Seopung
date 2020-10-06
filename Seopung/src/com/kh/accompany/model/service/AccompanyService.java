@@ -203,6 +203,49 @@ public class AccompanyService {
 		
 	}
 	
+	public int cancel(int accomNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().cancel(conn, accomNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
+	
+	public int selectResponseListCount(int userNo) {
+		
+		
+		Connection conn = getConnection();
+		
+		int listCount = new AccompanyDao().selectResponseListCount(conn, userNo);
+		
+		close(conn);
+		
+		return listCount;
+		
+		
+		
+	}
+	
+	public ArrayList<Accompany> selectResponseList(PageInfo pi, int userNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Accompany> list = new AccompanyDao().selectResponseList(conn, pi, userNo);
+		
+		close(conn);
+		
+		return list;
+	
+	
+	}
 	
 	
 	

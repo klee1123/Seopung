@@ -54,6 +54,19 @@ public class Accompany {
 		this.planNo = planNo;
 		this.planTitle = planTitle;
 	}
+	
+	public Accompany(int accomNo,  String userId, String userNick , Date accomApply, String accomStatus, int userNo1 , int userNo2, int planNo, String planTitle) {
+		super();
+		this.accomNo = accomNo;
+		this.userId = userId;
+		this.userNick = userNick;
+		this.accomApply = accomApply;
+		this.accomStatus = accomStatus;
+		this.userNo1 = userNo1;
+		this.userNo2 = userNo2;
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+	}
 
 	public int getAccomNo() {
 		return accomNo;

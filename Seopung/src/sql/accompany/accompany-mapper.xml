@@ -184,6 +184,53 @@
 	
 	</entry>
 	
+	<entry key="accomCancel">
+		UPDATE TB_ACCOMPANY
+		   SET ACCOM_STATUS = 'N'
+		 WHERE ACCOM_NO = ?
+	
+	</entry>
+	
+	<entry key="selectResponseListCount">
+		
+		SELECT COUNT(*) LISTCOUNT
+		  FROM TB_ACCOMPANY
+		 WHERE (ACCOM_STATUS IS NULL OR ACCOM_STATUS = 'N')
+           AND USER_NO = ?
+	
+	
+	</entry>
+	
+	
+		<entry key="selectResponseList">
+         				SELECT *
+		 FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       C.ACCOM_NO
+		                     , M.USER_ID
+		                     , M.USER_NICK
+                             , C.ACCOM_APPLY
+                             , C.ACCOM_STATUS
+		                     , C.USER_NO
+		                     , C.USER_NO2
+		                     , C.PLAN_NO
+                             , P.PLAN_TITLE
+		                  FROM TB_ACCOMPANY C
+		                  JOIN TB_MEMBER M ON(C.USER_NO2 = M.USER_NO)
+                          JOIN TB_PLAN_OPTION P ON(C.PLAN_NO = P.PLAN_NO)
+		                  WHERE (C.ACCOM_STATUS IS NULL OR C.ACCOM_STATUS = 'N')
+		                    AND C.USER_NO = ? 
+		                 ORDER 
+		                    BY C.ACCOM_NO DESC
+		               ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
 	
 	
 	

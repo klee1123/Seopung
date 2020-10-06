@@ -1,5 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+<%@ page import="java.util.ArrayList, com.kh.common.*" %>
+<%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
+
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
+	
+	
+	
+	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+	
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,63 +101,39 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
+	                <%if(list.isEmpty()){ %>
+	                <tr>
+	                	<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
+	                </tr>
+	                <%} else { %>
+	                	<% for(int i=0; i<list.size(); i++) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
+	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;<%= i+1 %></td>
+	                        <td ><%= list.get(i).getUserId() %></td>
 	                        <td></td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td>수락</td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;" hidden>동행취소</a></td>
-
+	                        <td><%= list.get(i).getAccomApply() %></td>
+                            <td><a href="#"><%= list.get(i).getPlanTitle() %></a></td>
+                            <td>
+                            
+                            <% if(list.get(i).getAccomStatus() == null || list.get(i).getAccomStatus().equals("null")){ %>
+                            
+                                                 	<span>진행중</span>
+                            <% } else if(list.get(i).getAccomStatus().equals("N")) { %>
+                            
+                                               	<span>거절</span>
+                            
+                                                  
+                            <% } %>
+                            </td>
+                            <td>
+                            <% if(list.get(i).getAccomStatus() == null || list.get(i).getAccomStatus().equals("null")) { %>
+                            
+                            <a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;" id="accomCancel" onclick="accomCancel('<%= list.get(i).getAccomNo() %>');">동행취소</a></td>
+							
+							<% } %>
                         </tr>
-
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td></td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td>진행중</td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;">동행취소</a></td>
-
-                        </tr>
-
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td></td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td>거절</td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;" hidden>동행취소칸(진행중만 나옴)</a></td>
-
-                        </tr>
-
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td></td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td>수락</td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;" hidden>동행취소칸(진행중만 나옴)</a></td>
-
-                        </tr>
-
-                        <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-	                        <td >아이디 넣을칸</td>
-	                        <td></td>
-	                        <td>2020.09.19</td>
-                            <td><a href="#">asdasdasd</a></td>
-                            <td>수락</td>
-                            <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#cancel"  style="font-size: 10px;" hidden>동행취소칸(진행중만 나옴)</a></td>
-
-                        </tr>
-
-                     
-
+						<% } %>
+                   <% } %>
                        
 	                </tbody>
 				</table>
@@ -142,6 +141,22 @@
 			
                 </form>
                 
+				<script>
+				function accomCancel(accomNo){
+					
+					$("#accomNo").val(accomNo);
+					
+					
+					
+				}
+				
+				
+				
+				
+				</script>
+
+
+
 
                 
                 <div class="modal" id="cancel">
@@ -153,15 +168,16 @@
                             </div>
 
                             <div class="modal-body" align="center">
-                
+                			
                                 <h4><b>
                                     동행신청을 취소하시겠습니까 ? <br>   
                                 </b>
                                 </h4>
                                 <br>
             
-                                <form action="" method="post">
-                        
+                                <form action="<%= contextPath %>/responseCancel.ac" method="get">
+                        			
+                        			<input type="hidden" name="accomNo" id="accomNo">
                                     <button type="submit" class="genric-btn info-border radius">확인</button>
                                     <button type="reset" class="genric-btn danger-border radius">취소</button>
                                 </form>
@@ -175,23 +191,29 @@
 
 
                     <br><br>
-                    <div class="pagingArea" align="center">
-        
-                        <div align="center">
-                            <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
-                            <button class="btn btn-secondary btn-sm">&lt;</button>
-
-                            <button class="btn btn-outline-secondary btn-sm">1</button>
-                            <button class="btn btn-outline-secondary btn-sm">2</button>
-                            <button class="btn btn-outline-secondary btn-sm">3</button>
-                            <button class="btn btn-outline-secondary btn-sm">4</button>
-                            <button class="btn btn-outline-secondary btn-sm">5</button>
-
-                            <button class="btn btn-secondary btn-sm">&gt;</button>
-                            <button class="btn btn-secondary btn-sm">&gt;&gt;</button>
-                        
-                        </div>
+                <div class="pagingArea" align="center">
+                    <div align="center">
+					<% if(currentPage != 1){ %>
+	            	<!-- 맨 처음으로 (<<) -->
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/response.ac?currentPage=1">&lt;&lt;</button>
+                    <!-- 이전페이지로 (<) -->    
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/response.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
+					<% } %>
+					
+				<% for(int p=startPage; p<=endPage; p++){ %>
+					<% if(p != currentPage){ %>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/response.ac?currentPage=<%=p%>';"><%= p %></button>
+					<% }else{ %>
+						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
+                	<% } %>        
+                <% } %>
+                
+                <% if(currentPage != maxPage){ %>  
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/response.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/response.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                <% } %>    
                     </div>
+	            </div>
 	        </div>
 	    
 	    </div>   

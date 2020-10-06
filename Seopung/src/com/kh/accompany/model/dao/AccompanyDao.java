@@ -439,6 +439,125 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public int cancel(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int selectResponseListCount(Connection conn, int userNo) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRequestListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+				listCount = rset.getInt("LISTCOUNT");
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return listCount;
+		
+		
+		
+		
+	}
+	
+	public ArrayList<Accompany> selectResponseList(Connection conn, PageInfo pi, int userNo){
+		
+		ArrayList<Accompany> list = new ArrayList<Accompany>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectResponseList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, userNo);
+			
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Accompany(rset.getInt("ACCOM_NO"),
+									   rset.getString("USER_ID"),
+						               rset.getString("USER_NICK"),
+						               rset.getDate("ACCOM_APPLY"),
+						               rset.getString("ACCOM_STATUS"),
+						               rset.getInt("USER_NO"),
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO"),
+						               rset.getString("PLAN_TITLE")));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
 
 	
 	
