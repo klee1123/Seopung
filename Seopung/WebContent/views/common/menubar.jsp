@@ -132,7 +132,7 @@ $(function(){
 									</div></li>
 							</ul>
 							<div style="width: 210px;">
-								<form action="<%=contextPath %>/search.do" method="get">
+								<form action="<%=contextPath %>/search.do" method="get" autocomplete="off">
 									<div class="input-group mb-3"
 										style="margin-left: 25px; margin-top: 15px; margin-bottom: 15px;">
 										<input type="text" class="form-control" name="keyword"
