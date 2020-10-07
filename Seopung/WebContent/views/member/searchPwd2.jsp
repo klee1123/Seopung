@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String id = (String)request.getAttribute("id");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -57,7 +58,8 @@ table+br+button {
 			<fieldset id="searchPwd2" style="width: 460px; height: 380px;"
 				align="center">
 				<br>
-				<input type="hidden" name="userId" id="userId" value="<%=id%>">
+				
+				<input type="hidden" name="id" id="id" value="<%=id%>">
 				<p style="font-size: 22px; font-weight: bold; color: dimgray">비밀번호
 					변경</p>
 				<p style="font-size: 16px; color: grey;">

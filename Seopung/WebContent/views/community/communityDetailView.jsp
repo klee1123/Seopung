@@ -479,11 +479,11 @@
 	    				"<tr>" +
 							"<td width='60'>";
 			 
-			 if(result.list[i].profile == "null"){
-				 comment += "<img width='45px' height='45px' class='rounded-circle' src='https://ucanr.edu/sb3/display_2018/images/default-user.png'>";
-			 }else{
-				 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
-			 }
+				  if(result.list[i].profile == null){
+                         comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
+                 }else{
+                         comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+                  }
 			 
 			 comment +=         "</td>" +
 							"<td>" + result.list[i].replyWriter + "<br>" + result.list[i].createDate +

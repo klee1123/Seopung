@@ -37,11 +37,12 @@ public class SearchPwdServlet2 extends HttpServlet {
 		
 		String id = new MemberService().searchId2(userId, email);
 		
-		
+		System.out.println(id);
 		if(!id.equals("")) {
 		request.setAttribute("id", id);
-		System.out.println(id);
+		
 		request.getRequestDispatcher("views/member/searchPwd2.jsp").forward(request, response);
+		
 		}else {
 			request.setAttribute("errorMsg", "아이디와 이메일이 일치하지 않습니다.");
 			request.getRequestDispatcher("views/member/searchError.jsp").forward(request, response);

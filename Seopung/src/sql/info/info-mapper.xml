@@ -79,4 +79,11 @@
          WHERE USER_NO = ?
            
     </entry>
+    
+    <entry key="deleteProfilePic">
+    	UPDATE
+    	      TB_MEMBER
+    	  SET PROFILEPIC_PATH = null
+    	WHERE USER_NO = ?
+    </entry>
 </properties>

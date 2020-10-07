@@ -121,6 +121,15 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
+				r = new AdminReport(rset.getInt("REPORT_NO"),
+						rset.getString("REPORT_CONTENT"),
+						rset.getDate("REPORT_DATE"),
+						rset.getString("REPORT_TYPE"),
+						rset.getString("ID1"),
+						rset.getString("ID2"));
+			}
+			
+			/*if(rset.next()) {
 				r = new AdminReport();
 				r.setReportNo(rset.getInt("report_no"));
 				r.setReportContent(rset.getString("report_content"));
@@ -128,7 +137,7 @@ private Properties prop = new Properties();
 				r.setReportType(rset.getString("report_type"));
 				r.setUserNo(rset.getString("ID1"));
 				r.setUserId2(rset.getString("ID2"));
-			}
+			}*/
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

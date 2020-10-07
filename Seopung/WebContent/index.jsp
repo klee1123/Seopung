@@ -104,7 +104,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-sm-6">
-                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                    <div class="single_donation_item" style="margin-left: 20px;">
                         <p id="fontStyle">공지사항</p><br>
                         <p><table id="mainNotice" style="table-layout:fixed;">
                            <!-- <tr>
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6" >
-                    <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
+                    <div class="single_donation_item" style="margin-left: 20px;">
                         <p id="fontStyle">인기글</p><br>
                         <p><table id="mainPlanRec" style="table-layout:fixed;" >
                            <!-- <tr>
