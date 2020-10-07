@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminInquiry.model.service.AdminInquiryService;
 import com.kh.adminPlan.model.service.PlanService;
 
@@ -31,6 +32,7 @@ public class AdminInquiryDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 		String[] ino = request.getParameterValues("ino");
 		
 		int result = new AdminInquiryService().deleteInquiry(ino);
@@ -41,6 +43,11 @@ public class AdminInquiryDeleteServlet extends HttpServlet {
 			
 		}else {
 			request.setAttribute("errorMsg", "일정 삭제 실패");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
+		
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 	}

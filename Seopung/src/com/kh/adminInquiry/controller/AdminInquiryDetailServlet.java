@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminInquiry.model.service.AdminInquiryService;
 import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminNotice.model.vo.AdminNotice;
@@ -31,6 +32,8 @@ public class AdminInquiryDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 		int ino = Integer.parseInt(request.getParameter("ino"));
 		
 		AdminInquiry i = new AdminInquiryService().selectAdminInquiry(ino);
@@ -43,6 +46,11 @@ public class AdminInquiryDetailServlet extends HttpServlet {
 			
 		}else {
 			request.setAttribute("errorMsg", "유효한 게시글이 아닙니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
+		
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
 			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
 		}
 		
