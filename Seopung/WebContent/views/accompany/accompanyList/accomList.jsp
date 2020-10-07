@@ -93,7 +93,7 @@
 	        
 			<div class="accompanyList"> <br>
 				
-               
+                <a href="#"  class="btn btn-outline-primary btn-sm" id="btnDelete" style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>
                 
 	            <form action="<%=contextPath %>/list.ac" method="GET">
                     
@@ -458,6 +458,51 @@
                         </div>
                     </div>
                 </div>
+                
+                
+          <script>
+                
+                         	// 체크박스 전체선택 및 해제
+            $(function(){
+                $("#chk_all").click(function(){
+                    if($("#chk_all").prop("checked")){
+                        $("input[id=chk]").prop("checked",true);
+
+                    }else {
+                        $("input[id=chk]").prop("checked",false);
+                    }
+                });
+            });
+         	
+         	// 삭제시
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "ino=" + selected[i];
+	                	}else{
+	                  		str += "ino=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/selectDelete.ac?" + str;
+	              	} 
+	            });
+            });
+		</script>
 
 
             

@@ -505,7 +505,7 @@
 
                 </div>                
                 
-                <script>
+        <script>
                 
                          	// 체크박스 전체선택 및 해제
             $(function(){
