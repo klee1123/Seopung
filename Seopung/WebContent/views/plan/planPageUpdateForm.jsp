@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="com.kh.planMake.model.vo.PlanMake"%>
+<%@ page import="com.kh.planMake.model.vo.PlanMake" %>
 
 
 <%
 	PlanMake pm = (PlanMake)request.getAttribute("pm");
-
 
 %>
 	
@@ -14,7 +13,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>일정 만들기 - 지도</title>
+<title>일정 수정 페이지</title>
 <style>
 /* 폰트 */
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css); 
@@ -366,7 +365,7 @@
 				<form action="<%= contextPath %>/planPageUpdate.pl" style="width:800px;" method="post">
 					<div>
 					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
-						<input type="hidden" name="planDay" value="<%=pm.getPlanDay()%>">
+					 	<input type="hidden" name="planNo" value="<%=pm.getPlanNo()%>">
 					
 					</div>
 					
@@ -383,10 +382,10 @@
 								<table>
 									<tr>
 										<td style="width: 400px;">
-											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" value="<%= pm.getPlanSdate() %>" required> </div>
+											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" value="<%= pm.getsDate() %>" required> </div>
 										</td>
 										<td>
-											<div id=""> <input type="date" name="planEdate" id="eDate" size="12" value="<%= pm.getPlanEdate() %>" required> </div>
+											<div id=""> <input type="date" name="planEdate" id="eDate" size="12" value="<%= pm.geteDate() %>" required> </div>
 										</td>
 									</tr>
 								</table>
@@ -518,10 +517,10 @@
 										<div id="so_title" style="width:400px;">동행 유무</div>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planAcc" value="y" checked="checked"><span>동행</span></label>
+												<label class="box-radio-input"><input type="radio" name="planAcc" value="Y" checked="checked"><span>동행</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planAcc" value="n"><span>비동행</span></label>
+												<label class="box-radio-input"><input type="radio" name="planAcc" value="N"><span>비동행</span></label>
 											</div>
 										</div>
 									</td>
@@ -560,10 +559,10 @@
 										<span id="so_title">스크랩 허용</span>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="y" checked="checked"><span>허용</span></label>
+												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="Y" checked="checked"><span>허용</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="n"><span>비허용</span></label>
+												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="N"><span>비허용</span></label>
 											</div>
 										</div>
 										<script>
@@ -588,16 +587,16 @@
 										<span id="so_title">일정 공개 여부</span>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planPrivate" value="y" checked="checked"><span>공개</span></label>
+												<label class="box-radio-input"><input type="radio" name="planPrivate" value="Y" checked="checked"><span>공개</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planPrivate" value="n"><span>비공개</span></label>
+												<label class="box-radio-input"><input type="radio" name="planPrivate" value="N"><span>비공개</span></label>
 											</div>
 										</div>
 										<script>
 							            	$(function(){
 							            		
-							            		var planPrivaten = "<%=pm.getPlanPrivate()%>";
+							            		var planPrivate = "<%=pm.getPlanPrivate()%>";
 							            		//  "운동,등산,요리"	 /  ""
 							            		
 							            		$("input[type=radio]").each(function(){
@@ -615,8 +614,8 @@
 							</table>
 						</div>
 						
-						<div id="inputBox" style="margin-top:0px;">
-							<!-- tap 버튼 및 tap 리스트 -->
+						<!-- <div id="inputBox" style="margin-top:0px;">
+							tap 버튼 및 tap 리스트
 							<div id="planPlace">
 								<div id="so_title">장소명</div>
 								<div class="tab">
@@ -638,9 +637,9 @@
 								</div>
 							</div>
 							
-						</div>
+						</div> -->
 						
-						<div style="margin-top:160px;">
+						<div>
 							<div id="so_title">메모작성</div>
 							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"><%= pm.getPlanMemo() %></textarea>
 						</div>

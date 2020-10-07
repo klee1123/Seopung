@@ -72,6 +72,11 @@
 
   }
 
+  #messageContent_1 {
+      text-decoration: none;
+      color: black;
+  }
+
   
 
 </style>
@@ -98,7 +103,7 @@
                 
                 <div class="receive"> <br>
                     
-                    <a href="#"  class="btn btn-outline-primary btn-sm" id="btnDelete" style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>    
+                    <a href="#"  class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>    
                     <form action="<%= contextPath %>/receiver.ms" method="POST">
                     <br>
                   
@@ -125,11 +130,11 @@
 	                			<% for(int i=0; i<list.size(); i++) { %>
                             
                                 <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1" value="<%= list.get(i).getMassageNo() %>">&nbsp;&nbsp;<%= i+1 %></td>
+                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;<%= i+1 %></td>
                                     <td ><%= list.get(i).getUserId() %></td>
                                     <td><%=list.get(i).getUserNick() %></td>
                                     <td><%= list.get(i).getMessageDate() %></td>
-                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
+                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" id="messageContent_1" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
                                     <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#reply" style="font-size: 10px;" onclick = "replyMessage('<%= list.get(i).getUserNick() %>');">답장하기</a>
                                     </td>
                                     <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#reportModal"  style="font-size: 10px;"onclick="report(<%=list.get(i).getMassageNo()%>, <%= list.get(i).getUserNo2()%>, 4);">신고</a></td>
@@ -436,13 +441,9 @@
 				<script>
 				function messageContent(userId, messageContent){
 					
-					console.log(userId);
-					
 					$("#userId2").val(userId);
 					
-					console.log($("#userId2").val());
-					
-					$("#introduction").val(messageContent);
+					$("#introduction").val(messageContent)
 					
 					
 				}
@@ -477,7 +478,7 @@
                                         <div class="profilePhoto" style="float: left; margin-left: 50px;" >
                                             <input type="text" id="userId2" readonly>
                                             <a href="#" data-toggle="modal" data-target="#profile">&nbsp;</a>
-                                            <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;" onclick= >프로필보기</a>
+                                            <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;">프로필보기</a>
                                             <br><br>
                                            
                                         </div>
@@ -504,53 +505,6 @@
 
 
                 </div>                
-                
-        <script>
-                
-                         	// 체크박스 전체선택 및 해제
-            $(function(){
-                $("#chk_all").click(function(){
-                    if($("#chk_all").prop("checked")){
-                        $("input[id=chk]").prop("checked",true);
-
-                    }else {
-                        $("input[id=chk]").prop("checked",false);
-                    }
-                });
-            });
-         	
-         	// 삭제시
-            $(function(){
-            	$("#btnDelete").click(function(){
-
-              		var selected = new Array();
-              		$("input[id=chk]:checked").each(function(){
-                		selected.push(this.value);
-              		});
-              		
-              		if(selected.length == 0){
-                    	alert("체크된 항목이 없습니다.");
-                        return;
-                    }
-
-	              	var str = "";
-	              	for(var i=0;i<selected.length; i++){
-	                	if(i == selected.length-1){
-	                  		str += "ino=" + selected[i];
-	                	}else{
-	                  		str += "ino=" + selected[i] + "&";
-	                	}
-	              	}
-	              
-	              	if(confirm("정말 삭제하시겠습니까?")) {
-	                	location.href="<%=contextPath%>/delete.ms?" + str;
-	              	} 
-	            });
-            });
-		</script>
-                
-                
-                
                
                
                 <div class="pagingArea" align="center">

@@ -504,10 +504,10 @@
 										<span id="so_title">일정 공개 여부</span>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planPrivate" value="y" checked="checked"><span>공개</span></label>
+												<label class="box-radio-input"><input type="radio" name="planPrivate" value="Y" checked="checked"><span>공개</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planPrivate" value="n"><span>비공개</span></label>
+												<label class="box-radio-input"><input type="radio" name="planPrivate" value="N"><span>비공개</span></label>
 											</div>
 										</div>
 									</div>
@@ -515,9 +515,9 @@
 								</tr>
 							</table>
 						</div>
-						
+						<!--  
 						<div id="inputBox" style="margin-top:0px;">
-							<!-- tap 버튼 및 tap 리스트 -->
+							
 							<div id="planPlace">
 								<div id="so_title">장소명</div>
 								<div class="tab">
@@ -535,23 +535,10 @@
 								<div id="Day3" class="tabcontent">
 							 		<div id="planPlace3" ><input type="text" name="planPlace"><input type="button" class="btnAdd3" value="Add"><br></div>
 								</div>
-							
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
 							</div>
-							
 						</div>
-						
-						<div style="margin-top:160px;">
+						-->
+						<div >
 							<div id="so_title">메모작성</div>
 							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
 						</div>

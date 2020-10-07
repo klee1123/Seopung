@@ -72,7 +72,7 @@ div {
         <h2>&nbsp;고객센터</h2><br>
 
         <h3 style="display:inline;">
-        <a style= "color : black" href="<%=contextPath%>/list.no?currentPage=1"> &nbsp;공지사항</h3>
+        <a style= "color : black" href="<%=contextPath%>/list.no?currentPage=1"> &nbsp;공지사항</a></h3>
         &emsp;&emsp;&emsp;&emsp;
         <h3 style="display:inline;">1:1문의</h3>
 
