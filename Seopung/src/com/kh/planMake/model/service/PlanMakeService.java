@@ -91,7 +91,7 @@ public class PlanMakeService {
 		
 		close(conn);
 		
-		return pm;
+		return ppm;
 	}
 	
 	public int updatePlanPlace(PlanMake ppm) {

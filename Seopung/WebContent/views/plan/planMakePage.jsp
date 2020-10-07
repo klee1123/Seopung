@@ -357,6 +357,7 @@
 					<div>
 					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
 						<input type="hidden" name="planDay" value="123">
+						
 					
 					</div>
 					
