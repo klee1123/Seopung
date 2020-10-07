@@ -97,7 +97,7 @@
             <h1 style="font-weight: 900; font-size: 30px;">&nbsp;&nbsp;&nbsp;개인정보 조회 및 변경</h1>
             <hr>
         <div class="myInfo">
-        <form action="<%=contextPath%>/updateInfo.in" method="POST" enctype="multipart/form-data">
+        <form action="<%=contextPath%>/updateInfo.in" method="POST" enctype="multipart/form-data" autocomplete="off">
             <input type="hidden" name="userNo" value="<%=userNo%>">
             <button type="submit" class="btn btn-secondary btn-sm">저장</button>
              <br><br>
@@ -113,7 +113,7 @@
                 <p style="font-size: 12px;">10MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
-                    <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile" onclick="location.href='<%=contextPath%>/DeleteProfile.in?userNo=<%=userNo%>';">삭제</button>
+            
                 </div>
             </div>
             <div class="changeInfo">
@@ -216,15 +216,15 @@
         
         <!-- Modal body -->
         <div class="modal-body" align="center">
-            <form action="<%= contextPath %>/updateNick.me" method="POST" id="nickChange">
+            <form action="<%= contextPath %>/updateNick.me" method="POST" id="nickChange" autocomplete="off">
                 <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
                 <table>
                 	<tr>
                 		<th>현재닉네임</th>
-                		<td><input type="text" name="userNick" id="userNick" readonly value="<%= nickName %>"></td>
+                		<td><input type="text" name="userNick" id="userNick" style="width:200px" readonly value="<%= nickName %>"></td>
                     <tr>
                         <th>변경할 닉네임</th>
-                        <td><input type="text" name="updateNick" id="updateNick" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn" onclick="nickCheck();">중복확인</button></td>
+                        <td><input type="text" name="updateNick" id="updateNick" style="width:200px" placeholder="영문, 숫자, 한글 포함 10자" required><button type="button" class="btn btn-secondary btn-sm" id="updateNick_Btn" onclick="nickCheck();">중복확인</button></td>
                     	
                     </tr>
                     <tr><td colspan="2" align="center"><span id=nickView></span></td></tr>
@@ -284,7 +284,7 @@
         
         <!-- Modal body -->
         <div class="modal-body" align="center">
-            <form action="<%= contextPath %>/updatePwd.me" method="POST">
+            <form action="<%= contextPath %>/updatePwd.me" method="POST" >
             <input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
                 <table>
                     <tr>
@@ -305,7 +305,7 @@
                 </table>
                 <br>
                 <div id="pcBtn">
-                <button type="button" class="btn btn-secondary" id="pwdChkBtn">인증확인</button>
+                <button type="button" class="btn btn-secondary" id="pwdChkBtn">확인</button>
                 </div>
                 <div id="pBtn">
                	<button type="submit" class="btn btn-secondary" id="pwdBtn">비밀번호변경</button>
