@@ -102,9 +102,9 @@
             <% } %>
 			<% if(currentPage != maxPage) { %>
 	            <!-- 다음 페이지로 (>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>"> &gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath %>/list.in?currentPage=<%=currentPage+1 %>&userNo=<%=userNo%>';"> &gt; </button>
 	            <!-- 맨 끝으로 (>>) -->
-	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>"> &gt;&gt; </button>
+	            <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.in?currentPage=<%=maxPage%>&userNo=<%=userNo%>';"> &gt;&gt; </button>
 			<% } %>
 
         </div>

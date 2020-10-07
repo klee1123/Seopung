@@ -289,16 +289,16 @@
                 <table>
                     <tr>
                         <th>현재 비밀번호 </th>
-                        <td><input type="password" name="userPwd" required></td>
+                        <td><input placeholder="현재 비밀번호를 입력해주세요" type="password" name="userPwd" style="width:200px" required></td>
                     </tr>
                     <tr>
                         <th> 변경할 비밀번호 </th>
-                        <td><input type="password" name="updatePwd" id="pwd1" required></td>
+                        <td><input placeholder="&nbsp;8 ~ 15자 영문 대ㆍ소문자, 숫자, 특수문자" type="password" name="updatePwd" id="pwd1" style="width:200px" required></td>
                     </tr>
                     <tr><td colspan="2" align="center"><span id="regPwd"></span></td></tr>
                     <tr id="pwdTwo">
                         <th>변경할 비밀번호 재입력 </th>
-                        <td><input type="password" name="checkPwd" id="pwd2" required>
+                        <td><input placeholder="&nbsp;똑같은 비밀번호를 입력해주세요" type="password" name="checkPwd" id="pwd2" style="width:200px" required>
                     	</td>
                     </tr>
                     <tr><td colspan="2" align="center"><span id="pwdSpan"></span></td></tr>

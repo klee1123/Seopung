@@ -36,7 +36,6 @@ public class DetailInquireServlet extends HttpServlet {
 		Inquire i = new InquireService().selectInquire(ino);
 		
 		request.setAttribute("i",i);
-		System.out.println(i);
 		request.getRequestDispatcher("views/myPage/inquireDetail.jsp").forward(request, response);
 	}
 

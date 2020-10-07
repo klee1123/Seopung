@@ -106,7 +106,7 @@
                 <div class="col-lg-4 col-sm-6">
                     <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
                         <p id="fontStyle">공지사항</p><br>
-                        <p><table id="mainNotice" >
+                        <p><table id="mainNotice" style="table-layout:fixed;">
                            <!-- <tr>
                            		<td><a href="">공지사항 제목 공지사항 제목</a></td>
                            </tr>  -->
@@ -117,7 +117,7 @@
                 <div class="col-lg-4 col-sm-6" >
                     <div class="single_donation_item" style="margin-left: 20px;border: 1px solid rgb(230,230,230);">
                         <p id="fontStyle">인기글</p><br>
-                        <p><table id="mainPlanRec" >
+                        <p><table id="mainPlanRec" style="table-layout:fixed;" >
                            <!-- <tr>
                            		<td><a href="">인기글 제목</a></td>
                             </tr>  --> 
@@ -177,7 +177,7 @@
 					                "<div class='col-lg-4 col-sm-6'>" +
 					                    "<div class='single_blog_part'>" +
 					                        "<div class='blog_text'>" +
-					                            "<p id='fontStyle' style='font-size:20px'>" + list[i].title + "</p>" + "<br>" +
+					                            "<p id='fontStyle'>" + list[i].title + "</p>" + "<br>" +
 					                            "<div class='recommendRank' id='recommendR' style='width: 200; height:250px;'>" +
 					                            "<a href='<%=contextPath%>/detailList.re?cno=" + list[i].reNo + "'><img id='reImg' src=" + list[i].thumb + "></a>" +
 					                            "</div>" +
@@ -209,7 +209,7 @@
 						for(var i=0; i<5; i++) {
 							result += 
 								"<tr>" +
-                       				"<td>" + 
+                       				"<td style='overflow:hidden; white-space: nowrap;text-overflow: ellipsis;'>" + 
                        					"<a href='<%=contextPath%>/detail.pl?pno=" + list[i].planNo + "'>" + list[i].planTitle + "</a>" + 
                        				"</td>" +
                        			"</tr>";
@@ -236,7 +236,7 @@
 						for(var i=0; i<5; i++) {
 							result +=
 								"<tr>" +
-                       				"<td>" + 
+                       				"<td style='overflow:hidden; white-space: nowrap;text-overflow: ellipsis;'>" + 
                        					"<a href='<%=contextPath%>/detail.no?nno=" + list[i].noticeNo + "'>" + list[i].noticeTitle + "</a>" +
                        				"</td>" +
                        			"</tr>";
