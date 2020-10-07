@@ -66,7 +66,7 @@
 	                        <br>
 	                        <h6>공지사항</h6>
 	                        <h4>
-	                            <%= n.getNoticeTitle() %><br>
+	                            <a style= "color : black" href="<%=contextPath%>/detail.no?nno=<%=n.getNoticeNo()%>"><%= n.getNoticeTitle() %></a><br>
 	                        </h4>
 	                        <h6><%= n.getNoticeEnroll() %></h6>
 	                        

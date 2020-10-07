@@ -1,4 +1,4 @@
-package com.kh.inquire.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.inquire.model.service.InquireService;
-import com.kh.inquire.model.vo.Inquire;
+import com.kh.message.model.service.MessageService;
 
 /**
- * Servlet implementation class DetailInquireListServlet
+ * Servlet implementation class MessageReceiverDeleteServlet
  */
-@WebServlet("/detail.in")
-public class DetailInquireServlet extends HttpServlet {
+@WebServlet("/delete.ms")
+public class MessageReceiverDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DetailInquireServlet() {
+    public MessageReceiverDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,22 @@ public class DetailInquireServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String[] mno = request.getParameterValues("ino");
 		
-		int ino = Integer.parseInt(request.getParameter("ino"));
+		int result = new MessageService().messageDelete(mno);
 		
-		Inquire i = new InquireService().selectInquire(ino);
-		
-		request.setAttribute("i",i);
-		request.getRequestDispatcher("views/myPage/inquireDetail.jsp").forward(request, response);
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "메세지 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
+			
+		}else {
+			request.setAttribute("errorMsg", "메세지 삭제 실패");
+			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
+		}
 	}
-
+		
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

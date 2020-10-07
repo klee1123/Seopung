@@ -38,11 +38,11 @@
             font-size: 22px;
         }
         #iqcontent{
-            width:250px;
+            width:800px;
             height:250px;
         }
         .Admin{
-        	width:250px;
+        	width:800px;
             height:200px;
         }
        
@@ -64,7 +64,7 @@
             <h4>
                <span name="iqTitle"><%= i.getInquireTitle() %> </span>
             </h4>
-            	닉네임 : <span id="nick"><%= i.getUserNick() %></span> 날짜 : <span id="date"><%= i.getInquireEnrollDate() %></span>
+            	닉네임 : <span id="nick"><%= i.getUserNick() %> /</span> 날짜 : <span id="date"><%= i.getInquireEnrollDate() %></span>
             <hr style="font-weight: 900; font-size: 30px;">
             <br>
                 <div id="iqcontent"><%= i.getInquireContent() %></div>

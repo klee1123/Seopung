@@ -37,12 +37,13 @@
 		     , REPORT_CONTENT
 		     , REPORT_DATE
 		     , REPORT_TYPE
-		     , USER_NO
-		     , USER_NO2
+		     , M1.USER_ID AS ID1
+             , M2.USER_ID AS ID2
 		  FROM TB_REPORT R
-	FULL OUTER JOIN TB_MEMBER USING(USER_NO)
+		  JOIN TB_MEMBER M1 ON (R.USER_NO = M1.USER_NO)
+          JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO)
 		 WHERE R.REPORT_STATUS = 'Y'
-		   AND REPORT_NO = ?
+		   AND REPORT_NO = 1;
 	</entry>
 	
 	<entry key="deleteReport">

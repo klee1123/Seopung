@@ -90,7 +90,7 @@
                     <ul>
                        
                         <li><a href="<%= contextPath %>/receiver.ms?currentPage=1">받은 메세지함</a></li>
-                        <li><a href="<%= contextPath %>/send.ms">보낸 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/send.ms?currentPage=1">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
                 <li><a href="<%= contextPath %>/list.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">1:1 문의</a></li> <br>

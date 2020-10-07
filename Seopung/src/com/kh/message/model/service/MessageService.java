@@ -1,6 +1,6 @@
 package com.kh.message.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -44,6 +44,55 @@ public class MessageService {
 		
 	}
 	
+	public int messageDelete(String[] mno) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MessageDao().messageDelete(conn, mno);
+		
+		if(result > 0 ) {
+			
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		
+		close(conn);
+		
+		return result;
+		
+		
+	}
+	
+	public int selectSenderCount(int userNo) {
+		
+		Connection conn = getConnection();
+		
+		int listCount = new MessageDao().selectSenderCount(conn, userNo);
+		
+		close(conn);
+		
+		return listCount;
+		
+		
+	}
+	
+	public ArrayList<Message> selectSenderList(PageInfo pi, int userNo){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Message> list = new MessageDao().selectSenderList(conn, pi, userNo);
+		
+		close(conn);
+		
+		return list;
+		
+		
+		
+	}
+	
+
 	
 	
 	

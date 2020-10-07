@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
-<%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
+<%@ page import="com.kh.message.model.vo.* , com.kh.Member.model.vo.*" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
+	ArrayList<Message> list = (ArrayList<Message>)request.getAttribute("list");
 	
 	
 	
@@ -100,8 +101,8 @@
                 
                 <div class="send"> <br>
                     
-                    <a href="#"  class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px; float: right; margin-right: 10px;">선택삭제</a>    
-                    <form action="" method="POST">
+                    <a href="#"  class="btn btn-outline-primary btn-sm" id="btnDelete" style="font-size: 10px; float: right; margin-right: 10px;">선택삭제</a>    
+                    <form action="<%= contextPath %>/send.ms" method="POST">
                     <br>
                   
                    
@@ -118,56 +119,144 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <%if(list.isEmpty()){ %>
+	                		<tr>
+	                			<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
+	                		</tr>
+	                		<%} else { %>
+	                			<% for(int i=0; i<list.size(); i++) { %>
                                 <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
+                                    <td><input type="checkbox"id="chk" name="chk1" value=<%= list.get(i).getMassageNo() %>><%= i+1 %></td>
+                                    <td ><%= list.get(i).getUserId() %></td>
+                                    <td><%= list.get(i).getUserNick() %></td>
+                                    <td><%= list.get(i).getMessageDate() %></td>
+                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
 
                                 </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-        
+								<% } %>
+								
+							<% } %>
                             </tbody>
                         </table>
-                    
-                
+                  
                     </form>
+
+
+				<script>
+				
+				function messageContent(userId, messageContent){
+					
+					console.log(userId);
+					
+					$("#userId2").val(userId);
+					
+					console.log($("#userId2").val());
+					
+					$("#introduction").val(messageContent);
+					
+					
+				}
+				
+		
+				</script>
+				      
+                
+                <!-- 메세지내용 modal -->
+                <div class="modal" id="messageContent">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">메세지내용</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body" align="center">
+                            
+                                <div class="profile">
+                                    <form action="" method="POST">
+                                        
+                                        
+                                    
+                                        <div class="profilePhoto" style="float: left; margin-left: 50px;" >
+                                            <input type="text" id="userId2" readonly>
+                                            <a href="#" data-toggle="modal" data-target="#profile">&nbsp;</a>
+                                            <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;" onclick= >프로필보기</a>
+                                            <br><br>
+                                           
+                                        </div>
+                                        
+                                        <div>
+                                            <textarea name="introduction" id="introduction" cols="50" rows="8"style="resize: none;" readonly></textarea>
+                                        </div>
+                                        <br><br>
+
+                                        <button class="genric-btn info-border radius">확인</button>
+
+                                    </form>
+                                    </div>
+
+
+                            </div>
+                            
+
+
+                        </div>
+                        
+                    </div>
+
+
+
+                </div>                
+                
+                <script>
+                
+            // 체크박스 전체선택 및 해제
+            $(function(){
+                $("#chk_all").click(function(){
+                    if($("#chk_all").prop("checked")){
+                        $("input[id=chk]").prop("checked",true);
+
+                    }else {
+                        $("input[id=chk]").prop("checked",false);
+                    }
+                });
+            });
+         	
+         	// 삭제시
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "ino=" + selected[i];
+	                	}else{
+	                  		str += "ino=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/deleteSend.ms?" + str;
+	              	} 
+	            });
+            });
+		</script>
+
+
+
+
 
 
                     
@@ -176,22 +265,22 @@
                     <div align="center">
 					<% if(currentPage != 1){ %>
 	            	<!-- 맨 처음으로 (<<) -->
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=1">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/send.ms?currentPage=1">&lt;&lt;</button>
                     <!-- 이전페이지로 (<) -->    
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/send.ms?currentPage=<%= currentPage -1 %>">&lt;</button>
 					<% } %>
 					
 				<% for(int p=startPage; p<=endPage; p++){ %>
 					<% if(p != currentPage){ %>
-                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=p%>';"><%= p %></button>
+                        <button class="btn btn-outline-secondary btn-sm" onclick="location.href='<%=contextPath%>/send.ms?currentPage=<%=p%>';"><%= p %></button>
 					<% }else{ %>
 						<button class="btn btn-secondary btn-sm" disabled><%= p %></button>
                 	<% } %>        
                 <% } %>
                 
                 <% if(currentPage != maxPage){ %>  
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=currentPage+1%>';">&gt;</button>
-                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%=maxPage%>';">&gt;&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/send.ms?currentPage=<%=currentPage+1%>';">&gt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/send.ms?currentPage=<%=maxPage%>';">&gt;&gt;</button>
                 <% } %>    
                     </div>
 	            </div>

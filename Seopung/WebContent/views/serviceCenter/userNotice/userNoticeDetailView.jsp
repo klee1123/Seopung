@@ -120,8 +120,6 @@ div {
         <hr>
 
         <div class="outer" align="left">
-			<form action="<%= contextPath %>/detail.no" 
-				  method="post" id="userNoticeForm">
 
 				<div>
 
@@ -139,10 +137,8 @@ div {
 				<br><br>
 
                 <div align="center">
-					<button class="btn btn-primary" onclick="history.back();">
-					목록으로 돌아가기</button>
+					<button type="button" class="btn btn-primary" onclick="history.back()">목록으로 돌아가기</button>
 				</div></div>
-				</form>
                 
                 <br><br>
     

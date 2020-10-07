@@ -93,8 +93,7 @@
 	        
 			<div class="accompanyList"> <br>
 				
-                    
-
+               
                 
 	            <form action="<%=contextPath %>/list.ac" method="GET">
                     
@@ -133,8 +132,8 @@
                             <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="openProfile(<%= list.get(i).getUserNo1() %>);">프로필</a></td>
                             <% } %>
                             
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%=  list.get(i).getUserNick() %>')">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= list.get(i).getAccomNo()  %>);" >동행삭제</a></td>
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%=  list.get(i).getUserNick() %>');">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= list.get(i).getAccomNo()  %>);">동행삭제</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="userId" id="accomProfile" >
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
