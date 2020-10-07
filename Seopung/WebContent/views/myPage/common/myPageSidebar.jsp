@@ -73,8 +73,8 @@
     
                 <li>동행인관리
                     <ul>
-                        <li><a href="../../accompany/accompanyRequest/accomRequest.jsp" >신청 온 동행인</a></li>
-                        <li><a href="../../accompany/accompanyResponse/accomResponse.jsp">신청 한 동행인</a></li>
+                        <li><a href="<%= contextPath %>/request.ac?currentPage=1" >신청 온 동행인</a></li>
+                        <li><a href="<%= contextPath %>/response.ac?currentPage=1">신청 한 동행인</a></li>
                         <li><a href="<%=contextPath %>/list.ac?currentPage=1">동행목록</a></li>
                     </ul>
                 </li> <br>
@@ -89,8 +89,8 @@
                 <li>메시지함
                     <ul>
                        
-                        <li><a href="../../message/receive/receiveMessage.jsp">받은 메세지함</a></li>
-                        <li><a href="../../message/send/sendMessage.jsp">보낸 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/receiver.ms?currentPage=1">받은 메세지함</a></li>
+                        <li><a href="<%= contextPath %>/send.ms?currentPage=1">보낸 메세지함</a></li>
                     </ul>
                 </li><br>
                 <li><a href="<%= contextPath %>/list.in?currentPage=1&userNo=<%=loginUser.getUserNo()%>">1:1 문의</a></li> <br>

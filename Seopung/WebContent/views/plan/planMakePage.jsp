@@ -357,6 +357,7 @@
 					<div>
 					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
 						<input type="hidden" name="planDay" value="123">
+						
 					
 					</div>
 					
@@ -526,16 +527,26 @@
 								</div>
 								
 								<div id="Day1" class="tabcontent">
-							 		<div id="placeName1" ><input type="text" name="placeName"><input type="button" class="btnAdd1" value="Add"><br></div>
+							 		<div id="planPlace1" ><input type="text" name="planPlace"><input type="button" class="btnAdd1" value="Add"><br></div>
 								</div>
-								
 								<div id="Day2" class="tabcontent">
-								 	<div id="placeName2" ><input type="text" name="placeName"><input type="button" class="btnAdd2" value="Add"><br></div>
+							 		<div id="planPlace2" ><input type="text" name="planPlace"><input type="button" class="btnAdd2" value="Add"><br></div>
 								</div>
-								
 								<div id="Day3" class="tabcontent">
-								  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd3" value="Add"><br></div>
+							 		<div id="planPlace3" ><input type="text" name="planPlace"><input type="button" class="btnAdd3" value="Add"><br></div>
 								</div>
+							
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
 							</div>
 							
 						</div>
@@ -815,24 +826,56 @@
 		// Get the element with id="defaultOpen" and click on it
 		document.getElementById("defaultOpen").click();
 	</script>
-		
+	
 		
 	<!-- 장소명 text 추가 버튼 스크립트  -->
+ 
  	<script>
- 		 $(document).ready (function () {                
-             $('.btnAdd1').click (function () {                                        
-                 $('#placeName1').append (                        
-                     '<div><input type="text" name="placeName"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
-                 ); // end append      
-                 
-                 $('.btnRemove1').on('click', function () { 
-                	 $(this).prev().remove (); // remove the textbox
-                     $(this).next().remove (); // remove the <div>
-                     $(this).remove (); // remove the button
-                 });
-             }); // end click                                            
-         }); // end ready 
+ 			 $(document).ready (function () {                
+ 		        $('.btnAdd1').click (function () {                                        
+ 		            $('#planPlace1').append (                        
+ 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
+ 		            ); // end append      
+ 		            
+ 		            $('.btnRemove1').on('click', function () { 
+ 		           	 $(this).prev().remove (); // remove the textbox
+ 		                $(this).next().remove (); // remove the <div>
+ 		                $(this).remove (); // remove the button
+ 		            });
+ 		        }); // end click                                            
+ 		    }); // end ready 
  	</script>
+ 	<script>
+ 			 $(document).ready (function () {                
+ 		        $('.btnAdd2').click (function () {                                        
+ 		            $('#planPlace2').append (                        
+ 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove2" value="Remove"></div>'                    
+ 		            ); // end append      
+ 		            
+ 		            $('.btnRemove2').on('click', function () { 
+ 		           	 $(this).prev().remove (); // remove the textbox
+ 		                $(this).next().remove (); // remove the <div>
+ 		                $(this).remove (); // remove the button
+ 		            });
+ 		        }); // end click                                            
+ 		    }); // end ready 
+ 	</script>
+ 	<script>
+ 			 $(document).ready (function () {                
+ 		        $('.btnAdd3').click (function () {                                        
+ 		            $('#planPlace3').append (                        
+ 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove3" value="Remove"></div>'                    
+ 		            ); // end append      
+ 		            
+ 		            $('.btnRemove3').on('click', function () { 
+ 		           	 $(this).prev().remove (); // remove the textbox
+ 		                $(this).next().remove (); // remove the <div>
+ 		                $(this).remove (); // remove the button
+ 		            });
+ 		        }); // end click                                            
+ 		    }); // end ready 
+ 	</script>
+ 	
  	
  	
  	<!-- Date 제한 스크립트 -->

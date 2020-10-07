@@ -15,17 +15,16 @@ import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
 
 /**
- * Servlet implementation class AccompanyList
+ * Servlet implementation class AccompanyResponseServlet
  */
-@WebServlet("/list.ac")
-public class AccompanyListServlet extends HttpServlet {
+@WebServlet("/response.ac")
+public class AccompanyResponseListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     *
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyListServlet() {
+    public AccompanyResponseListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +33,7 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		
 		request.setCharacterEncoding("utf-8");
 		
@@ -56,7 +56,7 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		
 		
-		int listCount = new AccompanyService().selectListCount(userNo);
+		int listCount = new AccompanyService().selectResponseListCount(userNo);
 		
 		// 조회된 동행수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
@@ -79,24 +79,18 @@ public class AccompanyListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		
-		ArrayList<Accompany> list =  new AccompanyService().selectList(pi, userNo);
-		
+		ArrayList<Accompany> list =  new AccompanyService().selectResponseList(pi, userNo);
 		
 		
 		
 		
 		System.out.println(list);
 		
-		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		
 		request.setAttribute("userNo", userNo);
-		
-		
-		request.getRequestDispatcher("views/accompany/accompanyList/accomList.jsp").forward(request, response);
-		
-		
+
+		request.getRequestDispatcher("views/accompany/accompanyResponse/accomResponse.jsp").forward(request, response);
 		
 	}
 

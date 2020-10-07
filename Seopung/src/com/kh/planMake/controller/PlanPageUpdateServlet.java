@@ -8,20 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.planMake.model.service.PlanMakeService;
 import com.kh.planMake.model.vo.PlanMake;
 
 /**
  * Servlet implementation class MemberInsertServlet
  */
-@WebServlet("/planMakePage.pl")
-public class PlanMakeInsertServlet extends HttpServlet {
+@WebServlet("/planPageUpdate.pl")
+public class PlanPageUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PlanMakeInsertServlet() {
+    public PlanPageUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -71,39 +72,37 @@ public class PlanMakeInsertServlet extends HttpServlet {
 		
 		
 		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
-		PlanMake p = new PlanMake();
-				p.setPlanTitle(planTitle);
-				p.setPlanSdate(planSdate);
-				p.setPlanEdate(planEdate);
-				p.setPlanAge(planAge);
-				p.setPlanAcc(planAcc);
-				p.setPlanBudget(planBudget);
-				p.setPlanScrapYn(planScrapYn);
-				p.setPlanPrivate(planPrivate);
-				p.setPlanMemo(planMemo);
-				p.setPlanType(planType);
-				p.setPlanTrans(planTrans);
-				p.setUserNo(userNo);
+		PlanMake pm = new PlanMake();
+				pm.setPlanTitle(planTitle);
+				pm.setPlanSdate(planSdate);
+				pm.setPlanEdate(planEdate);
+				pm.setPlanAge(planAge);
+				pm.setPlanAcc(planAcc);
+				pm.setPlanBudget(planBudget);
+				pm.setPlanScrapYn(planScrapYn);
+				pm.setPlanPrivate(planPrivate);
+				pm.setPlanMemo(planMemo);
+				pm.setPlanType(planType);
+				pm.setPlanTrans(planTrans);
+				pm.setUserNo(userNo);
 		
-		PlanMake pp = new PlanMake();
-			pp.setPlanDay(planDay);
-			pp.setPlanPlace(planPlace);
+		PlanMake ppm = new PlanMake();
+			ppm.setPlanDay(planDay);
+			ppm.setPlanPlace(planPlace);
 			
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
-		int result = new PlanMakeService().insertPlanMake(p);
-		int result2 = new PlanMakeService().insertPlanPlace(pp);
+		int result = new PlanMakeService().updatePlanMake(pm);
+		int result2 = new PlanMakeService().updatePlanPlace(ppm);
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
 		if((result+result2 )> 0) {	//  저장 성공
 			
 			request.getSession().setAttribute("alertMsg", "일정 등록 성공");
 			 request.getRequestDispatcher("index.jsp").forward(request, response);
-			  
-			 
-			
 		}
 		
+	
 	}
 
 	/**

@@ -2,13 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.*" %>
 <%@ page import="com.kh.accompany.model.vo.* , com.kh.Member.model.vo.*" %>
-<%@ page import="com.kh.Member.model.vo.*" %>
 
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Accompany> list = (ArrayList<Accompany>)request.getAttribute("list");
-	Member profile = (Member)request.getAttribute("profile");
 	
+	
+	
+	int userNo = 0;
+	if(session.getAttribute("loginUser") != null){
+		userNo = ((LoginUser)session.getAttribute("loginUser")).getUserNo();
+	}
 	
 	
 	int listCount = pi.getListCount();
@@ -89,8 +93,7 @@
 	        
 			<div class="accompanyList"> <br>
 				
-                    
-
+               
                 
 	            <form action="<%=contextPath %>/list.ac" method="GET">
                     
@@ -115,19 +118,29 @@
 	                	<td align="center" colspan="7">조회된 리스트가 없습니다.</td>
 	                </tr>
 	                <%} else { %>
-	                	<% for(Accompany a : list) { %>
+	                	<% for(int i=0; i<list.size(); i++) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= a.getAccomNo() %> <input type="hidden" id="accomNo1" value="<%= a.getAccomNo() %>"></td>
-	                        <td><%= a.getUserId() %></td>
-	                        <td><%= a.getUserNick() %></td>
-	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="accomProfile('<%= a.getUserId() %>');">프로필</a></td>
-                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%= a.getUserNick() %>')">메세지보내기</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= a.getAccomNo() %>);" >동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report">신고</a></td>
+	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= i+1 %> </td>
+	                        
+	                        
+	                        <td><%= list.get(i).getUserId() %></td>
+	                        <td><%= list.get(i).getUserNick() %></td>
+	                        
+	                        <% if( loginUser.getUserNo() == list.get(i).getUserNo1()) {%>
+	                        <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="openProfile(<%= list.get(i).getUserNo2() %>);">프로필</a></td>
+                            <% } else { %>
+                            <td><a href="#" class="genric-btn info-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#profile" onclick="openProfile(<%= list.get(i).getUserNo1() %>);">프로필</a></td>
+                            <% } %>
+                            
+                            <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%=  list.get(i).getUserNick() %>');">메세지보내기</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= list.get(i).getAccomNo()  %>);">동행삭제</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
 							<input type="hidden" name="userId" id="accomProfile" >
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
-							<input type="hidden" name="userNo" id="userNo1" value="<%= a.getUserNo1() %>">
-							<input type="hidden" name="userNo2" id="userNo2" value="<%= a.getUserNo2() %>">
+							<input type="hidden" name="userNo" id="userNo1" value="<%= list.get(i).getUserNo1() %>">
+							<input type="hidden" name="userNo2" id="userNo2" value="<%= list.get(i).getUserNo1() %>">
+	                   		<input type="hidden" id="accomNo1" value="<%= list.get(i).getAccomNo() %>">
+	                   		
 	                    </tr>
 	                    <% } %>
                     <% } %>
@@ -186,7 +199,41 @@
                 	
                 }
 				
-				
+				function accomReport(planNo){
+					
+					$("#reportNo").val($("#loginUserNo").val());
+					
+					var reportUserNo = $("#reportNo").val();
+					console.log(reportUserNo);
+                	var userNo1 = $("#userNo1").val();
+                	var userNo2 = $("#userNo2").val();
+                	var accomNo = $("#accomNo1").val();
+                	
+                	
+                	
+                	$("#reportPlanNo").val(planNo);
+                	console.log($("#reportPlanNo").val());
+                	$("#accomNo").val(accomNo);
+                	
+                	
+                	
+                	
+                	if(reportUserNo == userNo1){
+                		$("#reportNo2").val(userNo2);
+                		console.log($("#reportNo2").val());
+                	}else{
+                		$("#reportNo2").val(userNo1);
+                		console.log($("#reportNo2").val());
+                	}
+					
+					
+					
+					
+					
+				}
+                
+                
+                
                 </script>
 				
 				                
@@ -207,8 +254,8 @@
                             <div class="modal-body" align="center">
                             
                                 <div class="message">
-                                    <form action="message.ac" method="GET">
-                                        
+                                    <form action="<%= contextPath %>/message.ac" method="GET">
+                                        <input type="hidden" name="flagNo" value="1">
                                         <input type="hidden" name="senderNo" id="myNo">
                                         <input type="hidden" name="receiverNo" id="userNo">
                                         
@@ -249,86 +296,108 @@
                 </div>
 
                                 
-                <!-- 프로필 modal -->
-                <div class="modal" id="profile">
-                    <div class="modal-dialog" >
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h3 class="modal-title">프로필</h3>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+		<!--  프로필 모달 -->
+		<div class="modal" id="myProfile">
+	        <div class="modal-dialog modal-sm">
+	            <div class="modal-content" align="center">
+	            
+	                <!-- Modal Header -->
+	                <div class="modal-header">
+	                <h5>프로필</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	                </div>
+	                
+	                <!-- Modal body -->
+	                <div class="modal-profile" style="height:370px;">
+					</div>          
+	            </div>
+	        </div>
+	    </div><!-- profile modal end -->
 
-                            <!-- Modal body -->
-                            <div class="modal-body" align="center">
-                            
-                                <div class="profile">
-                                    <form action="<%= contextPath %>/profile.ac" method="GET">
-                                         <br><br>
-                                        
-                                    
-                                        <div class="profilePhoto"">
-                                            <img src="../../../resources/images/회원.jpg" alt="">
-                                            <br><br>
-                                           
-                                        </div>
-                                        <div class="profileJoin">
-                                            
-                                        <table id="join" align="center" style="float: left;">
-                                            <tr>
-                                                <th align="left" width="100px" ">아이디</th>
-                                                <td><span></span></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <th align="left" width="100px">이름</th>
-                                                <td><span> </span></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <th align="left">닉네임</th>
-                                                <td><span></span></td>
-                                            
-                                            </tr>
-                                            <tr>
-                                               
-                                                </tr>
-                                            </tr>
-                                            <tr>
-                                                <th align="left">이메일</th>
-                                                <td><span> </span></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <th align="left">생년월일</th>
-                                                <td><span></span></td>
-                                            </tr>
-                                            
-                                        </table>
-                                        <br><br>
-                                        </div>
-                                        
-                                        <textarea name="introduction" cols="50" rows="8"style="resize: none;"></textarea>
-                                        
-                                        <br><br>
+	<!-- 프로필 모달 ajax 스크립트 -->
+	<script>
+		var modal = document.getElementById("myProfile");
+	
+		$(function(){
+			
+			$(".close").click(function() {
+				modal.style.display = "none";
+			});
+			
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		
+		});
+		
+		function openProfile(userNo){
+			
+			modal.style.display = "block";
+			selectProfile(userNo);	
+			
+			
+			
+			
+		}
+		
+		function selectProfile(userNo){
+       		$.ajax({
+       			url:"<%=contextPath%>/profile.pl",
+       			type:"post",
+       			data:{
+       				"userNo":userNo
+       			},
+       			success:function(profile){
+       				
+       				var content = "<br>";
+       				
+       				if(profile.m.profile != "null"){
+	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+       				}else{
+       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+       				}
+       					
+	                content += "<br><br>" +
+	                    "<table>" +
+	                        "<tr>" +
+	                            "<th  width='80'>닉네임</th>" +
+	                            "<td width='120'>" +
+	                                profile.m.nickName + 
+	                            "</td>" +
+	                        "</tr>" +
+	                        "<tr>" +
+	                            "<th>이메일</th>" +
+	                            "<td>" +
+	                                profile.m.email + 
+	                            "</td>" +
+	                        "</tr>" +
+	                        "<tr>" +
+	                            "<th>가입일</th>" +
+	                            "<td>" +
+	                                profile.m.enrollDate +
+	                            "</td>" +
+	                        "</tr>" +
+	                    "</table>" +
+	                    "<br>" +
+	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
+	                    
+	                if(profile.m.userIntro != "null"){
+	                	content += profile.m.userIntro + "</textarea>";
+	                }else{
+	                	content +=  "</textarea><br>";
+	                }
+	               
+	                $(".modal-profile").html(content);
 
-                                        <button class="genric-btn info-border radius">확인</button>
+       			}, error:function(){
+       				console.log("프로필 조회용 ajax 통신 실패");
+	       		}
+	       	});
+		}
+	</script>
 
-                                    </form>
-                                    </div>
-
-
-                            </div>
-                            
-
-
-                        </div>
-                        
-                    </div>
-
-
-
-                </div>
 
 
 
@@ -348,41 +417,40 @@
                             <!-- Modal body -->
                             <div class="modal-body" align="center">
                         
-                                <form action="" method="post">
-            
-                                    <table>
-                                        <tr>
-                                            <th>신고 사유</th>
-                                                
-                                            <td>
-                                                <div class="default-select" id="default-select_2">
-                                                    <select>
-                                                        <option value="1">영리목적, 홍보성</option>
-                                                        <option value="1">불법성</option>
-                                                        <option value="1">욕설,인신공격</option>
-                                                        <option value="1">도배 및 광고</option>
-                                                        <option value="1">개인정보 노출</option>
-                                                        <option value="1">음란성, 선정성</option>
-                                                        <option value="1">모방 또는 명의 도용</option>
-                                                        <option value="1">기타</option>
-                                                    </select>
-                                                </div>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 제목 &nbsp;</th>
-                                            <td><input type="text" name="reportTitle" required></td>
-                                        </tr>
-                                        <tr>
-                                            <th>신고 내용</th>
-                                            <td><textarea name="reportContent" cols="30" rows="10" style="resize: none;" required></textarea></td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <button type="submit" class="genric-btn info-border radius">작성</button>
-                                    <button type="reset" class="genric-btn danger-border radius">취소</button>
-                                    
+                                <form action="<%= contextPath %>/report.ac" method="get">
+                                	<input type="hidden" name="flagNo" value=1>
+            						<input type="hidden" name="reportUserNo" id="reportNo">
+            						<input type="hidden" name="reportUserNo2" id="reportNo2">
+            						<input type="hidden" name="planNo" id= "reportPlanNo">
+            						<input type="hidden" name="accomNo" id= "accomNo">
+                                    <p style="font-size: 13px; padding-left:20px;">
+                                * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
+                                * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
+                                * 허위 신고의 경우 신고자가 제재받을 수 있음을 유념해주세요. <br>
+		                            </p>
+		                            <br>
+		                            <b style="color:black;">신고유형</b>
+		                            <select name="reportType" class="form-control" required>
+		                            	<option value="" disabled selected hidden>신고 내용을 선택하세요.</option>
+		                                <option value="영리목적">영리목적</option>
+		                                <option value="불법성">불법성</option>
+		                                <option value="욕설">욕설</option>
+		                                <option value="도배">도배</option>
+		                                <option value="개인정보노출">개인정보노출</option>
+		                                <option value="음란성">음란성</option>
+		                                <option value="명의도용">명의도용</option>
+		                                <option value="기타">기타</option>
+		                            </select>
+		                            <br>
+		                            <b style="color:black;">신고내용</b>
+		                            <textarea name="reportContent" id="reportContent" cols="30" rows="6" style="resize: none;overflow:auto;" class="form-control" maxlength="1000" required></textarea>
+		                            <br>
+		                            <div align="center">
+		                                <input type="checkbox" required id="agreeCheck"> <label for="agreeCheck">개인 정보 수집 및 이용에 동의합니다.</label>
+		                                <br><br><br>
+		                                <button type="submit" class="btn btn-primary">제출</button>
+		                            </div>
+		                                   
                                 </form>
             
                             </div>
@@ -398,9 +466,9 @@
                     <div align="center">
 					<% if(currentPage != 1){ %>
 	            	<!-- 맨 처음으로 (<<) -->
-                        <button class="btn btn-secondary btn-sm">&lt;&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=1">&lt;&lt;</button>
                     <!-- 이전페이지로 (<) -->    
-                        <button class="btn btn-secondary btn-sm">&lt;</button>
+                        <button class="btn btn-secondary btn-sm" onclick="location.href='<%=contextPath%>/list.ac?currentPage=<%= currentPage -1 %>">&lt;</button>
 					<% } %>
 					
 				<% for(int p=startPage; p<=endPage; p++){ %>

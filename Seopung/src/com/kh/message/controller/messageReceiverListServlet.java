@@ -1,4 +1,4 @@
-package com.kh.accompany.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.Member.model.vo.LoginUser;
-import com.kh.accompany.model.service.AccompanyService;
-import com.kh.accompany.model.vo.Accompany;
 import com.kh.common.PageInfo;
+import com.kh.message.model.service.MessageService;
+import com.kh.message.model.vo.Message;
 
 /**
- * Servlet implementation class AccompanyList
+ * Servlet implementation class messageReceiverListServlet
  */
-@WebServlet("/list.ac")
-public class AccompanyListServlet extends HttpServlet {
+@WebServlet("/receiver.ms")
+public class messageReceiverListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     *
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyListServlet() {
+    public messageReceiverListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,7 @@ public class AccompanyListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		request.setCharacterEncoding("utf-8");
 		
 		int currentPage;	// 현재 페이지 (즉, 요청한 페이지)
@@ -56,7 +55,7 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		
 		
-		int listCount = new AccompanyService().selectListCount(userNo);
+		int listCount = new MessageService().selectReceiverCount(userNo);
 		
 		// 조회된 동행수가 0일 경우 페이징오류 해결 위해서 (처리안하면 > >>가 보임) 
 		if(listCount != 0) {
@@ -78,25 +77,14 @@ public class AccompanyListServlet extends HttpServlet {
 
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
-		
-		ArrayList<Accompany> list =  new AccompanyService().selectList(pi, userNo);
-		
-		
-		
-		
-		
-		System.out.println(list);
-		
+		ArrayList<Message> list =  new MessageService().selectReceiverList(pi, userNo);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
-		
 		request.setAttribute("userNo", userNo);
 		
 		
-		request.getRequestDispatcher("views/accompany/accompanyList/accomList.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/message/receive/receiveMessage.jsp").forward(request, response);
 		
 	}
 

@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.Member.model.vo.Member;
 import com.kh.accompany.model.vo.Accompany;
+import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
 
 
@@ -89,9 +90,13 @@ private Properties prop = new Properties();
 			int endRow = startRow + pi.getBoardLimit() - 1;
 			
 			pstmt.setInt(1, userNo);
-			pstmt.setInt(2, userNo);
-			pstmt.setInt(3, startRow);
-			pstmt.setInt(4, endRow);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			pstmt.setInt(4, userNo);
+			pstmt.setInt(5, startRow);
+			pstmt.setInt(6, endRow);
+
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -101,7 +106,8 @@ private Properties prop = new Properties();
 									   rset.getString("USER_ID"),
 						               rset.getString("USER_NICK"),
 						               rset.getInt("USER_NO"),
-						               rset.getInt("USER_NO2")));
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO")));
 				
 			}
 			
@@ -118,6 +124,9 @@ private Properties prop = new Properties();
 		
 		
 	}
+	
+	
+
 	
 	public int deleteAccom(Connection conn, int accomNo) {
 		
@@ -223,6 +232,368 @@ private Properties prop = new Properties();
 		return result;
 		
 	}
+	
+	public int checkReport(Connection conn , Report accomReport){
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("accomCheckReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(accomReport.getUserNo1()));
+			pstmt.setInt(2, Integer.parseInt(accomReport.getUserNo2()));
+			pstmt.setInt(3, accomReport.getReportPostNo());
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			result = rset.getInt(1);
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int insertReport(Connection conn, Report accomReport) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomInsertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(accomReport.getUserNo1()));
+			pstmt.setInt(2, Integer.parseInt(accomReport.getUserNo2()));
+			pstmt.setInt(3, accomReport.getReportPostNo());
+			pstmt.setString(4, accomReport.getReportType());
+			pstmt.setString(5, accomReport.getReportContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int updateReport(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+	
+	
+	
+	public int selectRequestListCount(Connection conn, int userNo) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRequestListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+				listCount = rset.getInt("LISTCOUNT");
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return listCount;
+		
+		
+	}
+	
+	public ArrayList<Accompany> selectRequestList(Connection conn, PageInfo pi, int userNo){
+		
+		ArrayList<Accompany> list = new ArrayList<Accompany>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRequestList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, userNo);
+			
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Accompany(rset.getInt("ACCOM_NO"),
+									   rset.getString("USER_ID"),
+						               rset.getString("USER_NICK"),
+						               rset.getDate("ACCOM_APPLY"),
+						               rset.getInt("USER_NO"),
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO"),
+						               rset.getString("PLAN_TITLE")));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public int agree(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomAgree");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int cancel(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
+	public int selectResponseListCount(Connection conn, int userNo) {
+		
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectRequestListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+				listCount = rset.getInt("LISTCOUNT");
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return listCount;
+		
+		
+		
+		
+	}
+	
+	public ArrayList<Accompany> selectResponseList(Connection conn, PageInfo pi, int userNo){
+		
+		ArrayList<Accompany> list = new ArrayList<Accompany>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectResponseList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, userNo);
+			
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				list.add(new Accompany(rset.getInt("ACCOM_NO"),
+									   rset.getString("USER_ID"),
+						               rset.getString("USER_NICK"),
+						               rset.getDate("ACCOM_APPLY"),
+						               rset.getString("ACCOM_STATUS"),
+						               rset.getInt("USER_NO"),
+						               rset.getInt("USER_NO2"),
+						               rset.getInt("PLAN_NO"),
+						               rset.getString("PLAN_TITLE")));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public int responseCancel(Connection conn, int accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("accomResponseCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, accomNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+	
 
 	
 	

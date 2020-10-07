@@ -13,6 +13,7 @@ public class Accompany {
 	private int planNo;					// 일정 번호(PLAN)
 	private String userId;
 	private String userNick;
+	private String planTitle;
 	
 	
 
@@ -32,13 +33,39 @@ public class Accompany {
 	
 	
 
-	public Accompany(int accomNo,  String userId, String userNick , int userNo1 , int userNo2) {
+	public Accompany(int accomNo,  String userId, String userNick , int userNo1 , int userNo2, int planNo) {
 		super();
 		this.accomNo = accomNo;
 		this.userId = userId;
 		this.userNick = userNick;
 		this.userNo1 = userNo1;
 		this.userNo2 = userNo2;
+		this.planNo = planNo;
+	}
+	
+	public Accompany(int accomNo,  String userId, String userNick , Date accomApply, int userNo1 , int userNo2, int planNo, String planTitle) {
+		super();
+		this.accomNo = accomNo;
+		this.userId = userId;
+		this.userNick = userNick;
+		this.accomApply = accomApply;
+		this.userNo1 = userNo1;
+		this.userNo2 = userNo2;
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+	}
+	
+	public Accompany(int accomNo,  String userId, String userNick , Date accomApply, String accomStatus, int userNo1 , int userNo2, int planNo, String planTitle) {
+		super();
+		this.accomNo = accomNo;
+		this.userId = userId;
+		this.userNick = userNick;
+		this.accomApply = accomApply;
+		this.accomStatus = accomStatus;
+		this.userNo1 = userNo1;
+		this.userNo2 = userNo2;
+		this.planNo = planNo;
+		this.planTitle = planTitle;
 	}
 
 	public int getAccomNo() {
@@ -113,6 +140,16 @@ public class Accompany {
 		this.userNick = userNick;
 	}
 	
+	
+	
+	public String getPlanTitle() {
+		return planTitle;
+	}
+
+	public void setPlanTitle(String planTitle) {
+		this.planTitle = planTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "Accompany [accomNo=" + accomNo + ", accomApply=" + accomApply + ", accomStatus=" + accomStatus

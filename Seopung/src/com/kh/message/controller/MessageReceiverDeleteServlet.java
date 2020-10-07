@@ -1,4 +1,4 @@
-package com.kh.accompany.controller;
+package com.kh.message.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.accompany.model.service.AccompanyService;
+import com.kh.message.model.service.MessageService;
 
 /**
- * Servlet implementation class AccompanyMessageServlet
+ * Servlet implementation class MessageReceiverDeleteServlet
  */
-@WebServlet("/message.ac")
-public class AccompanyMessageServlet extends HttpServlet {
+@WebServlet("/delete.ms")
+public class MessageReceiverDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyMessageServlet() {
+    public MessageReceiverDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,36 +30,21 @@ public class AccompanyMessageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String[] mno = request.getParameterValues("ino");
 		
-		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
-		System.out.println(senderNo);
-		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
-		System.out.println(receiverNo);
+		int result = new MessageService().messageDelete(mno);
 		
-		int flagNo = Integer.parseInt(request.getParameter("flagNo"));
-		
-		
-		
-		String introduction = request.getParameter("introduction");
-		
-		int result = new AccompanyService().sendMessage(senderNo, receiverNo, introduction);
-		
-		
-		if(flagNo == 1) {
-		
-		
-			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
-		}else {
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "메세지 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
 			
+		}else {
+			request.setAttribute("errorMsg", "메세지 삭제 실패");
 			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
 		}
-		
-		
-		
-		
-		
 	}
-
+		
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

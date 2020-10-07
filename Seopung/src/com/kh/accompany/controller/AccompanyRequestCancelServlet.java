@@ -1,7 +1,6 @@
 package com.kh.accompany.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.accompany.model.service.AccompanyService;
 
 /**
- * Servlet implementation class AccompanyMessageServlet
+ * Servlet implementation class AccompanyRequestCancelServlet
  */
-@WebServlet("/message.ac")
-public class AccompanyMessageServlet extends HttpServlet {
+@WebServlet("/cancel.ac")
+public class AccompanyRequestCancelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccompanyMessageServlet() {
+    public AccompanyRequestCancelServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,32 +28,15 @@ public class AccompanyMessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
+
+		int accomNo = Integer.parseInt(request.getParameter("accomNo"));
 		
-		int senderNo = Integer.parseInt(request.getParameter("senderNo"));
-		System.out.println(senderNo);
-		int receiverNo = Integer.parseInt(request.getParameter("receiverNo"));
-		System.out.println(receiverNo);
-		
-		int flagNo = Integer.parseInt(request.getParameter("flagNo"));
+		int result = new AccompanyService().cancel(accomNo);
 		
 		
 		
-		String introduction = request.getParameter("introduction");
-		
-		int result = new AccompanyService().sendMessage(senderNo, receiverNo, introduction);
-		
-		
-		if(flagNo == 1) {
-		
-		
-			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
-		}else {
-			
-			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
-		}
-		
-		
+		response.sendRedirect(request.getContextPath() + "/request.ac?currentPage=1&accomNo=" + accomNo);
 		
 		
 		
