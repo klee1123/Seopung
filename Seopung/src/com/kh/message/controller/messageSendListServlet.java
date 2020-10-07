@@ -85,8 +85,6 @@ public class messageSendListServlet extends HttpServlet {
 		request.setAttribute("userNo", userNo);
 		
 		
-		
-		
 		request.getRequestDispatcher("views/message/send/sendMessage.jsp").forward(request, response);
 	}
 

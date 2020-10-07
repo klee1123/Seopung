@@ -58,7 +58,7 @@
 		</entry>
 
 
-		<entry key="selectReceiverList">
+		<entry key="selectSenderList">
  		SELECT *
 		 FROM (
 		        SELECT 
