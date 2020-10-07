@@ -66,33 +66,7 @@ public class PlanMakeDao {
 	}
 	
 	
-	public int insertPlanPlace(Connection conn, PlanMake pp) {
-		// insert문 => 처리된 행 수
-		
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("insertPlanPlace");
-		
-		try {
-			pstmt = conn.prepareStatement(sql); // 미완성된sql문 => 완성하고 실행
-			
-			pstmt.setString(1, pp.getPlanDay());
-			pstmt.setString(2, pp.getPlanPlace());
-		
-			
-			result = pstmt.executeUpdate();
-						
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;		
-		
-	}
+	
 	
 	
 	public PlanMake selectPlanMake(Connection conn, int planNo) {
@@ -115,8 +89,8 @@ public class PlanMakeDao {
 				
 				pm = new PlanMake(rset.getInt("PLAN_NO"),
 								rset.getString("PLAN_TITLE"),
-								rset.getString("PLAN_SDATE"),
-								rset.getString("PLAN_EDATE"),
+								rset.getDate("PLAN_SDATE"),
+								rset.getDate("PLAN_EDATE"),
 								rset.getString("PLAN_AGE"),
 								rset.getString("PLAN_ACC"),
 								rset.getString("PLAN_BUDGET"),
@@ -124,8 +98,8 @@ public class PlanMakeDao {
 								rset.getString("PLAN_PRIVATE"),
 								rset.getString("PLAN_MEMO"),
 								rset.getString("PLAN_TYPE"),
-								rset.getString("PLAN_TRANS"),
-								rset.getInt("USER_NO")
+								rset.getString("PLAN_TRANS")
+								
 								
 								);
 			}
@@ -140,43 +114,6 @@ public class PlanMakeDao {
 		return pm;
 	}
 	
-	public PlanMake selectPlanPlace(Connection conn, int planNo) {
-		// select 문 => 한 행 조회
-		PlanMake ppm = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectPlanPlace");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, planNo);
-
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
-				ppm = new PlanMake(rset.getInt("PLAN_MAP_NO"),
-								rset.getString("PLAN_DAY"),
-								rset.getString("PLAN_PLACE"),
-								rset.getInt("PLAN_NO")
-								);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return ppm;
-	}
-	
-	
-	
 	
 	
 	public int updatePlanMake(Connection conn, PlanMake pm) {
@@ -189,17 +126,19 @@ public class PlanMakeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pm.getPlanTitle());
-			pstmt.setString(2, pm.getPlanSdate());
-			pstmt.setString(3, pm.getPlanEdate());
-			pstmt.setString(4, pm.getPlanAge());
-			pstmt.setString(5, pm.getPlanAcc());
-			pstmt.setString(6, pm.getPlanBudget());
-			pstmt.setString(7, pm.getPlanScrapYn());
-			pstmt.setString(8, pm.getPlanPrivate());
-			pstmt.setString(9, pm.getPlanMemo());
-			pstmt.setString(10, pm.getPlanType());
-			pstmt.setString(11, pm.getPlanTrans());
+			pstmt.setInt(1, pm.getPlanNo());
+			pstmt.setString(2, pm.getPlanTitle());
+			pstmt.setString(3, pm.getPlanSdate());
+			pstmt.setString(4, pm.getPlanEdate());
+			pstmt.setString(5, pm.getPlanAge());
+			pstmt.setString(6, pm.getPlanAcc());
+			pstmt.setString(7, pm.getPlanBudget());
+			pstmt.setString(8, pm.getPlanScrapYn());
+			pstmt.setString(9, pm.getPlanPrivate());
+			pstmt.setString(10, pm.getPlanMemo());
+			pstmt.setString(11, pm.getPlanType());
+			pstmt.setString(12, pm.getPlanTrans());
+			pstmt.setInt(13, pm.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -213,30 +152,6 @@ public class PlanMakeDao {
 	}
 	
 	
-	public int updatePlanPlace(Connection conn, PlanMake ppm) {
-		// update문 => 처리된 행 수
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("updatePlanPlace");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ppm.getPlanDay());
-			pstmt.setString(2, ppm.getPlanPlace());
-		
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
 	
 	
 	

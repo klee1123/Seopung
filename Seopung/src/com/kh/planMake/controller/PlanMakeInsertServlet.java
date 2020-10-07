@@ -61,13 +61,6 @@ public class PlanMakeInsertServlet extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		
-		String planDay = request.getParameter("planDay");
-		String[] planPlaces = request.getParameterValues("planPlace");
-		String planPlace = "";
-		if(planPlaces != null) {
-			planPlace = String.join(",",  planPlaces);
-		}
-		
 		
 		
 		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
@@ -85,17 +78,14 @@ public class PlanMakeInsertServlet extends HttpServlet {
 				p.setPlanTrans(planTrans);
 				p.setUserNo(userNo);
 		
-		PlanMake pp = new PlanMake();
-			pp.setPlanDay(planDay);
-			pp.setPlanPlace(planPlace);
 			
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
 		int result = new PlanMakeService().insertPlanMake(p);
-		int result2 = new PlanMakeService().insertPlanPlace(pp);
+		
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
-		if((result+result2 )> 0) {	//  저장 성공
+		if(result> 0) {	//  저장 성공
 			
 			request.getSession().setAttribute("alertMsg", "일정 등록 성공");
 			 request.getRequestDispatcher("index.jsp").forward(request, response);
