@@ -76,21 +76,12 @@
 		 WHERE PLAN_NO = ?
 	</entry>
 	
-	<entry key="selectPlanPlace">
-		SELECT 
-		         PLAN_MAP_NO
-			   , PLAN_DAY
-			   , PLAN_PLACE
-			   , PLAN_NO
-		  FROM TB_PLAN_MAP
-		 WHERE PLAN_NO = ?
-	</entry>
 	
 	<entry key="updatePlanMeke">
 		UPDATE 
 		       TB_PLAN_OPTION
 		   SET 
-		      PLAN_NO = ?
+		   	 PLAN_NO = ?
 		   , PLAN_TITLE = ?
 		   , PLAN_SDATE = ?
 		   , PLAN_EDATE = ?
@@ -102,10 +93,11 @@
 		   , PLAN_MEMO = ?
 		   , PLAN_TYPE = ?
 		   , PLAN_TRANS = ?
+		   , USER_NO = ?
 		 WHERE PLAN_NO = ?
 	</entry>
 	
-	<entry key="updatePlanPlace">
+	<!-- <entry key="updatePlanPlace">
 		UPDATE 
 		       TB_PLAN_MAP
 		   SET 
@@ -114,6 +106,6 @@
 		   , PLAN_PLACE = ?
 		 WHERE PLAN_NO = ?
 	</entry>
-	
+	 -->
 	
 </properties>

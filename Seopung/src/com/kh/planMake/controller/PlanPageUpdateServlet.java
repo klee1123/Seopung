@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.LoginUser;
 import com.kh.planMake.model.service.PlanMakeService;
 import com.kh.planMake.model.vo.PlanMake;
 
@@ -36,6 +35,8 @@ public class PlanPageUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		// 2. 전달값 뽑기서 변수 및 객체에 기록하기
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int planNo = Integer.parseInt(request.getParameter("planNo"));
 		String planTitle = request.getParameter("planTitle");	
 		String planSdate = request.getParameter("planSdate");
 		String planEdate = request.getParameter("planEdate");
@@ -58,21 +59,19 @@ public class PlanPageUpdateServlet extends HttpServlet {
 		if(planTranss != null) {
 			planTrans = String.join(",",  planTranss);
 		}
-		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		
-		
-		String planDay = request.getParameter("planDay");
-		String[] planPlaces = request.getParameterValues("planPlace");
-		String planPlace = "";
-		if(planPlaces != null) {
-			planPlace = String.join(",",  planPlaces);
-		}
+	
+		//String planDay = request.getParameter("planDay");
+		//String[] planPlaces = request.getParameterValues("planPlace");
+		//String planPlace = "";
+		//if(planPlaces != null) {
+		//	planPlace = String.join(",",  planPlaces);
+		//}
 		
 		
 		
 		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
 		PlanMake pm = new PlanMake();
+				pm.setPlanNo(planNo);
 				pm.setPlanTitle(planTitle);
 				pm.setPlanSdate(planSdate);
 				pm.setPlanEdate(planEdate);
@@ -85,22 +84,26 @@ public class PlanPageUpdateServlet extends HttpServlet {
 				pm.setPlanType(planType);
 				pm.setPlanTrans(planTrans);
 				pm.setUserNo(userNo);
-		
-		PlanMake ppm = new PlanMake();
-			ppm.setPlanDay(planDay);
-			ppm.setPlanPlace(planPlace);
-			
+		/*
+		 * PlanMake ppm = new PlanMake(); ppm.setPlanDay(planDay);
+		 * ppm.setPlanPlace(planPlace);
+		 */
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
 		int result = new PlanMakeService().updatePlanMake(pm);
-		int result2 = new PlanMakeService().updatePlanPlace(ppm);
+		/* int result2 = new PlanMakeService().updatePlanPlace(ppm); */
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
-		if((result+result2 )> 0) {	//  저장 성공
+		//System.out.println(pm);
+		
+		//if(result> 0) {	//  저장 성공
 			
-			request.getSession().setAttribute("alertMsg", "일정 등록 성공");
-			 request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
+			request.getSession().setAttribute("alertMsg", "일정 수정 성공");
+			 response.sendRedirect(request.getContextPath() + "/detail.pl?pno=" + planNo);
+	//	} else {
+	//		request.setAttribute("alertMsg", "일정조회 실패");
+	//		request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+	//	}
 		
 	
 	}

@@ -1,5 +1,7 @@
 package com.kh.planMake.model.vo;
 
+import java.sql.Date;
+
 public class PlanMake {
 
 	private int planNo;					// 일정번호
@@ -18,38 +20,19 @@ public class PlanMake {
 	private int planScrapCount;			// 스크랩수
 	private int userNo;					// 회원 번호
 	
-	private int planMapNo;				// 장소번호
-	private String planDay;				// 일정일
-	private String planPlace;			// 장소명
+	//private int planMapNo;				// 장소번호
+	//private String planDay;				// 일정일
+	//private String planPlace;			// 장소명
+	
+	private Date sDate;
+	private Date eDate;
+	
 	
 	public PlanMake() {
 		super();
 	}
 
-	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
-			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
-			String planTrans, int planRecommend, int planScrapCount, int userNo, int planMapNo, String planDay,
-			String planPlace) {
-		super();
-		this.planNo = planNo;
-		this.planTitle = planTitle;
-		this.planSdate = planSdate;
-		this.planEdate = planEdate;
-		this.planAge = planAge;
-		this.planAcc = planAcc;
-		this.planBudget = planBudget;
-		this.planScrapYn = planScrapYn;
-		this.planPrivate = planPrivate;
-		this.planMemo = planMemo;
-		this.planType = planType;
-		this.planTrans = planTrans;
-		this.planRecommend = planRecommend;
-		this.planScrapCount = planScrapCount;
-		this.userNo = userNo;
-		this.planMapNo = planMapNo;
-		this.planDay = planDay;
-		this.planPlace = planPlace;
-	}
+	
 
 	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
@@ -73,47 +56,27 @@ public class PlanMake {
 	}
 
 	
-	// selectPlanMake
-	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
-			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
-			String planTrans, int userNo) {
-		super();
-		this.planNo = planNo;
-		this.planTitle = planTitle;
-		this.planSdate = planSdate;
-		this.planEdate = planEdate;
-		this.planAge = planAge;
-		this.planAcc = planAcc;
-		this.planBudget = planBudget;
-		this.planScrapYn = planScrapYn;
-		this.planPrivate = planPrivate;
-		this.planMemo = planMemo;
-		this.planType = planType;
-		this.planTrans = planTrans;
-		this.userNo = userNo;
-	}
-
 	
 	// selectPlanPlace
-	public PlanMake(int planMapNo, String planDay, String planPlace, int planNo) {
-		super();
-		this.planMapNo = planMapNo;
-		this.planDay = planDay;
-		this.planPlace = planPlace;
-		this.planNo = planNo;
-	}
+	//public PlanMake(int planMapNo, String planDay, String planPlace, int planNo) {
+	//	super();
+	//	this.planMapNo = planMapNo;
+	//	this.planDay = planDay;
+	//	this.planPlace = planPlace;
+	//	this.planNo = planNo;
+	//}
 	
 	
 
-	// updatePlanMake
-	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+	// select / updatePlanMake
+	public PlanMake(int planNo, String planTitle, Date sDate, Date eDate, String planAge, String planAcc,
 			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
 			String planTrans) {
 		super();
 		this.planNo = planNo;
 		this.planTitle = planTitle;
-		this.planSdate = planSdate;
-		this.planEdate = planEdate;
+		this.sDate = sDate;
+		this.eDate = eDate;
 		this.planAge = planAge;
 		this.planAcc = planAcc;
 		this.planBudget = planBudget;
@@ -125,19 +88,13 @@ public class PlanMake {
 	}
 	
 	// updatePlanPlace
-		public PlanMake(String planDay, String planPlace) {
-			super();
-			this.planDay = planDay;
-			this.planPlace = planPlace;
-		}
+	//	public PlanMake(String planDay, String planPlace) {
+		//	super();
+	//		this.planDay = planDay;
+		//	this.planPlace = planPlace;
+		//}
 		
-		
-	public PlanMake(int planNo, String planTitle, int planRecommend) {
-			super();
-			this.planNo = planNo;
-			this.planTitle = planTitle;
-			this.planRecommend = planRecommend;
-		}
+	
 
 	public int getPlanNo() {
 		return planNo;
@@ -259,28 +216,21 @@ public class PlanMake {
 		this.userNo = userNo;
 	}
 
-	public int getPlanMapNo() {
-		return planMapNo;
+
+	public Date getsDate() {
+		return sDate;
 	}
 
-	public void setPlanMapNo(int planMapNo) {
-		this.planMapNo = planMapNo;
+	public void setsDate(Date sDate) {
+		this.sDate = sDate;
 	}
 
-	public String getPlanDay() {
-		return planDay;
+	public Date geteDate() {
+		return eDate;
 	}
 
-	public void setPlanDay(String planDay) {
-		this.planDay = planDay;
-	}
-
-	public String getPlanPlace() {
-		return planPlace;
-	}
-
-	public void setPlanPlace(String planPlace) {
-		this.planPlace = planPlace;
+	public void seteDate(Date eDate) {
+		this.eDate = eDate;
 	}
 
 	@Override
@@ -289,15 +239,10 @@ public class PlanMake {
 				+ planEdate + ", planAge=" + planAge + ", planAcc=" + planAcc + ", planBudget=" + planBudget
 				+ ", planScrapYn=" + planScrapYn + ", planPrivate=" + planPrivate + ", planMemo=" + planMemo
 				+ ", planType=" + planType + ", planTrans=" + planTrans + ", planRecommend=" + planRecommend
-				+ ", planScrapCount=" + planScrapCount + ", userNo=" + userNo + ", planMapNo=" + planMapNo + ", planDay="
-				+ planDay + ", planPlace=" + planPlace + "]";
+				+ ", planScrapCount=" + planScrapCount + ", userNo=" + userNo
+				+  ", sDate=" + sDate + ", eDate=" + eDate + "]";
 	}
 
-	
-	
-	
-	
-	
 	
 	
 	
