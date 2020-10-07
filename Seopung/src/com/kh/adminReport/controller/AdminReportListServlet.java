@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.adminReport.model.service.AdminReportService;
 import com.kh.adminReport.model.vo.AdminReport;
 import com.kh.common.PageInfo;
@@ -34,6 +35,7 @@ public class AdminReportListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 		request.setCharacterEncoding("utf-8");
 		
 		int listCount;		// 현재 총 게시글 갯수
@@ -81,6 +83,10 @@ public class AdminReportListServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("../views/admin/manage_report/manageReportListView.jsp").forward(request, response);
 		
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -1,25 +1,26 @@
-package com.kh.adminNotice.controller;
+package com.kh.accompany.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.vo.LoginUser;
+import com.kh.accompany.model.service.AccompanyService;
 
 /**
- * Servlet implementation class AdminNoticeEnrollFormServlet
+ * Servlet implementation class AccompanySelectDeleteServlet
  */
-@WebServlet("/adminPage/enrollForm.no")
-public class AdminNoticeEnrollFormServlet extends HttpServlet {
+@WebServlet("/selectDelete.ac")
+public class AccompanySelectDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminNoticeEnrollFormServlet() {
+    public AccompanySelectDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +30,18 @@ public class AdminNoticeEnrollFormServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
-		request.setAttribute("pageTitle", "공지사항 등록");
-		request.getRequestDispatcher("../views/admin/manage_notice/manageNoticeEnrollForm.jsp").forward(request, response);
+		String[] accomNo = request.getParameterValues("ino");
 		
+		int result = new AccompanyService().selectDelete(accomNo);
+		
+		if(result>0) {
+			request.getSession().setAttribute("alertMsg", "동행 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
+			
 		}else {
-			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
-			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("errorMsg", "동행 삭제 실패");
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
 		}
-		
 	}
 
 	/**

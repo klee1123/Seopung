@@ -131,9 +131,14 @@ public class PlanMake {
 			this.planPlace = planPlace;
 		}
 		
-	
-	
-	
+		
+	public PlanMake(int planNo, String planTitle, int planRecommend) {
+			super();
+			this.planNo = planNo;
+			this.planTitle = planTitle;
+			this.planRecommend = planRecommend;
+		}
+
 	public int getPlanNo() {
 		return planNo;
 	}

@@ -123,7 +123,7 @@
                     $(this).find("td:eq(1)").css("cursor","pointer");
                   
                     $(this).find("td:eq(1)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.rp?currentPage=1&rpno=" + $(this).prev().text();
+                      location.href = "<%= contextPath %>/adminPage/detail.rp?rpno=" + $(this).prev().text();
                     });
                   });
 			});

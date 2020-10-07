@@ -207,6 +207,7 @@
 	<entry key="accomAgree">
 		UPDATE TB_ACCOMPANY
 		   SET ACCOM_STATUS = 'Y'
+		   	 , ACCOM_COMPLETE = SYSDATE
 		 WHERE ACCOM_NO = ?
 	
 	
@@ -264,6 +265,14 @@
 	
 	<entry key="accomResponseCancel">
 		
+		UPDATE TB_ACCOMPANY
+		   SET ACCOM_STATUS = 'N'
+		 WHERE ACCOM_NO = ?
+	
+	
+	</entry>
+	
+	<entry key="selectDelete">
 		UPDATE TB_ACCOMPANY
 		   SET ACCOM_STATUS = 'N'
 		 WHERE ACCOM_NO = ?

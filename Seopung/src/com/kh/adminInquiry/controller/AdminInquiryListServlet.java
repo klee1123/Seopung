@@ -14,6 +14,7 @@ import com.kh.adminInquiry.model.service.AdminInquiryService;
 import com.kh.adminInquiry.model.vo.AdminInquiry;
 import com.kh.adminNotice.model.service.AdminNoticeService;
 import com.kh.adminNotice.model.vo.AdminNotice;
+import com.kh.Member.model.vo.LoginUser;
 import com.kh.admin.model.vo.Admin;
 import com.kh.common.PageInfo;
 
@@ -37,6 +38,7 @@ public class AdminInquiryListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getSession().getAttribute("loginUser") != null && ((LoginUser)request.getSession().getAttribute("loginUser")).getCategory() == 2) {
 		request.setCharacterEncoding("utf-8");
 		
 		int listCount;		// 현재 총 게시글 갯수
@@ -84,6 +86,10 @@ public class AdminInquiryListServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("../views/admin/manage_inquiry/manageInquiryListView.jsp").forward(request, response);
 		
+		}else {
+			request.setAttribute("errorMsg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.getRequestDispatcher("../views/admin/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**
