@@ -40,7 +40,7 @@
 		
 		<div class="outer" align="center">
 			<form action="<%= contextPath %>/adminPage/insert.ad" method="post" id="adminListForm"
-				onsubmit="return validateForm()">
+				onsubmit="return validateForm()" autocomplete="off">
 
 				<table align="center">
 					<tr>
