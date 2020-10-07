@@ -154,6 +154,21 @@ public class InfoService {
         return result;
 
     }
+	
+	public int deleteProfilePic(int userNo) {
+		Connection conn = getConnection();
+		
+		int result = new InfoDao().deleteProfilePic(conn, userNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
 }
 
 

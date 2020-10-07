@@ -1,4 +1,4 @@
-package com.kh.Member.controller;
+package com.kh.information.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.Member.model.service.MemberService;
-import com.kh.Member.model.vo.Member;
+import com.kh.information.model.service.InfoService;
 
 /**
- * Servlet implementation class ChangePwdServlet
+ * Servlet implementation class DeleteProfilePicServlet
  */
-@WebServlet("/changePwd.me")
-public class ChangePwdServlet extends HttpServlet {
+@WebServlet("/DeleteProfile.in")
+public class DeleteProfilePicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePwdServlet() {
+    public DeleteProfilePicServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,18 @@ public class ChangePwdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		String userPwd = request.getParameter("pwd");
-		String userId = request.getParameter("id");
-		System.out.println(userId);
-		System.out.println(userPwd);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
-		int result = new MemberService().changePwd(userId, userPwd);
+		int result = new InfoService().deleteProfilePic(userNo);
 		
 		if(result > 0) {
-			
-			request.getSession().setAttribute("alertMsg", "비밀번호가 변경되었습니다.");
-			response.sendRedirect(request.getContextPath());
+		
+			response.sendRedirect(request.getContextPath()+ "/myPage.me");
+		}else {
+			request.getSession().setAttribute("errorMsg","프로필 삭제에 실패했습니다");
+			response.sendRedirect(request.getContextPath()+ "/views/common/errorPage.jsp");
 		}
+	
 	}
 
 	/**
