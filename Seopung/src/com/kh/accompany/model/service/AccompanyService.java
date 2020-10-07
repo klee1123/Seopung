@@ -14,6 +14,7 @@ import com.kh.accompany.model.dao.AccompanyDao;
 import com.kh.accompany.model.vo.Accompany;
 import com.kh.adminMember.model.vo.Report;
 import com.kh.common.PageInfo;
+import com.kh.message.model.dao.MessageDao;
 
 public class AccompanyService {
 
@@ -263,6 +264,27 @@ public class AccompanyService {
 		}
 		
 		return result;
+		
+	}
+	
+	public int selectDelete(String[] accomNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AccompanyDao().selectDelete(conn, accomNo);
+		
+		if(result > 0 ) {
+			
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		
+		close(conn);
+		
+		return result;
+		
 		
 	}
 	
