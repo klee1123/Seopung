@@ -261,7 +261,7 @@
                                         
                                     
                                         <div class="profilePhoto" style="float: ">
-                                            	닉네임 : <input type="text" id="userNick" readonly>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;닉네임 : <input type="text" id="userNick" readonly>
                                             <br>
                                            
                                         </div>
