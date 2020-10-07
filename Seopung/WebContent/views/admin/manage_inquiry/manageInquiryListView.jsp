@@ -57,7 +57,7 @@
 
 			<br>
 
-			<table align="center" id="listArea" class="table table-hover">
+			<table align="center" id="listArea" class="table table-hover" style="table-layout:fixed;">
 				<thead style="text-align:center;">
 					<tr>
 						<th width="50px"><input type="checkbox" id="chk_all" name="ino"></th>
@@ -79,7 +79,7 @@
 	                        <tr>
 	                            <td><input type="checkbox" id="chk" name="ino" value="<%=iq.getInquireNo() %>"></td>
 	                            <td><%= iq.getInquireNo() %></td>
-	                            <td><%= iq.getInquireTitle() %></td>
+	                            <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><%= iq.getInquireTitle() %></td>
 	                            <% if(iq.getInquireSep().equals("회원")){ %>
 	                            <td><%= iq.getInquireWriter() %></td> <!-- 작성자 -->
 	                            <%} else {%>

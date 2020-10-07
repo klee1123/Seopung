@@ -58,8 +58,8 @@
 					<tr>
 						<th width="50px"><input type="checkbox" id="chk_all"></th>
 						<th width="75px">번호</th>
-						<th width="200px">신고된 아이디</th>
-						<th width="100px">신고자 아이디</th>
+						<th width="150px">신고된 아이디</th>
+						<th width="150px">신고자 아이디</th>
 						<th width="100px">작성일</th>
 						<th width="100px">구분</th>
 					</tr>

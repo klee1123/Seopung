@@ -97,7 +97,7 @@
 
 			<hr>
 
-			<div id="content_3"><%= n.getNoticeContent() %></div>
+			<div id="content_3" style="overflow:auto;" ><%= n.getNoticeContent() %></div>
 
 			<hr>
 			
