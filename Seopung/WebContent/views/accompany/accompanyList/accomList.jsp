@@ -353,11 +353,13 @@
        				
        				var content = "<br>";
        				
-       				if(profile.m.profile != "null"){
-	       				content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
-       				}else{
-       					content += "<img src='https://ucanr.edu/sb3/display_2018/images/default-user.png' class='rounded-circle' height='120' width='120'>";
-       				}
+       				
+       				
+       				if(profile.m.profile == null || profile.m.profile == "null"){
+                        content += "<img src='<%=contextPath%>/resources/images/default-user.png' class='rounded-circle' height='120' width='120'>";
+                    }else{
+                        content += "<img src='<%=contextPath%>/" + profile.m.profile + "' class='rounded-circle' height='120' width='120'>";
+                    }
        					
 	                content += "<br><br>" +
 	                    "<table>" +
@@ -383,11 +385,11 @@
 	                    "<br>" +
 	                    "<textarea cols='30' rows='4' readonly style='resize: none; overflow: auto;'>";
 	                    
-	                if(profile.m.userIntro != "null"){
-	                	content += profile.m.userIntro + "</textarea>";
-	                }else{
-	                	content +=  "</textarea><br>";
-	                }
+	                if(profile.m.userIntro == null || profile.m.userIntro == "null"){
+                        content +=  "</textarea><br>";
+                    }else{
+                        content += profile.m.userIntro + "</textarea>";
+                    }
 	               
 	                $(".modal-profile").html(content);
 
