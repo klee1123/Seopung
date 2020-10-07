@@ -43,7 +43,7 @@
 		  JOIN TB_MEMBER M1 ON (R.USER_NO = M1.USER_NO)
           JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO)
 		 WHERE R.REPORT_STATUS = 'Y'
-		   AND REPORT_NO = 1;
+		   AND REPORT_NO = ?
 	</entry>
 	
 	<entry key="deleteReport">

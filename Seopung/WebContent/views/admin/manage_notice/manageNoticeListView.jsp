@@ -39,7 +39,7 @@
 		
 		<div class="outer">
 
-			<table align="center" id="listArea" class="table table-hover">
+			<table align="center" id="listArea" class="table table-hover" style="table-layout:fixed;">
 				<thead style="text-align:center;">
 					<tr>
 						<th width="50px"><input type="checkbox" id="chk_all" name="nno"></th>
@@ -59,7 +59,7 @@
 	                        <tr>
 	                            <td><input type="checkbox" id="chk" name="nno" value="<%=n.getNoticeNo()%>"></td>
 	                            <td><%= n.getNoticeNo() %></td>
-	                            <td><%= n.getNoticeTitle() %></td>
+	                            <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><%= n.getNoticeTitle() %></td>
 	                            <td><%= n.getNoticeEnroll() %></td>
 	                            <td><%= n.getNoticeViews() %></td>
 	                        </tr>
