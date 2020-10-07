@@ -32,8 +32,8 @@ public class ChangePwdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		String userPwd = request.getParameter("userPwd");
-		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("pwd");
+		String userId = request.getParameter("id");
 		System.out.println(userId);
 		System.out.println(userPwd);
 		
