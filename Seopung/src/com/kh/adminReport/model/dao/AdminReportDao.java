@@ -122,7 +122,13 @@ private Properties prop = new Properties();
 			
 			if(rset.next()) {
 				r = new AdminReport();
-						}
+				r.setReportNo(rset.getInt("report_no"));
+				r.setReportContent(rset.getString("report_content"));
+				r.setReportDate(rset.getDate("report_date"));
+				r.setReportType(rset.getString("report_type"));
+				r.setUserNo(rset.getString("ID1"));
+				r.setUserNo2(rset.getInt("ID2"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
