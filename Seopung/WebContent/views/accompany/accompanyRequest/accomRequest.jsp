@@ -167,7 +167,7 @@
                
                 	$("#reportNo2").val(userNo1);
 					
-                	$("#accomNo").val(accomNo);
+                	$("#accomNo4").val(accomNo);
                 	
                 	
 					
@@ -278,7 +278,7 @@
             						<input type="hidden" name="reportUserNo" id="reportNo">
             						<input type="hidden" name="reportUserNo2" id="reportNo2">
             						<input type="hidden" name="planNo" id= "reportPlanNo">
-            						<input type="hidden" name="accomNo" id= "accomNo">
+            						<input type="hidden" name="accomNo" id= "accomNo4">
                                     <p style="font-size: 13px; padding-left:20px;">
                                 * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
                                 * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>

@@ -134,7 +134,7 @@
                             
                             <td><a href="#" class="genric-btn primary-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 15px" data-toggle="modal" data-target="#message" onclick="accomMessage('<%=  list.get(i).getUserNick() %>');">메세지보내기</a></td>
                             <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 10px" data-toggle="modal" data-target="#delete" onclick="deleteAccompany(<%= list.get(i).getAccomNo()  %>);">동행삭제</a></td>
-                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= list.get(i).getPlanNo() %>);">신고</a></td>
+                            <td><a href="#" class="genric-btn danger-border radius" style="height: 25px; font-size: 10px; line-height: 25px; padding: 0 5px" data-toggle="modal" data-target="#report" onclick="accomReport(<%= list.get(i).getPlanNo() %>, <%= list.get(i).getAccomNo() %>);">신고</a></td>
 							<input type="hidden" name="userId" id="accomProfile" >
 							<input type="hidden" name="myNo" id="loginUserNo" value="<%= loginUser.getUserNo() %>">
 							<input type="hidden" name="userNo" id="userNo1" value="<%= list.get(i).getUserNo1() %>">
@@ -199,7 +199,7 @@
                 	
                 }
 				
-				function accomReport(planNo){
+				function accomReport(planNo, accomNo){
 					
 					$("#reportNo").val($("#loginUserNo").val());
 					
@@ -207,13 +207,13 @@
 					console.log(reportUserNo);
                 	var userNo1 = $("#userNo1").val();
                 	var userNo2 = $("#userNo2").val();
-                	var accomNo = $("#accomNo1").val();
+                	
                 	
                 	
                 	
                 	$("#reportPlanNo").val(planNo);
                 	console.log($("#reportPlanNo").val());
-                	$("#accomNo").val(accomNo);
+                	$("#accomNo3").val(accomNo);
                 	
                 	
                 	
@@ -424,7 +424,7 @@
             						<input type="hidden" name="reportUserNo" id="reportNo">
             						<input type="hidden" name="reportUserNo2" id="reportNo2">
             						<input type="hidden" name="planNo" id= "reportPlanNo">
-            						<input type="hidden" name="accomNo" id= "accomNo">
+            						<input type="hidden" name="accomNo" id= "accomNo3">
                                     <p style="font-size: 13px; padding-left:20px;">
                                 * 신고하신 내용은 증거자료를 참고하여 서풍 약관에 의거해 조치됩니다. <br>
                                 * 증거 내용이 불충분하거나 타당한 이유가 아니면 무효 처리됩니다. <br>
