@@ -127,7 +127,7 @@ private Properties prop = new Properties();
 				r.setReportDate(rset.getDate("report_date"));
 				r.setReportType(rset.getString("report_type"));
 				r.setUserNo(rset.getString("ID1"));
-				r.setUserNo2(rset.getInt("ID2"));
+				r.setUserId2(rset.getString("ID2"));
 			}
 			
 		} catch (SQLException e) {
