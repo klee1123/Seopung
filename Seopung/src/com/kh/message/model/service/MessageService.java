@@ -1,6 +1,6 @@
 package com.kh.message.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.*;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -40,6 +40,27 @@ public class MessageService {
 		
 		return list;
 		
+		
+		
+	}
+	
+	public int messageDelete(int ino) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MessageDao().messageDelete(conn, ino);
+		
+		if(result > 0 ) {
+			
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		
+		close(conn);
+		
+		return result;
 		
 		
 	}

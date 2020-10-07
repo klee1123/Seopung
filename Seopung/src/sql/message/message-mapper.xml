@@ -32,7 +32,7 @@
 		                  WHERE M.STATUS = 'Y' 
 		                    AND (M.USER_NO2 = ?) 
 		                 ORDER 
-		                    BY M.MESSAGE_NO DESC
+		                    BY M.MESSAGE_NO DESCi
 		               ) A
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
