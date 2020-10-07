@@ -101,7 +101,7 @@
 
 			<hr>
 			
-			<!-- 사용자가 문의한 내용 -->
+			<!-- 사용자가 신고한 내용 -->
 			<div id="content_3" style="height: 300px;"><%= r.getReportContent() %></div>
 
 			<hr>
@@ -113,23 +113,6 @@
 			</div>
 
 			<br> <br>
-
-		<script>
-            
-	       	$(function(){
-	       		selectReplyList(1); // 페이지 로딩된 직후에 이 게시글에 딸려있는 댓글 리스트 조회
-	       		
-	       		//setInterval(selectReplyList,1000);
-	       		
-	       		$("#deleteBtn").click(function(){
-	       			if(confirm("정말 삭제하시겠습니까?")) {
-	       				location.href="<%=contextPath%>/adminPage/delete.rp?rpno=<%=r.getReportNo()%>";
-	       			}
-	       		});
-	       		
-	       	});	 
-	       	
-       	</script>
 	
 
 	</div>
