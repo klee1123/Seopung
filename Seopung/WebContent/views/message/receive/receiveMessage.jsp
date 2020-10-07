@@ -134,7 +134,7 @@
                                     <td ><%= list.get(i).getUserId() %></td>
                                     <td><%=list.get(i).getUserNick() %></td>
                                     <td><%= list.get(i).getMessageDate() %></td>
-                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" id="messageContent_1" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>');" ><%= list.get(i).getMessageContent() %></a></td>
+                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" id="messageContent_1" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
                                     <td><a href="#" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#reply" style="font-size: 10px;" onclick = "replyMessage('<%= list.get(i).getUserNick() %>');">답장하기</a>
                                     </td>
                                     <td><a href="#"  class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#reportModal"  style="font-size: 10px;"onclick="report(<%=list.get(i).getMassageNo()%>, <%= list.get(i).getUserNo2()%>, 4);">신고</a></td>
@@ -439,10 +439,11 @@
 	</script>
 
 				<script>
-				function messageContent(userId){
+				function messageContent(userId, messageContent){
 					
-					$("#userId").val(userId);
+					$("#userId2").val(userId);
 					
+					$("#introduction").val(messageContent)
 					
 					
 				}
@@ -475,7 +476,7 @@
                                         
                                     
                                         <div class="profilePhoto" style="float: left; margin-left: 50px;" >
-                                            <img src="../../../resources/images/회원.jpg" style="width: 20px; height: 20px;" alt=""><input type="text" id="userId" readonly>
+                                            <input type="text" id="userId2" readonly>
                                             <a href="#" data-toggle="modal" data-target="#profile">&nbsp;</a>
                                             <a href="#" class="btn btn-outline-warning btn-sm"  style="font-size: 10px;">프로필보기</a>
                                             <br><br>
@@ -483,7 +484,7 @@
                                         </div>
                                         
                                         <div>
-                                            <textarea name="introduction" cols="50" rows="8"style="resize: none;" >메세지내용</textarea>
+                                            <textarea name="introduction" id="introduction" cols="50" rows="8"style="resize: none;" readonly></textarea>
                                         </div>
                                         <br><br>
 
