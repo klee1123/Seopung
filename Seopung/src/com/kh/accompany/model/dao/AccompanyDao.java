@@ -594,6 +594,39 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public int selectDelete(Connection conn , String[] accomNo) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("selectDelete");
+		
+		// 삭제할 추천코스 갯수가 복수일 경우
+		if(accomNo.length > 1) {
+			for(int i=1; i<accomNo.length; i++) {
+				sql += " OR ACCOM_NO =" + accomNo[i];
+			}
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(accomNo[0]));
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+	
 
 	
 	

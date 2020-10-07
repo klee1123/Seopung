@@ -120,7 +120,7 @@
 	                <%} else { %>
 	                	<% for(int i=0; i<list.size(); i++) { %>
 	                    <tr align="center" style="line-height: 2;">
-	                        <td><input type="checkbox" class="primary-checkbox" id="default-checkbox">&nbsp;&nbsp;<%= i+1 %> </td>
+	                        <td><input type="checkbox" id="chk" name="chk1" value="<%= list.get(i).getAccomNo() %>">&nbsp;&nbsp;<%= i+1 %> </td>
 	                        
 	                        
 	                        <td><%= list.get(i).getUserId() %></td>
@@ -462,7 +462,7 @@
                 
           <script>
                 
-                         	// 체크박스 전체선택 및 해제
+          // 체크박스 전체선택 및 해제
             $(function(){
                 $("#chk_all").click(function(){
                     if($("#chk_all").prop("checked")){

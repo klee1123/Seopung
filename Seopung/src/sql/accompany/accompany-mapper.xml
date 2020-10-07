@@ -271,6 +271,14 @@
 	
 	</entry>
 	
+	<entry key="selectDelete">
+		UPDATE TB_ACCOMPANY
+		   SET ACCOM_STATUS = 'N'
+		 WHERE ACCOM_NO = ?
+	
+	
+	</entry>
+	
 	
 	
 	

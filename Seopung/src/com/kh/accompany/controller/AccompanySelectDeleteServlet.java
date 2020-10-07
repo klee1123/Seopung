@@ -32,15 +32,15 @@ public class AccompanySelectDeleteServlet extends HttpServlet {
 		
 		String[] accomNo = request.getParameterValues("ino");
 		
-		int result = new AccompanyService().selectDelete(accomnNo);
+		int result = new AccompanyService().selectDelete(accomNo);
 		
 		if(result>0) {
-			request.getSession().setAttribute("alertMsg", "메세지 삭제 성공");
-			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
+			request.getSession().setAttribute("alertMsg", "동행 삭제 성공");
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
 			
 		}else {
-			request.setAttribute("errorMsg", "메세지 삭제 실패");
-			response.sendRedirect(request.getContextPath() + "/receiver.ms?currentPage=1");
+			request.setAttribute("errorMsg", "동행 삭제 실패");
+			response.sendRedirect(request.getContextPath() + "/list.ac?currentPage=1");
 		}
 	}
 
