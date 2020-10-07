@@ -113,7 +113,7 @@
                 <p style="font-size: 12px;">10MB이하의 JPEG파일만 등록가능합니다.</p>
                 <div id="myPageButton" align="center">
                     <button type="button" class="btn btn-secondary btn-sm" id="profileBtn">파일등록</button>
-                    <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile">삭제</button>
+                    <button type="button" class="btn btn-secondary btn-sm" id="deleteProfile" onclick="location.href='<%=contextPath%>/DeleteProfile.in?userNo=<%=userNo%>';">삭제</button>
                 </div>
             </div>
             <div class="changeInfo">

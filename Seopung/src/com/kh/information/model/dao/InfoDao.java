@@ -227,4 +227,25 @@ public class InfoDao {
         return result;
     }
 	
+	public int deleteProfilePic(Connection conn, int userNo) {
+		int result = 0;
+		
+        PreparedStatement pstmt = null;
+
+        String sql = prop.getProperty("deleteProfilePic");
+        
+        try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, userNo);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+        return result;
+		
+	}
+	
 }

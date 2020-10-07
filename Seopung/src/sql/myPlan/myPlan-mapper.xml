@@ -24,7 +24,8 @@
 		                   FROM TB_PLAN_OPTION
 		                  WHERE STATUS = 'Y'
 		                    AND USER_NO = ?
-		                    AND PLAN_PRIVATE = 'Y'
+		                    AND (PLAN_PRIVATE = 'Y'
+		                     OR PLAN_PRIVATE = 'y')
 		                  ORDER
 		                     BY PLAN_NO DESC
 		                ) A
@@ -47,7 +48,8 @@
 		                   FROM TB_PLAN_OPTION
 		                  WHERE STATUS = 'Y'
 		                    AND USER_NO = ?
-		                    AND PLAN_PRIVATE = 'N'
+		                    AND (PLAN_PRIVATE = 'N'
+		                     OR PLAN_PRIVATE = 'n')
 		                  ORDER
 		                     BY PLAN_NO DESC
 		                ) A
