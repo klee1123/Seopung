@@ -180,6 +180,35 @@
 	              	} 
 	            });
             });
+         	
+         	// 삭제시
+            $(function(){
+            	$("#btnDelete").click(function(){
+
+              		var selected = new Array();
+              		$("input[id=chk]:checked").each(function(){
+                		selected.push(this.value);
+              		});
+              		
+              		if(selected.length == 0){
+                    	alert("체크된 항목이 없습니다.");
+                        return;
+                    }
+
+	              	var str = "";
+	              	for(var i=0;i<selected.length; i++){
+	                	if(i == selected.length-1){
+	                  		str += "rno=" + selected[i];
+	                	}else{
+	                  		str += "rno=" + selected[i] + "&";
+	                	}
+	              	}
+	              
+	              	if(confirm("정말 삭제하시겠습니까?")) {
+	                	location.href="<%=contextPath%>/adminPage/delete.rp?" + str;
+	              	} 
+	            });
+            });
 		</script>	
 		
 	</div>
