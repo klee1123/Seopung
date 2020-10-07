@@ -52,7 +52,7 @@
         &nbsp;공지사항</h3>
         &emsp;&emsp;&emsp;&emsp;
         <h3 style="display:inline;">
-        <a style= "color : black" href="<%=contextPath%>/enrollForm.iq?ino=currentPage=1';">1:1문의</h3>
+        <a style= "color : black" href="<%=contextPath%>/enrollForm.iq?ino=currentPage=1';">1:1문의</a></h3>
 
         <hr>
 
