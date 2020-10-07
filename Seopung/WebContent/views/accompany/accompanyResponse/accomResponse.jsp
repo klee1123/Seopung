@@ -60,6 +60,13 @@
       height: 800px;
   }
 
+  #planTitle_1{
+
+text-decoration: none;
+color: black;
+
+}
+
 
 
 </style>
@@ -112,7 +119,7 @@
 	                        <td ><%= list.get(i).getUserId() %></td>
 	                        <td></td>
 	                        <td><%= list.get(i).getAccomApply() %></td>
-                            <td><a href="<%= contextPath %>/detail.pl?pno=<%= list.get(i).getPlanNo() %>" ><%= list.get(i).getPlanTitle() %></a></td>
+                            <td><a href="<%= contextPath %>/detail.pl?pno=<%= list.get(i).getPlanNo() %>" id="planTitle_1" ><%= list.get(i).getPlanTitle() %></a></td>
                             <td>
                             
                             <% if(list.get(i).getAccomStatus() == null || list.get(i).getAccomStatus().equals("null")){ %>

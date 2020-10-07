@@ -74,6 +74,11 @@
 
   }
 
+  #messageContent_1 {
+      text-decoration: none;
+      color: black;
+  }
+
   
 
 </style>
@@ -130,7 +135,7 @@
                                     <td ><%= list.get(i).getUserId() %></td>
                                     <td><%= list.get(i).getUserNick() %></td>
                                     <td><%= list.get(i).getMessageDate() %></td>
-                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
+                                    <td style="overflow:hidden; white-space: nowrap;text-overflow: ellipsis;"><a href="#" id="messageContent_1" data-toggle="modal" data-target="#messageContent" onclick="messageContent('<%= list.get(i).getUserId() %>', '<%= list.get(i).getMessageContent() %>');" ><%= list.get(i).getMessageContent() %></a></td>
 
                                 </tr>
 								<% } %>
