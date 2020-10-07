@@ -114,7 +114,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Nav Item - 통계관리 Collapse Menu -->
+      <!-- Nav Item - 통계관리 Collapse Menu 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-chart-area"></i>
@@ -126,10 +126,10 @@
             <a class="collapse-item" href="">일정통계</a>
           </div>
         </div>
-      </li>
+      </li>-->
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
+      <!-- Divider 
+      <hr class="sidebar-divider">-->
 
       <!-- Nav Item - 고객센터 Collapse Menu -->
       <li class="nav-item">
