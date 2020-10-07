@@ -9,7 +9,7 @@
 		 WHERE STATUS = 'Y'
 		   AND USER_NO2 = ?
 	
-	</entry>
+		</entry>
 	
 		<entry key="selectReceiverList">
  		SELECT *
@@ -32,12 +32,56 @@
 		                  WHERE M.STATUS = 'Y' 
 		                    AND (M.USER_NO2 = ?) 
 		                 ORDER 
-		                    BY M.MESSAGE_NO DESCi
+		                    BY M.MESSAGE_NO DESC
 		               ) A
 		       )
 		 WHERE RNUM BETWEEN ? AND ?
 		 
 		 </entry>
+		 
+		 <entry key="deleteMessage">
+		 UPDATE TB_MESSAGE
+		    SET STATUS = 'N'
+		  WHERE MESSAGE_NO = ?  
+		 
+		 
+		 
+		 
+		 </entry>
+		 
+		 <entry key="selectSenderCount">
+		SELECT COUNT(*) LISTCOUNT
+		  FROM TB_MESSAGE
+		 WHERE STATUS = 'Y'
+		   AND USER_NO = ?
+	
+		</entry>
 
 
+		<entry key="selectReceiverList">
+ 		SELECT *
+		 FROM (
+		        SELECT 
+		               ROWNUM RNUM
+		             , A.*
+		          FROM (
+		                SELECT 
+		                       M.MESSAGE_NO
+		                     , B.USER_ID
+		                     , B.USER_NICK
+		                     , M.MESSAGE_CONTENT
+		                     , M.MESSAGE_DATE
+		                     , M.USER_NO
+		                     , M.USER_NO2
+		                     
+		                  FROM TB_MESSAGE M
+		                  JOIN TB_MEMBER B ON(M.USER_NO2 = B.USER_NO)
+		                  WHERE M.STATUS = 'Y' 
+		                    AND (M.USER_NO = ?) 
+		                 ORDER 
+		                    BY M.MESSAGE_NO DESC
+		               ) A
+		       )
+		 WHERE RNUM BETWEEN ? AND ?
+		</entry>
 </properties>

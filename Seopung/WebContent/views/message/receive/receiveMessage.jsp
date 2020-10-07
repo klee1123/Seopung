@@ -98,7 +98,7 @@
                 
                 <div class="receive"> <br>
                     
-                    <a href="#"  class="btn btn-outline-primary btn-sm" id="btn_delete" style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>    
+                    <a href="#"  class="btn btn-outline-primary btn-sm" id="btnDelete" style="font-size: 10px; float: right; margin-right: 40px;">선택삭제</a>    
                     <form action="<%= contextPath %>/receiver.ms" method="POST">
                     <br>
                   
@@ -125,7 +125,7 @@
 	                			<% for(int i=0; i<list.size(); i++) { %>
                             
                                 <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1" value="<%= list.get(i).getUserNo2() %>">&nbsp;&nbsp;<%= i+1 %></td>
+                                    <td><input type="checkbox"id="chk" name="chk1" value="<%= list.get(i).getMassageNo() %>">&nbsp;&nbsp;<%= i+1 %></td>
                                     <td ><%= list.get(i).getUserId() %></td>
                                     <td><%=list.get(i).getUserNick() %></td>
                                     <td><%= list.get(i).getMessageDate() %></td>

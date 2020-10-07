@@ -101,7 +101,7 @@
                 <div class="send"> <br>
                     
                     <a href="#"  class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#report"  style="font-size: 10px; float: right; margin-right: 10px;">선택삭제</a>    
-                    <form action="" method="POST">
+                    <form action="<%= contextPath %>/send.ms" method="POST">
                     <br>
                   
                    
@@ -127,42 +127,6 @@
 
                                 </tr>
 
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-
-                                <tr align="center" style="line-height: 2;">
-                                    <td><input type="checkbox"id="chk" name="chk1">&nbsp;&nbsp;1</td>
-                                    <td >아이디 넣을칸</td>
-                                    <td>닉네임</td>
-                                    <td>2020.09.19</td>
-                                    <td><a href="#">asdasdasdasd</a></td>
-
-                                </tr>
-        
                             </tbody>
                         </table>
                     
