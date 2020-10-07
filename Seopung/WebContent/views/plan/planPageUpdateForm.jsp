@@ -7,25 +7,6 @@
 <%
 	PlanMake pm = (PlanMake)request.getAttribute("pm");
 
-	int planNo = pm.getPlanNo();
-	String planTitle = pm.getPlanTitle();
-	String planSdate = pm.getPlanSdate();
-	String planEdate = pm.getPlanEdate();
-	String planAge = pm.getPlanAge();
-	String planAcc = pm.getPlanAcc();
-	String planBudget = pm.getPlanBudget();
-	String planScrapYn = pm.getPlanScrapYn();
-	String planPrivate = pm.getPlanPrivate();
-	String planMemo = pm.getPlanMemo();
-	int userNo = pm.getUserNo();
-	
-	String planTrans = (pm.getPlanTrans() == null) ? "" : pm.getPlanTrans();
-	String planType = (pm.getPlanType() == null) ? "" : pm.getPlanType();
-	
-	int planMapNo = pm.getPlanMapNo();
-	String planDay = pm.getPlanDay();
-	String planPlace = pm.getPlanPlace();
-
 
 %>
 	
@@ -382,10 +363,10 @@
 			
 			<!-- 입력 폼 양식 div -->
 			<div id="content2" style="margin-top:10px;">
-				<form action="<%= contextPath %>/planMakePageUpdate.pl?" style="width:800px;" method="post">
+				<form action="<%= contextPath %>/planPageUpdate.pl" style="width:800px;" method="post">
 					<div>
-					 	<input type="hidden" name="userNo" value="1">
-						<input type="hidden" name="planDay" value="123">
+					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
+						<input type="hidden" name="planDay" value="<%=pm.getPlanDay()%>">
 					
 					</div>
 					
@@ -393,7 +374,7 @@
 					
 						<div style="height:70px;">
 							<div id="so_title">일정 제목</div>
-							<div id="so_title"> <input type="text" style="width: 800px" name="planTitle" id="plan_title" placeholder="일정 제목" value="<%= planTitle %>" required > </div>
+							<div id="so_title"> <input type="text" style="width: 800px" name="planTitle" id="plan_title" placeholder="일정 제목" value="<%= pm.getPlanTitle() %>" required > </div>
 						</div>
 						
 						<div id="inputBox" style="height:70px">
@@ -402,10 +383,10 @@
 								<table>
 									<tr>
 										<td style="width: 400px;">
-											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" value="<%= planSdate %>" required> </div>
+											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" value="<%= pm.getPlanSdate() %>" required> </div>
 										</td>
 										<td>
-											<div id=""> <input type="date" name="planEdate" id="eDate" size="12" value="<%= planEdate %>" required> </div>
+											<div id=""> <input type="date" name="planEdate" id="eDate" size="12" value="<%= pm.getPlanEdate() %>" required> </div>
 										</td>
 									</tr>
 								</table>
@@ -437,7 +418,7 @@
 							<script>
 				            	$(function(){
 				            		
-				            		var planType = "<%=planType%>";
+				            		var planType = "<%=pm.getPlanType()%>";
 				            		//  "운동,등산,요리"	 /  ""
 				            		
 				            		$("input[type=radio]").each(function(){
@@ -477,7 +458,7 @@
 							<script>
 				            	$(function(){
 				            		
-				            		var planAge = "<%=planAge%>";
+				            		var planAge = "<%=pm.getPlanAge()%>";
 				            		//  "운동,등산,요리"	 /  ""
 				            		
 				            		$("input[type=checkbox]").each(function(){
@@ -516,7 +497,7 @@
 							<script>
 				            	$(function(){
 				            		
-				            		var planTrans = "<%=planTrans%>";
+				            		var planTrans = "<%=pm.getPlanTrans()%>";
 				            		//  "운동,등산,요리"	 /  ""
 				            		
 				            		$("input[type=checkbox]").each(function(){
@@ -548,7 +529,7 @@
 										<div id="so_title">일정 예산금액</div>
 										<div class="plan_budget">
 											<div class=""> 
-												<input type="text" style="width: 230px; height: 30px;" name="planBudget" placeholder="예산금액" value="<%= planBudget %>">
+												<input type="text" style="width: 230px; height: 30px;" name="planBudget" placeholder="예산금액" value="<%= pm.getPlanBudget() %>">
 											</div>
 										</div>
 									</td>
@@ -557,7 +538,7 @@
 							<script>
 				            	$(function(){
 				            		
-				            		var planAcc = "<%=planAcc%>";
+				            		var planAcc = "<%=pm.getPlanAcc()%>";
 				            		//  "운동,등산,요리"	 /  ""
 				            		
 				            		$("input[type=radio]").each(function(){
@@ -588,7 +569,7 @@
 										<script>
 							            	$(function(){
 							            		
-							            		var planScrapYn = "<%=planScrapYn%>";
+							            		var planScrapYn = "<%=pm.getPlanScrapYn()%>";
 							            		//  "운동,등산,요리"	 /  ""
 							            		
 							            		$("input[type=radio]").each(function(){
@@ -616,7 +597,7 @@
 										<script>
 							            	$(function(){
 							            		
-							            		var planPrivaten = "<%=planPrivate%>";
+							            		var planPrivaten = "<%=pm.getPlanPrivate()%>";
 							            		//  "운동,등산,요리"	 /  ""
 							            		
 							            		$("input[type=radio]").each(function(){
@@ -639,21 +620,21 @@
 							<div id="planPlace">
 								<div id="so_title">장소명</div>
 								<div class="tab">
-								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day - 1"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day - 2"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day - 3"></input>
+								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')"></input>
+							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')"></input>
 								</div>
 								
 								<div id="Day1" class="tabcontent">
-							 		<div id="placeName1" ><input type="text" name="placeName"><input type="button" class="btnAdd1" value="Add"><br></div>
+							 		<div id="placeName1" ><input type="text" name="planPlace"><input type="button" class="btnAdd1" value="Add"><br></div>
 								</div>
 								
 								<div id="Day2" class="tabcontent">
-								 	<div id="placeName2" ><input type="text" name="placeName"><input type="button" class="btnAdd2" value="Add"><br></div>
+								 	<div id="placeName2" ><input type="text" name="planPlace"><input type="button" class="btnAdd2" value="Add"><br></div>
 								</div>
 								
 								<div id="Day3" class="tabcontent">
-								  	<div id="placeName" ><input type="text" name="placeName"><input type="button" class="btnAdd3" value="Add"><br></div>
+								  	<div id="placeName3" ><input type="text" name="planPlace"><input type="button" class="btnAdd3" value="Add"><br></div>
 								</div>
 							</div>
 							
@@ -661,7 +642,7 @@
 						
 						<div style="margin-top:160px;">
 							<div id="so_title">메모작성</div>
-							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요" value="<%= planMemo %>"></textarea>
+							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"><%= pm.getPlanMemo() %></textarea>
 						</div>
 						
 						<div style="margin-top:20px;">
@@ -941,7 +922,7 @@
  		 $(document).ready (function () {                
              $('.btnAdd1').click (function () {                                        
                  $('#placeName1').append (                        
-                     '<div><input type="text" name="placeName"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
+                     '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
                  ); // end append      
                  
                  $('.btnRemove1').on('click', function () { 

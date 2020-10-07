@@ -73,22 +73,67 @@ public class PlanMake {
 	}
 
 	
-	public PlanMake(int planNo, int planMapNo, String planDay, String planPlace) {
-		super();
-		this.planNo = planNo;
-		this.planMapNo = planMapNo;
-		this.planDay = planDay;
-		this.planPlace = planPlace;
-	}
-	
-
-	public PlanMake(int planNo, String planTitle, int planRecommend) {
+	// selectPlanMake
+	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
+			String planTrans, int userNo) {
 		super();
 		this.planNo = planNo;
 		this.planTitle = planTitle;
-		this.planRecommend = planRecommend;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+		this.planAge = planAge;
+		this.planAcc = planAcc;
+		this.planBudget = planBudget;
+		this.planScrapYn = planScrapYn;
+		this.planPrivate = planPrivate;
+		this.planMemo = planMemo;
+		this.planType = planType;
+		this.planTrans = planTrans;
+		this.userNo = userNo;
 	}
 
+	
+	// selectPlanPlace
+	public PlanMake(int planMapNo, String planDay, String planPlace, int planNo) {
+		super();
+		this.planMapNo = planMapNo;
+		this.planDay = planDay;
+		this.planPlace = planPlace;
+		this.planNo = planNo;
+	}
+	
+	
+
+	// updatePlanMake
+	public PlanMake(int planNo, String planTitle, String planSdate, String planEdate, String planAge, String planAcc,
+			String planBudget, String planScrapYn, String planPrivate, String planMemo, String planType,
+			String planTrans) {
+		super();
+		this.planNo = planNo;
+		this.planTitle = planTitle;
+		this.planSdate = planSdate;
+		this.planEdate = planEdate;
+		this.planAge = planAge;
+		this.planAcc = planAcc;
+		this.planBudget = planBudget;
+		this.planScrapYn = planScrapYn;
+		this.planPrivate = planPrivate;
+		this.planMemo = planMemo;
+		this.planType = planType;
+		this.planTrans = planTrans;
+	}
+	
+	// updatePlanPlace
+		public PlanMake(String planDay, String planPlace) {
+			super();
+			this.planDay = planDay;
+			this.planPlace = planPlace;
+		}
+		
+	
+	
+	
 	public int getPlanNo() {
 		return planNo;
 	}
