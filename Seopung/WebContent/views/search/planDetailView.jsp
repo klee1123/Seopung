@@ -225,7 +225,7 @@
 					<%if(loginUser != null && loginUser.getUserNo() == p.getUserNo() || category == 2){ %>
 					<div align="right">
 						<%if(category == 1){ %>
-						<button class="btn btn-outline-secondary btn-sm" onClick="location='views/plan/planPageUpdateForm.jsp'">수정</button>
+						<button class="btn btn-outline-secondary btn-sm" onClick="location='<%=contextPath%>/updateForm.pl?pno=<%=p.getPlanNo()%>'">수정</button>
 						<%} %>
 						<button class="btn btn-outline-secondary btn-sm" onclick="confirmDeletePlan();">삭제</button>
 					</div>
