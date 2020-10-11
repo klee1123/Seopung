@@ -140,7 +140,7 @@
 		                   WHERE COMMENT_STATUS = 'Y'
                              AND PLAN_NO = ? 
                            ORDER
-                              BY PLAN_NO DESC          
+                              BY COMMENT_NO DESC          
 		                 ) A
 		     )
 		 WHERE RNUM BETWEEN ? AND ?

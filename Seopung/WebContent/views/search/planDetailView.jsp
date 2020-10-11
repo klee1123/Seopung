@@ -544,7 +544,7 @@
 					console.log("Ajax 통신 실패");
 				}
 			});
-		})
+		});
 			
 	</script>
 	
