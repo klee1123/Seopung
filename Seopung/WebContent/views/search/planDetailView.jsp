@@ -406,18 +406,16 @@
 		<!-- 댓글 작성창 -->
 		<%if(loginUser!=null && loginUser.getCategory() == 1){ %>
 		<div id="content_4" align="center">
-			<form action="" method="post">
-				<table>
-					<tr>
-						<td width="70px"></td>
-						<td width="800px;"><textarea id="commentContent" name="comment" cols="110"
-								rows="3" maxlength="500" style="resize: none;overflow:auto" required></textarea></td>
-						<td width="100" align="center">
-							<button class="btn btn-secondary" onclick="addComment();">등록</button>
-						</td>
-					</tr>
-				</table>
-			</form>
+			<table>
+				<tr>
+					<td width="70px"></td>
+					<td width="800px;"><textarea id="commentContent" name="comment" cols="110"
+							rows="3" maxlength="500" style="resize: none;overflow:auto" required></textarea></td>
+					<td width="100" align="center">
+						<button type="button" class="btn btn-secondary" onclick="addComment();">등록</button>
+					</td>
+				</tr>
+			</table>
 		</div> <!--  content_4 end -->
 		<hr>
 		<%} %>
@@ -462,7 +460,7 @@
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form action="" method="post" id="reportForm">
+                        <form method="post" id="reportForm">
                         	<input type="hidden" name="reportPostNo" id="reportPostNo">
                         	<input type="hidden" name="reportUserNo2" id="reportUserNo2">
                         	<input type="hidden" name="reportPostType" id="reportPostType">
@@ -498,7 +496,7 @@
                 </div>
             </div>
         </div> <!--  report modal end -->
-	    
+       
 		
 	</div> <!-- outer end -->
 	
@@ -519,12 +517,12 @@
 			reportModal.style.display = "block";
 		}
 		
-		$("#reportForm").submit(function(){
-			
+		$("#reportForm").submit(function(e){
+			e.preventDefault();
 			var form = $(this);
 			
 			$.ajax({
-				type:form.attr('method'),
+				type:"post",
 				url:"<%=contextPath%>/insert.rp",
 				data:form.serialize(),
 				success:function(result2){
@@ -532,9 +530,12 @@
 					if(result2>0){
 						alert("신고되었습니다.");
 						reportModal.style.display = "none";
+						document.getElementById("reportForm").reset();
+						
 					}else{
 						alert("이미 신고하셨습니다.")
 						reportModal.style.display = "none";
+						document.getElementById("reportForm").reset();
 					}
 					
 				}, error:function(){
@@ -645,22 +646,21 @@
        				"currentPage":cPage
        			},
        			success:function(result){
-       				
-                       if(result.list.length > 0){
-                            
-                            var comment="";
-    	       				 for(var i in result.list){
-    	       					comment += "<table>" +
+					if(result.list.length > 0){
+       					var comment="";
+       					
+						for(var i in result.list){
+       						comment += "<table>" +
 				    	    				"<tr>" +
 				    							"<td width='60'>";
+				    		
+				    		if(result.list[i].profile == null || result.list[i].profile == "null"){
+    	       					comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
+    	       				}else{
+    	       					comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
+    	       				}
     	       					 
-    	       					 if(result.list[i].profile == null || result.list[i].profile == "null"){
-    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/resources/images/default-user.png'>";
-    	       					 }else{
-    	       						 comment += "<img width='45px' height='45px' class='rounded-circle' src='<%=contextPath%>/" + result.list[i].profile + "'>";
-    	       					 }
-    	       					 
-    	       					 comment += "</td>" +
+    	       				comment += "</td>" +
 		    							"<td>" + result.list[i].userNick + "<br>" + result.list[i].enrollDate +
 		    							"</td>" +
 		    							"<td>" +  "</td>" + 
@@ -671,59 +671,54 @@
 		    							"</td>" +
 		    							"<td align='center'width='50'>";
 				    		
-				    		 if(<%=userNo%>!=0 && <%=userNo%> == result.list[i].userNo || <%=category%>== 2 ) {
-				    			 comment += "<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>";
-				    		 }else if(<%=userNo%>!=0){
-				    			 comment += "<button style='border: none; background: none; color:red;' onclick='report(" + result.list[i].commentNo + ", " + result.list[i].userNo + ", 3);'>신고</button>";
-				    		 }
-				    		 comment +=	"</td>" +
-				    						"</tr>" +
+				    		if(<%=userNo%>!=0 && <%=userNo%> == result.list[i].userNo || <%=category%>== 2 ) {
+				    			comment += "<button style='border: none; background: none' onclick='confirmDeleteComment(" + result.list[i].commentNo + ");'>삭제</button>";
+				    		}else if(<%=userNo%>!=0){
+				    			comment += "<button style='border: none; background: none; color:red;' onclick='report(" + result.list[i].commentNo + ", " + result.list[i].userNo + ", 3);'>신고</button>";
+				    		}
+				    		
+				    		comment +=	"</td>" +
+				    					"</tr>" +
 				    					"</table>";
-    	       				 }
+						}
                            
+						var $listCount = result.pi.listCount;     	       					
+   	       				var $currentPage = result.pi.currentPage;
+                        var $startPage = result.pi.startPage;
+                        var $endPage = result.pi.endPage;
+                        var $maxPage = result.pi.maxPage;
                           
-    	       				var $listCount = result.pi.listCount;     	       					
-    	       				var $currentPage = result.pi.currentPage;
-                           var $startPage = result.pi.startPage;
-                           var $endPage = result.pi.endPage;
-                           var $maxPage = result.pi.maxPage;
-                           
-                           var $btns = "";
-                           for(var $p = $startPage; $p <= $endPage; $p++ ){
-                              
-                              $btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
-                           }
-                           
-                           if(cPage != "1"){
-                            var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
-                           }else{
-                           	var $prevBtn = "";
-                           }
-                           
-                           if(cPage != $maxPage){
-                            var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
-                           }else{
-                           	var $nextBtn = "";
-                           }
-                           	
-                            
-                           var $buttons = $prevBtn + $btns + $nextBtn ;
-                           
-	       				$("#content_4").html("댓글 " + $listCount);
-    	       				$("#content_5").html(comment);
-                           
-                           $("#paging").html($buttons);
-                           
-                        }else{
-		       				$("#content_4").html("댓글 0");
-                           $("#content_5").html('작성된 댓글이 없습니다.');
+                        var $btns = "";
+                        for(var $p = $startPage; $p <= $endPage; $p++ ){
+                        	$btns += "<button type='button' onclick='selectReplyList(" + $p + ");' style='border: none; background: none'>" + $p + "</button>";
                         }
-
-       				
-	       		},error:function(){
+                          
+                        if(cPage != "1"){
+                        	var $prevBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage - 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&lt;" + "</button>";
+                        }else{
+                        	var $prevBtn = "";
+                        }
+                        
+                        if(cPage != $maxPage){
+                         	var $nextBtn = "<button type='button' onclick='selectReplyList(" + ($currentPage + 1) + ");' class='btn btn-outline-secondary btn-sm'>" + "&gt;" + "</button>";
+                        }else{
+                        	var $nextBtn = "";
+                        }
+                           
+                        var $buttons = $prevBtn + $btns + $nextBtn ;
+                          
+       					$("#content_4").html("댓글 " + $listCount);
+   	       				$("#content_5").html(comment);
+                        $("#paging").html($buttons);
+                           
+					}else{
+		       			$("#content_4").html("댓글 0");
+                        $("#content_5").html('작성된 댓글이 없습니다.');
+                    }
+				},error:function(){
 	       				console.log("댓글 리스트 조회용 ajax 통신 실패");
 	       		}
-	       	});
+			});
 		}
        	
        	// 댓글 작성용 ajax
@@ -748,7 +743,6 @@
        		});
        		
        	}
-       	
        	
        	// 댓글 삭제 CONFIRM 용
        	function confirmDeleteComment(commentNo){

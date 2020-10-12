@@ -80,7 +80,7 @@
         <% if(currentPage>1){ %>
         
         <% }else{ %>
-			<a href="views/plan/planMakePage.jsp">
+			<a href="<%=contextPath %>/enrollForm.pl">
             <div class="MakeMap" align="center" >
                 <p><img src="resources/images/plus.jpg"  width="50" height="50" alt="" style="margin-top: 80px;"></p>
                 <br>

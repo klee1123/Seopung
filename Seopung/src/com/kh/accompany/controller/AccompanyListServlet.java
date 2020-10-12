@@ -84,10 +84,6 @@ public class AccompanyListServlet extends HttpServlet {
 		
 		
 		
-		
-		System.out.println(list);
-		
-		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
