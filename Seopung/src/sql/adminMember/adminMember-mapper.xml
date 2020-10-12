@@ -140,7 +140,8 @@
 	<entry key="removeBlacklist">
 		UPDATE 
 		       TB_MEMBER
-		   SET STATUS = 'Y'
+		   SET STATUS = 'Y',
+		       MODIFY_DATE = SYSDATE
 		 WHERE USER_NO = ?
 	</entry>
 
