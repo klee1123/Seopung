@@ -363,12 +363,9 @@
 			}
 
 			// Get the element with id="defaultOpen" and click on it
-			document.getElementById("defaultOpen").click();
-			
 			$(function(){
-				
-				selectPlace(1);
-				
+				document.getElementById("defaultOpen").click();
+				//selectPlace(1);
 			});
 		
 			function selectPlace(day){
@@ -635,17 +632,8 @@
 	<!-- 댓글 관련 ajax 스크립트 -->
 	<script>
 		$(function(){
-			
 			selectReplyList(1); // 페이지 로딩된 직후에 이 게시글에 딸려있는 댓글 리스트 조회
-			
-			$("#deleteBtn").click(function(){
-	   			if(confirm("정말 삭제하시겠습니까?")) {
-	   				location.href="<%=contextPath%>/adminPage/delete.pl?pno=<%=p.getPlanNo()%>";
-	   			}
-	   		});
-			
 		});
-	
            
        	// 해당 게시글에 딸려있는 댓글리스트 조회용 ajax
        	function selectReplyList(cPage){
