@@ -71,7 +71,7 @@
 				<thead style="text-align:center;">
 					<tr>
 						<th width="20px"><input type="checkbox" id="chk_all"></th>
-						<th width="75px">번호</th>
+						<th width="75px">회원번호</th>
 						<th width="120px">아이디</th>
 						<th width="120px">이름</th>
 						<th width="250px">제재 사유</th>
@@ -144,7 +144,7 @@
                     $(this).find("td:eq(4)").css("cursor","pointer");
                   
                     $(this).find("td:eq(4)").click(function(){
-                      location.href = "<%= contextPath %>/adminPage/detail.bl?currentPage=1&uno=" + $(this).prevAll().eq(2).text();
+                      location.href = "<%= contextPath %>/adminPage/detail.bl?currentPage=1&uno=" + $(this).prevAll().eq(2).text() + "&userId=" +  $(this).prev().prev().text();
                     });
                   });
 			});
