@@ -6,6 +6,7 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.planMake.model.dao.PlanMakeDao;
 import com.kh.planMake.model.vo.PlanMake;
@@ -14,14 +15,15 @@ import com.kh.planMake.model.vo.PlanMake;
 public class PlanMakeService {
 	
 	// option
-	public int insertPlanMake(PlanMake p) {
+	public int insertPlanMake(PlanMake p, ArrayList<String> placeList) {
 			
 		Connection conn = getConnection();
 		
-		int result = new PlanMakeDao().insertPlanMake(conn, p);
+		int result1 = new PlanMakeDao().insertPlanMake(conn, p);
+		int result2 = new PlanMakeDao().insertPlanPlace(conn, placeList);
 		
 		
-		if(result > 0) {
+		if(result1>0 && result2>0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -29,7 +31,7 @@ public class PlanMakeService {
 		
 		close(conn);
 		
-		return result;
+		return result1 * result2;
 	
 	}
 
@@ -62,8 +64,7 @@ public class PlanMakeService {
 		
 		return result;
 	}
-	
-	
+
 	
 	
 	

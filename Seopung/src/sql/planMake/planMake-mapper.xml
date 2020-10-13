@@ -36,25 +36,24 @@
 		   , ?
 		   , ?
 		  )
-		  
-		 
 	</entry>
+	
 	<entry key="insertPlanPlace">
-		 INSERT
-		  	INTO TB_PLAN_MAP
-		  	(
-		  		PLAN_MAP_NO
-		  	  , PLAN_DAY
-		  	  , PLAN_PLACE
-		  	  , PLAN_NO
-		  	)
-		  	VALUES
-		  	(
-		  		SEQ_PLANMAPNO.NEXTVAL
-		  	  , ?
-		  	  , ?
-		  	  , SEQ_PLANNO.NEXTVAL - 1
-		  	) 
+		INSERT 
+		  INTO TB_PLAN_MAP
+		  (
+		     PLAN_MAP_NO
+		   , PLAN_DAY
+		   , PLAN_PLACE
+		   , PLAN_NO
+		  )
+		  VALUES
+		  (
+		     SEQ_PLANMAPNO.NEXTVAL
+		   , ?
+		   , ?
+		   , SEQ_PLANNO.CURRVAL
+		  )
 	</entry>
 	
 	<entry key="selectPlanMake">
@@ -107,5 +106,6 @@
 		 WHERE PLAN_NO = ?
 	</entry>
 	 -->
+
 	
 </properties>

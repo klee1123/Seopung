@@ -246,7 +246,12 @@
 							style="font-size: 20px; color:rgb(75, 75, 75);"><%= p.getPlanTitle() %></b> <br> <%=p.getStartDate() %>
 							~ <%=p.getEndDate() %></td>
 						<td>추천 : <span id="recommendCount"><%=p.getRecommendCount() %></span> <br> 스크랩 : <span id="scrapCount"><%=p.getScrapCount() %></span>
-							<br> 예산금액 : <%=p.getBudget() %>원
+							<br> 예산금액 : 
+							<%if(p.getBudget() == null || p.getBudget().equals("null")){ %>
+							0원
+							<%}else{ %>
+							<%=p.getBudget() %>원
+							<%} %>
 						</td>
 					</tr>
 				</table>

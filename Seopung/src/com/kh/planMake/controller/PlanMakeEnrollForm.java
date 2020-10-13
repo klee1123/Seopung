@@ -33,7 +33,8 @@ public class PlanMakeEnrollForm extends HttpServlet {
 			request.getRequestDispatcher("views/plan/planMakePage.jsp").forward(request, response);
 		}else {
 			request.getSession().setAttribute("alertMsg", "로그인이 필요한 서비스입니다.");
-			response.sendRedirect(request.getContextPath());
+			String referer = request.getHeader("Referer");
+			response.sendRedirect(referer);
 		}
 	
 	}
