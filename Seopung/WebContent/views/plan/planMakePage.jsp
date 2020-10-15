@@ -167,8 +167,6 @@
 
 #so_title {
 	font-size: 18px;
-	font-weight: bold;
-	color: #fec104;
 }
 /* 전체 감싸는 div */
 .wrap {
@@ -207,51 +205,75 @@
 
 /************************** tab 버튼 css start **********************************/
 
-/* Style the tab */
-.tab {
-  float: left;
-  width: 20%;
-  height: 200px;
-  border: 1px solid #ccc;
-  overflow:auto;
-}
+    #ResultArea * {box-sizing: border-box}
 
-/* Style the buttons inside the tab */
-.tab .tablinks {
-  display: block;
-  color: black;
-  padding: 10px 10px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 16px;
-}
+    #ResultArea{width:800px;}
+    /* Style the tab */
+    #ResultArea .tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 300px;
+    overflow: auto;
+    
+    }
 
-/* Change background color of buttons on hover */
-.tab .tablinks:hover {
-	background: #00c0ff;
-	color: #fff;
-}
+    /* Style the buttons inside the tab */
+    #ResultArea .tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 0px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    height:50px;
+    }
 
-/* Create an active/current "tab button" class */
-.tab .tablinks.active {
-  background: #00c0ff;
-	color: #fff;
-}
+    /* Change background color of buttons on hover */
+    #ResultArea .tab button:hover {
+    background-color: #ddd;
+    }
 
-/* Style the tab content */
-.tabcontent {
-  float: left;
-  padding: 10px;
-  border: 1px solid #ccc;
-  width: 80%;
-  border-left: none;
-  height: 200px;
-  overflow:auto;
-}
+    /* Create an active/current "tab button" class */
+    #ResultArea .tab button.active {
+    background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    #ResultArea .tabcontent {
+    float: left;
+    padding: 15px;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-left: none;
+    height: 300px;
+    overflow: auto;
+    }
+    
+    #planDays{
+	border: 1px solid #dfdfdf;
+	background: none;
+	padding: 0px 8px;
+	text-align: center;
+	width: 150px;
+	height: 42px;
+	line-height: 42px;
+	font-weight: 500;
+	cursor: pointer;
+	
+    }
+    #planDays:hover{
+    color: #fff;
+    background: #00c0ff;
+    border: none;
+    }
+
 /************************** tab 버튼 css end **********************************/
 .plan_type>div {
 	width: 130px;
@@ -285,7 +307,6 @@
 	width: 100px;
 	height: 42px;
 	line-height: 42px;
-	font-weight: 999;
 	cursor: pointer;
 }
 
@@ -307,7 +328,6 @@
 	width: 100px;
 	height: 42px;
 	line-height: 42px;
-	font-weight: 500;
 	cursor: pointer;
 }
 
@@ -356,8 +376,6 @@
 				<form action="<%= contextPath %>/planMakePage.pl" style="width:800px;" method="post" name="f">
 					<div>
 					 	<input type="hidden" name="userNo" value="<%=loginUser.getUserNo()%>">
-						<input type="hidden" name="planDay" value="123">
-						
 					
 					</div>
 					
@@ -368,21 +386,41 @@
 							<div id="so_title"> <input type="text" style="width: 800px" name="planTitle" id="plan_title" placeholder="일정 제목" required> </div>
 						</div>
 						
-						<div id="inputBox" style="height:70px">
-							<div id="so_title">일정날짜</div>
-							<div id="planDate">
-								<table>
-									<tr>
-										<td style="width: 400px;">
-											<div id=""> <input type="date" name="planSdate" id="sDate" size="12" required> </div>
-										</td>
-										<td>
-											<div id=""> <input type="date" name="planEdate" id="eDate" size="12" required> </div>
-										</td>
-									</tr>
-								</table>
-							</div>
+						<br>
+							
+						<div id="planDate">
+							<table>
+								<tr>
+									<td style="width: 300px;">
+										<div id="so_title"> 시작일 <input type="date" name="planSdate" id="sDate" size="12" required> </div>
+									</td>
+									<td width="300">
+										<div id="so_title"> 종료일 <input type="date" name="planEdate" id="eDate" size="12" required> </div>
+									</td>
+									<td>
+										<button type="button" onclick="getDays()" id="planDays">세부일정 계획하기</button>
+									</td>
+								</tr>
+							</table>
 						</div>
+						
+						
+						<input type="hidden" name="days" value="1">
+					    <br><br>
+					    
+					    <div id="ResultArea" style="margin-bottom:330px;">
+							<div class="tab">
+					            <button type="button" class="tablinks" onclick="openDays(event, 1)" id="defaultOpen">Day1</button>
+					        </div>
+					
+					        <div id="1" class="tabcontent">
+					            <div>
+					                <ol id="day1">
+					
+					                </ol>
+					            </div>
+					        </div>
+					    </div>
 						
 						<div id="inputBox">
 							<div id="so_title">여행 유형</div>
@@ -464,10 +502,10 @@
 										<div id="so_title" style="width:400px;">동행 유무</div>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planAcc" value="y" checked="checked"><span>동행</span></label>
+												<label class="box-radio-input"><input type="radio" name="planAcc" value="Y" checked="checked"><span>동행</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planAcc" value="n"><span>비동행</span></label>
+												<label class="box-radio-input"><input type="radio" name="planAcc" value="N"><span>비동행</span></label>
 											</div>
 										</div>
 									</td>
@@ -475,7 +513,7 @@
 										<div id="so_title">일정 예산금액</div>
 										<div class="plan_budget">
 											<div class=""> 
-												<input type="text" style="width: 230px; height: 30px;" name="planBudget" placeholder="예산금액">
+												<input type="text" style="width: 230px; height: 30px;" name="planBudget" placeholder="예산금액" required>
 											</div>
 										</div>
 									</td>
@@ -491,10 +529,10 @@
 										<span id="so_title">스크랩 허용</span>
 										<div class="plan_type">
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="y" checked="checked"><span>허용</span></label>
+												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="Y" checked="checked"><span>허용</span></label>
 											</div>
 											<div class="">
-												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="n"><span>비허용</span></label>
+												<label class="box-radio-input"><input type="radio" name="planScrapYn" value="N"><span>비허용</span></label>
 											</div>
 										</div>
 									</div>
@@ -515,39 +553,21 @@
 								</tr>
 							</table>
 						</div>
-						<!--  
-						<div id="inputBox" style="margin-top:0px;">
-							
-							<div id="planPlace">
-								<div id="so_title">장소명</div>
-								<div class="tab">
-								  <input type="button" class="tablinks" onclick="openCity(event, 'Day1')" id="defaultOpen" name="planDay" value="Day - 1"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day2')" name="planDay" value="Day - 2"></input>
-							      <input type="button" class="tablinks" onclick="openCity(event, 'Day3')" name="planDay" value="Day - 3"></input>
-								</div>
-								
-								<div id="Day1" class="tabcontent">
-							 		<div id="planPlace1" ><input type="text" name="planPlace"><input type="button" class="btnAdd1" value="Add"><br></div>
-								</div>
-								<div id="Day2" class="tabcontent">
-							 		<div id="planPlace2" ><input type="text" name="planPlace"><input type="button" class="btnAdd2" value="Add"><br></div>
-								</div>
-								<div id="Day3" class="tabcontent">
-							 		<div id="planPlace3" ><input type="text" name="planPlace"><input type="button" class="btnAdd3" value="Add"><br></div>
-								</div>
-							</div>
-						</div>
-						-->
+						
 						<div >
 							<div id="so_title">메모작성</div>
 							<textarea name="planMemo" style="resize: none; width: 800px; height: 200px" placeholder=" 내용을 입력해주세요"></textarea>
 						</div>
+						
+						
+						
 						
 						<div style="margin-top:20px;">
 							<button class="bbtn" type="submit" style="width:800px;">작성완료</button>
 						</div>
 						
 					</div> <!-- planOption end -->
+					
 				</form> <!--  form end -->
 			</div> <!-- id=2 end  -->
 		</div>	
@@ -559,7 +579,92 @@
 	
 	
 	<!------------------------------------------------------------- 스크립트들  ----------------------------------------------------------------------------->
+		
+ 	
+ 	<!-- Date 제한 스크립트 -->
+ 	<script>
+       document.getElementById("sDate").onchange = function () {
+           var input = document.getElementById("eDate");
+           input.setAttribute("min", this.value);
+       }
+       document.getElementById("eDate").onchange = function () {
+           var input = document.getElementById("sDate");
+           input.setAttribute("max", this.value);
+       }
+   	</script>
+   	
+   	<!-- 세부요일일정 스크립트 -->
+   	<script>
+	    function addRow(value){
+	        var newInput = document.createElement('li');
+	        newInput.innerHTML = "<input type='text' name='day"+ value +"' required><input type='button' class='removeRow' value='삭제'>";
+	        document.getElementById("day" + value).appendChild(newInput);
 	
+	        $(".removeRow").click(function() { 
+	            $(this).prev().remove();
+	            $(this).parent().remove();
+	            $(this).remove();
+	        });
+	    }
+	    
+	    function getDays(){
+	        var startDate = $("#sDate").val();
+	        var endDate = $("#eDate").val();
+	
+	        var start = new Date(startDate);
+	        var end = new Date(endDate);
+	        
+	        // end - start returns difference in milliseconds 
+	        var diff = new Date(end - start);
+	
+	        // get days
+	        var days = diff/1000/60/60/24 + 1;
+	
+	        $("input[name=days]").val(days);
+	
+	
+	        var str1 = "<div class='tab'> ";
+	        var str2 = "";
+	        for(var i=1; i<=days; i++){
+	            if(i==1){
+	                str1 += "<button type='button' class='tablinks' onclick='openDays(event," + i + ")' id='defaultOpen'> Day " + i + "</button> ";
+	            }else{
+	                str1 += "<button type='button' class='tablinks' onclick='openDays(event," + i + ")'> Day " + i + "</button> ";
+	            }
+	            
+	            str2 += "<div id='" + i + "' class='tabcontent'>" +
+	                        "<div>" +
+	                            "<ol id='day" + i + "'>" +
+	                                
+	                            "</ol>" +
+	                        "</div>" +
+	                        "<button type='button' onclick='addRow(" + i + ")''>추가</button>" +
+	                    "</div> ";
+	
+	        }
+	        str1 += "</div>";
+	
+	        $("#ResultArea").html(str1+str2);
+	        
+	        // Get the element with id="defaultOpen" and click on it
+	        document.getElementById("defaultOpen").click();
+	    }
+	
+	    function openDays(evt, cityName) {
+	        var i, tabcontent, tablinks;
+	        tabcontent = document.getElementsByClassName("tabcontent");
+	        for (i = 0; i < tabcontent.length; i++) {
+	            tabcontent[i].style.display = "none";
+	        }
+	        tablinks = document.getElementsByClassName("tablinks");
+	        for (i = 0; i < tablinks.length; i++) {
+	            tablinks[i].className = tablinks[i].className.replace(" active", "");
+	        }
+	        document.getElementById(cityName).style.display = "block";
+	        evt.currentTarget.className += " active";
+	    }
+	</script>
+   	
 	
 	<!-- 카카오 지도 스크립트 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dfe8cd32f33f0e2f8b4705bcfad0f7b0&libraries=services"></script>
@@ -794,93 +899,6 @@
 		}
 	</script>
 	
-	<!-- tap 스크립트 -->
-	<script>
-		function openCity(evt, days) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-		    tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablinks");
-		  for (i = 0; i < tablinks.length; i++) {
-		    tablinks[i].className = tablinks[i].className.replace(" active", "");
-		  }
-		  document.getElementById(days).style.display = "block";
-		  evt.currentTarget.className += " active";
-		}
-
-		// Get the element with id="defaultOpen" and click on it
-		document.getElementById("defaultOpen").click();
-	</script>
-	
-		
-	<!-- 장소명 text 추가 버튼 스크립트  -->
- 
- 	<script>
- 			 $(document).ready (function () {                
- 		        $('.btnAdd1').click (function () {                                        
- 		            $('#planPlace1').append (                        
- 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove1" value="Remove"></div>'                    
- 		            ); // end append      
- 		            
- 		            $('.btnRemove1').on('click', function () { 
- 		           	 $(this).prev().remove (); // remove the textbox
- 		                $(this).next().remove (); // remove the <div>
- 		                $(this).remove (); // remove the button
- 		            });
- 		        }); // end click                                            
- 		    }); // end ready 
- 	</script>
- 	<script>
- 			 $(document).ready (function () {                
- 		        $('.btnAdd2').click (function () {                                        
- 		            $('#planPlace2').append (                        
- 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove2" value="Remove"></div>'                    
- 		            ); // end append      
- 		            
- 		            $('.btnRemove2').on('click', function () { 
- 		           	 $(this).prev().remove (); // remove the textbox
- 		                $(this).next().remove (); // remove the <div>
- 		                $(this).remove (); // remove the button
- 		            });
- 		        }); // end click                                            
- 		    }); // end ready 
- 	</script>
- 	<script>
- 			 $(document).ready (function () {                
- 		        $('.btnAdd3').click (function () {                                        
- 		            $('#planPlace3').append (                        
- 		                '<div><input type="text" name="planPlace"> <input type="button" class="btnRemove3" value="Remove"></div>'                    
- 		            ); // end append      
- 		            
- 		            $('.btnRemove3').on('click', function () { 
- 		           	 $(this).prev().remove (); // remove the textbox
- 		                $(this).next().remove (); // remove the <div>
- 		                $(this).remove (); // remove the button
- 		            });
- 		        }); // end click                                            
- 		    }); // end ready 
- 	</script>
- 	
- 	
- 	
- 	<!-- Date 제한 스크립트 -->
- 	<script>
-       document.getElementById("sDate").onchange = function () {
-           var input = document.getElementById("eDate");
-           input.setAttribute("min", this.value);
-       }
-       document.getElementById("eDate").onchange = function () {
-           var input = document.getElementById("sDate");
-           input.setAttribute("max", this.value);
-       }
-   	</script>
-   	
-   	
-   	
-   
-   	
    
 
 </body>

@@ -3,6 +3,7 @@
 <%@ page import="java.util.ArrayList, com.kh.common.PageInfo, com.kh.adminMember.model.vo.Report" %>
 <%
 	int userNo = (int)request.getAttribute("userNo");
+	String userId = (String)request.getAttribute("userId");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Report> reportList = (ArrayList<Report>)request.getAttribute("reportList");
 	
@@ -42,7 +43,7 @@
 		<div class="outer">
 
 			<h5>
-				<b><%=reportList.get(0).getUserNo2() %></b> 님에 대한 신고내역
+				<b><%=userId %></b> 님에 대한 신고내역
 			</h5>
 
 			<br>
@@ -59,7 +60,7 @@
 				<tbody style="text-align: center;">
 					<% if(reportList.isEmpty()){ %>
 					<tr>
-						<td colspan="5">조회된 리스트가 없습니다.</td>
+						<td colspan="4">조회된 리스트가 없습니다.</td>
 					</tr>
 					<% }else{ %>
 						<% for(Report r : reportList){ %>

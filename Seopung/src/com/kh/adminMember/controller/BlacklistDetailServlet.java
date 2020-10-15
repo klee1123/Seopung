@@ -46,6 +46,7 @@ public class BlacklistDetailServlet extends HttpServlet {
 			int endPage;
 			
 			int userNo = Integer.parseInt(request.getParameter("uno"));
+			String userId = request.getParameter("userId");
 			reportListCount = new MemberService().selectReportListCount(userNo);
 			
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -69,6 +70,7 @@ public class BlacklistDetailServlet extends HttpServlet {
 			ArrayList<Report> reportList = new MemberService().selectReportList(pi, userNo);
 			
 			request.setAttribute("userNo", userNo);
+			request.setAttribute("userId", userId);
 			request.setAttribute("pi", pi);
 			request.setAttribute("reportList", reportList);
 			request.setAttribute("pageTitle", "블랙리스트 신고내역 조회");

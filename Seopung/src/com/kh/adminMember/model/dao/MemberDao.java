@@ -231,8 +231,9 @@ public class MemberDao {
 				reportType += rset.getString("report_type") + "/";
 			}
 			
-			reportType = reportType.substring(0, reportType.length() - 1);
-			
+			if(!reportType.equals("")) {
+				reportType = reportType.substring(0, reportType.length() - 1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

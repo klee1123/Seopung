@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.planMake.model.vo.PlanMake;
@@ -152,9 +153,40 @@ public class PlanMakeDao {
 	}
 	
 	
-	
-	
-	
+	public int insertPlanPlace(Connection conn, ArrayList<String> placeList) {
+		// insert문 => 처리된 행 수
+		int result = 1;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertPlanPlace");
+		
+		try {
+			for(int i=0; i<placeList.size(); i++) {
+				
+				if(!placeList.get(i).equals("")) {
+					pstmt = conn.prepareStatement(sql);
+					
+					
+					pstmt.setInt(1, (i+1));
+					pstmt.setString(2, placeList.get(i));
+					
+					result = pstmt.executeUpdate();
+					
+					if(result == 0) {
+						return 0;
+					}
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 }

@@ -115,7 +115,7 @@ $(function(){
 									id="navbarDropdown" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"> 일정서비스 </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="">일정만들기</a> <a
+										<a class="dropdown-item" href="<%=contextPath %>/enrollForm.pl">일정만들기</a> <a
 											class="dropdown-item" href="<%=contextPath%>/list.pl?currentPage=1">일정검색</a>
 									</div></li>
 								<li class="nav-item"><a class="nav-link" href="<%=contextPath%>/list.co?currentPage=1&head=전체&array=최신">커뮤니티</a>

@@ -23,7 +23,8 @@
                             USER_NO2
                        FROM TB_REPORT R
                        JOIN TB_MEMBER M1 ON (R.USER_NO = M1.USER_NO)
-                       JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO) 
+                       JOIN TB_MEMBER M2 ON (R.USER_NO2 = M2.USER_NO)
+                      WHERE REPORT_STATUS = 'Y'
                       ORDER
                          BY REPORT_NO DESC
                   ) A

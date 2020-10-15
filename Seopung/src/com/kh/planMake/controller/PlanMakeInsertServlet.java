@@ -1,6 +1,7 @@
 package com.kh.planMake.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,7 +61,18 @@ public class PlanMakeInsertServlet extends HttpServlet {
 		
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
+		// 요일별 일정 정보
+		int days = Integer.parseInt(request.getParameter("days"));
 		
+		ArrayList<String> placeList = new ArrayList<>();
+		for(int i=1; i<=days; i++) {
+			String[] lists = request.getParameterValues("day" + i);
+			String list = "";
+			if(lists != null) {
+				list = String.join(",",  lists);
+			}
+			placeList.add(list);
+		}
 		
 		
 		// 기본생성자생성후 setter메소드 이용해서 담기 / 아사리 매개변수생성자 이용해서 담기
@@ -81,17 +93,17 @@ public class PlanMakeInsertServlet extends HttpServlet {
 			
 			
 		// 3. 요청 처리 (서비스 메소드 호출 및 결과 받기)
-		int result = new PlanMakeService().insertPlanMake(p);
+		int result = new PlanMakeService().insertPlanMake(p, placeList);
 		
 		
 		// 4. 결과에 따른 사용자가 보게될 응답페이지 지정
 		if(result> 0) {	//  저장 성공
-			
 			request.getSession().setAttribute("alertMsg", "일정 등록 성공");
-			 request.getRequestDispatcher("index.jsp").forward(request, response);
-			  
-			 
+			response.sendRedirect(request.getContextPath());		
 			
+		}else {
+			request.setAttribute("errorMsg", "일정 등록 실패");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}

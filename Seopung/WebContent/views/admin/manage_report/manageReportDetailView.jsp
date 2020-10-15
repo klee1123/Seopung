@@ -90,12 +90,12 @@
 							5.회원 신고내용-->
 			<div id="content_1">
 				<div style="width: 740px; font-size: 18px;"><%=r.getReportType()%></div>
-				<div style="text-align: right;"><%=r.getReportDate()%></div>
+				<div style="width: 250px;"><%=r.getReportDate()%></div>
 			</div>
 
 			<div id="content_2">
-                <div style="width: 740px;">신고된 아이디 <%= r.getUserNo2() %></div>
-                <div style="width: 740px;">신고자 아이디 <%= r.getUserNo() %></div>
+                <div style="width: 740px;">신고된 아이디&nbsp;&nbsp;<%= r.getUserId2() %></div>
+                <div style="width: 250px;" >신고자 아이디 &nbsp;&nbsp;<%= r.getUserNo() %></div>
 					
 			</div>
 
